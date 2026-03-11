@@ -51,7 +51,7 @@
       },
       "versionFile": "code/claude-code-version.txt",
       "excludeUrlsContaining": [
-        "CHANGELOG.md"
+        "changelog.md"
       ],
       "additionalFiles": [
         {

@@ -252,7 +252,8 @@ jobs:
               let urls = Array.from(llmsText.matchAll(/https:\/\/[^)\s]+\.md/g), (match) => match[0]);
 
               for (const excludedFragment of source.excludeUrlsContaining || []) {
-                urls = urls.filter((url) => !url.includes(excludedFragment));
+                const excludedFragmentLower = excludedFragment.toLowerCase();
+                urls = urls.filter((url) => !url.toLowerCase().includes(excludedFragmentLower));
               }
 
               if (!urls.length) {
