@@ -261,6 +261,7 @@ jobs:
               }
 
               let downloaded = 0;
+              let skipped = 0;
 
               for (const url of urls) {
                 if (!url.startsWith(source.stripPrefix)) {
@@ -274,7 +275,12 @@ jobs:
 
                 const markdown = await fetchText(url);
                 if (looksLikeHtml(markdown.contentType, markdown.text)) {
-                  throw new Error(`Fetched HTML instead of markdown for ${url}`);
+                  core.warning(`Skipping ${url} because it returned HTML instead of markdown.`);
+                  if (fs.existsSync(targetFile)) {
+                    expectedMarkdownFiles.add(path.resolve(targetFile));
+                  }
+                  skipped += 1;
+                  continue;
                 }
 
                 fs.writeFileSync(targetFile, markdown.text);
@@ -289,7 +295,12 @@ jobs:
 
                 const extraContent = await fetchText(extraFile.url);
                 if (looksLikeHtml(extraContent.contentType, extraContent.text)) {
-                  throw new Error(`Fetched HTML instead of markdown for ${extraFile.url}`);
+                  core.warning(`Skipping ${extraFile.url} because it returned HTML instead of markdown.`);
+                  if (fs.existsSync(targetFile) && targetFile.endsWith('.md')) {
+                    expectedMarkdownFiles.add(path.resolve(targetFile));
+                  }
+                  skipped += 1;
+                  continue;
                 }
 
                 fs.writeFileSync(targetFile, extraContent.text);
@@ -327,7 +338,7 @@ jobs:
                 reason: source.reason
               };
 
-              downloadedCounts.push(`${source.id}:${downloaded}:${pruned}`);
+              downloadedCounts.push(`${source.id}:${downloaded}:${pruned}:${skipped}`);
             }
 
             fs.writeFileSync(statePath, `${JSON.stringify(state, null, 2)}\n`);
