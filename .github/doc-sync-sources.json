@@ -1,0 +1,73 @@
+{
+  "sources": [
+    {
+      "id": "react",
+      "displayName": "React",
+      "targetDir": "react",
+      "llmsUrl": "https://react.dev/llms.txt",
+      "stripPrefix": "https://react.dev/",
+      "versionStrategy": "github-release",
+      "releaseRepo": {
+        "owner": "facebook",
+        "repo": "react"
+      },
+      "versionFile": "react/react-version.txt",
+      "llmsRewrites": [
+        {
+          "pattern": "\\): ",
+          "replacement": ".md): "
+        }
+      ]
+    },
+    {
+      "id": "nextjs",
+      "displayName": "Next.js",
+      "targetDir": "nextjs",
+      "llmsUrl": "https://nextjs.org/docs/llms.txt",
+      "stripPrefix": "https://nextjs.org/docs/",
+      "versionStrategy": "github-release",
+      "releaseRepo": {
+        "owner": "vercel",
+        "repo": "next.js"
+      },
+      "versionFile": "nextjs/nextjs-version.txt",
+      "llmsRewrites": [
+        {
+          "pattern": "\\): ",
+          "replacement": ".md): "
+        }
+      ]
+    },
+    {
+      "id": "claude-code",
+      "displayName": "Claude Code",
+      "targetDir": "code",
+      "llmsUrl": "https://code.claude.com/docs/llms.txt",
+      "stripPrefix": "https://code.claude.com/docs/",
+      "versionStrategy": "github-release",
+      "releaseRepo": {
+        "owner": "anthropics",
+        "repo": "claude-code"
+      },
+      "versionFile": "code/claude-code-version.txt",
+      "excludeUrlsContaining": [
+        "CHANGELOG.md"
+      ],
+      "additionalFiles": [
+        {
+          "url": "https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/CHANGELOG.md",
+          "path": "CHANGELOG.md"
+        }
+      ]
+    },
+    {
+      "id": "claude-api",
+      "displayName": "Claude API and SDK",
+      "targetDir": "claude",
+      "llmsUrl": "https://platform.claude.com/llms.txt",
+      "stripPrefix": "https://platform.claude.com/docs/en/",
+      "versionStrategy": "interval",
+      "scheduleDays": 7
+    }
+  ]
+}

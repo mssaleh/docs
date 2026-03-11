@@ -1,0 +1,352 @@
+name: Sync Docs
+
+on:
+  schedule:
+    - cron: '19 3 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Force a sync even if no new release is detected
+        required: false
+        default: false
+        type: boolean
+      source:
+        description: Optional source id to sync (react, nextjs, claude-code, claude-api)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      has_updates: ${{ steps.detect.outputs.has_updates }}
+      updates: ${{ steps.detect.outputs.updates }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: detect
+        uses: actions/github-script@v7
+        env:
+          FORCE_SYNC: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force || 'false' }}
+          REQUESTED_SOURCE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.source || '' }}
+        with:
+          script: |
+            const fs = require('fs');
+
+            const manifest = JSON.parse(fs.readFileSync('.github/doc-sync-sources.json', 'utf8'));
+            const state = JSON.parse(fs.readFileSync('.github/doc-sync-state.json', 'utf8'));
+            const forceSync = process.env.FORCE_SYNC === 'true';
+            const requestedSource = (process.env.REQUESTED_SOURCE || '').trim();
+            const now = new Date();
+
+            function normalizeVersion(value) {
+              return (value || '').replace(/^refs\/tags\//, '').replace(/^v/, '').trim();
+            }
+
+            function intervalDue(lastSyncedAt, scheduleDays) {
+              if (!lastSyncedAt) {
+                return true;
+              }
+
+              const lastSynced = new Date(lastSyncedAt);
+              if (Number.isNaN(lastSynced.getTime())) {
+                return true;
+              }
+
+              const elapsedMs = now.getTime() - lastSynced.getTime();
+              return elapsedMs >= scheduleDays * 24 * 60 * 60 * 1000;
+            }
+
+            const updates = [];
+
+            for (const source of manifest.sources) {
+              if (requestedSource && source.id !== requestedSource) {
+                continue;
+              }
+
+              const sourceState = state[source.id] || {};
+
+              if (forceSync) {
+                updates.push({
+                  ...source,
+                  version: sourceState.version || null,
+                  previousVersion: sourceState.version || null,
+                  reason: 'forced'
+                });
+                continue;
+              }
+
+              if (source.versionStrategy === 'github-release') {
+                const release = await github.rest.repos.getLatestRelease({
+                  owner: source.releaseRepo.owner,
+                  repo: source.releaseRepo.repo
+                });
+
+                const rawVersion = release.data.tag_name || release.data.name || '';
+                const version = normalizeVersion(rawVersion);
+                const previousVersion = sourceState.version || null;
+
+                if (!version) {
+                  core.setFailed(`No release version resolved for ${source.id}`);
+                  return;
+                }
+
+                if (version !== previousVersion) {
+                  updates.push({
+                    ...source,
+                    version,
+                    previousVersion,
+                    rawVersion,
+                    reason: previousVersion ? 'new-release' : 'initial-release-sync'
+                  });
+                }
+                continue;
+              }
+
+              if (source.versionStrategy === 'interval') {
+                if (intervalDue(sourceState.last_synced_at, source.scheduleDays || 7)) {
+                  updates.push({
+                    ...source,
+                    version: null,
+                    previousVersion: null,
+                    reason: sourceState.last_synced_at ? 'interval' : 'initial-interval-sync'
+                  });
+                }
+                continue;
+              }
+
+              core.setFailed(`Unsupported version strategy for ${source.id}: ${source.versionStrategy}`);
+              return;
+            }
+
+            if (requestedSource && !manifest.sources.some((source) => source.id === requestedSource)) {
+              core.setFailed(`Unknown source id: ${requestedSource}`);
+              return;
+            }
+
+            core.info(`Updates queued: ${updates.map((source) => source.id).join(', ') || 'none'}`);
+            core.setOutput('has_updates', updates.length > 0 ? 'true' : 'false');
+            core.setOutput('updates', JSON.stringify(updates));
+
+  sync:
+    needs: detect
+    if: needs.detect.outputs.has_updates == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: sync
+        uses: actions/github-script@v7
+        env:
+          UPDATES_JSON: ${{ needs.detect.outputs.updates }}
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const updates = JSON.parse(process.env.UPDATES_JSON || '[]');
+            const statePath = path.join(process.env.GITHUB_WORKSPACE, '.github', 'doc-sync-state.json');
+            const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+            const syncedAt = new Date().toISOString();
+            const downloadedCounts = [];
+
+            function ensureWithinRoot(root, filePath) {
+              const resolvedRoot = path.resolve(root);
+              const resolvedPath = path.resolve(filePath);
+
+              if (resolvedPath !== resolvedRoot && !resolvedPath.startsWith(`${resolvedRoot}${path.sep}`)) {
+                throw new Error(`Refusing to write outside ${resolvedRoot}: ${resolvedPath}`);
+              }
+            }
+
+            function looksLikeHtml(contentType, text) {
+              const loweredType = (contentType || '').toLowerCase();
+              const sample = text.slice(0, 200).toLowerCase();
+              return loweredType.includes('text/html') || sample.includes('<html') || sample.includes('<!doctype html');
+            }
+
+            function listFilesRecursively(dirPath) {
+              if (!fs.existsSync(dirPath)) {
+                return [];
+              }
+
+              const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+              const files = [];
+
+              for (const entry of entries) {
+                const entryPath = path.join(dirPath, entry.name);
+                if (entry.isDirectory()) {
+                  files.push(...listFilesRecursively(entryPath));
+                  continue;
+                }
+
+                if (entry.isFile()) {
+                  files.push(entryPath);
+                }
+              }
+
+              return files;
+            }
+
+            function removeEmptyDirectories(dirPath, rootDir) {
+              if (!fs.existsSync(dirPath) || dirPath === rootDir) {
+                return;
+              }
+
+              if (!fs.statSync(dirPath).isDirectory()) {
+                return;
+              }
+
+              const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+              for (const entry of entries) {
+                if (entry.isDirectory()) {
+                  removeEmptyDirectories(path.join(dirPath, entry.name), rootDir);
+                }
+              }
+
+              if (fs.readdirSync(dirPath).length === 0) {
+                fs.rmdirSync(dirPath);
+              }
+            }
+
+            async function fetchText(url) {
+              const response = await fetch(url, {
+                headers: {
+                  'user-agent': 'docs-sync-workflow'
+                }
+              });
+
+              if (!response.ok) {
+                throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
+              }
+
+              return {
+                contentType: response.headers.get('content-type') || '',
+                text: await response.text()
+              };
+            }
+
+            for (const source of updates) {
+              const targetDir = path.join(process.env.GITHUB_WORKSPACE, source.targetDir);
+              fs.mkdirSync(targetDir, { recursive: true });
+              const expectedMarkdownFiles = new Set();
+
+              const llmsResult = await fetchText(source.llmsUrl);
+              let llmsText = llmsResult.text;
+
+              for (const rewrite of source.llmsRewrites || []) {
+                llmsText = llmsText.replace(new RegExp(rewrite.pattern, 'g'), rewrite.replacement);
+              }
+
+              fs.writeFileSync(path.join(targetDir, 'llms.txt'), llmsText);
+
+              let urls = Array.from(llmsText.matchAll(/https:\/\/[^)\s]+\.md/g), (match) => match[0]);
+
+              for (const excludedFragment of source.excludeUrlsContaining || []) {
+                urls = urls.filter((url) => !url.includes(excludedFragment));
+              }
+
+              if (!urls.length) {
+                throw new Error(`No markdown URLs found for ${source.id}`);
+              }
+
+              let downloaded = 0;
+
+              for (const url of urls) {
+                if (!url.startsWith(source.stripPrefix)) {
+                  throw new Error(`URL ${url} does not match stripPrefix ${source.stripPrefix}`);
+                }
+
+                const relativePath = url.slice(source.stripPrefix.length);
+                const targetFile = path.join(targetDir, relativePath);
+                ensureWithinRoot(targetDir, targetFile);
+                fs.mkdirSync(path.dirname(targetFile), { recursive: true });
+
+                const markdown = await fetchText(url);
+                if (looksLikeHtml(markdown.contentType, markdown.text)) {
+                  throw new Error(`Fetched HTML instead of markdown for ${url}`);
+                }
+
+                fs.writeFileSync(targetFile, markdown.text);
+                expectedMarkdownFiles.add(path.resolve(targetFile));
+                downloaded += 1;
+              }
+
+              for (const extraFile of source.additionalFiles || []) {
+                const targetFile = path.join(targetDir, extraFile.path);
+                ensureWithinRoot(targetDir, targetFile);
+                fs.mkdirSync(path.dirname(targetFile), { recursive: true });
+
+                const extraContent = await fetchText(extraFile.url);
+                if (looksLikeHtml(extraContent.contentType, extraContent.text)) {
+                  throw new Error(`Fetched HTML instead of markdown for ${extraFile.url}`);
+                }
+
+                fs.writeFileSync(targetFile, extraContent.text);
+                if (targetFile.endsWith('.md')) {
+                  expectedMarkdownFiles.add(path.resolve(targetFile));
+                }
+              }
+
+              let pruned = 0;
+              for (const existingFile of listFilesRecursively(targetDir)) {
+                if (!existingFile.endsWith('.md')) {
+                  continue;
+                }
+
+                const resolvedFile = path.resolve(existingFile);
+                if (expectedMarkdownFiles.has(resolvedFile)) {
+                  continue;
+                }
+
+                fs.unlinkSync(resolvedFile);
+                pruned += 1;
+              }
+
+              removeEmptyDirectories(targetDir, targetDir);
+
+              if (source.versionFile && source.version) {
+                const versionFile = path.join(process.env.GITHUB_WORKSPACE, source.versionFile);
+                ensureWithinRoot(process.env.GITHUB_WORKSPACE, versionFile);
+                fs.writeFileSync(versionFile, `${source.version}\n`);
+              }
+
+              state[source.id] = {
+                version: source.version || null,
+                last_synced_at: syncedAt,
+                reason: source.reason
+              };
+
+              downloadedCounts.push(`${source.id}:${downloaded}:${pruned}`);
+            }
+
+            fs.writeFileSync(statePath, `${JSON.stringify(state, null, 2)}\n`);
+            core.setOutput('downloaded_counts', downloadedCounts.join(','));
+
+            await core.summary
+              .addHeading('Documentation sync completed')
+              .addList(updates.map((source) => `${source.id} (${source.reason}${source.version ? `, ${source.version}` : ''})`))
+              .write();
+
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet; then
+            echo "No changes detected after sync."
+            exit 0
+          fi
+
+          git add .
+          git commit -m "chore: sync documentation snapshots"
+          git push
