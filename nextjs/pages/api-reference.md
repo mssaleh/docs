@@ -1,0 +1,31 @@
+---
+title: API Reference
+description: Next.js API Reference for the Pages Router.
+url: "https://nextjs.org/docs/pages/api-reference"
+version: 16.1.6
+lastUpdated: 2026-02-27
+router: Pages Router
+---
+
+
+
+- [Components](/docs/pages/api-reference/components)
+  - API Reference for Next.js built-in components in the Pages Router.
+- [File-system conventions](/docs/pages/api-reference/file-conventions)
+  - API Reference for Next.js file-system conventions.
+- [Functions](/docs/pages/api-reference/functions)
+  - API Reference for Functions and Hooks in Pages Router.
+- [Configuration](/docs/pages/api-reference/config)
+  - Learn how to configure your Next.js application.
+- [CLI](/docs/pages/api-reference/cli)
+  - API Reference for the Next.js Command Line Interface (CLI) tools.
+- [Edge Runtime](/docs/pages/api-reference/edge)
+  - API Reference for the Edge Runtime.
+- [Turbopack](/docs/pages/api-reference/turbopack)
+  - Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
+
+---
+
+For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)
+
+For an index of all available documentation, see [/docs/llms.txt](/docs/llms.txt)
