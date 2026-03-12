@@ -6,6 +6,7 @@ This repository keeps local markdown snapshots of documentation for a small set 
 - Next.js
 - Claude Code
 - Claude API and SDK
+- Model Context Protocol
 
 The repo is intentionally scriptless. Syncing is handled by GitHub Actions and configured through a manifest.
 
@@ -15,7 +16,7 @@ The workflow is defined in `.github/workflows/sync-docs.yml`.
 
 It runs daily and decides what to sync based on `.github/doc-sync-sources.json` and `.github/doc-sync-state.json`.
 
-- React, Next.js, and Claude Code are checked against the latest GitHub release from their upstream repositories.
+- React, Next.js, Claude Code, and Model Context Protocol are checked against the latest GitHub release from their upstream repositories.
 - Claude API and SDK do not expose a version stream that is useful for this purpose, so they are synced on a 7 day interval.
 - Each sync downloads `llms.txt`, extracts markdown URLs, mirrors the markdown files into the matching local directory, and updates version files where applicable.
 - Stale markdown files are pruned if they no longer exist upstream.
@@ -48,7 +49,7 @@ The workflow supports manual dispatch from GitHub Actions.
 Available inputs:
 
 - `force`: sync even if no new release or interval trigger is detected
-- `source`: limit the run to one source id: `react`, `nextjs`, `claude-code`, or `claude-api`
+- `source`: limit the run to one source id: `react`, `nextjs`, `claude-code`, `claude-api`, or `mcp`
 
 ## Repository Layout
 
@@ -56,6 +57,7 @@ Available inputs:
 - `nextjs/`: Next.js docs mirror
 - `code/`: Claude Code docs mirror
 - `claude/`: Claude API and SDK docs mirror
+- `mcp/`: Model Context Protocol docs mirror
 - `.github/doc-sync-sources.json`: source manifest
 - `.github/doc-sync-state.json`: sync state
 - `.github/workflows/sync-docs.yml`: automation workflow

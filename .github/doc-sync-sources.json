@@ -68,6 +68,19 @@
       "stripPrefix": "https://platform.claude.com/docs/en/",
       "versionStrategy": "interval",
       "scheduleDays": 7
+    },
+    {
+      "id": "mcp",
+      "displayName": "Model Context Protocol",
+      "targetDir": "mcp",
+      "llmsUrl": "https://modelcontextprotocol.io/llms.txt",
+      "stripPrefix": "https://modelcontextprotocol.io/",
+      "versionStrategy": "github-release",
+      "releaseRepo": {
+        "owner": "modelcontextprotocol",
+        "repo": "modelcontextprotocol"
+      },
+      "versionFile": "mcp/mcp-version.txt"
     }
   ]
 }
