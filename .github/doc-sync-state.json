@@ -18,5 +18,10 @@
     "version": null,
     "last_synced_at": "2026-03-11T00:45:46.826Z",
     "reason": "initial-interval-sync"
+  },
+  "mcp": {
+    "version": "2025-11-25",
+    "last_synced_at": "2026-03-12T18:49:42.900Z",
+    "reason": "initial-release-sync"
   }
 }
