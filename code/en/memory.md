@@ -251,6 +251,10 @@ Managed policy CLAUDE.md files cannot be excluded. This ensures organization-wid
 
 Auto memory lets Claude accumulate knowledge across sessions without you writing anything. Claude saves notes for itself as it works: build commands, debugging insights, architecture notes, code style preferences, and workflow habits. Claude doesn't save something every session. It decides what's worth remembering based on whether the information would be useful in a future conversation.
 
+<Note>
+  Auto memory requires Claude Code v2.1.59 or later. Check your version with `claude --version`.
+</Note>
+
 ### Enable or disable auto memory
 
 Auto memory is on by default. To toggle it, open `/memory` in a session and use the auto memory toggle, or set `autoMemoryEnabled` in your project settings:
@@ -266,6 +270,16 @@ To disable auto memory via environment variable, set `CLAUDE_CODE_DISABLE_AUTO_M
 ### Storage location
 
 Each project gets its own memory directory at `~/.claude/projects/<project>/memory/`. The `<project>` path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.
+
+To store auto memory in a different location, set `autoMemoryDirectory` in your user or local settings:
+
+```json  theme={null}
+{
+  "autoMemoryDirectory": "~/my-custom-memory-dir"
+}
+```
+
+This setting is accepted from policy, local, and user settings. It is not accepted from project settings (`.claude/settings.json`) to prevent a shared project from redirecting auto memory writes to sensitive locations.
 
 The directory contains a `MEMORY.md` entrypoint and optional topic files:
 
@@ -307,7 +321,7 @@ These are the most common issues with CLAUDE.md and auto memory, along with step
 
 ### Claude isn't following my CLAUDE.md
 
-CLAUDE.md is context, not enforcement. Claude reads it and tries to follow it, but there's no guarantee of strict compliance, especially for vague or conflicting instructions.
+CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself. Claude reads it and tries to follow it, but there's no guarantee of strict compliance, especially for vague or conflicting instructions.
 
 To debug:
 
@@ -315,6 +329,8 @@ To debug:
 * Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see [Choose where to put CLAUDE.md files](#choose-where-to-put-claudemd-files)).
 * Make instructions more specific. "Use 2-space indentation" works better than "format code nicely."
 * Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.
+
+For instructions you want at the system prompt level, use [`--append-system-prompt`](/en/cli-reference#system-prompt-flags). This must be passed every invocation, so it's better suited to scripts and automation than interactive use.
 
 <Tip>
   Use the [`InstructionsLoaded` hook](/en/hooks#instructionsloaded) to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.

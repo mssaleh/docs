@@ -10,8 +10,8 @@
     "reason": "initial-release-sync"
   },
   "claude-code": {
-    "version": "2.1.74",
-    "last_synced_at": "2026-03-12T04:03:19.329Z",
+    "version": "2.1.76",
+    "last_synced_at": "2026-03-14T04:02:51.227Z",
     "reason": "new-release"
   },
   "claude-api": {

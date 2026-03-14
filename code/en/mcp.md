@@ -944,6 +944,19 @@ This is particularly useful when working with MCP servers that:
   If you frequently encounter output warnings with specific MCP servers, consider increasing the limit or configuring the server to paginate or filter its responses.
 </Warning>
 
+## Respond to MCP elicitation requests
+
+MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can't get on its own, Claude Code displays an interactive dialog and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.
+
+Servers can request input in two ways:
+
+* **Form mode**: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.
+* **URL mode**: Claude Code opens a browser URL for authentication or approval. Complete the flow in the browser, then confirm in the CLI.
+
+To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](/en/hooks#elicitation).
+
+If you're building an MCP server that uses elicitation, see the [MCP elicitation specification](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) for protocol details and schema examples.
+
 ## Use MCP resources
 
 MCP servers can expose resources that you can reference using @ mentions, similar to how you reference files.
@@ -1010,15 +1023,16 @@ Add clear, descriptive server instructions that explain:
 
 ### Configure tool search
 
-Tool search runs in auto mode by default, meaning it activates only when your MCP tool definitions exceed the context threshold. If you have few tools, they load normally without tool search. This feature requires models that support `tool_reference` blocks: Sonnet 4 and later, or Opus 4 and later. Haiku models do not support tool search.
+Tool search is enabled by default: MCP tools are deferred and discovered on demand. When `ANTHROPIC_BASE_URL` points to a non-first-party host, tool search is disabled by default because most proxies do not forward `tool_reference` blocks. Set `ENABLE_TOOL_SEARCH` explicitly if your proxy does. This feature requires models that support `tool_reference` blocks: Sonnet 4 and later, or Opus 4 and later. Haiku models do not support tool search.
 
 Control tool search behavior with the `ENABLE_TOOL_SEARCH` environment variable:
 
 | Value      | Behavior                                                                           |
 | :--------- | :--------------------------------------------------------------------------------- |
-| `auto`     | Activates when MCP tools exceed 10% of context (default)                           |
+| (unset)    | Enabled by default. Disabled when `ANTHROPIC_BASE_URL` is a non-first-party host   |
+| `true`     | Always enabled, including for non-first-party `ANTHROPIC_BASE_URL`                 |
+| `auto`     | Activates when MCP tools exceed 10% of context                                     |
 | `auto:<N>` | Activates at custom threshold, where `<N>` is a percentage (e.g., `auto:5` for 5%) |
-| `true`     | Always enabled                                                                     |
 | `false`    | Disabled, all MCP tools loaded upfront                                             |
 
 ```bash  theme={null}
