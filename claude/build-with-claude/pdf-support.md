@@ -17,11 +17,15 @@ Claude works with any standard PDF. However, you should ensure your request size
 
 | Requirement | Limit |
 |------------|--------|
-| Maximum request size | 32MB |
-| Maximum pages per request | 100 |
+| Maximum request size | 32&nbsp;MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
+| Maximum pages per request | 600 (100 for models with a 200k-token context window) |
 | Format | Standard PDF (no passwords/encryption) |
 
-Both limits are on the entire request payload, including any other content sent alongside PDFs.
+Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
+
+<Tip>
+Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. If this happens, try splitting the document into sections.
+</Tip>
 
 Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](/docs/en/build-with-claude/vision#limitations) as other vision tasks.
 
@@ -64,7 +68,7 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
 If customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
 <Note>
-This is a known constraint with the Converse API that we're working to address. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
+This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
 </Note>
 
 <Note>
@@ -1045,7 +1049,7 @@ public class MessagesBatchDocumentExample {
     icon="file"
     href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision"
   >
-    Explore practical examples of PDF processing in our cookbook recipe.
+    Explore practical examples of PDF processing in the cookbook recipe.
   </Card>
 
   <Card
