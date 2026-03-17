@@ -2,8 +2,8 @@
 title: getStaticPaths
 description: "API reference for `getStaticPaths`. Learn how to fetch data and generate static pages with `getStaticPaths`."
 url: "https://nextjs.org/docs/pages/api-reference/functions/get-static-paths"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

@@ -2,8 +2,8 @@
 title: ESLint
 description: Next.js reports ESLint errors and warnings during builds by default. Learn how to opt-out of this behavior here.
 url: "https://nextjs.org/docs/pages/api-reference/config/eslint"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

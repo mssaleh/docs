@@ -2,8 +2,8 @@
 title: Guides
 description: Learn how to implement common patterns and real-world use cases using Next.js
 url: "https://nextjs.org/docs/app/guides"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 ---
 
 

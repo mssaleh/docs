@@ -2,8 +2,8 @@
 title: Static Site Generation (SSG)
 description: Use Static Site Generation (SSG) to pre-render pages at build time.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

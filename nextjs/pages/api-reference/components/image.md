@@ -2,8 +2,8 @@
 title: Image
 description: "Optimize Images in your Next.js Application using the built-in `next/image` Component."
 url: "https://nextjs.org/docs/pages/api-reference/components/image"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -735,6 +735,36 @@ module.exports = {
 }
 ```
 
+#### `maximumDiskCacheSize`
+
+The default image optimization loader will write optimized images to disk so subsequent requests can be served faster from the disk cache.
+
+You can configure the maximum disk cache size in bytes, for example 500 MB:
+
+```js filename="next.config.js"
+module.exports = {
+  images: {
+    maximumDiskCacheSize: 500_000_000,
+  },
+}
+```
+
+You can also disable the disk cache entirely by setting the value to `0`.
+
+```js filename="next.config.js"
+module.exports = {
+  images: {
+    maximumDiskCacheSize: 0,
+  },
+}
+```
+
+If no value is configured, the default behavior is to check the current available disk space once during startup and use 50%.
+
+When the disk cache exceeds the configured size, the least recently used optimized images will be deleted until the cache is under the limit again.
+
+Alternatively, you can implement your own cache handler using [`cacheHandler`](/docs/app/api-reference/config/next-config-js/incrementalCacheHandlerPath) which will ignore the `maximumDiskCacheSize` configuration.
+
 #### `maximumResponseBody`
 
 The default image optimization loader will fetch source images up to 50 MB in size.
@@ -1243,6 +1273,7 @@ export default function Home() {
 
 | Version    | Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `v16.1.7`  | `maximumDiskCacheSize` configuration added.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `v16.1.2`  | `maximumResponseBody` configuration added.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `v16.0.0`  | `qualities` default configuration changed to `[75]`, `preload` prop added, `priority` prop deprecated, `dangerouslyAllowLocalIP` config added, `maximumRedirects` config added.                                                                                                                                                                                                                                                                                                            |
 | `v15.3.0`  | `remotePatterns` added support for array of `URL` objects.                                                                                                                                                                                                                                                                                                                                                                                                                                 |

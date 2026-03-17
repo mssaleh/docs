@@ -2,8 +2,8 @@
 title: devIndicators
 description: "Optimized pages include an indicator to let you know if it's being statically optimized. You can opt-out of it here."
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/devIndicators"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

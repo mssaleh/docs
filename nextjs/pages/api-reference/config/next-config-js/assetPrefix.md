@@ -2,8 +2,8 @@
 title: assetPrefix
 description: Learn how to use the assetPrefix config option to configure your CDN.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/assetPrefix"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

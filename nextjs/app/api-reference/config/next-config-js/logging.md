@@ -2,8 +2,8 @@
 title: logging
 description: Configure how data fetches are logged to the console when running Next.js in development mode.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/logging"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

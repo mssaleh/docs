@@ -2,8 +2,8 @@
 title: use client
 description: Learn how to use the use client directive to render a component on the client.
 url: "https://nextjs.org/docs/app/api-reference/directives/use-client"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"

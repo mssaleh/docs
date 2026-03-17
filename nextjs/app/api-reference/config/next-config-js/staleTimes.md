@@ -2,8 +2,8 @@
 title: staleTimes
 description: Learn how to override the invalidation time of the Client Router Cache.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

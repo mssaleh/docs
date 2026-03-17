@@ -2,8 +2,8 @@
 title: How to implement JSON-LD in your Next.js application
 description: Learn how to add JSON-LD to your Next.js application to describe your content to search engines and AI.
 url: "https://nextjs.org/docs/app/guides/json-ld"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

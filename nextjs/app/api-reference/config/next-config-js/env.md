@@ -2,8 +2,8 @@
 title: env
 description: Learn to add and access environment variables in your Next.js application at build time.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/env"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

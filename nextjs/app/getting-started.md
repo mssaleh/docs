@@ -2,8 +2,8 @@
 title: Getting Started
 description: Learn how to create full-stack web applications with the Next.js App Router.
 url: "https://nextjs.org/docs/app/getting-started"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 ---
 
 

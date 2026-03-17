@@ -2,8 +2,8 @@
 title: How to use debugging tools with Next.js
 description: Learn how to debug your Next.js application with VS Code or Chrome DevTools.
 url: "https://nextjs.org/docs/pages/guides/debugging"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

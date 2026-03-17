@@ -2,8 +2,8 @@
 title: Image Optimization
 description: "Optimize your images with the built-in `next/image` component."
 url: "https://nextjs.org/docs/pages/getting-started/images"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"

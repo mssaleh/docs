@@ -2,8 +2,8 @@
 title: Migrating
 description: Learn how to migrate from popular frameworks to Next.js
 url: "https://nextjs.org/docs/pages/guides/migrating"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

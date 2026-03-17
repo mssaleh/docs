@@ -2,8 +2,8 @@
 title: Custom App
 description: Control page initialization and add a layout that persists for all pages by overriding the default App component used by Next.js.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/custom-app"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

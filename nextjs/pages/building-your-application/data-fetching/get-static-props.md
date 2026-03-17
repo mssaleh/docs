@@ -2,8 +2,8 @@
 title: getStaticProps
 description: "Fetch data and generate static pages with `getStaticProps`. Learn more about this API for data fetching in Next.js."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

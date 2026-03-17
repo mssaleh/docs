@@ -2,8 +2,8 @@
 title: Rendering
 description: Learn the fundamentals of rendering in React and Next.js.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

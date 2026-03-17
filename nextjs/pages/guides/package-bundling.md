@@ -2,8 +2,8 @@
 title: How to optimize package bundling
 description: "Learn how to optimize your application's server and client bundles."
 url: "https://nextjs.org/docs/pages/guides/package-bundling"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

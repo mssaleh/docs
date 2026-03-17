@@ -2,8 +2,8 @@
 title: Proxy
 description: Learn how to use Proxy to run code before a request is completed.
 url: "https://nextjs.org/docs/pages/api-reference/file-conventions/proxy"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

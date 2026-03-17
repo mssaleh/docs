@@ -2,8 +2,8 @@
 title: How to add analytics to your Next.js application
 description: Measure and track page performance using Next.js Speed Insights
 url: "https://nextjs.org/docs/app/guides/analytics"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

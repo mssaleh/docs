@@ -2,8 +2,8 @@
 title: NextResponse
 description: API Reference for NextResponse.
 url: "https://nextjs.org/docs/app/api-reference/functions/next-response"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

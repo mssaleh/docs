@@ -2,8 +2,8 @@
 title: getStaticProps
 description: "API reference for `getStaticProps`. Learn how to use `getStaticProps` to generate static pages with Next.js."
 url: "https://nextjs.org/docs/pages/api-reference/functions/get-static-props"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

@@ -2,8 +2,8 @@
 title: How to use markdown and MDX in Next.js
 description: Learn how to configure MDX to write JSX in your markdown files.
 url: "https://nextjs.org/docs/pages/guides/mdx"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

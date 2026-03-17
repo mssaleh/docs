@@ -2,8 +2,8 @@
 title: Upgrading
 description: Learn how to upgrade to the latest versions of Next.js.
 url: "https://nextjs.org/docs/pages/guides/upgrading"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

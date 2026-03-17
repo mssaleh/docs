@@ -2,8 +2,8 @@
 title: Linking and Navigating
 description: "Learn how navigation works in Next.js, and how to use the Link Component and `useRouter` hook."
 url: "https://nextjs.org/docs/pages/building-your-application/routing/linking-and-navigating"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

@@ -2,8 +2,8 @@
 title: How to upgrade to version 14
 description: Upgrade your Next.js Application from Version 13 to 14.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-14"
-version: 16.1.6
-lastUpdated: 2026-02-27
+version: 16.1.7
+lastUpdated: 2026-03-16
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
