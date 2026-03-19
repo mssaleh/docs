@@ -2,8 +2,8 @@
 title: Codemods
 description: Use codemods to upgrade your Next.js codebase when new features are released.
 url: "https://nextjs.org/docs/app/guides/upgrading/codemods"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-13
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -224,7 +224,7 @@ export default eslintConfig
 npx @next/codemod@latest app-dir-runtime-config-experimental-edge .
 ```
 
-This codemod transforms [Route Segment Config `runtime`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#runtime) value `experimental-edge` to `edge`.
+This codemod transforms [Route Segment Config `runtime`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/runtime) value `experimental-edge` to `edge`.
 
 For example:
 

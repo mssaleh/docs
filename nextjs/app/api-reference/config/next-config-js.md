@@ -2,8 +2,8 @@
 title: next.config.js
 description: Learn how to configure your application with next.config.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-11-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Configuration: /docs/app/api-reference/config"
@@ -150,8 +150,8 @@ expect(response.status).toEqual(307)
 expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 ```
 
-- [experimental.adapterPath](/docs/app/api-reference/config/next-config-js/adapterPath)
-  - Configure a custom adapter for Next.js to hook into the build process with modifyConfig and onBuildComplete callbacks.
+- [adapterPath](/docs/app/api-reference/config/next-config-js/adapterPath)
+  - Configure a custom adapter for Next.js to hook into the build process.
 - [allowedDevOrigins](/docs/app/api-reference/config/next-config-js/allowedDevOrigins)
   - Use `allowedDevOrigins` to configure additional origins that can request the dev server.
 - [appDir](/docs/app/api-reference/config/next-config-js/appDir)
@@ -162,8 +162,6 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Learn how to enable the experimental `authInterrupts` configuration option to use `forbidden` and `unauthorized`.
 - [basePath](/docs/app/api-reference/config/next-config-js/basePath)
   - Use `basePath` to deploy a Next.js application under a sub-path of a domain.
-- [browserDebugInfoInTerminal](/docs/app/api-reference/config/next-config-js/browserDebugInfoInTerminal)
-  - Forward browser console logs and errors to your terminal during development.
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
   - Learn how to enable the cacheComponents flag in Next.js.
 - [cacheHandlers](/docs/app/api-reference/config/next-config-js/cacheHandlers)
@@ -204,10 +202,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Configure the Next.js cache used for storing and revalidating data to use any external service like Redis, Memcached, or others.
 - [inlineCss](/docs/app/api-reference/config/next-config-js/inlineCss)
   - Enable inline CSS support.
-- [isolatedDevBuild](/docs/app/api-reference/config/next-config-js/isolatedDevBuild)
-  - Use isolated build outputs for development server to prevent conflicts with production builds.
 - [logging](/docs/app/api-reference/config/next-config-js/logging)
-  - Configure how data fetches are logged to the console when running Next.js in development mode.
+  - Configure logging behavior in the terminal when running Next.js in development mode, including fetch logging, incoming requests, and forwarding browser console logs to the terminal.
 - [mdxRs](/docs/app/api-reference/config/next-config-js/mdxRs)
   - Use the new Rust compiler to compile MDX files in the App Router.
 - [onDemandEntries](/docs/app/api-reference/config/next-config-js/onDemandEntries)
@@ -243,7 +239,7 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 - [serverExternalPackages](/docs/app/api-reference/config/next-config-js/serverExternalPackages)
   - Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.
 - [staleTimes](/docs/app/api-reference/config/next-config-js/staleTimes)
-  - Learn how to override the invalidation time of the Client Router Cache.
+  - Learn how to override the invalidation time of the client cache.
 - [staticGeneration*](/docs/app/api-reference/config/next-config-js/staticGeneration)
   - Learn how to configure static generation in your Next.js application.
 - [taint](/docs/app/api-reference/config/next-config-js/taint)
@@ -256,6 +252,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Configure Next.js with Turbopack-specific options
 - [turbopackFileSystemCache](/docs/app/api-reference/config/next-config-js/turbopackFileSystemCache)
   - Learn how to enable FileSystem Caching for Turbopack builds
+- [turbopack.ignoreIssue](/docs/app/api-reference/config/next-config-js/turbopackIgnoreIssue)
+  - Suppress specific Turbopack errors and warnings from the CLI output and error overlay.
 - [typedRoutes](/docs/app/api-reference/config/next-config-js/typedRoutes)
   - Enable support for statically typed links.
 - [typescript](/docs/app/api-reference/config/next-config-js/typescript)

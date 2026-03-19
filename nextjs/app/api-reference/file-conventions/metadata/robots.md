@@ -2,8 +2,8 @@
 title: robots.txt
 description: API Reference for robots.txt file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -26,7 +26,7 @@ Sitemap: https://acme.com/sitemap.xml
 
 Add a `robots.js` or `robots.ts` file that returns a [`Robots` object](#robots-object).
 
-> **Good to know**: `robots.js` is a special Route Handler that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> **Good to know**: `robots.js` is a special Route Handler that is cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 ```ts filename="app/robots.ts" switcher
 import type { MetadataRoute } from 'next'

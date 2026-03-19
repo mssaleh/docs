@@ -2,8 +2,8 @@
 title: headers
 description: Add custom HTTP headers to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -393,7 +393,7 @@ Next.js sets the `Cache-Control` header of `public, max-age=31536000, immutable`
 
 However, you can set `Cache-Control` headers for other responses or data.
 
-Learn more about [caching](/docs/app/guides/caching) with the App Router.
+Learn more about [caching](/docs/app/getting-started/caching) with the App Router.
 
 ## Options
 

@@ -2,8 +2,8 @@
 title: not-found.js
 description: API reference for the not-found.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/not-found"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -46,6 +46,8 @@ export default function NotFound() {
   )
 }
 ```
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `not-found.js` renders between `loading.js` and `page.js`. It is wrapped by the `<Suspense>` boundary from `loading.js` and the error boundary from `error.js` in the same segment.
 
 ## `global-not-found.js` (experimental)
 

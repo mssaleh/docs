@@ -2,8 +2,8 @@
 title: unauthorized.js
 description: API reference for the unauthorized.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/unauthorized"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

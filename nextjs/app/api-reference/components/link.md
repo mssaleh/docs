@@ -2,8 +2,8 @@
 title: Link Component
 description: "Enable fast client-side navigation with the built-in `next/link` component."
 url: "https://nextjs.org/docs/app/api-reference/components/link"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -34,13 +34,14 @@ export default function Page() {
 
 The following props can be passed to the `<Link>` component:
 
-| Prop                        | Example                  | Type             | Required |
-| --------------------------- | ------------------------ | ---------------- | -------- |
-| [`href`](#href-required)    | `href="/dashboard"`      | String or Object | Yes      |
-| [`replace`](#replace)       | `replace={false}`        | Boolean          | -        |
-| [`scroll`](#scroll)         | `scroll={false}`         | Boolean          | -        |
-| [`prefetch`](#prefetch)     | `prefetch={false}`       | Boolean or null  | -        |
-| [`onNavigate`](#onnavigate) | `onNavigate={(e) => {}}` | Function         | -        |
+| Prop                                  | Example                          | Type             | Required |
+| ------------------------------------- | -------------------------------- | ---------------- | -------- |
+| [`href`](#href-required)              | `href="/dashboard"`              | String or Object | Yes      |
+| [`replace`](#replace)                 | `replace={false}`                | Boolean          | -        |
+| [`scroll`](#scroll)                   | `scroll={false}`                 | Boolean          | -        |
+| [`prefetch`](#prefetch)               | `prefetch={false}`               | Boolean or null  | -        |
+| [`onNavigate`](#onnavigate)           | `onNavigate={(e) => {}}`         | Function         | -        |
+| [`transitionTypes`](#transitiontypes) | `transitionTypes={['slide-in']}` | `string[]`       | -        |
 
 > **Good to know**: `<a>` tag attributes such as `className` or `target="_blank"` can be added to `<Link>` as props and will be passed to the underlying `<a>` element.
 
@@ -229,6 +230,34 @@ export default function Page() {
 > * When using modifier keys (`Ctrl`/`Cmd` + Click), `onClick` executes but `onNavigate` doesn't since Next.js prevents default navigation for new tabs.
 > * External URLs won't trigger `onNavigate` since it's only for client-side and same-origin navigations.
 > * Links with the `download` attribute will work with `onClick` but not `onNavigate` since the browser will treat the linked URL as a download.
+
+### `transitionTypes`
+
+A list of transition types to apply to the navigation. These types are passed to [`React.addTransitionType`](https://react.dev/reference/react/addTransitionType) inside the navigation transition, enabling [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) components to apply different animations based on the type of navigation.
+
+```tsx filename="app/page.tsx" switcher
+import Link from 'next/link'
+
+export default function Page() {
+  return (
+    <Link href="/about" transitionTypes={['slide-in']}>
+      About
+    </Link>
+  )
+}
+```
+
+```jsx filename="app/page.js" switcher
+import Link from 'next/link'
+
+export default function Page() {
+  return (
+    <Link href="/about" transitionTypes={['slide-in']}>
+      About
+    </Link>
+  )
+}
+```
 
 ## Examples
 

@@ -2,8 +2,8 @@
 title: Next.js Compiler
 description: Next.js Compiler, written in Rust, which transforms and minifies your Next.js application.
 url: "https://nextjs.org/docs/architecture/nextjs-compiler"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-05-19
 prerequisites:
   - "Architecture: /docs/architecture"
 ---

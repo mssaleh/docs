@@ -2,8 +2,8 @@
 title: getServerSideProps
 description: "Fetch data on each request with `getServerSideProps`."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -66,7 +66,7 @@ export default function Page({ repo }) {
 
 You should use `getServerSideProps` if you need to render a page that relies on personalized user data, or information that can only be known at request time. For example, `authorization` headers or a geolocation.
 
-If you do not need to fetch the data at request time, or would prefer to cache the data and pre-rendered HTML, we recommend using [`getStaticProps`](/docs/pages/building-your-application/data-fetching/get-static-props).
+If you do not need to fetch the data at request time, or would prefer to cache the data and prerendered HTML, we recommend using [`getStaticProps`](/docs/pages/building-your-application/data-fetching/get-static-props).
 
 ## Behavior
 

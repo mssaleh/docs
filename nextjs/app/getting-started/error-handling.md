@@ -2,13 +2,14 @@
 title: Error Handling
 description: Learn how to display expected errors and handle uncaught exceptions.
 url: "https://nextjs.org/docs/app/getting-started/error-handling"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-17
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
   - app/api-reference/functions/redirect
   - app/api-reference/file-conventions/error
+  - app/api-reference/functions/catchError
   - app/api-reference/functions/not-found
   - app/api-reference/file-conventions/not-found
 ---
@@ -211,10 +212,10 @@ import { useEffect } from 'react'
 
 export default function ErrorPage({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string }
-  reset: () => void
+  unstable_retry: () => void
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
@@ -226,8 +227,8 @@ export default function ErrorPage({
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
@@ -242,7 +243,7 @@ export default function ErrorPage({
 
 import { useEffect } from 'react'
 
-export default function ErrorPage({ error, reset }) {
+export default function ErrorPage({ error, unstable_retry }) {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error)
@@ -253,8 +254,8 @@ export default function ErrorPage({ error, reset }) {
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
@@ -268,7 +269,66 @@ Errors will bubble up to the nearest parent error boundary. This allows for gran
 
 ![Nested Error Component Hierarchy](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/nested-error-component-hierarchy.png)
 
-Error boundaries don’t catch errors inside event handlers. They’re designed to catch errors [during rendering](https://react.dev/reference/react/Component#static-getderivedstatefromerror) to show a **fallback UI** instead of crashing the whole app.
+For component-level error recovery, the [`unstable_catchError`](/docs/app/api-reference/functions/catchError) function lets you create error boundaries that can wrap any part of your component tree:
+
+```tsx filename="app/custom-error-boundary.tsx" switcher
+'use client'
+
+import { unstable_catchError as catchError, type ErrorInfo } from 'next/error'
+
+function ErrorFallback(
+  props: { title: string },
+  { error, unstable_retry: retry }: ErrorInfo
+) {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      <p>{error.message}</p>
+      <button onClick={() => retry()}>Try again</button>
+    </div>
+  )
+}
+
+export default catchError(ErrorFallback)
+```
+
+```jsx filename="app/custom-error-boundary.js" switcher
+'use client'
+
+import { unstable_catchError as catchError } from 'next/error'
+
+function ErrorFallback(props, { error, unstable_retry: retry }) {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      <p>{error.message}</p>
+      <button onClick={() => retry()}>Try again</button>
+    </div>
+  )
+}
+
+export default catchError(ErrorFallback)
+```
+
+Then use the returned component as a wrapper in any layout or page:
+
+```tsx filename="app/some-component.tsx" switcher
+import ErrorBoundary from './custom-error-boundary'
+
+export default function Component({ children }: { children: React.ReactNode }) {
+  return <ErrorBoundary title="Dashboard Error">{children}</ErrorBoundary>
+}
+```
+
+```jsx filename="app/some-component.js" switcher
+import ErrorBoundary from './custom-error-boundary'
+
+export default function Component({ children }) {
+  return <ErrorBoundary title="Dashboard Error">{children}</ErrorBoundary>
+}
+```
+
+Error boundaries don't catch errors inside event handlers. They're designed to catch errors [during rendering](https://react.dev/reference/react/Component#static-getderivedstatefromerror) to show a **fallback UI** instead of crashing the whole app.
 
 In general, errors in event handlers or async code aren’t handled by error boundaries because they run after rendering.
 
@@ -335,17 +395,17 @@ While less common, you can handle errors in the root layout using the [`global-e
 
 export default function GlobalError({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string }
-  reset: () => void
+  unstable_retry: () => void
 }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
   )
@@ -355,13 +415,13 @@ export default function GlobalError({
 ```jsx filename="app/global-error.js" switcher
 'use client' // Error boundaries must be Client Components
 
-export default function GlobalError({ error, reset }) {
+export default function GlobalError({ error, unstable_retry }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
   )
@@ -375,6 +435,8 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - API Reference for the redirect function.
 - [error.js](/docs/app/api-reference/file-conventions/error)
   - API reference for the error.js special file.
+- [unstable_catchError](/docs/app/api-reference/functions/catchError)
+  - API Reference for the unstable_catchError function.
 - [notFound](/docs/app/api-reference/functions/not-found)
   - API Reference for the notFound function.
 - [not-found.js](/docs/app/api-reference/file-conventions/not-found)

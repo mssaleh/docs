@@ -2,8 +2,8 @@
 title: How to handle redirects in Next.js
 description: Learn the different ways to handle redirects in Next.js.
 url: "https://nextjs.org/docs/app/guides/redirecting"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -26,7 +26,7 @@ There are a few ways you can handle redirects in Next.js. This page will go thro
 
 ## `redirect` function
 
-The `redirect` function allows you to redirect the user to another URL. You can call `redirect` in [Server Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/updating-data).
+The `redirect` function allows you to redirect the user to another URL. You can call `redirect` in [Server Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/mutating-data).
 
 `redirect` is often used after a mutation or event. For example, creating a post:
 
@@ -78,7 +78,7 @@ See the [`redirect` API reference](/docs/app/api-reference/functions/redirect) f
 
 ## `permanentRedirect` function
 
-The `permanentRedirect` function allows you to **permanently** redirect the user to another URL. You can call `permanentRedirect` in [Server Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/updating-data).
+The `permanentRedirect` function allows you to **permanently** redirect the user to another URL. You can call `permanentRedirect` in [Server Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/mutating-data).
 
 `permanentRedirect` is often used after a mutation or event that changes an entity's canonical URL, such as updating a user's profile URL after they change their username:
 

@@ -2,8 +2,8 @@
 title: Client-side Fetching
 description: Learn about client-side data fetching, and how to use SWR, a data fetching React Hook library that handles caching, revalidation, focus tracking, refetching on interval and more.
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -11,7 +11,7 @@ prerequisites:
 ---
 
 
-Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. Unlike the server-side rendering APIs, you can use client-side data fetching at the component level.
+Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to prerender your data, or when the content of your pages needs to update frequently. Unlike the server-side rendering APIs, you can use client-side data fetching at the component level.
 
 If done at the page level, the data is fetched at runtime, and the content of the page is updated as the data changes. When used at the component level, the data is fetched at the time of the component mount, and the content of the component is updated as the data changes.
 

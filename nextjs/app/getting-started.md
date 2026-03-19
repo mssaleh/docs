@@ -2,8 +2,8 @@
 title: Getting Started
 description: Learn how to create full-stack web applications with the Next.js App Router.
 url: "https://nextjs.org/docs/app/getting-started"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-05-02
 ---
 
 
@@ -34,14 +34,14 @@ If you're new to React or need a refresher, we recommend starting with our [Reac
   - Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 - [Server and Client Components](/docs/app/getting-started/server-and-client-components)
   - Learn how you can use React Server and Client Components to render parts of your application on the server or the client.
-- [Cache Components](/docs/app/getting-started/cache-components)
-  - Learn how to use Cache Components and combine the benefits of static and dynamic rendering.
 - [Fetching Data](/docs/app/getting-started/fetching-data)
   - Learn how to fetch data and stream content that depends on data.
-- [Updating Data](/docs/app/getting-started/updating-data)
+- [Mutating Data](/docs/app/getting-started/mutating-data)
   - Learn how to mutate data using Server Functions and Server Actions in Next.js.
-- [Caching and Revalidating](/docs/app/getting-started/caching-and-revalidating)
-  - Learn how to cache and revalidate data in your application.
+- [Caching](/docs/app/getting-started/caching)
+  - Learn how to cache data and UI in Next.js
+- [Revalidating](/docs/app/getting-started/revalidating)
+  - Learn how to revalidate cached data using time-based and on-demand strategies.
 - [Error Handling](/docs/app/getting-started/error-handling)
   - Learn how to display expected errors and handle uncaught exceptions.
 - [CSS](/docs/app/getting-started/css)

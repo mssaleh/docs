@@ -2,15 +2,15 @@
 title: reactMaxHeadersLength
 description: The maximum length of the headers that are emitted by React and added to the response.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/reactMaxHeadersLength"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
-During static rendering, React can emit headers that can be added to the response. These can be used to improve performance by allowing the browser to preload resources like fonts, scripts, and stylesheets. The default value is `6000`, but you can override this value by configuring the `reactMaxHeadersLength` option in `next.config.js`:
+During prerendering, React can emit headers that can be added to the response. These can be used to improve performance by allowing the browser to preload resources like fonts, scripts, and stylesheets. The default value is `6000`, but you can override this value by configuring the `reactMaxHeadersLength` option in `next.config.js`:
 
 ```js filename="next.config.js"
 module.exports = {

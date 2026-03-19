@@ -2,8 +2,8 @@
 title: How to implement internationalization in Next.js
 description: Next.js has built-in support for internationalized routing and language detection. Learn more here.
 url: "https://nextjs.org/docs/pages/guides/internationalization"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"
@@ -215,7 +215,7 @@ You can access the locale information via the Next.js router. For example, using
 * `locales` contains all configured locales.
 * `defaultLocale` contains the configured default locale.
 
-When [pre-rendering](/docs/pages/building-your-application/rendering/static-site-generation) pages with `getStaticProps` or `getServerSideProps`, the locale information is provided in [the context](/docs/pages/building-your-application/data-fetching/get-static-props) provided to the function.
+When [prerendering](/docs/pages/building-your-application/rendering/static-site-generation) pages with `getStaticProps` or `getServerSideProps`, the locale information is provided in [the context](/docs/pages/building-your-application/data-fetching/get-static-props) provided to the function.
 
 When leveraging `getStaticPaths`, the configured locales are provided in the context parameter of the function under `locales` and the configured defaultLocale under `defaultLocale`.
 
@@ -328,7 +328,7 @@ For pages that are [automatically statically optimized](/docs/pages/building-you
 
 ### Non-dynamic getStaticProps Pages
 
-For non-dynamic `getStaticProps` pages, a version is generated for each locale like above. `getStaticProps` is called with each `locale` that is being rendered. If you would like to opt-out of a certain locale from being pre-rendered, you can return `notFound: true` from `getStaticProps` and this variant of the page will not be generated.
+For non-dynamic `getStaticProps` pages, a version is generated for each locale like above. `getStaticProps` is called with each `locale` that is being rendered. If you would like to opt-out of a certain locale from being prerendered, you can return `notFound: true` from `getStaticProps` and this variant of the page will not be generated.
 
 ```js
 export async function getStaticProps({ locale }) {

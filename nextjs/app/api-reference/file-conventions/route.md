@@ -2,8 +2,8 @@
 title: route.js
 description: API reference for the route.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -345,7 +345,7 @@ export async function GET(request, { params }) {
 
 You can use [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) with dynamic Route Handlers to statically generate responses at build time for specified params, while handling other params dynamically at request time.
 
-When using [Cache Components](/docs/app/getting-started/cache-components), you can combine `generateStaticParams` with `use cache` to enable data caching for both prerendered and runtime params.
+When using [Cache Components](/docs/app/getting-started/caching), you can combine `generateStaticParams` with `use cache` to enable data caching for both prerendered and runtime params.
 
 See the [generateStaticParams with Route Handlers](/docs/app/api-reference/functions/generate-static-params#with-route-handlers) documentation for examples and details.
 
@@ -675,6 +675,16 @@ See the [API reference](/docs/app/api-reference/file-conventions/route-segment-c
 | `v15.0.0-RC` | `context.params` is now a promise. A [codemod](/docs/app/guides/upgrading/codemods#150) is available |
 | `v15.0.0-RC` | The default caching for `GET` handlers was changed from static to dynamic                            |
 | `v13.2.0`    | Route Handlers are introduced.                                                                       |
+
+- [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)
+  - API reference for the dynamicParams route segment config option.
+- [maxDuration](/docs/app/api-reference/file-conventions/route-segment-config/maxDuration)
+  - API reference for the maxDuration route segment config option.
+- [preferredRegion](/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion)
+  - API reference for the preferredRegion route segment config option.
+- [runtime](/docs/app/api-reference/file-conventions/route-segment-config/runtime)
+  - API reference for the runtime route segment config option.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

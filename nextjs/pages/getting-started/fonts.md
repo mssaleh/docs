@@ -2,8 +2,8 @@
 title: How to use fonts
 description: Learn how to use fonts in Next.js
 url: "https://nextjs.org/docs/pages/getting-started/fonts"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-05-08
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"
@@ -47,50 +47,6 @@ export default function MyApp({ Component, pageProps }) {
     <main className={geist.className}>
       <Component {...pageProps} />
     </main>
-  )
-}
-```
-
-If you want to apply the font to the `<html>` element, you can use a [Custom Document](/docs/pages/building-your-application/routing/custom-document) (`pages/_document`):
-
-```tsx filename="pages/_document.tsx" highlight={2,4-6,10} switcher
-import { Html, Head, Main, NextScript } from 'next/document'
-import { Geist } from 'next/font/google'
-
-const geist = Geist({
-  subsets: ['latin'],
-})
-
-export default function Document() {
-  return (
-    <Html lang="en" className={geist.className}>
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
-}
-```
-
-```jsx filename="pages/_document.js" highlight={2,4-6,10} switcher
-import { Html, Head, Main, NextScript } from 'next/document'
-import { Geist } from 'next/font/google'
-
-const geist = Geist({
-  subsets: ['latin'],
-})
-
-export default function Document() {
-  return (
-    <Html lang="en" className={geist.className}>
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
   )
 }
 ```

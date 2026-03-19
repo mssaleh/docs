@@ -2,8 +2,8 @@
 title: Docs Contribution Guide
 description: Learn how to contribute to Next.js Documentation
 url: "https://nextjs.org/docs/community/contribution-guide"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-02-11
 prerequisites:
   - "Community: /docs/community"
 ---

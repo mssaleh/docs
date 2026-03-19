@@ -2,8 +2,8 @@
 title: webVitalsAttribution
 description: Learn how to use the webVitalsAttribution option to pinpoint the source of Web Vitals issues.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/webVitalsAttribution"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

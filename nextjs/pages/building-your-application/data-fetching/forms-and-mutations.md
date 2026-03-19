@@ -2,8 +2,8 @@
 title: Forms and Mutations
 description: Learn how to handle form submissions and data mutations with Next.js.
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -15,7 +15,7 @@ Forms enable you to create and update data in web applications. Next.js provides
 
 > **Good to know:**
 >
-> * We will soon recommend [incrementally adopting](/docs/app/guides/migrating/app-router-migration) the App Router and using [Server Actions](/docs/app/getting-started/updating-data) for handling form submissions and data mutations. Server Actions allow you to define asynchronous server functions that can be called directly from your components, without needing to manually create an API Route.
+> * We will soon recommend [incrementally adopting](/docs/app/guides/migrating/app-router-migration) the App Router and using [Server Actions](/docs/app/getting-started/mutating-data) for handling form submissions and data mutations. Server Actions allow you to define asynchronous server functions that can be called directly from your components, without needing to manually create an API Route.
 > * API Routes [do not specify CORS headers](https://developer.mozilla.org/docs/Web/HTTP/CORS), meaning they are same-origin only by default.
 > * Since API Routes run on the server, we're able to use sensitive values (like API keys) through [Environment Variables](/docs/pages/guides/environment-variables) without exposing them to the client. This is critical for the security of your application.
 

@@ -2,8 +2,8 @@
 title: Error Handling
 description: Handle errors in your Next.js app.
 url: "https://nextjs.org/docs/pages/building-your-application/configuring/error-handling"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

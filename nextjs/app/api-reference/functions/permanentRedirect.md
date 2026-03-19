@@ -2,8 +2,8 @@
 title: permanentRedirect
 description: API Reference for the permanentRedirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/permanentRedirect"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -12,7 +12,7 @@ related:
 ---
 
 
-The `permanentRedirect` function allows you to redirect the user to another URL. `permanentRedirect` can be used in Server Components, Client Components, [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/updating-data).
+The `permanentRedirect` function allows you to redirect the user to another URL. `permanentRedirect` can be used in Server Components, Client Components, [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/mutating-data).
 
 When used in a streaming context, this will insert a meta tag to emit the redirect on the client side. When used in a server action, it will serve a 303 HTTP redirect response to the caller. Otherwise, it will serve a 308 (Permanent) HTTP redirect response to the caller.
 
@@ -33,7 +33,7 @@ permanentRedirect(path, type)
 | `path`    | `string`                                                      | The URL to redirect to. Can be a relative or absolute path. |
 | `type`    | `'replace'` (default) or `'push'` (default in Server Actions) | The type of redirect to perform.                            |
 
-By default, `permanentRedirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/updating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
+By default, `permanentRedirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/mutating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
 
 The `RedirectType` object contains the available options for the `type` parameter.
 

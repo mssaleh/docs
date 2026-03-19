@@ -2,8 +2,8 @@
 title: mdxRs
 description: Use the new Rust compiler to compile MDX files in the App Router.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/mdxRs"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-11-05
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

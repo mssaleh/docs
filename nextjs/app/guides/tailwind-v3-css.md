@@ -2,8 +2,8 @@
 title: How to install Tailwind CSS v3 in your Next.js application
 description: Style your Next.js Application using Tailwind CSS v3 for broader browser support.
 url: "https://nextjs.org/docs/app/guides/tailwind-v3-css"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-08-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

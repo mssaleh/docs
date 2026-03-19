@@ -2,8 +2,8 @@
 title: src Folder
 description: "Save pages under the `src` folder as an alternative to the root `pages` directory."
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/src-folder"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-10-17
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

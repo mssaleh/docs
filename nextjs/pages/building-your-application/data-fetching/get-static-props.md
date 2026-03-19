@@ -2,8 +2,8 @@
 title: getStaticProps
 description: "Fetch data and generate static pages with `getStaticProps`. Learn more about this API for data fetching in Next.js."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -11,7 +11,7 @@ prerequisites:
 ---
 
 
-If you export a function called `getStaticProps` (Static Site Generation) from a page, Next.js will pre-render this page at build time using the props returned by `getStaticProps`.
+If you export a function called `getStaticProps` (Static Site Generation) from a page, Next.js will prerender this page at build time using the props returned by `getStaticProps`.
 
 ```tsx filename="pages/index.tsx" switcher
 import type { InferGetStaticPropsType, GetStaticProps } from 'next'
@@ -58,7 +58,7 @@ You should use `getStaticProps` if:
 
 * The data required to render the page is available at build time ahead of a user’s request
 * The data comes from a headless CMS
-* The page must be pre-rendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
+* The page must be prerendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
 * The data can be publicly cached (not user-specific). This condition can be bypassed in certain specific situation by using a Proxy to rewrite the path.
 
 ## When does getStaticProps run
@@ -185,9 +185,9 @@ To verify what Next.js eliminates from the client-side bundle, you can use the [
 
 ## Statically generates both HTML and JSON
 
-When a page with `getStaticProps` is pre-rendered at build time, in addition to the page HTML file, Next.js generates a JSON file holding the result of running `getStaticProps`.
+When a page with `getStaticProps` is prerendered at build time, in addition to the page HTML file, Next.js generates a JSON file holding the result of running `getStaticProps`.
 
-This JSON file will be used in client-side routing through [`next/link`](/docs/pages/api-reference/components/link) or [`next/router`](/docs/pages/api-reference/functions/use-router). When you navigate to a page that’s pre-rendered using `getStaticProps`, Next.js fetches this JSON file (pre-computed at build time) and uses it as the props for the page component. This means that client-side page transitions will **not** call `getStaticProps` as only the exported JSON is used.
+This JSON file will be used in client-side routing through [`next/link`](/docs/pages/api-reference/components/link) or [`next/router`](/docs/pages/api-reference/functions/use-router). When you navigate to a page that’s prerendered using `getStaticProps`, Next.js fetches this JSON file (pre-computed at build time) and uses it as the props for the page component. This means that client-side page transitions will **not** call `getStaticProps` as only the exported JSON is used.
 
 When using Incremental Static Generation, `getStaticProps` will be executed in the background to generate the JSON needed for client-side navigation. You may see this in the form of multiple requests being made for the same page, however, this is intended and has no impact on end-user performance.
 

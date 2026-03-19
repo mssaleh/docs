@@ -2,8 +2,8 @@
 title: serverExternalPackages
 description: "Opt-out specific dependencies from the dependency bundling enabled by `bundlePagesRouterDependencies`."
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/serverExternalPackages"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-12-05
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

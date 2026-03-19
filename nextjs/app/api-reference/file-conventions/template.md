@@ -2,8 +2,8 @@
 title: template.js
 description: API Reference for the template.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/template"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -44,6 +44,8 @@ In terms of nesting, `template.js` is rendered between a layout and its children
   <Template key={routeParam}>{children}</Template>
 </Layout>
 ```
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `template.js` renders between `layout.js` and `error.js`. It wraps `error.js`, `loading.js`, `not-found.js`, and `page.js`, but does **not** wrap the `layout.js` in the same segment.
 
 ## Props
 

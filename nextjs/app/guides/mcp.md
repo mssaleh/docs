@@ -2,8 +2,8 @@
 title: Enabling Next.js MCP Server for Coding Agents
 description: Learn how to use Next.js MCP support to allow coding agents access to your application state
 url: "https://nextjs.org/docs/app/guides/mcp"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -50,7 +50,7 @@ For more configuration options, see the [next-devtools-mcp repository](https://g
 
 * **Next.js Knowledge Base**: Query comprehensive Next.js documentation and best practices
 * **Migration and Upgrade Tools**: Automated helpers for upgrading to Next.js 16 with codemods
-* **Cache Components Guide**: Setup and configuration assistance for Cache Components
+* **Caching Guide**: Setup and configuration assistance for Cache Components
 * **Browser Testing**: [Playwright MCP](https://github.com/microsoft/playwright-mcp) integration for verifying pages in the browser
 
 > **Note:** The Next.js team is actively expanding these capabilities. New tools and features are added regularly to improve the agent development experience.
@@ -89,6 +89,7 @@ Through `next-devtools-mcp`, agents can use the following tools:
 * **`get_logs`**: Get the path to the development log file containing browser console logs and server output
 * **`get_page_metadata`**: Get metadata about specific pages including routes, components, and rendering information
 * **`get_project_metadata`**: Retrieve project structure, configuration, and dev server URL
+* **`get_routes`**: Get all routes that will become entry points by scanning the filesystem. Returns routes grouped by router type (appRouter, pagesRouter). Dynamic segments appear as `[param]` or `[...slug]` patterns
 * **`get_server_action_by_id`**: Look up Server Actions by their ID to find the source file and function name
 
 ## Using with agents

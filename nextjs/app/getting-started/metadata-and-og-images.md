@@ -2,8 +2,8 @@
 title: Metadata and OG images
 description: Learn how to add metadata to your pages and create dynamic OG images.
 url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -129,7 +129,7 @@ Streaming metadata is **disabled for bots and crawlers** that expect metadata to
 
 You can customize or **disable** streaming metadata completely, with the [`htmlLimitedBots`](/docs/app/api-reference/config/next-config-js/htmlLimitedBots#disabling) option in your Next.js config file.
 
-Statically rendered pages don’t use streaming since metadata is resolved at build time.
+Prerendered pages don’t use streaming since metadata is resolved at build time.
 
 Learn more about [streaming metadata](/docs/app/api-reference/functions/generate-metadata#streaming-metadata).
 

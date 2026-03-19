@@ -2,8 +2,8 @@
 title: headers
 description: API reference for the headers function.
 url: "https://nextjs.org/docs/app/api-reference/functions/headers"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -52,7 +52,7 @@ export default async function Page() {
 * `headers` is an **asynchronous** function that returns a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function.
   * In version 14 and earlier, `headers` was a synchronous function. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
 * Since `headers` is read-only, you cannot `set` or `delete` the outgoing request headers.
-* `headers` is a [Dynamic API](/docs/app/guides/caching#dynamic-rendering) whose returned values cannot be known ahead of time. Using it in will opt a route into **[dynamic rendering](/docs/app/guides/caching#dynamic-rendering)**.
+* `headers` is a [Request-time API](/docs/app/glossary#request-time-apis) whose returned values cannot be known ahead of time. Using it in will opt a route into **[dynamic rendering](/docs/app/glossary#dynamic-rendering)**.
 
 ## Examples
 

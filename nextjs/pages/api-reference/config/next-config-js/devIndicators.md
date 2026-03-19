@@ -2,8 +2,8 @@
 title: devIndicators
 description: "Optimized pages include an indicator to let you know if it's being statically optimized. You can opt-out of it here."
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/devIndicators"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"
@@ -28,9 +28,9 @@ Setting `devIndicators` to `false` will hide the indicator, however Next.js will
 
 ### Indicator not marking a route as static
 
-If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of static rendering.
+If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of prerendering.
 
-You can confirm if a route is [static](/docs/app/guides/caching#static-rendering) or [dynamic](/docs/app/guides/caching#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
+You can confirm if a route is [prerendered](/docs/app/glossary#prerendering) or [dynamically rendered](/docs/app/glossary#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
 
 ```bash filename="Build Output"
 Route (app)

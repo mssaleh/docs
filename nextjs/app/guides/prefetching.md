@@ -2,8 +2,8 @@
 title: Prefetching
 description: Learn how to configure prefetching in Next.js
 url: "https://nextjs.org/docs/app/guides/prefetching"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-10
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -29,11 +29,11 @@ When navigating to the new page, there's no full page reload or browser loading 
 
 ## Prefetching static vs. dynamic routes
 
-|                                                                   | **Static page** | **Dynamic page**                                                                |
-| ----------------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------- |
-| **Prefetched**                                                    | Yes, full route | No, unless [`loading.js`](/docs/app/api-reference/file-conventions/loading)     |
-| [**Client Cache TTL**](/docs/app/guides/caching#full-route-cache) | 5 min (default) | Off, unless [enabled](/docs/app/api-reference/config/next-config-js/staleTimes) |
-| **Server roundtrip on click**                                     | No              | Yes, streamed after [shell](/docs/app/getting-started/cache-components)         |
+|                                                         | **Static page** | **Dynamic page**                                                                |
+| ------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------- |
+| **Prefetched**                                          | Yes, full route | No, unless [`loading.js`](/docs/app/api-reference/file-conventions/loading)     |
+| [**Client Cache TTL**](/docs/app/glossary#client-cache) | 5 min (default) | Off, unless [enabled](/docs/app/api-reference/config/next-config-js/staleTimes) |
+| **Server roundtrip on click**                           | No              | Yes, streamed after [shell](/docs/app/getting-started/caching)                  |
 
 > **Good to know:** During the initial navigation, the browser fetches the HTML, JavaScript, and React Server Components (RSC) Payload. For subsequent navigations, the browser will fetch the RSC Payload for Server Components and JS bundle for Client Components.
 
@@ -211,10 +211,10 @@ The scheduler prioritizes likely navigations while minimizing unused downloads.
 
 ### Partial Prerendering (PPR)
 
-When PPR is enabled, a page is divided into a static shell and a streamed dynamic section:
+When PPR is enabled, a page is divided into a [static shell](/docs/app/guides/streaming#the-static-shell) and a streamed dynamic section:
 
 * The shell, which can be prefetched, streams immediately
-* Dynamic data streams when ready
+* Uncached data streams when ready
 * Data invalidations (`revalidateTag`, `revalidatePath`) silently refresh associated prefetches
 
 ## Troubleshooting

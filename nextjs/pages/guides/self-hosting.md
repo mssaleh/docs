@@ -2,8 +2,8 @@
 title: How to self-host your Next.js application
 description: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
 url: "https://nextjs.org/docs/pages/guides/self-hosting"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-22
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"
@@ -76,7 +76,7 @@ If you want to host static assets on a different domain or CDN, you can use the 
 
 By default, generated cache assets will be stored in memory (defaults to 50mb) and on disk. If you are hosting Next.js using a container orchestration platform like Kubernetes, each pod will have a copy of the cache. To prevent stale data from being shown since the cache is not shared between pods by default, you can configure the Next.js cache to provide a cache handler and disable in-memory caching.
 
-To configure the ISR/Data Cache location when self-hosting, you can configure a custom handler in your `next.config.js` file:
+To configure the cache location when self-hosting, you can configure a custom handler in your `next.config.js` file:
 
 ```jsx filename="next.config.js"
 module.exports = {
@@ -154,7 +154,7 @@ When running Next.js across multiple server instances (for example, containers b
 
 ### Server Functions encryption key
 
-Next.js encrypts [Server Function](/docs/app/getting-started/updating-data) closure variables before sending them to the client. By default, a unique encryption key is generated for each build.
+Next.js encrypts [Server Function](/docs/app/getting-started/mutating-data) closure variables before sending them to the client. By default, a unique encryption key is generated for each build.
 
 When running multiple server instances, all instances must use the same encryption key. Otherwise, a Server Function encrypted by one instance cannot be decrypted by another, causing "Failed to find Server Action" errors.
 

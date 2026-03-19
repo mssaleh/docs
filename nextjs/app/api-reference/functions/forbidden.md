@@ -2,8 +2,8 @@
 title: forbidden
 description: API Reference for the forbidden function.
 url: "https://nextjs.org/docs/app/api-reference/functions/forbidden"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -39,7 +39,7 @@ module.exports = {
 }
 ```
 
-`forbidden` can be invoked in [Server Components](/docs/app/getting-started/server-and-client-components), [Server Functions](/docs/app/getting-started/updating-data), and [Route Handlers](/docs/app/api-reference/file-conventions/route).
+`forbidden` can be invoked in [Server Components](/docs/app/getting-started/server-and-client-components), [Server Functions](/docs/app/getting-started/mutating-data), and [Route Handlers](/docs/app/api-reference/file-conventions/route).
 
 ```tsx filename="app/auth/page.tsx" switcher
 import { verifySession } from '@/app/lib/dal'

@@ -2,15 +2,15 @@
 title: revalidateTag
 description: API Reference for the revalidateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidateTag"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
-`revalidateTag` allows you to invalidate [cached data](/docs/app/guides/caching) on-demand for a specific cache tag.
+`revalidateTag` allows you to invalidate cached data on-demand for a specific cache tag.
 
 This function is ideal for content where a slight delay in updates is acceptable, such as blog posts, product catalogs, or documentation. Users receive stale content while fresh data loads in the background.
 
@@ -41,7 +41,7 @@ revalidateTag(tag: string, profile: string | { expire?: number }): void;
 
 Tags must first be assigned to cached data. You can do this in two ways:
 
-* Using the [`next.tags`](/docs/app/guides/caching#fetch-optionsnexttags-and-revalidatetag) option with `fetch` for caching external API requests:
+* Using the [`next.tags`](/docs/app/api-reference/functions/fetch) option with `fetch` for caching external API requests:
 
 ```tsx
 fetch(url, { next: { tags: ['posts'] } })

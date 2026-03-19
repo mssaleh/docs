@@ -2,8 +2,8 @@
 title: Client-side Rendering (CSR)
 description: Learn how to implement client-side rendering in the Pages Router.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-06
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -82,7 +82,7 @@ Learn about the alternative rendering methods in Next.js.
 - [Server-side Rendering (SSR)](/docs/pages/building-your-application/rendering/server-side-rendering)
   - Use Server-side Rendering to render pages on each request.
 - [Static Site Generation (SSG)](/docs/pages/building-your-application/rendering/static-site-generation)
-  - Use Static Site Generation (SSG) to pre-render pages at build time.
+  - Use Static Site Generation (SSG) to prerender pages at build time.
 - [ISR](/docs/pages/guides/incremental-static-regeneration)
   - Learn how to create or update static pages at runtime with Incremental Static Regeneration.
 

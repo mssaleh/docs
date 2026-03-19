@@ -2,8 +2,8 @@
 title: Image (Legacy)
 description: Backwards compatible Image Optimization with the Legacy Image component.
 url: "https://nextjs.org/docs/pages/api-reference/components/image-legacy"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-02-02
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

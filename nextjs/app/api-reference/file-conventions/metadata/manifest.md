@@ -2,8 +2,8 @@
 title: manifest.json
 description: API Reference for manifest.json file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -28,7 +28,7 @@ Add or generate a `manifest.(json|webmanifest)` file that matches the [Web Manif
 
 Add a `manifest.js` or `manifest.ts` file that returns a [`Manifest` object](#manifest-object).
 
-> Good to know: `manifest.js` is a special Route Handler that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> Good to know: `manifest.js` is a special Route Handlers that is cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 ```ts filename="app/manifest.ts" switcher
 import type { MetadataRoute } from 'next'

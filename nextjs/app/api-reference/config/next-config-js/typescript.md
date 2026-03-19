@@ -2,8 +2,8 @@
 title: typescript
 description: Configure how Next.js handles TypeScript errors during production builds and specify a custom tsconfig file.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/typescript"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -33,6 +33,8 @@ module.exports = {
 Next.js fails your **production build** (`next build`) when TypeScript errors are present in your project.
 
 If you'd like Next.js to dangerously produce production code even when your application has errors, you can disable the built-in type checking step.
+
+Note that this completely skips the TypeScript type checking step. It does not run TypeScript and suppress errors, it bypasses the check entirely.
 
 If disabled, be sure you are running type checks as part of your build or deploy process, otherwise this can be very dangerous.
 

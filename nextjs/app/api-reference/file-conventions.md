@@ -2,8 +2,8 @@
 title: File-system conventions
 description: API Reference for Next.js file-system conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
@@ -44,8 +44,6 @@ prerequisites:
   - API reference for the route.js special file.
 - [Route Groups](/docs/app/api-reference/file-conventions/route-groups)
   - Route Groups can be used to partition your Next.js application into different sections.
-- [Route Segment Config](/docs/app/api-reference/file-conventions/route-segment-config)
-  - Learn about how to configure options for Next.js route segments.
 - [src](/docs/app/api-reference/file-conventions/src-folder)
   - Save pages under the `src` folder as an alternative to the root `pages` directory.
 - [template.js](/docs/app/api-reference/file-conventions/template)
@@ -54,6 +52,8 @@ prerequisites:
   - API reference for the unauthorized.js special file.
 - [Metadata Files](/docs/app/api-reference/file-conventions/metadata)
   - API documentation for the metadata file conventions.
+- [Route Segment Config](/docs/app/api-reference/file-conventions/route-segment-config)
+  - Learn about how to configure options for Next.js route segments.
 
 ---
 

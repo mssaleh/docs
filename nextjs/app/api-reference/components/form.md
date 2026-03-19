@@ -2,8 +2,8 @@
 title: Form Component
 description: "Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation."
 url: "https://nextjs.org/docs/app/api-reference/components/form"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -332,7 +332,7 @@ export default async function PostPage({ params }) {
 }
 ```
 
-See the [Server Actions](/docs/app/getting-started/updating-data) docs for more examples.
+See the [Server Actions](/docs/app/getting-started/mutating-data) docs for more examples.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

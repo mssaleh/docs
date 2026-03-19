@@ -2,21 +2,21 @@
 title: updateTag
 description: API Reference for the updateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/updateTag"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
-`updateTag` allows you to update [cached data](/docs/app/guides/caching) on-demand for a specific cache tag from within [Server Actions](/docs/app/getting-started/updating-data).
+`updateTag` allows you to update cached data on-demand for a specific cache tag from within [Server Actions](/docs/app/getting-started/mutating-data).
 
 This function is designed for **read-your-own-writes** scenarios, where a user makes a change (like creating a post), and the UI immediately shows the change, rather than stale data.
 
 ## Usage
 
-`updateTag` can **only** be called from within [Server Actions](/docs/app/getting-started/updating-data). It cannot be used in Route Handlers, Client Components, or any other context.
+`updateTag` can **only** be called from within [Server Actions](/docs/app/getting-started/mutating-data). It cannot be used in Route Handlers, Client Components, or any other context.
 
 If you need to invalidate cache tags in Route Handlers or other contexts, use [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) instead.
 
@@ -32,7 +32,7 @@ updateTag(tag: string): void;
 
 Tags must first be assigned to cached data. You can do this in two ways:
 
-* Using the [`next.tags`](/docs/app/guides/caching#fetch-optionsnexttags-and-revalidatetag) option with `fetch` for caching external API requests:
+* Using the [`next.tags`](/docs/app/api-reference/functions/fetch) option with `fetch` for caching external API requests:
 
 ```tsx
 fetch(url, { next: { tags: ['posts'] } })

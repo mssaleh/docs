@@ -2,8 +2,8 @@
 title: Guides
 description: Learn how to implement common patterns and real-world use cases using Next.js
 url: "https://nextjs.org/docs/app/guides"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-11
 ---
 
 
@@ -16,8 +16,8 @@ lastUpdated: 2026-03-16
   - Learn how to implement authentication in your Next.js application.
 - [Backend for Frontend](/docs/app/guides/backend-for-frontend)
   - Learn how to use Next.js as a backend framework
-- [Caching](/docs/app/guides/caching)
-  - An overview of caching mechanisms in Next.js.
+- [Caching (Previous Model)](/docs/app/guides/caching-without-cache-components)
+  - Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not using Cache Components.
 - [CI Build Caching](/docs/app/guides/ci-build-caching)
   - Learn how to configure CI to cache Next.js builds
 - [Content Security Policy](/docs/app/guides/content-security-policy)
@@ -56,6 +56,8 @@ lastUpdated: 2026-03-16
   - Optimize memory used by your application in development and production.
 - [Migrating](/docs/app/guides/migrating)
   - Learn how to migrate from popular frameworks to Next.js
+- [Migrating to Cache Components](/docs/app/guides/migrating-to-cache-components)
+  - Learn how to migrate from route segment configs to Cache Components in Next.js.
 - [Multi-tenant](/docs/app/guides/multi-tenant)
   - Learn how to build multi-tenant apps with the App Router.
 - [Multi-zones](/docs/app/guides/multi-zones)
@@ -66,6 +68,8 @@ lastUpdated: 2026-03-16
   - Learn how to analyze and optimize your application's server and client bundles with the Next.js Bundle Analyzer for Turbopack, and the `@next/bundle-analyzer` plugin for Webpack.
 - [Prefetching](/docs/app/guides/prefetching)
   - Learn how to configure prefetching in Next.js
+- [Preserving UI state](/docs/app/guides/preserving-ui-state)
+  - Learn how to control which UI state is preserved and which resets when navigating between pages.
 - [Production](/docs/app/guides/production-checklist)
   - Recommendations to ensure the best performance and user experience before taking your Next.js application to production.
 - [PWAs](/docs/app/guides/progressive-web-apps)
@@ -84,6 +88,8 @@ lastUpdated: 2026-03-16
   - Next.js fully supports building Single-Page Applications (SPAs).
 - [Static Exports](/docs/app/guides/static-exports)
   - Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use features that require a server.
+- [Streaming](/docs/app/guides/streaming)
+  - Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
 - [Tailwind CSS v3](/docs/app/guides/tailwind-v3-css)
   - Style your Next.js Application using Tailwind CSS v3 for broader browser support.
 - [Testing](/docs/app/guides/testing)

@@ -2,8 +2,8 @@
 title: How to build micro-frontends using multi-zones and Next.js
 description: Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
 url: "https://nextjs.org/docs/app/guides/multi-zones"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -120,7 +120,7 @@ Since the pages in different zones may be released at different times, feature f
 
 ## Server Actions
 
-When using [Server Actions](/docs/app/getting-started/updating-data) with Multi-Zones, you must explicitly allow the user-facing origin since your user facing domain may serve multiple applications. In your `next.config.js` file, add the following lines:
+When using [Server Actions](/docs/app/getting-started/mutating-data) with Multi-Zones, you must explicitly allow the user-facing origin since your user facing domain may serve multiple applications. In your `next.config.js` file, add the following lines:
 
 ```js filename="next.config.js"
 const nextConfig = {

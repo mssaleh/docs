@@ -2,8 +2,8 @@
 title: useParams
 description: API Reference for the useParams hook in the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/functions/use-params"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -59,7 +59,7 @@ const params = useParams()
 
 ## Returns
 
-`useParams` returns an object containing the current route's filled in [dynamic parameters](/docs/pages/building-your-application/routing/dynamic-routes), or `null` during [pre-rendering](#behavior-during-pre-rendering).
+`useParams` returns an object containing the current route's filled in [dynamic parameters](/docs/pages/building-your-application/routing/dynamic-routes), or `null` during [prerendering](#behavior-during-prerendering).
 
 * Each property in the object is an active dynamic segment.
 * The property name is the segment's name, and the property value is what the segment is filled in with.
@@ -79,7 +79,7 @@ For example:
 
 ## Behavior
 
-### Behavior during pre-rendering
+### Behavior during prerendering
 
 For pages that are [statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization), `useParams` will return `null` on the initial render. After hydration, the value will be updated to the actual params once the router is ready.
 
@@ -217,7 +217,7 @@ export function Breadcrumb() {
   const params = useParams<{ slug: string }>()
 
   if (!params) {
-    // Fallback for Pages Router during pre-rendering
+    // Fallback for Pages Router during prerendering
     return <nav>Home / ...</nav>
   }
 
@@ -233,7 +233,7 @@ export function Breadcrumb() {
   const params = useParams()
 
   if (!params) {
-    // Fallback for Pages Router during pre-rendering
+    // Fallback for Pages Router during prerendering
     return <nav>Home / ...</nav>
   }
 

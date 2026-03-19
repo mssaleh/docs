@@ -1,9 +1,9 @@
 ---
 title: staleTimes
-description: Learn how to override the invalidation time of the Client Router Cache.
+description: Learn how to override the invalidation time of the client cache.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -13,7 +13,7 @@ prerequisites:
 
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
-`staleTimes` is an experimental feature that enables caching of page segments in the [client-side router cache](/docs/app/guides/caching#client-side-router-cache).
+`staleTimes` is an experimental feature that enables caching of page segments in the [Client Cache](/docs/app/glossary#client-cache).
 
 You can enable this experimental feature and provide custom revalidation times by setting the experimental `staleTimes` flag:
 
@@ -35,16 +35,14 @@ The `static` and `dynamic` properties correspond with the time period (in second
 
 * The `dynamic` property is used when the page is neither statically generated nor fully prefetched (e.g. with `prefetch={true}`).
   * Default: 0 seconds (not cached)
-* The `static` property is used for statically generated pages, or when the `prefetch` prop on `Link` is set to `true`, or when calling [`router.prefetch`](/docs/app/guides/caching#routerprefetch).
+* The `static` property is used for statically generated pages, or when the `prefetch` prop on `Link` is set to `true`, or when calling [`router.prefetch`](/docs/app/api-reference/functions/use-router).
   * Default: 5 minutes
 
 > **Good to know:**
 >
 > * [Loading boundaries](/docs/app/api-reference/file-conventions/loading) are considered reusable for the `static` period defined in this configuration.
 > * This doesn't affect [partial rendering](/docs/app/getting-started/linking-and-navigating#client-side-transitions), **meaning shared layouts won't automatically be refetched on every navigation, only the page segment that changes.**
-> * This doesn't change [back/forward caching](/docs/app/guides/caching#client-side-router-cache) behavior to prevent layout shift and to prevent losing the browser scroll position.
-
-You can learn more about the Client Router Cache [here](/docs/app/guides/caching#client-side-router-cache).
+> * This doesn't change [back/forward caching](/docs/app/glossary#client-cache) behavior to prevent layout shift and to prevent losing the browser scroll position.
 
 ### Version History
 

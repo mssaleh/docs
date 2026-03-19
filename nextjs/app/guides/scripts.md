@@ -2,8 +2,8 @@
 title: How to load and optimize scripts
 description: Optimize 3rd party scripts with the built-in Script component.
 url: "https://nextjs.org/docs/app/guides/scripts"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

@@ -2,8 +2,8 @@
 title: favicon, icon, and apple-icon
 description: API Reference for the Favicon, Icon and Apple Icon file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -173,10 +173,10 @@ export default function Icon() {
 
 > **Good to know**:
 >
-> * By default, generated icons are [**statically optimized**](/docs/app/guides/caching#static-rendering) (generated at build time and cached) unless they use [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) or uncached data.
+> * By default, generated icons are [**statically optimized**](/docs/app/glossary#prerendering) (generated at build time and cached) unless they use [Request-time APIs](/docs/app/glossary#request-time-apis) or uncached data.
 > * You can generate multiple icons in the same file using [`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata).
 > * You cannot generate a `favicon` icon. Use [`icon`](#icon) or a [favicon.ico](#favicon) file instead.
-> * App icons are special Route Handlers that are cached by default unless they use a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> * App icons are special Route Handlers that are cached by default unless they use a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 ### Props
 

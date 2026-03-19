@@ -2,8 +2,8 @@
 title: devIndicators
 description: "Configuration options for the on-screen indicator that gives context about the current route you're viewing during development."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/devIndicators"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -27,9 +27,9 @@ Setting `devIndicators` to `false` will hide the indicator, however Next.js will
 
 ### Indicator not marking a route as static
 
-If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of static rendering.
+If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of prerendering.
 
-You can confirm if a route is [static](/docs/app/guides/caching#static-rendering) or [dynamic](/docs/app/guides/caching#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
+You can confirm if a route is [prerendered](/docs/app/glossary#prerendering) or [dynamically rendered](/docs/app/glossary#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
 
 ```bash filename="Build Output"
 Route (app)
@@ -40,9 +40,9 @@ Route (app)
 ƒ  (Dynamic)  server-rendered on demand
 ```
 
-There are two reasons a route might opt out of static rendering:
+There are two reasons a route might opt out of prerendering:
 
-* The presence of [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) which rely on runtime information.
+* The presence of [Request-time APIs](/docs/app/glossary#request-time-apis) which rely on request information.
 * An [uncached data request](/docs/app/getting-started/fetching-data), like a call to an ORM or database driver.
 
 Check your route for any of these conditions, and if you are not able to statically render the route, then consider using [`loading.js`](/docs/app/api-reference/file-conventions/loading) or [`<Suspense />`](https://react.dev/reference/react/Suspense) to leverage [streaming](/docs/app/getting-started/linking-and-navigating#streaming).

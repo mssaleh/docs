@@ -2,8 +2,8 @@
 title: Functions
 description: API Reference for Next.js Functions and Hooks.
 url: "https://nextjs.org/docs/app/api-reference/functions"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
@@ -16,6 +16,8 @@ prerequisites:
   - Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 - [cacheTag](/docs/app/api-reference/functions/cacheTag)
   - Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
+- [unstable_catchError](/docs/app/api-reference/functions/catchError)
+  - API Reference for the unstable_catchError function.
 - [connection](/docs/app/api-reference/functions/connection)
   - API Reference for the connection function.
 - [cookies](/docs/app/api-reference/functions/cookies)

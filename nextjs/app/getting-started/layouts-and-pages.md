@@ -2,8 +2,8 @@
 title: Layouts and Pages
 description: Learn how to create your first pages and layouts, and link between them with the Link component.
 url: "https://nextjs.org/docs/app/getting-started/layouts-and-pages"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -242,11 +242,11 @@ export default async function Page({ searchParams }) {
 }
 ```
 
-Using `searchParams` opts your page into [**dynamic rendering**](/docs/app/guides/caching#dynamic-rendering) because it requires an incoming request to read the search parameters from.
+Using `searchParams` opts your page into [**dynamic rendering**](/docs/app/glossary#dynamic-rendering) because it requires an incoming request to read the search parameters from.
 
 Client Components can read search params using the [`useSearchParams`](/docs/app/api-reference/functions/use-search-params) hook.
 
-Learn more about `useSearchParams` in [statically rendered](/docs/app/api-reference/functions/use-search-params#static-rendering) and [dynamically rendered](/docs/app/api-reference/functions/use-search-params#dynamic-rendering) routes.
+Learn more about `useSearchParams` in [prerendered](/docs/app/api-reference/functions/use-search-params#prerendering) and [dynamically rendered](/docs/app/api-reference/functions/use-search-params#dynamic-rendering) routes.
 
 ### What to use and when
 

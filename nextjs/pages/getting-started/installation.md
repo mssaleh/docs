@@ -2,8 +2,8 @@
 title: Create a new Next.js application
 description: "How to create a new Next.js application with `create-next-app`. Set up TypeScript, ESLint,and configure your `next.config.js` file."
 url: "https://nextjs.org/docs/pages/getting-started/installation"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2024-11-06
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"
@@ -53,7 +53,7 @@ On installation, you'll see the following prompts:
 ```txt filename="Terminal"
 What is your project named? my-app
 Would you like to use the recommended Next.js defaults?
-    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, Turbopack
+    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, AGENTS.md
     No, reuse previous settings
     No, customize settings - Choose your own preferences
 ```
@@ -69,6 +69,7 @@ Would you like your code inside a `src/` directory? No / Yes
 Would you like to use App Router? (recommended) No / Yes
 Would you like to customize the import alias (`@/*` by default)? No / Yes
 What import alias would you like configured? @/*
+Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / Yes
 ```
 
 After the prompts, [`create-next-app`](/docs/app/api-reference/cli/create-next-app) will create a folder with your project name and install the required dependencies.

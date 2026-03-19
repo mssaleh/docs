@@ -2,8 +2,8 @@
 title: How to implement authentication in Next.js
 description: Learn how to implement authentication in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/authentication"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -27,7 +27,7 @@ The examples on this page walk through basic username and password auth for educ
 
 ### Sign-up and login functionality
 
-You can use the [`<form>`](https://react.dev/reference/react-dom/components/form) element with React's [Server Actions](/docs/app/getting-started/updating-data) and `useActionState` to capture user credentials, validate form fields, and call your Authentication Provider's API or database.
+You can use the [`<form>`](https://react.dev/reference/react-dom/components/form) element with React's [Server Actions](/docs/app/getting-started/mutating-data) and `useActionState` to capture user credentials, validate form fields, and call your Authentication Provider's API or database.
 
 Since Server Actions always execute on the server, they provide a secure environment for handling authentication logic.
 
@@ -1203,7 +1203,7 @@ This pattern allows you to show or hide UI elements based on user permissions wh
 
 ### Server Actions
 
-Treat [Server Actions](/docs/app/getting-started/updating-data) with the same security considerations as public-facing API endpoints, and verify if the user is allowed to perform a mutation.
+Treat [Server Actions](/docs/app/getting-started/mutating-data) with the same security considerations as public-facing API endpoints, and verify if the user is allowed to perform a mutation.
 
 In the example below, we check the user's role before allowing the action to proceed:
 
@@ -1297,7 +1297,7 @@ The example above demonstrates a Route Handler with a two-tier security check. I
 
 ## Context Providers
 
-Using context providers for auth works due to [interleaving](/docs/app/getting-started/server-and-client-components#examples#interleaving-server-and-client-components). However, React `context` is not supported in Server Components, making them only applicable to Client Components.
+Using context providers for auth works due to [interleaving](/docs/app/getting-started/server-and-client-components#interleaving-server-and-client-components). However, React `context` is not supported in Server Components, making them only applicable to Client Components.
 
 This works, but any child Server Components will be rendered on the server first, and will not have access to the context provider’s session data:
 

@@ -2,8 +2,8 @@
 title: useLinkStatus
 description: API Reference for the useLinkStatus hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-link-status"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-09-02
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

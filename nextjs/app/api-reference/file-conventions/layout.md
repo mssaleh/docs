@@ -2,8 +2,8 @@
 title: layout.js
 description: API reference for the layout.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/layout"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -27,6 +27,8 @@ export default function DashboardLayout({ children }) {
   return <section>{children}</section>
 }
 ```
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `layout.js` is the outermost component in a route segment. It wraps `template.js`, `error.js`, `loading.js`, `not-found.js`, and `page.js`.
 
 A **root layout** is the top-most layout in the root `app` directory. It is used to define the `<html>` and `<body>` tags and other globally shared UI.
 
@@ -312,6 +314,54 @@ export default function Layout({ children }) {
   return (
     <>
       <Breadcrumbs />
+      <main>{children}</main>
+    </>
+  )
+}
+```
+
+### Interaction with `loading.js`
+
+Because `loading.js` sits below `layout.js` in the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), it cannot show a fallback for uncached or runtime data access in the layout itself, such as calling [`cookies()`](/docs/app/api-reference/functions/cookies), [`headers()`](/docs/app/api-reference/functions/headers), or making uncached fetches.
+
+The behavior depends on whether [Cache Components](/docs/app/getting-started/caching) is enabled:
+
+* **Without Cache Components:** The navigation will block until the layout finishes rendering, and the `loading.js` fallback will not be shown.
+* **With Cache Components:** `loading.js` is treated as a regular `<Suspense>` boundary rather than a special prefetch marker. Uncached or runtime data access in the layout must be explicitly wrapped in its own `<Suspense>` boundary, otherwise Next.js guides you with a build-time error. The static shell streams immediately, and the uncached content swaps in as it resolves.
+
+In both cases, to ensure instant navigation, either:
+
+* Wrap runtime data access in your layout in its own `<Suspense>` boundary with a fallback.
+* Move uncached data fetching from `layout.js` into `page.js` where `loading.js` can show a fallback.
+
+```tsx filename="app/dashboard/layout.tsx" switcher highlight={8-10}
+import { Suspense } from 'react'
+import { NavSkeleton } from './nav-skeleton'
+import { DashboardNav } from './dashboard-nav'
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Suspense fallback={<NavSkeleton />}>
+        <DashboardNav />
+      </Suspense>
+      <main>{children}</main>
+    </>
+  )
+}
+```
+
+```jsx filename="app/dashboard/layout.js" switcher highlight={8-10}
+import { Suspense } from 'react'
+import { NavSkeleton } from './nav-skeleton'
+import { DashboardNav } from './dashboard-nav'
+
+export default function Layout({ children }) {
+  return (
+    <>
+      <Suspense fallback={<NavSkeleton />}>
+        <DashboardNav />
+      </Suspense>
       <main>{children}</main>
     </>
   )

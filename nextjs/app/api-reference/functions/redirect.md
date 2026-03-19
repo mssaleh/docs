@@ -2,8 +2,8 @@
 title: redirect
 description: API Reference for the redirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/redirect"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -12,7 +12,7 @@ related:
 ---
 
 
-The `redirect` function allows you to redirect the user to another URL. `redirect` can be used while rendering in [Server and Client Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/updating-data).
+The `redirect` function allows you to redirect the user to another URL. `redirect` can be used while rendering in [Server and Client Components](/docs/app/getting-started/server-and-client-components), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/mutating-data).
 
 When used in a [streaming context](/docs/app/getting-started/linking-and-navigating#streaming), this will insert a meta tag to emit the redirect on the client side. When used in a server action, it will serve a 303 HTTP redirect response to the caller. Otherwise, it will serve a 307 HTTP redirect response to the caller.
 
@@ -33,7 +33,7 @@ redirect(path, type)
 | `path`    | `string`                                                      | The URL to redirect to. Can be a relative or absolute path. |
 | `type`    | `'replace'` (default) or `'push'` (default in Server Actions) | The type of redirect to perform.                            |
 
-By default, `redirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/updating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
+By default, `redirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/mutating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
 
 The `RedirectType` object contains the available options for the `type` parameter.
 

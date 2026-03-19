@@ -2,8 +2,8 @@
 title: serverActions
 description: Configure Server Actions behavior in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

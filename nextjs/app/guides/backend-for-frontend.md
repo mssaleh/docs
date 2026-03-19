@@ -2,8 +2,8 @@
 title: How to use Next.js as a backend for your frontend
 description: Learn how to use Next.js as a backend framework
 url: "https://nextjs.org/docs/app/guides/backend-for-frontend"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -868,7 +868,7 @@ These examples include, working with [Cookies](/docs/app/api-reference/file-conv
 
 Fetch data in Server Components directly from its source, not via Route Handlers.
 
-For Server Components pre-rendered at build time, using Route Handlers will fail the build step. This is because, while building there is no server listening for these requests.
+For Server Components prerendered at build time, using Route Handlers will fail the build step. This is because, while building there is no server listening for these requests.
 
 For Server Components rendered on demand, fetching from Route Handlers is slower due to the extra HTTP round trip between the handler and the render process.
 
@@ -895,7 +895,7 @@ Server Actions are queued. Using them for data fetching introduces sequential ex
 
 `export` mode outputs a static site without a runtime server. Features that require the Next.js runtime are [not supported](/docs/app/guides/static-exports#unsupported-features), because this mode produces a static site, and no runtime server.
 
-In `export mode`, only `GET` Route Handlers are supported, in combination with the [`dynamic`](/docs/app/api-reference/file-conventions/route-segment-config#dynamic) route segment config, set to `'force-static'`.
+In `export mode`, only `GET` Route Handlers are supported, in combination with the [`dynamic`](/docs/app/guides/caching-without-cache-components#dynamic) route segment config, set to `'force-static'`.
 
 This can be used to generate static HTML, JSON, TXT, or other files.
 

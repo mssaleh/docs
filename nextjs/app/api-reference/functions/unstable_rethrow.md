@@ -2,8 +2,8 @@
 title: unstable_rethrow
 description: API Reference for the unstable_rethrow function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_rethrow"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -58,7 +58,7 @@ The following Next.js APIs rely on throwing an error which should be rethrown an
 * [`redirect()`](/docs/app/guides/redirecting#redirect-function)
 * [`permanentRedirect()`](/docs/app/guides/redirecting#permanentredirect-function)
 
-If a route segment is marked to throw an error unless it's static, a Dynamic API call will also throw an error that should similarly not be caught by the developer. Note that Partial Prerendering (PPR) affects this behavior as well. These APIs are:
+If a route segment is marked to throw an error unless it's static, a Request-time API call will also throw an error that should similarly not be caught by the developer. Note that Partial Prerendering (PPR) affects this behavior as well. These APIs are:
 
 * [`cookies`](/docs/app/api-reference/functions/cookies)
 * [`headers`](/docs/app/api-reference/functions/headers)

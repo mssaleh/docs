@@ -2,8 +2,8 @@
 title: reactCompiler
 description: Enable the React Compiler to automatically optimize component rendering.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-02-11
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

@@ -2,14 +2,14 @@
 title: generateViewport
 description: API Reference for the generateViewport function.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-viewport"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 related:
   - app/api-reference/file-conventions/metadata
-  - app/getting-started/cache-components
+  - app/getting-started/caching
   - app/api-reference/config/next-config-js/cacheComponents
 ---
 
@@ -68,7 +68,7 @@ export function generateViewport({ params }) {
 
 > **Good to know**:
 >
-> * If the viewport doesn't depend on runtime information, it should be defined using the static [`viewport` object](#the-viewport-object) rather than `generateViewport`.
+> * If the viewport doesn't depend on request information, it should be defined using the static [`viewport` object](#the-viewport-object) rather than `generateViewport`.
 
 ## Viewport Fields
 
@@ -182,7 +182,7 @@ export const viewport = {
 
 ## With Cache Components
 
-When [Cache Components](/docs/app/getting-started/cache-components) is enabled, `generateViewport` follows the same rules as other components. If viewport accesses runtime data (`cookies()`, `headers()`, `params`, `searchParams`) or performs uncached data fetching, it defers to request time.
+When [Cache Components](/docs/app/getting-started/caching) is enabled, `generateViewport` follows the same rules as other components. If viewport accesses runtime data (`cookies()`, `headers()`, `params`, `searchParams`) or performs uncached data fetching, it defers to request time.
 
 Unlike metadata, viewport cannot be streamed because it affects initial page load UI. If `generateViewport` defers to request time, the page would need to block until resolved.
 
@@ -198,7 +198,7 @@ export async function generateViewport() {
 
 If viewport genuinely requires runtime data, wrap the document `<body>` in a Suspense boundary to signal that the entire route should be dynamic:
 
-```tsx filename="app/layout.tsx" highlight={1,11-15}
+```tsx filename="app/layout.tsx" highlight={1,13,17}
 import { Suspense } from 'react'
 import { cookies } from 'next/headers'
 
@@ -293,8 +293,8 @@ View all the Metadata API options.
 
 - [Metadata Files](/docs/app/api-reference/file-conventions/metadata)
   - API documentation for the metadata file conventions.
-- [Cache Components](/docs/app/getting-started/cache-components)
-  - Learn how to use Cache Components and combine the benefits of static and dynamic rendering.
+- [Caching](/docs/app/getting-started/caching)
+  - Learn how to cache data and UI in Next.js
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
   - Learn how to enable the cacheComponents flag in Next.js.
 

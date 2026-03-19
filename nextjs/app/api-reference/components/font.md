@@ -2,8 +2,8 @@
 title: Font Module
 description: "Optimizing loading web fonts with the built-in `next/font` loaders."
 url: "https://nextjs.org/docs/app/api-reference/components/font"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-08-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"

@@ -2,8 +2,8 @@
 title: inlineCss
 description: Enable inline CSS support.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/inlineCss"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -77,7 +77,7 @@ This trade-off matters most with:
 >
 > * CSS inlining is applied globally and cannot be configured on a per-page basis
 > * Styles are duplicated during initial page load - once within `<style>` tags for SSR and once in the RSC payload
-> * When navigating to statically rendered pages, styles will use `<link>` tags instead of inline CSS to avoid duplication
+> * When navigating to prerendered pages, styles will use `<link>` tags instead of inline CSS to avoid duplication
 > * This feature is not available in development mode and only works in production builds
 ---
 

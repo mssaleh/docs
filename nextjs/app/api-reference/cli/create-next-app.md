@@ -2,8 +2,8 @@
 title: create-next-app
 description: Create Next.js apps using one command with the create-next-app CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/create-next-app"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"
@@ -62,6 +62,7 @@ The following options are available:
 | `--reset-preferences`                   | Explicitly tell the CLI to reset any stored preferences               |
 | `--skip-install`                        | Explicitly tell the CLI to skip installing packages                   |
 | `--disable-git`                         | Explicitly tell the CLI to disable git initialization                 |
+| `--agents-md`                           | Include `AGENTS.md` and `CLAUDE.md` to guide coding agents (default)  |
 | `--yes`                                 | Use previous preferences or defaults for all options                  |
 
 ## Examples
@@ -91,7 +92,7 @@ On installation, you'll see the following prompts:
 ```txt filename="Terminal"
 What is your project named? my-app
 Would you like to use the recommended Next.js defaults?
-    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, Turbopack
+    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, AGENTS.md
     No, reuse previous settings
     No, customize settings - Choose your own preferences
 ```
@@ -107,6 +108,7 @@ Would you like your code inside a `src/` directory? No / Yes
 Would you like to use App Router? (recommended) No / Yes
 Would you like to customize the import alias (`@/*` by default)? No / Yes
 What import alias would you like configured? @/*
+Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / Yes
 ```
 
 After the prompts, `create-next-app` will create a folder with your project name and install the required dependencies.

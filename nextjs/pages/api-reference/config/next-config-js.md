@@ -2,8 +2,8 @@
 title: next.config.js Options
 description: Learn about the options available in next.config.js for the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -151,7 +151,7 @@ expect(response.status).toEqual(307)
 expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 ```
 
-- [experimental.adapterPath](/docs/pages/api-reference/config/next-config-js/adapterPath)
+- [adapterPath](/docs/pages/api-reference/config/next-config-js/adapterPath)
   - Configure a custom adapter for Next.js to hook into the build process with modifyConfig and buildComplete callbacks.
 - [allowedDevOrigins](/docs/pages/api-reference/config/next-config-js/allowedDevOrigins)
   - Use `allowedDevOrigins` to configure additional origins that can request the dev server.
@@ -185,8 +185,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Next.js will automatically use HTTP Keep-Alive by default. Learn more about how to disable HTTP Keep-Alive here.
 - [images](/docs/pages/api-reference/config/next-config-js/images)
   - Custom configuration for the next/image loader
-- [isolatedDevBuild](/docs/pages/api-reference/config/next-config-js/isolatedDevBuild)
-  - Use isolated directories for development builds to prevent conflicts with production builds.
+- [logging](/docs/pages/api-reference/config/next-config-js/logging)
+  - Configure logging behavior in the terminal when running Next.js in development mode.
 - [onDemandEntries](/docs/pages/api-reference/config/next-config-js/onDemandEntries)
   - Configure how Next.js will dispose and keep in memory pages created in development.
 - [optimizePackageImports](/docs/pages/api-reference/config/next-config-js/optimizePackageImports)

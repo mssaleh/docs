@@ -2,8 +2,8 @@
 title: after
 description: API Reference for the after function.
 url: "https://nextjs.org/docs/app/api-reference/functions/after"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -12,7 +12,7 @@ prerequisites:
 
 `after` allows you to schedule work to be executed after a response (or prerender) is finished. This is useful for tasks and other side effects that should not block the response, such as logging and analytics.
 
-It can be used in [Server Components](/docs/app/getting-started/server-and-client-components) (including [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata)), [Server Functions](/docs/app/getting-started/updating-data), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Proxy](/docs/app/api-reference/file-conventions/proxy).
+It can be used in [Server Components](/docs/app/getting-started/server-and-client-components) (including [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata)), [Server Functions](/docs/app/getting-started/mutating-data), [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Proxy](/docs/app/api-reference/file-conventions/proxy).
 
 The function accepts a callback that will be executed after the response (or prerender) is finished:
 
@@ -44,7 +44,7 @@ export default function Layout({ children }) {
 }
 ```
 
-> **Good to know:** `after` is not a [Dynamic API](/docs/app/guides/caching#dynamic-rendering) and calling it does not cause a route to become dynamic. If it's used within a static page, the callback will execute at build time, or whenever a page is revalidated.
+> **Good to know:** `after` is not a [Request-time API](/docs/app/glossary#request-time-apis) and calling it does not cause a route to become dynamic. If it's used within a static page, the callback will execute at build time, or whenever a page is revalidated.
 
 ## Reference
 
@@ -54,7 +54,7 @@ export default function Layout({ children }) {
 
 ### Duration
 
-`after` will run for the platform's default or configured max duration of your route. If your platform supports it, you can configure the timeout limit using the [`maxDuration`](/docs/app/api-reference/file-conventions/route-segment-config#maxduration) route segment config.
+`after` will run for the platform's default or configured max duration of your route. If your platform supports it, you can configure the timeout limit using the [`maxDuration`](/docs/app/api-reference/file-conventions/route-segment-config/maxDuration) route segment config.
 
 ## Good to know
 
@@ -70,7 +70,7 @@ Whether you can use request APIs like [`cookies`](/docs/app/api-reference/functi
 
 #### In Route Handlers and Server Functions
 
-You can call `cookies` and `headers` directly inside the `after` callback when used in [Route Handlers](/docs/app/api-reference/file-conventions/route) and [Server Functions](/docs/app/getting-started/updating-data). This is useful for logging activity after a mutation or API request. For example:
+You can call `cookies` and `headers` directly inside the `after` callback when used in [Route Handlers](/docs/app/api-reference/file-conventions/route) and [Server Functions](/docs/app/getting-started/mutating-data). This is useful for logging activity after a mutation or API request. For example:
 
 ```ts filename="app/api/route.ts" highlight={2,10-16} switcher
 import { after } from 'next/server'
@@ -124,7 +124,7 @@ export async function POST(request) {
 
 #### In Server Components (pages and layouts)
 
-[Server Components](/docs/app/getting-started/server-and-client-components) (including pages, layouts, and `generateMetadata`) **cannot** use `cookies`, `headers`, or other [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) inside `after`. This is because Next.js needs to know which part of the component tree accesses request data to support [Partial Prerendering](/docs/app/glossary#partial-prerendering-ppr) and [Cache Components](/docs/app/getting-started/cache-components), but `after` runs after React's rendering lifecycle.
+[Server Components](/docs/app/getting-started/server-and-client-components) (including pages, layouts, and `generateMetadata`) **cannot** use `cookies`, `headers`, or other Request-time APIs inside `after`. This is because Next.js needs to know which part of the component tree accesses request data to support [Partial Prerendering](/docs/app/glossary#partial-prerendering-ppr) and [Cache Components](/docs/app/getting-started/caching), but `after` runs after React's rendering lifecycle.
 
 If you need request data inside an `after` callback in a Server Component, read it beforehand and pass the values in:
 
@@ -174,7 +174,7 @@ Calling `cookies()` or `headers()` inside the `after` callback in a Server Compo
 
 #### With Cache Components
 
-When using [Cache Components](/docs/app/getting-started/cache-components), components that access request data like `cookies` or `headers` must be wrapped in [`<Suspense>`](https://react.dev/reference/react/Suspense) so the rest of the page can be prerendered into a static shell.
+When using [Cache Components](/docs/app/getting-started/caching), components that access request data like `cookies` or `headers` must be wrapped in [`<Suspense>`](https://react.dev/reference/react/Suspense) so the rest of the page can be prerendered into a static shell.
 
 You can combine this pattern with `after` by reading request data in a dynamic component and passing it into `after`:
 

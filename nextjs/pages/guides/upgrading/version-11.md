@@ -2,8 +2,8 @@
 title: How to upgrade to version 11
 description: Upgrade your Next.js Application from Version 10 to Version 11.
 url: "https://nextjs.org/docs/pages/guides/upgrading/version-11"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"
@@ -114,7 +114,7 @@ You can opt-out of this new default by adding `excludeDefaultMomentLocales: fals
 
 ### Update usage of `router.events`
 
-In case you're accessing `router.events` during rendering, in Next.js 11 `router.events` is no longer provided during pre-rendering. Ensure you're accessing `router.events` in `useEffect`:
+In case you're accessing `router.events` during rendering, in Next.js 11 `router.events` is no longer provided during prerendering. Ensure you're accessing `router.events` in `useEffect`:
 
 ```js
 useEffect(() => {

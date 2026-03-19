@@ -2,8 +2,8 @@
 title: compress
 description: Next.js provides gzip compression to compress rendered content and static files, it only works with the server target. Learn more about it here.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/compress"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

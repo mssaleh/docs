@@ -2,8 +2,8 @@
 title: unstable_noStore
 description: API Reference for the unstable_noStore function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_noStore"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -15,7 +15,7 @@ prerequisites:
 
 **In version 15, we recommend using [`connection`](/docs/app/api-reference/functions/connection) instead of `unstable_noStore`.**
 
-`unstable_noStore` can be used to declaratively opt out of static rendering and indicate a particular component should not be cached.
+`unstable_noStore` can be used to declaratively opt out of prerendering and indicate a particular component should not be cached.
 
 ```jsx
 import { unstable_noStore as noStore } from 'next/cache';

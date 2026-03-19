@@ -2,8 +2,8 @@
 title: opengraph-image and twitter-image
 description: API Reference for the Open Graph Image and Twitter Image file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -95,9 +95,9 @@ Generate a route segment's shared image by creating an `opengraph-image` or `twi
 
 > **Good to know**:
 >
-> * By default, generated images are [**statically optimized**](/docs/app/guides/caching#static-rendering) (generated at build time and cached) unless they use [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) or uncached data.
+> * By default, generated images are [**statically optimized**](/docs/app/glossary#prerendering) (generated at build time and cached) unless they use [Request-time APIs](/docs/app/glossary#request-time-apis) or uncached data.
 > * You can generate multiple Images in the same file using [`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata).
-> * `opengraph-image.js` and `twitter-image.js` are special Route Handlers that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> * `opengraph-image.js` and `twitter-image.js` are special Route Handlers that is cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 The easiest way to generate an image is to use the [ImageResponse](/docs/app/api-reference/functions/image-response) API from `next/og`.
 
@@ -337,7 +337,7 @@ export default function Image() {}
 This example uses the `params` object and external data to generate the image.
 
 > **Good to know**:
-> By default, this generated image will be [statically optimized](/docs/app/guides/caching#static-rendering). You can configure the individual `fetch` [`options`](/docs/app/api-reference/functions/fetch) or route segments [options](/docs/app/api-reference/file-conventions/route-segment-config#revalidate) to change this behavior.
+> By default, this generated image will be statically optimized. You can configure the individual `fetch` [`options`](/docs/app/api-reference/functions/fetch) or route segments [options](/docs/app/guides/caching-without-cache-components#route-segment-config-revalidate) to change this behavior.
 
 ```tsx filename="app/posts/[slug]/opengraph-image.tsx" switcher
 import { ImageResponse } from 'next/og'

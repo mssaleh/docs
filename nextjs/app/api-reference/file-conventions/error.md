@@ -2,8 +2,8 @@
 title: error.js
 description: API reference for the error.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/error"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-17
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -23,10 +23,10 @@ import { useEffect } from 'react'
 
 export default function Error({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string }
-  reset: () => void
+  unstable_retry: () => void
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
@@ -38,8 +38,8 @@ export default function Error({
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
@@ -54,7 +54,7 @@ export default function Error({
 
 import { useEffect } from 'react'
 
-export default function Error({ error, reset }) {
+export default function Error({ error, unstable_retry }) {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error)
@@ -65,8 +65,8 @@ export default function Error({ error, reset }) {
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
@@ -84,6 +84,9 @@ export default function Error({ error, reset }) {
 >
 > * The [React DevTools](https://react.dev/learn/react-developer-tools) allow you to toggle error boundaries to test error states.
 > * If you want errors to bubble up to the parent error boundary, you can `throw` when rendering the `error` component.
+> * For component-level error recovery that aren't tied to route segments like [`error.js`](/docs/app/api-reference/file-conventions/error), use the [`unstable_catchError`](/docs/app/api-reference/functions/catchError) function.
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `error.js` wraps `loading.js`, `not-found.js`, `page.js`, and nested `layout.js` files in a React error boundary. It does **not** wrap the `layout.js` or `template.js` above it in the same segment. To handle errors in the root layout, use [`global-error.js`](/docs/app/api-reference/file-conventions/error#global-error).
 
 ## Reference
 
@@ -104,26 +107,26 @@ An instance of an [`Error`](https://developer.mozilla.org/docs/Web/JavaScript/Re
 
 An automatically generated hash of the error thrown. It can be used to match the corresponding error in server-side logs.
 
-#### `reset`
+#### `unstable_retry`
 
 The cause of an error can sometimes be temporary. In these cases, trying again might resolve the issue.
 
-An error component can use the `reset()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-render the error boundary's contents. If successful, the fallback error component is replaced with the result of the re-render.
+An error component can use the `unstable_retry()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-fetch and re-render the error boundary's contents. If successful, the fallback error component is replaced with the result of the re-render.
 
 ```tsx filename="app/dashboard/error.tsx" switcher
 'use client' // Error boundaries must be Client Components
 
 export default function Error({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string }
-  reset: () => void
+  unstable_retry: () => void
 }) {
   return (
     <div>
       <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }
@@ -132,15 +135,19 @@ export default function Error({
 ```jsx filename="app/dashboard/error.js" switcher
 'use client' // Error boundaries must be Client Components
 
-export default function Error({ error, reset }) {
+export default function Error({ error, unstable_retry }) {
   return (
     <div>
       <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }
 ```
+
+#### `reset`
+
+In most cases, you should use [`unstable_retry()`](#unstable_retry) instead. However, if you have a specific reason to clear the error state and re-render the error boundary's contents without re-fetching the contents, you can use the `reset()` function.
 
 ## Examples
 
@@ -155,17 +162,17 @@ While less common, you can handle errors in the root layout or template using `g
 
 export default function GlobalError({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string }
-  reset: () => void
+  unstable_retry: () => void
 }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
   )
@@ -175,13 +182,13 @@ export default function GlobalError({
 ```jsx filename="app/global-error.js" switcher
 'use client' // Error boundaries must be Client Components
 
-export default function GlobalError({ error, reset }) {
+export default function GlobalError({ error, unstable_retry }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
   )
@@ -312,6 +319,7 @@ export default GracefullyDegradingErrorBoundary
 
 | Version   | Changes                                     |
 | --------- | ------------------------------------------- |
+| `v16.2.0` | `unstable_retry` prop added.                |
 | `v15.2.0` | Also display `global-error` in development. |
 | `v13.1.0` | `global-error` introduced.                  |
 | `v13.0.0` | `error` introduced.                         |

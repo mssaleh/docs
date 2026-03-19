@@ -2,8 +2,8 @@
 title: use server
 description: Learn how to use the use server directive to execute code on the server.
 url: "https://nextjs.org/docs/app/api-reference/directives/use-server"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"
@@ -19,20 +19,32 @@ The following example shows a file with a `use server` directive at the top. All
 ```tsx filename="app/actions.ts" highlight={1} switcher
 'use server'
 import { db } from '@/lib/db' // Your database client
+import { auth } from '@/lib/auth'
 
 export async function createUser(data: { name: string; email: string }) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
   const user = await db.user.create({ data })
-  return user
+  return { id: user.id, name: user.name }
 }
 ```
 
 ```jsx filename="app/actions.js" highlight={1} switcher
 'use server'
 import { db } from '@/lib/db' // Your database client
+import { auth } from '@/lib/auth'
 
 export async function createUser(data) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
   const user = await db.user.create({ data })
-  return user
+  return { id: user.id, name: user.name }
 }
 ```
 
@@ -45,9 +57,17 @@ Assuming you have a `fetchUsers` Server Function in `actions.ts`:
 ```tsx filename="app/actions.ts" highlight={1} switcher
 'use server'
 import { db } from '@/lib/db' // Your database client
+import { auth } from '@/lib/auth'
 
 export async function fetchUsers() {
-  const users = await db.user.findMany()
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
+  const users = await db.user.findMany({
+    select: { id: true, name: true, email: true },
+  })
   return users
 }
 ```
@@ -55,9 +75,17 @@ export async function fetchUsers() {
 ```jsx filename="app/actions.js" highlight={1} switcher
 'use server'
 import { db } from '@/lib/db' // Your database client
+import { auth } from '@/lib/auth'
 
 export async function fetchUsers() {
-  const users = await db.user.findMany()
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
+  const users = await db.user.findMany({
+    select: { id: true, name: true, email: true },
+  })
   return users
 }
 ```
@@ -95,6 +123,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   async function updatePost(formData: FormData) {
     'use server'
+    // Verify auth before saving (e.g. inside savePost)
     await savePost(params.id, formData)
     revalidatePath(`/posts/${params.id}`)
   }
@@ -112,6 +141,7 @@ export default async function PostPage({ params }) {
 
   async function updatePost(formData) {
     'use server'
+    // Verify auth before saving (e.g. inside savePost)
     await savePost(params.id, formData)
     revalidatePath(`/posts/${params.id}`)
   }
@@ -122,28 +152,25 @@ export default async function PostPage({ params }) {
 
 ## Security considerations
 
-When using the `use server` directive, it's important to ensure that all server-side logic is secure and that sensitive data remains protected.
+Design your data access functions as secure primitives: validate inputs, check authentication and authorization, and constrain return types to only what the caller needs. When Server Functions delegate to a [Data Access Layer](/docs/app/guides/data-security#using-a-data-access-layer-for-mutations), these guarantees live in one place and apply consistently.
 
 ### Authentication and authorization
 
-Always authenticate and authorize users before performing sensitive server-side operations.
+Always authenticate and authorize users before performing sensitive server-side operations. Read authentication from cookies or headers rather than accepting tokens as function parameters.
 
 ```tsx filename="app/actions.ts" highlight={1,7,8,9,10} switcher
 'use server'
 
 import { db } from '@/lib/db' // Your database client
-import { authenticate } from '@/lib/auth' // Your authentication library
+import { auth } from '@/lib/auth' // Your authentication library
 
-export async function createUser(
-  data: { name: string; email: string },
-  token: string
-) {
-  const user = authenticate(token)
-  if (!user) {
+export async function createUser(data: { name: string; email: string }) {
+  const session = await auth()
+  if (!session?.user) {
     throw new Error('Unauthorized')
   }
   const newUser = await db.user.create({ data })
-  return newUser
+  return { id: newUser.id, name: newUser.name }
 }
 ```
 
@@ -151,17 +178,21 @@ export async function createUser(
 'use server'
 
 import { db } from '@/lib/db' // Your database client
-import { authenticate } from '@/lib/auth' // Your authentication library
+import { auth } from '@/lib/auth' // Your authentication library
 
-export async function createUser(data, token) {
-  const user = authenticate(token)
-  if (!user) {
+export async function createUser(data) {
+  const session = await auth()
+  if (!session?.user) {
     throw new Error('Unauthorized')
   }
   const newUser = await db.user.create({ data })
-  return newUser
+  return { id: newUser.id, name: newUser.name }
 }
 ```
+
+### Return values
+
+Server Function return values are serialized and sent to the client. Only return data the UI needs, not raw database records. See the [Data Security guide](/docs/app/guides/data-security#controlling-return-values) for more details.
 
 ## Reference
 

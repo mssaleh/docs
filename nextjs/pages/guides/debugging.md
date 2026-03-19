@@ -2,8 +2,8 @@
 title: How to use debugging tools with Next.js
 description: Learn how to debug your Next.js application with VS Code or Chrome DevTools.
 url: "https://nextjs.org/docs/pages/guides/debugging"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"
@@ -137,7 +137,7 @@ The value of `--inspect` is passed to the underlying Node.js process. Check out 
 
 > **Good to know**: Use `--inspect=0.0.0.0` to allow remote debugging access outside localhost, such as when running the app in a Docker container.
 
-Launching the Next.js dev server with the `--inspect` flag will look something like this:
+Launching the Next.js server with the `--inspect` flag will look something like this:
 
 ```bash filename="Terminal"
 Debugger listening on ws://127.0.0.1:9229/0cf90313-350d-4466-a748-cd60f4e47c95

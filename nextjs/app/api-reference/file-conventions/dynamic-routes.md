@@ -2,8 +2,8 @@
 title: Dynamic Route Segments
 description: Dynamic Route Segments can be used to programmatically generate route segments from dynamic data.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -149,7 +149,7 @@ export default async function Page(props: PageProps<'/[locale]'>) {
 
 ### With Cache Components
 
-When using [Cache Components](/docs/app/getting-started/cache-components) with dynamic route segments, how you handle params depends on whether you use [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params).
+When using [Cache Components](/docs/app/getting-started/caching) with dynamic route segments, how you handle params depends on whether you use [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params).
 
 Without `generateStaticParams`, param values are unknown during prerendering, making params runtime data. You must wrap param access in `<Suspense>` boundaries to provide fallback UI.
 
@@ -296,7 +296,7 @@ async function PrivatePost({ slug }: { slug: string }) {
 
 ### With `generateStaticParams`
 
-The [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) function can be used to [statically generate](/docs/app/guides/caching#static-rendering) routes at build time instead of on-demand at request time.
+The [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) function can be used to [statically generate](/docs/app/glossary#prerendering) routes at build time instead of on-demand at request time.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export async function generateStaticParams() {
@@ -318,7 +318,7 @@ export async function generateStaticParams() {
 }
 ```
 
-When using `fetch` inside the `generateStaticParams` function, the requests are [automatically deduplicated](/docs/app/guides/caching#request-memoization). This avoids multiple network calls for the same data Layouts, Pages, and other `generateStaticParams` functions, speeding up build time.
+When using `fetch` inside the `generateStaticParams` function, the requests are [automatically deduplicated](/docs/app/glossary#memoization). This avoids multiple network calls for the same data Layouts, Pages, and other `generateStaticParams` functions, speeding up build time.
 
 ### Dynamic GET Route Handlers with `generateStaticParams`
 

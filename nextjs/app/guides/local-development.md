@@ -2,8 +2,8 @@
 title: How to optimize your local development environment
 description: Learn how to optimize your local development environment with Next.js.
 url: "https://nextjs.org/docs/app/guides/local-development"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -267,7 +267,7 @@ It provides detailed information about the time taken for each module to compile
 
 8. By default the trace viewer will aggregate timings, in order to see each individual time you can switch from "Aggregated in order" to "Spans in order" at the top right of the viewer.
 
-> **Good to know**: The trace file is place under the development server directory, which defaults to `.next/dev`. This is controllable using the [`isolatedDevBuild`](/docs/app/api-reference/config/next-config-js/isolatedDevBuild) flag in your Next config file.
+> **Good to know**: The trace file is placed under the development server directory, which defaults to `.next/dev`.
 
 ### Still having problems?
 

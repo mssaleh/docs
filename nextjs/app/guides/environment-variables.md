@@ -2,8 +2,8 @@
 title: How to use environment variables in Next.js
 description: Learn to add and access environment variables in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/environment-variables"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -184,7 +184,7 @@ import { connection } from 'next/server'
 
 export default async function Component() {
   await connection()
-  // cookies, headers, and other Dynamic APIs
+  // cookies, headers, and other Request-time APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
   const value = process.env.MY_VALUE
@@ -197,7 +197,7 @@ import { connection } from 'next/server'
 
 export default async function Component() {
   await connection()
-  // cookies, headers, and other Dynamic APIs
+  // cookies, headers, and other Request-time APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
   const value = process.env.MY_VALUE

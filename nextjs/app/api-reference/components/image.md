@@ -2,8 +2,8 @@
 title: Image Component
 description: "Optimize Images in your Next.js Application using the built-in `next/image` Component."
 url: "https://nextjs.org/docs/app/api-reference/components/image"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -531,6 +531,8 @@ module.exports = {
 
 The example above will ensure the `src` property of `next/image` must start with `https://assets.example.com` and must have the exact query string `?v=1727111025337`. Any other protocol or query string will respond with `400` Bad Request.
 
+Note that any allowed `remotePatterns` that respond with a redirect will follow the redirect from the remote image server without validating `remotePatterns` again on the redirect location. You can reduce or disable redirects by configuring [maximumRedirects](#maximumredirects).
+
 #### `loaderFile`
 
 `loaderFiles` allows you to use a custom image optimization service instead of Next.js.
@@ -735,6 +737,8 @@ module.exports = {
   },
 }
 ```
+
+For your convenience, these redirects do not need to satisfy [remotePatterns](#remotepatterns).
 
 You can configure the number of redirects to follow when fetching remote images. Setting the value to `0` will disable following redirects.
 

@@ -2,8 +2,8 @@
 title: How to create a static export of your Next.js application
 description: Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use features that require a server.
 url: "https://nextjs.org/docs/app/guides/static-exports"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -226,7 +226,7 @@ If you need to read dynamic values from the incoming request, you cannot use a s
 
 ### Browser APIs
 
-Client Components are pre-rendered to HTML during `next build`. Because [Web APIs](https://developer.mozilla.org/docs/Web/API) like `window`, `localStorage`, and `navigator` are not available on the server, you need to safely access these APIs only when running in the browser. For example:
+Client Components are prerendered to HTML during `next build`. Because [Web APIs](https://developer.mozilla.org/docs/Web/API) like `window`, `localStorage`, and `navigator` are not available on the server, you need to safely access these APIs only when running in the browser. For example:
 
 ```jsx
 'use client';
@@ -258,10 +258,10 @@ Features that require a Node.js server, or dynamic logic that cannot be computed
 * [Incremental Static Regeneration](/docs/app/guides/incremental-static-regeneration)
 * [Image Optimization](/docs/app/api-reference/components/image) with the default `loader`
 * [Draft Mode](/docs/app/guides/draft-mode)
-* [Server Actions](/docs/app/getting-started/updating-data)
+* [Server Actions](/docs/app/getting-started/mutating-data)
 * [Intercepting Routes](/docs/app/api-reference/file-conventions/intercepting-routes)
 
-Attempting to use any of these features with `next dev` will result in an error, similar to setting the [`dynamic`](/docs/app/api-reference/file-conventions/route-segment-config#dynamic) option to `error` in the root layout.
+Attempting to use any of these features with `next dev` will result in an error, similar to setting the [`dynamic`](/docs/app/guides/caching-without-cache-components#dynamic) option to `error` in the root layout.
 
 ```jsx
 export const dynamic = 'error'

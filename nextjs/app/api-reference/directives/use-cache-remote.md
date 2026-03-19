@@ -2,8 +2,8 @@
 title: "use cache: remote"
 description: "Learn how to use the \"use cache: remote\" directive for persistent, shared caching using remote cache handlers."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache-remote"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"
@@ -94,7 +94,7 @@ Next.js provides three caching directives, each designed for different use cases
 
 ### Caching with runtime data
 
-Both `use cache` and `'use cache: remote'` can't access runtime values like cookies or search params directly. You can extract these values and pass them as arguments to cached functions. See [with runtime data](/docs/app/getting-started/cache-components#with-runtime-data) for this pattern.
+Both `use cache` and `'use cache: remote'` can't access runtime values like cookies or search params directly. You can extract these values and pass them as arguments to cached functions. See [with runtime data](/docs/app/getting-started/caching#working-with-runtime-apis) for this pattern.
 
 > **Good to know**: `use cache` stores entries in-memory. In serverless environments, memory is not shared between instances and is typically destroyed after serving a request, leading to frequent cache misses for runtime caching.
 

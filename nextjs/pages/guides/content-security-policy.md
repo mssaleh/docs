@@ -2,8 +2,8 @@
 title: How to set a Content Security Policy (CSP) for your Next.js application
 description: Learn how to set a Content Security Policy (CSP) for your Next.js application.
 url: "https://nextjs.org/docs/pages/guides/content-security-policy"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"
@@ -35,7 +35,7 @@ If an attacker wanted to load a script into your page, they'd need to guess the 
 
 [Proxy](/docs/app/api-reference/file-conventions/proxy) enables you to add headers and generate nonces before the page renders.
 
-Every time a page is viewed, a fresh nonce should be generated. This means that you **must use [dynamic rendering](/docs/app/guides/caching#dynamic-rendering) to add nonces**.
+Every time a page is viewed, a fresh nonce should be generated. This means that you **must use [dynamic rendering](/docs/app/glossary#dynamic-rendering) to add nonces**.
 
 For example:
 

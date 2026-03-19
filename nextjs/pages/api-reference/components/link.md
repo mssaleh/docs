@@ -2,8 +2,8 @@
 title: Link
 description: "API reference for the `<Link>` component."
 url: "https://nextjs.org/docs/pages/api-reference/components/link"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -316,6 +316,8 @@ export default function Page() {
 > * When using modifier keys (`Ctrl`/`Cmd` + Click), `onClick` executes but `onNavigate` doesn't since Next.js prevents default navigation for new tabs.
 > * External URLs won't trigger `onNavigate` since it's only for client-side and same-origin navigations.
 > * Links with the `download` attribute will work with `onClick` but not `onNavigate` since the browser will treat the linked URL as a download.
+
+### `transitionTypes`
 
 ## Examples
 

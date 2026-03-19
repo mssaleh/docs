@@ -2,8 +2,8 @@
 title: page.js
 description: API reference for the page.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/page"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -36,6 +36,7 @@ export default function Page({ params, searchParams }) {
 * A `page` is always the **leaf** of the route subtree.
 * A `page` file is required to make a route segment **publicly accessible**.
 * Pages are [Server Components](https://react.dev/reference/rsc/server-components) by default, but can be set to a [Client Component](https://react.dev/reference/rsc/use-client).
+* In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `page.js` is the innermost file convention. It is wrapped by `loading.js` (Suspense boundary), `error.js` (error boundary), `template.js`, and `layout.js` in the same segment.
 
 ## Reference
 
@@ -122,7 +123,7 @@ export default function Page({ searchParams }) {
 
 * Since the `searchParams` prop is a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.
   * In version 14 and earlier, `searchParams` was a synchronous prop. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
-* `searchParams` is a **[Dynamic API](/docs/app/guides/caching#dynamic-rendering)** whose values cannot be known ahead of time. Using it will opt the page into **[dynamic rendering](/docs/app/guides/caching#dynamic-rendering)** at request time.
+* `searchParams` is a **[Request-time API](/docs/app/glossary#request-time-apis)** whose values cannot be known ahead of time. Using it will opt the page into **[dynamic rendering](/docs/app/glossary#dynamic-rendering)** at request time.
 * `searchParams` is a plain JavaScript object, not a `URLSearchParams` instance.
 
 ### Page Props Helper

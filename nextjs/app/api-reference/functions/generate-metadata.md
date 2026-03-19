@@ -2,15 +2,15 @@
 title: generateMetadata
 description: Learn how to add Metadata to your Next.js application for improved search engine optimization (SEO) and web shareability.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 related:
   - app/api-reference/file-conventions/metadata
   - app/api-reference/functions/generate-viewport
-  - app/getting-started/cache-components
+  - app/getting-started/caching
   - app/api-reference/config/next-config-js/cacheComponents
 ---
 
@@ -47,7 +47,7 @@ export default function Page() {}
 
 Dynamic metadata depends on **dynamic information**, such as the current route parameters, external data, or `metadata` in parent segments, can be set by exporting a `generateMetadata` function that returns a [`Metadata` object](#metadata-fields).
 
-Resolving `generateMetadata` is part of rendering the page. If the page can be pre-rendered and `generateMetadata` doesn't introduce dynamic behavior, the resulting metadata is included in the page’s initial HTML.
+Resolving `generateMetadata` is part of rendering the page. If the page can be prerendered and `generateMetadata` doesn't introduce dynamic behavior, the resulting metadata is included in the page's initial HTML.
 
 Otherwise the metadata resolved from `generateMetadata` [can be streamed](/docs/app/api-reference/functions/generate-metadata#streaming-metadata) after sending the initial UI.
 
@@ -113,9 +113,56 @@ For type completion of `params` and `searchParams`, you can type the first argum
 > * Next.js will automatically resolve the metadata, and create the relevant `<head>` tags for the page.
 > * The `metadata` object and `generateMetadata` function exports are **only supported in Server Components**.
 > * You cannot export both the `metadata` object and `generateMetadata` function from the same route segment.
-> * `fetch` requests inside `generateMetadata` are automatically [memoized](/docs/app/guides/caching#request-memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components.
-> * React [`cache` can be used](/docs/app/guides/caching#react-cache-function) if `fetch` is unavailable.
+> * `fetch` requests inside `generateMetadata` are automatically [memoized](/docs/app/glossary#memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components.
+> * React [`cache` can be used](https://react.dev/reference/react/cache) if `fetch` is unavailable.
 > * [File-based metadata](/docs/app/api-reference/file-conventions/metadata) has the higher priority and will override the `metadata` object and `generateMetadata` function.
+
+## Why `generateMetadata` is Server Component only
+
+`generateMetadata` and the `metadata` export are only supported in Server Components because metadata must be resolved on the server before the page component is rendered. This allows Next.js to include the metadata in the initial HTML response.
+
+If you need to use Client Component features, keep your `page.tsx` as a Server Component and move the Client Component logic to a separate file:
+
+```tsx filename="app/page.tsx" switcher
+import type { Metadata } from 'next'
+import { InteractiveComponent } from './interactive-component'
+
+export const metadata: Metadata = {
+  title: 'My Page',
+}
+
+export default function Page() {
+  return <InteractiveComponent />
+}
+```
+
+```jsx filename="app/page.js" switcher
+import { InteractiveComponent } from './interactive-component'
+
+export const metadata = {
+  title: 'My Page',
+}
+
+export default function Page() {
+  return <InteractiveComponent />
+}
+```
+
+```tsx filename="app/interactive-component.tsx" switcher
+'use client'
+
+export function InteractiveComponent() {
+  // Client-side interactivity (hooks, event handlers, etc.)
+}
+```
+
+```jsx filename="app/interactive-component.js" switcher
+'use client'
+
+export function InteractiveComponent() {
+  // Client-side interactivity (hooks, event handlers, etc.)
+}
+```
 
 ## Reference
 
@@ -148,8 +195,8 @@ For type completion of `params` and `searchParams`, you can type the first argum
 
 > **Good to know**:
 >
-> * If metadata doesn't depend on runtime information, it should be defined using the static [`metadata` object](#the-metadata-object) rather than `generateMetadata`.
-> * `fetch` requests are automatically [memoized](/docs/app/guides/caching#request-memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components. React [`cache` can be used](/docs/app/guides/caching#react-cache-function) if `fetch` is unavailable.
+> * If metadata doesn't depend on request information, it should be defined using the static [`metadata` object](#the-metadata-object) rather than `generateMetadata`.
+> * `fetch` requests are automatically memoized for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components. React [`cache` can be used](https://react.dev/reference/react/cache) if `fetch` is unavailable.
 > * `searchParams` are only available in `page.js` segments.
 > * The [`redirect()`](/docs/app/api-reference/functions/redirect) and [`notFound()`](/docs/app/api-reference/functions/not-found) Next.js methods can also be used inside `generateMetadata`.
 
@@ -1210,7 +1257,7 @@ Overriding `htmlLimitedBots` could lead to longer response times. Streaming meta
 
 ### With Cache Components
 
-When [Cache Components](/docs/app/getting-started/cache-components) is enabled, `generateMetadata` follows the same rules as other components. If metadata accesses runtime data (`cookies()`, `headers()`, `params`, `searchParams`) or performs uncached data fetching, it defers to request time.
+When [Cache Components](/docs/app/getting-started/caching) is enabled, `generateMetadata` follows the same rules as other components. If metadata accesses runtime data (`cookies()`, `headers()`, `params`, `searchParams`) or performs uncached data fetching, it defers to request time.
 
 How Next.js handles this depends on the rest of your page:
 
@@ -1387,8 +1434,8 @@ View all the Metadata API options.
   - API documentation for the metadata file conventions.
 - [generateViewport](/docs/app/api-reference/functions/generate-viewport)
   - API Reference for the generateViewport function.
-- [Cache Components](/docs/app/getting-started/cache-components)
-  - Learn how to use Cache Components and combine the benefits of static and dynamic rendering.
+- [Caching](/docs/app/getting-started/caching)
+  - Learn how to cache data and UI in Next.js
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
   - Learn how to enable the cacheComponents flag in Next.js.
 

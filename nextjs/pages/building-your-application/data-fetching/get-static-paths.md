@@ -2,8 +2,8 @@
 title: getStaticPaths
 description: "Fetch data and generate static pages with `getStaticPaths`. Learn more about this API for data fetching in Next.js."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -13,7 +13,7 @@ prerequisites:
 
 If a page has [Dynamic Routes](/docs/pages/building-your-application/routing/dynamic-routes) and uses `getStaticProps`, it needs to define a list of paths to be statically generated.
 
-When you export a function called `getStaticPaths` (Static Site Generation) from a page that uses dynamic routes, Next.js will statically pre-render all the paths specified by `getStaticPaths`.
+When you export a function called `getStaticPaths` (Static Site Generation) from a page that uses dynamic routes, Next.js will statically prerender all the paths specified by `getStaticPaths`.
 
 ```tsx filename="pages/repo/[name].tsx" switcher
 import type {
@@ -84,13 +84,13 @@ The [`getStaticPaths` API reference](/docs/pages/api-reference/functions/get-sta
 
 ## When should I use getStaticPaths?
 
-You should use `getStaticPaths` if you’re statically pre-rendering pages that use dynamic routes and:
+You should use `getStaticPaths` if you’re statically prerendering pages that use dynamic routes and:
 
 * The data comes from a headless CMS
 * The data comes from a database
 * The data comes from the filesystem
 * The data can be publicly cached (not user-specific)
-* The page must be pre-rendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
+* The page must be prerendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
 
 ## When does getStaticPaths run
 

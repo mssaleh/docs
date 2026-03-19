@@ -2,8 +2,8 @@
 title: Parallel Routes
 description: Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynamic applications.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -60,7 +60,7 @@ export default function Layout({ children, team, analytics }) {
 }
 ```
 
-However, slots are **not** route segments and do not affect the URL structure. For example, for `/@analytics/views`, the URL will be `/views` since `@analytics` is a slot. Slots are combined with the regular [Page](/docs/app/api-reference/file-conventions/page) component to form the final page associated with the route segment. Because of this, you cannot have separate [static](/docs/app/guides/caching#static-rendering) and [dynamic](/docs/app/guides/caching#dynamic-rendering) slots at the same route segment level. If one slot is dynamic, all slots at that level must be dynamic.
+However, slots are **not** route segments and do not affect the URL structure. For example, for `/@analytics/views`, the URL will be `/views` since `@analytics` is a slot. Slots are combined with the regular [Page](/docs/app/api-reference/file-conventions/page) component to form the final page associated with the route segment. Because of this, you cannot have separate [prerendered](/docs/app/glossary#prerendering) and [dynamically rendered](/docs/app/glossary#dynamic-rendering) slots at the same route segment level. If one slot is dynamic, all slots at that level must be dynamic.
 
 > **Good to know**:
 >
@@ -271,7 +271,7 @@ export default function Page() {
 > **Good to know:**
 >
 > * The convention `(.)` is used for intercepting routes. See [Intercepting Routes](/docs/app/api-reference/file-conventions/intercepting-routes#convention) docs for more information.
-> * By separating the `<Modal>` functionality from the modal content (`<Login>`), you can ensure any content inside the modal, e.g. [forms](/docs/app/guides/forms), are Server Components. See [Interleaving Client and Server Components](/docs/app/getting-started/server-and-client-components#examples#supported-pattern-passing-server-components-to-client-components-as-props) for more information.
+> * By separating the `<Modal>` functionality from the modal content (`<Login>`), you can ensure any content inside the modal, e.g. [forms](/docs/app/guides/forms), are Server Components. See [Interleaving Client and Server Components](/docs/app/getting-started/server-and-client-components#interleaving-server-and-client-components) for more information.
 
 #### Opening the modal
 

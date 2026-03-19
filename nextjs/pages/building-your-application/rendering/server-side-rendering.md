@@ -2,8 +2,8 @@
 title: Server-side Rendering (SSR)
 description: Use Server-side Rendering to render pages on each request.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"
@@ -17,7 +17,7 @@ If a page uses **Server-side Rendering**, the page HTML is generated on **each r
 
 To use Server-side Rendering for a page, you need to `export` an `async` function called `getServerSideProps`. This function will be called by the server on every request.
 
-For example, suppose that your page needs to pre-render frequently updated data (fetched from an external API). You can write `getServerSideProps` which fetches this data and passes it to `Page` like below:
+For example, suppose that your page needs to prerender frequently updated data (fetched from an external API). You can write `getServerSideProps` which fetches this data and passes it to `Page` like below:
 
 ```jsx
 export default function Page({ data }) {

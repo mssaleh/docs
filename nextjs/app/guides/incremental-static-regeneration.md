@@ -2,8 +2,8 @@
 title: How to implement Incremental Static Regeneration (ISR)
 description: Learn how to create or update static pages at runtime with Incremental Static Regeneration.
 url: "https://nextjs.org/docs/app/guides/incremental-static-regeneration"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-13
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -100,14 +100,14 @@ Here's how this example works:
 3. After 60 seconds has passed, the next request will still return the cached (now stale) page
 4. The cache is invalidated and a new version of the page begins generating in the background
 5. Once generated successfully, the next request will return the updated page and cache it for subsequent requests
-6. If `/blog/26` is requested, and it exists, the page will be generated on-demand. This behavior can be changed by using a different [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) value. However, if the post does not exist, then 404 is returned.
+6. If `/blog/26` is requested, and it exists, the page will be generated on-demand. This behavior can be changed by using a different [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams) value. However, if the post does not exist, then 404 is returned.
 
 ## Reference
 
 ### Route segment config
 
-* [`revalidate`](/docs/app/api-reference/file-conventions/route-segment-config#revalidate)
-* [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams)
+* [`revalidate`](/docs/app/guides/caching-without-cache-components#route-segment-config-revalidate)
+* [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)
 
 ### Functions
 
@@ -164,7 +164,7 @@ export default async function Page() {
 }
 ```
 
-We recommend setting a high revalidation time. For instance, 1 hour instead of 1 second. If you need more precision, consider using on-demand revalidation. If you need real-time data, consider switching to [dynamic rendering](/docs/app/guides/caching#dynamic-rendering).
+We recommend setting a high revalidation time. For instance, 1 hour instead of 1 second. If you need more precision, consider using on-demand revalidation. If you need real-time data, consider switching to [dynamic rendering](/docs/app/glossary#dynamic-rendering).
 
 ### On-demand revalidation with `revalidatePath`
 
@@ -260,7 +260,7 @@ export default async function Page() {
 }
 ```
 
-You can then use `revalidateTag` in a [Server Actions](/docs/app/getting-started/updating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
+You can then use `revalidateTag` in a [Server Actions](/docs/app/getting-started/mutating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
 
 ```ts filename="app/actions.ts" switcher
 'use server'
@@ -324,8 +324,8 @@ This will make the Next.js server console log ISR cache hits and misses. You can
 
 * ISR is only supported when using the Node.js runtime (default).
 * ISR is not supported when creating a [Static Export](/docs/app/guides/static-exports).
-* If you have multiple `fetch` requests in a statically rendered route, and each has a different `revalidate` frequency, the lowest time will be used for ISR. However, those revalidate frequencies will still be respected by the [Data Cache](/docs/app/guides/caching#data-cache).
-* If any of the `fetch` requests used on a route have a `revalidate` time of `0`, or an explicit `no-store`, the route will be [dynamically rendered](/docs/app/guides/caching#dynamic-rendering).
+* If you have multiple `fetch` requests in a prerendered route, and each has a different `revalidate` frequency, the lowest time will be used for ISR. However, those revalidate frequencies will still be respected by the [cache](/docs/app/getting-started/caching).
+* If any of the `fetch` requests used on a route have a `revalidate` time of `0`, or an explicit `no-store`, the route will be dynamically rendered.
 * Proxy won't be executed for on-demand ISR requests, meaning any path rewrites or logic in Proxy will not be applied. Ensure you are revalidating the exact path. For example, `/post/1` instead of a rewritten `/post-1`.
 
 ## Platform Support

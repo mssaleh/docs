@@ -2,8 +2,8 @@
 title: useSearchParams
 description: API Reference for the useSearchParams hook in the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/functions/use-search-params"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -63,7 +63,7 @@ const searchParams = useSearchParams()
 
 ## Returns
 
-`useSearchParams` returns a **read-only** version of the [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) interface, or `null` during [pre-rendering](#behavior-during-pre-rendering).
+`useSearchParams` returns a **read-only** version of the [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) interface, or `null` during [prerendering](#behavior-during-prerendering).
 
 The interface includes utility methods for reading the URL's query string:
 
@@ -89,9 +89,9 @@ The interface includes utility methods for reading the URL's query string:
 
 ## Behavior
 
-### Behavior during pre-rendering
+### Behavior during prerendering
 
-For pages that are [statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) (not using `getServerSideProps`), `useSearchParams` will return `null` during pre-rendering. After hydration, the value will be updated to the actual search params.
+For pages that are [statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) (not using `getServerSideProps`), `useSearchParams` will return `null` during prerendering. After hydration, the value will be updated to the actual search params.
 
 This is because search params cannot be known during static generation as they depend on the request.
 
@@ -289,7 +289,7 @@ export function SearchBar() {
   const searchParams = useSearchParams()
 
   if (!searchParams) {
-    // Fallback for Pages Router during pre-rendering
+    // Fallback for Pages Router during prerendering
     return <input defaultValue="" placeholder="Search..." />
   }
 
@@ -307,7 +307,7 @@ export function SearchBar() {
   const searchParams = useSearchParams()
 
   if (!searchParams) {
-    // Fallback for Pages Router during pre-rendering
+    // Fallback for Pages Router during prerendering
     return <input defaultValue="" placeholder="Search..." />
   }
 
@@ -317,7 +317,7 @@ export function SearchBar() {
 }
 ```
 
-> **Good to know**: When using this component in the App Router, wrap it in a `<Suspense>` boundary for [static rendering](/docs/app/api-reference/functions/use-search-params#static-rendering) support.
+> **Good to know**: When using this component in the App Router, wrap it in a `<Suspense>` boundary for [prerendering](/docs/app/api-reference/functions/use-search-params#prerendering) support.
 
 ## Version History
 

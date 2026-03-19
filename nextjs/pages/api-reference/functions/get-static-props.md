@@ -2,8 +2,8 @@
 title: getStaticProps
 description: "API reference for `getStaticProps`. Learn how to use `getStaticProps` to generate static pages with Next.js."
 url: "https://nextjs.org/docs/pages/api-reference/functions/get-static-props"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -11,7 +11,7 @@ prerequisites:
 ---
 
 
-Exporting a function called `getStaticProps` will pre-render a page at build time using the props returned from the function:
+Exporting a function called `getStaticProps` will prerender a page at build time using the props returned from the function:
 
 ```tsx filename="pages/index.tsx" switcher
 import type { InferGetStaticPropsType, GetStaticProps } from 'next'
@@ -134,7 +134,7 @@ export async function getStaticProps(context) {
 }
 ```
 
-> **Good to know**: `notFound` is not needed for [`fallback: false`](/docs/pages/api-reference/functions/get-static-paths#fallback-false) mode as only paths returned from `getStaticPaths` will be pre-rendered.
+> **Good to know**: `notFound` is not needed for [`fallback: false`](/docs/pages/api-reference/functions/get-static-paths#fallback-false) mode as only paths returned from `getStaticPaths` will be prerendered.
 
 ### `redirect`
 

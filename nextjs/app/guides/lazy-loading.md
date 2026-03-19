@@ -2,8 +2,8 @@
 title: How to lazy load Client Components and libraries
 description: "Lazy load imported libraries and React Components to improve your application's loading performance."
 url: "https://nextjs.org/docs/app/guides/lazy-loading"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-10
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -18,7 +18,7 @@ There are two ways you can implement lazy loading in Next.js:
 1. Using [Dynamic Imports](#nextdynamic) with `next/dynamic`
 2. Using [`React.lazy()`](https://react.dev/reference/react/lazy) with [Suspense](https://react.dev/reference/react/Suspense)
 
-By default, Server Components are automatically [code split](https://developer.mozilla.org/docs/Glossary/Code_splitting), and you can use [streaming](/docs/app/api-reference/file-conventions/loading) to progressively send pieces of UI from the server to the client. Lazy loading applies to Client Components.
+By default, Server Components are automatically [code split](https://developer.mozilla.org/docs/Glossary/Code_splitting), and you can use [streaming](/docs/app/guides/streaming) to progressively send pieces of UI from the server to the client. Lazy loading applies to Client Components.
 
 ## `next/dynamic`
 
@@ -66,7 +66,7 @@ When using `React.lazy()` and Suspense, Client Components will be [prerendered](
 
 > **Note:** `ssr: false` option will only work for Client Components, move it into Client Components ensure the client code-splitting working properly.
 
-If you want to disable pre-rendering for a Client Component, you can use the `ssr` option set to `false`:
+If you want to disable prerendering for a Client Component, you can use the `ssr` option set to `false`:
 
 ```jsx
 const ComponentC = dynamic(() => import('../components/C'), { ssr: false })
@@ -172,6 +172,48 @@ const ClientComponent = dynamic(() =>
   import('../components/hello').then((mod) => mod.Hello)
 )
 ```
+
+## Magic Comments
+
+Next.js supports magic comments to control how dynamic imports are handled by the bundler. These comments work with dynamic `import()`, `require()`, `require.resolve()`, and `new Worker()` expressions.
+
+> **Good to know:** Magic comments do not work with static `import` statements (`import x from 'y'`). They only work with dynamic expressions.
+
+### `webpackIgnore` / `turbopackIgnore`
+
+Use these comments to skip bundling a dynamic import. The import expression will be left as-is in the output, useful for runtime-only modules:
+
+```js
+// Skip bundling - import happens at runtime
+const runtime = await import(/* webpackIgnore: true */ 'runtime-module')
+
+// Turbopack-specific variant
+const plugin = await import(/* turbopackIgnore: true */ pluginPath)
+
+// Also works with require
+const mod = require(/* webpackIgnore: true */ 'runtime-module')
+```
+
+### `turbopackOptional` (Turbopack only)
+
+Use this comment to suppress build errors when a module might not exist. The import will still throw at runtime if the module is missing:
+
+```js
+// No build error if './optional-feature' doesn't exist
+// Runtime will throw MODULE_NOT_FOUND if executed
+const feature = await import(/* turbopackOptional: true */ './optional-feature')
+
+// Also works with require
+const mod = require(/* turbopackOptional: true */ './optional-module')
+```
+
+This is useful for:
+
+* Conditional features that may not be installed
+* Plugin systems where modules are optional
+* Gradual migrations where some files may not exist yet
+
+> **Good to know:** `webpackOptional` is not supported. Use `turbopackOptional` instead when using Turbopack.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

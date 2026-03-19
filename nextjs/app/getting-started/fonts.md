@@ -2,8 +2,8 @@
 title: Font Optimization
 description: Learn how to optimize fonts in Next.js
 url: "https://nextjs.org/docs/app/getting-started/fonts"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-14
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -135,7 +135,7 @@ export default function RootLayout({ children }) {
 
 ## Local fonts
 
-To use a local font, import your font from `next/font/local` and specify the [`src`](/docs/app/api-reference/components/font#src) of your local font file. Fonts can be stored in the [`public`](/docs/app/api-reference/file-conventions/public-folder) folder or co-located inside the `app` folder. For example:
+To use a local font, import the `localFont` function from `next/font/local` and specify the [`src`](/docs/app/api-reference/components/font#src) of your local font file. The path is resolved relative to the file where `localFont` is called. Fonts can be stored anywhere in the project, including the [`public`](/docs/app/api-reference/file-conventions/public-folder) folder or co-located inside the `app` folder. For example, to use a font stored in `app/fonts/`:
 
 ```tsx filename="app/layout.tsx" switcher
 import localFont from 'next/font/local'

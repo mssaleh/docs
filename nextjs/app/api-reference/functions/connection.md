@@ -2,8 +2,8 @@
 title: connection
 description: API Reference for the connection function.
 url: "https://nextjs.org/docs/app/api-reference/functions/connection"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -12,7 +12,7 @@ prerequisites:
 
 The `connection()` function allows you to indicate rendering should wait for an incoming user request before continuing.
 
-It's useful when a component doesn't use [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering), but you want it to be dynamically rendered at runtime and not statically rendered at build time. This usually occurs when you access external information that you intentionally want to change the result of a render, such as `Math.random()` or `new Date()`.
+It's useful when a component doesn't use [Request-time APIs](/docs/app/glossary#request-time-apis), but you want it to be rendered at runtime and not prerendered at build time. This usually occurs when you access external information that you intentionally want to change the result of a render, such as `Math.random()` or `new Date()`.
 
 ```ts filename="app/page.tsx" switcher
 import { connection } from 'next/server'
@@ -55,7 +55,7 @@ function connection(): Promise<void>
 ## Good to know
 
 * `connection` replaces [`unstable_noStore`](/docs/app/api-reference/functions/unstable_noStore) to better align with the future of Next.js.
-* The function is only necessary when dynamic rendering is required and common Dynamic APIs are not used.
+* The function is only necessary when dynamic rendering is required and common Request-time APIs are not used.
 
 ### Version History
 

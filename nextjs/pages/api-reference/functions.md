@@ -2,8 +2,8 @@
 title: Functions
 description: API Reference for Functions and Hooks in Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/functions"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

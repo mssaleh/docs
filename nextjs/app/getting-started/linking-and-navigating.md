@@ -2,8 +2,8 @@
 title: Linking and Navigating
 description: Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 url: "https://nextjs.org/docs/app/getting-started/linking-and-navigating"
-version: 16.1.7
-lastUpdated: 2026-03-16
+version: 16.2.0
+lastUpdated: 2026-03-13
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -32,7 +32,7 @@ In Next.js, [Layouts and Pages](/docs/app/getting-started/layouts-and-pages) are
 
 There are two types of server rendering, based on *when* it happens:
 
-* **Static Rendering (or Prerendering)** happens at build time or during [revalidation](/docs/app/getting-started/caching-and-revalidating) and the result is cached.
+* **Prerendering** happens at build time or during [revalidation](/docs/app/getting-started/revalidating) and the result is cached.
 * **Dynamic Rendering** happens at request time in response to a client request.
 
 The trade-off of server rendering is that the client must wait for the server to respond before the new route can be shown. Next.js addresses this delay by [prefetching](#prefetching) routes the user is likely to visit and performing [client-side transitions](#client-side-transitions).
@@ -98,7 +98,7 @@ To improve the navigation experience to dynamic routes, you can use [streaming](
 
 ### Streaming
 
-Streaming allows the server to send parts of a dynamic route to the client as soon as they're ready, rather than waiting for the entire route to be rendered. This means users see something sooner, even if parts of the page are still loading.
+Streaming allows the server to send parts of a dynamic route to the client as soon as they're ready, rather than waiting for the entire route to be rendered. This means users see something sooner, even if parts of the page are still loading. See the [Streaming guide](/docs/app/guides/streaming) for a deep dive into how streaming works in Next.js.
 
 For dynamic routes, it means they can be **partially prefetched**. That is, shared layouts and loading skeletons can be requested ahead of time.
 
