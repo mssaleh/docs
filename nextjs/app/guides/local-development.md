@@ -2,7 +2,7 @@
 title: How to optimize your local development environment
 description: Learn how to optimize your local development environment with Next.js.
 url: "https://nextjs.org/docs/app/guides/local-development"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"

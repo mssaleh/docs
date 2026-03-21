@@ -2,7 +2,7 @@
 title: How to upgrade to version 9
 description: Upgrade your Next.js Application from Version 8 to Version 9.
 url: "https://nextjs.org/docs/pages/guides/upgrading/version-9"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-25
 router: Pages Router
 prerequisites:

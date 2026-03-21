@@ -2,7 +2,7 @@
 title: Components
 description: API Reference for Next.js built-in components in the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/components"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

@@ -2,7 +2,7 @@
 title: How to configure Babel in Next.js
 description: Extend the babel preset added by Next.js with your own configs.
 url: "https://nextjs.org/docs/pages/guides/babel"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

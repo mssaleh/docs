@@ -2,7 +2,7 @@
 title: generateViewport
 description: API Reference for the generateViewport function.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-viewport"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -2,7 +2,7 @@
 title: ESLint Plugin
 description: Learn how to use and configure the ESLint plugin to catch common issues and problems in a Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/eslint"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-11-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"

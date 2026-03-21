@@ -2,7 +2,7 @@
 title: Head
 description: "Add custom elements to the `head` of your page with the built-in Head component."
 url: "https://nextjs.org/docs/pages/api-reference/components/head"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

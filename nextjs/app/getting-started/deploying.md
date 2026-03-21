@@ -2,7 +2,7 @@
 title: Deploying
 description: Learn how to deploy your Next.js application.
 url: "https://nextjs.org/docs/app/getting-started/deploying"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-02-27
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

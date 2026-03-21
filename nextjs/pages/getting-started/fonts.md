@@ -2,7 +2,7 @@
 title: How to use fonts
 description: Learn how to use fonts in Next.js
 url: "https://nextjs.org/docs/pages/getting-started/fonts"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-05-08
 router: Pages Router
 prerequisites:

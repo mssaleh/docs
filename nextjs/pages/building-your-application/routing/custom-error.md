@@ -2,7 +2,7 @@
 title: Custom Errors
 description: Override and extend the built-in Error page to handle custom errors.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/custom-error"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

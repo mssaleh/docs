@@ -2,7 +2,7 @@
 title: usePathname
 description: API Reference for the usePathname hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-pathname"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

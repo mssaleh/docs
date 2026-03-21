@@ -2,7 +2,7 @@
 title: proxy.js
 description: API reference for the proxy.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"

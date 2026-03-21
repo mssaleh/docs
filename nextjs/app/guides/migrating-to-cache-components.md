@@ -2,7 +2,7 @@
 title: Migrating to Cache Components
 description: Learn how to migrate from route segment configs to Cache Components in Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating-to-cache-components"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"

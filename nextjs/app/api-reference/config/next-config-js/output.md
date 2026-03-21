@@ -2,7 +2,7 @@
 title: output
 description: Next.js automatically traces which files are needed by each page to allow for easy deployment of your application. Learn how it works here.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/output"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-10-08
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

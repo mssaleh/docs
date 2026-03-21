@@ -2,7 +2,7 @@
 title: getServerSideProps
 description: "API reference for `getServerSideProps`. Learn how to fetch data on each request with Next.js."
 url: "https://nextjs.org/docs/pages/api-reference/functions/get-server-side-props"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:

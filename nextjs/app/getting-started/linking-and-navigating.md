@@ -2,8 +2,8 @@
 title: Linking and Navigating
 description: Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 url: "https://nextjs.org/docs/app/getting-started/linking-and-navigating"
-version: 16.2.0
-lastUpdated: 2026-03-13
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -203,6 +203,7 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }))
+}
 
 export default async function Page({ params }) {
   const { slug } = await params

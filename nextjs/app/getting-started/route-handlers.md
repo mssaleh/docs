@@ -2,7 +2,7 @@
 title: Route Handlers
 description: Learn how to use Route Handlers
 url: "https://nextjs.org/docs/app/getting-started/route-handlers"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

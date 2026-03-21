@@ -2,7 +2,7 @@
 title: How to use CSS-in-JS libraries
 description: Use CSS-in-JS libraries with Next.js
 url: "https://nextjs.org/docs/app/guides/css-in-js"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-07-28
 prerequisites:
   - "Guides: /docs/app/guides"

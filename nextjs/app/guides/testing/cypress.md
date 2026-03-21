@@ -2,7 +2,7 @@
 title: How to set up Cypress with Next.js
 description: Learn how to set up Cypress with Next.js for End-to-End (E2E) and Component Testing.
 url: "https://nextjs.org/docs/app/guides/testing/cypress"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -2,7 +2,7 @@
 title: experimental.proxyClientMaxBodySize
 description: Configure the maximum request body size when using proxy.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/proxyClientMaxBodySize"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-10-17
 router: Pages Router
 prerequisites:

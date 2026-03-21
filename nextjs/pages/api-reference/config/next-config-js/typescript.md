@@ -2,7 +2,7 @@
 title: typescript
 description: Next.js reports TypeScript errors by default. Learn to opt-out of this behavior here.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/typescript"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

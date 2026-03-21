@@ -2,7 +2,7 @@
 title: How to implement authentication in Next.js
 description: Learn how to implement authentication in Next.js, covering best practices, securing routes, authorization techniques, and session management.
 url: "https://nextjs.org/docs/pages/guides/authentication"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-22
 router: Pages Router
 prerequisites:

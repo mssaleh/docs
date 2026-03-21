@@ -2,8 +2,8 @@
 title: How to set a Content Security Policy (CSP) for your Next.js application
 description: Learn how to set a Content Security Policy (CSP) for your Next.js application.
 url: "https://nextjs.org/docs/app/guides/content-security-policy"
-version: 16.2.0
-lastUpdated: 2026-03-18
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -406,7 +406,6 @@ module.exports = {
 ### Limitations of SRI
 
 * **Experimental**: Feature may change or be removed
-* **Webpack only**: Not available with Turbopack
 * **App Router only**: Not supported in Pages Router
 * **Build-time only**: Cannot handle dynamically generated scripts
 

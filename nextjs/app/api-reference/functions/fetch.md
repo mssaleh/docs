@@ -2,7 +2,7 @@
 title: fetch
 description: API reference for the extended fetch function.
 url: "https://nextjs.org/docs/app/api-reference/functions/fetch"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -2,8 +2,8 @@
 title: Error Handling
 description: Learn how to display expected errors and handle uncaught exceptions.
 url: "https://nextjs.org/docs/app/getting-started/error-handling"
-version: 16.2.0
-lastUpdated: 2026-03-17
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -154,9 +154,14 @@ export default async function Page() {
 You can call the [`notFound`](/docs/app/api-reference/functions/not-found) function within a route segment and use the [`not-found.js`](/docs/app/api-reference/file-conventions/not-found) file to show a 404 UI.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
+import { notFound } from 'next/navigation'
 import { getPostBySlug } from '@/lib/posts'
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { slug } = await params
   const post = getPostBySlug(slug)
 
@@ -169,6 +174,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
+import { notFound } from 'next/navigation'
 import { getPostBySlug } from '@/lib/posts'
 
 export default async function Page({ params }) {

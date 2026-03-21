@@ -2,7 +2,7 @@
 title: ImageResponse
 description: API Reference for the ImageResponse constructor.
 url: "https://nextjs.org/docs/app/api-reference/functions/image-response"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

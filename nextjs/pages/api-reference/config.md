@@ -2,7 +2,7 @@
 title: Configuration
 description: Learn how to configure your Next.js application.
 url: "https://nextjs.org/docs/pages/api-reference/config"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

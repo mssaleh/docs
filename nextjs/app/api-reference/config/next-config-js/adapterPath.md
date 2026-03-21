@@ -2,7 +2,7 @@
 title: adapterPath
 description: Configure a custom adapter for Next.js to hook into the build process.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/adapterPath"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-17
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

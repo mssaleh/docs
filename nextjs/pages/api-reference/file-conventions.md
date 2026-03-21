@@ -2,7 +2,7 @@
 title: File-system conventions
 description: API Reference for Next.js file-system conventions.
 url: "https://nextjs.org/docs/pages/api-reference/file-conventions"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

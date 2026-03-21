@@ -2,7 +2,7 @@
 title: appDir
 description: Enable the App Router to use layouts, streaming, and more.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/appDir"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

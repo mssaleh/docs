@@ -2,7 +2,7 @@
 title: Link
 description: "API reference for the `<Link>` component."
 url: "https://nextjs.org/docs/pages/api-reference/components/link"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

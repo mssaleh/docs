@@ -2,8 +2,8 @@
 title: How to set up your Next.js project for AI coding agents
 description: Learn how to configure your Next.js project so AI coding agents use up-to-date documentation instead of outdated training data.
 url: "https://nextjs.org/docs/app/guides/ai-agents"
-version: 16.2.0
-lastUpdated: 2026-02-16
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -81,6 +81,19 @@ Before any Next.js work, find and read the relevant doc in `node_modules/next/di
 ```md filename="CLAUDE.md"
 @AGENTS.md
 ```
+
+<details>
+<summary>For earlier versions</summary>
+
+On version 16.1 and earlier, use the codemod to generate these files automatically:
+
+```bash
+npx @next/codemod@latest agents-md
+```
+
+The codemod outputs the bundled docs to `.next-docs/` in the project root instead of `node_modules/next/dist/docs/`, and the generated agent files will point to that directory.
+
+</details>
 
 ## Understanding AGENTS.md
 

@@ -2,7 +2,7 @@
 title: Dynamic Routes
 description: Dynamic Routes are pages that allow you to add custom params to your URLs. Start creating Dynamic Routes and learn more here.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

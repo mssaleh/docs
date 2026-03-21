@@ -2,7 +2,7 @@
 title: create-next-app
 description: Create Next.js apps using one command with the create-next-app CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/create-next-app"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

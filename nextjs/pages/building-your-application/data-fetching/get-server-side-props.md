@@ -2,7 +2,7 @@
 title: getServerSideProps
 description: "Fetch data on each request with `getServerSideProps`."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-03
 router: Pages Router
 prerequisites:

@@ -2,7 +2,7 @@
 title: useReportWebVitals
 description: useReportWebVitals
 url: "https://nextjs.org/docs/pages/api-reference/functions/use-report-web-vitals"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

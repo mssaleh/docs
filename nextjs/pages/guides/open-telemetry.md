@@ -2,7 +2,7 @@
 title: How to instrument your Next.js app with OpenTelemetry
 description: Learn how to instrument your Next.js app with OpenTelemetry.
 url: "https://nextjs.org/docs/pages/guides/open-telemetry"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

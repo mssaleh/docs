@@ -2,7 +2,7 @@
 title: Font Optimization
 description: Learn how to optimize fonts in Next.js
 url: "https://nextjs.org/docs/app/getting-started/fonts"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-14
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

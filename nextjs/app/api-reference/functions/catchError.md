@@ -2,8 +2,8 @@
 title: unstable_catchError
 description: API Reference for the unstable_catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
-version: 16.2.0
-lastUpdated: 2026-03-17
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -117,7 +117,7 @@ Use `retry()` to prompt the user to recover from the error. When called, the fun
 
 In most cases, use `retry()` instead of `reset()`. The `reset()` function only clears the error state and re-renders without re-fetching, which means it won't recover from Server Component errors.
 
-```tsx filename="app/custom-error-boundary.tsx" highlight={9,12} switcher
+```tsx filename="app/custom-error-boundary.tsx" highlight={16,17} switcher
 'use client'
 
 import { unstable_catchError } from 'next/error'
@@ -142,7 +142,7 @@ function ErrorFallback(
 export default unstable_catchError(ErrorFallback)
 ```
 
-```jsx filename="app/custom-error-boundary.js" highlight={7,10} switcher
+```jsx filename="app/custom-error-boundary.js" highlight={9,10} switcher
 'use client'
 
 import { unstable_catchError } from 'next/error'

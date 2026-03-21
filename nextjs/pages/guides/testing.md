@@ -2,7 +2,7 @@
 title: Testing
 description: Learn how to set up Next.js with three commonly used testing tools — Cypress, Playwright, Vitest, and Jest.
 url: "https://nextjs.org/docs/pages/guides/testing"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-24
 router: Pages Router
 prerequisites:

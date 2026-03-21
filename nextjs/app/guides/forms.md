@@ -2,7 +2,7 @@
 title: How to create forms with Server Actions
 description: Learn how to create forms in Next.js with React Server Actions.
 url: "https://nextjs.org/docs/app/guides/forms"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-03-10
 prerequisites:
   - "Guides: /docs/app/guides"

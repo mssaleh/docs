@@ -2,7 +2,7 @@
 title: cssChunking
 description: "Use the `cssChunking` option to control how CSS files are chunked in your Next.js application."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cssChunking"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

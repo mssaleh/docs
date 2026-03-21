@@ -2,8 +2,8 @@
 title: Preserving UI state across navigations
 description: Learn how to control which UI state is preserved and which resets when navigating between pages.
 url: "https://nextjs.org/docs/app/guides/preserving-ui-state"
-version: 16.2.0
-lastUpdated: 2026-03-03
+version: 16.2.1
+lastUpdated: 2026-03-20
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -498,7 +498,7 @@ The ref persists across hide/show cycles (refs aren't cleaned up), so `hasMounte
 
 ## Examples
 
-The [Activity Patterns Demo](https://react-activity-patterns.vercel.app/) ([source](https://github.com/vercel-labs/react-activity-patterns)) is a Next.js app with Cache Components enabled and three routes. Navigate between them to see state preservation in action:
+The [Activity Patterns Demo](https://react-activity-patterns.labs.vercel.dev) ([source](https://github.com/vercel-labs/react-activity-patterns)) is a Next.js app with Cache Components enabled and three routes. Navigate between them to see state preservation in action:
 
 * **Data** — sortable table and selectable list that keep their state across navigations, plus a reviews section that prerenders in the background
 * **Forms** — filter panel with DOM state (`<details>`, checkboxes, text inputs) that persists, and a newsletter form that resets after submission using `useLayoutEffect` cleanup

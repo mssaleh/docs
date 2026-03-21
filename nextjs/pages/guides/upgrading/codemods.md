@@ -2,7 +2,7 @@
 title: Codemods
 description: Use codemods to upgrade your Next.js codebase when new features are released.
 url: "https://nextjs.org/docs/pages/guides/upgrading/codemods"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2025-04-15
 router: Pages Router
 prerequisites:

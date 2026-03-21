@@ -2,7 +2,7 @@
 title: API Routes
 description: Next.js supports API Routes, which allow you to build your API without leaving your Next.js app. Learn how it works here.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/api-routes"
-version: 16.2.0
+version: 16.2.1
 lastUpdated: 2026-02-13
 router: Pages Router
 prerequisites:
