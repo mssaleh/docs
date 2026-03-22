@@ -1,4 +1,4 @@
-# Fast mode (research preview)
+# Fast mode (beta: research preview)
 
 Higher output speed for Claude Opus 4.6, delivering significantly faster token generation for latency-sensitive and agentic workflows.
 
@@ -7,7 +7,7 @@ Higher output speed for Claude Opus 4.6, delivering significantly faster token g
 Fast mode provides significantly faster output token generation for Claude Opus 4.6. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
 
 <Note>
-Fast mode is in research preview. [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
+Fast mode is in beta (research preview). [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
 </Note>
 
 <Note>
@@ -48,7 +48,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python nocheck
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -66,7 +66,7 @@ response = client.beta.messages.create(
 print(response.content[0].text)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -110,7 +110,7 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
 Console.WriteLine(response);
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -140,7 +140,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.AnthropicBeta;
@@ -166,7 +166,7 @@ public class FastModeExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -186,7 +186,7 @@ $response = $client->beta->messages->create(
 echo $response->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -297,7 +297,7 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
 Console.WriteLine(response.Usage.Speed);  // "fast" or "standard"
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -327,7 +327,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.AnthropicBeta;
@@ -353,7 +353,7 @@ public class FastModeUsage {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -421,7 +421,7 @@ Since setting `max_retries` to `0` also disables retries for other transient err
 
 <CodeGroup>
 
-```python Python nocheck hidelines={1..4}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -612,7 +612,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..11,-1}
+```java Java hidelines={1..2,5..11,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.errors.InternalServerException;
@@ -662,7 +662,7 @@ public class FastModeFallback {
 }
 ```
 
-```php PHP hidelines={1..10}
+```php PHP hidelines={1..3,8}
 <?php
 
 use Anthropic\Client;
@@ -713,7 +713,7 @@ $message = createMessageWithFastFallback(
 );
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 anthropic = Anthropic::Client.new

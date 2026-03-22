@@ -9,7 +9,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming via `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 <CodeGroup>
-    ```python Python
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -23,7 +23,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
             print(text, end="", flush=True)
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -64,7 +64,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     }
     ```
 
-    ```go Go hidelines={1..13,-1}
+    ```go Go hidelines={1..11,-1}
     package main
 
     import (
@@ -102,7 +102,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     }
     ```
 
-    ```java Java hidelines={1..6,-1}
+    ```java Java hidelines={1..6,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.MessageCreateParams;
@@ -130,7 +130,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     }
     ```
 
-    ```php PHP
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -150,7 +150,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     }
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -170,7 +170,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
 <CodeGroup>
-    ```python Python hidelines={1..4,-1}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -185,7 +185,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     print(message.content[0].text)
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -234,7 +234,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     }
     ```
 
-    ```go Go hidelines={1..13,-1}
+    ```go Go hidelines={1..11,-1}
     package main
 
     import (
@@ -271,7 +271,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     }
     ```
 
-    ```java Java hidelines={1..9,-1}
+    ```java Java hidelines={1..2,4..9,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.helpers.MessageAccumulator;
@@ -300,7 +300,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     }
     ```
 
-    ```php PHP hidelines={1..5}
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -325,7 +325,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     echo $fullText;
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -405,6 +405,8 @@ When using [extended thinking](/docs/en/build-with-claude/extended-thinking#stre
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
+When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. See [Controlling thinking display](/docs/en/build-with-claude/extended-thinking#controlling-thinking-display).
+
 A typical thinking delta looks like:
 ```sse Thinking delta
 event: content_block_delta
@@ -449,7 +451,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -463,7 +465,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -508,7 +510,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -546,7 +548,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,-1}
+```java Java hidelines={1..7,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -575,7 +577,7 @@ public class StreamingExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -595,7 +597,7 @@ foreach ($stream as $message) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -681,7 +683,7 @@ This request asks Claude to use a tool to report the weather.
     }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -716,7 +718,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -804,7 +806,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -858,7 +860,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -907,7 +909,7 @@ public class StreamingToolUse {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -944,7 +946,7 @@ foreach ($stream as $message) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1100,7 +1102,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -1124,7 +1126,7 @@ with client.messages.stream(
                 print(event.delta.text, end="", flush=True)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1172,7 +1174,7 @@ await foreach (var msg in client.Messages.CreateStreaming(parameters))
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1213,7 +1215,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,-1}
+```java Java hidelines={1..7,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1246,7 +1248,7 @@ public class ExtendedThinkingStreaming {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1267,7 +1269,7 @@ foreach ($stream as $message) {
 }
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1298,7 +1300,7 @@ event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
-data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}}
+data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": "", "signature": ""}}
 
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
@@ -1365,7 +1367,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -1382,7 +1384,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1421,7 +1423,7 @@ await foreach (var msg in client.Messages.CreateStreaming(parameters))
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1466,7 +1468,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..4,6..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1499,7 +1501,7 @@ public class WebSearchStreaming {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1522,7 +1524,7 @@ foreach ($stream as $message) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

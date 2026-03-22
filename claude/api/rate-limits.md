@@ -37,6 +37,7 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
       <th>Usage Tier</th>
       <th>Credit Purchase</th>
       <th>Max Credit Purchase</th>
+      <th>Monthly Spend Limit</th>
     </tr>
   </thead>
   <tbody>
@@ -44,26 +45,31 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
       <td>Tier 1</td>
       <td>\$5</td>
       <td>\$100</td>
+      <td>\$100</td>
     </tr>
     <tr>
       <td>Tier 2</td>
       <td>\$40</td>
+      <td>\$500</td>
       <td>\$500</td>
     </tr>
     <tr>
       <td>Tier 3</td>
       <td>\$200</td>
       <td>\$1,000</td>
+      <td>\$1,000</td>
     </tr>
     <tr>
       <td>Tier 4</td>
       <td>\$400</td>
+      <td>\$200,000</td>
       <td>\$200,000</td>
     </tr>
     <tr>
       <td>Monthly Invoicing</td>
       <td>N/A</td>
       <td>N/A</td>
+      <td>No limit</td>
     </tr>
   </tbody>
 </table>
@@ -72,6 +78,8 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
 **Credit Purchase** shows the cumulative credit purchases (excluding tax) required to advance to that tier. You advance immediately upon reaching the threshold.
 
 **Max Credit Purchase** limits the maximum amount you can add to your account in a single transaction to prevent account overfunding.
+
+**Monthly Spend Limit** is the maximum you can spend on the API each calendar month at that tier.
 </Note>
 
 ## Increasing your spend limits
@@ -253,7 +261,7 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 
 ### Fast mode rate limits
 
-When using [fast mode](/docs/en/build-with-claude/fast-mode) (`speed: "fast"`) on Opus 4.6 (research preview), dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
+When using [fast mode](/docs/en/build-with-claude/fast-mode) (beta: research preview) with `speed: "fast"` on Opus 4.6, dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
 
 The response includes `anthropic-fast-*` headers that indicate your fast mode rate limit status. See the [fast mode documentation](/docs/en/build-with-claude/fast-mode#rate-limits) for details on these headers.
 

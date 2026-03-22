@@ -16,8 +16,8 @@
   },
   "claude-api": {
     "version": null,
-    "last_synced_at": "2026-03-14T16:29:05.235Z",
-    "reason": "forced"
+    "last_synced_at": "2026-03-22T04:06:22.320Z",
+    "reason": "interval"
   },
   "mcp": {
     "version": "2025-11-25",

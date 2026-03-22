@@ -51,7 +51,7 @@ dotnet add package Anthropic.Foundry
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-foundry:2.15.0")
+implementation("com.anthropic:anthropic-java-foundry:2.18.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -59,7 +59,7 @@ implementation("com.anthropic:anthropic-java-foundry:2.15.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>2.15.0</version>
+    <version>2.18.0</version>
 </dependency>
 ```
 </Tab>
@@ -217,7 +217,7 @@ Console.WriteLine(
 
 <Tab title="Java">
 
-```java Java nocheck hidelines={1..5}
+```java Java nocheck
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.foundry.backends.FoundryBackend;
@@ -393,7 +393,7 @@ Console.WriteLine(
 
 <Tab title="Java">
 
-```java Java nocheck hidelines={1..4,7..8}
+```java Java nocheck hidelines={1..2,4,8}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.foundry.backends.FoundryBackend;

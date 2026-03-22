@@ -32,7 +32,7 @@ For more information, see [Differences in thinking across model versions](#diffe
 
 When extended thinking is turned on, Claude creates `thinking` content blocks where it outputs its internal reasoning. Claude incorporates insights from this reasoning before crafting a final response.
 
-The API response will include `thinking` content blocks, followed by `text` content blocks.
+The API response includes `thinking` content blocks, followed by `text` content blocks.
 
 Here's an example of the default response format:
 
@@ -81,7 +81,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -98,7 +98,7 @@ response = client.messages.create(
     ],
 )
 
-# The response will contain summarized thinking blocks and text blocks
+# The response contains summarized thinking blocks and text blocks
 for block in response.content:
     if block.type == "thinking":
         print(f"\nThinking summary: {block.thinking}")
@@ -106,7 +106,7 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -126,7 +126,7 @@ const response = await client.messages.create({
   ]
 });
 
-// The response will contain summarized thinking blocks and text blocks
+// The response contains summarized thinking blocks and text blocks
 for (const block of response.content) {
   if (block.type === "thinking") {
     console.log(`\nThinking summary: ${block.thinking}`);
@@ -178,7 +178,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -215,7 +215,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -247,7 +247,7 @@ public class ExtendedThinkingExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -275,7 +275,7 @@ foreach ($message->content as $block) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -323,7 +323,7 @@ Claude Opus 4.6 supports up to 128k output tokens. Earlier models support up to 
 
 ### Summarized thinking
 
-With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse.
+With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior when the `display` field on the thinking configuration is unset or set to `"summarized"`.
 
 Here are some important considerations for summarized thinking:
 
@@ -340,11 +340,418 @@ Claude Sonnet 3.7 continues to return full thinking output.
 In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](mailto:sales@anthropic.com).
 </Note>
 
+### Controlling thinking display
+
+The `display` field on the thinking configuration controls how thinking content is returned in API responses. It accepts two values:
+
+- `"summarized"` (default): Thinking blocks contain summarized thinking text. See [Summarized thinking](#summarized-thinking) for details.
+- `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)).
+
+Setting `display: "omitted"` is useful when your application doesn't surface thinking content to users. The primary benefit is **faster time-to-first-text-token when streaming:** The server skips streaming thinking tokens entirely and delivers only the signature, so the final text response begins streaming sooner.
+
+<Note>
+No SDK currently includes `display` in its type definitions. The Python SDK forwards unrecognized dict keys to the API at runtime; passing `display` in the thinking dict works transparently. The TypeScript SDK requires a type assertion. The C#, Go, Java, PHP, and Ruby SDKs require a direct HTTP request until native support lands.
+</Note>
+
+Here are some important considerations for omitted thinking:
+
+- You're still charged for the full thinking tokens. Omitting reduces latency, not cost.
+- If you pass thinking blocks back in multi-turn conversations, pass them unchanged. The server decrypts the `signature` to reconstruct the original thinking for prompt construction (see [Preserving thinking blocks](/docs/en/build-with-claude/extended-thinking#preserving-thinking-blocks)). Any text you place in the `thinking` field of a round-tripped omitted block is ignored.
+- `display` is invalid with `thinking.type: "disabled"` (there is nothing to display).
+- When using `thinking.type: "adaptive"` and the model skips thinking for a simple request, no thinking block is produced regardless of `display`.
+
+<Note>
+The `signature` field is identical whether `display` is `"summarized"` or `"omitted"`. Switching `display` values between turns in a conversation is supported.
+</Note>
+
+Automated pipelines that never surface thinking content to end users can skip the overhead of receiving thinking tokens over the wire. Latency-sensitive applications get the same reasoning quality without waiting for thinking text to stream before the final response begins.
+
+<Tabs>
+<Tab title="Shell">
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 16000,
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 10000,
+        "display": "omitted"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "What is 27 * 453?"
+        }
+    ]
+}'
+```
+</Tab>
+
+<Tab title="Python">
+```python Python hidelines={1..2}
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=16000,
+    thinking={
+        "type": "enabled",
+        "budget_tokens": 10000,
+        "display": "omitted",
+    },
+    messages=[
+        {"role": "user", "content": "What is 27 * 453?"},
+    ],
+)
+
+for block in response.content:
+    if block.type == "thinking":
+        if block.thinking:
+            print(f"Thinking: {block.thinking}")
+        else:
+            print("Thinking: [omitted]")
+    elif block.type == "text":
+        print(f"Response: {block.text}")
+```
+</Tab>
+
+<Tab title="TypeScript">
+<Note>
+TypeScript SDK types don't yet include `display`. The type assertion passes it through at runtime; the SDK forwards unknown parameters to the API.
+</Note>
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000,
+    display: "omitted"
+  },
+  messages: [
+    {
+      role: "user",
+      content: "What is 27 * 453?"
+    }
+  ]
+} as unknown as Anthropic.MessageCreateParamsNonStreaming);
+
+for (const block of response.content) {
+  if (block.type === "thinking") {
+    if (block.thinking) {
+      console.log(`Thinking: ${block.thinking}`);
+    } else {
+      console.log("Thinking: [omitted]");
+    }
+  } else if (block.type === "text") {
+    console.log(`Response: ${block.text}`);
+  }
+}
+```
+</Tab>
+
+<Tab title="C#">
+<Note>
+Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
+</Note>
+```csharp C# hidelines={1..10,-2..-1}
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("x-api-key", Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY"));
+        client.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
+
+        var body = """
+        {
+            "model": "claude-sonnet-4-6",
+            "max_tokens": 16000,
+            "thinking": {
+                "type": "enabled",
+                "budget_tokens": 10000,
+                "display": "omitted"
+            },
+            "messages": [
+                {"role": "user", "content": "What is 27 * 453?"}
+            ]
+        }
+        """;
+
+        var response = await client.PostAsync(
+            "https://api.anthropic.com/v1/messages",
+            new StringContent(body, Encoding.UTF8, "application/json"));
+
+        var json = await response.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(json);
+        foreach (var block in doc.RootElement.GetProperty("content").EnumerateArray())
+        {
+            var type = block.GetProperty("type").GetString();
+            if (type == "thinking")
+            {
+                var thinking = block.GetProperty("thinking").GetString();
+                Console.WriteLine($"Thinking: {(string.IsNullOrEmpty(thinking) ? "[omitted]" : thinking)}");
+            }
+            else if (type == "text")
+            {
+                Console.WriteLine($"Response: {block.GetProperty("text").GetString()}");
+            }
+        }
+    }
+}
+```
+</Tab>
+
+<Tab title="Go">
+<Note>
+Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
+</Note>
+```go Go hidelines={1..12,-1}
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+)
+
+func main() {
+	body := []byte(`{
+		"model": "claude-sonnet-4-6",
+		"max_tokens": 16000,
+		"thinking": {
+			"type": "enabled",
+			"budget_tokens": 10000,
+			"display": "omitted"
+		},
+		"messages": [
+			{"role": "user", "content": "What is 27 * 453?"}
+		]
+	}`)
+
+	req, _ := http.NewRequest("POST", "https://api.anthropic.com/v1/messages", bytes.NewBuffer(body))
+	req.Header.Set("x-api-key", os.Getenv("ANTHROPIC_API_KEY"))
+	req.Header.Set("anthropic-version", "2023-06-01")
+	req.Header.Set("content-type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	respBody, _ := io.ReadAll(resp.Body)
+
+	var result map[string]any
+	json.Unmarshal(respBody, &result)
+	for _, block := range result["content"].([]any) {
+		b := block.(map[string]any)
+		if b["type"] == "thinking" {
+			thinking := b["thinking"].(string)
+			if thinking == "" {
+				fmt.Println("Thinking: [omitted]")
+			} else {
+				fmt.Println("Thinking:", thinking)
+			}
+		} else if b["type"] == "text" {
+			fmt.Println("Response:", b["text"])
+		}
+	}
+}
+```
+</Tab>
+
+<Tab title="Java">
+<Note>
+Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
+</Note>
+```java Java hidelines={1..9,-2..-1}
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class ThinkingDisplay {
+    public static void main(String[] args) throws Exception {
+        String body = """
+            {
+                "model": "claude-sonnet-4-6",
+                "max_tokens": 16000,
+                "thinking": {
+                    "type": "enabled",
+                    "budget_tokens": 10000,
+                    "display": "omitted"
+                },
+                "messages": [
+                    {"role": "user", "content": "What is 27 * 453?"}
+                ]
+            }
+            """;
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.anthropic.com/v1/messages"))
+            .header("x-api-key", System.getenv("ANTHROPIC_API_KEY"))
+            .header("anthropic-version", "2023-06-01")
+            .header("content-type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(body))
+            .build();
+
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+
+        JSONObject json = new JSONObject(response.body());
+        JSONArray content = json.getJSONArray("content");
+        for (int i = 0; i < content.length(); i++) {
+            JSONObject block = content.getJSONObject(i);
+            String type = block.getString("type");
+            if (type.equals("thinking")) {
+                String thinking = block.getString("thinking");
+                System.out.println("Thinking: " + (thinking.isEmpty() ? "[omitted]" : thinking));
+            } else if (type.equals("text")) {
+                System.out.println("Response: " + block.getString("text"));
+            }
+        }
+    }
+}
+```
+</Tab>
+
+<Tab title="PHP">
+<Note>
+Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
+</Note>
+```php PHP hidelines={1..2}
+<?php
+
+$body = json_encode([
+    "model" => "claude-sonnet-4-6",
+    "max_tokens" => 16000,
+    "thinking" => [
+        "type" => "enabled",
+        "budget_tokens" => 10000,
+        "display" => "omitted",
+    ],
+    "messages" => [
+        ["role" => "user", "content" => "What is 27 * 453?"],
+    ],
+]);
+
+$ch = curl_init("https://api.anthropic.com/v1/messages");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "x-api-key: " . getenv("ANTHROPIC_API_KEY"),
+    "anthropic-version: 2023-06-01",
+    "content-type: application/json",
+]);
+
+$response = json_decode(curl_exec($ch), true);
+curl_close($ch);
+
+foreach ($response["content"] as $block) {
+    if ($block["type"] === "thinking") {
+        $thinking = $block["thinking"];
+        echo "Thinking: " . ($thinking === "" ? "[omitted]" : $thinking) . "\n";
+    } elseif ($block["type"] === "text") {
+        echo "Response: " . $block["text"] . "\n";
+    }
+}
+```
+</Tab>
+
+<Tab title="Ruby">
+<Note>
+Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
+</Note>
+```ruby Ruby
+require "net/http"
+require "json"
+require "uri"
+
+uri = URI("https://api.anthropic.com/v1/messages")
+body = {
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000,
+    display: "omitted"
+  },
+  messages: [
+    { role: "user", content: "What is 27 * 453?" }
+  ]
+}
+
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+request = Net::HTTP::Post.new(uri)
+request["x-api-key"] = ENV["ANTHROPIC_API_KEY"]
+request["anthropic-version"] = "2023-06-01"
+request["content-type"] = "application/json"
+request.body = body.to_json
+
+response = JSON.parse(http.request(request).body)
+response["content"].each do |block|
+  if block["type"] == "thinking"
+    thinking = block["thinking"]
+    puts "Thinking: #{thinking.empty? ? '[omitted]' : thinking}"
+  elsif block["type"] == "text"
+    puts "Response: #{block['text']}"
+  end
+end
+```
+</Tab>
+</Tabs>
+
+When `display: "omitted"` is set, the response contains `thinking` blocks with an empty `thinking` field:
+
+```json
+{
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": "EosnCkYICxIMMb3LzNrMu..."
+    },
+    {
+      "type": "text",
+      "text": "The answer is 12,231."
+    }
+  ]
+}
+```
+
+When streaming with `display: "omitted"`, no `thinking_delta` events are emitted; see [Streaming thinking](#streaming-thinking) below for the event sequence.
+
 ### Streaming thinking
 
 You can stream extended thinking responses using [server-sent events (SSE)](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents).
 
 When streaming is enabled for extended thinking, you receive thinking content via `thinking_delta` events.
+
+When `display: "omitted"` is set, no `thinking_delta` events are emitted. See [Controlling thinking display](#controlling-thinking-display).
 
 For more documentation on streaming via the Messages API, see [Streaming Messages](/docs/en/build-with-claude/streaming).
 
@@ -374,7 +781,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -414,7 +821,7 @@ with client.messages.stream(
             print("\nBlock complete.")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -524,7 +931,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -583,7 +990,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,-1}
+```java Java hidelines={1..7,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -622,7 +1029,7 @@ public class ExtendedThinkingStreaming {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -666,7 +1073,7 @@ foreach ($stream as $event) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -724,7 +1131,7 @@ event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-6", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
-data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}}
+data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": "", "signature": ""}}
 
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
@@ -758,6 +1165,22 @@ event: message_stop
 data: {"type": "message_stop"}
 ```
 
+When `display: "omitted"` is set, the thinking block opens, a single `signature_delta` arrives, and the block closes without any `thinking_delta` events. Text streaming begins immediately after:
+
+```sse
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"EosnCkYICxIMMb3LzNrMu..."}}
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0}
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}}
+```
+
 <Note>
 When using streaming with thinking enabled, you might notice that text sometimes arrives in larger chunks alternating with smaller, token-by-token delivery. This is expected behavior, especially for thinking content.
 
@@ -776,10 +1199,10 @@ When using extended thinking with tool use, be aware of the following limitation
 
 ### Toggling thinking modes in conversations
 
-You cannot toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn should operate in a single thinking mode:
+You can't toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn should operate in a single thinking mode:
 
 - **If thinking is enabled**, the final assistant turn should start with a thinking block.
-- **If thinking is disabled**, the final assistant turn should not contain any thinking blocks
+- **If thinking is disabled**, the final assistant turn shouldn't contain any thinking blocks
 
 From the model's perspective, **tool use loops are part of the assistant turn**. An assistant turn doesn't complete until Claude finishes its full response, which may include multiple tool calls and results.
 
@@ -916,7 +1339,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -961,7 +1384,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..12,-1}
+```java Java hidelines={1..12,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -999,7 +1422,7 @@ public class ExtendedThinkingWithTools {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1030,7 +1453,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1064,7 +1487,7 @@ puts message
 
 </CodeGroup>
 
-The API response will include thinking, text, and tool_use blocks:
+The API response includes thinking, text, and tool_use blocks:
 
 ```json
 {
@@ -1093,7 +1516,7 @@ The API response will include thinking, text, and tool_use blocks:
 Now let's continue the conversation and use the tool
 
 <CodeGroup>
-```python Python hidelines={1..4}
+```python Python hidelines={1}
 import anthropic
 from typing import Any
 
@@ -1129,7 +1552,7 @@ tool_use_block = next(
 weather_data = {"temperature": 88}
 
 # Second request - Include thinking block and tool result
-# No new thinking blocks will be generated in the response
+# No new thinking blocks are generated in the response
 continuation = client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=16000,
@@ -1169,7 +1592,7 @@ const weatherData = { temperature: 88 };
 
 if (thinkingBlock && toolUseBlock) {
   // Second request - Include thinking block and tool result
-  // No new thinking blocks will be generated in the response
+  // No new thinking blocks are generated in the response
   const continuation = await client.messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 16000,
@@ -1272,7 +1695,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-6..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1346,7 +1769,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..18,-1}
+```java Java hidelines={1..10,13..18,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -1435,7 +1858,7 @@ public class ExtendedThinkingToolUse {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1501,7 +1924,7 @@ $continuation = $client->messages->create(
 echo $continuation;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1564,7 +1987,7 @@ puts continuation
 
 </CodeGroup>
 
-The API response will now **only** include text
+The API response now includes **only** text
 
 ```json
 {
@@ -1584,23 +2007,23 @@ The API response will now **only** include text
 During tool use, you must pass `thinking` blocks back to the API, and you must include the complete unmodified block back to the API. This is critical for maintaining the model's reasoning flow and conversation integrity.
 
 <Tip>
-While you can omit `thinking` blocks from prior `assistant` role turns, always pass back all thinking blocks to the API for any multi-turn conversation. The API will:
-- Automatically filter the provided thinking blocks
-- Use the relevant thinking blocks necessary to preserve the model's reasoning
-- Only bill for the input tokens for the blocks shown to Claude
+While you can omit `thinking` blocks from prior `assistant` role turns, always pass back all thinking blocks to the API for any multi-turn conversation. The API:
+- Automatically filters the provided thinking blocks
+- Uses the relevant thinking blocks necessary to preserve the model's reasoning
+- Only bills for the input tokens for the blocks shown to Claude
 </Tip>
 
 <Note>
 When toggling thinking modes during a conversation, remember that the entire assistant turn (including tool use loops) must operate in a single thinking mode. For more details, see [Toggling thinking modes in conversations](#toggling-thinking-modes-in-conversations).
 </Note>
 
-When Claude invokes tools, it is pausing its construction of a response to await external information. When tool results are returned, Claude will continue building that existing response. This necessitates preserving thinking blocks during tool use, for a couple of reasons:
+When Claude invokes tools, it is pausing its construction of a response to await external information. When tool results are returned, Claude continues building that existing response. This necessitates preserving thinking blocks during tool use, for a couple of reasons:
 
 1. **Reasoning continuity**: The thinking blocks capture Claude's step-by-step reasoning that led to tool requests. When you post tool results, including the original thinking ensures Claude can continue its reasoning from where it left off.
 
 2. **Context maintenance**: While tool results appear as user messages in the API structure, they're part of a continuous reasoning flow. Preserving thinking blocks maintains this conceptual flow across multiple API calls. For more information on context management, see the [guide on context windows](/docs/en/build-with-claude/context-windows).
 
-**Important**: When providing `thinking` blocks, the entire sequence of consecutive `thinking` blocks must match the outputs generated by the model during the original request; you cannot rearrange or modify the sequence of these blocks.
+**Important**: When providing `thinking` blocks, the entire sequence of consecutive `thinking` blocks must match the outputs generated by the model during the original request; you can't rearrange or modify the sequence of these blocks.
 
 ### Interleaved thinking
 
@@ -1751,7 +2174,7 @@ User: [Text response, cache=True]
 <section title="System prompt caching (preserved when thinking changes)">
 
 <CodeGroup>
-```python Python hidelines={1,4..5}
+```python Python hidelines={1}
 from anthropic import Anthropic
 import requests
 from bs4 import BeautifulSoup
@@ -2105,7 +2528,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..2,4..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -2192,7 +2615,7 @@ public class ThinkingCacheExample {
 }
 ```
 
-```php PHP hidelines={1..7}
+```php PHP hidelines={1..5}
 <?php
 
 
@@ -2260,7 +2683,7 @@ $response3 = $client->messages->create(
 echo "Third response usage: " . json_encode($response3->usage) . "\n";
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1}
 require "anthropic"
 require "net/http"
 require "uri"
@@ -2344,7 +2767,7 @@ puts "Third response usage: #{response3.usage}"
 <section title="Messages caching (invalidated when thinking changes)">
 
 <CodeGroup>
-```python Python hidelines={1,4..5}
+```python Python hidelines={1}
 from anthropic import Anthropic
 import requests
 from bs4 import BeautifulSoup
@@ -2682,7 +3105,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..41,-5..-1}
+```go Go hidelines={1..41,-1}
 package main
 
 import (
@@ -2793,7 +3216,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..16,-1}
+```java Java hidelines={1..2,4..16,94..95,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -3018,7 +3441,7 @@ $response3 = $client->messages->create(
 echo "Third response usage: " . json_encode($response3->usage) . "\n";
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1}
 require "anthropic"
 require "net/http"
 require "uri"
@@ -3236,7 +3659,7 @@ If sending back thinking blocks, we recommend passing everything back as you rec
 Here are some important considerations on thinking encryption:
 - When [streaming responses](/docs/en/build-with-claude/extended-thinking#streaming-thinking), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 - `signature` values are significantly longer in Claude 4 models than in previous models.
-- The `signature` field is an opaque field and should not be interpreted or parsed - it exists solely for verification purposes.
+- The `signature` field is an opaque field and should not be interpreted or parsed.
 - `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock), and [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)). Values generated on one platform will be compatible with another.
 
 ## Differences in thinking across model versions
@@ -3284,13 +3707,18 @@ When extended thinking is enabled, a specialized system prompt is automatically 
 </Note>
 
 When using summarized thinking:
-- **Input tokens**: Tokens in your original request (excludes thinking tokens from previous turns)
-- **Output tokens (billed)**: The original thinking tokens that Claude generated internally
-- **Output tokens (visible)**: The summarized thinking tokens you see in the response
-- **No charge**: Tokens used to generate the summary
+- **Input tokens:** Tokens in your original request (excludes thinking tokens from previous turns)
+- **Output tokens (billed):** The original thinking tokens that Claude generated internally
+- **Output tokens (visible):** The summarized thinking tokens you see in the response
+- **No charge:** Tokens used to generate the summary
+
+When using `display: "omitted"`:
+- **Input tokens:** Tokens in your original request (same as summarized)
+- **Output tokens (billed):** The original thinking tokens that Claude generated internally (same as summarized)
+- **Output tokens (visible):** Zero thinking tokens (the `thinking` field is empty)
 
 <Warning>
-The billed output token count will **not** match the visible token count in the response. You are billed for the full thinking process, not the summary you see.
+The billed output token count will **not** match the visible token count in the response. You are billed for the full thinking process, not the thinking content visible in the response.
 </Warning>
 
 ## Best practices and considerations for extended thinking
@@ -3304,20 +3732,21 @@ The billed output token count will **not** match the visible token count in the 
 
 ### Performance considerations
 
-- **Response times:** Be prepared for potentially longer response times due to the additional processing required for the reasoning process. Factor in that generating thinking blocks may increase overall response time.
+- **Response times:** Be prepared for longer response times due to additional processing. Generating thinking blocks increases overall response time.
 - **Streaming requirements:** The SDKs require streaming when `max_tokens` is greater than 21,333 to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without handling individual events. See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events) for details. When streaming, be prepared to handle both thinking and text content blocks as they arrive.
+- **Omitting thinking for latency:** If your application doesn't display thinking content, set `display: "omitted"` on the thinking configuration to reduce time-to-first-text-token. See [Controlling thinking display](#controlling-thinking-display).
 
 ### Feature compatibility
 
 - Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use).
 - When thinking is enabled, you can set `top_p` to values between 1 and 0.95.
-- You cannot pre-fill responses when thinking is enabled.
+- You can't pre-fill responses when thinking is enabled.
 - Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.
 
 ### Usage guidelines
 
-- **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning like math, coding, and analysis.
-- **Context handling:** You do not need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they are not included when calculating context usage.
+- **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning, like math, coding, and analysis.
+- **Context handling:** You don't need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they aren't included when calculating context usage.
 - **Prompt engineering:** Review the [extended thinking prompting tips](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#leverage-thinking-and-interleaved-thinking-capabilities) if you want to maximize Claude's thinking capabilities.
 
 ## Next steps
