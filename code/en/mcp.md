@@ -374,11 +374,13 @@ In `.mcp.json` at plugin root:
 
 ```json  theme={null}
 {
-  "database-tools": {
-    "command": "${CLAUDE_PLUGIN_ROOT}/servers/db-server",
-    "args": ["--config", "${CLAUDE_PLUGIN_ROOT}/config.json"],
-    "env": {
-      "DB_URL": "${DB_URL}"
+  "mcpServers": {
+    "database-tools": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/servers/db-server",
+      "args": ["--config", "${CLAUDE_PLUGIN_ROOT}/config.json"],
+      "env": {
+        "DB_URL": "${DB_URL}"
+      }
     }
   }
 }
@@ -674,7 +676,7 @@ claude mcp add --transport http \
 
 ### Use pre-configured OAuth credentials
 
-Some MCP servers don't support automatic OAuth setup. If you see an error like "Incompatible auth server: does not support dynamic client registration," the server requires pre-configured credentials. Register an OAuth app through the server's developer portal first, then provide the credentials when adding the server.
+Some MCP servers don't support automatic OAuth setup via Dynamic Client Registration. If you see an error like "Incompatible auth server: does not support dynamic client registration," the server requires pre-configured credentials. Claude Code also supports servers that use a Client ID Metadata Document (CIMD) instead of Dynamic Client Registration, and discovers these automatically. If automatic discovery fails, register an OAuth app through the server's developer portal first, then provide the credentials when adding the server.
 
 <Steps>
   <Step title="Register an OAuth app with the server">
@@ -764,6 +766,48 @@ Set `authServerMetadataUrl` in the `oauth` object of your server's config in `.m
 ```
 
 The URL must use `https://`. This option requires Claude Code v2.1.64 or later.
+
+### Use dynamic headers for custom authentication
+
+If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use `headersHelper` to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.
+
+```json  theme={null}
+{
+  "mcpServers": {
+    "internal-api": {
+      "type": "http",
+      "url": "https://mcp.internal.example.com",
+      "headersHelper": "/opt/bin/get-mcp-auth-headers.sh"
+    }
+  }
+}
+```
+
+The command can also be inline:
+
+```json  theme={null}
+{
+  "mcpServers": {
+    "internal-api": {
+      "type": "http",
+      "url": "https://mcp.internal.example.com",
+      "headersHelper": "echo '{\"Authorization\": \"Bearer '\"$(get-token)\"'\"}'"
+    }
+  }
+}
+```
+
+**Requirements:**
+
+* The command must write a JSON object of string key-value pairs to stdout
+* The command runs in a shell with a 10-second timeout
+* Dynamic headers override any static `headers` with the same name
+
+The helper runs fresh on each connection (at session start and on reconnect). There is no caching, so your script is responsible for any token reuse.
+
+<Note>
+  `headersHelper` executes arbitrary shell commands. When defined at project or local scope, it only runs after you accept the workspace trust dialog.
+</Note>
 
 ## Add MCP servers from JSON configuration
 
