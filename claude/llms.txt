@@ -12,7 +12,7 @@ https://platform.claude.com
 
 The full documentation is available in the following languages on https://platform.claude.com/docs:
 
-- English (en) - 606 pages - /docs - Content included below
+- English (en) - 620 pages - /docs - Content included below
 - German (Deutsch) (de) - 133 pages - /docs/de - Visit website for content
 - Spanish (Español) (es) - 133 pages - /docs/es - Visit website for content
 - French (Français) (fr) - 133 pages - /docs/fr - Visit website for content
@@ -46,11 +46,13 @@ The full documentation is available in the following languages on https://platfo
 - [Python SDK](https://platform.claude.com/docs/en/agent-sdk/python.md) - Agent SDK reference - Python
 - [TypeScript SDK](https://platform.claude.com/docs/en/agent-sdk/typescript.md) - Agent SDK reference - TypeScript
 - [Agent Skills in the SDK](https://platform.claude.com/docs/en/agent-sdk/skills.md)
+- [API and data retention](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md)
 - [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool.md)
 - [Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing.md)
 - [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md) - Building with extended thinking
 - [Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model.md) - Choosing the right model
 - [Citations](https://platform.claude.com/docs/en/build-with-claude/citations.md)
+- [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill.md)
 - [Claude Code Analytics API](https://platform.claude.com/docs/en/build-with-claude/claude-code-analytics-api.md)
 - [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry.md) - Claude in Microsoft Foundry
 - [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock.md) - Claude on Amazon Bedrock
@@ -59,26 +61,29 @@ The full documentation is available in the following languages on https://platfo
 - [Compaction](https://platform.claude.com/docs/en/build-with-claude/compaction.md)
 - [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md)
 - [Handling Permissions](https://platform.claude.com/docs/en/agent-sdk/permissions.md) - Configure permissions
-- [MCP in the SDK](https://platform.claude.com/docs/en/agent-sdk/mcp.md) - Connect to external tools with MCP
+- [Connect MCP servers](https://platform.claude.com/docs/en/agent-sdk/mcp.md) - Connect to external tools with MCP
 - [Console prompting tools](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-tools.md)
 - [Context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing.md)
 - [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows.md)
-- [Custom Tools](https://platform.claude.com/docs/en/agent-sdk/custom-tools.md)
 - [Data residency](https://platform.claude.com/docs/en/build-with-claude/data-residency.md)
 - [Define success and build evaluations](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests.md) - Define success criteria and build evaluations
+- [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md)
 - [Effort](https://platform.claude.com/docs/en/build-with-claude/effort.md)
 - [Embeddings](https://platform.claude.com/docs/en/build-with-claude/embeddings.md)
 - [Fast mode (beta: research preview)](https://platform.claude.com/docs/en/build-with-claude/fast-mode.md)
 - [Files API](https://platform.claude.com/docs/en/build-with-claude/files.md)
 - [Fine-grained tool streaming](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming.md)
 - [Structured outputs in the SDK](https://platform.claude.com/docs/en/agent-sdk/structured-outputs.md) - Get structured output from agents
+- [Define custom tools](https://platform.claude.com/docs/en/agent-sdk/custom-tools.md) - Give Claude custom tools
 - [User approvals and input](https://platform.claude.com/docs/en/agent-sdk/user-input.md) - Handle approvals and user input
+- [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls.md)
 - [Handling stop reasons](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons.md)
 - [Hosting the Agent SDK](https://platform.claude.com/docs/en/agent-sdk/hosting.md)
 - [How the agent loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop.md)
-- [How to implement tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use.md)
+- [How tool use works](https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works.md)
 - [Increase output consistency](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency.md)
 - [Control execution with hooks](https://platform.claude.com/docs/en/agent-sdk/hooks.md) - Intercept and control agent behavior with hooks
+- [Manage tool context](https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context.md)
 - [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md)
 - [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool.md)
 - [Migration Guide](https://platform.claude.com/docs/en/agent-sdk/migration-guide.md) - Migrate to Claude Agent SDK
@@ -87,6 +92,7 @@ The full documentation is available in the following languages on https://platfo
 - [Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)
 - [Modifying system prompts](https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts.md)
 - [Multilingual support](https://platform.claude.com/docs/en/build-with-claude/multilingual-support.md)
+- [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use.md)
 - [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support.md)
 - [Plugins in the SDK](https://platform.claude.com/docs/en/agent-sdk/plugins.md)
 - [Pricing](https://platform.claude.com/docs/en/about-claude/pricing.md)
@@ -98,8 +104,10 @@ The full documentation is available in the following languages on https://platfo
 - [Reducing latency](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency.md)
 - [Remote MCP servers](https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers.md)
 - [File checkpointing](https://platform.claude.com/docs/en/agent-sdk/file-checkpointing.md) - Rewind file changes with checkpointing
+- [Tool search](https://platform.claude.com/docs/en/agent-sdk/tool-search.md) - Scale to many tools with tool search
 - [Search results](https://platform.claude.com/docs/en/build-with-claude/search-results.md)
 - [Securely deploying AI agents](https://platform.claude.com/docs/en/agent-sdk/secure-deployment.md)
+- [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md)
 - [Best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices.md) - Skill authoring best practices
 - [Skills for enterprise](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise.md)
 - [Slash Commands in the SDK](https://platform.claude.com/docs/en/agent-sdk/slash-commands.md)
@@ -107,13 +115,20 @@ The full documentation is available in the following languages on https://platfo
 - [Streaming Input](https://platform.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md)
 - [Streaming Messages](https://platform.claude.com/docs/en/build-with-claude/streaming.md)
 - [Streaming refusals](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md)
+- [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use.md)
 - [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md)
 - [Subagents in the SDK](https://platform.claude.com/docs/en/agent-sdk/subagents.md)
 - [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool.md)
 - [Todo Lists](https://platform.claude.com/docs/en/agent-sdk/todo-tracking.md)
 - [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting.md)
+- [Tool combinations](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-combinations.md)
+- [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference.md)
+- [Tool Runner (SDK)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner.md)
 - [Tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool.md) - Tool search tool
+- [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
 - [Track cost and usage](https://platform.claude.com/docs/en/agent-sdk/cost-tracking.md)
+- [Troubleshooting](https://platform.claude.com/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use.md) - Troubleshooting tool use
+- [Tutorial: Build a tool-using agent](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent.md)
 - [TypeScript V2 (preview)](https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview.md) - TypeScript SDK V2 interface (preview)
 - [Usage and Cost API](https://platform.claude.com/docs/en/build-with-claude/usage-cost-api.md)
 - [Use Claude Code features](https://platform.claude.com/docs/en/agent-sdk/claude-code-features.md) - Use Claude Code features in the SDK
@@ -126,7 +141,6 @@ The full documentation is available in the following languages on https://platfo
 - [What's new in Claude 4.6](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-6.md)
 - [Work with sessions](https://platform.claude.com/docs/en/agent-sdk/sessions.md)
 - [Workspaces](https://platform.claude.com/docs/en/build-with-claude/workspaces.md)
-- [Zero Data Retention](https://platform.claude.com/docs/en/build-with-claude/zero-data-retention.md) - Zero Data Retention (ZDR)
 
 ### API Reference
 

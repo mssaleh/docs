@@ -4,6 +4,10 @@ Server-side context compaction for managing long conversations that approach con
 
 ---
 
+<Note>
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
+
 <Tip>
 Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically with minimal integration work.
 </Tip>
@@ -22,10 +26,6 @@ This is ideal for:
 
 <Note>
 Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.
-</Note>
-
-<Note>
-Compaction is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements.
 </Note>
 
 ## Supported models
@@ -1990,8 +1990,8 @@ Compaction requires an additional sampling step, which contributes to rate limit
 ```json
 {
   "usage": {
-    "input_tokens": 45000,
-    "output_tokens": 1234,
+    "input_tokens": 23000,
+    "output_tokens": 1000,
     "iterations": [
       {
         "type": "compaction",
@@ -2008,7 +2008,7 @@ Compaction requires an additional sampling step, which contributes to rate limit
 }
 ```
 
-The `iterations` array shows usage for each sampling iteration. When compaction occurs, you'll see a `compaction` iteration followed by the main `message` iteration. The final iteration's token counts reflect the effective context size after compaction.
+The `iterations` array shows usage for each sampling iteration. When compaction occurs, you'll see a `compaction` iteration followed by the main `message` iteration. The top-level `input_tokens` and `output_tokens` match the `message` iteration exactly in this example because there is only one non-compaction iteration. The final iteration's token counts reflect the effective context size after compaction.
 
 <Note>
 The top-level `input_tokens` and `output_tokens` do not include compaction iteration usage. They reflect the sum of all non-compaction iterations. To calculate total tokens consumed and billed for a request, sum across all entries in the `usage.iterations` array.
@@ -3067,8 +3067,8 @@ puts chat(client, messages, "Now add rate limiting and error handling")
 ## Next steps
 
 <CardGroup>
-  <Card title="Compaction cookbook" icon="book" href="https://platform.claude.com/cookbook">
-    Explore practical examples and implementations in the cookbook.
+  <Card title="Session memory compaction cookbook" icon="book" href="https://platform.claude.com/cookbook/misc-session-memory-compaction">
+    Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
   </Card>
   <Card title="Context windows" icon="arrows-maximize" href="/docs/en/build-with-claude/context-windows">
     Learn about context window sizes and management strategies.
