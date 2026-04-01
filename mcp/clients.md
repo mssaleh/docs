@@ -499,7 +499,7 @@ This page showcases applications that support the Model Context Protocol (MCP). 
   * Quick chat with an AI that can see your screen
 </McpClient>
 
-<McpClient name="Claude Code" homepage="https://claude.com/product/claude-code" supports="Resources, Prompts, Tools, Roots, Instructions, Discovery, DCR" instructions="https://code.claude.com/docs/en/mcp">
+<McpClient name="Claude Code" homepage="https://claude.com/product/claude-code" supports="Resources, Prompts, Tools, Roots, Elicitation, Instructions, Discovery, DCR" instructions="https://code.claude.com/docs/en/mcp">
   Claude Code is an interactive agentic coding tool from Anthropic that helps you code faster through natural language commands. It supports MCP integration for resources, prompts, tools, and roots, and also functions as an MCP server to integrate with other clients.
 
   **Key features:**
@@ -511,7 +511,7 @@ This page showcases applications that support the Model Context Protocol (MCP). 
 <McpClient
   name="Claude Desktop App"
   homepage="https://claude.ai/download"
-  supports="Resources, Prompts, Tools, Apps, DCR"
+  supports="Resources, Prompts, Tools, Roots, Apps, DCR"
   instructions={[
   ["Local servers", "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop"],
   ["Remote servers", "https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp"]
@@ -527,7 +527,7 @@ This page showcases applications that support the Model Context Protocol (MCP). 
   * Local server connections for enhanced privacy and security
 </McpClient>
 
-<McpClient name="Claude.ai" homepage="https://claude.ai" supports="Resources, Prompts, Tools, CIMD, DCR">
+<McpClient name="Claude.ai" homepage="https://claude.ai" supports="Resources, Prompts, Tools, Apps, CIMD, DCR">
   Claude.ai is Anthropic's web-based AI assistant that provides MCP support for remote servers.
 
   **Key features:**
@@ -574,14 +574,15 @@ This page showcases applications that support the Model Context Protocol (MCP). 
   * Also available as VS Code extension
 </McpClient>
 
-<McpClient name="Continue" homepage="https://github.com/continuedev/continue" supports="Resources, Prompts, Tools" instructions="https://docs.continue.dev/customize/deep-dives/mcp">
-  Continue is an open-source AI code assistant, with built-in support for all MCP features.
+<McpClient name="Continue" homepage="https://github.com/continuedev/continue" supports="Resources, Prompts, Tools, Apps" instructions="https://docs.continue.dev/customize/deep-dives/mcp">
+  Continue is an open-source AI code assistant, with built-in support for MCP Tools, Resource, Prompts, and Apps
 
   **Key features:**
 
   * Type "@" to mention MCP resources
   * Prompt templates surface as slash commands
   * Use both built-in and MCP tools directly in chat
+  * Limited MCP Apps support for displaying MCP UIs
   * Supports VS Code and JetBrains IDEs, with any LLM
 </McpClient>
 
@@ -737,7 +738,7 @@ This page showcases applications that support the Model Context Protocol (MCP). 
   * Full-text search across all your chats and data
 </McpClient>
 
-<McpClient name="goose" homepage="https://github.com/block/goose" supports="Resources, Prompts, Tools, Sampling, Elicitation, Instructions, Apps" instructions="https://block.github.io/goose/docs/getting-started/using-extensions/">
+<McpClient name="goose" homepage="https://github.com/block/goose" supports="Apps, DCR, Discovery, Elicitation, Instructions, Prompts, Resources, Roots, Sampling, Tools" instructions="https://block.github.io/goose/docs/getting-started/using-extensions/">
   goose is an open source AI agent that supercharges your software development by automating coding tasks.
 
   **Key features:**

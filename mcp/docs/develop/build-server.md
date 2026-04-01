@@ -791,14 +791,14 @@ This tutorial will primarily focus on tools.
   <Tab title="Java">
     <Note>
       This is a quickstart demo based on Spring AI MCP auto-configuration and boot starters.
-      To learn how to create sync and async MCP Servers, manually, consult the [Java SDK Server](/sdk/java/mcp-server) documentation.
+      To learn how to create sync and async MCP Servers, manually, consult the [Java SDK Server](https://java.sdk.modelcontextprotocol.io/) documentation.
     </Note>
 
     Let's get started with building our weather server!
     [You can find the complete code for what we'll be building here.](https://github.com/spring-projects/spring-ai-examples/tree/main/model-context-protocol/weather/starter-stdio-server)
 
     For more information, see the [MCP Server Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html) reference documentation.
-    For manual MCP Server implementation, refer to the [MCP Server Java SDK documentation](/sdk/java/mcp-server).
+    For manual MCP Server implementation, refer to the [MCP Server Java SDK documentation](https://java.sdk.modelcontextprotocol.io/).
 
     ### Logging in MCP Servers
 
@@ -1106,7 +1106,7 @@ This tutorial will primarily focus on tools.
 
     ### System requirements
 
-    * Java 17 or higher installed.
+    * JDK 11 or higher installed.
 
     ### Set up your environment
 
@@ -1140,60 +1140,45 @@ This tutorial will primarily focus on tools.
       ```
     </CodeGroup>
 
-    After running `gradle init`, you will be presented with options for creating your project.
-    Select **Application** as the project type, **Kotlin** as the programming language, and **Java 17** as the Java version.
+    After running `gradle init`, select **Application** as the project type, **Kotlin** as the programming language.
 
     Alternatively, you can create a Kotlin application using the [IntelliJ IDEA project wizard](https://kotlinlang.org/docs/jvm-get-started.html).
 
-    After creating the project, add the following dependencies:
+    After creating the project, replace the contents of your `build.gradle.kts` with:
 
-    <CodeGroup>
-      ```kotlin build.gradle.kts theme={null}
-      val mcpVersion = "0.4.0"
-      val slf4jVersion = "2.0.9"
-      val ktorVersion = "3.1.1"
+    ```kotlin build.gradle.kts theme={null}
+    // Check latest versions at https://github.com/modelcontextprotocol/kotlin-sdk/releases
+    val mcpVersion = "0.9.0"
+    val ktorVersion = "3.2.3"
+    val slf4jVersion = "2.0.17"
 
-      dependencies {
-          implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")
-          implementation("org.slf4j:slf4j-nop:$slf4jVersion")
-          implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-          implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-      }
-      ```
+    plugins {
+        kotlin("jvm") version "2.3.20"
+        kotlin("plugin.serialization") version "2.3.20"
+        id("com.gradleup.shadow") version "8.3.9"
+        application
+    }
 
-      ```groovy build.gradle theme={null}
-      def mcpVersion = '0.3.0'
-      def slf4jVersion = '2.0.9'
-      def ktorVersion = '3.1.1'
+    application {
+        mainClass.set("MainKt")
+    }
 
-      dependencies {
-          implementation "io.modelcontextprotocol:kotlin-sdk:$mcpVersion"
-          implementation "org.slf4j:slf4j-nop:$slf4jVersion"
-          implementation "io.ktor:ktor-client-content-negotiation:$ktorVersion"
-          implementation "io.ktor:ktor-serialization-kotlinx-json:$ktorVersion"
-      }
-      ```
-    </CodeGroup>
+    dependencies {
+        implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")
+        implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+        implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+        implementation("io.ktor:ktor-client-cio:$ktorVersion")
+        implementation("org.slf4j:slf4j-simple:$slf4jVersion")
+    }
+    ```
 
-    Also, add the following plugins to your build script:
+    Verify that everything is set up correctly:
 
-    <CodeGroup>
-      ```kotlin build.gradle.kts theme={null}
-      plugins {
-          kotlin("plugin.serialization") version "your_version_of_kotlin"
-          id("com.gradleup.shadow") version "8.3.9"
-      }
-      ```
+    ```bash  theme={null}
+    ./gradlew build
+    ```
 
-      ```groovy build.gradle theme={null}
-      plugins {
-          id 'org.jetbrains.kotlin.plugin.serialization' version 'your_version_of_kotlin'
-          id 'com.gradleup.shadow' version '8.3.9'
-      }
-      ```
-    </CodeGroup>
-
-    Now let’s dive into building your server.
+    Now let's dive into building your server.
 
     ## Building your server
 
@@ -1202,29 +1187,28 @@ This tutorial will primarily focus on tools.
     Add a server initialization function:
 
     ```kotlin  theme={null}
-    // Main function to run the MCP server
-    fun `run mcp server`() {
-        // Create the MCP Server instance with a basic implementation
+    fun runMcpServer() {
         val server = Server(
             Implementation(
-                name = "weather", // Tool name is "weather"
-                version = "1.0.0" // Version of the implementation
+                name = "weather",
+                version = "1.0.0",
             ),
             ServerOptions(
-                capabilities = ServerCapabilities(tools = ServerCapabilities.Tools(listChanged = true))
-            )
+                capabilities = ServerCapabilities(tools = ServerCapabilities.Tools(listChanged = true)),
+            ),
         )
 
-        // Create a transport using standard IO for server communication
+        // register tools on server here
+
         val transport = StdioServerTransport(
             System.`in`.asInput(),
-            System.out.asSink().buffered()
+            System.out.asSink().buffered(),
         )
 
         runBlocking {
-            server.connect(transport)
+            val session = server.createSession(transport)
             val done = Job()
-            server.onClose {
+            session.onClose {
                 done.complete()
             }
             done.join()
@@ -1237,83 +1221,7 @@ This tutorial will primarily focus on tools.
     Next, let's add functions and data classes for querying and converting responses from the National Weather Service API:
 
     ```kotlin  theme={null}
-    // Extension function to fetch forecast information for given latitude and longitude
-    suspend fun HttpClient.getForecast(latitude: Double, longitude: Double): List<String> {
-        val points = this.get("/points/$latitude,$longitude").body<Points>()
-        val forecast = this.get(points.properties.forecast).body<Forecast>()
-        return forecast.properties.periods.map { period ->
-            """
-                ${period.name}:
-                Temperature: ${period.temperature} ${period.temperatureUnit}
-                Wind: ${period.windSpeed} ${period.windDirection}
-                Forecast: ${period.detailedForecast}
-            """.trimIndent()
-        }
-    }
-
-    // Extension function to fetch weather alerts for a given state
-    suspend fun HttpClient.getAlerts(state: String): List<String> {
-        val alerts = this.get("/alerts/active/area/$state").body<Alert>()
-        return alerts.features.map { feature ->
-            """
-                Event: ${feature.properties.event}
-                Area: ${feature.properties.areaDesc}
-                Severity: ${feature.properties.severity}
-                Description: ${feature.properties.description}
-                Instruction: ${feature.properties.instruction}
-            """.trimIndent()
-        }
-    }
-
-    @Serializable
-    data class Points(
-        val properties: Properties
-    ) {
-        @Serializable
-        data class Properties(val forecast: String)
-    }
-
-    @Serializable
-    data class Forecast(
-        val properties: Properties
-    ) {
-        @Serializable
-        data class Properties(val periods: List<Period>)
-
-        @Serializable
-        data class Period(
-            val number: Int, val name: String, val startTime: String, val endTime: String,
-            val isDaytime: Boolean, val temperature: Int, val temperatureUnit: String,
-            val temperatureTrend: String, val probabilityOfPrecipitation: JsonObject,
-            val windSpeed: String, val windDirection: String,
-            val shortForecast: String, val detailedForecast: String,
-        )
-    }
-
-    @Serializable
-    data class Alert(
-        val features: List<Feature>
-    ) {
-        @Serializable
-        data class Feature(
-            val properties: Properties
-        )
-
-        @Serializable
-        data class Properties(
-            val event: String, val areaDesc: String, val severity: String,
-            val description: String, val instruction: String?,
-        )
-    }
-    ```
-
-    ### Implementing tool execution
-
-    The tool execution handler is responsible for actually executing the logic of each tool. Let's add it:
-
-    ```kotlin  theme={null}
-    // Create an HTTP client with a default request configuration and JSON content negotiation
-    val httpClient = HttpClient {
+    val httpClient = HttpClient(CIO) {
         defaultRequest {
             url("https://api.weather.gov")
             headers {
@@ -1322,62 +1230,133 @@ This tutorial will primarily focus on tools.
             }
             contentType(ContentType.Application.Json)
         }
-        // Install content negotiation plugin for JSON serialization/deserialization
-        install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
+        install(ContentNegotiation) {
+            json(Json { ignoreUnknownKeys = true })
+        }
     }
 
-    // Register a tool to fetch weather alerts by state
+    // Extension function to fetch weather alerts for a given state
+    suspend fun HttpClient.getAlerts(state: String): List<String> {
+        val alerts = this.get("/alerts/active/area/$state").body<AlertsResponse>()
+        return alerts.features.map { feature ->
+            """
+                Event: ${feature.properties.event}
+                Area: ${feature.properties.areaDesc}
+                Severity: ${feature.properties.severity}
+                Status: ${feature.properties.status}
+                Headline: ${feature.properties.headline}
+            """.trimIndent()
+        }
+    }
+
+    // Extension function to fetch forecast information for given latitude and longitude
+    suspend fun HttpClient.getForecast(latitude: Double, longitude: Double): List<String> {
+        val points = this.get("/points/$latitude,$longitude").body<PointsResponse>()
+        val forecastUrl = points.properties.forecast ?: error("No forecast URL available")
+        val forecast = this.get(forecastUrl).body<ForecastResponse>()
+        return forecast.properties.periods.map { period ->
+            """
+                ${period.name}:
+                Temperature: ${period.temperature}°${period.temperatureUnit}
+                Wind: ${period.windSpeed} ${period.windDirection}
+                ${period.shortForecast}
+            """.trimIndent()
+        }
+    }
+
+    @Serializable
+    data class PointsResponse(val properties: PointsProperties)
+
+    @Serializable
+    data class PointsProperties(val forecast: String? = null)
+
+    @Serializable
+    data class ForecastResponse(val properties: ForecastProperties)
+
+    @Serializable
+    data class ForecastProperties(val periods: List<ForecastPeriod> = emptyList())
+
+    @Serializable
+    data class ForecastPeriod(
+        val name: String? = null,
+        val temperature: Int? = null,
+        val temperatureUnit: String? = null,
+        val windSpeed: String? = null,
+        val windDirection: String? = null,
+        val shortForecast: String? = null,
+    )
+
+    @Serializable
+    data class AlertsResponse(val features: List<AlertFeature> = emptyList())
+
+    @Serializable
+    data class AlertFeature(val properties: AlertProperties)
+
+    @Serializable
+    data class AlertProperties(
+        val event: String? = null,
+        val areaDesc: String? = null,
+        val severity: String? = null,
+        val status: String? = null,
+        val headline: String? = null,
+    )
+    ```
+
+    ### Implementing tool execution
+
+    The tool execution handler is responsible for actually executing the logic of each tool. Let's add it:
+
+    ```kotlin  theme={null}
+    // Register weather tools
+
     server.addTool(
         name = "get_alerts",
-        description = """
-            Get weather alerts for a US state. Input is Two-letter US state code (e.g. CA, NY)
-        """.trimIndent(),
-        inputSchema = Tool.Input(
+        description = "Get weather alerts for a US state. Input is a two-letter US state code (e.g. CA, NY)",
+        inputSchema = ToolSchema(
             properties = buildJsonObject {
                 putJsonObject("state") {
                     put("type", "string")
                     put("description", "Two-letter US state code (e.g. CA, NY)")
                 }
             },
-            required = listOf("state")
-        )
+            required = listOf("state"),
+        ),
     ) { request ->
-        val state = request.arguments["state"]?.jsonPrimitive?.content
-        if (state == null) {
-            return@addTool CallToolResult(
-                content = listOf(TextContent("The 'state' parameter is required."))
+        val state = request.arguments?.get("state")?.jsonPrimitive?.content
+            ?: return@addTool CallToolResult(
+                content = listOf(TextContent("The 'state' parameter is required.")),
             )
-        }
 
         val alerts = httpClient.getAlerts(state)
-
         CallToolResult(content = alerts.map { TextContent(it) })
     }
 
-    // Register a tool to fetch weather forecast by latitude and longitude
     server.addTool(
         name = "get_forecast",
-        description = """
-            Get weather forecast for a specific latitude/longitude
-        """.trimIndent(),
-        inputSchema = Tool.Input(
+        description = "Get weather forecast for a location. Note: only US locations are supported by the NWS API.",
+        inputSchema = ToolSchema(
             properties = buildJsonObject {
-                putJsonObject("latitude") { put("type", "number") }
-                putJsonObject("longitude") { put("type", "number") }
+                putJsonObject("latitude") {
+                    put("type", "number")
+                    put("description", "Latitude of the location")
+                }
+                putJsonObject("longitude") {
+                    put("type", "number")
+                    put("description", "Longitude of the location")
+                }
             },
-            required = listOf("latitude", "longitude")
-        )
+            required = listOf("latitude", "longitude"),
+        ),
     ) { request ->
-        val latitude = request.arguments["latitude"]?.jsonPrimitive?.doubleOrNull
-        val longitude = request.arguments["longitude"]?.jsonPrimitive?.doubleOrNull
+        val latitude = request.arguments?.get("latitude")?.jsonPrimitive?.doubleOrNull
+        val longitude = request.arguments?.get("longitude")?.jsonPrimitive?.doubleOrNull
         if (latitude == null || longitude == null) {
             return@addTool CallToolResult(
-                content = listOf(TextContent("The 'latitude' and 'longitude' parameters are required."))
+                content = listOf(TextContent("The 'latitude' and 'longitude' parameters are required.")),
             )
         }
 
         val forecast = httpClient.getForecast(latitude, longitude)
-
         CallToolResult(content = forecast.map { TextContent(it) })
     }
     ```
@@ -1387,10 +1366,21 @@ This tutorial will primarily focus on tools.
     Finally, implement the main function to run the server:
 
     ```kotlin  theme={null}
-    fun main() = `run mcp server`()
+    fun main() = runMcpServer()
     ```
 
-    Make sure to run `./gradlew build` to build your server. This is a very important step in getting your server to connect.
+    You can run the server directly during development:
+
+    ```bash  theme={null}
+    ./gradlew run
+    ```
+
+    For production use, build the shadow JAR:
+
+    ```bash  theme={null}
+    ./gradlew build
+    java -jar build/libs/weather-0.1.0-all.jar
+    ```
 
     Let's now test your server from an existing MCP host, Claude for Desktop.
 
@@ -1777,9 +1767,6 @@ This tutorial will primarily focus on tools.
       # Add the MCP SDK dependency
       bundle add mcp
 
-      # Install dependencies
-      bundle install
-
       # Create our server file
       touch weather.rb
       ```
@@ -1794,9 +1781,6 @@ This tutorial will primarily focus on tools.
 
       # Add the MCP SDK dependency
       bundle add mcp
-
-      # Install dependencies
-      bundle install
 
       # Create our server file
       new-item weather.rb
@@ -2968,7 +2952,7 @@ When you ask a question:
 
     **None of this is working. What do I do?**
 
-    Please refer to our [debugging guide](/legacy/tools/debugging) for better debugging tools and more detailed guidance.
+    Please refer to our [debugging guide](/docs/tools/debugging) for better debugging tools and more detailed guidance.
   </Accordion>
 
   <Accordion title="Weather API Issues">
@@ -2993,7 +2977,7 @@ When you ask a question:
 </AccordionGroup>
 
 <Note>
-  For more advanced troubleshooting, check out our guide on [Debugging MCP](/legacy/tools/debugging)
+  For more advanced troubleshooting, check out our guide on [Debugging MCP](/docs/tools/debugging)
 </Note>
 
 ## Next steps
@@ -3007,11 +2991,11 @@ When you ask a question:
     Check out our gallery of official MCP servers and implementations
   </Card>
 
-  <Card title="Debugging Guide" icon="bug" href="/legacy/tools/debugging">
+  <Card title="Debugging Guide" icon="bug" href="/docs/tools/debugging">
     Learn how to effectively debug MCP servers and integrations
   </Card>
 
-  <Card title="Building MCP with LLMs" icon="comments" href="/tutorials/building-mcp-with-llms">
-    Learn how to use LLMs like Claude to speed up your MCP development
+  <Card title="Build with Agent Skills" icon="comments" href="/docs/develop/build-with-agent-skills">
+    Use agent skills to guide AI coding assistants through server design
   </Card>
 </CardGroup>

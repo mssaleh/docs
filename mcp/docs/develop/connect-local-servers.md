@@ -228,7 +228,7 @@ If you encounter issues setting up or using the Filesystem Server, these solutio
   </Accordion>
 
   <Accordion title="None of this is working. What do I do?">
-    Please refer to our [debugging guide](/legacy/tools/debugging) for better debugging tools and more detailed guidance.
+    Please refer to our [debugging guide](/docs/tools/debugging) for better debugging tools and more detailed guidance.
   </Accordion>
 
   <Accordion title="ENOENT error and `${APPDATA}` in paths on Windows">
