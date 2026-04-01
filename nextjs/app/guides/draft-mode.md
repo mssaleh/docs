@@ -2,8 +2,8 @@
 title: How to preview content with Draft Mode in Next.js
 description: Next.js has draft mode to toggle between static and dynamic pages. You can learn how it works with App Router here.
 url: "https://nextjs.org/docs/app/guides/draft-mode"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

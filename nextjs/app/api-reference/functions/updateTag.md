@@ -2,8 +2,8 @@
 title: updateTag
 description: API Reference for the updateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/updateTag"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

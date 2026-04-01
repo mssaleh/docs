@@ -2,8 +2,8 @@
 title: useRouter
 description: Learn more about the API of the Next.js Router, and access the router instance in your page with the useRouter hook.
 url: "https://nextjs.org/docs/pages/api-reference/functions/use-router"
-version: 16.2.1
-lastUpdated: 2026-02-02
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

@@ -2,8 +2,8 @@
 title: distDir
 description: Set a custom build directory to use instead of the default .next directory.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/distDir"
-version: 16.2.1
-lastUpdated: 2025-06-16
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

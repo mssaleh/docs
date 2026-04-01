@@ -2,8 +2,8 @@
 title: How to upgrade to version 11
 description: Upgrade your Next.js Application from Version 10 to Version 11.
 url: "https://nextjs.org/docs/pages/guides/upgrading/version-11"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

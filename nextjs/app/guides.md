@@ -2,8 +2,8 @@
 title: Guides
 description: Learn how to implement common patterns and real-world use cases using Next.js
 url: "https://nextjs.org/docs/app/guides"
-version: 16.2.1
-lastUpdated: 2025-06-11
+version: 16.2.2
+lastUpdated: 2026-03-31
 ---
 
 
@@ -18,6 +18,8 @@ lastUpdated: 2025-06-11
   - Learn how to use Next.js as a backend framework
 - [Caching (Previous Model)](/docs/app/guides/caching-without-cache-components)
   - Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not using Cache Components.
+- [CDN Caching](/docs/app/guides/cdn-caching)
+  - Learn how CDN caching works with Next.js, including what works today, cache variability, and the direction toward pathname-based cache keying.
 - [CI Build Caching](/docs/app/guides/ci-build-caching)
   - Learn how to configure CI to cache Next.js builds
 - [Content Security Policy](/docs/app/guides/content-security-policy)
@@ -30,12 +32,16 @@ lastUpdated: 2025-06-11
   - Learn the built-in data security features in Next.js and learn best practices for protecting your application's data.
 - [Debugging](/docs/app/guides/debugging)
   - Learn how to debug your Next.js application with VS Code, Chrome DevTools, or Firefox DevTools.
+- [Deploying to Platforms](/docs/app/guides/deploying-to-platforms)
+  - Understand which Next.js features require specific platform capabilities and how to choose the right deployment target.
 - [Draft Mode](/docs/app/guides/draft-mode)
   - Next.js has draft mode to toggle between static and dynamic pages. You can learn how it works with App Router here.
 - [Environment Variables](/docs/app/guides/environment-variables)
   - Learn to add and access environment variables in your Next.js application.
 - [Forms](/docs/app/guides/forms)
   - Learn how to create forms in Next.js with React Server Actions.
+- [How Revalidation Works](/docs/app/guides/how-revalidation-works)
+  - A deep dive into how Next.js revalidates cached content, including the tag system, cache consistency, and multi-instance coordination.
 - [ISR](/docs/app/guides/incremental-static-regeneration)
   - Learn how to create or update static pages at runtime with Incremental Static Regeneration.
 - [Instrumentation](/docs/app/guides/instrumentation)
@@ -66,6 +72,8 @@ lastUpdated: 2025-06-11
   - Learn how to instrument your Next.js app with OpenTelemetry.
 - [Package Bundling](/docs/app/guides/package-bundling)
   - Learn how to analyze and optimize your application's server and client bundles with the Next.js Bundle Analyzer for Turbopack, and the `@next/bundle-analyzer` plugin for Webpack.
+- [PPR Platform Guide](/docs/app/guides/ppr-platform-guide)
+  - A guide for platform engineers on implementing PPR support, from basic origin rendering to optimized CDN integration.
 - [Prefetching](/docs/app/guides/prefetching)
   - Learn how to configure prefetching in Next.js
 - [Preserving UI state](/docs/app/guides/preserving-ui-state)
@@ -78,6 +86,8 @@ lastUpdated: 2025-06-11
   - Learn how to build public, "static" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites.
 - [Redirecting](/docs/app/guides/redirecting)
   - Learn the different ways to handle redirects in Next.js.
+- [Rendering Philosophy](/docs/app/guides/rendering-philosophy)
+  - Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for deployment.
 - [Sass](/docs/app/guides/sass)
   - Style your Next.js application using Sass.
 - [Scripts](/docs/app/guides/scripts)

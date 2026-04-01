@@ -2,8 +2,8 @@
 title: Supported Browsers
 description: Browser support and which JavaScript features are supported by Next.js.
 url: "https://nextjs.org/docs/architecture/supported-browsers"
-version: 16.2.1
-lastUpdated: 2025-10-01
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Architecture: /docs/architecture"
 ---

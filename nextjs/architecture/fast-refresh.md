@@ -2,8 +2,8 @@
 title: Fast Refresh
 description: Fast Refresh is a hot module reloading experience that gives you instantaneous feedback on edits made to your React components.
 url: "https://nextjs.org/docs/architecture/fast-refresh"
-version: 16.2.1
-lastUpdated: 2025-10-27
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Architecture: /docs/architecture"
 ---

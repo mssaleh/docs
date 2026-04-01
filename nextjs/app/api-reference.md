@@ -2,8 +2,8 @@
 title: API Reference
 description: Next.js API Reference for the App Router.
 url: "https://nextjs.org/docs/app/api-reference"
-version: 16.2.1
-lastUpdated: 2025-06-16
+version: 16.2.2
+lastUpdated: 2026-03-31
 ---
 
 
@@ -20,6 +20,8 @@ lastUpdated: 2025-06-16
   - Learn how to configure Next.js applications.
 - [CLI](/docs/app/api-reference/cli)
   - API Reference for the Next.js Command Line Interface (CLI) tools.
+- [Adapters](/docs/app/api-reference/adapters)
+  - Build deployment adapters for Next.js platforms and infrastructure.
 - [Edge Runtime](/docs/app/api-reference/edge)
   - API Reference for the Edge Runtime.
 - [Turbopack](/docs/app/api-reference/turbopack)

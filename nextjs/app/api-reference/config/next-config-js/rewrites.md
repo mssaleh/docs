@@ -2,8 +2,8 @@
 title: rewrites
 description: Add rewrites to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites"
-version: 16.2.1
-lastUpdated: 2026-02-02
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

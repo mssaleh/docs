@@ -2,8 +2,8 @@
 title: CLI
 description: API Reference for the Next.js Command Line Interface (CLI) tools.
 url: "https://nextjs.org/docs/pages/api-reference/cli"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

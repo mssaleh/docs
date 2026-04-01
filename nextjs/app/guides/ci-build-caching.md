@@ -2,8 +2,8 @@
 title: How to configure Continuous Integration (CI) build caching
 description: Learn how to configure CI to cache Next.js builds
 url: "https://nextjs.org/docs/app/guides/ci-build-caching"
-version: 16.2.1
-lastUpdated: 2025-04-22
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

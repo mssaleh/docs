@@ -2,8 +2,8 @@
 title: route.js
 description: API reference for the route.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

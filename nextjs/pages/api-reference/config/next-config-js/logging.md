@@ -2,8 +2,8 @@
 title: logging
 description: Configure logging behavior in the terminal when running Next.js in development mode.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/logging"
-version: 16.2.1
-lastUpdated: 2026-02-12
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

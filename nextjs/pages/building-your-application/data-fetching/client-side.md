@@ -2,8 +2,8 @@
 title: Client-side Fetching
 description: Learn about client-side data fetching, and how to use SWR, a data fetching React Hook library that handles caching, revalidation, focus tracking, refetching on interval and more.
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

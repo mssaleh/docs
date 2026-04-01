@@ -2,8 +2,8 @@
 title: unstable_catchError
 description: API Reference for the unstable_catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
-version: 16.2.1
-lastUpdated: 2026-03-20
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -15,22 +15,28 @@ related:
 
 The `unstable_catchError` function creates a component that wraps its children in an error boundary. It provides a programmatic alternative to the [`error.js`](/docs/app/api-reference/file-conventions/error) file convention, enabling component-level error recovery anywhere in your component tree.
 
+Compared to a custom React error boundary, `unstable_catchError` is designed to work with Next.js out of the box:
+
+* **Built-in error recovery** — [`unstable_retry()`](/docs/app/api-reference/file-conventions/error#unstable_retry) re-fetches and re-renders the error boundary's children, including Server Components.
+* **Framework-aware integration** — APIs like `redirect()` and `notFound()` work by throwing special errors under the hood. `unstable_catchError` handles these seamlessly, so they're not accidentally caught by your error boundary.
+* **Client navigation handling** — The error state automatically clears when you do a client navigation to a different route.
+
 `unstable_catchError` can be called from [Client Components](/docs/app/getting-started/server-and-client-components).
 
 ```tsx filename="app/custom-error-boundary.tsx" switcher
 'use client'
 
-import { unstable_catchError } from 'next/error'
+import { unstable_catchError, type ErrorInfo } from 'next/error'
 
 function ErrorFallback(
   props: { title: string },
-  { error, unstable_retry: retry }: { error: Error; unstable_retry: () => void }
+  { error, unstable_retry }: ErrorInfo
 ) {
   return (
     <div>
       <h2>{props.title}</h2>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }
@@ -43,12 +49,12 @@ export default unstable_catchError(ErrorFallback)
 
 import { unstable_catchError } from 'next/error'
 
-function ErrorFallback(props, { error, unstable_retry: retry }) {
+function ErrorFallback(props, { error, unstable_retry }) {
   return (
     <div>
       <h2>{props.title}</h2>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }
@@ -73,11 +79,11 @@ A function that renders the error UI when an error is caught. It receives two ar
 * `props` — The props passed to the wrapper component (excluding `children`).
 * `errorInfo` — An object containing information about the error:
 
-| Property         | Type                                                                                        | Description                                                                                                                                              |
-| ---------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `error`          | [`Error`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error) | The error instance that was caught.                                                                                                                      |
-| `unstable_retry` | `() => void`                                                                                | Re-fetches and re-renders the error boundary's contents. If successful, the fallback is replaced with the re-rendered result.                            |
-| `reset`          | `() => void`                                                                                | Resets the error state and re-renders without re-fetching. Use [`retry()`](/docs/app/api-reference/file-conventions/error#unstable_retry) in most cases. |
+| Property         | Type                                                                                        | Description                                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `error`          | [`Error`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error) | The error instance that was caught.                                                                                                                               |
+| `unstable_retry` | `() => void`                                                                                | Re-fetches and re-renders the error boundary's children. If successful, the fallback is replaced with the re-rendered result.                                     |
+| `reset`          | `() => void`                                                                                | Resets the error state and re-renders without re-fetching. Use [`unstable_retry()`](/docs/app/api-reference/file-conventions/error#unstable_retry) in most cases. |
 
 The `fallback` function must be a Client Component (or defined in a `'use client'` module).
 
@@ -113,27 +119,20 @@ export default function Component({ children }) {
 
 ### Recovering from errors
 
-Use `retry()` to prompt the user to recover from the error. When called, the function re-fetches and re-renders the error boundary's contents. If successful, the fallback is replaced with the re-rendered result.
+Use `unstable_retry()` to prompt the user to recover from the error. When called, the function re-fetches and re-renders the error boundary's children. If successful, the fallback is replaced with the re-rendered result.
 
-In most cases, use `retry()` instead of `reset()`. The `reset()` function only clears the error state and re-renders without re-fetching, which means it won't recover from Server Component errors.
+In most cases, use `unstable_retry()` instead of `reset()`. The `reset()` function only clears the error state and re-renders without re-fetching, which means it won't recover from Server Component errors.
 
-```tsx filename="app/custom-error-boundary.tsx" highlight={16,17} switcher
+```tsx filename="app/custom-error-boundary.tsx" switcher
 'use client'
 
-import { unstable_catchError } from 'next/error'
+import { unstable_catchError, type ErrorInfo } from 'next/error'
 
-function ErrorFallback(
-  props: {},
-  {
-    error,
-    unstable_retry: retry,
-    reset,
-  }: { error: Error; unstable_retry: () => void; reset: () => void }
-) {
+function ErrorFallback(props: {}, { error, unstable_retry, reset }: ErrorInfo) {
   return (
     <div>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
       <button onClick={() => reset()}>Reset</button>
     </div>
   )
@@ -142,16 +141,16 @@ function ErrorFallback(
 export default unstable_catchError(ErrorFallback)
 ```
 
-```jsx filename="app/custom-error-boundary.js" highlight={9,10} switcher
+```jsx filename="app/custom-error-boundary.js" switcher
 'use client'
 
 import { unstable_catchError } from 'next/error'
 
-function ErrorFallback(props, { error, unstable_retry: retry, reset }) {
+function ErrorFallback(props, { error, unstable_retry, reset }) {
   return (
     <div>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
       <button onClick={() => reset()}>Reset</button>
     </div>
   )
@@ -169,8 +168,7 @@ You can pass server-rendered content as a prop to display data-driven fallback U
 ```tsx filename="app/error-boundary.tsx" switcher
 'use client'
 
-import { unstable_catchError } from 'next/error'
-import type { ErrorInfo } from 'next/error'
+import { unstable_catchError, type ErrorInfo } from 'next/error'
 
 function ErrorFallback(
   props: { fallback: React.ReactNode },

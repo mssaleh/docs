@@ -2,8 +2,8 @@
 title: after
 description: API Reference for the after function.
 url: "https://nextjs.org/docs/app/api-reference/functions/after"
-version: 16.2.1
-lastUpdated: 2026-03-13
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

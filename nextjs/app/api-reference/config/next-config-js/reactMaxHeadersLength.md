@@ -2,8 +2,8 @@
 title: reactMaxHeadersLength
 description: The maximum length of the headers that are emitted by React and added to the response.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/reactMaxHeadersLength"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

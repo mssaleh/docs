@@ -2,8 +2,8 @@
 title: Metadata Files API Reference
 description: API documentation for the metadata file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata"
-version: 16.2.1
-lastUpdated: 2025-10-17
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

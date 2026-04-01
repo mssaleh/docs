@@ -2,8 +2,8 @@
 title: Dynamic Route Segments
 description: Dynamic Route Segments can be used to programmatically generate route segments from dynamic data.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

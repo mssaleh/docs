@@ -2,8 +2,8 @@
 title: Automatic Static Optimization
 description: Next.js automatically optimizes your app to be static HTML whenever possible. Learn how it works here.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/automatic-static-optimization"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

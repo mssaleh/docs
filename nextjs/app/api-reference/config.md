@@ -2,8 +2,8 @@
 title: Configuration
 description: Learn how to configure Next.js applications.
 url: "https://nextjs.org/docs/app/api-reference/config"
-version: 16.2.1
-lastUpdated: 2025-06-16
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---

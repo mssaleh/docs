@@ -2,8 +2,8 @@
 title: urlImports
 description: Configure Next.js to allow importing modules from external URLs.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/urlImports"
-version: 16.2.1
-lastUpdated: 2025-06-16
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

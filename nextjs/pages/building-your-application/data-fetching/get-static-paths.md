@@ -2,8 +2,8 @@
 title: getStaticPaths
 description: "Fetch data and generate static pages with `getStaticPaths`. Learn more about this API for data fetching in Next.js."
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

@@ -2,8 +2,8 @@
 title: How to use CSS in your application
 description: Learn about the different ways to add CSS to your application, including CSS Modules, Global CSS, Tailwind CSS, and more.
 url: "https://nextjs.org/docs/pages/getting-started/css"
-version: 16.2.1
-lastUpdated: 2025-08-06
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"

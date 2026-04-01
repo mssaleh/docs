@@ -2,8 +2,8 @@
 title: Revalidating
 description: Learn how to revalidate cached data using time-based and on-demand strategies.
 url: "https://nextjs.org/docs/app/getting-started/revalidating"
-version: 16.2.1
-lastUpdated: 2026-03-20
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

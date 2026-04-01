@@ -2,8 +2,8 @@
 title: How to set up Playwright with Next.js
 description: Learn how to set up Next.js with Playwright for End-to-End (E2E) and Integration testing.
 url: "https://nextjs.org/docs/pages/guides/testing/playwright"
-version: 16.2.1
-lastUpdated: 2025-04-24
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

@@ -2,8 +2,8 @@
 title: How to create forms with API Routes
 description: Learn how to handle form submissions and data mutations with Next.js.
 url: "https://nextjs.org/docs/pages/guides/forms"
-version: 16.2.1
-lastUpdated: 2026-02-24
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

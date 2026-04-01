@@ -2,8 +2,8 @@
 title: next CLI
 description: Learn how to run and build your application with the Next.js CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/next"
-version: 16.2.1
-lastUpdated: 2026-02-24
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"

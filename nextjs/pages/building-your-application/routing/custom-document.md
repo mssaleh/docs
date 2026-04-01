@@ -2,8 +2,8 @@
 title: Custom Document
 description: Extend the default document markup added by Next.js.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/custom-document"
-version: 16.2.1
-lastUpdated: 2025-05-27
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

@@ -2,8 +2,8 @@
 title: How to migrate from Vite to Next.js
 description: Learn how to migrate your existing React application from Vite to Next.js.
 url: "https://nextjs.org/docs/pages/guides/migrating/from-vite"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

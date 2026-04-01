@@ -2,8 +2,8 @@
 title: Error Handling
 description: Learn how to display expected errors and handle uncaught exceptions.
 url: "https://nextjs.org/docs/app/getting-started/error-handling"
-version: 16.2.1
-lastUpdated: 2026-03-20
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -284,13 +284,13 @@ import { unstable_catchError as catchError, type ErrorInfo } from 'next/error'
 
 function ErrorFallback(
   props: { title: string },
-  { error, unstable_retry: retry }: ErrorInfo
+  { error, unstable_retry }: ErrorInfo
 ) {
   return (
     <div>
       <h2>{props.title}</h2>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }
@@ -303,12 +303,12 @@ export default catchError(ErrorFallback)
 
 import { unstable_catchError as catchError } from 'next/error'
 
-function ErrorFallback(props, { error, unstable_retry: retry }) {
+function ErrorFallback(props, { error, unstable_retry }) {
   return (
     <div>
       <h2>{props.title}</h2>
       <p>{error.message}</p>
-      <button onClick={() => retry()}>Try again</button>
+      <button onClick={() => unstable_retry()}>Try again</button>
     </div>
   )
 }

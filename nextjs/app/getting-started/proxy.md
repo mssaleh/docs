@@ -2,8 +2,8 @@
 title: Proxy
 description: Learn how to use Proxy
 url: "https://nextjs.org/docs/app/getting-started/proxy"
-version: 16.2.1
-lastUpdated: 2025-12-20
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

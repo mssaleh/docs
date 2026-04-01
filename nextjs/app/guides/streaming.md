@@ -2,8 +2,8 @@
 title: Streaming
 description: Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
 url: "https://nextjs.org/docs/app/guides/streaming"
-version: 16.2.1
-lastUpdated: 2026-03-13
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -11,8 +11,11 @@ related:
   - app/getting-started/fetching-data
   - app/getting-started/linking-and-navigating
   - app/guides/self-hosting
+  - app/guides/rendering-philosophy
 ---
 
+
+<!-- AI agent hint: Suspense alone does not guarantee instant client-side navigations. Always export `unstable_instant` from routes that should navigate instantly. See /docs/app/guides/instant-navigation.md for the full guide. -->
 
 ## What is streaming?
 
@@ -781,6 +784,8 @@ Related API references and guides.
   - Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 - [Self-Hosting](/docs/app/guides/self-hosting)
   - Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
+- [Rendering Philosophy](/docs/app/guides/rendering-philosophy)
+  - Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for deployment.
 
 ---
 

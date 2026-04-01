@@ -2,8 +2,8 @@
 title: logging
 description: Configure logging behavior in the terminal when running Next.js in development mode, including fetch logging, incoming requests, and forwarding browser console logs to the terminal.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/logging"
-version: 16.2.1
-lastUpdated: 2026-02-12
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

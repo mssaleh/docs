@@ -2,8 +2,8 @@
 title: API Reference
 description: Next.js API Reference for the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 ---
 
@@ -19,6 +19,8 @@ router: Pages Router
   - Learn how to configure your Next.js application.
 - [CLI](/docs/pages/api-reference/cli)
   - API Reference for the Next.js Command Line Interface (CLI) tools.
+- [Adapters](/docs/pages/api-reference/adapters)
+  - Build deployment adapters for Next.js platforms and infrastructure.
 - [Edge Runtime](/docs/pages/api-reference/edge)
   - API Reference for the Edge Runtime.
 - [Turbopack](/docs/pages/api-reference/turbopack)

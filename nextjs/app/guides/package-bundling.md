@@ -2,8 +2,8 @@
 title: Optimizing package bundling
 description: "Learn how to analyze and optimize your application's server and client bundles with the Next.js Bundle Analyzer for Turbopack, and the `@next/bundle-analyzer` plugin for Webpack."
 url: "https://nextjs.org/docs/app/guides/package-bundling"
-version: 16.2.1
-lastUpdated: 2026-02-11
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

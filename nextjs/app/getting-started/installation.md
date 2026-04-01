@@ -2,8 +2,8 @@
 title: Installation
 description: "Learn how to create a new Next.js application with the `create-next-app` CLI, and set up TypeScript, ESLint, and Module Path Aliases."
 url: "https://nextjs.org/docs/app/getting-started/installation"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---

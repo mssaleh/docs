@@ -2,8 +2,8 @@
 title: How to build single-page applications with Next.js
 description: Next.js fully supports building Single-Page Applications (SPAs).
 url: "https://nextjs.org/docs/app/guides/single-page-applications"
-version: 16.2.1
-lastUpdated: 2026-03-03
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

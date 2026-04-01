@@ -2,8 +2,8 @@
 title: redirects
 description: Add redirects to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/redirects"
-version: 16.2.1
-lastUpdated: 2025-11-12
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

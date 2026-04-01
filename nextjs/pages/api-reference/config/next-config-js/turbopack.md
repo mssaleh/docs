@@ -2,8 +2,8 @@
 title: turbopack
 description: Configure Next.js with Turbopack-specific options
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/turbopack"
-version: 16.2.1
-lastUpdated: 2025-09-22
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

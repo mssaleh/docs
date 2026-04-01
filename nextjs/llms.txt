@@ -1,6 +1,6 @@
 # Next.js Documentation
 
-@doc-version: 16.2.1
+@doc-version: 16.2.2
 @doc-version-notes: Some features may have extended or refined behavior in minor or patch releases
 
 
@@ -30,15 +30,18 @@
   - [Authentication](https://nextjs.org/docs/app/guides/authentication.md): Learn how to implement authentication in your Next.js application.
   - [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend.md): Learn how to use Next.js as a backend framework
   - [Caching (Previous Model)](https://nextjs.org/docs/app/guides/caching-without-cache-components.md): Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not using Cache Components.
+  - [CDN Caching](https://nextjs.org/docs/app/guides/cdn-caching.md): Learn how CDN caching works with Next.js, including what works today, cache variability, and the direction toward pathname-based cache keying.
   - [CI Build Caching](https://nextjs.org/docs/app/guides/ci-build-caching.md): Learn how to configure CI to cache Next.js builds
   - [Content Security Policy](https://nextjs.org/docs/app/guides/content-security-policy.md): Learn how to set a Content Security Policy (CSP) for your Next.js application.
   - [CSS-in-JS](https://nextjs.org/docs/app/guides/css-in-js.md): Use CSS-in-JS libraries with Next.js
   - [Custom Server](https://nextjs.org/docs/app/guides/custom-server.md): Start a Next.js app programmatically using a custom server.
   - [Data Security](https://nextjs.org/docs/app/guides/data-security.md): Learn the built-in data security features in Next.js and learn best practices for protecting your application's data.
   - [Debugging](https://nextjs.org/docs/app/guides/debugging.md): Learn how to debug your Next.js application with VS Code, Chrome DevTools, or Firefox DevTools.
+  - [Deploying to Platforms](https://nextjs.org/docs/app/guides/deploying-to-platforms.md): Understand which Next.js features require specific platform capabilities and how to choose the right deployment target.
   - [Draft Mode](https://nextjs.org/docs/app/guides/draft-mode.md): Next.js has draft mode to toggle between static and dynamic pages. You can learn how it works with App Router here.
   - [Environment Variables](https://nextjs.org/docs/app/guides/environment-variables.md): Learn to add and access environment variables in your Next.js application.
   - [Forms](https://nextjs.org/docs/app/guides/forms.md): Learn how to create forms in Next.js with React Server Actions.
+  - [How Revalidation Works](https://nextjs.org/docs/app/guides/how-revalidation-works.md): A deep dive into how Next.js revalidates cached content, including the tag system, cache consistency, and multi-instance coordination.
   - [ISR](https://nextjs.org/docs/app/guides/incremental-static-regeneration.md): Learn how to create or update static pages at runtime with Incremental Static Regeneration.
   - [Instrumentation](https://nextjs.org/docs/app/guides/instrumentation.md): Learn how to use instrumentation to run code at server startup in your Next.js app
   - [Internationalization](https://nextjs.org/docs/app/guides/internationalization.md): Add support for multiple languages with internationalized routing and localized content.
@@ -57,12 +60,14 @@
   - [Multi-zones](https://nextjs.org/docs/app/guides/multi-zones.md): Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
   - [OpenTelemetry](https://nextjs.org/docs/app/guides/open-telemetry.md): Learn how to instrument your Next.js app with OpenTelemetry.
   - [Package Bundling](https://nextjs.org/docs/app/guides/package-bundling.md): Learn how to analyze and optimize your application's server and client bundles with the Next.js Bundle Analyzer for Turbopack, and the `@next/bundle-analyzer` plugin for Webpack.
+  - [PPR Platform Guide](https://nextjs.org/docs/app/guides/ppr-platform-guide.md): A guide for platform engineers on implementing PPR support, from basic origin rendering to optimized CDN integration.
   - [Prefetching](https://nextjs.org/docs/app/guides/prefetching.md): Learn how to configure prefetching in Next.js
   - [Preserving UI state](https://nextjs.org/docs/app/guides/preserving-ui-state.md): Learn how to control which UI state is preserved and which resets when navigating between pages.
   - [Production](https://nextjs.org/docs/app/guides/production-checklist.md): Recommendations to ensure the best performance and user experience before taking your Next.js application to production.
   - [PWAs](https://nextjs.org/docs/app/guides/progressive-web-apps.md): Learn how to build a Progressive Web Application (PWA) with Next.js.
   - [Public pages](https://nextjs.org/docs/app/guides/public-static-pages.md): Learn how to build public, "static" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites.
   - [Redirecting](https://nextjs.org/docs/app/guides/redirecting.md): Learn the different ways to handle redirects in Next.js.
+  - [Rendering Philosophy](https://nextjs.org/docs/app/guides/rendering-philosophy.md): Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for deployment.
   - [Sass](https://nextjs.org/docs/app/guides/sass.md): Style your Next.js application using Sass.
   - [Scripts](https://nextjs.org/docs/app/guides/scripts.md): Optimize 3rd party scripts with the built-in Script component.
   - [Self-Hosting](https://nextjs.org/docs/app/guides/self-hosting.md): Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
@@ -237,6 +242,18 @@
   - [CLI](https://nextjs.org/docs/app/api-reference/cli.md): API Reference for the Next.js Command Line Interface (CLI) tools.
     - [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app.md): Create Next.js apps using one command with the create-next-app CLI.
     - [next CLI](https://nextjs.org/docs/app/api-reference/cli/next.md): Learn how to run and build your application with the Next.js CLI.
+  - [Adapters](https://nextjs.org/docs/app/api-reference/adapters.md): Build deployment adapters for Next.js platforms and infrastructure.
+    - [Configuration](https://nextjs.org/docs/app/api-reference/adapters/configuration.md): Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter.
+    - [Creating an Adapter](https://nextjs.org/docs/app/api-reference/adapters/creating-an-adapter.md): Create an adapter module that implements the `NextAdapter` interface.
+    - [API Reference](https://nextjs.org/docs/app/api-reference/adapters/api-reference.md): Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface.
+    - [Testing Adapters](https://nextjs.org/docs/app/api-reference/adapters/testing-adapters.md): Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
+    - [Routing with @next/routing](https://nextjs.org/docs/app/api-reference/adapters/routing-with-next-routing.md): Use `@next/routing` to apply Next.js route matching behavior in adapters.
+    - [Implementing PPR in an Adapter](https://nextjs.org/docs/app/api-reference/adapters/implementing-ppr-in-an-adapter.md): Implement Partial Prerendering support in an adapter using fallback output and cache hooks.
+    - [Runtime Integration](https://nextjs.org/docs/app/api-reference/adapters/runtime-integration.md): Understand how build-time adapters and runtime cache interfaces work together.
+    - [Invoking Entrypoints](https://nextjs.org/docs/app/api-reference/adapters/invoking-entrypoints.md): Invoke Node.js and Edge build entrypoints with adapter runtime context.
+    - [Output Types](https://nextjs.org/docs/app/api-reference/adapters/output-types.md): Reference for all build output types exposed to adapters.
+    - [Routing Information](https://nextjs.org/docs/app/api-reference/adapters/routing-information.md): Reference for routing phases and route fields exposed in `onBuildComplete`.
+    - [Use Cases](https://nextjs.org/docs/app/api-reference/adapters/use-cases.md): Common patterns and examples for deployment adapter implementations.
   - [Edge Runtime](https://nextjs.org/docs/app/api-reference/edge.md): API Reference for the Edge Runtime.
   - [Turbopack](https://nextjs.org/docs/app/api-reference/turbopack.md): Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
 
@@ -349,7 +366,7 @@
     - [userAgent](https://nextjs.org/docs/pages/api-reference/functions/userAgent.md): The userAgent helper extends the Web Request API with additional properties and methods to interact with the user agent object from the request.
   - [Configuration](https://nextjs.org/docs/pages/api-reference/config.md): Learn how to configure your Next.js application.
     - [next.config.js Options](https://nextjs.org/docs/pages/api-reference/config/next-config-js.md): Learn about the options available in next.config.js for the Pages Router.
-      - [adapterPath](https://nextjs.org/docs/pages/api-reference/config/next-config-js/adapterPath.md): Configure a custom adapter for Next.js to hook into the build process with modifyConfig and buildComplete callbacks.
+      - [adapterPath](https://nextjs.org/docs/pages/api-reference/config/next-config-js/adapterPath.md): Configure a custom adapter for Next.js to hook into the build process.
       - [allowedDevOrigins](https://nextjs.org/docs/pages/api-reference/config/next-config-js/allowedDevOrigins.md): Use `allowedDevOrigins` to configure additional origins that can request the dev server.
       - [assetPrefix](https://nextjs.org/docs/pages/api-reference/config/next-config-js/assetPrefix.md): Learn how to use the assetPrefix config option to configure your CDN.
       - [basePath](https://nextjs.org/docs/pages/api-reference/config/next-config-js/basePath.md): Use `basePath` to deploy a Next.js application under a sub-path of a domain.
@@ -391,6 +408,18 @@
   - [CLI](https://nextjs.org/docs/pages/api-reference/cli.md): API Reference for the Next.js Command Line Interface (CLI) tools.
     - [create-next-app CLI](https://nextjs.org/docs/pages/api-reference/cli/create-next-app.md): Create Next.js apps using one command with the create-next-app CLI.
     - [next CLI](https://nextjs.org/docs/pages/api-reference/cli/next.md): Learn how to run and build your application with the Next.js CLI.
+  - [Adapters](https://nextjs.org/docs/pages/api-reference/adapters.md): Build deployment adapters for Next.js platforms and infrastructure.
+    - [Configuration](https://nextjs.org/docs/pages/api-reference/adapters/configuration.md): Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter.
+    - [Creating an Adapter](https://nextjs.org/docs/pages/api-reference/adapters/creating-an-adapter.md): Create an adapter module that implements the `NextAdapter` interface.
+    - [API Reference](https://nextjs.org/docs/pages/api-reference/adapters/api-reference.md): Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface.
+    - [Testing Adapters](https://nextjs.org/docs/pages/api-reference/adapters/testing-adapters.md): Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
+    - [Routing with @next/routing](https://nextjs.org/docs/pages/api-reference/adapters/routing-with-next-routing.md): Use `@next/routing` to apply Next.js route matching behavior in adapters.
+    - [Implementing PPR in an Adapter](https://nextjs.org/docs/pages/api-reference/adapters/implementing-ppr-in-an-adapter.md): Implement Partial Prerendering support in an adapter using fallback output and cache hooks.
+    - [Runtime Integration](https://nextjs.org/docs/pages/api-reference/adapters/runtime-integration.md): Understand how build-time adapters and runtime cache interfaces work together.
+    - [Invoking Entrypoints](https://nextjs.org/docs/pages/api-reference/adapters/invoking-entrypoints.md): Invoke Node.js and Edge build entrypoints with adapter runtime context.
+    - [Output Types](https://nextjs.org/docs/pages/api-reference/adapters/output-types.md): Reference for all build output types exposed to adapters.
+    - [Routing Information](https://nextjs.org/docs/pages/api-reference/adapters/routing-information.md): Reference for routing phases and route fields exposed in `onBuildComplete`.
+    - [Use Cases](https://nextjs.org/docs/pages/api-reference/adapters/use-cases.md): Common patterns and examples for deployment adapter implementations.
   - [Edge Runtime](https://nextjs.org/docs/pages/api-reference/edge.md): API Reference for the Edge Runtime.
   - [Turbopack](https://nextjs.org/docs/pages/api-reference/turbopack.md): Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
 

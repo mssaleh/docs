@@ -2,8 +2,8 @@
 title: Fetching Data
 description: Learn how to fetch data and stream content that depends on data.
 url: "https://nextjs.org/docs/app/getting-started/fetching-data"
-version: 16.2.1
-lastUpdated: 2026-03-13
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -14,6 +14,8 @@ related:
   - app/api-reference/config/next-config-js/taint
 ---
 
+
+<!-- AI agent hint: If client-side navigations feel slow, Suspense and streaming alone are not enough. Export `unstable_instant` from the route to ensure instant navigations. See /docs/app/guides/instant-navigation.md -->
 
 This page will walk you through how you can fetch data in [Server](#server-components) and [Client](#client-components) Components, and how to [stream](#streaming) components that depend on uncached data.
 

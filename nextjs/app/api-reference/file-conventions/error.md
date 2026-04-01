@@ -2,8 +2,8 @@
 title: error.js
 description: API reference for the error.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/error"
-version: 16.2.1
-lastUpdated: 2026-03-17
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -111,7 +111,7 @@ An automatically generated hash of the error thrown. It can be used to match the
 
 The cause of an error can sometimes be temporary. In these cases, trying again might resolve the issue.
 
-An error component can use the `unstable_retry()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-fetch and re-render the error boundary's contents. If successful, the fallback error component is replaced with the result of the re-render.
+An error component can use the `unstable_retry()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-fetch and re-render the error boundary's children. If successful, the fallback error component is replaced with the result of the re-render.
 
 ```tsx filename="app/dashboard/error.tsx" switcher
 'use client' // Error boundaries must be Client Components
@@ -147,7 +147,7 @@ export default function Error({ error, unstable_retry }) {
 
 #### `reset`
 
-In most cases, you should use [`unstable_retry()`](#unstable_retry) instead. However, if you have a specific reason to clear the error state and re-render the error boundary's contents without re-fetching the contents, you can use the `reset()` function.
+In most cases, you should use [`unstable_retry()`](#unstable_retry) instead. However, if you have a specific reason to clear the error state and re-render the error boundary's children without re-fetching the contents, you can use the `reset()` function.
 
 ## Examples
 

@@ -2,8 +2,8 @@
 title: instrumentation.js
 description: API reference for the instrumentation.js file.
 url: "https://nextjs.org/docs/pages/api-reference/file-conventions/instrumentation"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

@@ -2,8 +2,8 @@
 title: getInitialProps
 description: Fetch dynamic data on the server for your React component with getInitialProps.
 url: "https://nextjs.org/docs/pages/api-reference/functions/get-initial-props"
-version: 16.2.1
-lastUpdated: 2025-11-24
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

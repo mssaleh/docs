@@ -2,8 +2,8 @@
 title: next.config.js Options
 description: Learn about the options available in next.config.js for the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js"
-version: 16.2.1
-lastUpdated: 2025-04-15
+version: 16.2.2
+lastUpdated: 2026-03-31
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -152,7 +152,7 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 ```
 
 - [adapterPath](/docs/pages/api-reference/config/next-config-js/adapterPath)
-  - Configure a custom adapter for Next.js to hook into the build process with modifyConfig and buildComplete callbacks.
+  - Configure a custom adapter for Next.js to hook into the build process.
 - [allowedDevOrigins](/docs/pages/api-reference/config/next-config-js/allowedDevOrigins)
   - Use `allowedDevOrigins` to configure additional origins that can request the dev server.
 - [assetPrefix](/docs/pages/api-reference/config/next-config-js/assetPrefix)

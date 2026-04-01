@@ -2,8 +2,8 @@
 title: Next.js Glossary
 description: A glossary of common terms used in Next.js.
 url: "https://nextjs.org/docs/app/glossary"
-version: 16.2.1
-lastUpdated: 2026-03-10
+version: 16.2.2
+lastUpdated: 2026-03-31
 ---
 
 

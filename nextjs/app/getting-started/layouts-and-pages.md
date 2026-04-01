@@ -2,8 +2,8 @@
 title: Layouts and Pages
 description: Learn how to create your first pages and layouts, and link between them with the Link component.
 url: "https://nextjs.org/docs/app/getting-started/layouts-and-pages"
-version: 16.2.1
-lastUpdated: 2026-03-20
+version: 16.2.2
+lastUpdated: 2026-03-31
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
