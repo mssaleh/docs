@@ -75,13 +75,13 @@ Actions follow a `namespace:action` format, such as `chat:submit` to send a mess
 
 Actions available in the `Global` context:
 
-| Action                 | Default | Description                 |
-| :--------------------- | :------ | :-------------------------- |
-| `app:interrupt`        | Ctrl+C  | Cancel current operation    |
-| `app:exit`             | Ctrl+D  | Exit Claude Code            |
-| `app:redraw`           | Ctrl+L  | Redraw the screen           |
-| `app:toggleTodos`      | Ctrl+T  | Toggle task list visibility |
-| `app:toggleTranscript` | Ctrl+O  | Toggle verbose transcript   |
+| Action                 | Default   | Description                 |
+| :--------------------- | :-------- | :-------------------------- |
+| `app:interrupt`        | Ctrl+C    | Cancel current operation    |
+| `app:exit`             | Ctrl+D    | Exit Claude Code            |
+| `app:redraw`           | (unbound) | Force terminal redraw       |
+| `app:toggleTodos`      | Ctrl+T    | Toggle task list visibility |
+| `app:toggleTranscript` | Ctrl+O    | Toggle verbose transcript   |
 
 ### History actions
 
@@ -100,6 +100,7 @@ Actions available in the `Chat` context:
 | Action                | Default                   | Description                         |
 | :-------------------- | :------------------------ | :---------------------------------- |
 | `chat:cancel`         | Escape                    | Cancel current input                |
+| `chat:clearInput`     | Ctrl+L                    | Clear prompt input                  |
 | `chat:killAgents`     | Ctrl+X Ctrl+K             | Kill all background agents          |
 | `chat:cycleMode`      | Shift+Tab\*               | Cycle permission modes              |
 | `chat:modelPicker`    | Cmd+P / Meta+P            | Open model picker                   |
@@ -400,7 +401,7 @@ Some shortcuts may conflict with terminal multiplexers:
 
 ## Vim mode interaction
 
-When vim mode is enabled (`/vim`), keybindings and vim mode operate independently:
+When vim mode is enabled via `/config` → Editor mode, keybindings and vim mode operate independently:
 
 * **Vim mode** handles input at the text input level (cursor movement, modes, motions)
 * **Keybindings** handle actions at the component level (toggle todos, submit, etc.)

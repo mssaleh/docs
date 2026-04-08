@@ -28,7 +28,7 @@
 | `Ctrl+X Ctrl+K`                                   | Kill all background agents. Press twice within 3 seconds to confirm | Background agent control                                                                                                                                             |
 | `Ctrl+D`                                          | Exit Claude Code session                                            | EOF signal                                                                                                                                                           |
 | `Ctrl+G` or `Ctrl+X Ctrl+E`                       | Open in default text editor                                         | Edit your prompt or custom response in your default text editor. `Ctrl+X Ctrl+E` is the readline-native binding                                                      |
-| `Ctrl+L`                                          | Redraw the screen                                                   | Repaints the current UI without clearing conversation history                                                                                                        |
+| `Ctrl+L`                                          | Clear prompt input                                                  | Clears typed text, keeps conversation history                                                                                                                        |
 | `Ctrl+O`                                          | Toggle verbose output                                               | Shows detailed tool usage and execution. Also expands MCP read and search calls, which collapse to a single line like "Queried slack" by default                     |
 | `Ctrl+R`                                          | Reverse search command history                                      | Search through previous commands interactively                                                                                                                       |
 | `Ctrl+V` or `Cmd+V` (iTerm2) or `Alt+V` (Windows) | Paste image from clipboard                                          | Inserts an `[Image #N]` chip at the cursor so you can reference it positionally in your prompt                                                                       |
@@ -104,7 +104,7 @@ See the [commands reference](/en/commands) for the full list of built-in command
 
 ## Vim editor mode
 
-Enable vim-style editing with `/vim` command or configure permanently via `/config`.
+Enable vim-style editing via `/config` → Editor mode.
 
 ### Mode switching
 
