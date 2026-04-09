@@ -2,8 +2,8 @@
 title: How to upgrade to version 16
 description: Upgrade your Next.js Application from Version 15 to 16.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-16"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -458,7 +458,17 @@ bun add -D babel-plugin-react-compiler
 
 ### revalidateTag
 
-[`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) has a new function signature. You can pass a [`cacheLife`](/docs/app/api-reference/functions/cacheLife#reference) profile as the second argument.
+[`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) now requires a second argument specifying a [`cacheLife`](/docs/app/api-reference/functions/cacheLife#reference) profile. The single-argument form is deprecated and will produce a TypeScript error.
+
+```ts
+// Before
+revalidateTag('posts')
+
+// After
+revalidateTag('posts', 'max')
+```
+
+If you need immediate expiration rather than stale-while-revalidate, use [`updateTag`](/docs/app/api-reference/functions/updateTag) in Server Actions instead.
 
 ```ts filename="app/actions.ts" switcher
 'use server'

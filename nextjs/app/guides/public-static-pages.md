@@ -2,8 +2,8 @@
 title: Building public pages
 description: "Learn how to build public, \"static\" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites."
 url: "https://nextjs.org/docs/app/guides/public-static-pages"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

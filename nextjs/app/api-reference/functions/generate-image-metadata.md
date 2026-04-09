@@ -2,8 +2,8 @@
 title: generateImageMetadata
 description: Learn how to generate multiple images in a single Metadata API special file.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

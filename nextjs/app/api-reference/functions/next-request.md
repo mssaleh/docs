@@ -2,8 +2,8 @@
 title: NextRequest
 description: API Reference for NextRequest.
 url: "https://nextjs.org/docs/app/api-reference/functions/next-request"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

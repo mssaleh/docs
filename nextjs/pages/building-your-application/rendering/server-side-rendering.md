@@ -2,8 +2,8 @@
 title: Server-side Rendering (SSR)
 description: Use Server-side Rendering to render pages on each request.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

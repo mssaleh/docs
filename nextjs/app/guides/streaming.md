@@ -2,8 +2,8 @@
 title: Streaming
 description: Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
 url: "https://nextjs.org/docs/app/guides/streaming"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

@@ -2,8 +2,8 @@
 title: Link Component
 description: "Enable fast client-side navigation with the built-in `next/link` component."
 url: "https://nextjs.org/docs/app/api-reference/components/link"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"

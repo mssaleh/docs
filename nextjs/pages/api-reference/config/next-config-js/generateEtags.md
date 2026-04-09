@@ -2,8 +2,8 @@
 title: generateEtags
 description: Next.js will generate etags for every page by default. Learn more about how to disable etag generation here.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/generateEtags"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

@@ -2,8 +2,8 @@
 title: Next.js Community
 description: Get involved in the Next.js community.
 url: "https://nextjs.org/docs/community"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 ---
 
 

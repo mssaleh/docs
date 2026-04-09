@@ -2,8 +2,8 @@
 title: Adapters
 description: Build deployment adapters for Next.js platforms and infrastructure.
 url: "https://nextjs.org/docs/app/api-reference/adapters"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---

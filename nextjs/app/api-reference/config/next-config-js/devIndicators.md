@@ -2,8 +2,8 @@
 title: devIndicators
 description: "Configuration options for the on-screen indicator that gives context about the current route you're viewing during development."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/devIndicators"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

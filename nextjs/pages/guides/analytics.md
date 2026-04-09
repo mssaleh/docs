@@ -2,8 +2,8 @@
 title: How to set up analytics
 description: Measure and track page performance using Next.js
 url: "https://nextjs.org/docs/pages/guides/analytics"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

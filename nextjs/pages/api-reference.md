@@ -2,8 +2,8 @@
 title: API Reference
 description: Next.js API Reference for the Pages Router.
 url: "https://nextjs.org/docs/pages/api-reference"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 ---
 

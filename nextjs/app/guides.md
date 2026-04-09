@@ -2,8 +2,8 @@
 title: Guides
 description: Learn how to implement common patterns and real-world use cases using Next.js
 url: "https://nextjs.org/docs/app/guides"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 ---
 
 
@@ -110,6 +110,8 @@ lastUpdated: 2026-03-31
   - Learn how to upgrade to the latest versions of Next.js.
 - [Videos](/docs/app/guides/videos)
   - Recommendations and best practices for optimizing videos in your Next.js application.
+- [View transitions](/docs/app/guides/view-transitions)
+  - Learn how to use view transitions to communicate meaning during navigation, loading, and content changes in a Next.js app.
 
 ---
 

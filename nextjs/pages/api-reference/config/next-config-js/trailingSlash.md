@@ -2,8 +2,8 @@
 title: trailingSlash
 description: Configure Next.js pages to resolve with or without a trailing slash.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/trailingSlash"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

@@ -2,8 +2,8 @@
 title: Edge Runtime
 description: API Reference for the Edge Runtime.
 url: "https://nextjs.org/docs/pages/api-reference/edge"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

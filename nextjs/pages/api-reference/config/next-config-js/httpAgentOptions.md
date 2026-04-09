@@ -2,8 +2,8 @@
 title: httpAgentOptions
 description: Next.js will automatically use HTTP Keep-Alive by default. Learn more about how to disable HTTP Keep-Alive here.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/httpAgentOptions"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

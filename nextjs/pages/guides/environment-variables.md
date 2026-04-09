@@ -2,8 +2,8 @@
 title: How to use environment variables in Next.js
 description: Learn to add and access environment variables in your Next.js application.
 url: "https://nextjs.org/docs/pages/guides/environment-variables"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

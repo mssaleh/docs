@@ -2,8 +2,8 @@
 title: viewTransition
 description: Enable ViewTransition API from React in App Router
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -13,7 +13,7 @@ prerequisites:
 
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
-`viewTransition` is an experimental flag that enables the new [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) in React. This API allows you to leverage the native View Transitions browser API to create seamless transitions between UI states.
+`viewTransition` enables React's [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) integration in Next.js. This lets you animate navigations, loading states, and content changes using the native browser View Transitions API.
 
 To enable this feature, you need to set the `viewTransition` property to `true` in your `next.config.js` file.
 
@@ -28,9 +28,10 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-> Important Notice: The `<ViewTransition>` Component is already available in React's Canary release channel.
-> `experimental.viewTransition` is only required to enable deeper integration with Next.js features e.g. automatically
-> [adding Transition types](https://react.dev/reference/react/addTransitionType) for navigations. Next.js specific transition types are not implemented yet.
+> \[!NOTE]
+> The [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) component is provided by React.
+> The `experimental.viewTransition` flag enables Next.js integration, such as triggering
+> transitions during route navigations.
 
 ## Usage
 
@@ -42,9 +43,9 @@ import { ViewTransition } from 'react'
 
 ### Live Demo
 
-Check out our [Next.js View Transition Demo](https://view-transition-example.vercel.app) to see this feature in action.
+Check out the [View Transitions Demo](https://react-view-transitions-demo.labs.vercel.dev) to see this feature in action, or read the [designing view transitions guide](/docs/app/guides/view-transitions) for a step-by-step walkthrough.
 
-As this API evolves, we will update our documentation and share more examples. However, for now, we strongly advise against using this feature in production.
+The View Transitions API is a baseline web standard, and browser support continues to expand. As React's [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) component evolves, more transition patterns and use cases will become available.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

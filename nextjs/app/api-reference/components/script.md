@@ -2,8 +2,8 @@
 title: Script Component
 description: "Optimize third-party scripts in your Next.js application using the built-in `next/script` Component."
 url: "https://nextjs.org/docs/app/api-reference/components/script"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"

@@ -2,8 +2,8 @@
 title: Guides
 description: Learn how to implement common UI patterns and use cases using Next.js
 url: "https://nextjs.org/docs/pages/guides"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 ---
 

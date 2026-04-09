@@ -2,8 +2,8 @@
 title: Output Types
 description: Reference for all build output types exposed to adapters.
 url: "https://nextjs.org/docs/app/api-reference/adapters/output-types"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -87,7 +87,7 @@ React pages from the `app/` directory:
   type: 'APP_PAGE'
   id: string           // Route identifier
   filePath: string     // Path to the built file
-  pathname: string     // URL pathname.Includes .rsc suffix for RSC routes
+  pathname: string     // URL pathname. Includes .rsc suffix for RSC routes
   sourcePage: string   // Original relative source file path
   runtime: 'nodejs' | 'edge' // Runtime the route is built for
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)

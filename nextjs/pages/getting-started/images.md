@@ -2,8 +2,8 @@
 title: Image Optimization
 description: "Optimize your images with the built-in `next/image` component."
 url: "https://nextjs.org/docs/pages/getting-started/images"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"
@@ -114,6 +114,50 @@ export default function Page() {
   )
 }
 ```
+
+### Images without static imports
+
+If you can't use a static `import` for your images, you can use a dynamic `import()` in a Server Component to still get automatic `width`, `height`, and `blurDataURL`:
+
+```tsx filename="app/blog/[slug]/page.tsx" switcher
+import Image from 'next/image'
+
+async function PostImage({
+  imageFilename,
+  alt,
+}: {
+  imageFilename: string
+  alt: string
+}) {
+  const { default: image } = await import(
+    `../content/blog/images/${imageFilename}`
+  )
+  // image contains width, height, and blurDataURL
+  return <Image src={image} alt={alt} />
+}
+```
+
+```jsx filename="app/blog/[slug]/page.js" switcher
+import Image from 'next/image'
+
+async function PostImage({ imageFilename, alt }) {
+  const { default: image } = await import(
+    `../content/blog/images/${imageFilename}`
+  )
+  // image contains width, height, and blurDataURL
+  return <Image src={image} alt={alt} />
+}
+```
+
+If you have a [path alias](https://www.typescriptlang.org/tsconfig/#paths) configured (e.g. `@/`), you can use it instead of a relative path:
+
+```tsx
+const { default: image } = await import(
+  `@/content/blog/images/${imageFilename}`
+)
+```
+
+The path must include a static prefix (like `../content/blog/images/`). Be as specific as possible, since **all** files matching that prefix are bundled. Only files in your specified directory are included, so external input cannot reach outside of it.
 
 ## Remote images
 

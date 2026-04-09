@@ -2,8 +2,8 @@
 title: Testing Adapters
 description: Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
 url: "https://nextjs.org/docs/pages/api-reference/adapters/testing-adapters"
-version: 16.2.2
-lastUpdated: 2026-03-31
+version: 16.2.3
+lastUpdated: 2026-04-08
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"
@@ -176,6 +176,9 @@ require('fs').writeFileSync('package.json',JSON.stringify(pkg,null,2));
 # Set the adapter path so that the app uses it.
 export NEXT_ADAPTER_PATH="${ADAPTER_DIR}/dist/index.js"
 
+# Build the app
+pnpm build
+
 # Write any metadata needed later to files in the working directory.
 BUILD_ID="$(cat .next/BUILD_ID)"
 DEPLOYMENT_ID="my-adapter-local"
@@ -188,9 +191,6 @@ IMMUTABLE_ASSET_TOKEN="undefined"
   echo "DEPLOYMENT_ID: $DEPLOYMENT_ID"
   echo "IMMUTABLE_ASSET_TOKEN: $IMMUTABLE_ASSET_TOKEN"
 } >> .adapter-build.log
-
-# Build the app
-pnpm build
 
 # Start or deploy the app. Capture the URL at this point or make the script output the URL to stdout.
 provider-cli-to-deploy
