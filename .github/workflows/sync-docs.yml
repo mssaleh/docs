@@ -11,7 +11,7 @@ on:
         default: false
         type: boolean
       source:
-        description: Optional source id to sync (react, nextjs, claude-code, claude-api, mcp)
+        description: Optional source id to sync (react, nextjs, claude-code, claude-api, mcp, llamaindex)
         required: false
         type: string
 
