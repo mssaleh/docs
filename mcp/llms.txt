@@ -25,6 +25,7 @@
 - [Architecture overview](https://modelcontextprotocol.io/docs/learn/architecture.md)
 - [Understanding MCP clients](https://modelcontextprotocol.io/docs/learn/client-concepts.md)
 - [Understanding MCP servers](https://modelcontextprotocol.io/docs/learn/server-concepts.md)
+- [Versioning](https://modelcontextprotocol.io/docs/learn/versioning.md)
 - [SDKs](https://modelcontextprotocol.io/docs/sdk.md): Official SDKs for building with Model Context Protocol
 - [Debugging](https://modelcontextprotocol.io/docs/tools/debugging.md): A comprehensive guide to debugging Model Context Protocol (MCP) integrations
 - [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector.md): In-depth guide to using the MCP Inspector for testing and debugging Model Context Protocol servers
@@ -101,4 +102,3 @@
 - [Completion](https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/completion.md)
 - [Logging](https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/logging.md)
 - [Pagination](https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination.md)
-- [Versioning](https://modelcontextprotocol.io/specification/versioning.md)
