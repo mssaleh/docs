@@ -81,6 +81,19 @@
         "repo": "modelcontextprotocol"
       },
       "versionFile": "mcp/mcp-version.txt"
+    },
+    {
+      "id": "llamaindex",
+      "displayName": "LlamaIndex",
+      "targetDir": "llamaindex",
+      "llmsUrl": "https://developers.llamaindex.ai/llms.txt",
+      "stripPrefix": "https://developers.llamaindex.ai/",
+      "versionStrategy": "github-release",
+      "releaseRepo": {
+        "owner": "run-llama",
+        "repo": "llama_index"
+      },
+      "versionFile": "llamaindex/llamaindex-version.txt"
     }
   ]
 }
