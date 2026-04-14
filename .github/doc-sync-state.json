@@ -10,9 +10,9 @@
     "reason": "forced"
   },
   "claude-code": {
-    "version": "2.1.104",
-    "last_synced_at": "2026-04-13T08:11:40.641Z",
-    "reason": "forced"
+    "version": "2.1.105",
+    "last_synced_at": "2026-04-14T04:20:16.676Z",
+    "reason": "new-release"
   },
   "claude-api": {
     "version": null,
@@ -25,8 +25,8 @@
     "reason": "forced"
   },
   "llamaindex": {
-    "version": null,
-    "last_synced_at": "2026-04-13T08:11:40.641Z",
-    "reason": "forced"
+    "version": "0.14.20",
+    "last_synced_at": "2026-04-14T04:20:16.676Z",
+    "reason": "initial-release-sync"
   }
 }
