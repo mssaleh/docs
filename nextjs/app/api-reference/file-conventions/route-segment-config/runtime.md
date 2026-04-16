@@ -2,8 +2,8 @@
 title: runtime
 description: API reference for the runtime route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/runtime"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Route Segment Config: /docs/app/api-reference/file-conventions/route-segment-config"

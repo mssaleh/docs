@@ -2,8 +2,8 @@
 title: Error Handling
 description: Learn how to display expected errors and handle uncaught exceptions.
 url: "https://nextjs.org/docs/app/getting-started/error-handling"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

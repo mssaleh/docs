@@ -2,8 +2,8 @@
 title: Parallel Routes
 description: Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynamic applications.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

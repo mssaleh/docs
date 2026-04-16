@@ -2,8 +2,8 @@
 title: How to set up Vitest with Next.js
 description: Learn how to set up Next.js with Vitest and React Testing Library - two popular unit testing libraries.
 url: "https://nextjs.org/docs/pages/guides/testing/vitest"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

@@ -2,8 +2,8 @@
 title: Internationalization
 description: Add support for multiple languages with internationalized routing and localized content.
 url: "https://nextjs.org/docs/app/guides/internationalization"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

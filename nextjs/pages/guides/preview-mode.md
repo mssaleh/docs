@@ -2,8 +2,8 @@
 title: How to preview content with Preview Mode in Next.js
 description: Next.js has the preview mode for statically generated pages. You can learn how it works here.
 url: "https://nextjs.org/docs/pages/guides/preview-mode"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

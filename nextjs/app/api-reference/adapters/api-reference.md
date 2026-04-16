@@ -2,8 +2,8 @@
 title: API Reference
 description: "Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface."
 url: "https://nextjs.org/docs/app/api-reference/adapters/api-reference"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

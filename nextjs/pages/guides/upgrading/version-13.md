@@ -2,8 +2,8 @@
 title: How to upgrade to version 13
 description: Upgrade your Next.js Application from Version 12 to 13.
 url: "https://nextjs.org/docs/pages/guides/upgrading/version-13"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

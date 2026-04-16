@@ -2,8 +2,8 @@
 title: Tailwind CSS
 description: Style your Next.js Application using Tailwind CSS.
 url: "https://nextjs.org/docs/pages/guides/tailwind-v3-css"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

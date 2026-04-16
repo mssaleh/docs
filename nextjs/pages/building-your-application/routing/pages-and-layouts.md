@@ -2,8 +2,8 @@
 title: Pages and Layouts
 description: Create your first page and shared layout with the Pages Router.
 url: "https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

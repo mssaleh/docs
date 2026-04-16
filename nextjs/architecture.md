@@ -2,8 +2,8 @@
 title: Architecture
 description: How Next.js Works
 url: "https://nextjs.org/docs/architecture"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 ---
 
 

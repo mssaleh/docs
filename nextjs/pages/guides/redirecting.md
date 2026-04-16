@@ -2,8 +2,8 @@
 title: How to handle redirects in Next.js
 description: Learn the different ways to handle redirects in Next.js.
 url: "https://nextjs.org/docs/pages/guides/redirecting"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

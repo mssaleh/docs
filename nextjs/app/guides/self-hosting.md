@@ -2,8 +2,8 @@
 title: How to self-host your Next.js application
 description: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
 url: "https://nextjs.org/docs/app/guides/self-hosting"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

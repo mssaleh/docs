@@ -2,8 +2,8 @@
 title: viewTransition
 description: Enable ViewTransition API from React in App Router
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

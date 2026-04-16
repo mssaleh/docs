@@ -2,8 +2,8 @@
 title: How to implement internationalization in Next.js
 description: Next.js has built-in support for internationalized routing and language detection. Learn more here.
 url: "https://nextjs.org/docs/pages/guides/internationalization"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

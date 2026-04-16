@@ -2,8 +2,8 @@
 title: serverExternalPackages
 description: "Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverExternalPackages"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

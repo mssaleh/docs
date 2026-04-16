@@ -2,8 +2,8 @@
 title: generateBuildId
 description: Configure the build id, which is used to identify the current build in which your application is being served.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/generateBuildId"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

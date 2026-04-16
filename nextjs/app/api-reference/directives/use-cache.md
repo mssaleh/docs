@@ -2,8 +2,8 @@
 title: use cache
 description: "Learn how to use the \"use cache\" directive to cache data in your Next.js application."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"

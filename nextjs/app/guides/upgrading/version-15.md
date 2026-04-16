@@ -2,8 +2,8 @@
 title: How to upgrade to version 15
 description: Upgrade your Next.js Application from Version 14 to 15.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-15"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"

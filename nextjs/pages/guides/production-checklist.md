@@ -2,8 +2,8 @@
 title: How to optimize your Next.js application for production
 description: Recommendations to ensure the best performance and user experience before taking your Next.js application to production.
 url: "https://nextjs.org/docs/pages/guides/production-checklist"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

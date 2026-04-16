@@ -2,8 +2,8 @@
 title: Accessibility
 description: The built-in accessibility features of Next.js.
 url: "https://nextjs.org/docs/architecture/accessibility"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 prerequisites:
   - "Architecture: /docs/architecture"
 ---

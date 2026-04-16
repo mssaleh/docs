@@ -2,8 +2,8 @@
 title: Create a new Next.js application
 description: "How to create a new Next.js application with `create-next-app`. Set up TypeScript, ESLint,and configure your `next.config.js` file."
 url: "https://nextjs.org/docs/pages/getting-started/installation"
-version: 16.2.3
-lastUpdated: 2026-04-08
+version: 16.2.4
+lastUpdated: 2026-04-15
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"
