@@ -1,11 +1,11 @@
-# Claude on Amazon Bedrock
+# Claude on Amazon Bedrock (legacy)
 
-Anthropic's Claude models are now generally available through Amazon Bedrock.
+The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.
 
 ---
 
 <Note>
-This page covers the Amazon Bedrock integration available today (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding). A research preview of a new AWS-managed offering, with the Messages API at `/anthropic/v1/messages` and SSE streaming, is documented at [Claude in Amazon Bedrock (research preview)](/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview).
+This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming.
 </Note>
 
 Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](/docs/en/api/client-sdks).
@@ -18,7 +18,7 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
 3. Verify that your credentials are working:
 
-```bash Shell
+```bash
 aws sts get-caller-identity
 ```
 
@@ -124,19 +124,27 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 #### API model IDs
 
+<Note>
+  Claude Opus 4.7 is reachable through `InvokeModel` on `bedrock-runtime`.
+  These requests are served by the same infrastructure as the
+  [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock)
+  endpoint. For the native Messages API request shape and full feature
+  parity, use that page. Claude Opus 4.7 is omitted from the model table
+  on this page because it does not have an ARN-versioned model ID.
+</Note>
+
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.6 | anthropic.claude-sonnet-4-6 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
-| Claude Sonnet 4 | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
+| Claude Sonnet 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
 | Claude Sonnet 3.7 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
 | Claude Opus 4.5 | anthropic.claude-opus-4-5-20251101-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Opus 4.1 | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
-| Claude Opus 4 | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
+| Claude Opus 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
-| Claude Haiku 3 <Tooltip tooltipContent="Deprecated as of February 19, 2026. Retiring April 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-haiku-20240307-v1:0 | No | Yes | Yes | No | Yes |
 
 For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section below.
 
@@ -648,7 +656,7 @@ For more details on the two document processing modes and their limitations, ref
 
 ### Context window
 
-Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
+Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Amazon Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -662,7 +670,7 @@ Starting with **Claude Sonnet 4.5 and all future models**, Amazon Bedrock offers
 Regional endpoints include a 10% pricing premium over global endpoints.
 
 <Note>
-This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.
+This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 </Note>
 
 ### When to use each option
@@ -681,9 +689,9 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 ### Implementation
 
-**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4):**
+**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4 (deprecated)):**
 
-The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
+The model IDs for Claude Sonnet 4.5 and 4 (deprecated) already include the `global.` prefix:
 
 <CodeGroup>
 ```bash CLI

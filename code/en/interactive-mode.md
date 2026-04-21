@@ -13,8 +13,8 @@
 
   **macOS users**: Option/Alt key shortcuts (`Alt+B`, `Alt+F`, `Alt+Y`, `Alt+M`, `Alt+P`, `Alt+T`) require configuring Option as Meta in your terminal:
 
-  * **iTerm2**: settings → Profiles → Keys → set Left/Right Option key to "Esc+"
-  * **Terminal.app**: settings → Profiles → Keyboard → check "Use Option as Meta Key"
+  * **iTerm2**: Settings → Profiles → Keys → General → set Left/Right Option key to "Esc+"
+  * **Apple Terminal**: Settings → Profiles → Keyboard → check "Use Option as Meta Key"
   * **VS Code**: set `"terminal.integrated.macOptionIsMeta": true` in VS Code settings
 
   See [Terminal configuration](/en/terminal-config) for details.
@@ -35,7 +35,7 @@
 | `Ctrl+B`                                          | Background running tasks                                            | Backgrounds bash commands and agents. Tmux users press twice                                                                                                                                                                                                                                           |
 | `Ctrl+T`                                          | Toggle task list                                                    | Show or hide the [task list](#task-list) in the terminal status area                                                                                                                                                                                                                                   |
 | `Left/Right arrows`                               | Cycle through dialog tabs                                           | Navigate between tabs in permission dialogs and menus                                                                                                                                                                                                                                                  |
-| `Up/Down arrows`                                  | Navigate command history                                            | Recall previous inputs                                                                                                                                                                                                                                                                                 |
+| `Up/Down arrows` or `Ctrl+P`/`Ctrl+N`             | Move cursor or navigate command history                             | In multiline input, first moves the cursor within the prompt. Once the cursor is already on the top or bottom edge, pressing again navigates command history                                                                                                                                           |
 | `Esc` + `Esc`                                     | Rewind or summarize                                                 | Restore code and/or conversation to a previous point, or summarize from a selected message                                                                                                                                                                                                             |
 | `Shift+Tab` or `Alt+M` (some configurations)      | Cycle permission modes                                              | Cycle through `default`, `acceptEdits`, `plan`, and any modes you have enabled, such as `auto` or `bypassPermissions`. See [permission modes](/en/permission-modes).                                                                                                                                   |
 | `Option+P` (macOS) or `Alt+P` (Windows/Linux)     | Switch model                                                        | Switch models without clearing your prompt                                                                                                                                                                                                                                                             |
@@ -44,14 +44,17 @@
 
 ### Text editing
 
-| Shortcut                 | Description                  | Context                                                                                                       |
-| :----------------------- | :--------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| `Ctrl+K`                 | Delete to end of line        | Stores deleted text for pasting                                                                               |
-| `Ctrl+U`                 | Clear entire input buffer    | Stores cleared text for pasting with `Ctrl+Y`. `Cmd+Backspace` deletes from cursor to line start              |
-| `Ctrl+Y`                 | Paste deleted text           | Paste text deleted with `Ctrl+K` or `Ctrl+U`                                                                  |
-| `Alt+Y` (after `Ctrl+Y`) | Cycle paste history          | After pasting, cycle through previously deleted text. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
-| `Alt+B`                  | Move cursor back one word    | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS                                      |
-| `Alt+F`                  | Move cursor forward one word | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS                                      |
+| Shortcut                 | Description                          | Context                                                                                                                                                                               |
+| :----------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Ctrl+A`                 | Move cursor to start of current line | In multiline input, moves to the start of the current logical line                                                                                                                    |
+| `Ctrl+E`                 | Move cursor to end of current line   | In multiline input, moves to the end of the current logical line                                                                                                                      |
+| `Ctrl+K`                 | Delete to end of line                | Stores deleted text for pasting                                                                                                                                                       |
+| `Ctrl+U`                 | Delete from cursor to line start     | Stores deleted text for pasting. Repeat to clear across lines in multiline input. On macOS, terminal emulators including iTerm2 and Terminal.app map `Cmd+Backspace` to this shortcut |
+| `Ctrl+W`                 | Delete previous word                 | Stores deleted text for pasting. On Windows, `Ctrl+Backspace` also deletes the previous word                                                                                          |
+| `Ctrl+Y`                 | Paste deleted text                   | Paste text deleted with `Ctrl+K`, `Ctrl+U`, or `Ctrl+W`                                                                                                                               |
+| `Alt+Y` (after `Ctrl+Y`) | Cycle paste history                  | After pasting, cycle through previously deleted text. Requires [Option as Meta](#keyboard-shortcuts) on macOS                                                                         |
+| `Alt+B`                  | Move cursor back one word            | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS                                                                                                              |
+| `Alt+F`                  | Move cursor forward one word         | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS                                                                                                              |
 
 ### Theme and display
 
@@ -61,16 +64,16 @@
 
 ### Multiline input
 
-| Method           | Shortcut       | Context                                                 |
-| :--------------- | :------------- | :------------------------------------------------------ |
-| Quick escape     | `\` + `Enter`  | Works in all terminals                                  |
-| macOS default    | `Option+Enter` | Default on macOS                                        |
-| Shift+Enter      | `Shift+Enter`  | Works out of the box in iTerm2, WezTerm, Ghostty, Kitty |
-| Control sequence | `Ctrl+J`       | Line feed character for multiline                       |
-| Paste mode       | Paste directly | For code blocks, logs                                   |
+| Method           | Shortcut       | Context                                                                                            |
+| :--------------- | :------------- | :------------------------------------------------------------------------------------------------- |
+| Quick escape     | `\` + `Enter`  | Works in all terminals                                                                             |
+| Option key       | `Option+Enter` | After enabling [Option as Meta](/en/terminal-config#enable-option-key-shortcuts-on-macos) on macOS |
+| Shift+Enter      | `Shift+Enter`  | Native in iTerm2, WezTerm, Ghostty, Kitty, Warp, Apple Terminal                                    |
+| Control sequence | `Ctrl+J`       | Works in any terminal without configuration                                                        |
+| Paste mode       | Paste directly | For code blocks, logs                                                                              |
 
 <Tip>
-  Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, and Kitty. For other terminals (VS Code, Alacritty, Zed, Warp), run `/terminal-setup` to install the binding.
+  Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, and Apple Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run `/terminal-setup` to install the binding.
 </Tip>
 
 ### Quick commands
@@ -162,6 +165,7 @@ Enable vim-style editing via `/config` → Editor mode.
 | `>>`           | Indent line             |
 | `<<`           | Dedent line             |
 | `J`            | Join lines              |
+| `u`            | Undo                    |
 | `.`            | Repeat last change      |
 
 ### Text objects (NORMAL mode)

@@ -40,7 +40,7 @@ You will be billed for output tokens up until the refusal.
 </Note>
 
 <Tip>
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Sonnet 4 (`claude-sonnet-4-20250514`), which has different usage restrictions.
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
 ## Implementation guide
@@ -48,14 +48,14 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 Here's how to detect and handle streaming refusals in your application:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 # Stream request and check for refusal
 response=$(curl -N https://api.anthropic.com/v1/messages \
   --header "anthropic-version: 2023-06-01" \
   --header "content-type: application/json" \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --data '{
-    "model": "claude-sonnet-4-6",
+    "model": "claude-opus-4-7",
     "messages": [{"role": "user", "content": "Hello"}],
     "max_tokens": 256,
     "stream": true
@@ -86,7 +86,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-sonnet-4-6",
+        model="claude-opus-4-7",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
@@ -113,7 +113,7 @@ function resetConversation() {
 try {
   const stream = await client.messages.stream({
     messages: [...messages, { role: "user", content: "Hello" }],
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1024
   });
 
@@ -198,7 +198,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.Model("claude-sonnet-4-6"),
+		Model:     anthropic.Model("claude-opus-4-7"),
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
@@ -288,7 +288,7 @@ try {
         messages: [
             ['role' => 'user', 'content' => 'Hello']
         ],
-        model: 'claude-sonnet-4-6',
+        model: 'claude-opus-4-7',
     );
 
     foreach ($stream as $event) {
@@ -317,7 +317,7 @@ end
 
 begin
   stream = client.messages.stream(
-    model: :"claude-sonnet-4-6",
+    model: :"claude-opus-4-7",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }]
   )

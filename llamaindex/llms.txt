@@ -4,36 +4,37 @@
 
 ## Accessing Documentation Programmatically
 
-All documentation pages are available as raw Markdown by appending `index.md` to the page URL. For example, the page at `https://developers.llamaindex.ai/python/cloud/llamaparse/migration-v1-to-v2/` has its Markdown source at `https://developers.llamaindex.ai/python/cloud/llamaparse/migration-v1-to-v2/index.md`.
+All documentation pages are available as raw Markdown by appending `index.md` to the page URL. For example, the page at `https://developers.llamaindex.ai/llamaparse/parse/getting_started/` has its Markdown source at `https://developers.llamaindex.ai/llamaparse/parse/getting_started/index.md`.
 
 The site also exposes REST API endpoints for searching and browsing documentation:
 
 - **Search**: `GET https://developers.llamaindex.ai/api/search?q=<query>&limit=10&section=<section>&full-content=true` — Full-text BM25 search across all docs. `section` and `full-content` are optional.
 - **Grep**: `GET https://developers.llamaindex.ai/api/grep?q=<regex>&context=0&case-sensitive=false&max-results=100` — Regex pattern matching across documentation content.
-- **Read**: `GET https://developers.llamaindex.ai/api/read?path=<doc-path>&startLine=0&endLine=500` — Retrieve content of a specific documentation page (e.g. `path=/python/cloud/llamaparse/migration-v1-to-v2/`). Returns the first 500 lines by default. Use `startLine` and `endLine` to paginate through longer documents.
+- **Read**: `GET https://developers.llamaindex.ai/api/read?path=<doc-path>&startLine=0&endLine=500` — Retrieve content of a specific documentation page (e.g. `path=/llamaparse/parse/getting_started/`). Returns the first 500 lines by default. Use `startLine` and `endLine` to paginate through longer documents.
 - **List**: `GET https://developers.llamaindex.ai/api/list?section=<section>&path=<path>&depth=2` — Browse the documentation tree structure. All parameters are optional.
 
 All API endpoints return JSON with CORS enabled (`Access-Control-Allow-Origin: *`).
 
 ## LlamaCloud
-- [Cookbooks](https://developers.llamaindex.ai/python/cloud/cookbooks/)
-- [Quickstart](https://developers.llamaindex.ai/python/cloud/): Documentation for LlamaParse, the enterprise agentic OCR and document agent platform.
-- [LlamaClassify Examples](https://developers.llamaindex.ai/python/cloud/llamaclassify/examples/): Collection of examples demonstrating how to use the LlamaClassify for document classification.
-- [Getting Started](https://developers.llamaindex.ai/python/cloud/llamaclassify/getting_started/): Learn what the Classification API is, how rules work, and how to run classifications using the client SDK.
-- [Index Examples](https://developers.llamaindex.ai/python/cloud/llamacloud/examples/): Collection of examples demonstrating how to use Index for building RAG applications.
-- [Data Sinks](https://developers.llamaindex.ai/python/cloud/llamacloud/integrations/data_sinks/)
-- [Data Sources](https://developers.llamaindex.ai/python/cloud/llamacloud/integrations/data_sources/): Overview of data source integrations for Index for connecting and retrieving data for RAG use cases.
-- [Embedding Models](https://developers.llamaindex.ai/python/cloud/llamacloud/integrations/embedding_models/)
-- [LlamaExtract Examples](https://developers.llamaindex.ai/python/cloud/llamaextract/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.
-- [Getting Started](https://developers.llamaindex.ai/python/cloud/llamaextract/getting_started/): Introduction to LlamaExtract, a tool for extracting structured data from unstructured documents, available as a web UI, Python SDK, and REST API.
-- [LlamaExtract Examples](https://developers.llamaindex.ai/python/cloud/llamaextract/v1/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.
-- [Getting Started](https://developers.llamaindex.ai/python/cloud/llamaextract/v1/getting_started/): Introduction to LlamaExtract, a tool for extracting structured data from unstructured documents, available as a web UI, Python SDK, and REST API.
-- [Overview of Parse](https://developers.llamaindex.ai/python/cloud/llamaparse/): Introduction to Parse, a document parsing service that transforms unstructured documents into LLM-ready data with support for various file types and output formats.
-- [LlamaParse Examples](https://developers.llamaindex.ai/python/cloud/llamaparse/tutorials/): Collection of examples demonstrating how to use the LlamaParse
-- [LlamaParse Examples with llama-cloud-services](https://developers.llamaindex.ai/python/cloud/llamaparse/v1/examples/): Collection of examples demonstrating how to use the LlamaParse
-- [LlamaSheets Examples](https://developers.llamaindex.ai/python/cloud/llamasheets/examples/): Collection of examples demonstrating how to use the LlamaSheets API for spreadsheet understanding.
-- [Split Examples](https://developers.llamaindex.ai/python/cloud/split/examples/): Collection of examples demonstrating how to use the Split API for document segmentation.
-- [Getting Started](https://developers.llamaindex.ai/python/cloud/split/getting_started/): Introduction to the Split API, a tool for automatically segmenting concatenated PDFs into logical document sections based on content categories.
+- [LlamaClassify Examples](https://developers.llamaindex.ai/llamaparse/classify/examples/): Collection of examples demonstrating how to use the LlamaClassify for document classification.
+- [Overview of Classify](https://developers.llamaindex.ai/llamaparse/classify/): Learn what the Classification API is, how rules work, and how to run classifications using the client SDK.
+- [Index Examples](https://developers.llamaindex.ai/llamaparse/cloud-index/examples/): Collection of examples demonstrating how to use Index for building RAG applications.
+- [Data Sinks](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/data_sinks/)
+- [Data Sources](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/data_sources/): Overview of data source integrations for Index for connecting and retrieving data for RAG use cases.
+- [Embedding Models](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/embedding_models/)
+- [Cookbooks](https://developers.llamaindex.ai/llamaparse/cookbooks/)
+- [LlamaExtract Examples](https://developers.llamaindex.ai/llamaparse/extract/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.
+- [Overview of Extract](https://developers.llamaindex.ai/llamaparse/extract/): Introduction to LlamaExtract, a tool for extracting structured data from unstructured documents, available as a web UI, Python SDK, and REST API.
+- [LlamaExtract Examples](https://developers.llamaindex.ai/llamaparse/extract/v1/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.
+- [Getting Started](https://developers.llamaindex.ai/llamaparse/extract/v1/getting_started/): Introduction to LlamaExtract, a tool for extracting structured data from unstructured documents, available as a web UI, Python SDK, and REST API.
+- [LlamaParse Platform Quickstart](https://developers.llamaindex.ai/llamaparse/): Install the SDK, get an API key, and run your first call against Parse, Extract, Classify, Split, Sheets, or Index — all from one platform.
+- [Parse Examples](https://developers.llamaindex.ai/llamaparse/parse/examples/): Runnable example tutorials demonstrating Parse for common document workflows — first parse, chart extraction, financial table extraction, custom prompts, batch processing, spreadsheets, and TypeScript/Node.js integration.
+- [Overview of Parse](https://developers.llamaindex.ai/llamaparse/parse/): Parse is an agentic document parser built for LLM pipelines—layout-aware OCR that turns PDFs, scans, tables, and charts into clean markdown, text, or JSON.
+- [LlamaParse Examples with llama-cloud-services](https://developers.llamaindex.ai/llamaparse/parse/v1/examples/): Collection of examples demonstrating how to use the LlamaParse
+- [LlamaSheets Examples](https://developers.llamaindex.ai/llamaparse/sheets/examples/): Collection of examples demonstrating how to use the LlamaSheets API for spreadsheet understanding.
+- [Getting Started](https://developers.llamaindex.ai/llamaparse/sheets/): Introduction to LlamaSheets, a new beta service for extracting regions and tables from spreadsheets.
+- [Split Examples](https://developers.llamaindex.ai/llamaparse/split/examples/): Collection of examples demonstrating how to use the Split API for document segmentation.
+- [Overview of Split](https://developers.llamaindex.ai/llamaparse/split/): Introduction to the Split API, a tool for automatically segmenting concatenated PDFs into logical document sections based on content categories.
 
 ## Python LlamaAgents & Workflows
 - [Introduction](https://developers.llamaindex.ai/python/llamaagents/workflows/)

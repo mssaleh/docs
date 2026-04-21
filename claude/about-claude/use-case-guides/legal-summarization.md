@@ -75,7 +75,7 @@ See the guide on [establishing success criteria](/docs/en/test-and-evaluate/deve
 
 ### Select the right Claude model
 
-Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.6 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5.
+Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.7 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5.
 
 To help estimate these costs, below is a comparison of the cost to summarize 1,000 sublease agreements using both Sonnet and Haiku:
 
@@ -89,15 +89,15 @@ To help estimate these costs, below is a comparison of the cost to summarize 1,0
     * Output tokens per summary: 350
     * Total output tokens: 350,000
 
-* **Claude Opus 4.6 estimated cost**
+* **Claude Opus 4.7 estimated cost**
     * Input token cost: 86 MTok * \$5.00/MTok = \$430
     * Output token cost: 0.35 MTok * \$25.00/MTok = \$8.75
     * Total cost: \$430.00 + \$8.75 = \$438.75
 
-* **Claude Haiku 3 estimated cost**
-    * Input token cost: 86 MTok * \$0.25/MTok = \$21.50
-    * Output token cost: 0.35 MTok * \$1.25/MTok = \$0.44
-    * Total cost: \$21.50 + \$0.44 = \$21.96
+* **Claude Haiku 4.5 estimated cost**
+    * Input token cost: 86 MTok * \$1.00/MTok = \$86.00
+    * Output token cost: 0.35 MTok * \$5.00/MTok = \$1.75
+    * Total cost: \$86.00 + \$1.75 = \$87.75
 
 <Tip>Actual costs may differ from these estimates. These estimates are based on the example highlighted in the section on [prompting](#build-a-strong-prompt).</Tip>
 
@@ -160,7 +160,7 @@ client = anthropic.Anthropic()
 
 
 def summarize_document(
-    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+    text, details_to_extract, model="claude-opus-4-7", max_tokens=1000
 ):
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = "\n".join(details_to_extract)
@@ -189,12 +189,7 @@ def summarize_document(
         system="You are a legal analyst specializing in real estate law, known for highly accurate and detailed summaries of sublease agreements.",
         messages=[
             {"role": "user", "content": prompt},
-            {
-                "role": "assistant",
-                "content": "Here is the summary of the sublease agreement: <summary>",
-            },
         ],
-        stop_sequences=["</summary>"],
     )
 
     return response.content[0].text
@@ -264,7 +259,7 @@ def chunk_text(text, chunk_size=20000):
 
 
 def summarize_long_document(
-    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+    text, details_to_extract, model="claude-opus-4-7", max_tokens=1000
 ):
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = "\n".join(details_to_extract)
@@ -305,12 +300,7 @@ def summarize_long_document(
         system="You are a legal expert that summarizes notes on one document.",
         messages=[
             {"role": "user", "content": final_summary_prompt},
-            {
-                "role": "assistant",
-                "content": "Here is the summary of the sublease agreement: <summary>",
-            },
         ],
-        stop_sequences=["</summary>"],
     )
 
     return response.content[0].text
