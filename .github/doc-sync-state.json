@@ -10,9 +10,9 @@
     "reason": "forced"
   },
   "claude-code": {
-    "version": "2.1.117",
-    "last_synced_at": "2026-04-23T01:18:19.831Z",
-    "reason": "forced"
+    "version": "2.1.118",
+    "last_synced_at": "2026-04-23T04:22:39.945Z",
+    "reason": "new-release"
   },
   "claude-api": {
     "version": null,
