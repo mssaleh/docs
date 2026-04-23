@@ -3,7 +3,7 @@ title: deploymentId
 description: Configure a deployment identifier used for version skew protection and cache busting.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/deploymentId"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

@@ -3,7 +3,7 @@ title: transpilePackages
 description: "Automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`)."
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/transpilePackages"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

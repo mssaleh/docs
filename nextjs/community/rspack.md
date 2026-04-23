@@ -3,7 +3,7 @@ title: Rspack Integration
 description: "Use the `next-rspack` plugin to bundle your Next.js with Rspack."
 url: "https://nextjs.org/docs/community/rspack"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Community: /docs/community"
 ---

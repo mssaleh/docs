@@ -3,7 +3,7 @@ title: How revalidation works in Next.js
 description: A deep dive into how Next.js revalidates cached content, including the tag system, cache consistency, and multi-instance coordination.
 url: "https://nextjs.org/docs/app/guides/how-revalidation-works"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

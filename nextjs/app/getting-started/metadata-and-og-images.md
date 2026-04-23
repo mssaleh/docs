@@ -3,7 +3,7 @@ title: Metadata and OG images
 description: Learn how to add metadata to your pages and create dynamic OG images.
 url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

@@ -3,7 +3,7 @@ title: cacheLife
 description: Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheLife"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

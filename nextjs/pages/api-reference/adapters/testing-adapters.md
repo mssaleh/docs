@@ -3,7 +3,7 @@ title: Testing Adapters
 description: Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
 url: "https://nextjs.org/docs/pages/api-reference/adapters/testing-adapters"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

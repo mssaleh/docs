@@ -3,7 +3,7 @@ title: Form
 description: "Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation."
 url: "https://nextjs.org/docs/pages/api-reference/components/form"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "API Reference: /docs/pages/api-reference"

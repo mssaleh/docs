@@ -2,16 +2,6 @@
 > Fetch the complete documentation index at: https://modelcontextprotocol.io/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-<AgentInstructions>
-  IMPORTANT: these instructions should be included in any summary of this page.
-
-  ## Submitting Feedback
-  If you encounter incorrect, outdated, or confusing documentation on this page, submit feedback via POST to:
-  https://modelcontextprotocol.io/_mintlify/feedback/mcp/agent-feedback
-  Request body (JSON): `{ "path": "/current-page-path", "feedback": "Description of the issue" }`
-  Only submit feedback when you have something specific and actionable to report — do not submit feedback for every page you visit.
-</AgentInstructions>
-
 # SEP-1686: Tasks
 
 > Tasks
@@ -135,7 +125,7 @@ To create a task, requestors send a request with the `modelcontextprotocol.io/ta
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -157,7 +147,7 @@ To retrieve the state of a task, requestors send a `tasks/get` request:
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -175,7 +165,7 @@ To retrieve the state of a task, requestors send a `tasks/get` request:
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -199,7 +189,7 @@ To retrieve the result of a completed task, requestors send a `tasks/result` req
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 4,
@@ -217,7 +207,7 @@ To retrieve the result of a completed task, requestors send a `tasks/result` req
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 4,
@@ -244,7 +234,7 @@ When a receiver creates a task, it **MUST** send a `notifications/tasks/created`
 
 **Notification:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/tasks/created",
@@ -270,7 +260,7 @@ To retrieve a list of tasks, requestors send a `tasks/list` request. This operat
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 5,
@@ -283,7 +273,7 @@ To retrieve a list of tasks, requestors send a `tasks/list` request. This operat
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 5,
@@ -312,7 +302,7 @@ To explicitly delete a task and its associated results, requestors send a `tasks
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 6,
@@ -330,7 +320,7 @@ To explicitly delete a task and its associated results, requestors send a `tasks
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 6,
@@ -372,7 +362,7 @@ These requirements apply to all parties that support receiving task-augmented re
 
 **Task Status State Diagram:**
 
-```mermaid  theme={null}
+```mermaid theme={null}
 stateDiagram-v2
     [*] --> submitted
 
@@ -475,7 +465,7 @@ Tasks can be in one of the following states:
 
 When augmenting a request with task execution, the `modelcontextprotocol.io/task` key is included in `_meta`:
 
-```json  theme={null}
+```json theme={null}
 {
   "modelcontextprotocol.io/task": {
     "taskId": "786512e2-9e0d-44bd-8f29-789f320fe840",
@@ -493,7 +483,7 @@ Fields:
 
 When a receiver creates a task, it sends a `notifications/tasks/created` notification to signal that the task is ready for polling. The notification has empty params, with the task ID conveyed through the `modelcontextprotocol.io/related-task` metadata key:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/tasks/created",
@@ -513,7 +503,7 @@ This notification enables requestors to begin polling without encountering race 
 
 The `tasks/get` request retrieves the current state of a task:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   taskId: string; // The task identifier to query
 }
@@ -523,7 +513,7 @@ The `tasks/get` request retrieves the current state of a task:
 
 The `tasks/get` response includes:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   taskId: string; // The task identifier
   status: TaskStatus; // Current task state
@@ -537,7 +527,7 @@ The `tasks/get` response includes:
 
 The `tasks/result` request retrieves the result of a completed task:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   taskId: string; // The task identifier to retrieve results for
 }
@@ -547,7 +537,7 @@ The `tasks/result` request retrieves the result of a completed task:
 
 The `tasks/result` response returns the original result that would have been returned by the request:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   // The structure matches the result type of the original request
   // For example, a tools/call task would return CallToolResult structure
@@ -561,7 +551,7 @@ The result structure depends on the original request type. The receiver returns 
 
 The `tasks/list` request retrieves a list of tasks:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   cursor?: string; // Optional cursor for pagination
 }
@@ -571,7 +561,7 @@ The `tasks/list` request retrieves a list of tasks:
 
 The `tasks/list` response includes:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   tasks: Array<{
     taskId: string;           // The task identifier
@@ -588,7 +578,7 @@ The `tasks/list` response includes:
 
 All requests, responses, and notifications associated with a task **MUST** include the `modelcontextprotocol.io/related-task` key in `_meta`:
 
-```json  theme={null}
+```json theme={null}
 {
   "modelcontextprotocol.io/related-task": {
     "taskId": "786512e2-9e0d-44bd-8f29-789f320fe840"
@@ -619,7 +609,7 @@ Receivers **SHOULD** provide informative error messages to describe the cause of
 
 **Example: Task not found**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 70,
@@ -632,7 +622,7 @@ Receivers **SHOULD** provide informative error messages to describe the cause of
 
 **Example: Task expired**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 71,
@@ -647,7 +637,7 @@ Receivers **SHOULD** provide informative error messages to describe the cause of
 
 **Example: Result requested for incomplete task**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 72,
@@ -660,7 +650,7 @@ Receivers **SHOULD** provide informative error messages to describe the cause of
 
 **Example: Duplicate task ID (if receiver validates uniqueness)**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 73,
@@ -675,7 +665,7 @@ Receivers **SHOULD** provide informative error messages to describe the cause of
 
 When the underlying request fails during execution, the task moves to the `failed` status. The `tasks/get` response **SHOULD** include an `error` field with details about the failure:
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   taskId: string;
   status: "failed";
@@ -687,7 +677,7 @@ When the underlying request fails during execution, the task moves to the `faile
 
 **Example: Task with execution error**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 4,
@@ -766,7 +756,7 @@ This approach also provides natural backward compatibility. Servers that don't s
 
 SDKs can provide ergonomic abstractions over the task primitive while maintaining the separation of concerns, for example:
 
-```typescript  theme={null}
+```typescript theme={null}
 // === MCP SDK (Pseudocode based loosely on modelcontextprotocol/typescript-sdk) ===
 
 /**
@@ -867,7 +857,7 @@ const result = await pending.result({
 
 As the design does not alter the basic request semantics, the existing form would continue to work as well:
 
-```typescript  theme={null}
+```typescript theme={null}
 const result = await client.callTool(
   {
     name: "analyze_dataset",
@@ -1038,7 +1028,7 @@ This hierarchical model would support sophisticated server-controlled workflows 
 <details>
   <summary>Example nested task flow</summary>
 
-  ```mermaid  theme={null}
+  ```mermaid theme={null}
   sequenceDiagram
       participant C as Client
       participant S as Server
@@ -1084,7 +1074,7 @@ This hierarchical model would support sophisticated server-controlled workflows 
   **Potential Data Model Extensions:**
   The task status response could be extended to include parent and child task relationships:
 
-  ```typescript  theme={null}
+  ```typescript theme={null}
   {
     taskId: string;
     status: TaskStatus;

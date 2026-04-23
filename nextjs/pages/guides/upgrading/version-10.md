@@ -3,7 +3,7 @@ title: How to upgrade to version 10
 description: Upgrade your Next.js Application from Version 9 to Version 10.
 url: "https://nextjs.org/docs/pages/guides/upgrading/version-10"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

@@ -3,7 +3,7 @@ title: Functions
 description: API Reference for Next.js Functions and Hooks.
 url: "https://nextjs.org/docs/app/api-reference/functions"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---

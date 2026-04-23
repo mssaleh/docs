@@ -3,7 +3,7 @@ title: How to use and optimize videos
 description: Recommendations and best practices for optimizing videos in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/videos"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

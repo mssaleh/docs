@@ -3,7 +3,7 @@ title: headers
 description: Add custom HTTP headers to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

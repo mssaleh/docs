@@ -3,7 +3,7 @@ title: productionBrowserSourceMaps
 description: Enables browser source map generation during the production build.
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/productionBrowserSourceMaps"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

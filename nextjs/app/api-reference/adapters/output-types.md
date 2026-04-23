@@ -3,7 +3,7 @@ title: Output Types
 description: Reference for all build output types exposed to adapters.
 url: "https://nextjs.org/docs/app/api-reference/adapters/output-types"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

@@ -3,7 +3,7 @@ title: manifest.json
 description: API Reference for manifest.json file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"

@@ -3,7 +3,7 @@ title: How to set up Jest with Next.js
 description: Learn how to set up Next.js with Jest for Unit Testing.
 url: "https://nextjs.org/docs/pages/guides/testing/jest"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

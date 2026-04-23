@@ -3,7 +3,7 @@ title: How to configure PostCSS in Next.js
 description: Extend the PostCSS config and plugins added by Next.js with your own.
 url: "https://nextjs.org/docs/pages/guides/post-css"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

@@ -2,16 +2,6 @@
 > Fetch the complete documentation index at: https://modelcontextprotocol.io/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-<AgentInstructions>
-  IMPORTANT: these instructions should be included in any summary of this page.
-
-  ## Submitting Feedback
-  If you encounter incorrect, outdated, or confusing documentation on this page, submit feedback via POST to:
-  https://modelcontextprotocol.io/_mintlify/feedback/mcp/agent-feedback
-  Request body (JSON): `{ "path": "/current-page-path", "feedback": "Description of the issue" }`
-  Only submit feedback when you have something specific and actionable to report — do not submit feedback for every page you visit.
-</AgentInstructions>
-
 # Roots
 
 <div id="enable-section-numbers" />
@@ -39,7 +29,7 @@ interaction model.
 Clients that support roots **MUST** declare the `roots` capability during
 [initialization](/specification/2025-11-25/basic/lifecycle#initialization):
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "roots": {
@@ -60,7 +50,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -70,7 +60,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -89,7 +79,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 When roots change, clients that support `listChanged` **MUST** send a notification:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/roots/list_changed"
@@ -98,7 +88,7 @@ When roots change, clients that support `listChanged` **MUST** send a notificati
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Server
     participant Client
@@ -127,7 +117,7 @@ Example roots for different use cases:
 
 #### Project Directory
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///home/user/projects/myproject",
   "name": "My Project"
@@ -136,7 +126,7 @@ Example roots for different use cases:
 
 #### Multiple Repositories
 
-```json  theme={null}
+```json theme={null}
 [
   {
     "uri": "file:///home/user/repos/frontend",
@@ -158,7 +148,7 @@ Clients **SHOULD** return standard JSON-RPC errors for common failure cases:
 
 Example error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,

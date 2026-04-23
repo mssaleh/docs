@@ -3,7 +3,7 @@ title: Client-side Rendering (CSR)
 description: Learn how to implement client-side rendering in the Pages Router.
 url: "https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

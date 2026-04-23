@@ -3,7 +3,7 @@ title: basePath
 description: "Use `basePath` to deploy a Next.js application under a sub-path of a domain."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

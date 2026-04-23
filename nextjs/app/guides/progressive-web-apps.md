@@ -3,7 +3,7 @@ title: How to build a Progressive Web Application (PWA) with Next.js
 description: Learn how to build a Progressive Web Application (PWA) with Next.js.
 url: "https://nextjs.org/docs/app/guides/progressive-web-apps"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

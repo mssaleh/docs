@@ -3,7 +3,7 @@ title: Edge Runtime
 description: API Reference for the Edge Runtime.
 url: "https://nextjs.org/docs/app/api-reference/edge"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---

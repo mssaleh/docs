@@ -3,7 +3,7 @@ title: Project Structure and Organization
 description: Learn about the folder and file conventions in a Next.js project, and how to organize your project.
 url: "https://nextjs.org/docs/pages/getting-started/project-structure"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Getting Started: /docs/pages/getting-started"

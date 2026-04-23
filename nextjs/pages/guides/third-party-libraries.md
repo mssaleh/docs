@@ -3,7 +3,7 @@ title: How to optimize third-party libraries
 description: "Optimize the performance of third-party libraries in your application with the `@next/third-parties` package."
 url: "https://nextjs.org/docs/pages/guides/third-party-libraries"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

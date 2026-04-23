@@ -3,7 +3,7 @@ title: How to lazy load Client Components and libraries
 description: "Lazy load imported libraries and React Components to improve your application's loading performance."
 url: "https://nextjs.org/docs/app/guides/lazy-loading"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

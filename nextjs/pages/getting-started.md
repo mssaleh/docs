@@ -3,7 +3,7 @@ title: Getting Started - Pages Router
 description: Learn how to create full-stack web applications with Next.js with the Pages Router.
 url: "https://nextjs.org/docs/pages/getting-started"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 ---
 

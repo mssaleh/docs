@@ -3,7 +3,7 @@ title: unstable_catchError
 description: API Reference for the unstable_catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

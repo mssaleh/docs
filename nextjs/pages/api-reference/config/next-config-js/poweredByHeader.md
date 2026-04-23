@@ -3,7 +3,7 @@ title: poweredByHeader
 description: "Next.js will add the `x-powered-by` header by default. Learn to opt-out of it here."
 url: "https://nextjs.org/docs/pages/api-reference/config/next-config-js/poweredByHeader"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Configuration: /docs/pages/api-reference/config"

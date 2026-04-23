@@ -3,7 +3,7 @@ title: Forms and Mutations
 description: Learn how to handle form submissions and data mutations with Next.js.
 url: "https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Building Your Application: /docs/pages/building-your-application"

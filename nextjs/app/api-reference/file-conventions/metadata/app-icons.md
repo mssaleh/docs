@@ -3,7 +3,7 @@ title: favicon, icon, and apple-icon
 description: API Reference for the Favicon, Icon and Apple Icon file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"

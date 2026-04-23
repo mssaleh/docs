@@ -3,7 +3,7 @@ title: How to set up instrumentation
 description: Learn how to use instrumentation to run code at server startup in your Next.js app
 url: "https://nextjs.org/docs/pages/guides/instrumentation"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 router: Pages Router
 prerequisites:
   - "Guides: /docs/pages/guides"

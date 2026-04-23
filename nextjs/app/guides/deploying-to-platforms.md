@@ -3,7 +3,7 @@ title: Deploying Next.js to different platforms
 description: Understand which Next.js features require specific platform capabilities and how to choose the right deployment target.
 url: "https://nextjs.org/docs/app/guides/deploying-to-platforms"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

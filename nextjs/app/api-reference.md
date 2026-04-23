@@ -3,7 +3,7 @@ title: API Reference
 description: Next.js API Reference for the App Router.
 url: "https://nextjs.org/docs/app/api-reference"
 version: 16.2.4
-lastUpdated: 2026-04-15
+lastUpdated: 2026-04-21
 ---
 
 
