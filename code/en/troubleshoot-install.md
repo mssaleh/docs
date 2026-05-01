@@ -24,6 +24,7 @@ Match the error message or symptom you're seeing to a fix:
 | `'bash' is not recognized as the name of a cmdlet`                                          | [Use the Windows installer command](#wrong-install-command-on-windows)                                                  |
 | `Claude Code on Windows requires either Git for Windows (for bash) or PowerShell`           | [Install a shell](#claude-code-on-windows-requires-either-git-for-windows-for-bash-or-powershell)                       |
 | `Claude Code does not support 32-bit Windows`                                               | [Open Windows PowerShell, not the x86 entry](#claude-code-does-not-support-32-bit-windows)                              |
+| `The process cannot access the file ... because it is being used by another process`        | [Clear the downloads folder and retry](#the-process-cannot-access-the-file-during-windows-install)                      |
 | `Error loading shared library`                                                              | [Wrong binary variant for your system](#linux-musl-or-glibc-binary-mismatch)                                            |
 | `Illegal instruction`                                                                       | [Architecture or CPU instruction set mismatch](#illegal-instruction)                                                    |
 | `cannot execute binary file: Exec format error` in WSL                                      | [WSL1 native-binary regression](#exec-format-error-on-wsl1)                                                             |
@@ -110,6 +111,8 @@ Check if the install directory is in your PATH by listing your PATH entries and 
     ```
 
     Alternatively, close and reopen your terminal.
+
+    For other shells such as fish or Nushell, add `~/.local/bin` to your PATH using your shell's own configuration syntax, then restart your terminal.
 
     Verify the fix worked:
 
@@ -453,6 +456,17 @@ If you see `'irm' is not recognized`, `The token '&&' is not valid`, or `'bash' 
   irm https://claude.ai/install.ps1 | iex
   ```
 
+### `The process cannot access the file` during Windows install
+
+If the PowerShell installer fails with `Failed to download binary: The process cannot access the file ... because it is being used by another process`, the installer couldn't write to `%USERPROFILE%\.claude\downloads`. This usually means a previous install attempt is still running, or antivirus software is scanning a partially downloaded binary in that folder.
+
+Close any other PowerShell windows running the installer and wait for antivirus scans to release the file. Then delete the downloads folder and run the installer again:
+
+```powershell theme={null}
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\downloads"
+irm https://claude.ai/install.ps1 | iex
+```
+
 ### Install killed on low-memory Linux servers
 
 If you see `Killed` during installation on a VPS or cloud instance:
@@ -721,26 +735,26 @@ claude
 
 Check `~/.zshrc`, `~/.bashrc`, or `~/.profile` for `export ANTHROPIC_API_KEY=...` lines and remove them to make the change permanent. On Windows, check your PowerShell profile at `$PROFILE` and your User environment variables for `ANTHROPIC_API_KEY`. Run `/status` inside Claude Code to confirm which authentication method is active.
 
-### OAuth login fails in WSL2
+### OAuth login fails in WSL2, SSH, or containers
 
-Browser-based login in WSL2 can fail in two ways: WSL can't open your Windows browser, or the terminal won't accept the pasted authorization code.
+When Claude Code runs in WSL2, on a remote machine over SSH, or inside a container, the browser usually opens on a different host and its redirect can't reach Claude Code's local callback server. After you sign in, the browser shows a login code instead of redirecting back automatically. Paste that code into the terminal at the `Paste code here if prompted` prompt to complete login.
 
-If the browser doesn't open, set the `BROWSER` environment variable to your Windows browser path:
+If the browser doesn't open at all from WSL2, set the `BROWSER` environment variable to your Windows browser path:
 
 ```bash theme={null}
 export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
 claude
 ```
 
-Or press `c` at the login prompt to copy the OAuth URL and paste it into your Windows browser yourself.
+Alternatively, press `c` at the interactive login prompt to copy the OAuth URL, or copy the URL that `claude auth login` prints, and open it in a browser on your local machine.
 
-If the browser opens but pasting the code back into the terminal does nothing, your terminal's paste binding likely isn't reaching the prompt. Try your terminal's alternate paste shortcut, often right-click or Shift+Insert in Windows Terminal, or run login outside the interactive UI:
+If pasting the code into the interactive prompt does nothing, your terminal's paste binding likely isn't reaching the input field. Try your terminal's alternate paste shortcut, often right-click or Shift+Insert in Windows Terminal, or use `claude auth login` instead, which reads the pasted code from standard input:
 
 ```bash theme={null}
 claude auth login
 ```
 
-This fallback also applies on native Windows or any terminal where pasting the code into the interactive prompt fails.
+This fallback also applies on native Windows or any terminal where pasting into the interactive prompt fails.
 
 ### Not logged in or token expired
 
