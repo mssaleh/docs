@@ -2,8 +2,9 @@
 title: authInterrupts
 description: "Learn how to enable the experimental `authInterrupts` configuration option to use `forbidden` and `unauthorized`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/authInterrupts"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -15,8 +16,9 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This feature is currently available in the canary channel and subject to change.
+> This feature is currently available in the canary channel and subject to change. Try it out by [upgrading Next.js](/docs/app/getting-started/upgrading#canary-version), and share your feedback on [GitHub](https://github.com/vercel/next.js/issues).
 
 The `authInterrupts` configuration option allows you to use [`forbidden`](/docs/app/api-reference/functions/forbidden) and [`unauthorized`](/docs/app/api-reference/functions/unauthorized) APIs in your application. While these functions are experimental, you must enable the `authInterrupts` option in your `next.config.js` file to use them:
 

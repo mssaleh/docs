@@ -2,16 +2,18 @@
 title: unstable_rethrow
 description: API Reference for the unstable_rethrow function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_rethrow"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This feature is currently unstable and subject to change, it is not recommended for production.
+> This feature is currently unstable and subject to change, it's not recommended for production. Try it out and share your feedback on [GitHub](https://github.com/vercel/next.js/issues).
 
 `unstable_rethrow` can be used to avoid catching internal errors thrown by Next.js when attempting to handle errors thrown in your application code.
 

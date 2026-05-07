@@ -2,14 +2,16 @@
 title: reactStrictMode
 description: The complete Next.js runtime is now Strict Mode-compliant, learn how to opt-in
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/reactStrictMode"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 > **Good to know**: Since Next.js 13.5.1, Strict Mode is `true` by default with `app` router, so the above configuration is only necessary for `pages`. You can still disable Strict Mode by setting `reactStrictMode: false`.
 
 > **Suggested**: We strongly suggest you enable Strict Mode in your Next.js application to better prepare your application for the future of React.

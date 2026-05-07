@@ -2,13 +2,15 @@
 title: How to set up instrumentation with OpenTelemetry
 description: Learn how to instrument your Next.js app with OpenTelemetry.
 url: "https://nextjs.org/docs/app/guides/open-telemetry"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Observability is crucial for understanding and optimizing the behavior and performance of your Next.js app.
 
 As applications become more complex, it becomes increasingly difficult to identify and diagnose issues that may arise. By leveraging observability tools, such as logging and metrics, developers can gain insights into their application's behavior and identify areas for optimization. With observability, developers can proactively address issues before they become major problems and provide a better user experience. Therefore, it is highly recommended to use observability in your Next.js applications to improve performance, optimize resources, and enhance user experience.

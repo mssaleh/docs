@@ -2,16 +2,18 @@
 title: appDir
 description: Enable the App Router to use layouts, streaming, and more.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/appDir"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This is a legacy API and no longer recommended. It is still supported for backward compatibility.
+> This is a legacy API and no longer recommended. It's still supported for backward compatibility.
 
 > **Good to know**: This option is **no longer** needed as of Next.js 13.4. The App Router is now stable.
 

@@ -2,14 +2,16 @@
 title: generateStaticParams
 description: API reference for the generateStaticParams function.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-static-params"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `generateStaticParams` function can be used in combination with [dynamic route segments](/docs/app/api-reference/file-conventions/dynamic-routes) to [**statically generate**](/docs/app/glossary#prerendering) routes at build time instead of on-demand at request time.
 
 `generateStaticParams` can be used with:

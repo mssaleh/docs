@@ -2,8 +2,9 @@
 title: use cache
 description: "Learn how to use the \"use cache\" directive to cache data in your Next.js application."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"
@@ -18,6 +19,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `use cache` directive allows you to mark a route, React component, or a function as cacheable. It can be used at the top of a file to indicate that all exports in the file should be cached, or inline at the top of function or component to cache the return value.
 
 > **Good to know:**

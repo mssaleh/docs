@@ -2,13 +2,15 @@
 title: File-system conventions
 description: API Reference for Next.js file-system conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
 - [default.js](/docs/app/api-reference/file-conventions/default)
   - API Reference for the default.js file.

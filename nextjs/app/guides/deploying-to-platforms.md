@@ -2,8 +2,9 @@
 title: Deploying Next.js to different platforms
 description: Understand which Next.js features require specific platform capabilities and how to choose the right deployment target.
 url: "https://nextjs.org/docs/app/guides/deploying-to-platforms"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -14,6 +15,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js [treats static and dynamic content as a spectrum](/docs/app/guides/rendering-philosophy) at the component level. Different features in this model require different platform capabilities. This page helps you understand what your platform needs to support and how to configure your deployment.
 
 ## Minimum Requirements

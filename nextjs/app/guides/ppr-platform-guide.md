@@ -2,8 +2,9 @@
 title: Implementing Partial Prerendering on your platform
 description: A guide for platform engineers on implementing PPR support, from basic origin rendering to optimized CDN integration.
 url: "https://nextjs.org/docs/app/guides/ppr-platform-guide"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -14,6 +15,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Partial Prerendering (PPR) combines static and dynamic rendering in a single route. At build time, Next.js generates a static HTML shell and a `postponedState` blob for each PPR-enabled route. At request time, the shell is served immediately and dynamic portions are rendered and streamed to the client.
 
 This page explains how platforms can implement PPR support at different levels of sophistication.

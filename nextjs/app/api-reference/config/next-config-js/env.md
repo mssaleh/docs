@@ -2,16 +2,18 @@
 title: env
 description: Learn to add and access environment variables in your Next.js application at build time.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/env"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This is a legacy API and no longer recommended. It is still supported for backward compatibility.
+> This is a legacy API and no longer recommended. It's still supported for backward compatibility.
 
 > Since the release of [Next.js 9.4](https://nextjs.org/blog/next-9-4) we now have a more intuitive and ergonomic experience for [adding environment variables](/docs/app/guides/environment-variables). Give it a try!
 

@@ -2,8 +2,9 @@
 title: Next.js Rendering Philosophy
 description: Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for deployment.
 url: "https://nextjs.org/docs/app/guides/rendering-philosophy"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -14,6 +15,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 ## Static and Dynamic as a Spectrum
 
 Most web frameworks draw a hard line between static and dynamic at the route level. A page is either prerendered at build time or server-rendered at request time. This model is simple to understand and simple to deploy: you upload static files to a CDN and point dynamic routes at a server.

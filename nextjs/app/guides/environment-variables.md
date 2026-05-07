@@ -2,13 +2,15 @@
 title: How to use environment variables in Next.js
 description: Learn to add and access environment variables in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/environment-variables"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js comes with built-in support for environment variables, which allows you to do the following:
 
 * [Use `.env` to load environment variables](#loading-environment-variables)

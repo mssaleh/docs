@@ -2,14 +2,16 @@
 title: favicon, icon, and apple-icon
 description: API Reference for the Favicon, Icon and Apple Icon file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `favicon`, `icon`, or `apple-icon` file conventions allow you to set icons for your application.
 
 They are useful for adding app icons that appear in places like web browser tabs, phone home screens, and search engine results.

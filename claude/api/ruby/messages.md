@@ -20,6 +20,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+  Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
   Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
 - `messages: Array[MessageParam]`
@@ -148,13 +150,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -178,13 +190,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -354,13 +380,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -384,13 +420,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -573,13 +623,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -603,13 +663,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -841,13 +915,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -871,13 +955,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -1013,13 +1111,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: Integer`
 
                     - `document_title: String`
 
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: :content_block_location`
 
@@ -1043,13 +1151,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: Integer`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: String`
 
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: String`
 
@@ -1197,13 +1319,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -1227,13 +1359,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -1691,13 +1837,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -1721,13 +1877,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -2426,7 +2596,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: :low | :medium | :high | :max`
+  - `effort: :low | :medium | :high | 2 more`
 
     All possible effort levels.
 
@@ -2435,6 +2605,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:medium`
 
     - `:high`
+
+    - `:xhigh`
 
     - `:max`
 
@@ -2551,13 +2723,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -2581,13 +2763,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -3926,15 +4122,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: Integer`
 
           - `document_title: String`
 
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: :content_block_location`
 
@@ -3958,13 +4164,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: Integer`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: String`
 
@@ -4911,13 +5131,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -4941,13 +5171,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -5117,13 +5361,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -5147,13 +5401,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -5336,13 +5604,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -5366,13 +5644,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -5604,13 +5896,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -5634,13 +5936,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -5776,13 +6092,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: Integer`
 
                     - `document_title: String`
 
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: :content_block_location`
 
@@ -5806,13 +6132,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: Integer`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: String`
 
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: String`
 
@@ -5960,13 +6300,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -5990,13 +6340,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -6454,13 +6818,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -6484,13 +6858,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -7171,7 +7559,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: :low | :medium | :high | :max`
+  - `effort: :low | :medium | :high | 2 more`
 
     All possible effort levels.
 
@@ -7180,6 +7568,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `:medium`
 
     - `:high`
+
+    - `:xhigh`
 
     - `:max`
 
@@ -7272,13 +7662,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -7302,13 +7702,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -8903,15 +9317,25 @@ puts(message_tokens_count)
 
   - `cited_text: String`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `document_index: Integer`
 
   - `document_title: String`
 
   - `end_block_index: Integer`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `file_id: String`
 
   - `start_block_index: Integer`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `type: :content_block_location`
 
@@ -8923,13 +9347,23 @@ puts(message_tokens_count)
 
   - `cited_text: String`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `document_index: Integer`
 
   - `document_title: String`
 
   - `end_block_index: Integer`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `start_block_index: Integer`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `type: :content_block_location`
 
@@ -8979,13 +9413,27 @@ puts(message_tokens_count)
 
   - `cited_text: String`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `end_block_index: Integer`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `search_result_index: Integer`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `source: String`
 
   - `start_block_index: Integer`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `title: String`
 
@@ -9067,15 +9515,25 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: Integer`
 
       - `document_title: String`
 
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `file_id: String`
 
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: :content_block_location`
 
@@ -9099,13 +9557,27 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: Integer`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: String`
 
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: String`
 
@@ -9123,13 +9595,27 @@ puts(message_tokens_count)
 
   - `cited_text: String`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `end_block_index: Integer`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `search_result_index: Integer`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `source: String`
 
   - `start_block_index: Integer`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `title: String`
 
@@ -9843,15 +10329,25 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `file_id: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -9875,13 +10371,27 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -10526,13 +11036,23 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -10556,13 +11076,27 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -10732,13 +11266,23 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -10762,13 +11306,27 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -10951,13 +11509,23 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: Integer`
 
           - `document_title: String`
 
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: :content_block_location`
 
@@ -10981,13 +11549,27 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: Integer`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: String`
 
@@ -11219,13 +11801,23 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -11249,13 +11841,27 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -11391,13 +11997,23 @@ puts(message_tokens_count)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: Integer`
 
                 - `document_title: String`
 
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: :content_block_location`
 
@@ -11421,13 +12037,27 @@ puts(message_tokens_count)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: Integer`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: String`
 
@@ -11575,13 +12205,23 @@ puts(message_tokens_count)
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: Integer`
 
                         - `document_title: String`
 
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: :content_block_location`
 
@@ -11605,13 +12245,27 @@ puts(message_tokens_count)
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: Integer`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: String`
 
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: String`
 
@@ -12069,13 +12723,23 @@ puts(message_tokens_count)
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: Integer`
 
                         - `document_title: String`
 
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: :content_block_location`
 
@@ -12099,13 +12763,27 @@ puts(message_tokens_count)
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: Integer`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: String`
 
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: String`
 
@@ -12750,13 +13428,23 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -12780,13 +13468,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -12928,13 +13630,23 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -12958,13 +13670,27 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -13190,13 +13916,23 @@ puts(message_tokens_count)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: Integer`
 
                 - `document_title: String`
 
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: :content_block_location`
 
@@ -13220,13 +13956,27 @@ puts(message_tokens_count)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: Integer`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: String`
 
@@ -13623,15 +14373,25 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: Integer`
 
           - `document_title: String`
 
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: :content_block_location`
 
@@ -13655,13 +14415,27 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: Integer`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: String`
 
@@ -15605,13 +16379,23 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -15635,13 +16419,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -15811,13 +16609,23 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -15841,13 +16649,27 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -16030,13 +16852,23 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -16060,13 +16892,27 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -16298,13 +17144,23 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -16328,13 +17184,27 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -16470,13 +17340,23 @@ puts(message_tokens_count)
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: Integer`
 
                     - `document_title: String`
 
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: :content_block_location`
 
@@ -16500,13 +17380,27 @@ puts(message_tokens_count)
 
                     - `cited_text: String`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: Integer`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: Integer`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: String`
 
                     - `start_block_index: Integer`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: String`
 
@@ -16654,13 +17548,23 @@ puts(message_tokens_count)
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -16684,13 +17588,27 @@ puts(message_tokens_count)
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -17148,13 +18066,23 @@ puts(message_tokens_count)
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: Integer`
 
                             - `document_title: String`
 
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: :content_block_location`
 
@@ -17178,13 +18106,27 @@ puts(message_tokens_count)
 
                             - `cited_text: String`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: Integer`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: Integer`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: String`
 
                             - `start_block_index: Integer`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: String`
 
@@ -17862,7 +18804,7 @@ puts(message_tokens_count)
 
 - `class OutputConfig`
 
-  - `effort: :low | :medium | :high | :max`
+  - `effort: :low | :medium | :high | 2 more`
 
     All possible effort levels.
 
@@ -17871,6 +18813,8 @@ puts(message_tokens_count)
     - `:medium`
 
     - `:high`
+
+    - `:xhigh`
 
     - `:max`
 
@@ -17964,15 +18908,25 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `file_id: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -17996,13 +18950,27 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -18096,15 +19064,25 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: Integer`
 
           - `document_title: String`
 
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: :content_block_location`
 
@@ -18128,13 +19106,27 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: Integer`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: String`
 
@@ -18224,15 +19216,25 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: Integer`
 
           - `document_title: String`
 
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: :content_block_location`
 
@@ -18256,13 +19258,27 @@ puts(message_tokens_count)
 
           - `cited_text: String`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: Integer`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: Integer`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: String`
 
           - `start_block_index: Integer`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: String`
 
@@ -19051,15 +20067,25 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -19083,13 +20109,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -19995,15 +21035,25 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -20027,13 +21077,27 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -20988,15 +22052,25 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -21020,13 +22094,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -21666,15 +22754,25 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -21698,13 +22796,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -21865,13 +22977,23 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: Integer`
 
         - `document_title: String`
 
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: :content_block_location`
 
@@ -21895,13 +23017,27 @@ puts(message_tokens_count)
 
         - `cited_text: String`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: Integer`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: String`
 
         - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: String`
 
@@ -22193,15 +23329,25 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: Integer`
 
       - `document_title: String`
 
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `file_id: String`
 
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: :content_block_location`
 
@@ -22225,13 +23371,27 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: Integer`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: String`
 
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: String`
 
@@ -22316,13 +23476,23 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: Integer`
 
       - `document_title: String`
 
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: :content_block_location`
 
@@ -22346,13 +23516,27 @@ puts(message_tokens_count)
 
       - `cited_text: String`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: Integer`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: Integer`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: String`
 
       - `start_block_index: Integer`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: String`
 
@@ -22404,15 +23588,25 @@ puts(message_tokens_count)
 
     - `cited_text: String`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `document_index: Integer`
 
     - `document_title: String`
 
     - `end_block_index: Integer`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `file_id: String`
 
     - `start_block_index: Integer`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `type: :content_block_location`
 
@@ -22436,13 +23630,27 @@ puts(message_tokens_count)
 
     - `cited_text: String`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `end_block_index: Integer`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `search_result_index: Integer`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `source: String`
 
     - `start_block_index: Integer`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `title: String`
 
@@ -22490,13 +23698,23 @@ puts(message_tokens_count)
 
     - `cited_text: String`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `document_index: Integer`
 
     - `document_title: String`
 
     - `end_block_index: Integer`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `start_block_index: Integer`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `type: :content_block_location`
 
@@ -22520,13 +23738,27 @@ puts(message_tokens_count)
 
     - `cited_text: String`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `end_block_index: Integer`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `search_result_index: Integer`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `source: String`
 
     - `start_block_index: Integer`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `title: String`
 
@@ -23430,13 +24662,23 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -23460,13 +24702,27 @@ puts(message_tokens_count)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -23602,13 +24858,23 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -23632,13 +24898,27 @@ puts(message_tokens_count)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -23786,13 +25066,23 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -23816,13 +25106,27 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -25917,13 +27221,23 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -25947,13 +27261,27 @@ puts(message_tokens_count)
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -26573,13 +27901,23 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -26603,13 +27941,27 @@ puts(message_tokens_count)
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -27427,6 +28779,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+      Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
       Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
     - `messages: Array[MessageParam]`
@@ -27555,13 +28909,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: Integer`
 
                 - `document_title: String`
 
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: :content_block_location`
 
@@ -27585,13 +28949,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: Integer`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: String`
 
@@ -27761,13 +29139,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `cited_text: String`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `document_index: Integer`
 
                           - `document_title: String`
 
                           - `end_block_index: Integer`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `start_block_index: Integer`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `type: :content_block_location`
 
@@ -27791,13 +29179,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `cited_text: String`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `end_block_index: Integer`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `search_result_index: Integer`
+
+                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                            Counted separately from `document_index`; server-side web search results are not included in this count.
 
                           - `source: String`
 
                           - `start_block_index: Integer`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `title: String`
 
@@ -27980,13 +29382,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: Integer`
 
                   - `document_title: String`
 
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: :content_block_location`
 
@@ -28010,13 +29422,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `cited_text: String`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: Integer`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: Integer`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: String`
 
                   - `start_block_index: Integer`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: String`
 
@@ -28248,13 +29674,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: Integer`
 
                       - `document_title: String`
 
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: :content_block_location`
 
@@ -28278,13 +29714,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `cited_text: String`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: Integer`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: Integer`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: String`
 
                       - `start_block_index: Integer`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: String`
 
@@ -28420,13 +29870,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: Integer`
 
                         - `document_title: String`
 
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: :content_block_location`
 
@@ -28450,13 +29910,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `cited_text: String`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: Integer`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: Integer`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: String`
 
                         - `start_block_index: Integer`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: String`
 
@@ -28604,13 +30078,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                 - `cited_text: String`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `document_index: Integer`
 
                                 - `document_title: String`
 
                                 - `end_block_index: Integer`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `start_block_index: Integer`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `type: :content_block_location`
 
@@ -28634,13 +30118,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                 - `cited_text: String`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `end_block_index: Integer`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `search_result_index: Integer`
+
+                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                 - `source: String`
 
                                 - `start_block_index: Integer`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `title: String`
 
@@ -29098,13 +30596,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                 - `cited_text: String`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `document_index: Integer`
 
                                 - `document_title: String`
 
                                 - `end_block_index: Integer`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `start_block_index: Integer`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `type: :content_block_location`
 
@@ -29128,13 +30636,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                 - `cited_text: String`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `end_block_index: Integer`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `search_result_index: Integer`
+
+                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                 - `source: String`
 
                                 - `start_block_index: Integer`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `title: String`
 
@@ -29833,7 +31355,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Configuration options for the model's output, such as the output format.
 
-      - `effort: :low | :medium | :high | :max`
+      - `effort: :low | :medium | :high | 2 more`
 
         All possible effort levels.
 
@@ -29842,6 +31364,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `:medium`
 
         - `:high`
+
+        - `:xhigh`
 
         - `:max`
 
@@ -29958,13 +31482,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -29988,13 +31522,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 
@@ -31890,15 +33438,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: Integer`
 
                 - `document_title: String`
 
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: :content_block_location`
 
@@ -31922,13 +33480,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: Integer`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: String`
 
@@ -33166,15 +34738,25 @@ puts(message_batch_individual_response)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: Integer`
 
                 - `document_title: String`
 
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: :content_block_location`
 
@@ -33198,13 +34780,27 @@ puts(message_batch_individual_response)
 
                 - `cited_text: String`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: Integer`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: Integer`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: String`
 
                 - `start_block_index: Integer`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: String`
 
@@ -34238,15 +35834,25 @@ puts(message_batch_individual_response)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: Integer`
 
               - `document_title: String`
 
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: :content_block_location`
 
@@ -34270,13 +35876,27 @@ puts(message_batch_individual_response)
 
               - `cited_text: String`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: Integer`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: Integer`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: String`
 
               - `start_block_index: Integer`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: String`
 
@@ -35272,15 +36892,25 @@ puts(message_batch_individual_response)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: Integer`
 
             - `document_title: String`
 
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: :content_block_location`
 
@@ -35304,13 +36934,27 @@ puts(message_batch_individual_response)
 
             - `cited_text: String`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: Integer`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: Integer`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: String`
 
             - `start_block_index: Integer`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: String`
 

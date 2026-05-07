@@ -2,14 +2,16 @@
 title: revalidateTag
 description: API Reference for the revalidateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidateTag"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 `revalidateTag` allows you to invalidate cached data on-demand for a specific cache tag.
 
 This function is ideal for content where a slight delay in updates is acceptable, such as blog posts, product catalogs, or documentation. Users receive stale content while fresh data loads in the background.

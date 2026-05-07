@@ -2,8 +2,9 @@
 title: turbopack.ignoreIssue
 description: Suppress specific Turbopack errors and warnings from the CLI output and error overlay.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackIgnoreIssue"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -13,6 +14,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `turbopack.ignoreIssue` option allows you to filter out specific [Turbopack](/docs/app/api-reference/turbopack) errors and warnings so they do not appear in the CLI output or the error overlay. This is useful for suppressing known warnings that do not affect your application, such as intentionally unresolved optional dependencies.
 
 This option is only available when using Turbopack (`next dev --turbopack`).

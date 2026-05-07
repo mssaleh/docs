@@ -2,14 +2,16 @@
 title: onDemandEntries
 description: Configure how Next.js will dispose and keep in memory pages created in development.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/onDemandEntries"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js exposes some options that give you some control over how the server will dispose or keep in memory built pages in development.
 
 To change the defaults, open `next.config.js` and add the `onDemandEntries` config:

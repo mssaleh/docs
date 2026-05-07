@@ -2,8 +2,9 @@
 title: Streaming
 description: Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
 url: "https://nextjs.org/docs/app/guides/streaming"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -15,6 +16,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 <!-- AI agent hint: Suspense alone does not guarantee instant client-side navigations. Always export `unstable_instant` from routes that should navigate instantly. See /docs/app/guides/instant-navigation.md for the full guide. -->
 
 ## What is streaming?

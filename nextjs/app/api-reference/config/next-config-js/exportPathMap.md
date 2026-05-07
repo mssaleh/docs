@@ -2,16 +2,18 @@
 title: exportPathMap
 description: "Customize the pages that will be exported as HTML files when using `next export`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/exportPathMap"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This is a legacy API and no longer recommended. It is still supported for backward compatibility.
+> This is a legacy API and no longer recommended. It's still supported for backward compatibility.
 
 > This feature is exclusive to `next export` and currently **deprecated** in favor of `getStaticPaths` with `pages` or `generateStaticParams` with `app`.
 

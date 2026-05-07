@@ -2,8 +2,9 @@
 title: unstable_catchError
 description: API Reference for the unstable_catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -13,6 +14,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `unstable_catchError` function creates a component that wraps its children in an error boundary. It provides a programmatic alternative to the [`error.js`](/docs/app/api-reference/file-conventions/error) file convention, enabling component-level error recovery anywhere in your component tree.
 
 Compared to a custom React error boundary, `unstable_catchError` is designed to work with Next.js out of the box:

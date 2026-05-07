@@ -2,13 +2,15 @@
 title: Building public pages
 description: "Learn how to build public, \"static\" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites."
 url: "https://nextjs.org/docs/app/guides/public-static-pages"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Public pages show the same content to every user. Common examples include landing pages, marketing pages, and product pages.
 
 Since data is shared, these kind of pages can be [prerendered](/docs/app/glossary#prerendering) ahead of time and reused. This leads to faster page loads and lower server costs.

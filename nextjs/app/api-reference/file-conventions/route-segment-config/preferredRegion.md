@@ -2,14 +2,16 @@
 title: preferredRegion
 description: API reference for the preferredRegion route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Route Segment Config: /docs/app/api-reference/file-conventions/route-segment-config"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `preferredRegion` option allows you to specify the preferred deployment region for a route segment. This value is passed to your deployment platform.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher

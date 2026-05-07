@@ -2,8 +2,9 @@
 title: How to load and optimize scripts
 description: Optimize 3rd party scripts with the built-in Script component.
 url: "https://nextjs.org/docs/app/guides/scripts"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -11,6 +12,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 ### Layout Scripts
 
 To load a third-party script for multiple routes, import `next/script` and include the script directly in your layout component:

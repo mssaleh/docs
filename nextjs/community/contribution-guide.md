@@ -2,13 +2,15 @@
 title: Docs Contribution Guide
 description: Learn how to contribute to Next.js Documentation
 url: "https://nextjs.org/docs/community/contribution-guide"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Community: /docs/community"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Welcome to the Next.js Docs Contribution Guide! We're excited to have you here.
 
 This page provides instructions on how to edit the Next.js documentation. Our goal is to ensure that everyone in the community feels empowered to contribute and improve our docs.
@@ -322,6 +324,10 @@ The following icons are available for use in the docs:
 ```
 
 **Output:**
+
+✓
+
+✗
 
 We do not use emojis in the docs.
 

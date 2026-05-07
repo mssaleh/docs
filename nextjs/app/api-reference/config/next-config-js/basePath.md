@@ -2,14 +2,16 @@
 title: basePath
 description: "Use `basePath` to deploy a Next.js application under a sub-path of a domain."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 To deploy a Next.js application under a sub-path of a domain you can use the `basePath` config option.
 
 `basePath` allows you to set a path prefix for the application. For example, to use `/docs` instead of `''` (an empty string, the default), open `next.config.js` and add the `basePath` config:

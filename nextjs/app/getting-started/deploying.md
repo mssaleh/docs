@@ -2,13 +2,15 @@
 title: Deploying
 description: Learn how to deploy your Next.js application.
 url: "https://nextjs.org/docs/app/getting-started/deploying"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js can be deployed as a Node.js server, Docker container, static export, or adapted to run on different platforms.
 
 | Deployment Option                | Feature Support                                                     |

@@ -2,8 +2,9 @@
 title: Route Handlers
 description: Learn how to use Route Handlers
 url: "https://nextjs.org/docs/app/getting-started/route-handlers"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -12,6 +13,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 ## Route Handlers
 
 Route Handlers allow you to create custom request handlers for a given route using the Web [Request](https://developer.mozilla.org/docs/Web/API/Request) and [Response](https://developer.mozilla.org/docs/Web/API/Response) APIs.
@@ -152,9 +154,9 @@ You can consider a `route` the lowest level routing primitive.
 
 | Page                 | Route              | Result                       |
 | -------------------- | ------------------ | ---------------------------- |
-| `app/page.js`        | `app/route.js`     |  Conflict |
-| `app/page.js`        | `app/api/route.js` |  Valid    |
-| `app/[user]/page.js` | `app/api/route.js` |  Valid    |
+| `app/page.js`        | `app/route.js`     | ✗ Conflict |
+| `app/page.js`        | `app/api/route.js` | ✓ Valid    |
+| `app/[user]/page.js` | `app/api/route.js` | ✓ Valid    |
 
 Each `route.js` or `page.js` file takes over all HTTP verbs for that route.
 

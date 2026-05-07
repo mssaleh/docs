@@ -2,14 +2,16 @@
 title: revalidatePath
 description: API Reference for the revalidatePath function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidatePath"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 `revalidatePath` allows you to invalidate [cached data](/docs/app/getting-started/caching) on-demand for a specific path.
 
 ## Usage

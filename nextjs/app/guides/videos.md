@@ -2,13 +2,15 @@
 title: How to use and optimize videos
 description: Recommendations and best practices for optimizing videos in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/videos"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 This page outlines how to use videos with Next.js applications, showing how to store and display video files without affecting performance.
 
 ## Using `<video>` and `<iframe>`

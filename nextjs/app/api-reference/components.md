@@ -2,13 +2,15 @@
 title: Components
 description: API Reference for Next.js built-in components.
 url: "https://nextjs.org/docs/app/api-reference/components"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
 - [Font](/docs/app/api-reference/components/font)
   - Optimizing loading web fonts with the built-in `next/font` loaders.

@@ -2,14 +2,16 @@
 title: "Routing with @next/routing"
 description: "Use `@next/routing` to apply Next.js route matching behavior in adapters."
 url: "https://nextjs.org/docs/app/api-reference/adapters/routing-with-next-routing"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 You can use [`@next/routing`](https://www.npmjs.com/package/@next/routing) to reproduce Next.js route matching behavior with data from `onBuildComplete`.
 
 > \[!NOTE]

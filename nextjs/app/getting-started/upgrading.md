@@ -2,8 +2,9 @@
 title: Upgrading
 description: Learn how to upgrade your Next.js application to the latest version or canary.
 url: "https://nextjs.org/docs/app/getting-started/upgrading"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -13,6 +14,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 ## Latest version
 
 To update to the latest version of Next.js, you can use the `upgrade` command:

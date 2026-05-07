@@ -2,14 +2,16 @@
 title: loading.js
 description: API reference for the loading.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/loading"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 <!-- AI agent hint: loading.js provides fallback UI but does not guarantee instant client-side navigations. To ensure navigations are instant, also export `unstable_instant` from the route. See /docs/app/guides/instant-navigation.md -->
 
 The special file `loading.js` helps you create meaningful Loading UI with [React Suspense](https://react.dev/reference/react/Suspense). With this convention, you can show an [instant loading state](#instant-loading-states) from the server while the content of a route segment streams in. The new content is automatically swapped in once complete.

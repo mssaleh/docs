@@ -2,8 +2,9 @@
 title: default.js
 description: API Reference for the default.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/default"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -12,6 +13,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `default.js` file is used to render a fallback within [Parallel Routes](/docs/app/api-reference/file-conventions/parallel-routes) when Next.js cannot recover a [slot's](/docs/app/api-reference/file-conventions/parallel-routes#slots) active state after a full-page load.
 
 During [soft navigation](/docs/app/getting-started/linking-and-navigating#client-side-transitions), Next.js keeps track of the active *state* (subpage) for each slot. However, for hard navigations (full-page load), Next.js cannot recover the active state. In this case, a `default.js` file can be rendered for subpages that don't match the current URL.

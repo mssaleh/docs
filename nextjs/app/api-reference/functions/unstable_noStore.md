@@ -2,16 +2,18 @@
 title: unstable_noStore
 description: API Reference for the unstable_noStore function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_noStore"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 
-> This is a legacy API and no longer recommended. It is still supported for backward compatibility.
+> This is a legacy API and no longer recommended. It's still supported for backward compatibility.
 
 **In version 15, we recommend using [`connection`](/docs/app/api-reference/functions/connection) instead of `unstable_noStore`.**
 

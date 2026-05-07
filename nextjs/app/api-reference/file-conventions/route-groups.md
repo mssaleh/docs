@@ -2,14 +2,16 @@
 title: Route Groups
 description: Route Groups can be used to partition your Next.js application into different sections.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-groups"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Route Groups are a folder convention that let you organize routes by category or team.
 
 ## Convention

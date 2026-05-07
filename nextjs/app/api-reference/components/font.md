@@ -2,14 +2,16 @@
 title: Font Module
 description: "Optimizing loading web fonts with the built-in `next/font` loaders."
 url: "https://nextjs.org/docs/app/api-reference/components/font"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 [`next/font`](/docs/app/api-reference/components/font) automatically optimizes your fonts (including custom fonts) and removes external network requests for improved privacy and performance.
 
 It includes **built-in automatic self-hosting** for any font file. This means you can optimally load web fonts with no [layout shift](https://web.dev/articles/cls).
@@ -62,17 +64,17 @@ export default function RootLayout({ children }) {
 
 | Key                                         | `font/google`       | `font/local`        | Type                       | Required          |
 | ------------------------------------------- | ------------------- | ------------------- | -------------------------- | ----------------- |
-| [`src`](#src)                               |  |  | String or Array of Objects | Yes               |
-| [`weight`](#weight)                         |  |  | String or Array            | Required/Optional |
-| [`style`](#style)                           |  |  | String or Array            | -                 |
-| [`subsets`](#subsets)                       |  |  | Array of Strings           | -                 |
-| [`axes`](#axes)                             |  |  | Array of Strings           | -                 |
-| [`display`](#display)                       |  |  | String                     | -                 |
-| [`preload`](#preload)                       |  |  | Boolean                    | -                 |
-| [`fallback`](#fallback)                     |  |  | Array of Strings           | -                 |
-| [`adjustFontFallback`](#adjustfontfallback) |  |  | Boolean or String          | -                 |
-| [`variable`](#variable)                     |  |  | String                     | -                 |
-| [`declarations`](#declarations)             |  |  | Array of Objects           | -                 |
+| [`src`](#src)                               | ✗ | ✓ | String or Array of Objects | Yes               |
+| [`weight`](#weight)                         | ✓ | ✓ | String or Array            | Required/Optional |
+| [`style`](#style)                           | ✓ | ✓ | String or Array            | -                 |
+| [`subsets`](#subsets)                       | ✓ | ✗ | Array of Strings           | -                 |
+| [`axes`](#axes)                             | ✓ | ✗ | Array of Strings           | -                 |
+| [`display`](#display)                       | ✓ | ✓ | String                     | -                 |
+| [`preload`](#preload)                       | ✓ | ✓ | Boolean                    | -                 |
+| [`fallback`](#fallback)                     | ✓ | ✓ | Array of Strings           | -                 |
+| [`adjustFontFallback`](#adjustfontfallback) | ✓ | ✓ | Boolean or String          | -                 |
+| [`variable`](#variable)                     | ✓ | ✓ | String                     | -                 |
+| [`declarations`](#declarations)             | ✗ | ✓ | Array of Objects           | -                 |
 
 ### `src`
 

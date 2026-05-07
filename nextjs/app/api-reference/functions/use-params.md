@@ -2,14 +2,16 @@
 title: useParams
 description: API Reference for the useParams hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-params"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 `useParams` is a **Client Component** hook that lets you read a route's [dynamic params](/docs/app/api-reference/file-conventions/dynamic-routes) filled in by the current URL.
 
 ```tsx filename="app/example-client-component.tsx" switcher

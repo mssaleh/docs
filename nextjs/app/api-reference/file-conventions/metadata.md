@@ -2,14 +2,16 @@
 title: Metadata Files API Reference
 description: API documentation for the metadata file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 This section of the docs covers **Metadata file conventions**. File-based metadata can be defined by adding special metadata files to route segments.
 
 Each file convention can be defined using a static file (e.g. `opengraph-image.jpg`), or a dynamic variant that uses code to generate the file (e.g. `opengraph-image.js`).

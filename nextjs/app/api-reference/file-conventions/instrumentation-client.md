@@ -2,14 +2,16 @@
 title: instrumentation-client.js
 description: "Learn how to add client-side instrumentation to track and monitor your Next.js application's frontend performance."
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `instrumentation-client.js|ts` file allows you to add monitoring, analytics code, and other side-effects that run before your application becomes interactive. This is useful for setting up performance tracking, error monitoring, polyfills, or any other client-side observability tools.
 
 To use it, place the file in the **root** of your application or inside a `src` folder.

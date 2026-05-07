@@ -2,14 +2,16 @@
 title: unstable_cache
 description: API Reference for the unstable_cache function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_cache"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 > **Note:**
 > This API has been replaced by [`use cache`](/docs/app/api-reference/directives/use-cache) in Next.js 16.
 > We recommend opting into [Cache Components](/docs/app/getting-started/caching) and replacing `unstable_cache` with the `use cache` directive.

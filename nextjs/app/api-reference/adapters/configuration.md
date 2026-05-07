@@ -2,14 +2,16 @@
 title: Configuration
 description: "Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter."
 url: "https://nextjs.org/docs/app/api-reference/adapters/configuration"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 To use an adapter, specify the path to your adapter module in `adapterPath`:
 
 ```js filename="next.config.js"

@@ -2,14 +2,16 @@
 title: useRouter
 description: API reference for the useRouter hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-router"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `useRouter` hook allows you to programmatically change routes inside [Client Components](/docs/app/getting-started/server-and-client-components).
 
 > **Recommendation:** Use the [`<Link>` component](/docs/app/api-reference/components/link) for navigation unless you have a specific requirement for using `useRouter`.

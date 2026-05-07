@@ -2,13 +2,15 @@
 title: How to optimize memory usage
 description: Optimize memory used by your application in development and production.
 url: "https://nextjs.org/docs/app/guides/memory-usage"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 As applications grow and become more feature rich, they can demand more resources when developing locally or creating production builds.
 
 Let's explore some strategies and techniques to optimize memory and address common memory issues in Next.js.

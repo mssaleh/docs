@@ -2,13 +2,15 @@
 title: Edge Runtime
 description: API Reference for the Edge Runtime.
 url: "https://nextjs.org/docs/app/api-reference/edge"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js has two server runtimes you can use in your application:
 
 * The **Node.js Runtime** (default), which has access to all Node.js APIs and is used for rendering your application.

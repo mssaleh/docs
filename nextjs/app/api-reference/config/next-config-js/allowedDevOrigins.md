@@ -2,14 +2,16 @@
 title: allowedDevOrigins
 description: "Use `allowedDevOrigins` to configure additional origins that can request the dev server."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js blocks cross-origin requests to dev-only assets and endpoints during development by default to prevent unauthorized access.
 
 To configure a Next.js application to allow requests from origins other than the hostname the server was initialized with (`localhost` by default), use the `allowedDevOrigins` config option.

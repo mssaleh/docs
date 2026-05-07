@@ -2,13 +2,15 @@
 title: How to configure Continuous Integration (CI) build caching
 description: Learn how to configure CI to cache Next.js builds
 url: "https://nextjs.org/docs/app/guides/ci-build-caching"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 To improve build performance, Next.js saves a cache to `.next/cache` that is shared between builds.
 
 To take advantage of this cache in Continuous Integration (CI) environments, your CI workflow will need to be configured to correctly persist the cache between builds.

@@ -2,14 +2,16 @@
 title: productionBrowserSourceMaps
 description: Enables browser source map generation during the production build.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/productionBrowserSourceMaps"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Source Maps are enabled by default during development. During production builds, they are disabled to prevent you leaking your source on the client, unless you specifically opt-in with the configuration flag.
 
 Next.js provides a configuration flag you can use to enable browser source map generation during the production build:

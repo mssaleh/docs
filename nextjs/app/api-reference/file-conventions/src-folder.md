@@ -2,8 +2,9 @@
 title: src Folder
 description: "Save pages under the `src` folder as an alternative to the root `pages` directory."
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/src-folder"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -12,6 +13,7 @@ related:
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 As an alternative to having the special Next.js `app` or `pages` directories in the root of your project, Next.js also supports the common pattern of placing application code under the `src` folder.
 
 This separates application code from project configuration files which mostly live in the root of a project, which is preferred by some individuals and teams.

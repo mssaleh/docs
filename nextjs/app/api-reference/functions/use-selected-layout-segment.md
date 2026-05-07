@@ -2,14 +2,16 @@
 title: useSelectedLayoutSegment
 description: API Reference for the useSelectedLayoutSegment hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 `useSelectedLayoutSegment` is a **Client Component** hook that lets you read the active route segment **one level below** the Layout it is called from.
 
 It is useful for navigation UI, such as tabs inside a parent layout that change style depending on the active child segment.

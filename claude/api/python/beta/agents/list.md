@@ -34,7 +34,7 @@ List Agents
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -78,7 +78,11 @@ List Agents
 
     - `"output-300k-2026-03-24"`
 
+    - `"user-profiles-2026-03-24"`
+
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -181,6 +185,26 @@ List Agents
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: Optional[BetaManagedAgentsMultiagent]`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: List[BetaManagedAgentsAgentReference]`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: str`
+
+      - `type: Literal["agent"]`
+
+        - `"agent"`
+
+      - `version: int`
+
+    - `type: Literal["coordinator"]`
+
+      - `"coordinator"`
 
   - `name: str`
 

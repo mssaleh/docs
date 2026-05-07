@@ -2,14 +2,16 @@
 title: page.js
 description: API reference for the page.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/page"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `page` file allows you to define UI that is **unique** to a route. You can create a page by default exporting a component from the file:
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher

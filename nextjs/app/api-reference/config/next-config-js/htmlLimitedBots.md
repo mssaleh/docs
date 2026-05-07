@@ -2,14 +2,16 @@
 title: htmlLimitedBots
 description: Specify a list of user agents that should receive blocking metadata.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `htmlLimitedBots` config allows you to specify a list of user agents that should receive blocking metadata instead of [streaming metadata](/docs/app/api-reference/functions/generate-metadata#streaming-metadata).
 
 ```ts filename="next.config.ts" switcher

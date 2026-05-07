@@ -2,13 +2,15 @@
 title: How to build single-page applications with Next.js
 description: Next.js fully supports building Single-Page Applications (SPAs).
 url: "https://nextjs.org/docs/app/guides/single-page-applications"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js fully supports building Single-Page Applications (SPAs).
 
 This includes fast route transitions with prefetching, client-side data fetching, using browser APIs, integrating with third-party client libraries, creating static routes, and more.
@@ -273,10 +275,10 @@ Since the initial `fallback` data is automatically handled by Next.js, you can n
 
 |                      | SWR                 | RSC                 | RSC + SWR           |
 | -------------------- | ------------------- | ------------------- | ------------------- |
-| SSR data             |  |  |  |
-| Streaming while SSR  |  |  |  |
-| Deduplicate requests |  |  |  |
-| Client-side features |  |  |  |
+| SSR data             | ✗ | ✓ | ✓ |
+| Streaming while SSR  | ✗ | ✓ | ✓ |
+| Deduplicate requests | ✓ | ✓ | ✓ |
+| Client-side features | ✓ | ✗ | ✓ |
 
 ### SPAs with React Query
 

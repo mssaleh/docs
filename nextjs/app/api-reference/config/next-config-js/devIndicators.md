@@ -2,14 +2,16 @@
 title: devIndicators
 description: "Configuration options for the on-screen indicator that gives context about the current route you're viewing during development."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/devIndicators"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 `devIndicators` allows you to configure the on-screen indicator that gives context about the current route you're viewing during development.
 
 ```ts filename="Types"

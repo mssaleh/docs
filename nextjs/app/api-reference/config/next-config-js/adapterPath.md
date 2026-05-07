@@ -2,14 +2,16 @@
 title: adapterPath
 description: Configure a custom adapter for Next.js to hook into the build process.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/adapterPath"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Next.js provides a built-in adapters API. It allows deployment platforms or build systems to integrate with the Next.js build process.
 
 For a full reference implementation, see the [`nextjs/adapter-vercel`](https://github.com/nextjs/adapter-vercel) adapter.

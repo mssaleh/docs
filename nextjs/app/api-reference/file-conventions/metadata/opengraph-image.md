@@ -2,14 +2,16 @@
 title: opengraph-image and twitter-image
 description: API Reference for the Open Graph Image and Twitter Image file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The `opengraph-image` and `twitter-image` file conventions allow you to set Open Graph and Twitter images for a route segment.
 
 They are useful for setting the images that appear on social networks and messaging apps when a user shares a link to your site.

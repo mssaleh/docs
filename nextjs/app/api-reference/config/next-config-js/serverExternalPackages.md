@@ -2,14 +2,16 @@
 title: serverExternalPackages
 description: "Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverExternalPackages"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 Dependencies used inside [Server Components](/docs/app/getting-started/server-and-client-components) and [Route Handlers](/docs/app/api-reference/file-conventions/route) will automatically be bundled by Next.js.
 
 If a dependency is using Node.js specific features, you can choose to opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.

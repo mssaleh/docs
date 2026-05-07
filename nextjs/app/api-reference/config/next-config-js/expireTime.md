@@ -2,14 +2,16 @@
 title: expireTime
 description: Customize stale-while-revalidate expire time for ISR enabled pages.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/expireTime"
-version: 16.2.4
-lastUpdated: 2026-04-21
+docs_index: /docs/llms.txt
+version: 16.2.5
+lastUpdated: 2026-05-06
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
 ---
 
 
+> For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 You can specify a custom `stale-while-revalidate` expire time for CDNs to consume in the `Cache-Control` header for ISR enabled pages.
 
 Open `next.config.js` and add the `expireTime` config:
