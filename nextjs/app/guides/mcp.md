@@ -3,8 +3,8 @@ title: Enabling Next.js MCP Server for Coding Agents
 description: Learn how to use Next.js MCP support to allow coding agents access to your application state
 url: "https://nextjs.org/docs/app/guides/mcp"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

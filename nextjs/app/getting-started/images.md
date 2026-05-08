@@ -3,8 +3,8 @@ title: Image Optimization
 description: Learn how to optimize images in Next.js
 url: "https://nextjs.org/docs/app/getting-started/images"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

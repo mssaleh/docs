@@ -3,8 +3,8 @@ title: output
 description: Next.js automatically traces which files are needed by each page to allow for easy deployment of your application. Learn how it works here.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/output"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

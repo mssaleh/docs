@@ -3,8 +3,8 @@ title: unstable_noStore
 description: API Reference for the unstable_noStore function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_noStore"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

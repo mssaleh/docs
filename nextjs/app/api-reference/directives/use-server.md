@@ -3,8 +3,8 @@ title: use server
 description: Learn how to use the use server directive to execute code on the server.
 url: "https://nextjs.org/docs/app/api-reference/directives/use-server"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"

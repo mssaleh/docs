@@ -3,8 +3,8 @@ title: Preserving UI state across navigations
 description: Learn how to control which UI state is preserved and which resets when navigating between pages.
 url: "https://nextjs.org/docs/app/guides/preserving-ui-state"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

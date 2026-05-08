@@ -3,8 +3,8 @@ title: How to optimize third-party libraries
 description: "Optimize the performance of third-party libraries in your application with the `@next/third-parties` package."
 url: "https://nextjs.org/docs/app/guides/third-party-libraries"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

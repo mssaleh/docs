@@ -3,8 +3,8 @@ title: TypeScript
 description: Next.js provides a TypeScript-first development experience for building your React application.
 url: "https://nextjs.org/docs/app/api-reference/config/typescript"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Configuration: /docs/app/api-reference/config"

@@ -3,8 +3,8 @@ title: Linking and Navigating
 description: Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 url: "https://nextjs.org/docs/app/getting-started/linking-and-navigating"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

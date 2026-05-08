@@ -3,8 +3,8 @@ title: "Routing with @next/routing"
 description: "Use `@next/routing` to apply Next.js route matching behavior in adapters."
 url: "https://nextjs.org/docs/app/api-reference/adapters/routing-with-next-routing"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

@@ -3,8 +3,8 @@ title: useRouter
 description: API reference for the useRouter hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-router"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

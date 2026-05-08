@@ -3,8 +3,8 @@ title: "use cache: private"
 description: "Learn how to use the \"use cache: private\" directive to cache functions that access runtime request APIs."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache-private"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"

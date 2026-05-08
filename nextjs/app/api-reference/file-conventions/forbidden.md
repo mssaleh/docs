@@ -3,8 +3,8 @@ title: forbidden.js
 description: API reference for the forbidden.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/forbidden"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

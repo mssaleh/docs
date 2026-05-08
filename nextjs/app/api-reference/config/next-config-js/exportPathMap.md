@@ -3,8 +3,8 @@ title: exportPathMap
 description: "Customize the pages that will be exported as HTML files when using `next export`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/exportPathMap"
 docs_index: /docs/llms.txt
-version: 16.2.5
-lastUpdated: 2026-05-06
+version: 16.2.6
+lastUpdated: 2026-05-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
