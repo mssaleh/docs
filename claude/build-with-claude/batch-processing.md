@@ -76,15 +76,12 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Opus 4.6       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.5     | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.1     | $7.50 / MTok     | $37.50 / MTok   |
-| Claude Opus 4     | $7.50 / MTok     | $37.50 / MTok   |
+| Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations)) | $7.50 / MTok     | $37.50 / MTok   |
 | Claude Sonnet 4.6   | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Sonnet 4.5   | $1.50 / MTok     | $7.50 / MTok    |
-| Claude Sonnet 4   | $1.50 / MTok     | $7.50 / MTok    |
-| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | $1.50 / MTok     | $7.50 / MTok    |
+| Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations)) | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Haiku 4.5  | $0.50 / MTok     | $2.50 / MTok    |
-| Claude Haiku 3.5  | $0.40 / MTok     | $2 / MTok       |
-| Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations))  | $7.50 / MTok     | $37.50 / MTok   |
-| Claude Haiku 3    | $0.125 / MTok    | $0.625 / MTok   |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations)) | $0.40 / MTok     | $2 / MTok       |
 
 ---
 ## How to use the Message Batches API
@@ -390,7 +387,7 @@ $batch = $client->messages->batches->create(
     ],
 );
 
-print_r($batch);
+echo $batch->id;
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -500,7 +497,7 @@ echo "Batch $MESSAGE_BATCH_ID has finished processing"
 ```bash CLI hidelines={2..14,19}
 #!/bin/bash
 MESSAGE_BATCH_ID=$(ant messages:batches create \
-  --transform id --format yaml <<'YAML'
+  --transform id --raw-output <<'YAML'
 requests:
   - custom_id: test-1
     params:
@@ -514,7 +511,7 @@ YAML
 
 until [[ $(ant messages:batches retrieve \
           --message-batch-id "$MESSAGE_BATCH_ID" \
-          --transform processing_status --format yaml) == "ended" ]]; do
+          --transform processing_status --raw-output) == "ended" ]]; do
     echo "Batch $MESSAGE_BATCH_ID is still processing..."
     break
     sleep 60
@@ -562,34 +559,26 @@ while (true) {
 console.log(messageBatch);
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-class Program
+AnthropicClient client = new();
+string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
+
+MessageBatch messageBatch = null;
+while (true)
 {
-    static async Task Main(string[] args)
+    messageBatch = await client.Messages.Batches.Retrieve(messageBatchId);
+    if (messageBatch.ProcessingStatus == "ended")
     {
-        AnthropicClient client = new();
-        string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
-
-        MessageBatch messageBatch = null;
-        while (true)
-        {
-            messageBatch = await client.Messages.Batches.Retrieve(messageBatchId);
-            if (messageBatch.ProcessingStatus == "ended")
-            {
-                break;
-            }
-
-            Console.WriteLine($"Batch {messageBatchId} is still processing...");
-            await Task.Delay(60000);
-        }
-        Console.WriteLine(messageBatch);
+        break;
     }
+
+    Console.WriteLine($"Batch {messageBatchId} is still processing...");
+    await Task.Delay(60000);
 }
+Console.WriteLine(messageBatch);
 ```
 
 ```go Go nocheck hidelines={1..14,-1}
@@ -1000,40 +989,32 @@ for await (const result of await anthropic.messages.batches.results(
 }
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-public class Program
-{
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+AnthropicClient client = new();
 
-        await foreach (var result in client.Messages.Batches.ResultsStreaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
-        {
-            switch (result.Result.Type)
+await foreach (var result in client.Messages.Batches.ResultsStreaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
+{
+    switch (result.Result.Type)
+    {
+        case "succeeded":
+            Console.WriteLine($"Success! {result.CustomID}");
+            break;
+        case "errored":
+            if (result.Result.Error?.Type == "invalid_request")
             {
-                case "succeeded":
-                    Console.WriteLine($"Success! {result.CustomID}");
-                    break;
-                case "errored":
-                    if (result.Result.Error?.Type == "invalid_request")
-                    {
-                        Console.WriteLine($"Validation error: {result.CustomID}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Server error: {result.CustomID}");
-                    }
-                    break;
-                case "expired":
-                    Console.WriteLine($"Request expired: {result.CustomID}");
-                    break;
+                Console.WriteLine($"Validation error: {result.CustomID}");
             }
-        }
+            else
+            {
+                Console.WriteLine($"Server error: {result.CustomID}");
+            }
+            break;
+        case "expired":
+            Console.WriteLine($"Request expired: {result.CustomID}");
+            break;
     }
 }
 ```
@@ -1211,7 +1192,7 @@ curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
 ```bash CLI hidelines={2..13}
 #!/bin/bash
 MESSAGE_BATCH_ID=$(ant messages:batches create \
-  --transform id --format yaml <<'YAML'
+  --transform id --raw-output <<'YAML'
 requests:
   - custom_id: test-1
     params:
@@ -1247,22 +1228,15 @@ const messageBatch = await anthropic.messages.batches.cancel(MESSAGE_BATCH_ID);
 console.log(messageBatch);
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+AnthropicClient client = new();
+string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
 
-        var messageBatch = await client.Messages.Batches.Cancel(MESSAGE_BATCH_ID);
-        Console.WriteLine(messageBatch);
-    }
-}
+var messageBatch = await client.Messages.Batches.Cancel(messageBatchId);
+Console.WriteLine(messageBatch);
 ```
 
 ```go Go nocheck hidelines={1..12,-1}
@@ -1576,80 +1550,71 @@ const messageBatch = await anthropic.messages.batches.create({
 ```
 
 ```csharp C#
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 using Anthropic.Models.Messages.Batches;
 
-public class Program
+AnthropicClient client = new()
 {
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
+    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+};
 
-        var messageBatch = await client.Messages.Batches.Create(new BatchCreateParams
+var messageBatch = await client.Messages.Batches.Create(new BatchCreateParams
+{
+    Requests =
+    [
+        new()
         {
-            Requests =
-            [
-                new()
+            CustomID = "my-first-request",
+            Params = new()
+            {
+                Model = Model.ClaudeOpus4_7,
+                MaxTokens = 1024,
+                System = new List<TextBlockParam>
                 {
-                    CustomID = "my-first-request",
-                    Params = new()
+                    new()
                     {
-                        Model = Model.ClaudeOpus4_7,
-                        MaxTokens = 1024,
-                        System = new List<TextBlockParam>
-                        {
-                            new()
-                            {
-                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-                            },
-                            new()
-                            {
-                                Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new()
-                            }
-                        },
-                        Messages =
-                        [
-                            new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
-                        ]
+                        Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    },
+                    new()
+                    {
+                        Text = "<the entire contents of Pride and Prejudice>",
+                        CacheControl = new()
                     }
                 },
-                new()
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
+                ]
+            }
+        },
+        new()
+        {
+            CustomID = "my-second-request",
+            Params = new()
+            {
+                Model = Model.ClaudeOpus4_7,
+                MaxTokens = 1024,
+                System = new List<TextBlockParam>
                 {
-                    CustomID = "my-second-request",
-                    Params = new()
+                    new()
                     {
-                        Model = Model.ClaudeOpus4_7,
-                        MaxTokens = 1024,
-                        System = new List<TextBlockParam>
-                        {
-                            new()
-                            {
-                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-                            },
-                            new()
-                            {
-                                Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new()
-                            }
-                        },
-                        Messages =
-                        [
-                            new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }
-                        ]
+                        Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    },
+                    new()
+                    {
+                        Text = "<the entire contents of Pride and Prejudice>",
+                        CacheControl = new()
                     }
-                }
-            ]
-        });
-    }
-}
+                },
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }
+                ]
+            }
+        }
+    ]
+});
 ```
 
 ```go Go hidelines={1..10,-1}
@@ -1903,7 +1868,7 @@ In this example, both requests in the batch include identical system messages an
 The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
 
 <Note>
-Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and Claude Platform on AWS, and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
 </Note>
 
 Use extended output for long-form generation such as book-length drafts and technical documentation, exhaustive structured data extraction, large code-generation scaffolds, and long reasoning chains.
@@ -2132,7 +2097,7 @@ $batch = $client->beta->messages->batches->create(
     ],
 );
 
-print_r($batch);
+echo $batch->id;
 ```
 
 ```ruby Ruby hidelines={1..2}

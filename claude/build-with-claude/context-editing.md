@@ -44,7 +44,15 @@ When activated, the API automatically clears the oldest tool results in chronolo
 The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
 
 <Tip>
-**Default behavior:** The default varies by model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
+**Default behavior:** The default varies by model class.
+
+| Model class | Keep all prior thinking | Keep only the last turn's thinking |
+| --- | --- | --- |
+| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
+| Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier |
+| Haiku | (none) | All models through Claude Haiku 4.5 |
+
+Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 </Tip>
 
 An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking)).
@@ -1567,11 +1575,11 @@ YAML
 ORIGINAL=$(ant beta:messages count-tokens \
   --beta context-management-2025-06-27 \
   --transform context_management.original_input_tokens \
-  --format yaml < request.yaml)
+  --raw-output < request.yaml)
 
 INPUT_TOKENS=$(ant beta:messages count-tokens \
   --beta context-management-2025-06-27 \
-  --transform input_tokens --format yaml < request.yaml)
+  --transform input_tokens --raw-output < request.yaml)
 
 printf 'Original tokens: %s\n' "$ORIGINAL"
 printf 'After clearing: %s\n' "$INPUT_TOKENS"
@@ -1849,7 +1857,7 @@ puts "Savings: #{response.context_management.original_input_tokens - response.in
 
 The response shows both the final token count after context management is applied (`input_tokens`) and the original token count before any clearing occurred (`original_input_tokens`).
 
-## Using with the Memory Tool
+## Using with the memory tool
 
 Context editing can be combined with the [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
 
@@ -2147,7 +2155,7 @@ for message in runner:
 </Tab>
 <Tab title="TypeScript">
 
-```typescript TypeScript hidelines={1..15,-3..}
+```typescript TypeScript hidelines={1..14}
 import Anthropic from "@anthropic-ai/sdk";
 import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
@@ -2162,23 +2170,19 @@ const readFile = betaTool({
   run: async () => "file contents..."
 });
 
-async function main() {
-  const client = new Anthropic();
+const client = new Anthropic();
 
-  const runner = client.beta.messages.toolRunner({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    tools: [readFile],
-    messages: [{ role: "user", content: "What's in config.json?" }],
-    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
-  });
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+});
 
-  for await (const message of runner) {
-    console.log(`Tokens used: ${message.usage.input_tokens}`);
-  }
+for await (const message of runner) {
+  console.log(`Tokens used: ${message.usage.input_tokens}`);
 }
-
-main();
 ```
 
 </Tab>
@@ -2192,21 +2196,21 @@ The C# SDK does not include a `tool_runner` helper. Use [server-side compaction]
 <Tab title="Go">
 
 <Note>
-The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Go SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Java SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The PHP SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
@@ -2453,13 +2457,14 @@ For example, after a web search operation, the API response might show:
 {
   "usage": {
     "input_tokens": 63000,
+    "cache_creation_input_tokens": 0,
     "cache_read_input_tokens": 270000,
     "output_tokens": 1400
   }
 }
 ```
 
-The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 333k and triggers compaction prematurely.
+The SDK calculates total usage as 63,000 + 0 + 270,000 + 1,400 = 334,400 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 334k and triggers compaction prematurely.
 
 **Workarounds:**
 
@@ -2495,7 +2500,7 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 
 The TypeScript SDK's `toolRunner` supports compaction but does not log events. Detect compaction by watching `runner.params.messages.length` shrink between turns:
 
-```typescript TypeScript hidelines={1..25,-3..}
+```typescript TypeScript hidelines={1..24}
 import Anthropic from "@anthropic-ai/sdk";
 import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
@@ -2510,29 +2515,25 @@ const readFile = betaTool({
   run: async () => "file contents..."
 });
 
-async function main() {
-  const client = new Anthropic();
+const client = new Anthropic();
 
-  const runner = client.beta.messages.toolRunner({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    tools: [readFile],
-    messages: [{ role: "user", content: "What's in config.json?" }],
-    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
-  });
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+});
 
-  let prevMsgCount = 0;
-  for await (const message of runner) {
-    const currMsgCount = runner.params.messages.length;
-    if (currMsgCount < prevMsgCount) {
-      console.log(`Compaction occurred: ${prevMsgCount} -> ${currMsgCount} messages`);
-      console.log(`Input tokens after compaction: ${message.usage.input_tokens}`);
-    }
-    prevMsgCount = currMsgCount;
+let prevMsgCount = 0;
+for await (const message of runner) {
+  const currMsgCount = runner.params.messages.length;
+  if (currMsgCount < prevMsgCount) {
+    console.log(`Compaction occurred: ${prevMsgCount} -> ${currMsgCount} messages`);
+    console.log(`Input tokens after compaction: ${message.usage.input_tokens}`);
   }
+  prevMsgCount = currMsgCount;
 }
-
-main();
 ```
 
 </Tab>
@@ -2546,21 +2547,21 @@ The C# SDK does not include a `tool_runner` helper. Use [server-side compaction]
 <Tab title="Go">
 
 <Note>
-The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The Go SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The Java SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The PHP SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>

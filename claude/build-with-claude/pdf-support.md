@@ -35,19 +35,17 @@ Since PDF support relies on Claude's vision capabilities, it is subject to the s
 
 ### Supported platforms and models
 
-PDF support is currently supported via direct API access and Google Vertex AI. All [active models](/docs/en/about-claude/models/overview) support PDF processing.
+PDF support is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). All [active models](/docs/en/about-claude/models/overview) support PDF processing.
 
-PDF support is now available on Amazon Bedrock with the following considerations:
+### Amazon Bedrock PDF support
 
-### Amazon Bedrock PDF Support
-
-When using PDF support through Amazon Bedrock's Converse API, there are two distinct document processing modes:
+When using PDF support through Bedrock's Converse API, there are two distinct document processing modes:
 
 <Note>
 **Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).
 </Note>
 
-#### Document Processing Modes
+#### Document processing modes
 
 1. **Converse Document Chat** (Original mode - Text extraction only)
    - Provides basic text extraction from PDFs
@@ -62,14 +60,14 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
    - Uses approximately 7,000 tokens for a 3-page PDF
    - **Requires citations to be enabled** in the Converse API
 
-#### Key Limitations
+#### Key limitations
 
 - **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
 - **InvokeModel API**: Provides full control over PDF processing without forced citations.
 
-#### Common Issues
+#### Common issues
 
-If customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
+If Claude isn't seeing images or charts in your PDFs when using the Converse API, you likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
 <Note>
 This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
@@ -165,34 +163,30 @@ The simplest approach is to reference a PDF directly from a URL:
 
     const anthropic = new Anthropic();
 
-    async function main() {
-      const response = await anthropic.messages.create({
-        model: "claude-opus-4-7",
-        max_tokens: 1024,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "document",
-                source: {
-                  type: "url",
-                  url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-                }
-              },
-              {
-                type: "text",
-                text: "What are the key findings in this document?"
+    const response = await anthropic.messages.create({
+      model: "claude-opus-4-7",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "document",
+              source: {
+                type: "url",
+                url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
               }
-            ]
-          }
-        ]
-      });
+            },
+            {
+              type: "text",
+              text: "What are the key findings in this document?"
+            }
+          ]
+        }
+      ]
+    });
 
-      console.log(response);
-    }
-
-    main();
+    console.log(response);
     ```
     ```java Java hidelines={1..8,-2..}
     import com.anthropic.client.AnthropicClient;
@@ -349,8 +343,8 @@ If you need to send PDFs from your local system or when a URL isn't available:
       const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
 
       // Method 2: Load from a local file
-      // import fs from "fs";
-      // const pdfBase64 = (await fs.readFile('document.pdf')).toString('base64');
+      // import { readFile } from "node:fs/promises";
+      // const pdfBase64 = (await readFile('document.pdf')).toString('base64');
 
       // Send the API request with base64-encoded PDF
       const anthropic = new Anthropic();
@@ -499,7 +493,7 @@ curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/
 # First, upload your PDF to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./document.pdf \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Then use the returned file_id in your message
 ant beta:messages create \
@@ -556,43 +550,39 @@ import fs from "fs";
 
 const anthropic = new Anthropic();
 
-async function main() {
-  // Upload the PDF file
-  const fileUpload = await anthropic.beta.files.upload({
-    file: await toFile(fs.createReadStream("document.pdf"), undefined, {
-      type: "application/pdf"
-    })
-  });
+// Upload the PDF file
+const fileUpload = await anthropic.beta.files.upload({
+  file: await toFile(fs.createReadStream("document.pdf"), undefined, {
+    type: "application/pdf"
+  })
+});
 
-  // Use the uploaded file in a message
-  const response = await anthropic.beta.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    betas: ["files-api-2025-04-14"],
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "document",
-            source: {
-              type: "file",
-              file_id: fileUpload.id
-            }
-          },
-          {
-            type: "text",
-            text: "What are the key findings in this document?"
+// Use the uploaded file in a message
+const response = await anthropic.beta.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  betas: ["files-api-2025-04-14"],
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "document",
+          source: {
+            type: "file",
+            file_id: fileUpload.id
           }
-        ]
-      }
-    ]
-  });
+        },
+        {
+          type: "text",
+          text: "What are the key findings in this document?"
+        }
+      ]
+    }
+  ]
+});
 
-  console.log(response);
-}
-
-main();
+console.log(response);
 ```
 
 ```java Java nocheck hidelines={1..3,6,8,10..19,-2..}

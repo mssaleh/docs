@@ -20,6 +20,8 @@ Different APIs and features have different storage and retention needs. Where an
 - Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is never retained unless explicitly noted.
 - Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
+Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in **claude.ai** > **Organization settings** > **Data and privacy**.
+
 In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
 
 ## Zero data retention (ZDR) scope
@@ -48,7 +50,7 @@ The Claude API supports HIPAA-ready integrations for organizations that handle p
 Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
 
 <Note>
-This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
+This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 </Note>
 
 ### Getting started
@@ -81,7 +83,8 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 
 - **Claude consumer products:** Claude Free, Pro, or Max plans
 - **Console and Workbench:** Usage through the Claude Console interface
-- **Third-party platforms:** Claude on AWS Bedrock or Google Cloud Vertex AI (refer to those platforms' compliance documentation)
+- **Partner-operated platforms:** Amazon Bedrock or Vertex AI (refer to those platforms' compliance documentation)
+- **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available
 - **Third-party integrations:** Data processed by external tools or services connected to your application
 - **Claude Code:** Claude Code is not covered under HIPAA readiness
 - **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
@@ -236,9 +239,15 @@ Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss 
 
 </section>
 
-<section title="Does this apply to Claude on AWS Bedrock or Vertex AI?">
+<section title="Does this apply to Amazon Bedrock or Vertex AI?">
 
-No, only the Claude API is eligible for ZDR and HIPAA readiness. For Claude deployments on AWS Bedrock or Vertex AI, refer to those platforms' data retention and compliance policies.
+No. The ZDR and HIPAA arrangements described on this page apply to the Claude API, where Anthropic is the data processor. On Bedrock and Vertex AI, the cloud provider is the data processor; refer to those platforms' data retention and compliance policies for their equivalent controls.
+
+</section>
+
+<section title="Is Claude Platform on AWS eligible for ZDR or HIPAA readiness?">
+
+Claude Platform on AWS follows the same data retention policy as the first-party Claude API. ZDR is available on request; contact your Anthropic account representative to enable it. HIPAA readiness is not available on Claude Platform on AWS. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for details.
 
 </section>
 

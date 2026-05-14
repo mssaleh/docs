@@ -10,7 +10,7 @@ This guide describes how to work with images in Claude, including best practices
 
 ## How to use vision
 
-Use Claude’s vision capabilities through:
+Use Claude's vision capabilities through:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
 - The [Console Workbench](/workbench/). A button to add images appears at the top right of every User message block.
@@ -32,7 +32,7 @@ The maximal number of images per message or request is:
 The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
 <Note>
-While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
+While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Vertex AI) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
 Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
 </Note>
@@ -55,7 +55,7 @@ To minimize latency and to simplify coordinate-based workflows, you should prefe
 
 ### Calculate image costs
 
-Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you’re using.
+Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you're using.
 
 Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
@@ -75,7 +75,7 @@ Claude Opus 4.7 is the first Claude model with high-resolution image support. Th
 
 High-resolution support is automatic on Claude Opus 4.7 and requires no beta header or client-side opt-in.
 
-High-resolution images on Claude Opus 4.7 can use up to approximately 3x more image tokens than on prior models (4784 vs 1600 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
+High-resolution images on Claude Opus 4.7 can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
 
 Here are the same image sizes tokenized for Claude Opus 4.7, based on its per-token price of $5 per million input tokens:
 
@@ -87,15 +87,15 @@ Here are the same image sizes tokenized for Claude Opus 4.7, based on its per-to
 | 1920x1080 px(2.07 megapixels) | \~2765       | \~$0.014     | \~$14.00         |
 | 2000x1500 px(3 megapixels)    | \~4000       | \~$0.020     | \~$20.00         |
 
-### Ensuring image quality
+### Ensure image quality
 
 When providing images to Claude, keep the following in mind for best results:
 
 - **Image format**: Use a supported image format: JPEG, PNG, GIF, or WebP.\
   Animations are unsupported, and only the first frame will be used.
 - **Image clarity**: Ensure images are clear and not too blurry or pixelated.
-- **Text**: If the image contains important text, make sure it’s legible and not too small. Avoid cropping out key visual context just to enlarge the text.
-- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing and/or cropping your images.
+- **Text**: If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context just to enlarge the text.
+- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing your images, cropping them, or both.
 - **Image compression**: Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
 ---
@@ -385,35 +385,31 @@ Below are examples of how to include images in a Messages API request using base
       apiKey: process.env.ANTHROPIC_API_KEY
     });
 
-    async function main() {
-      const message = await anthropic.messages.create({
-        model: "claude-opus-4-7",
-        max_tokens: 1024,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: "image/jpeg",
-                  data: imageData // Base64-encoded image data as string
-                }
-              },
-              {
-                type: "text",
-                text: "Describe this image."
+    const message = await anthropic.messages.create({
+      model: "claude-opus-4-7",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: "image/jpeg",
+                data: imageData // Base64-encoded image data as string
               }
-            ]
-          }
-        ]
-      });
+            },
+            {
+              type: "text",
+              text: "Describe this image."
+            }
+          ]
+        }
+      ]
+    });
 
-      console.log(message);
-    }
-
-    main();
+    console.log(message);
     ```
     ```csharp C#
     using System.Collections.Generic;
@@ -554,7 +550,7 @@ Below are examples of how to include images in a Messages API request using base
         model: 'claude-opus-4-7',
     );
 
-    print_r($message);
+    echo $message->content[0]->text;
     ```
     ```ruby Ruby hidelines={1..2}
     require "anthropic"
@@ -666,34 +662,30 @@ Below are examples of how to include images in a Messages API request using base
       apiKey: process.env.ANTHROPIC_API_KEY
     });
 
-    async function main() {
-      const message = await anthropic.messages.create({
-        model: "claude-opus-4-7",
-        max_tokens: 1024,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "image",
-                source: {
-                  type: "url",
-                  url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-                }
-              },
-              {
-                type: "text",
-                text: "Describe this image."
+    const message = await anthropic.messages.create({
+      model: "claude-opus-4-7",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "image",
+              source: {
+                type: "url",
+                url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
               }
-            ]
-          }
-        ]
-      });
+            },
+            {
+              type: "text",
+              text: "Describe this image."
+            }
+          ]
+        }
+      ]
+    });
 
-      console.log(message);
-    }
-
-    main();
+    console.log(message);
     ```
     ```csharp C#
     using System.Collections.Generic;
@@ -826,7 +818,7 @@ Below are examples of how to include images in a Messages API request using base
         model: 'claude-opus-4-7',
     );
 
-    print_r($message);
+    echo $message->content[0]->text;
     ```
     ```ruby Ruby hidelines={1..2}
     require "anthropic"
@@ -919,7 +911,7 @@ curl -sSo image.jpg \
 # First, upload your image to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./image.jpg \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Then use the returned file_id in your message
 ant beta:messages create \
@@ -976,41 +968,37 @@ import fs from "fs";
 
 const anthropic = new Anthropic();
 
-async function main() {
-  // Upload the image file
-  const fileUpload = await anthropic.beta.files.upload({
-    file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
-  });
+// Upload the image file
+const fileUpload = await anthropic.beta.files.upload({
+  file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
+});
 
-  // Use the uploaded file in a message
-  const response = await anthropic.beta.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    betas: ["files-api-2025-04-14"],
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "image",
-            source: {
-              type: "file",
-              file_id: fileUpload.id
-            }
-          },
-          {
-            type: "text",
-            text: "Describe this image."
+// Use the uploaded file in a message
+const response = await anthropic.beta.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  betas: ["files-api-2025-04-14"],
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "file",
+            file_id: fileUpload.id
           }
-        ]
-      }
-    ]
-  });
+        },
+        {
+          type: "text",
+          text: "Describe this image."
+        }
+      ]
+    }
+  ]
+});
 
-  console.log(response);
-}
-
-main();
+console.log(response);
 ```
 
 ```csharp C# nocheck
@@ -1180,7 +1168,7 @@ $message = $client->beta->messages->create(
     betas: ['files-api-2025-04-14'],
 );
 
-print_r($message->content);
+echo $message->content[0]->text;
 ```
 
 ```ruby Ruby nocheck hidelines={1..2}
@@ -1220,7 +1208,7 @@ See [Messages API examples](/docs/en/api/messages/create) for more example code 
 
 <section title="Example: One image">
 
-It’s best to place images earlier in the prompt than questions about them or instructions for tasks that use them.
+It's best to place images earlier in the prompt than questions about them or instructions for tasks that use them.
 
 Ask Claude to describe one image.
 
@@ -1287,7 +1275,7 @@ Ask Claude to describe one image.
 </section>
 <section title="Example: Multiple images">
 
-In situations where there are multiple images, introduce each image with `Image 1:` and `Image 2:` and so on. You don’t need newlines between images or between images and the prompt.
+In situations where there are multiple images, introduce each image with `Image 1:` and `Image 2:` and so on. You don't need newlines between images or between images and the prompt.
 
 Ask Claude to describe the differences between multiple images.
 | Role | Content |
@@ -1463,7 +1451,7 @@ Ask Claude to describe the differences between multiple images, while giving it 
 </section>
 <section title="Example: Four images across two conversation turns">
 
-Claude’s vision capabilities shine in multimodal conversations that mix images and text. You can have extended back-and-forth exchanges with Claude, adding new images or follow-up questions at any point. This enables powerful workflows for iterative image analysis, comparison, or combining visuals with other knowledge.
+Claude's vision capabilities shine in multimodal conversations that mix images and text. You can have extended back-and-forth exchanges with Claude, adding new images or follow-up questions at any point. This enables powerful workflows for iterative image analysis, comparison, or combining visuals with other knowledge.
 
 Ask Claude to contrast two images, then ask a follow-up question comparing the first images to two new images.
 | Role | Content |
@@ -1473,7 +1461,7 @@ Ask Claude to contrast two images, then ask a follow-up question comparing the f
 | User | Image 1: \[Image 3\] Image 2: \[Image 4\] Are these images similar to the first two? |
 | Assistant | \[Claude's response\] |
 
-When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages/create) structure.
+When using the API, insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages/create) structure.
 
 </section>
 
@@ -1543,7 +1531,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
     - Messages API: Up to 600 images per request (100 for models with a 200k-token context window)
     - claude.ai: Up to 20 images per turn
 
-    Requests exceeding these limits are rejected and return an error. Requests with many large images may also fail before reaching these limits; see [Basics and limits](#basics-and-limits) for details.
+    Requests exceeding these limits are rejected and return an error. Requests with many large images may also fail before reaching these limits; see [General limits](#general-limits) for details.
 
   
 </section>

@@ -12,7 +12,11 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
 | **Learn more** | [Messages API docs](/docs/en/build-with-claude/working-with-messages) | [Claude Managed Agents docs](/docs/en/managed-agents/overview) |
 
-Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built in prompt caching, compaction, and other performance optimizations for high quality, efficient agent outputs.
+Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
+
+<Note>
+Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents) in the Claude Platform on AWS guide.
+</Note>
 
 <CardGroup cols={2}>
   <Card title="Quickstart" icon="play" href="/docs/en/managed-agents/quickstart">
@@ -58,19 +62,19 @@ Claude Managed Agents is built around four concepts:
 
 Claude Managed Agents is best for workloads that need:
 
-- **Long-running execution** - Tasks that run for minutes or hours with multiple tool calls
-- **Cloud infrastructure** - Secure containers with pre-installed packages and network access
-- **Minimal infrastructure** - No need to build your own agent loop, sandbox, or tool execution layer
-- **Stateful sessions** - Persistent file systems and conversation history across multiple interactions
+- **Long-running execution:** Tasks that run for minutes or hours with multiple tool calls
+- **Cloud infrastructure:** Secure containers with pre-installed packages and network access
+- **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
+- **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 
 ## Supported tools
 
-Claude Managed Agents gives Claude access to a comprehensive set of built-in tools:
+Claude Managed Agents gives Claude access to a set of built-in tools:
 
-- **Bash** - Run shell commands in the container
-- **File operations** - Read, write, edit, glob, and grep files in the container
-- **Web search and fetch** - Search the web and retrieve content from URLs
-- **MCP servers** - Connect to external tool providers
+- **Bash:** Run shell commands in the container
+- **File operations:** Read, write, edit, glob, and grep files in the container
+- **Web search and fetch:** Search the web and retrieve content from URLs
+- **MCP servers:** Connect to external tool providers
 
 See [Tools](/docs/en/managed-agents/tools) for the full list and configuration options.
 
@@ -82,10 +86,10 @@ Claude Managed Agents is currently in beta. All Managed Agents endpoints require
 To get started, you need:
 
 1. A [Claude API key](/settings/keys)
-2. The beta header above on all requests
+2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in beta (research preview). [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 ## Rate limits
 

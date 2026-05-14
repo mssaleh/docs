@@ -212,37 +212,29 @@ if (response.stop_reason === "max_tokens") {
 ```
 
 ```csharp C# nocheck
-using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages = messages,
+    Tools = tools
+};
+
+var response = await client.Messages.Create(parameters);
+
+if (response.StopReason == "max_tokens")
+{
+    var lastBlock = response.Content.Last();
+    if (lastBlock.Type == "tool_use")
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages = messages,
-            Tools = tools
-        };
-
-        var response = await client.Messages.Create(parameters);
-
-        if (response.StopReason == "max_tokens")
-        {
-            var lastBlock = response.Content.Last();
-            if (lastBlock.Type == "tool_use")
-            {
-                parameters.MaxTokens = 4096;
-                response = await client.Messages.Create(parameters);
-            }
-        }
+        parameters.MaxTokens = 4096;
+        response = await client.Messages.Create(parameters);
     }
 }
 ```
@@ -468,6 +460,7 @@ if response.stop_reason == "pause_turn":
     ]
     continuation = client.messages.create(
         model="claude-opus-4-7",
+        max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
@@ -497,10 +490,6 @@ if response.stop_reason == "refusal":
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
-<Note>
-To learn more about refusals triggered by API safety filters for Claude Sonnet 4.5, see [Understanding Sonnet 4.5's API Safety Filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
-</Note>
-
 ### model_context_window_exceeded
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
@@ -508,7 +497,7 @@ Claude stopped because it reached the model's context window limit. This allows 
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-7",
-    max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -591,7 +580,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, tools=tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -639,7 +628,7 @@ try:
     if response.stop_reason == "max_tokens":
         print("Response was truncated")
 
-except anthropic.APIError as e:
+except anthropic.APIStatusError as e:
     # Handle actual errors
     if e.status_code == 429:
         print("Rate limit exceeded")
@@ -685,7 +674,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, tools=tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -729,7 +718,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
-```python nocheck
+```python
 def get_max_possible_tokens(client, prompt):
     """
     Get as many tokens as possible within the model's context window
@@ -738,7 +727,7 @@ def get_max_possible_tokens(client, prompt):
     response = client.messages.create(
         model="claude-opus-4-7",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
+        max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )
 
     if response.stop_reason == "model_context_window_exceeded":

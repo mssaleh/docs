@@ -1,4 +1,4 @@
-# Streaming Messages
+# Streaming messages
 
 ---
 
@@ -444,17 +444,17 @@ event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds..."}}
 ```
 
-## Full HTTP Stream response
+## Full HTTP stream response
 
 Use the [client SDKs](/docs/en/api/client-sdks) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
-A stream response is comprised of:
+A stream response consists of:
 1. A `message_start` event
 2. Potentially multiple content blocks, each of which contains:
     - A `content_block_start` event
     - Potentially multiple `content_block_delta` events
     - A `content_block_stop` event
-3. A `message_delta` event
+3. One or more `message_delta` events
 4. A `message_stop` event
 
 There may be `ping` events dispersed throughout the response as well. See [Event types](#event-types) for more details on the format.
@@ -1108,16 +1108,7 @@ event: content_block_delta
 data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"o,"}}
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":" CA\""}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":", "}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"\"unit\": \"fah"}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"renheit\"}"}}
+data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":" CA\"}"}}
 
 event: content_block_stop
 data: {"type":"content_block_stop","index":1}
@@ -1131,7 +1122,7 @@ data: {"type":"message_stop"}
 
 ### Streaming request with extended thinking
 
-This request enables extended thinking with streaming to see Claude's step-by-step reasoning.
+This request enables extended thinking with streaming. The `display: "summarized"` setting streams a condensed summary of Claude's reasoning rather than the full chain of thought.
 
 <CodeGroup>
 ```bash cURL
@@ -1225,9 +1216,9 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_6,
+    Model = Model.ClaudeOpus4_7,
     MaxTokens = 20000,
-    Thinking = new ThinkingConfigEnabled(budgetTokens: 16000),
+    Thinking = new ThinkingConfigAdaptive { Display = Display.Summarized },
     Messages = [new() { Role = Role.User, Content = "What is the greatest common divisor of 1071 and 462?" }]
 };
 
@@ -1252,9 +1243,13 @@ func main() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 20000,
-		Thinking:  anthropic.ThinkingConfigParamOfEnabled(16000),
+		Thinking: anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{
+				Display: anthropic.ThinkingConfigAdaptiveDisplaySummarized,
+			},
+		},
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the greatest common divisor of 1071 and 462?")),
 		},
@@ -1278,35 +1273,36 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,-2..}
+```java Java hidelines={1..7,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.ThinkingConfigAdaptive;
 
-public class ExtendedThinkingStreaming {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(20000L)
-            .enabledThinking(16000L)
-            .addUserMessage("What is the greatest common divisor of 1071 and 462?")
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(20000L)
+        .thinking(ThinkingConfigAdaptive.builder()
+            .display(ThinkingConfigAdaptive.Display.SUMMARIZED)
+            .build())
+        .addUserMessage("What is the greatest common divisor of 1071 and 462?")
+        .build();
 
-        try (var streamResponse = client.messages().createStreaming(params)) {
-            streamResponse.stream().forEach(event -> {
-                event.contentBlockDelta().ifPresent(deltaEvent -> {
-                    deltaEvent.delta().thinking().ifPresent(td ->
-                        System.out.print(td.thinking())
-                    );
-                    deltaEvent.delta().text().ifPresent(td ->
-                        System.out.print(td.text())
-                    );
-                });
+    try (var streamResponse = client.messages().createStreaming(params)) {
+        streamResponse.stream().forEach(event -> {
+            event.contentBlockDelta().ifPresent(deltaEvent -> {
+                deltaEvent.delta().thinking().ifPresent(td ->
+                    IO.print(td.thinking())
+                );
+                deltaEvent.delta().text().ifPresent(td ->
+                    IO.print(td.text())
+                );
             });
-        }
+        });
     }
 }
 ```
@@ -1712,19 +1708,22 @@ For Claude 4.5 models and earlier, you can recover a streaming request that was 
 
 The basic recovery strategy involves:
 
-1. **Capture the partial response**: Save all content that was successfully received before the error occurred
-2. **Construct a continuation request**: Create a new API request that includes the partial assistant response as the beginning of a new assistant message
-3. **Resume streaming**: Continue receiving the rest of the response from where it was interrupted
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
 
-### Claude 4.6
+### Claude 4.6 and later
 
-For Claude 4.6 models, you should add a user message that instructs the model to continue from where it left off. For example:
+For Claude 4.6 and later models, the same capture-and-resume strategy applies, but step 2 changes: instead of placing the partial response in an assistant message, add a user message that instructs the model to continue from where it left off.
 
-```text Sample prompt
-Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
-```
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+2. **Construct a continuation request:** Create a new API request with a user message containing the partial response and an instruction to continue, for example:
+   ```text Sample prompt
+   Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
+   ```
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
 
 ### Error recovery best practices
 
-1. **Use SDK features**: Leverage the SDK's built-in message accumulation and error handling capabilities
-2. **Handle content types**: Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
+1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
+2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
