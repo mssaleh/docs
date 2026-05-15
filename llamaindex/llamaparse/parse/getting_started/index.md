@@ -1,5 +1,5 @@
 ---
-title: Getting Started | LlamaIndex OSS Documentation
+title: Getting Started | Developer Documentation
 description: Quick start guide for Parse, covering API key generation and document parsing using Python, TypeScript, the REST API, or the Web UI.
 ---
 
@@ -23,10 +23,10 @@ export LLAMA_CLOUD_API_KEY="llx-..."
 
 ## Your first parse job in 60 seconds
 
-- [Python](#tab-panel-30)
-- [TypeScript](#tab-panel-31)
-- [REST API](#tab-panel-32)
-- [Web UI](#tab-panel-33)
+- [Python](#tab-panel-32)
+- [TypeScript](#tab-panel-33)
+- [REST API](#tab-panel-34)
+- [Web UI](#tab-panel-35)
 
 Install the SDK:
 
