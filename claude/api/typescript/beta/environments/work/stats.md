@@ -1,4 +1,4 @@
-## Stats
+## Get Queue Statistics
 
 `client.beta.environments.work.stats(stringenvironmentID, WorkStatsParamsparams?, RequestOptionsoptions?): BetaSelfHostedWorkQueueStats`
 
@@ -18,7 +18,7 @@ Get statistics about the work queue for an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70,6 +70,10 @@ Get statistics about the work queue for an environment.
 
       - `"cache-diagnosis-2026-04-07"`
 
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `BetaSelfHostedWorkQueueStats`
@@ -114,4 +118,16 @@ const betaSelfHostedWorkQueueStats = await client.beta.environments.work.stats(
 );
 
 console.log(betaSelfHostedWorkQueueStats.depth);
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
 ```

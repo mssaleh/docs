@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedMemoryStore`
 
@@ -18,7 +18,7 @@ Delete a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70,6 +70,10 @@ Delete a memory store
 
       - `"cache-diagnosis-2026-04-07"`
 
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `BetaManagedAgentsDeletedMemoryStore`
@@ -98,4 +102,13 @@ const betaManagedAgentsDeletedMemoryStore = await client.beta.memoryStores.delet
 );
 
 console.log(betaManagedAgentsDeletedMemoryStore.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

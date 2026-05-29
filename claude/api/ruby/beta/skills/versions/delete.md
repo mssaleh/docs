@@ -1,4 +1,4 @@
-## Delete
+## Delete Skill Version
 
 `beta.skills.versions.delete(version, **kwargs) -> VersionDeleteResponse`
 
@@ -24,9 +24,9 @@ Delete Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78,6 +78,10 @@ Delete Skill Version
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class VersionDeleteResponse`
@@ -104,4 +108,13 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 
 puts(version)
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
 ```

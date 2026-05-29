@@ -1,4 +1,4 @@
-## List
+## List Vaults
 
 `client.beta.vaults.list(VaultListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsVault>`
 
@@ -28,7 +28,7 @@ List Vaults
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -80,6 +80,10 @@ List Vaults
 
       - `"cache-diagnosis-2026-04-07"`
 
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `BetaManagedAgentsVault`
@@ -126,5 +130,26 @@ const client = new Anthropic({
 // Automatically fetches more pages as needed.
 for await (const betaManagedAgentsVault of client.beta.vaults.list()) {
   console.log(betaManagedAgentsVault.id);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Example vault",
+      "metadata": {
+        "environment": "production"
+      },
+      "type": "vault",
+      "updated_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

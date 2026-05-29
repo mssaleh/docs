@@ -1,6 +1,6 @@
 # Work
 
-## Retrieve
+## Get Work Item
 
 **get** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -20,9 +20,9 @@ Retrieve detailed information about a specific work item.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74,9 +74,13 @@ Retrieve detailed information about a specific work item.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -163,7 +167,31 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Poll
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Poll for Work
 
 **get** `/v1/environments/{environment_id}/work/poll`
 
@@ -191,9 +219,9 @@ Long poll for work items in the queue.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -245,13 +273,17 @@ Long poll for work items in the queue.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 - `"Anthropic-Worker-ID": optional string`
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 ### Returns
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -338,7 +370,31 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/poll \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Ack
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Acknowledge Work
 
 **post** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
@@ -358,9 +414,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -412,9 +468,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -502,7 +562,31 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/ack
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Heartbeat
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Record Heartbeat
 
 **post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
@@ -532,9 +616,9 @@ Record a heartbeat for a work item to maintain the lease.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -586,9 +670,13 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaSelfHostedWorkHeartbeatResponse = object { last_heartbeat, lease_extended, state, 2 more }`
+- `BetaSelfHostedWorkHeartbeatResponse object { last_heartbeat, lease_extended, state, 2 more }`
 
   Response after recording a heartbeat for a work item.
 
@@ -634,7 +722,19 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/hea
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Stop
+#### Response
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+## Stop Work
 
 **post** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
@@ -654,9 +754,9 @@ Stop a work item, initiating graceful or forced shutdown.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -708,6 +808,10 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Body Parameters
 
 - `force: optional boolean`
@@ -716,7 +820,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ### Returns
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -805,7 +909,31 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/sto
     -d '{}'
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## List Work Items
 
 **get** `/v1/environments/{environment_id}/work`
 
@@ -833,9 +961,9 @@ List work items in an environment.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -887,9 +1015,13 @@ List work items in an environment.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaSelfHostedWorkListResponse = object { data, next_page }`
+- `BetaSelfHostedWorkListResponse object { data, next_page }`
 
   Response when listing work items with cursor-based pagination.
 
@@ -980,7 +1112,36 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Update Work Item
 
 **post** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -1000,9 +1161,9 @@ Update work item metadata with merge semantics.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1054,6 +1215,10 @@ Update work item metadata with merge semantics.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Body Parameters
 
 - `metadata: map[string]`
@@ -1062,7 +1227,7 @@ Update work item metadata with merge semantics.
 
 ### Returns
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1155,7 +1320,31 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID \
         }'
 ```
 
-## Stats
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Get Queue Statistics
 
 **get** `/v1/environments/{environment_id}/work/stats`
 
@@ -1171,9 +1360,9 @@ Get statistics about the work queue for an environment.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1225,9 +1414,13 @@ Get statistics about the work queue for an environment.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaSelfHostedWorkQueueStats = object { depth, oldest_queued_at, pending, 2 more }`
+- `BetaSelfHostedWorkQueueStats object { depth, oldest_queued_at, pending, 2 more }`
 
   Statistics about the work queue for an environment.
 
@@ -1264,11 +1457,23 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
+
 ## Domain Types
 
 ### Beta Self Hosted Work
 
-- `BetaSelfHostedWork = object { id, acknowledged_at, created_at, 9 more }`
+- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1348,7 +1553,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Self Hosted Work Heartbeat Response
 
-- `BetaSelfHostedWorkHeartbeatResponse = object { last_heartbeat, lease_extended, state, 2 more }`
+- `BetaSelfHostedWorkHeartbeatResponse object { last_heartbeat, lease_extended, state, 2 more }`
 
   Response after recording a heartbeat for a work item.
 
@@ -1386,7 +1591,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Self Hosted Work List Response
 
-- `BetaSelfHostedWorkListResponse = object { data, next_page }`
+- `BetaSelfHostedWorkListResponse object { data, next_page }`
 
   Response when listing work items with cursor-based pagination.
 
@@ -1470,7 +1675,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Self Hosted Work Queue Stats
 
-- `BetaSelfHostedWorkQueueStats = object { depth, oldest_queued_at, pending, 2 more }`
+- `BetaSelfHostedWorkQueueStats object { depth, oldest_queued_at, pending, 2 more }`
 
   Statistics about the work queue for an environment.
 
@@ -1500,7 +1705,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Self Hosted Work Stop Request
 
-- `BetaSelfHostedWorkStopRequest = object { force }`
+- `BetaSelfHostedWorkStopRequest object { force }`
 
   Request to stop a work item.
 
@@ -1510,7 +1715,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Self Hosted Work Update Request
 
-- `BetaSelfHostedWorkUpdateRequest = object { metadata }`
+- `BetaSelfHostedWorkUpdateRequest object { metadata }`
 
   Request to update work item metadata.
 
@@ -1520,7 +1725,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
 ### Beta Session Work Data
 
-- `BetaSessionWorkData = object { id, type }`
+- `BetaSessionWorkData object { id, type }`
 
   Work data for session work items.
 

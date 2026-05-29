@@ -1,4 +1,4 @@
-## Archive
+## Archive Vault
 
 `BetaManagedAgentsVault Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -68,6 +68,10 @@ Archive Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -113,4 +117,20 @@ VaultArchiveParams parameters = new()
 var betaManagedAgentsVault = await client.Beta.Vaults.Archive(parameters);
 
 Console.WriteLine(betaManagedAgentsVault);
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

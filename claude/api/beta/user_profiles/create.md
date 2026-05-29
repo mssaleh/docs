@@ -1,4 +1,4 @@
-## Create
+## Create User Profile
 
 **post** `/v1/user_profiles`
 
@@ -10,9 +10,9 @@ Create User Profile
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64,6 +64,10 @@ Create User Profile
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Body Parameters
 
 - `external_id: optional string`
@@ -90,7 +94,7 @@ Create User Profile
 
 ### Returns
 
-- `BetaUserProfile = object { id, created_at, metadata, 6 more }`
+- `BetaUserProfile object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -158,4 +162,24 @@ curl https://api.anthropic.com/v1/user_profiles \
           "external_id": "user_12345",
           "metadata": {}
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "relationship": "external",
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345",
+  "name": "Example User"
+}
 ```

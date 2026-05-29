@@ -1,4 +1,4 @@
-## Delete
+## Delete Session Resource
 
 `client.beta.sessions.resources.delete(stringresourceID, ResourceDeleteParamsparams, RequestOptionsoptions?): BetaManagedAgentsDeleteSessionResource`
 
@@ -22,7 +22,7 @@ Delete Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74,6 +74,10 @@ Delete Session Resource
 
       - `"cache-diagnosis-2026-04-07"`
 
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `BetaManagedAgentsDeleteSessionResource`
@@ -101,4 +105,13 @@ const betaManagedAgentsDeleteSessionResource = await client.beta.sessions.resour
 );
 
 console.log(betaManagedAgentsDeleteSessionResource.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
 ```

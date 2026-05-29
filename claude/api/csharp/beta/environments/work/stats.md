@@ -1,4 +1,4 @@
-## Stats
+## Get Queue Statistics
 
 `BetaSelfHostedWorkQueueStats Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -66,6 +66,10 @@ Get statistics about the work queue for an environment.
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class BetaSelfHostedWorkQueueStats:`
@@ -105,4 +109,16 @@ WorkStatsParams parameters = new()
 var betaSelfHostedWorkQueueStats = await client.Beta.Environments.Work.Stats(parameters);
 
 Console.WriteLine(betaSelfHostedWorkQueueStats);
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
 ```

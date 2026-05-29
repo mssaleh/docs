@@ -1,6 +1,6 @@
 # Events
 
-## List
+## List Session Thread Events
 
 `client.Beta.Sessions.Threads.Events.List(ctx, threadID, params) (*PageCursor[BetaManagedAgentsSessionEventUnion], error)`
 
@@ -83,6 +83,10 @@ List Session Thread Events
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -332,143 +336,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
@@ -564,8 +438,6 @@ List Session Thread Events
 
       - `Type BetaManagedAgentsTextBlockType`
 
-        - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -660,179 +532,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -904,179 +614,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -1098,143 +646,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
     - `FromSessionThreadID string`
 
@@ -1268,143 +686,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
     - `ProcessedAt Time`
 
@@ -1506,25 +794,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelOverloadedErrorType`
 
@@ -1546,25 +822,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelRateLimitedErrorType`
 
@@ -1586,25 +850,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelRequestFailedErrorType`
 
@@ -1630,25 +882,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsMCPConnectionFailedErrorType`
 
@@ -1674,25 +914,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsMCPAuthenticationFailedErrorType`
 
@@ -1714,25 +942,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsBillingErrorType`
 
@@ -1990,30 +1206,6 @@ List Session Thread Events
 
       Token usage for a single model request.
 
-      - `CacheCreationInputTokens int64`
-
-        Tokens used to create prompt cache in this request.
-
-      - `CacheReadInputTokens int64`
-
-        Tokens read from prompt cache in this request.
-
-      - `InputTokens int64`
-
-        Input tokens consumed by this request.
-
-      - `OutputTokens int64`
-
-        Output tokens generated by this request.
-
-      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
-
-        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
-
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -2170,29 +1362,13 @@ List Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type BetaManagedAgentsSessionEndTurnType`
-
-          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
-
       - `type BetaManagedAgentsSessionRequiresAction struct{…}`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `EventIDs []string`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type BetaManagedAgentsSessionRequiresActionType`
-
-          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
-
       - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
-
-          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
 
     - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
 
@@ -2246,179 +1422,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -2570,71 +1584,11 @@ List Session Thread Events
 
             - `Type BetaManagedAgentsMCPServerURLDefinitionType`
 
-              - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
-
             - `URL string`
 
           - `Model BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `ID BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `type BetaManagedAgentsModel string`
-
-                The model that will power your agent.
-
-                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `const BetaManagedAgentsModelClaudeOpus4_7 BetaManagedAgentsModel = "claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `const BetaManagedAgentsModelClaudeOpus4_6 BetaManagedAgentsModel = "claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_6 BetaManagedAgentsModel = "claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `const BetaManagedAgentsModelClaudeHaiku4_5 BetaManagedAgentsModel = "claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `const BetaManagedAgentsModelClaudeHaiku4_5_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_5 BetaManagedAgentsModel = "claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `string`
-
-            - `Speed BetaManagedAgentsModelConfigSpeed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
-
-              - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
 
           - `Name string`
 
@@ -2728,17 +1682,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
@@ -2760,17 +1706,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -2786,17 +1724,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `MCPServerName string`
 
@@ -2852,25 +1782,9 @@ List Session Thread Events
 
           A resolved Anthropic-managed skill.
 
-          - `SkillID string`
-
-          - `Type BetaManagedAgentsAnthropicSkillType`
-
-            - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
-          - `Version string`
-
         - `type BetaManagedAgentsCustomSkill struct{…}`
 
           A resolved user-created custom skill.
-
-          - `SkillID string`
-
-          - `Type BetaManagedAgentsCustomSkillType`
-
-            - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
-
-          - `Version string`
 
       - `System string`
 
@@ -2878,169 +1792,11 @@ List Session Thread Events
 
         - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
 
-          - `Configs []BetaManagedAgentsAgentToolConfig`
-
-            - `Enabled bool`
-
-            - `Name BetaManagedAgentsAgentToolConfigName`
-
-              Built-in agent tool identifier.
-
-              - `const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web_fetch"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web_search"`
-
-            - `PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `Enabled bool`
-
-            - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-            - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
-
         - `type BetaManagedAgentsMCPToolset struct{…}`
-
-          - `Configs []BetaManagedAgentsMCPToolConfig`
-
-            - `Enabled bool`
-
-            - `Name string`
-
-            - `PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `Enabled bool`
-
-            - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `MCPServerName string`
-
-          - `Type BetaManagedAgentsMCPToolsetType`
-
-            - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
 
         - `type BetaManagedAgentsCustomTool struct{…}`
 
           A custom tool as returned in API responses.
-
-          - `Description string`
-
-          - `InputSchema BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Properties map[string, any]`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Required []string`
-
-              List of required property names.
-
-            - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-              Must be 'object' for tool input schemas.
-
-              - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
-
-          - `Name string`
-
-          - `Type BetaManagedAgentsCustomToolType`
-
-            - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
 
       - `Type BetaManagedAgentsSessionAgentType`
 
@@ -3087,7 +1843,28 @@ func main() {
 }
 ```
 
-## Stream
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Stream Session Thread Events
 
 `client.Beta.Sessions.Threads.Events.Stream(ctx, threadID, params) (*BetaManagedAgentsStreamSessionThreadEventsUnion, error)`
 
@@ -3162,6 +1939,10 @@ Stream Session Thread Events
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -3411,143 +2192,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
@@ -3643,8 +2294,6 @@ Stream Session Thread Events
 
       - `Type BetaManagedAgentsTextBlockType`
 
-        - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -3739,179 +2388,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -3983,179 +2470,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -4177,143 +2502,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
     - `FromSessionThreadID string`
 
@@ -4347,143 +2542,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
 
     - `ProcessedAt Time`
 
@@ -4585,25 +2650,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelOverloadedErrorType`
 
@@ -4625,25 +2678,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelRateLimitedErrorType`
 
@@ -4665,25 +2706,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsModelRequestFailedErrorType`
 
@@ -4709,25 +2738,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsMCPConnectionFailedErrorType`
 
@@ -4753,25 +2770,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsMCPAuthenticationFailedErrorType`
 
@@ -4793,25 +2798,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type BetaManagedAgentsRetryStatusRetryingType`
-
-              - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
-
           - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type BetaManagedAgentsRetryStatusExhaustedType`
-
-              - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
-
           - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type BetaManagedAgentsRetryStatusTerminalType`
-
-              - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
 
         - `Type BetaManagedAgentsBillingErrorType`
 
@@ -5069,30 +3062,6 @@ Stream Session Thread Events
 
       Token usage for a single model request.
 
-      - `CacheCreationInputTokens int64`
-
-        Tokens used to create prompt cache in this request.
-
-      - `CacheReadInputTokens int64`
-
-        Tokens read from prompt cache in this request.
-
-      - `InputTokens int64`
-
-        Input tokens consumed by this request.
-
-      - `OutputTokens int64`
-
-        Output tokens generated by this request.
-
-      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
-
-        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
-
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -5249,29 +3218,13 @@ Stream Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type BetaManagedAgentsSessionEndTurnType`
-
-          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
-
       - `type BetaManagedAgentsSessionRequiresAction struct{…}`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `EventIDs []string`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type BetaManagedAgentsSessionRequiresActionType`
-
-          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
-
       - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
-
-          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
 
     - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
 
@@ -5325,179 +3278,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `Text string`
-
-          The text content.
-
-        - `Type BetaManagedAgentsTextBlockType`
-
-          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
       - `type BetaManagedAgentsImageBlock struct{…}`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-          Union type for image source variants.
-
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-            Base64-encoded image data.
-
-            - `Data string`
-
-              Base64-encoded image data.
-
-            - `MediaType string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type BetaManagedAgentsBase64ImageSourceType`
-
-              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-          - `type BetaManagedAgentsURLImageSource struct{…}`
-
-            Image referenced by URL.
-
-            - `Type BetaManagedAgentsURLImageSourceType`
-
-              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-            - `URL string`
-
-              URL of the image to fetch.
-
-          - `type BetaManagedAgentsFileImageSource struct{…}`
-
-            Image referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileImageSourceType`
-
-              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-        - `Type BetaManagedAgentsImageBlockType`
-
-          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
       - `type BetaManagedAgentsDocumentBlock struct{…}`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-          Union type for document source variants.
-
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-            Base64-encoded document data.
-
-            - `Data string`
-
-              Base64-encoded document data.
-
-            - `MediaType string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-            Plain text document content.
-
-            - `Data string`
-
-              The plain text content.
-
-            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-            Document referenced by URL.
-
-            - `Type BetaManagedAgentsURLDocumentSourceType`
-
-              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-            - `URL string`
-
-              URL of the document to fetch.
-
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-            Document referenced by file ID.
-
-            - `FileID string`
-
-              ID of a previously uploaded file.
-
-            - `Type BetaManagedAgentsFileDocumentSourceType`
-
-              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-        - `Type BetaManagedAgentsDocumentBlockType`
-
-          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-        - `Context string`
-
-          Additional context about the document for the model.
-
-        - `Title string`
-
-          The title of the document.
-
       - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
         A block containing a web search result.
-
-        - `Citations BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `Enabled bool`
-
-            Whether citations are enabled for this search result.
-
-        - `Content []BetaManagedAgentsSearchResultContent`
-
-          Array of text content blocks from the search result.
-
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsSearchResultContentType`
-
-            - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-        - `Source string`
-
-          The URL source of the search result.
-
-        - `Title string`
-
-          The title of the search result.
-
-        - `Type BetaManagedAgentsSearchResultBlockType`
-
-          - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
     - `IsError bool`
 
@@ -5649,71 +3440,11 @@ Stream Session Thread Events
 
             - `Type BetaManagedAgentsMCPServerURLDefinitionType`
 
-              - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
-
             - `URL string`
 
           - `Model BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `ID BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `type BetaManagedAgentsModel string`
-
-                The model that will power your agent.
-
-                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `const BetaManagedAgentsModelClaudeOpus4_7 BetaManagedAgentsModel = "claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `const BetaManagedAgentsModelClaudeOpus4_6 BetaManagedAgentsModel = "claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_6 BetaManagedAgentsModel = "claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `const BetaManagedAgentsModelClaudeHaiku4_5 BetaManagedAgentsModel = "claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `const BetaManagedAgentsModelClaudeHaiku4_5_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_5 BetaManagedAgentsModel = "claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `string`
-
-            - `Speed BetaManagedAgentsModelConfigSpeed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
-
-              - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
 
           - `Name string`
 
@@ -5807,17 +3538,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
@@ -5839,17 +3562,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -5865,17 +3580,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
                   - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                      - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
               - `MCPServerName string`
 
@@ -5931,25 +3638,9 @@ Stream Session Thread Events
 
           A resolved Anthropic-managed skill.
 
-          - `SkillID string`
-
-          - `Type BetaManagedAgentsAnthropicSkillType`
-
-            - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
-          - `Version string`
-
         - `type BetaManagedAgentsCustomSkill struct{…}`
 
           A resolved user-created custom skill.
-
-          - `SkillID string`
-
-          - `Type BetaManagedAgentsCustomSkillType`
-
-            - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
-
-          - `Version string`
 
       - `System string`
 
@@ -5957,169 +3648,11 @@ Stream Session Thread Events
 
         - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
 
-          - `Configs []BetaManagedAgentsAgentToolConfig`
-
-            - `Enabled bool`
-
-            - `Name BetaManagedAgentsAgentToolConfigName`
-
-              Built-in agent tool identifier.
-
-              - `const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web_fetch"`
-
-              - `const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web_search"`
-
-            - `PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `Enabled bool`
-
-            - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-            - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
-
         - `type BetaManagedAgentsMCPToolset struct{…}`
-
-          - `Configs []BetaManagedAgentsMCPToolConfig`
-
-            - `Enabled bool`
-
-            - `Name string`
-
-            - `PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `Enabled bool`
-
-            - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion`
-
-              Permission policy for tool execution.
-
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `MCPServerName string`
-
-          - `Type BetaManagedAgentsMCPToolsetType`
-
-            - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
 
         - `type BetaManagedAgentsCustomTool struct{…}`
 
           A custom tool as returned in API responses.
-
-          - `Description string`
-
-          - `InputSchema BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Properties map[string, any]`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Required []string`
-
-              List of required property names.
-
-            - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-              Must be 'object' for tool input schemas.
-
-              - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
-
-          - `Name string`
-
-          - `Type BetaManagedAgentsCustomToolType`
-
-            - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
 
       - `Type BetaManagedAgentsSessionAgentType`
 
@@ -6166,5 +3699,21 @@ func main() {
   if err != nil {
     panic(err.Error())
   }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
 }
 ```

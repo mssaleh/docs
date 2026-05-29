@@ -1,4 +1,4 @@
-## Send
+## Send Events
 
 `client.beta.sessions.events.send(stringsessionID, EventSendParamsparams, RequestOptionsoptions?): BetaManagedAgentsSendSessionEvents`
 
@@ -226,143 +226,13 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
-
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
 
         - `BetaManagedAgentsSearchResultBlock`
 
@@ -468,179 +338,17 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
-
         - `BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
-
-          - `citations: BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `enabled: boolean`
-
-              Whether citations are enabled for this search result.
-
-          - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-            Array of text content blocks from the search result.
-
-            - `text: string`
-
-              The text content.
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `source: string`
-
-            The URL source of the search result.
-
-          - `title: string`
-
-            The title of the search result.
-
-          - `type: "search_result"`
-
-            - `"search_result"`
 
       - `is_error?: boolean | null`
 
@@ -652,7 +360,7 @@ Send Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -703,6 +411,10 @@ Send Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -956,143 +668,13 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
-
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
 
         - `BetaManagedAgentsSearchResultBlock`
 
@@ -1222,179 +804,17 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
-
         - `BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
-
-          - `citations: BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `enabled: boolean`
-
-              Whether citations are enabled for this search result.
-
-          - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-            Array of text content blocks from the search result.
-
-            - `text: string`
-
-              The text content.
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `source: string`
-
-            The URL source of the search result.
-
-          - `title: string`
-
-            The title of the search result.
-
-          - `type: "search_result"`
-
-            - `"search_result"`
 
       - `is_error?: boolean | null`
 
@@ -1427,4 +847,24 @@ const betaManagedAgentsSendSessionEvents = await client.beta.sessions.events.sen
 );
 
 console.log(betaManagedAgentsSendSessionEvents.data);
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
 ```

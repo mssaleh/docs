@@ -1,4 +1,4 @@
-## Delete
+## Delete Session
 
 `beta.sessions.delete(strsession_id, SessionDeleteParams**kwargs)  -> BetaManagedAgentsDeletedSession`
 
@@ -16,7 +16,7 @@ Delete Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,10 @@ Delete Session
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession: …`
@@ -93,4 +97,13 @@ beta_managed_agents_deleted_session = client.beta.sessions.delete(
     session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
 )
 print(beta_managed_agents_deleted_session.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

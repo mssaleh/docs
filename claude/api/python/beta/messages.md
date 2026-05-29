@@ -1,6 +1,6 @@
 # Messages
 
-## Create
+## Create a Message
 
 `beta.messages.create(MessageCreateParams**kwargs)  -> BetaMessage`
 
@@ -264,25 +264,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestDocumentBlock: …`
 
         - `source: Source`
@@ -321,205 +302,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `class BetaTextBlockParam: …`
 
-                  - `text: str`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[List[BetaTextCitationParam]]`
-
-                    - `class BetaCitationCharLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_char_index: int`
-
-                      - `start_char_index: int`
-
-                      - `type: Literal["char_location"]`
-
-                        - `"char_location"`
-
-                    - `class BetaCitationPageLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_page_number: int`
-
-                      - `start_page_number: int`
-
-                      - `type: Literal["page_location"]`
-
-                        - `"page_location"`
-
-                    - `class BetaCitationContentBlockLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: Literal["content_block_location"]`
-
-                        - `"content_block_location"`
-
-                    - `class BetaCitationWebSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `encrypted_index: str`
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["web_search_result_location"]`
-
-                        - `"web_search_result_location"`
-
-                      - `url: str`
-
-                    - `class BetaCitationSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: int`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: str`
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
-
                 - `class BetaImageBlockParam: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64ImageSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaURLImageSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileImageSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["image"]`
-
-                    - `"image"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
             - `type: Literal["content"]`
 
@@ -549,25 +332,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           - `enabled: Optional[bool]`
@@ -584,136 +348,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: Optional[List[BetaTextCitationParam]]`
-
-            - `class BetaCitationCharLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationWebSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
 
         - `source: str`
 
@@ -727,28 +366,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
-
-          - `enabled: Optional[bool]`
 
       - `class BetaThinkingBlockParam: …`
 
@@ -783,25 +401,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `caller: Optional[Caller]`
 
@@ -845,25 +444,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[Content], null]]`
 
           - `str`
@@ -872,672 +452,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `class BetaTextBlockParam: …`
 
-              - `text: str`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[List[BetaTextCitationParam]]`
-
-                - `class BetaCitationCharLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationWebSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
             - `class BetaImageBlockParam: …`
-
-              - `source: Source`
-
-                - `class BetaBase64ImageSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaURLImageSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileImageSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["image"]`
-
-                - `"image"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `class BetaSearchResultBlockParam: …`
 
-              - `content: List[BetaTextBlockParam]`
-
-                - `text: str`
-
-                - `type: Literal["text"]`
-
-                  - `"text"`
-
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: Literal["ephemeral"]`
-
-                    - `"ephemeral"`
-
-                  - `ttl: Optional[Literal["5m", "1h"]]`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: Optional[List[BetaTextCitationParam]]`
-
-                  - `class BetaCitationCharLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationWebSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
-
-              - `source: str`
-
-              - `title: str`
-
-              - `type: Literal["search_result"]`
-
-                - `"search_result"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
             - `class BetaRequestDocumentBlock: …`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `class BetaToolReferenceBlockParam: …`
 
@@ -1552,25 +471,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
         - `is_error: Optional[bool]`
 
@@ -1606,25 +506,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -1633,27 +514,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebSearchToolResultBlockParam: …`
 
@@ -1703,25 +568,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -1730,27 +576,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlockParam: …`
 
@@ -1765,6 +595,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -1783,297 +615,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `class BetaWebFetchBlockParam: …`
 
             - `content: BetaRequestDocumentBlock`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `type: Literal["web_fetch_result"]`
 
@@ -2097,25 +638,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -2124,27 +646,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaAdvisorToolResultBlockParam: …`
 
@@ -2178,6 +684,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"advisor_result"`
 
+            - `stop_reason: Optional[str]`
+
           - `class BetaAdvisorRedactedResultBlockParam: …`
 
             - `encrypted_content: str`
@@ -2188,6 +696,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"advisor_redacted_result"`
 
+            - `stop_reason: Optional[str]`
+
         - `tool_use_id: str`
 
         - `type: Literal["advisor_tool_result"]`
@@ -2197,25 +707,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -2269,8 +760,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `encrypted_stdout: str`
 
             - `return_code: int`
@@ -2290,25 +779,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
@@ -2361,25 +831,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
@@ -2461,25 +912,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaToolSearchToolResultBlockParam: …`
 
         - `content: Content`
@@ -2508,30 +940,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `type: Literal["tool_reference"]`
 
-                - `"tool_reference"`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: Literal["tool_search_tool_search_result"]`
 
@@ -2546,25 +957,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaMCPToolUseBlockParam: …`
 
@@ -2586,25 +978,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestMCPToolResultBlockParam: …`
 
         - `tool_use_id: str`
@@ -2617,25 +990,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
 
           - `str`
@@ -2646,136 +1000,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `type: Literal["text"]`
 
-              - `"text"`
-
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: Optional[List[BetaTextCitationParam]]`
-
-              - `class BetaCitationCharLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
 
         - `is_error: Optional[bool]`
 
@@ -2794,25 +1023,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaCompactionBlockParam: …`
 
         A compaction block containing summary of previous context.
@@ -2823,10 +1033,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: Optional[str]`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: Literal["compaction"]`
 
           - `"compaction"`
@@ -2835,34 +1041,50 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
+        - `content: Optional[str]`
 
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
+          Summary of previously compacted content, or null if compaction failed
 
         - `encrypted_content: Optional[str]`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: Literal["user", "assistant"]`
+      - `class BetaMidConversationSystemBlockParam: …`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: List[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: str`
+
+          - `type: Literal["text"]`
+
+          - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Optional[List[BetaTextCitationParam]]`
+
+        - `type: Literal["mid_conv_system"]`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: Literal["user", "assistant", "system"]`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: ModelParam`
 
@@ -2870,12 +1092,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+  - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
     - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
     - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
     - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -2893,6 +1116,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -2967,25 +1194,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-  - `type: Literal["ephemeral"]`
-
-    - `"ephemeral"`
-
-  - `ttl: Optional[Literal["5m", "1h"]]`
-
-    The time-to-live for the cache control breakpoint.
-
-    This may be one the following values:
-
-    - `5m`: 5 minutes
-    - `1h`: 1 hour
-
-    Defaults to `5m`.
-
-    - `"5m"`
-
-    - `"1h"`
 
 - `container: Optional[Container]`
 
@@ -3137,12 +1345,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         When to trigger compaction. Defaults to 150000 input tokens.
 
-        - `type: Literal["input_tokens"]`
-
-          - `"input_tokens"`
-
-        - `value: int`
-
 - `diagnostics: Optional[BetaDiagnosticsParam]`
 
   Request-level diagnostics. Currently carries the previous response
@@ -3240,14 +1442,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-  - `schema: Dict[str, object]`
-
-    The JSON schema of the format
-
-  - `type: Literal["json_schema"]`
-
-    - `"json_schema"`
-
 - `service_tier: Optional[Literal["auto", "standard_only"]]`
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -3296,136 +1490,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `type: Literal["text"]`
 
-      - `"text"`
-
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[List[BetaTextCitationParam]]`
-
-      - `class BetaCitationCharLocationParam: …`
-
-        - `cited_text: str`
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_char_index: int`
-
-        - `start_char_index: int`
-
-        - `type: Literal["char_location"]`
-
-          - `"char_location"`
-
-      - `class BetaCitationPageLocationParam: …`
-
-        - `cited_text: str`
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_page_number: int`
-
-        - `start_page_number: int`
-
-        - `type: Literal["page_location"]`
-
-          - `"page_location"`
-
-      - `class BetaCitationContentBlockLocationParam: …`
-
-        - `cited_text: str`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_block_index: int`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `start_block_index: int`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `type: Literal["content_block_location"]`
-
-          - `"content_block_location"`
-
-      - `class BetaCitationWebSearchResultLocationParam: …`
-
-        - `cited_text: str`
-
-        - `encrypted_index: str`
-
-        - `title: Optional[str]`
-
-        - `type: Literal["web_search_result_location"]`
-
-          - `"web_search_result_location"`
-
-        - `url: str`
-
-      - `class BetaCitationSearchResultLocationParam: …`
-
-        - `cited_text: str`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `end_block_index: int`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `search_result_index: int`
-
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-        - `source: str`
-
-        - `start_block_index: int`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `title: Optional[str]`
-
-        - `type: Literal["search_result_location"]`
-
-          - `"search_result_location"`
 
 - `temperature: Optional[float]`
 
@@ -3641,25 +1710,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3710,25 +1760,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3764,25 +1795,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -3820,25 +1832,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3872,25 +1865,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -3927,25 +1901,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -3989,25 +1944,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4047,25 +1983,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -4111,25 +2028,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4169,25 +2067,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -4233,25 +2112,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4296,25 +2156,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4351,25 +2192,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4405,25 +2227,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -4472,25 +2275,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -4562,30 +2346,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -4637,25 +2400,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4671,26 +2415,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `user_location: Optional[BetaUserLocation]`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `type: Literal["approximate"]`
-
-        - `"approximate"`
-
-      - `city: Optional[str]`
-
-        The city of the user.
-
-      - `country: Optional[str]`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: Optional[str]`
-
-        The region of the user.
-
-      - `timezone: Optional[str]`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `class BetaWebFetchTool20260209: …`
 
@@ -4726,30 +2450,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -4803,30 +2506,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -4856,100 +2538,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-        - `claude-sonnet-4-6` - Best combination of speed and intelligence
-        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-        - `claude-sonnet-4-5` - High-performance model for agents and coding
-        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        - `"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `str`
-
     - `name: Literal["advisor"]`
 
       Name of the tool.
@@ -4974,47 +2562,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caching: Optional[BetaCacheControlEphemeral]`
 
       Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -5056,25 +2606,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -5111,25 +2642,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -5156,25 +2668,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `configs: Optional[Dict[str, BetaMCPToolConfig]]`
 
@@ -5218,7 +2711,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5269,6 +2762,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -5561,27 +3058,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebSearchToolResultBlock: …`
 
@@ -5635,27 +3116,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebFetchToolResultBlock: …`
 
@@ -5670,6 +3135,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -5755,27 +3222,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaAdvisorToolResultBlock: …`
 
@@ -5803,6 +3254,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class BetaAdvisorResultBlock: …`
 
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: str`
 
           - `type: Literal["advisor_result"]`
@@ -5814,6 +3269,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `encrypted_content: str`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: Literal["advisor_redacted_result"]`
 
@@ -5876,8 +3335,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `file_id: str`
 
             - `type: Literal["code_execution_output"]`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: str`
 
@@ -6093,121 +3550,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `class BetaCitationCharLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `file_id: Optional[str]`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationsWebSearchResultLocation: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
-
           - `text: str`
 
           - `type: Literal["text"]`
-
-            - `"text"`
 
       - `is_error: bool`
 
@@ -6356,12 +3701,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+    - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
       - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
       - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -6379,6 +3725,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -6585,14 +3935,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -6622,14 +3964,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `cache_creation: Optional[BetaCacheCreation]`
 
           Breakdown of cached tokens by TTL
-
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
 
         - `cache_creation_input_tokens: int`
 
@@ -6661,14 +3995,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -6687,100 +4013,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-            - `claude-sonnet-4-6` - Best combination of speed and intelligence
-            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-            - `claude-sonnet-4-5` - High-performance model for agents and coding
-            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-            - `"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `str`
-
         - `output_tokens: int`
 
           The number of output tokens which were used.
@@ -6794,6 +4026,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `output_tokens: int`
 
       The number of output tokens which were used.
+
+    - `output_tokens_details: Optional[OutputTokensDetails]`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: int`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -6845,7 +4097,101 @@ for message in client.beta.messages.create(
   print(message)
 ```
 
-## Count Tokens
+#### Response
+
+```json
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "container": {
+    "id": "id",
+    "expires_at": "2019-12-27T18:11:19.117Z",
+    "skills": [
+      {
+        "skill_id": "pdf",
+        "type": "anthropic",
+        "version": "latest"
+      }
+    ]
+  },
+  "content": [
+    {
+      "citations": [
+        {
+          "cited_text": "cited_text",
+          "document_index": 0,
+          "document_title": "document_title",
+          "end_char_index": 0,
+          "file_id": "file_id",
+          "start_char_index": 0,
+          "type": "char_location"
+        }
+      ],
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "context_management": {
+    "applied_edits": [
+      {
+        "cleared_input_tokens": 0,
+        "cleared_tool_uses": 0,
+        "type": "clear_tool_uses_20250919"
+      }
+    ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
+  "model": "claude-opus-4-6",
+  "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 2051,
+    "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
+    "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
+    "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "server_tool_use": {
+      "web_fetch_requests": 2,
+      "web_search_requests": 0
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+  }
+}
+```
+
+## Count tokens in a Message
 
 `beta.messages.count_tokens(MessageCountTokensParams**kwargs)  -> BetaMessageTokensCount`
 
@@ -7099,25 +4445,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestDocumentBlock: …`
 
         - `source: Source`
@@ -7156,205 +4483,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `class BetaTextBlockParam: …`
 
-                  - `text: str`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[List[BetaTextCitationParam]]`
-
-                    - `class BetaCitationCharLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_char_index: int`
-
-                      - `start_char_index: int`
-
-                      - `type: Literal["char_location"]`
-
-                        - `"char_location"`
-
-                    - `class BetaCitationPageLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_page_number: int`
-
-                      - `start_page_number: int`
-
-                      - `type: Literal["page_location"]`
-
-                        - `"page_location"`
-
-                    - `class BetaCitationContentBlockLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: Literal["content_block_location"]`
-
-                        - `"content_block_location"`
-
-                    - `class BetaCitationWebSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `encrypted_index: str`
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["web_search_result_location"]`
-
-                        - `"web_search_result_location"`
-
-                      - `url: str`
-
-                    - `class BetaCitationSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: int`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: str`
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
-
                 - `class BetaImageBlockParam: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64ImageSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaURLImageSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileImageSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["image"]`
-
-                    - `"image"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
             - `type: Literal["content"]`
 
@@ -7384,25 +4513,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           - `enabled: Optional[bool]`
@@ -7419,136 +4529,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: Optional[List[BetaTextCitationParam]]`
-
-            - `class BetaCitationCharLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationWebSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
 
         - `source: str`
 
@@ -7562,28 +4547,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
-
-          - `enabled: Optional[bool]`
 
       - `class BetaThinkingBlockParam: …`
 
@@ -7618,25 +4582,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `caller: Optional[Caller]`
 
@@ -7680,25 +4625,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[Content], null]]`
 
           - `str`
@@ -7707,672 +4633,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `class BetaTextBlockParam: …`
 
-              - `text: str`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[List[BetaTextCitationParam]]`
-
-                - `class BetaCitationCharLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationWebSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
             - `class BetaImageBlockParam: …`
-
-              - `source: Source`
-
-                - `class BetaBase64ImageSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaURLImageSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileImageSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["image"]`
-
-                - `"image"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `class BetaSearchResultBlockParam: …`
 
-              - `content: List[BetaTextBlockParam]`
-
-                - `text: str`
-
-                - `type: Literal["text"]`
-
-                  - `"text"`
-
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: Literal["ephemeral"]`
-
-                    - `"ephemeral"`
-
-                  - `ttl: Optional[Literal["5m", "1h"]]`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: Optional[List[BetaTextCitationParam]]`
-
-                  - `class BetaCitationCharLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationWebSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
-
-              - `source: str`
-
-              - `title: str`
-
-              - `type: Literal["search_result"]`
-
-                - `"search_result"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
             - `class BetaRequestDocumentBlock: …`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `class BetaToolReferenceBlockParam: …`
 
@@ -8387,25 +4652,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
         - `is_error: Optional[bool]`
 
@@ -8441,25 +4687,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -8468,27 +4695,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebSearchToolResultBlockParam: …`
 
@@ -8538,25 +4749,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -8565,27 +4757,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlockParam: …`
 
@@ -8600,6 +4776,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -8618,297 +4796,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `class BetaWebFetchBlockParam: …`
 
             - `content: BetaRequestDocumentBlock`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `type: Literal["web_fetch_result"]`
 
@@ -8932,25 +4819,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -8959,27 +4827,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaAdvisorToolResultBlockParam: …`
 
@@ -9013,6 +4865,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"advisor_result"`
 
+            - `stop_reason: Optional[str]`
+
           - `class BetaAdvisorRedactedResultBlockParam: …`
 
             - `encrypted_content: str`
@@ -9023,6 +4877,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"advisor_redacted_result"`
 
+            - `stop_reason: Optional[str]`
+
         - `tool_use_id: str`
 
         - `type: Literal["advisor_tool_result"]`
@@ -9032,25 +4888,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -9104,8 +4941,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `encrypted_stdout: str`
 
             - `return_code: int`
@@ -9125,25 +4960,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
@@ -9196,25 +5012,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
@@ -9296,25 +5093,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaToolSearchToolResultBlockParam: …`
 
         - `content: Content`
@@ -9343,30 +5121,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `type: Literal["tool_reference"]`
 
-                - `"tool_reference"`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: Literal["tool_search_tool_search_result"]`
 
@@ -9381,25 +5138,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaMCPToolUseBlockParam: …`
 
@@ -9421,25 +5159,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestMCPToolResultBlockParam: …`
 
         - `tool_use_id: str`
@@ -9452,25 +5171,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
 
           - `str`
@@ -9481,136 +5181,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `type: Literal["text"]`
 
-              - `"text"`
-
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: Optional[List[BetaTextCitationParam]]`
-
-              - `class BetaCitationCharLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
 
         - `is_error: Optional[bool]`
 
@@ -9629,25 +5204,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaCompactionBlockParam: …`
 
         A compaction block containing summary of previous context.
@@ -9658,10 +5214,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: Optional[str]`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: Literal["compaction"]`
 
           - `"compaction"`
@@ -9670,34 +5222,50 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
+        - `content: Optional[str]`
 
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
+          Summary of previously compacted content, or null if compaction failed
 
         - `encrypted_content: Optional[str]`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: Literal["user", "assistant"]`
+      - `class BetaMidConversationSystemBlockParam: …`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: List[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: str`
+
+          - `type: Literal["text"]`
+
+          - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Optional[List[BetaTextCitationParam]]`
+
+        - `type: Literal["mid_conv_system"]`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: Literal["user", "assistant", "system"]`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: ModelParam`
 
@@ -9705,12 +5273,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+  - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
     - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
     - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
     - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -9728,6 +5297,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -9802,25 +5375,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-  - `type: Literal["ephemeral"]`
-
-    - `"ephemeral"`
-
-  - `ttl: Optional[Literal["5m", "1h"]]`
-
-    The time-to-live for the cache control breakpoint.
-
-    This may be one the following values:
-
-    - `5m`: 5 minutes
-    - `1h`: 1 hour
-
-    Defaults to `5m`.
-
-    - `"5m"`
-
-    - `"1h"`
 
 - `context_management: Optional[BetaContextManagementConfigParam]`
 
@@ -9938,12 +5492,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When to trigger compaction. Defaults to 150000 input tokens.
 
-        - `type: Literal["input_tokens"]`
-
-          - `"input_tokens"`
-
-        - `value: int`
-
 - `mcp_servers: Optional[Iterable[BetaRequestMCPServerURLDefinitionParam]]`
 
   MCP servers to be utilized in this request
@@ -10018,14 +5566,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-  - `schema: Dict[str, object]`
-
-    The JSON schema of the format
-
-  - `type: Literal["json_schema"]`
-
-    - `"json_schema"`
-
 - `speed: Optional[Literal["standard", "fast"]]`
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -10048,136 +5588,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `type: Literal["text"]`
 
-      - `"text"`
-
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[List[BetaTextCitationParam]]`
-
-      - `class BetaCitationCharLocationParam: …`
-
-        - `cited_text: str`
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_char_index: int`
-
-        - `start_char_index: int`
-
-        - `type: Literal["char_location"]`
-
-          - `"char_location"`
-
-      - `class BetaCitationPageLocationParam: …`
-
-        - `cited_text: str`
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_page_number: int`
-
-        - `start_page_number: int`
-
-        - `type: Literal["page_location"]`
-
-          - `"page_location"`
-
-      - `class BetaCitationContentBlockLocationParam: …`
-
-        - `cited_text: str`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `document_index: int`
-
-        - `document_title: Optional[str]`
-
-        - `end_block_index: int`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `start_block_index: int`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `type: Literal["content_block_location"]`
-
-          - `"content_block_location"`
-
-      - `class BetaCitationWebSearchResultLocationParam: …`
-
-        - `cited_text: str`
-
-        - `encrypted_index: str`
-
-        - `title: Optional[str]`
-
-        - `type: Literal["web_search_result_location"]`
-
-          - `"web_search_result_location"`
-
-        - `url: str`
-
-      - `class BetaCitationSearchResultLocationParam: …`
-
-        - `cited_text: str`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `end_block_index: int`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `search_result_index: int`
-
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-        - `source: str`
-
-        - `start_block_index: int`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `title: Optional[str]`
-
-        - `type: Literal["search_result_location"]`
-
-          - `"search_result_location"`
 
 - `thinking: Optional[BetaThinkingConfigParam]`
 
@@ -10385,25 +5800,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -10454,25 +5850,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -10508,25 +5885,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -10564,25 +5922,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -10616,25 +5955,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -10671,25 +5991,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -10733,25 +6034,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -10791,25 +6073,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -10855,25 +6118,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -10913,25 +6157,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -10977,25 +6202,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11040,25 +6246,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11095,25 +6282,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11149,25 +6317,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -11216,25 +6365,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -11306,30 +6436,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -11381,25 +6490,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11415,26 +6505,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `user_location: Optional[BetaUserLocation]`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `type: Literal["approximate"]`
-
-        - `"approximate"`
-
-      - `city: Optional[str]`
-
-        The city of the user.
-
-      - `country: Optional[str]`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: Optional[str]`
-
-        The region of the user.
-
-      - `timezone: Optional[str]`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `class BetaWebFetchTool20260209: …`
 
@@ -11470,30 +6540,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -11547,30 +6596,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -11600,100 +6628,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-        - `claude-sonnet-4-6` - Best combination of speed and intelligence
-        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-        - `claude-sonnet-4-5` - High-performance model for agents and coding
-        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        - `"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `str`
-
     - `name: Literal["advisor"]`
 
       Name of the tool.
@@ -11718,47 +6652,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caching: Optional[BetaCacheControlEphemeral]`
 
       Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -11800,25 +6696,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11855,25 +6732,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -11901,25 +6759,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `configs: Optional[Dict[str, BetaMCPToolConfig]]`
 
       Configuration overrides for specific tools, keyed by tool name
@@ -11942,7 +6781,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -11994,6 +6833,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaMessageTokensCount: …`
@@ -12027,6 +6870,17 @@ beta_message_tokens_count = client.beta.messages.count_tokens(
     model="claude-opus-4-6",
 )
 print(beta_message_tokens_count.context_management)
+```
+
+#### Response
+
+```json
+{
+  "context_management": {
+    "original_input_tokens": 0
+  },
+  "input_tokens": 2095
+}
 ```
 
 ## Domain Types
@@ -12067,12 +6921,13 @@ print(beta_message_tokens_count.context_management)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+    - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
       - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
       - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -12090,6 +6945,10 @@ print(beta_message_tokens_count.context_management)
       - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -12179,6 +7038,10 @@ print(beta_message_tokens_count.context_management)
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+  - `stop_reason: Optional[str]`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
   - `type: Literal["advisor_redacted_result"]`
 
     - `"advisor_redacted_result"`
@@ -12195,9 +7058,15 @@ print(beta_message_tokens_count.context_management)
 
     - `"advisor_redacted_result"`
 
+  - `stop_reason: Optional[str]`
+
 ### Beta Advisor Result Block
 
 - `class BetaAdvisorResultBlock: …`
+
+  - `stop_reason: Optional[str]`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: str`
 
@@ -12215,6 +7084,8 @@ print(beta_message_tokens_count.context_management)
 
     - `"advisor_result"`
 
+  - `stop_reason: Optional[str]`
+
 ### Beta Advisor Tool 20260301
 
 - `class BetaAdvisorTool20260301: …`
@@ -12225,12 +7096,13 @@ print(beta_message_tokens_count.context_management)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+    - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
       - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
       - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -12248,6 +7120,10 @@ print(beta_message_tokens_count.context_management)
       - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -12366,25 +7242,6 @@ print(beta_message_tokens_count.context_management)
 
     Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-    - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
-
-    - `ttl: Optional[Literal["5m", "1h"]]`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
-
   - `defer_loading: Optional[bool]`
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -12425,6 +7282,10 @@ print(beta_message_tokens_count.context_management)
 
     - `class BetaAdvisorResultBlock: …`
 
+      - `stop_reason: Optional[str]`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
       - `text: str`
 
       - `type: Literal["advisor_result"]`
@@ -12436,6 +7297,10 @@ print(beta_message_tokens_count.context_management)
       - `encrypted_content: str`
 
         Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `stop_reason: Optional[str]`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
       - `type: Literal["advisor_redacted_result"]`
 
@@ -12481,6 +7346,8 @@ print(beta_message_tokens_count.context_management)
 
         - `"advisor_result"`
 
+      - `stop_reason: Optional[str]`
+
     - `class BetaAdvisorRedactedResultBlockParam: …`
 
       - `encrypted_content: str`
@@ -12490,6 +7357,8 @@ print(beta_message_tokens_count.context_management)
       - `type: Literal["advisor_redacted_result"]`
 
         - `"advisor_redacted_result"`
+
+      - `stop_reason: Optional[str]`
 
   - `tool_use_id: str`
 
@@ -13709,8 +8578,6 @@ print(beta_message_tokens_count.context_management)
 
         - `type: Literal["code_execution_output"]`
 
-          - `"code_execution_output"`
-
       - `encrypted_stdout: str`
 
       - `return_code: int`
@@ -13779,8 +8646,6 @@ print(beta_message_tokens_count.context_management)
 
       - `type: Literal["code_execution_output"]`
 
-        - `"code_execution_output"`
-
     - `encrypted_stdout: str`
 
     - `return_code: int`
@@ -13844,8 +8709,6 @@ print(beta_message_tokens_count.context_management)
         - `file_id: str`
 
         - `type: Literal["code_execution_output"]`
-
-          - `"code_execution_output"`
 
       - `encrypted_stdout: str`
 
@@ -13937,8 +8800,6 @@ print(beta_message_tokens_count.context_management)
       - `file_id: str`
 
       - `type: Literal["code_execution_output"]`
-
-        - `"code_execution_output"`
 
     - `encrypted_stdout: str`
 
@@ -14060,10 +8921,6 @@ print(beta_message_tokens_count.context_management)
   When content is None, the block represents a failed compaction. The server
   treats these as no-ops. Empty string content is not allowed.
 
-  - `content: Optional[str]`
-
-    Summary of previously compacted content, or null if compaction failed
-
   - `type: Literal["compaction"]`
 
     - `"compaction"`
@@ -14090,6 +8947,10 @@ print(beta_message_tokens_count.context_management)
       - `"5m"`
 
       - `"1h"`
+
+  - `content: Optional[str]`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `encrypted_content: Optional[str]`
 
@@ -14487,27 +9348,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaWebSearchToolResultBlock: …`
 
@@ -14561,27 +9406,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaWebFetchToolResultBlock: …`
 
@@ -14596,6 +9425,8 @@ print(beta_message_tokens_count.context_management)
           - `"url_too_long"`
 
           - `"url_not_allowed"`
+
+          - `"url_not_in_prior_context"`
 
           - `"url_not_accessible"`
 
@@ -14681,27 +9512,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaAdvisorToolResultBlock: …`
 
@@ -14729,6 +9544,10 @@ print(beta_message_tokens_count.context_management)
 
       - `class BetaAdvisorResultBlock: …`
 
+        - `stop_reason: Optional[str]`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
         - `text: str`
 
         - `type: Literal["advisor_result"]`
@@ -14740,6 +9559,10 @@ print(beta_message_tokens_count.context_management)
         - `encrypted_content: str`
 
           Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `stop_reason: Optional[str]`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
         - `type: Literal["advisor_redacted_result"]`
 
@@ -14802,8 +9625,6 @@ print(beta_message_tokens_count.context_management)
           - `file_id: str`
 
           - `type: Literal["code_execution_output"]`
-
-            - `"code_execution_output"`
 
         - `encrypted_stdout: str`
 
@@ -15019,121 +9840,9 @@ print(beta_message_tokens_count.context_management)
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `class BetaCitationCharLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
-          - `class BetaCitationPageLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
-
-          - `class BetaCitationContentBlockLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: Optional[str]`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
-          - `class BetaCitationsWebSearchResultLocation: …`
-
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
-          - `class BetaCitationSearchResultLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
-
         - `text: str`
 
         - `type: Literal["text"]`
-
-          - `"text"`
 
     - `is_error: bool`
 
@@ -15362,25 +10071,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
   - `class BetaRequestDocumentBlock: …`
 
     - `source: Source`
@@ -15419,205 +10109,7 @@ print(beta_message_tokens_count.context_management)
 
             - `class BetaTextBlockParam: …`
 
-              - `text: str`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[List[BetaTextCitationParam]]`
-
-                - `class BetaCitationCharLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationWebSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
             - `class BetaImageBlockParam: …`
-
-              - `source: Source`
-
-                - `class BetaBase64ImageSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaURLImageSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileImageSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["image"]`
-
-                - `"image"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
         - `type: Literal["content"]`
 
@@ -15647,25 +10139,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       - `enabled: Optional[bool]`
@@ -15682,136 +10155,11 @@ print(beta_message_tokens_count.context_management)
 
       - `type: Literal["text"]`
 
-        - `"text"`
-
       - `cache_control: Optional[BetaCacheControlEphemeral]`
 
         Create a cache control breakpoint at this content block.
 
-        - `type: Literal["ephemeral"]`
-
-          - `"ephemeral"`
-
-        - `ttl: Optional[Literal["5m", "1h"]]`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"`
-
-          - `"1h"`
-
       - `citations: Optional[List[BetaTextCitationParam]]`
-
-        - `class BetaCitationCharLocationParam: …`
-
-          - `cited_text: str`
-
-          - `document_index: int`
-
-          - `document_title: Optional[str]`
-
-          - `end_char_index: int`
-
-          - `start_char_index: int`
-
-          - `type: Literal["char_location"]`
-
-            - `"char_location"`
-
-        - `class BetaCitationPageLocationParam: …`
-
-          - `cited_text: str`
-
-          - `document_index: int`
-
-          - `document_title: Optional[str]`
-
-          - `end_page_number: int`
-
-          - `start_page_number: int`
-
-          - `type: Literal["page_location"]`
-
-            - `"page_location"`
-
-        - `class BetaCitationContentBlockLocationParam: …`
-
-          - `cited_text: str`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `document_index: int`
-
-          - `document_title: Optional[str]`
-
-          - `end_block_index: int`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `start_block_index: int`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `type: Literal["content_block_location"]`
-
-            - `"content_block_location"`
-
-        - `class BetaCitationWebSearchResultLocationParam: …`
-
-          - `cited_text: str`
-
-          - `encrypted_index: str`
-
-          - `title: Optional[str]`
-
-          - `type: Literal["web_search_result_location"]`
-
-            - `"web_search_result_location"`
-
-          - `url: str`
-
-        - `class BetaCitationSearchResultLocationParam: …`
-
-          - `cited_text: str`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `end_block_index: int`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `search_result_index: int`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `source: str`
-
-          - `start_block_index: int`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `title: Optional[str]`
-
-          - `type: Literal["search_result_location"]`
-
-            - `"search_result_location"`
 
     - `source: str`
 
@@ -15825,28 +10173,7 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
-
-      - `enabled: Optional[bool]`
 
   - `class BetaThinkingBlockParam: …`
 
@@ -15881,25 +10208,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `caller: Optional[Caller]`
 
@@ -15943,25 +10251,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `content: Optional[Union[str, List[Content], null]]`
 
       - `str`
@@ -15970,672 +10259,11 @@ print(beta_message_tokens_count.context_management)
 
         - `class BetaTextBlockParam: …`
 
-          - `text: str`
-
-          - `type: Literal["text"]`
-
-            - `"text"`
-
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: Optional[List[BetaTextCitationParam]]`
-
-            - `class BetaCitationCharLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationWebSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
-
         - `class BetaImageBlockParam: …`
-
-          - `source: Source`
-
-            - `class BetaBase64ImageSource: …`
-
-              - `data: str`
-
-              - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                - `"image/jpeg"`
-
-                - `"image/png"`
-
-                - `"image/gif"`
-
-                - `"image/webp"`
-
-              - `type: Literal["base64"]`
-
-                - `"base64"`
-
-            - `class BetaURLImageSource: …`
-
-              - `type: Literal["url"]`
-
-                - `"url"`
-
-              - `url: str`
-
-            - `class BetaFileImageSource: …`
-
-              - `file_id: str`
-
-              - `type: Literal["file"]`
-
-                - `"file"`
-
-          - `type: Literal["image"]`
-
-            - `"image"`
-
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
 
         - `class BetaSearchResultBlockParam: …`
 
-          - `content: List[BetaTextBlockParam]`
-
-            - `text: str`
-
-            - `type: Literal["text"]`
-
-              - `"text"`
-
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-              Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-            - `citations: Optional[List[BetaTextCitationParam]]`
-
-              - `class BetaCitationCharLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
-
-          - `source: str`
-
-          - `title: str`
-
-          - `type: Literal["search_result"]`
-
-            - `"search_result"`
-
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: Optional[BetaCitationsConfigParam]`
-
-            - `enabled: Optional[bool]`
-
         - `class BetaRequestDocumentBlock: …`
-
-          - `source: Source`
-
-            - `class BetaBase64PDFSource: …`
-
-              - `data: str`
-
-              - `media_type: Literal["application/pdf"]`
-
-                - `"application/pdf"`
-
-              - `type: Literal["base64"]`
-
-                - `"base64"`
-
-            - `class BetaPlainTextSource: …`
-
-              - `data: str`
-
-              - `media_type: Literal["text/plain"]`
-
-                - `"text/plain"`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-            - `class BetaContentBlockSource: …`
-
-              - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                - `str`
-
-                - `List[BetaContentBlockSourceContent]`
-
-                  - `class BetaTextBlockParam: …`
-
-                    - `text: str`
-
-                    - `type: Literal["text"]`
-
-                      - `"text"`
-
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: Literal["ephemeral"]`
-
-                        - `"ephemeral"`
-
-                      - `ttl: Optional[Literal["5m", "1h"]]`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: Optional[List[BetaTextCitationParam]]`
-
-                      - `class BetaCitationCharLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_char_index: int`
-
-                        - `start_char_index: int`
-
-                        - `type: Literal["char_location"]`
-
-                          - `"char_location"`
-
-                      - `class BetaCitationPageLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_page_number: int`
-
-                        - `start_page_number: int`
-
-                        - `type: Literal["page_location"]`
-
-                          - `"page_location"`
-
-                      - `class BetaCitationContentBlockLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: Literal["content_block_location"]`
-
-                          - `"content_block_location"`
-
-                      - `class BetaCitationWebSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `encrypted_index: str`
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["web_search_result_location"]`
-
-                          - `"web_search_result_location"`
-
-                        - `url: str`
-
-                      - `class BetaCitationSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: int`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: str`
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["search_result_location"]`
-
-                          - `"search_result_location"`
-
-                  - `class BetaImageBlockParam: …`
-
-                    - `source: Source`
-
-                      - `class BetaBase64ImageSource: …`
-
-                        - `data: str`
-
-                        - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                          - `"image/jpeg"`
-
-                          - `"image/png"`
-
-                          - `"image/gif"`
-
-                          - `"image/webp"`
-
-                        - `type: Literal["base64"]`
-
-                          - `"base64"`
-
-                      - `class BetaURLImageSource: …`
-
-                        - `type: Literal["url"]`
-
-                          - `"url"`
-
-                        - `url: str`
-
-                      - `class BetaFileImageSource: …`
-
-                        - `file_id: str`
-
-                        - `type: Literal["file"]`
-
-                          - `"file"`
-
-                    - `type: Literal["image"]`
-
-                      - `"image"`
-
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: Literal["ephemeral"]`
-
-                        - `"ephemeral"`
-
-                      - `ttl: Optional[Literal["5m", "1h"]]`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-              - `type: Literal["content"]`
-
-                - `"content"`
-
-            - `class BetaURLPDFSource: …`
-
-              - `type: Literal["url"]`
-
-                - `"url"`
-
-              - `url: str`
-
-            - `class BetaFileDocumentSource: …`
-
-              - `file_id: str`
-
-              - `type: Literal["file"]`
-
-                - `"file"`
-
-          - `type: Literal["document"]`
-
-            - `"document"`
-
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: Optional[BetaCitationsConfigParam]`
-
-            - `enabled: Optional[bool]`
-
-          - `context: Optional[str]`
-
-          - `title: Optional[str]`
 
         - `class BetaToolReferenceBlockParam: …`
 
@@ -16650,25 +10278,6 @@ print(beta_message_tokens_count.context_management)
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
 
     - `is_error: Optional[bool]`
 
@@ -16704,25 +10313,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: Optional[Caller]`
 
       Tool invocation directly from the model.
@@ -16731,27 +10321,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaWebSearchToolResultBlockParam: …`
 
@@ -16801,25 +10375,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: Optional[Caller]`
 
       Tool invocation directly from the model.
@@ -16828,27 +10383,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaWebFetchToolResultBlockParam: …`
 
@@ -16863,6 +10402,8 @@ print(beta_message_tokens_count.context_management)
           - `"url_too_long"`
 
           - `"url_not_allowed"`
+
+          - `"url_not_in_prior_context"`
 
           - `"url_not_accessible"`
 
@@ -16881,297 +10422,6 @@ print(beta_message_tokens_count.context_management)
       - `class BetaWebFetchBlockParam: …`
 
         - `content: BetaRequestDocumentBlock`
-
-          - `source: Source`
-
-            - `class BetaBase64PDFSource: …`
-
-              - `data: str`
-
-              - `media_type: Literal["application/pdf"]`
-
-                - `"application/pdf"`
-
-              - `type: Literal["base64"]`
-
-                - `"base64"`
-
-            - `class BetaPlainTextSource: …`
-
-              - `data: str`
-
-              - `media_type: Literal["text/plain"]`
-
-                - `"text/plain"`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-            - `class BetaContentBlockSource: …`
-
-              - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                - `str`
-
-                - `List[BetaContentBlockSourceContent]`
-
-                  - `class BetaTextBlockParam: …`
-
-                    - `text: str`
-
-                    - `type: Literal["text"]`
-
-                      - `"text"`
-
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: Literal["ephemeral"]`
-
-                        - `"ephemeral"`
-
-                      - `ttl: Optional[Literal["5m", "1h"]]`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: Optional[List[BetaTextCitationParam]]`
-
-                      - `class BetaCitationCharLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_char_index: int`
-
-                        - `start_char_index: int`
-
-                        - `type: Literal["char_location"]`
-
-                          - `"char_location"`
-
-                      - `class BetaCitationPageLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_page_number: int`
-
-                        - `start_page_number: int`
-
-                        - `type: Literal["page_location"]`
-
-                          - `"page_location"`
-
-                      - `class BetaCitationContentBlockLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: Literal["content_block_location"]`
-
-                          - `"content_block_location"`
-
-                      - `class BetaCitationWebSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `encrypted_index: str`
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["web_search_result_location"]`
-
-                          - `"web_search_result_location"`
-
-                        - `url: str`
-
-                      - `class BetaCitationSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: int`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: str`
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["search_result_location"]`
-
-                          - `"search_result_location"`
-
-                  - `class BetaImageBlockParam: …`
-
-                    - `source: Source`
-
-                      - `class BetaBase64ImageSource: …`
-
-                        - `data: str`
-
-                        - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                          - `"image/jpeg"`
-
-                          - `"image/png"`
-
-                          - `"image/gif"`
-
-                          - `"image/webp"`
-
-                        - `type: Literal["base64"]`
-
-                          - `"base64"`
-
-                      - `class BetaURLImageSource: …`
-
-                        - `type: Literal["url"]`
-
-                          - `"url"`
-
-                        - `url: str`
-
-                      - `class BetaFileImageSource: …`
-
-                        - `file_id: str`
-
-                        - `type: Literal["file"]`
-
-                          - `"file"`
-
-                    - `type: Literal["image"]`
-
-                      - `"image"`
-
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: Literal["ephemeral"]`
-
-                        - `"ephemeral"`
-
-                      - `ttl: Optional[Literal["5m", "1h"]]`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-              - `type: Literal["content"]`
-
-                - `"content"`
-
-            - `class BetaURLPDFSource: …`
-
-              - `type: Literal["url"]`
-
-                - `"url"`
-
-              - `url: str`
-
-            - `class BetaFileDocumentSource: …`
-
-              - `file_id: str`
-
-              - `type: Literal["file"]`
-
-                - `"file"`
-
-          - `type: Literal["document"]`
-
-            - `"document"`
-
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: Optional[BetaCitationsConfigParam]`
-
-            - `enabled: Optional[bool]`
-
-          - `context: Optional[str]`
-
-          - `title: Optional[str]`
 
         - `type: Literal["web_fetch_result"]`
 
@@ -17195,25 +10445,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: Optional[Caller]`
 
       Tool invocation directly from the model.
@@ -17222,27 +10453,11 @@ print(beta_message_tokens_count.context_management)
 
         Tool invocation directly from the model.
 
-        - `type: Literal["direct"]`
-
-          - `"direct"`
-
       - `class BetaServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
-
       - `class BetaServerToolCaller20260120: …`
-
-        - `tool_id: str`
-
-        - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
   - `class BetaAdvisorToolResultBlockParam: …`
 
@@ -17276,6 +10491,8 @@ print(beta_message_tokens_count.context_management)
 
           - `"advisor_result"`
 
+        - `stop_reason: Optional[str]`
+
       - `class BetaAdvisorRedactedResultBlockParam: …`
 
         - `encrypted_content: str`
@@ -17286,6 +10503,8 @@ print(beta_message_tokens_count.context_management)
 
           - `"advisor_redacted_result"`
 
+        - `stop_reason: Optional[str]`
+
     - `tool_use_id: str`
 
     - `type: Literal["advisor_tool_result"]`
@@ -17295,25 +10514,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
   - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -17367,8 +10567,6 @@ print(beta_message_tokens_count.context_management)
 
           - `type: Literal["code_execution_output"]`
 
-            - `"code_execution_output"`
-
         - `encrypted_stdout: str`
 
         - `return_code: int`
@@ -17388,25 +10586,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
   - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
@@ -17459,25 +10638,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
   - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
@@ -17559,25 +10719,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
   - `class BetaToolSearchToolResultBlockParam: …`
 
     - `content: Content`
@@ -17606,30 +10747,9 @@ print(beta_message_tokens_count.context_management)
 
           - `type: Literal["tool_reference"]`
 
-            - `"tool_reference"`
-
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
-
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
 
         - `type: Literal["tool_search_tool_search_result"]`
 
@@ -17644,25 +10764,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
   - `class BetaMCPToolUseBlockParam: …`
 
@@ -17684,25 +10785,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
   - `class BetaRequestMCPToolResultBlockParam: …`
 
     - `tool_use_id: str`
@@ -17715,25 +10797,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
 
       - `str`
@@ -17744,136 +10807,11 @@ print(beta_message_tokens_count.context_management)
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[List[BetaTextCitationParam]]`
-
-          - `class BetaCitationCharLocationParam: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
-          - `class BetaCitationPageLocationParam: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
-
-          - `class BetaCitationContentBlockLocationParam: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
-          - `class BetaCitationWebSearchResultLocationParam: …`
-
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
-          - `class BetaCitationSearchResultLocationParam: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
     - `is_error: Optional[bool]`
 
@@ -17892,25 +10830,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
   - `class BetaCompactionBlockParam: …`
 
     A compaction block containing summary of previous context.
@@ -17921,10 +10840,6 @@ print(beta_message_tokens_count.context_management)
     When content is None, the block represents a failed compaction. The server
     treats these as no-ops. Empty string content is not allowed.
 
-    - `content: Optional[str]`
-
-      Summary of previously compacted content, or null if compaction failed
-
     - `type: Literal["compaction"]`
 
       - `"compaction"`
@@ -17933,28 +10848,42 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
+    - `content: Optional[str]`
 
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
+      Summary of previously compacted content, or null if compaction failed
 
     - `encrypted_content: Optional[str]`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `class BetaMidConversationSystemBlockParam: …`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `content: List[BetaTextBlockParam]`
+
+      System instruction text blocks.
+
+      - `text: str`
+
+      - `type: Literal["text"]`
+
+      - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+        Create a cache control breakpoint at this content block.
+
+      - `citations: Optional[List[BetaTextCitationParam]]`
+
+    - `type: Literal["mid_conv_system"]`
+
+      - `"mid_conv_system"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
 
 ### Beta Content Block Source
 
@@ -18149,25 +11078,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `type: Literal["content"]`
 
     - `"content"`
@@ -18359,25 +11269,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
 ### Beta Context Management Config
 
 - `class BetaContextManagementConfig: …`
@@ -18491,12 +11382,6 @@ print(beta_message_tokens_count.context_management)
       - `trigger: Optional[BetaInputTokensTrigger]`
 
         When to trigger compaction. Defaults to 150000 input tokens.
-
-        - `type: Literal["input_tokens"]`
-
-          - `"input_tokens"`
-
-        - `value: int`
 
 ### Beta Context Management Response
 
@@ -18897,14 +11782,6 @@ print(beta_message_tokens_count.context_management)
 
       Breakdown of cached tokens by TTL
 
-      - `ephemeral_1h_input_tokens: int`
-
-        The number of input tokens used to create the 1 hour cache entry.
-
-      - `ephemeral_5m_input_tokens: int`
-
-        The number of input tokens used to create the 5 minute cache entry.
-
     - `cache_creation_input_tokens: int`
 
       The number of input tokens used to create the cache entry.
@@ -18935,14 +11812,6 @@ print(beta_message_tokens_count.context_management)
 
       Breakdown of cached tokens by TTL
 
-      - `ephemeral_1h_input_tokens: int`
-
-        The number of input tokens used to create the 1 hour cache entry.
-
-      - `ephemeral_5m_input_tokens: int`
-
-        The number of input tokens used to create the 5 minute cache entry.
-
     - `cache_creation_input_tokens: int`
 
       The number of input tokens used to create the cache entry.
@@ -18961,12 +11830,13 @@ print(beta_message_tokens_count.context_management)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
         - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -18984,6 +11854,10 @@ print(beta_message_tokens_count.context_management)
         - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -19918,27 +12792,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebSearchToolResultBlock: …`
 
@@ -19992,27 +12850,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebFetchToolResultBlock: …`
 
@@ -20027,6 +12869,8 @@ print(beta_message_tokens_count.context_management)
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -20112,27 +12956,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaAdvisorToolResultBlock: …`
 
@@ -20160,6 +12988,10 @@ print(beta_message_tokens_count.context_management)
 
         - `class BetaAdvisorResultBlock: …`
 
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: str`
 
           - `type: Literal["advisor_result"]`
@@ -20171,6 +13003,10 @@ print(beta_message_tokens_count.context_management)
           - `encrypted_content: str`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: Literal["advisor_redacted_result"]`
 
@@ -20233,8 +13069,6 @@ print(beta_message_tokens_count.context_management)
             - `file_id: str`
 
             - `type: Literal["code_execution_output"]`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: str`
 
@@ -20450,121 +13284,9 @@ print(beta_message_tokens_count.context_management)
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `class BetaCitationCharLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `file_id: Optional[str]`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationsWebSearchResultLocation: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
-
           - `text: str`
 
           - `type: Literal["text"]`
-
-            - `"text"`
 
       - `is_error: bool`
 
@@ -20713,12 +13435,13 @@ print(beta_message_tokens_count.context_management)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+    - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
       - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
       - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -20736,6 +13459,10 @@ print(beta_message_tokens_count.context_management)
       - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -20942,14 +13669,6 @@ print(beta_message_tokens_count.context_management)
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -20979,14 +13698,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_creation: Optional[BetaCacheCreation]`
 
           Breakdown of cached tokens by TTL
-
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
 
         - `cache_creation_input_tokens: int`
 
@@ -21018,14 +13729,6 @@ print(beta_message_tokens_count.context_management)
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -21044,100 +13747,6 @@ print(beta_message_tokens_count.context_management)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-            - `claude-sonnet-4-6` - Best combination of speed and intelligence
-            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-            - `claude-sonnet-4-5` - High-performance model for agents and coding
-            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-            - `"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `str`
-
         - `output_tokens: int`
 
           The number of output tokens which were used.
@@ -21151,6 +13760,26 @@ print(beta_message_tokens_count.context_management)
     - `output_tokens: int`
 
       The number of output tokens which were used.
+
+    - `output_tokens_details: Optional[OutputTokensDetails]`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: int`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -21254,14 +13883,6 @@ print(beta_message_tokens_count.context_management)
 
         Breakdown of cached tokens by TTL
 
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `cache_creation_input_tokens: int`
 
         The number of input tokens used to create the cache entry.
@@ -21292,14 +13913,6 @@ print(beta_message_tokens_count.context_management)
 
         Breakdown of cached tokens by TTL
 
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `cache_creation_input_tokens: int`
 
         The number of input tokens used to create the cache entry.
@@ -21318,12 +13931,13 @@ print(beta_message_tokens_count.context_management)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+        - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
           - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -21341,6 +13955,10 @@ print(beta_message_tokens_count.context_management)
           - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -21425,6 +14043,26 @@ print(beta_message_tokens_count.context_management)
   - `output_tokens: int`
 
     The cumulative number of output tokens which were used.
+
+  - `output_tokens_details: Optional[OutputTokensDetails]`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: int`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -21671,25 +14309,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestDocumentBlock: …`
 
         - `source: Source`
@@ -21728,205 +14347,7 @@ print(beta_message_tokens_count.context_management)
 
                 - `class BetaTextBlockParam: …`
 
-                  - `text: str`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[List[BetaTextCitationParam]]`
-
-                    - `class BetaCitationCharLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_char_index: int`
-
-                      - `start_char_index: int`
-
-                      - `type: Literal["char_location"]`
-
-                        - `"char_location"`
-
-                    - `class BetaCitationPageLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_page_number: int`
-
-                      - `start_page_number: int`
-
-                      - `type: Literal["page_location"]`
-
-                        - `"page_location"`
-
-                    - `class BetaCitationContentBlockLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: Literal["content_block_location"]`
-
-                        - `"content_block_location"`
-
-                    - `class BetaCitationWebSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `encrypted_index: str`
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["web_search_result_location"]`
-
-                        - `"web_search_result_location"`
-
-                      - `url: str`
-
-                    - `class BetaCitationSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: int`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: str`
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
-
                 - `class BetaImageBlockParam: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64ImageSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaURLImageSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileImageSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["image"]`
-
-                    - `"image"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
             - `type: Literal["content"]`
 
@@ -21956,25 +14377,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           - `enabled: Optional[bool]`
@@ -21991,136 +14393,11 @@ print(beta_message_tokens_count.context_management)
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: Optional[List[BetaTextCitationParam]]`
-
-            - `class BetaCitationCharLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationWebSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
 
         - `source: str`
 
@@ -22134,28 +14411,7 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
-
-          - `enabled: Optional[bool]`
 
       - `class BetaThinkingBlockParam: …`
 
@@ -22190,25 +14446,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `caller: Optional[Caller]`
 
@@ -22252,25 +14489,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[Content], null]]`
 
           - `str`
@@ -22279,672 +14497,11 @@ print(beta_message_tokens_count.context_management)
 
             - `class BetaTextBlockParam: …`
 
-              - `text: str`
-
-              - `type: Literal["text"]`
-
-                - `"text"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[List[BetaTextCitationParam]]`
-
-                - `class BetaCitationCharLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationWebSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
             - `class BetaImageBlockParam: …`
-
-              - `source: Source`
-
-                - `class BetaBase64ImageSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaURLImageSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileImageSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["image"]`
-
-                - `"image"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `class BetaSearchResultBlockParam: …`
 
-              - `content: List[BetaTextBlockParam]`
-
-                - `text: str`
-
-                - `type: Literal["text"]`
-
-                  - `"text"`
-
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: Literal["ephemeral"]`
-
-                    - `"ephemeral"`
-
-                  - `ttl: Optional[Literal["5m", "1h"]]`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: Optional[List[BetaTextCitationParam]]`
-
-                  - `class BetaCitationCharLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationWebSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
-
-              - `source: str`
-
-              - `title: str`
-
-              - `type: Literal["search_result"]`
-
-                - `"search_result"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
             - `class BetaRequestDocumentBlock: …`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `class BetaToolReferenceBlockParam: …`
 
@@ -22959,25 +14516,6 @@ print(beta_message_tokens_count.context_management)
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
         - `is_error: Optional[bool]`
 
@@ -23013,25 +14551,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -23040,27 +14559,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebSearchToolResultBlockParam: …`
 
@@ -23110,25 +14613,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -23137,27 +14621,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlockParam: …`
 
@@ -23172,6 +14640,8 @@ print(beta_message_tokens_count.context_management)
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -23190,297 +14660,6 @@ print(beta_message_tokens_count.context_management)
           - `class BetaWebFetchBlockParam: …`
 
             - `content: BetaRequestDocumentBlock`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                - `class BetaContentBlockSource: …`
-
-                  - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                    - `str`
-
-                    - `List[BetaContentBlockSourceContent]`
-
-                      - `class BetaTextBlockParam: …`
-
-                        - `text: str`
-
-                        - `type: Literal["text"]`
-
-                          - `"text"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: Optional[List[BetaTextCitationParam]]`
-
-                          - `class BetaCitationCharLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_char_index: int`
-
-                            - `start_char_index: int`
-
-                            - `type: Literal["char_location"]`
-
-                              - `"char_location"`
-
-                          - `class BetaCitationPageLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_page_number: int`
-
-                            - `start_page_number: int`
-
-                            - `type: Literal["page_location"]`
-
-                              - `"page_location"`
-
-                          - `class BetaCitationContentBlockLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: int`
-
-                            - `document_title: Optional[str]`
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: Literal["content_block_location"]`
-
-                              - `"content_block_location"`
-
-                          - `class BetaCitationWebSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                            - `encrypted_index: str`
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["web_search_result_location"]`
-
-                              - `"web_search_result_location"`
-
-                            - `url: str`
-
-                          - `class BetaCitationSearchResultLocationParam: …`
-
-                            - `cited_text: str`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: int`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: int`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: str`
-
-                            - `start_block_index: int`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: Optional[str]`
-
-                            - `type: Literal["search_result_location"]`
-
-                              - `"search_result_location"`
-
-                      - `class BetaImageBlockParam: …`
-
-                        - `source: Source`
-
-                          - `class BetaBase64ImageSource: …`
-
-                            - `data: str`
-
-                            - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: Literal["base64"]`
-
-                              - `"base64"`
-
-                          - `class BetaURLImageSource: …`
-
-                            - `type: Literal["url"]`
-
-                              - `"url"`
-
-                            - `url: str`
-
-                          - `class BetaFileImageSource: …`
-
-                            - `file_id: str`
-
-                            - `type: Literal["file"]`
-
-                              - `"file"`
-
-                        - `type: Literal["image"]`
-
-                          - `"image"`
-
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: Literal["ephemeral"]`
-
-                            - `"ephemeral"`
-
-                          - `ttl: Optional[Literal["5m", "1h"]]`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: Literal["content"]`
-
-                    - `"content"`
-
-                - `class BetaURLPDFSource: …`
-
-                  - `type: Literal["url"]`
-
-                    - `"url"`
-
-                  - `url: str`
-
-                - `class BetaFileDocumentSource: …`
-
-                  - `file_id: str`
-
-                  - `type: Literal["file"]`
-
-                    - `"file"`
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: Optional[BetaCitationsConfigParam]`
-
-                - `enabled: Optional[bool]`
-
-              - `context: Optional[str]`
-
-              - `title: Optional[str]`
 
             - `type: Literal["web_fetch_result"]`
 
@@ -23504,25 +14683,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: Optional[Caller]`
 
           Tool invocation directly from the model.
@@ -23531,27 +14691,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaAdvisorToolResultBlockParam: …`
 
@@ -23585,6 +14729,8 @@ print(beta_message_tokens_count.context_management)
 
               - `"advisor_result"`
 
+            - `stop_reason: Optional[str]`
+
           - `class BetaAdvisorRedactedResultBlockParam: …`
 
             - `encrypted_content: str`
@@ -23595,6 +14741,8 @@ print(beta_message_tokens_count.context_management)
 
               - `"advisor_redacted_result"`
 
+            - `stop_reason: Optional[str]`
+
         - `tool_use_id: str`
 
         - `type: Literal["advisor_tool_result"]`
@@ -23604,25 +14752,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -23676,8 +14805,6 @@ print(beta_message_tokens_count.context_management)
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `encrypted_stdout: str`
 
             - `return_code: int`
@@ -23697,25 +14824,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
@@ -23768,25 +14876,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
@@ -23868,25 +14957,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaToolSearchToolResultBlockParam: …`
 
         - `content: Content`
@@ -23915,30 +14985,9 @@ print(beta_message_tokens_count.context_management)
 
               - `type: Literal["tool_reference"]`
 
-                - `"tool_reference"`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: Literal["tool_search_tool_search_result"]`
 
@@ -23953,25 +15002,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
       - `class BetaMCPToolUseBlockParam: …`
 
@@ -23993,25 +15023,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaRequestMCPToolResultBlockParam: …`
 
         - `tool_use_id: str`
@@ -24024,25 +15035,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
 
           - `str`
@@ -24053,136 +15045,11 @@ print(beta_message_tokens_count.context_management)
 
             - `type: Literal["text"]`
 
-              - `"text"`
-
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: Optional[List[BetaTextCitationParam]]`
-
-              - `class BetaCitationCharLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocationParam: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocationParam: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
 
         - `is_error: Optional[bool]`
 
@@ -24201,25 +15068,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaCompactionBlockParam: …`
 
         A compaction block containing summary of previous context.
@@ -24230,10 +15078,6 @@ print(beta_message_tokens_count.context_management)
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: Optional[str]`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: Literal["compaction"]`
 
           - `"compaction"`
@@ -24242,34 +15086,50 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
+        - `content: Optional[str]`
 
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
+          Summary of previously compacted content, or null if compaction failed
 
         - `encrypted_content: Optional[str]`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: Literal["user", "assistant"]`
+      - `class BetaMidConversationSystemBlockParam: …`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: List[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: str`
+
+          - `type: Literal["text"]`
+
+          - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Optional[List[BetaTextCitationParam]]`
+
+        - `type: Literal["mid_conv_system"]`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: Literal["user", "assistant", "system"]`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 ### Beta Message Tokens Count
 
@@ -24296,6 +15156,162 @@ print(beta_message_tokens_count.context_management)
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Mid Conversation System Block Param
+
+- `class BetaMidConversationSystemBlockParam: …`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `content: List[BetaTextBlockParam]`
+
+    System instruction text blocks.
+
+    - `text: str`
+
+    - `type: Literal["text"]`
+
+      - `"text"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `citations: Optional[List[BetaTextCitationParam]]`
+
+      - `class BetaCitationCharLocationParam: …`
+
+        - `cited_text: str`
+
+        - `document_index: int`
+
+        - `document_title: Optional[str]`
+
+        - `end_char_index: int`
+
+        - `start_char_index: int`
+
+        - `type: Literal["char_location"]`
+
+          - `"char_location"`
+
+      - `class BetaCitationPageLocationParam: …`
+
+        - `cited_text: str`
+
+        - `document_index: int`
+
+        - `document_title: Optional[str]`
+
+        - `end_page_number: int`
+
+        - `start_page_number: int`
+
+        - `type: Literal["page_location"]`
+
+          - `"page_location"`
+
+      - `class BetaCitationContentBlockLocationParam: …`
+
+        - `cited_text: str`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `document_index: int`
+
+        - `document_title: Optional[str]`
+
+        - `end_block_index: int`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `start_block_index: int`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `type: Literal["content_block_location"]`
+
+          - `"content_block_location"`
+
+      - `class BetaCitationWebSearchResultLocationParam: …`
+
+        - `cited_text: str`
+
+        - `encrypted_index: str`
+
+        - `title: Optional[str]`
+
+        - `type: Literal["web_search_result_location"]`
+
+          - `"web_search_result_location"`
+
+        - `url: str`
+
+      - `class BetaCitationSearchResultLocationParam: …`
+
+        - `cited_text: str`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `end_block_index: int`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `search_result_index: int`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `source: str`
+
+        - `start_block_index: int`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `title: Optional[str]`
+
+        - `type: Literal["search_result_location"]`
+
+          - `"search_result_location"`
+
+  - `type: Literal["mid_conv_system"]`
+
+    - `"mid_conv_system"`
+
+  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -24499,6 +15515,10 @@ print(beta_message_tokens_count.context_management)
 
   - `class BetaThinkingDelta: …`
 
+    - `estimated_tokens: Optional[int]`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
     - `thinking: str`
 
     - `type: Literal["thinking_delta"]`
@@ -24666,6 +15686,10 @@ print(beta_message_tokens_count.context_management)
         - `"citations_delta"`
 
     - `class BetaThinkingDelta: …`
+
+      - `estimated_tokens: Optional[int]`
+
+        Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
       - `thinking: str`
 
@@ -24927,27 +15951,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebSearchToolResultBlock: …`
 
@@ -25001,27 +16009,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaWebFetchToolResultBlock: …`
 
@@ -25036,6 +16028,8 @@ print(beta_message_tokens_count.context_management)
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -25121,27 +16115,11 @@ print(beta_message_tokens_count.context_management)
 
           Tool invocation directly from the model.
 
-          - `type: Literal["direct"]`
-
-            - `"direct"`
-
         - `class BetaServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20250825"]`
-
-            - `"code_execution_20250825"`
-
         - `class BetaServerToolCaller20260120: …`
-
-          - `tool_id: str`
-
-          - `type: Literal["code_execution_20260120"]`
-
-            - `"code_execution_20260120"`
 
     - `class BetaAdvisorToolResultBlock: …`
 
@@ -25169,6 +16147,10 @@ print(beta_message_tokens_count.context_management)
 
         - `class BetaAdvisorResultBlock: …`
 
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: str`
 
           - `type: Literal["advisor_result"]`
@@ -25180,6 +16162,10 @@ print(beta_message_tokens_count.context_management)
           - `encrypted_content: str`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: Optional[str]`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: Literal["advisor_redacted_result"]`
 
@@ -25242,8 +16228,6 @@ print(beta_message_tokens_count.context_management)
             - `file_id: str`
 
             - `type: Literal["code_execution_output"]`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: str`
 
@@ -25459,121 +16443,9 @@ print(beta_message_tokens_count.context_management)
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `class BetaCitationCharLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `file_id: Optional[str]`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationsWebSearchResultLocation: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
-
           - `text: str`
 
           - `type: Literal["text"]`
-
-            - `"text"`
 
       - `is_error: bool`
 
@@ -25835,14 +16707,6 @@ print(beta_message_tokens_count.context_management)
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -25873,14 +16737,6 @@ print(beta_message_tokens_count.context_management)
 
           Breakdown of cached tokens by TTL
 
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `cache_creation_input_tokens: int`
 
           The number of input tokens used to create the cache entry.
@@ -25899,12 +16755,13 @@ print(beta_message_tokens_count.context_management)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+          - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
             - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -25922,6 +16779,10 @@ print(beta_message_tokens_count.context_management)
             - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -26006,6 +16867,26 @@ print(beta_message_tokens_count.context_management)
     - `output_tokens: int`
 
       The cumulative number of output tokens which were used.
+
+    - `output_tokens_details: Optional[OutputTokensDetails]`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: int`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -26312,27 +17193,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebSearchToolResultBlock: …`
 
@@ -26386,27 +17251,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlock: …`
 
@@ -26421,6 +17270,8 @@ print(beta_message_tokens_count.context_management)
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -26506,27 +17357,11 @@ print(beta_message_tokens_count.context_management)
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaAdvisorToolResultBlock: …`
 
@@ -26554,6 +17389,10 @@ print(beta_message_tokens_count.context_management)
 
           - `class BetaAdvisorResultBlock: …`
 
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `text: str`
 
             - `type: Literal["advisor_result"]`
@@ -26565,6 +17404,10 @@ print(beta_message_tokens_count.context_management)
             - `encrypted_content: str`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: Literal["advisor_redacted_result"]`
 
@@ -26627,8 +17470,6 @@ print(beta_message_tokens_count.context_management)
               - `file_id: str`
 
               - `type: Literal["code_execution_output"]`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: str`
 
@@ -26844,121 +17685,9 @@ print(beta_message_tokens_count.context_management)
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `class BetaCitationCharLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `file_id: Optional[str]`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationsWebSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
-
             - `text: str`
 
             - `type: Literal["text"]`
-
-              - `"text"`
 
         - `is_error: bool`
 
@@ -27107,12 +17836,13 @@ print(beta_message_tokens_count.context_management)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
         - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -27130,6 +17860,10 @@ print(beta_message_tokens_count.context_management)
         - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -27336,14 +18070,6 @@ print(beta_message_tokens_count.context_management)
 
             Breakdown of cached tokens by TTL
 
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `cache_creation_input_tokens: int`
 
             The number of input tokens used to create the cache entry.
@@ -27373,14 +18099,6 @@ print(beta_message_tokens_count.context_management)
           - `cache_creation: Optional[BetaCacheCreation]`
 
             Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
 
           - `cache_creation_input_tokens: int`
 
@@ -27412,14 +18130,6 @@ print(beta_message_tokens_count.context_management)
 
             Breakdown of cached tokens by TTL
 
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `cache_creation_input_tokens: int`
 
             The number of input tokens used to create the cache entry.
@@ -27438,100 +18148,6 @@ print(beta_message_tokens_count.context_management)
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-              The model that will complete your prompt.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-              - `claude-sonnet-4-6` - Best combination of speed and intelligence
-              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-              - `claude-sonnet-4-5` - High-performance model for agents and coding
-              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-mythos-preview"`
-
-                New class of intelligence, strongest in coding and cybersecurity
-
-              - `"claude-opus-4-6"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-              - `"claude-opus-4-1"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-1-20250805"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-0"`
-
-                Powerful model for complex tasks
-
-              - `"claude-opus-4-20250514"`
-
-                Powerful model for complex tasks
-
-              - `"claude-sonnet-4-0"`
-
-                High-performance model with extended thinking
-
-              - `"claude-sonnet-4-20250514"`
-
-                High-performance model with extended thinking
-
-              - `"claude-3-haiku-20240307"`
-
-                Fast and cost-effective model
-
-            - `str`
-
           - `output_tokens: int`
 
             The number of output tokens which were used.
@@ -27545,6 +18161,26 @@ print(beta_message_tokens_count.context_management)
       - `output_tokens: int`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: Optional[OutputTokensDetails]`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: int`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -27883,27 +18519,11 @@ print(beta_message_tokens_count.context_management)
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaWebSearchToolResultBlock: …`
 
@@ -27957,27 +18577,11 @@ print(beta_message_tokens_count.context_management)
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaWebFetchToolResultBlock: …`
 
@@ -27992,6 +18596,8 @@ print(beta_message_tokens_count.context_management)
                 - `"url_too_long"`
 
                 - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
 
                 - `"url_not_accessible"`
 
@@ -28077,27 +18683,11 @@ print(beta_message_tokens_count.context_management)
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaAdvisorToolResultBlock: …`
 
@@ -28125,6 +18715,10 @@ print(beta_message_tokens_count.context_management)
 
             - `class BetaAdvisorResultBlock: …`
 
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `text: str`
 
               - `type: Literal["advisor_result"]`
@@ -28136,6 +18730,10 @@ print(beta_message_tokens_count.context_management)
               - `encrypted_content: str`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: Literal["advisor_redacted_result"]`
 
@@ -28198,8 +18796,6 @@ print(beta_message_tokens_count.context_management)
                 - `file_id: str`
 
                 - `type: Literal["code_execution_output"]`
-
-                  - `"code_execution_output"`
 
               - `encrypted_stdout: str`
 
@@ -28415,121 +19011,9 @@ print(beta_message_tokens_count.context_management)
 
                 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-                - `class BetaCitationCharLocation: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `file_id: Optional[str]`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocation: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `file_id: Optional[str]`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocation: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `file_id: Optional[str]`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationsWebSearchResultLocation: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocation: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
               - `text: str`
 
               - `type: Literal["text"]`
-
-                - `"text"`
 
           - `is_error: bool`
 
@@ -28678,12 +19162,13 @@ print(beta_message_tokens_count.context_management)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+        - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
           - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -28701,6 +19186,10 @@ print(beta_message_tokens_count.context_management)
           - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -28907,14 +19396,6 @@ print(beta_message_tokens_count.context_management)
 
               Breakdown of cached tokens by TTL
 
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `cache_creation_input_tokens: int`
 
               The number of input tokens used to create the cache entry.
@@ -28944,14 +19425,6 @@ print(beta_message_tokens_count.context_management)
             - `cache_creation: Optional[BetaCacheCreation]`
 
               Breakdown of cached tokens by TTL
-
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
 
             - `cache_creation_input_tokens: int`
 
@@ -28983,14 +19456,6 @@ print(beta_message_tokens_count.context_management)
 
               Breakdown of cached tokens by TTL
 
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `cache_creation_input_tokens: int`
 
               The number of input tokens used to create the cache entry.
@@ -29009,100 +19474,6 @@ print(beta_message_tokens_count.context_management)
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-              - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-                The model that will complete your prompt.
-
-                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-                - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-                - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-                - `claude-sonnet-4-6` - Best combination of speed and intelligence
-                - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-                - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-                - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-                - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-                - `claude-sonnet-4-5` - High-performance model for agents and coding
-                - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-                - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-                - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-                - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-mythos-preview"`
-
-                  New class of intelligence, strongest in coding and cybersecurity
-
-                - `"claude-opus-4-6"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-opus-4-1"`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-1-20250805"`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-0"`
-
-                  Powerful model for complex tasks
-
-                - `"claude-opus-4-20250514"`
-
-                  Powerful model for complex tasks
-
-                - `"claude-sonnet-4-0"`
-
-                  High-performance model with extended thinking
-
-                - `"claude-sonnet-4-20250514"`
-
-                  High-performance model with extended thinking
-
-                - `"claude-3-haiku-20240307"`
-
-                  Fast and cost-effective model
-
-              - `str`
-
             - `output_tokens: int`
 
               The number of output tokens which were used.
@@ -29116,6 +19487,26 @@ print(beta_message_tokens_count.context_management)
         - `output_tokens: int`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: Optional[OutputTokensDetails]`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: int`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -29157,117 +19548,17 @@ print(beta_message_tokens_count.context_management)
 
       Information about context management strategies applied during the request
 
-      - `applied_edits: List[AppliedEdit]`
-
-        List of context management edits that were applied.
-
-        - `class BetaClearToolUses20250919EditResponse: …`
-
-          - `cleared_input_tokens: int`
-
-            Number of input tokens cleared by this edit.
-
-          - `cleared_tool_uses: int`
-
-            Number of tool uses that were cleared.
-
-          - `type: Literal["clear_tool_uses_20250919"]`
-
-            The type of context management edit applied.
-
-            - `"clear_tool_uses_20250919"`
-
-        - `class BetaClearThinking20251015EditResponse: …`
-
-          - `cleared_input_tokens: int`
-
-            Number of input tokens cleared by this edit.
-
-          - `cleared_thinking_turns: int`
-
-            Number of thinking turns that were cleared.
-
-          - `type: Literal["clear_thinking_20251015"]`
-
-            The type of context management edit applied.
-
-            - `"clear_thinking_20251015"`
-
     - `delta: Delta`
 
       - `container: Optional[BetaContainer]`
 
         Information about the container used in the request (for the code execution tool)
 
-        - `id: str`
-
-          Identifier for the container used in this request
-
-        - `expires_at: datetime`
-
-          The time at which the container will expire.
-
-        - `skills: Optional[List[BetaSkill]]`
-
-          Skills loaded in the container
-
-          - `skill_id: str`
-
-            Skill ID
-
-          - `type: Literal["anthropic", "custom"]`
-
-            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-            - `"anthropic"`
-
-            - `"custom"`
-
-          - `version: str`
-
-            Skill version or 'latest' for most recent version
-
       - `stop_details: Optional[BetaRefusalStopDetails]`
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio"]]`
-
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
-
-          - `"cyber"`
-
-          - `"bio"`
-
-        - `explanation: Optional[str]`
-
-          Human-readable explanation of the refusal.
-
-          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `type: Literal["refusal"]`
-
-          - `"refusal"`
-
       - `stop_reason: Optional[BetaStopReason]`
-
-        - `"end_turn"`
-
-        - `"max_tokens"`
-
-        - `"stop_sequence"`
-
-        - `"tool_use"`
-
-        - `"pause_turn"`
-
-        - `"compaction"`
-
-        - `"refusal"`
-
-        - `"model_context_window_exceeded"`
 
       - `stop_sequence: Optional[str]`
 
@@ -29309,235 +19600,33 @@ print(beta_message_tokens_count.context_management)
         - Calculate the true context window size from the last iteration
         - Understand token accumulation across server-side tool use loops
 
-        - `class BetaMessageIterationUsage: …`
-
-          Token usage for a sampling iteration.
-
-          - `cache_creation: Optional[BetaCacheCreation]`
-
-            Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `cache_creation_input_tokens: int`
-
-            The number of input tokens used to create the cache entry.
-
-          - `cache_read_input_tokens: int`
-
-            The number of input tokens read from the cache.
-
-          - `input_tokens: int`
-
-            The number of input tokens which were used.
-
-          - `output_tokens: int`
-
-            The number of output tokens which were used.
-
-          - `type: Literal["message"]`
-
-            Usage for a sampling iteration
-
-            - `"message"`
-
-        - `class BetaCompactionIterationUsage: …`
-
-          Token usage for a compaction iteration.
-
-          - `cache_creation: Optional[BetaCacheCreation]`
-
-            Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `cache_creation_input_tokens: int`
-
-            The number of input tokens used to create the cache entry.
-
-          - `cache_read_input_tokens: int`
-
-            The number of input tokens read from the cache.
-
-          - `input_tokens: int`
-
-            The number of input tokens which were used.
-
-          - `output_tokens: int`
-
-            The number of output tokens which were used.
-
-          - `type: Literal["compaction"]`
-
-            Usage for a compaction iteration
-
-            - `"compaction"`
-
-        - `class BetaAdvisorMessageIterationUsage: …`
-
-          Token usage for an advisor sub-inference iteration.
-
-          - `cache_creation: Optional[BetaCacheCreation]`
-
-            Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `cache_creation_input_tokens: int`
-
-            The number of input tokens used to create the cache entry.
-
-          - `cache_read_input_tokens: int`
-
-            The number of input tokens read from the cache.
-
-          - `input_tokens: int`
-
-            The number of input tokens which were used.
-
-          - `model: Model`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-              The model that will complete your prompt.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-              - `claude-sonnet-4-6` - Best combination of speed and intelligence
-              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-              - `claude-sonnet-4-5` - High-performance model for agents and coding
-              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-mythos-preview"`
-
-                New class of intelligence, strongest in coding and cybersecurity
-
-              - `"claude-opus-4-6"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-              - `"claude-opus-4-1"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-1-20250805"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-0"`
-
-                Powerful model for complex tasks
-
-              - `"claude-opus-4-20250514"`
-
-                Powerful model for complex tasks
-
-              - `"claude-sonnet-4-0"`
-
-                High-performance model with extended thinking
-
-              - `"claude-sonnet-4-20250514"`
-
-                High-performance model with extended thinking
-
-              - `"claude-3-haiku-20240307"`
-
-                Fast and cost-effective model
-
-            - `str`
-
-          - `output_tokens: int`
-
-            The number of output tokens which were used.
-
-          - `type: Literal["advisor_message"]`
-
-            Usage for an advisor sub-inference iteration
-
-            - `"advisor_message"`
-
       - `output_tokens: int`
 
         The cumulative number of output tokens which were used.
 
+      - `output_tokens_details: Optional[OutputTokensDetails]`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: int`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
       - `server_tool_use: Optional[BetaServerToolUsage]`
 
         The number of server tool requests.
-
-        - `web_fetch_requests: int`
-
-          The number of web fetch tool requests.
-
-        - `web_search_requests: int`
-
-          The number of web search tool requests.
 
   - `class BetaRawMessageStopEvent: …`
 
@@ -29553,889 +19642,35 @@ print(beta_message_tokens_count.context_management)
 
       - `class BetaTextBlock: …`
 
-        - `citations: Optional[List[BetaTextCitation]]`
-
-          Citations supporting the text block.
-
-          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-          - `class BetaCitationCharLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
-          - `class BetaCitationPageLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
-
-          - `class BetaCitationContentBlockLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: Optional[str]`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
-          - `class BetaCitationsWebSearchResultLocation: …`
-
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
-          - `class BetaCitationSearchResultLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
-
-        - `text: str`
-
-        - `type: Literal["text"]`
-
-          - `"text"`
-
       - `class BetaThinkingBlock: …`
-
-        - `signature: str`
-
-        - `thinking: str`
-
-        - `type: Literal["thinking"]`
-
-          - `"thinking"`
 
       - `class BetaRedactedThinkingBlock: …`
 
-        - `data: str`
-
-        - `type: Literal["redacted_thinking"]`
-
-          - `"redacted_thinking"`
-
       - `class BetaToolUseBlock: …`
-
-        - `id: str`
-
-        - `input: Dict[str, object]`
-
-        - `name: str`
-
-        - `type: Literal["tool_use"]`
-
-          - `"tool_use"`
-
-        - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller: …`
-
-            Tool invocation directly from the model.
-
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
-          - `class BetaServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
-          - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaServerToolUseBlock: …`
 
-        - `id: str`
-
-        - `input: Dict[str, object]`
-
-        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
-
-          - `"advisor"`
-
-          - `"web_search"`
-
-          - `"web_fetch"`
-
-          - `"code_execution"`
-
-          - `"bash_code_execution"`
-
-          - `"text_editor_code_execution"`
-
-          - `"tool_search_tool_regex"`
-
-          - `"tool_search_tool_bm25"`
-
-        - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
-
-        - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller: …`
-
-            Tool invocation directly from the model.
-
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
-          - `class BetaServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
-          - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
-
       - `class BetaWebSearchToolResultBlock: …`
-
-        - `content: BetaWebSearchToolResultBlockContent`
-
-          - `class BetaWebSearchToolResultError: …`
-
-            - `error_code: BetaWebSearchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"max_uses_exceeded"`
-
-              - `"too_many_requests"`
-
-              - `"query_too_long"`
-
-              - `"request_too_large"`
-
-            - `type: Literal["web_search_tool_result_error"]`
-
-              - `"web_search_tool_result_error"`
-
-          - `List[BetaWebSearchResultBlock]`
-
-            - `encrypted_content: str`
-
-            - `page_age: Optional[str]`
-
-            - `title: str`
-
-            - `type: Literal["web_search_result"]`
-
-              - `"web_search_result"`
-
-            - `url: str`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["web_search_tool_result"]`
-
-          - `"web_search_tool_result"`
-
-        - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller: …`
-
-            Tool invocation directly from the model.
-
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
-          - `class BetaServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
-          - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlock: …`
 
-        - `content: Content`
-
-          - `class BetaWebFetchToolResultErrorBlock: …`
-
-            - `error_code: BetaWebFetchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"url_too_long"`
-
-              - `"url_not_allowed"`
-
-              - `"url_not_accessible"`
-
-              - `"unsupported_content_type"`
-
-              - `"too_many_requests"`
-
-              - `"max_uses_exceeded"`
-
-              - `"unavailable"`
-
-            - `type: Literal["web_fetch_tool_result_error"]`
-
-              - `"web_fetch_tool_result_error"`
-
-          - `class BetaWebFetchBlock: …`
-
-            - `content: BetaDocumentBlock`
-
-              - `citations: Optional[BetaCitationConfig]`
-
-                Citation configuration for the document
-
-                - `enabled: bool`
-
-              - `source: Source`
-
-                - `class BetaBase64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class BetaPlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-              - `title: Optional[str]`
-
-                The title of the document
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-            - `retrieved_at: Optional[str]`
-
-              ISO 8601 timestamp when the content was retrieved
-
-            - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
-
-            - `url: str`
-
-              Fetched content URL
-
-        - `tool_use_id: str`
-
-        - `type: Literal["web_fetch_tool_result"]`
-
-          - `"web_fetch_tool_result"`
-
-        - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller: …`
-
-            Tool invocation directly from the model.
-
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
-          - `class BetaServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
-          - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
-
       - `class BetaAdvisorToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class BetaAdvisorToolResultError: …`
-
-            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
-
-              - `"max_uses_exceeded"`
-
-              - `"prompt_too_long"`
-
-              - `"too_many_requests"`
-
-              - `"overloaded"`
-
-              - `"unavailable"`
-
-              - `"execution_time_exceeded"`
-
-            - `type: Literal["advisor_tool_result_error"]`
-
-              - `"advisor_tool_result_error"`
-
-          - `class BetaAdvisorResultBlock: …`
-
-            - `text: str`
-
-            - `type: Literal["advisor_result"]`
-
-              - `"advisor_result"`
-
-          - `class BetaAdvisorRedactedResultBlock: …`
-
-            - `encrypted_content: str`
-
-              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-            - `type: Literal["advisor_redacted_result"]`
-
-              - `"advisor_redacted_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["advisor_tool_result"]`
-
-          - `"advisor_tool_result"`
 
       - `class BetaCodeExecutionToolResultBlock: …`
 
-        - `content: BetaCodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
-
-          - `class BetaCodeExecutionToolResultError: …`
-
-            - `error_code: BetaCodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `type: Literal["code_execution_tool_result_error"]`
-
-              - `"code_execution_tool_result_error"`
-
-          - `class BetaCodeExecutionResultBlock: …`
-
-            - `content: List[BetaCodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["code_execution_output"]`
-
-                - `"code_execution_output"`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `stdout: str`
-
-            - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
-
-          - `class BetaEncryptedCodeExecutionResultBlock: …`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `content: List[BetaCodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["code_execution_output"]`
-
-                - `"code_execution_output"`
-
-            - `encrypted_stdout: str`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `type: Literal["encrypted_code_execution_result"]`
-
-              - `"encrypted_code_execution_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["code_execution_tool_result"]`
-
-          - `"code_execution_tool_result"`
-
       - `class BetaBashCodeExecutionToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class BetaBashCodeExecutionToolResultError: …`
-
-            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"output_file_too_large"`
-
-            - `type: Literal["bash_code_execution_tool_result_error"]`
-
-              - `"bash_code_execution_tool_result_error"`
-
-          - `class BetaBashCodeExecutionResultBlock: …`
-
-            - `content: List[BetaBashCodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `stdout: str`
-
-            - `type: Literal["bash_code_execution_result"]`
-
-              - `"bash_code_execution_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["bash_code_execution_tool_result"]`
-
-          - `"bash_code_execution_tool_result"`
 
       - `class BetaTextEditorCodeExecutionToolResultBlock: …`
 
-        - `content: Content`
-
-          - `class BetaTextEditorCodeExecutionToolResultError: …`
-
-            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"file_not_found"`
-
-            - `error_message: Optional[str]`
-
-            - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
-              - `"text_editor_code_execution_tool_result_error"`
-
-          - `class BetaTextEditorCodeExecutionViewResultBlock: …`
-
-            - `content: str`
-
-            - `file_type: Literal["text", "image", "pdf"]`
-
-              - `"text"`
-
-              - `"image"`
-
-              - `"pdf"`
-
-            - `num_lines: Optional[int]`
-
-            - `start_line: Optional[int]`
-
-            - `total_lines: Optional[int]`
-
-            - `type: Literal["text_editor_code_execution_view_result"]`
-
-              - `"text_editor_code_execution_view_result"`
-
-          - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
-
-            - `is_file_update: bool`
-
-            - `type: Literal["text_editor_code_execution_create_result"]`
-
-              - `"text_editor_code_execution_create_result"`
-
-          - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
-
-            - `lines: Optional[List[str]]`
-
-            - `new_lines: Optional[int]`
-
-            - `new_start: Optional[int]`
-
-            - `old_lines: Optional[int]`
-
-            - `old_start: Optional[int]`
-
-            - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["text_editor_code_execution_tool_result"]`
-
-          - `"text_editor_code_execution_tool_result"`
-
       - `class BetaToolSearchToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class BetaToolSearchToolResultError: …`
-
-            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `error_message: Optional[str]`
-
-            - `type: Literal["tool_search_tool_result_error"]`
-
-              - `"tool_search_tool_result_error"`
-
-          - `class BetaToolSearchToolSearchResultBlock: …`
-
-            - `tool_references: List[BetaToolReferenceBlock]`
-
-              - `tool_name: str`
-
-              - `type: Literal["tool_reference"]`
-
-                - `"tool_reference"`
-
-            - `type: Literal["tool_search_tool_search_result"]`
-
-              - `"tool_search_tool_search_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["tool_search_tool_result"]`
-
-          - `"tool_search_tool_result"`
 
       - `class BetaMCPToolUseBlock: …`
 
-        - `id: str`
-
-        - `input: Dict[str, object]`
-
-        - `name: str`
-
-          The name of the MCP tool
-
-        - `server_name: str`
-
-          The name of the MCP server
-
-        - `type: Literal["mcp_tool_use"]`
-
-          - `"mcp_tool_use"`
-
       - `class BetaMCPToolResultBlock: …`
-
-        - `content: Union[str, List[BetaTextBlock]]`
-
-          - `str`
-
-          - `List[BetaTextBlock]`
-
-            - `citations: Optional[List[BetaTextCitation]]`
-
-              Citations supporting the text block.
-
-              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-              - `class BetaCitationCharLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `file_id: Optional[str]`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationsWebSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
-
-            - `text: str`
-
-            - `type: Literal["text"]`
-
-              - `"text"`
-
-        - `is_error: bool`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["mcp_tool_result"]`
-
-          - `"mcp_tool_result"`
 
       - `class BetaContainerUploadBlock: …`
 
         Response model for a file uploaded to the container.
-
-        - `file_id: str`
-
-        - `type: Literal["container_upload"]`
-
-          - `"container_upload"`
 
       - `class BetaCompactionBlock: …`
 
@@ -30444,18 +19679,6 @@ print(beta_message_tokens_count.context_management)
         When content is None, it indicates the compaction failed to produce a valid
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
-
-        - `content: Optional[str]`
-
-          Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: Optional[str]`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
-        - `type: Literal["compaction"]`
-
-          - `"compaction"`
 
     - `index: int`
 
@@ -30489,119 +19712,23 @@ print(beta_message_tokens_count.context_management)
 
           - `class BetaCitationCharLocation: …`
 
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
           - `class BetaCitationPageLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
 
           - `class BetaCitationContentBlockLocation: …`
 
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: Optional[str]`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
           - `class BetaCitationsWebSearchResultLocation: …`
 
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
           - `class BetaCitationSearchResultLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
         - `type: Literal["citations_delta"]`
 
           - `"citations_delta"`
 
       - `class BetaThinkingDelta: …`
+
+        - `estimated_tokens: Optional[int]`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
         - `thinking: str`
 
@@ -30910,25 +20037,6 @@ print(beta_message_tokens_count.context_management)
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
       - `type: Literal["content"]`
 
         - `"content"`
@@ -30956,25 +20064,6 @@ print(beta_message_tokens_count.context_management)
   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
-
-    - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
-
-    - `ttl: Optional[Literal["5m", "1h"]]`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
 
   - `citations: Optional[BetaCitationsConfigParam]`
 
@@ -31060,25 +20149,6 @@ print(beta_message_tokens_count.context_management)
       - `cache_control: Optional[BetaCacheControlEphemeral]`
 
         Create a cache control breakpoint at this content block.
-
-        - `type: Literal["ephemeral"]`
-
-          - `"ephemeral"`
-
-        - `ttl: Optional[Literal["5m", "1h"]]`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"`
-
-          - `"1h"`
 
       - `citations: Optional[List[BetaTextCitationParam]]`
 
@@ -31340,25 +20410,6 @@ print(beta_message_tokens_count.context_management)
   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
-
-    - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
-
-    - `ttl: Optional[Literal["5m", "1h"]]`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
 
   - `citations: Optional[BetaCitationsConfigParam]`
 
@@ -32567,6 +21618,10 @@ print(beta_message_tokens_count.context_management)
 
 - `class BetaThinkingDelta: …`
 
+  - `estimated_tokens: Optional[int]`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
   - `thinking: str`
 
   - `type: Literal["thinking_delta"]`
@@ -33225,25 +22280,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[List[BetaTextCitationParam]]`
 
           - `class BetaCitationCharLocationParam: …`
@@ -33396,25 +22432,6 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
       - `class BetaSearchResultBlockParam: …`
 
         - `content: List[BetaTextBlockParam]`
@@ -33423,136 +22440,11 @@ print(beta_message_tokens_count.context_management)
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: Literal["ephemeral"]`
-
-              - `"ephemeral"`
-
-            - `ttl: Optional[Literal["5m", "1h"]]`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: Optional[List[BetaTextCitationParam]]`
-
-            - `class BetaCitationCharLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class BetaCitationPageLocationParam: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class BetaCitationContentBlockLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class BetaCitationWebSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class BetaCitationSearchResultLocationParam: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
 
         - `source: str`
 
@@ -33565,25 +22457,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `citations: Optional[BetaCitationsConfigParam]`
 
@@ -33627,205 +22500,7 @@ print(beta_message_tokens_count.context_management)
 
                 - `class BetaTextBlockParam: …`
 
-                  - `text: str`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[List[BetaTextCitationParam]]`
-
-                    - `class BetaCitationCharLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_char_index: int`
-
-                      - `start_char_index: int`
-
-                      - `type: Literal["char_location"]`
-
-                        - `"char_location"`
-
-                    - `class BetaCitationPageLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_page_number: int`
-
-                      - `start_page_number: int`
-
-                      - `type: Literal["page_location"]`
-
-                        - `"page_location"`
-
-                    - `class BetaCitationContentBlockLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: Literal["content_block_location"]`
-
-                        - `"content_block_location"`
-
-                    - `class BetaCitationWebSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `encrypted_index: str`
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["web_search_result_location"]`
-
-                        - `"web_search_result_location"`
-
-                      - `url: str`
-
-                    - `class BetaCitationSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: int`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: str`
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
-
                 - `class BetaImageBlockParam: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64ImageSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaURLImageSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileImageSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["image"]`
-
-                    - `"image"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
             - `type: Literal["content"]`
 
@@ -33855,28 +22530,7 @@ print(beta_message_tokens_count.context_management)
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
-
-          - `enabled: Optional[bool]`
 
         - `context: Optional[str]`
 
@@ -33895,25 +22549,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
   - `is_error: Optional[bool]`
 
@@ -34143,25 +22778,6 @@ print(beta_message_tokens_count.context_management)
   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
-
-    - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
-
-    - `ttl: Optional[Literal["5m", "1h"]]`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
 
 ### Beta Tool Search Tool Result Error
 
@@ -34597,25 +23213,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -34651,25 +23248,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -34707,25 +23285,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -34759,25 +23318,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -34814,25 +23354,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -34876,25 +23397,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -34934,25 +23436,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -34998,25 +23481,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35056,25 +23520,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -35120,25 +23565,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35183,25 +23609,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35238,25 +23645,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35292,25 +23680,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -35359,25 +23728,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -35449,25 +23799,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -35524,25 +23855,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35558,26 +23870,6 @@ print(beta_message_tokens_count.context_management)
     - `user_location: Optional[BetaUserLocation]`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `type: Literal["approximate"]`
-
-        - `"approximate"`
-
-      - `city: Optional[str]`
-
-        The city of the user.
-
-      - `country: Optional[str]`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: Optional[str]`
-
-        The region of the user.
-
-      - `timezone: Optional[str]`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `class BetaWebFetchTool20260209: …`
 
@@ -35613,30 +23905,9 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -35690,30 +23961,9 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: Optional[BetaCitationsConfigParam]`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: Optional[bool]`
 
     - `defer_loading: Optional[bool]`
 
@@ -35743,12 +23993,13 @@ print(beta_message_tokens_count.context_management)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
         - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -35766,6 +24017,10 @@ print(beta_message_tokens_count.context_management)
         - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -35861,47 +24116,9 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caching: Optional[BetaCacheControlEphemeral]`
 
       Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `defer_loading: Optional[bool]`
 
@@ -35943,25 +24160,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35998,25 +24196,6 @@ print(beta_message_tokens_count.context_management)
 
       Create a cache control breakpoint at this content block.
 
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: Optional[bool]`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36043,25 +24222,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `configs: Optional[Dict[str, BetaMCPToolConfig]]`
 
@@ -36280,14 +24440,6 @@ print(beta_message_tokens_count.context_management)
 
         Breakdown of cached tokens by TTL
 
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `cache_creation_input_tokens: int`
 
         The number of input tokens used to create the cache entry.
@@ -36317,14 +24469,6 @@ print(beta_message_tokens_count.context_management)
       - `cache_creation: Optional[BetaCacheCreation]`
 
         Breakdown of cached tokens by TTL
-
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
 
       - `cache_creation_input_tokens: int`
 
@@ -36356,14 +24500,6 @@ print(beta_message_tokens_count.context_management)
 
         Breakdown of cached tokens by TTL
 
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `cache_creation_input_tokens: int`
 
         The number of input tokens used to create the cache entry.
@@ -36382,12 +24518,13 @@ print(beta_message_tokens_count.context_management)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+        - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
           - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -36405,6 +24542,10 @@ print(beta_message_tokens_count.context_management)
           - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -36489,6 +24630,26 @@ print(beta_message_tokens_count.context_management)
   - `output_tokens: int`
 
     The number of output tokens which were used.
+
+  - `output_tokens_details: Optional[OutputTokensDetails]`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: int`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -36825,25 +24986,6 @@ print(beta_message_tokens_count.context_management)
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
         - `type: Literal["content"]`
 
           - `"content"`
@@ -36871,25 +25013,6 @@ print(beta_message_tokens_count.context_management)
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `citations: Optional[BetaCitationsConfigParam]`
 
@@ -37164,6 +25287,8 @@ print(beta_message_tokens_count.context_management)
 
         - `"url_not_allowed"`
 
+        - `"url_not_in_prior_context"`
+
         - `"url_not_accessible"`
 
         - `"unsupported_content_type"`
@@ -37285,6 +25410,8 @@ print(beta_message_tokens_count.context_management)
         - `"url_too_long"`
 
         - `"url_not_allowed"`
+
+        - `"url_not_in_prior_context"`
 
         - `"url_not_accessible"`
 
@@ -37521,25 +25648,6 @@ print(beta_message_tokens_count.context_management)
 
                     Create a cache control breakpoint at this content block.
 
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
             - `type: Literal["content"]`
 
               - `"content"`
@@ -37567,25 +25675,6 @@ print(beta_message_tokens_count.context_management)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `citations: Optional[BetaCitationsConfigParam]`
 
@@ -37616,25 +25705,6 @@ print(beta_message_tokens_count.context_management)
   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
-
-    - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
-
-    - `ttl: Optional[Literal["5m", "1h"]]`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
 
   - `caller: Optional[Caller]`
 
@@ -37678,6 +25748,8 @@ print(beta_message_tokens_count.context_management)
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -37704,6 +25776,8 @@ print(beta_message_tokens_count.context_management)
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -37720,13 +25794,15 @@ print(beta_message_tokens_count.context_management)
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `Literal["invalid_tool_input", "url_too_long", "url_not_allowed", 5 more]`
+- `Literal["invalid_tool_input", "url_too_long", "url_not_allowed", 6 more]`
 
   - `"invalid_tool_input"`
 
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 
@@ -38265,7 +26341,7 @@ print(beta_message_tokens_count.context_management)
 
 # Batches
 
-## Create
+## Create a Message Batch
 
 `beta.messages.batches.create(BatchCreateParams**kwargs)  -> BetaMessageBatch`
 
@@ -38545,25 +26621,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
           - `class BetaRequestDocumentBlock: …`
 
             - `source: Source`
@@ -38602,205 +26659,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `class BetaTextBlockParam: …`
 
-                      - `text: str`
-
-                      - `type: Literal["text"]`
-
-                        - `"text"`
-
-                      - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `type: Literal["ephemeral"]`
-
-                          - `"ephemeral"`
-
-                        - `ttl: Optional[Literal["5m", "1h"]]`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `"5m"`
-
-                          - `"1h"`
-
-                      - `citations: Optional[List[BetaTextCitationParam]]`
-
-                        - `class BetaCitationCharLocationParam: …`
-
-                          - `cited_text: str`
-
-                          - `document_index: int`
-
-                          - `document_title: Optional[str]`
-
-                          - `end_char_index: int`
-
-                          - `start_char_index: int`
-
-                          - `type: Literal["char_location"]`
-
-                            - `"char_location"`
-
-                        - `class BetaCitationPageLocationParam: …`
-
-                          - `cited_text: str`
-
-                          - `document_index: int`
-
-                          - `document_title: Optional[str]`
-
-                          - `end_page_number: int`
-
-                          - `start_page_number: int`
-
-                          - `type: Literal["page_location"]`
-
-                            - `"page_location"`
-
-                        - `class BetaCitationContentBlockLocationParam: …`
-
-                          - `cited_text: str`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `document_index: int`
-
-                          - `document_title: Optional[str]`
-
-                          - `end_block_index: int`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `start_block_index: int`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `type: Literal["content_block_location"]`
-
-                            - `"content_block_location"`
-
-                        - `class BetaCitationWebSearchResultLocationParam: …`
-
-                          - `cited_text: str`
-
-                          - `encrypted_index: str`
-
-                          - `title: Optional[str]`
-
-                          - `type: Literal["web_search_result_location"]`
-
-                            - `"web_search_result_location"`
-
-                          - `url: str`
-
-                        - `class BetaCitationSearchResultLocationParam: …`
-
-                          - `cited_text: str`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `end_block_index: int`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `search_result_index: int`
-
-                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                          - `source: str`
-
-                          - `start_block_index: int`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `title: Optional[str]`
-
-                          - `type: Literal["search_result_location"]`
-
-                            - `"search_result_location"`
-
                     - `class BetaImageBlockParam: …`
-
-                      - `source: Source`
-
-                        - `class BetaBase64ImageSource: …`
-
-                          - `data: str`
-
-                          - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                            - `"image/jpeg"`
-
-                            - `"image/png"`
-
-                            - `"image/gif"`
-
-                            - `"image/webp"`
-
-                          - `type: Literal["base64"]`
-
-                            - `"base64"`
-
-                        - `class BetaURLImageSource: …`
-
-                          - `type: Literal["url"]`
-
-                            - `"url"`
-
-                          - `url: str`
-
-                        - `class BetaFileImageSource: …`
-
-                          - `file_id: str`
-
-                          - `type: Literal["file"]`
-
-                            - `"file"`
-
-                      - `type: Literal["image"]`
-
-                        - `"image"`
-
-                      - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `type: Literal["ephemeral"]`
-
-                          - `"ephemeral"`
-
-                        - `ttl: Optional[Literal["5m", "1h"]]`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `"5m"`
-
-                          - `"1h"`
 
                 - `type: Literal["content"]`
 
@@ -38830,25 +26689,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: Optional[BetaCitationsConfigParam]`
 
               - `enabled: Optional[bool]`
@@ -38865,136 +26705,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type: Literal["text"]`
 
-                - `"text"`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
-
-                - `ttl: Optional[Literal["5m", "1h"]]`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
               - `citations: Optional[List[BetaTextCitationParam]]`
-
-                - `class BetaCitationCharLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationWebSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocationParam: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
 
             - `source: str`
 
@@ -39008,28 +26723,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: Optional[BetaCitationsConfigParam]`
-
-              - `enabled: Optional[bool]`
 
           - `class BetaThinkingBlockParam: …`
 
@@ -39064,25 +26758,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
 
             - `caller: Optional[Caller]`
 
@@ -39126,25 +26801,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `content: Optional[Union[str, List[Content], null]]`
 
               - `str`
@@ -39153,672 +26809,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `class BetaTextBlockParam: …`
 
-                  - `text: str`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[List[BetaTextCitationParam]]`
-
-                    - `class BetaCitationCharLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_char_index: int`
-
-                      - `start_char_index: int`
-
-                      - `type: Literal["char_location"]`
-
-                        - `"char_location"`
-
-                    - `class BetaCitationPageLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_page_number: int`
-
-                      - `start_page_number: int`
-
-                      - `type: Literal["page_location"]`
-
-                        - `"page_location"`
-
-                    - `class BetaCitationContentBlockLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: int`
-
-                      - `document_title: Optional[str]`
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: Literal["content_block_location"]`
-
-                        - `"content_block_location"`
-
-                    - `class BetaCitationWebSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                      - `encrypted_index: str`
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["web_search_result_location"]`
-
-                        - `"web_search_result_location"`
-
-                      - `url: str`
-
-                    - `class BetaCitationSearchResultLocationParam: …`
-
-                      - `cited_text: str`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: int`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: int`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: str`
-
-                      - `start_block_index: int`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: Optional[str]`
-
-                      - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
-
                 - `class BetaImageBlockParam: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64ImageSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaURLImageSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileImageSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["image"]`
-
-                    - `"image"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
                 - `class BetaSearchResultBlockParam: …`
 
-                  - `content: List[BetaTextBlockParam]`
-
-                    - `text: str`
-
-                    - `type: Literal["text"]`
-
-                      - `"text"`
-
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: Literal["ephemeral"]`
-
-                        - `"ephemeral"`
-
-                      - `ttl: Optional[Literal["5m", "1h"]]`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: Optional[List[BetaTextCitationParam]]`
-
-                      - `class BetaCitationCharLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_char_index: int`
-
-                        - `start_char_index: int`
-
-                        - `type: Literal["char_location"]`
-
-                          - `"char_location"`
-
-                      - `class BetaCitationPageLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_page_number: int`
-
-                        - `start_page_number: int`
-
-                        - `type: Literal["page_location"]`
-
-                          - `"page_location"`
-
-                      - `class BetaCitationContentBlockLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: int`
-
-                        - `document_title: Optional[str]`
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: Literal["content_block_location"]`
-
-                          - `"content_block_location"`
-
-                      - `class BetaCitationWebSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                        - `encrypted_index: str`
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["web_search_result_location"]`
-
-                          - `"web_search_result_location"`
-
-                        - `url: str`
-
-                      - `class BetaCitationSearchResultLocationParam: …`
-
-                        - `cited_text: str`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: int`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: int`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: str`
-
-                        - `start_block_index: int`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: Optional[str]`
-
-                        - `type: Literal["search_result_location"]`
-
-                          - `"search_result_location"`
-
-                  - `source: str`
-
-                  - `title: str`
-
-                  - `type: Literal["search_result"]`
-
-                    - `"search_result"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[BetaCitationsConfigParam]`
-
-                    - `enabled: Optional[bool]`
-
                 - `class BetaRequestDocumentBlock: …`
-
-                  - `source: Source`
-
-                    - `class BetaBase64PDFSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["application/pdf"]`
-
-                        - `"application/pdf"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaPlainTextSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["text/plain"]`
-
-                        - `"text/plain"`
-
-                      - `type: Literal["text"]`
-
-                        - `"text"`
-
-                    - `class BetaContentBlockSource: …`
-
-                      - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                        - `str`
-
-                        - `List[BetaContentBlockSourceContent]`
-
-                          - `class BetaTextBlockParam: …`
-
-                            - `text: str`
-
-                            - `type: Literal["text"]`
-
-                              - `"text"`
-
-                            - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: Literal["ephemeral"]`
-
-                                - `"ephemeral"`
-
-                              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                            - `citations: Optional[List[BetaTextCitationParam]]`
-
-                              - `class BetaCitationCharLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_char_index: int`
-
-                                - `start_char_index: int`
-
-                                - `type: Literal["char_location"]`
-
-                                  - `"char_location"`
-
-                              - `class BetaCitationPageLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_page_number: int`
-
-                                - `start_page_number: int`
-
-                                - `type: Literal["page_location"]`
-
-                                  - `"page_location"`
-
-                              - `class BetaCitationContentBlockLocationParam: …`
-
-                                - `cited_text: str`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_block_index: int`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `start_block_index: int`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `type: Literal["content_block_location"]`
-
-                                  - `"content_block_location"`
-
-                              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `encrypted_index: str`
-
-                                - `title: Optional[str]`
-
-                                - `type: Literal["web_search_result_location"]`
-
-                                  - `"web_search_result_location"`
-
-                                - `url: str`
-
-                              - `class BetaCitationSearchResultLocationParam: …`
-
-                                - `cited_text: str`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `end_block_index: int`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `search_result_index: int`
-
-                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                - `source: str`
-
-                                - `start_block_index: int`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `title: Optional[str]`
-
-                                - `type: Literal["search_result_location"]`
-
-                                  - `"search_result_location"`
-
-                          - `class BetaImageBlockParam: …`
-
-                            - `source: Source`
-
-                              - `class BetaBase64ImageSource: …`
-
-                                - `data: str`
-
-                                - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                                  - `"image/jpeg"`
-
-                                  - `"image/png"`
-
-                                  - `"image/gif"`
-
-                                  - `"image/webp"`
-
-                                - `type: Literal["base64"]`
-
-                                  - `"base64"`
-
-                              - `class BetaURLImageSource: …`
-
-                                - `type: Literal["url"]`
-
-                                  - `"url"`
-
-                                - `url: str`
-
-                              - `class BetaFileImageSource: …`
-
-                                - `file_id: str`
-
-                                - `type: Literal["file"]`
-
-                                  - `"file"`
-
-                            - `type: Literal["image"]`
-
-                              - `"image"`
-
-                            - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: Literal["ephemeral"]`
-
-                                - `"ephemeral"`
-
-                              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                      - `type: Literal["content"]`
-
-                        - `"content"`
-
-                    - `class BetaURLPDFSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileDocumentSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["document"]`
-
-                    - `"document"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[BetaCitationsConfigParam]`
-
-                    - `enabled: Optional[bool]`
-
-                  - `context: Optional[str]`
-
-                  - `title: Optional[str]`
 
                 - `class BetaToolReferenceBlockParam: …`
 
@@ -39833,25 +26828,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                     Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
             - `is_error: Optional[bool]`
 
@@ -39887,25 +26863,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: Optional[Caller]`
 
               Tool invocation directly from the model.
@@ -39914,27 +26871,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebSearchToolResultBlockParam: …`
 
@@ -39984,25 +26925,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: Optional[Caller]`
 
               Tool invocation directly from the model.
@@ -40011,27 +26933,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebFetchToolResultBlockParam: …`
 
@@ -40046,6 +26952,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `"url_too_long"`
 
                   - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
 
                   - `"url_not_accessible"`
 
@@ -40064,297 +26972,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `class BetaWebFetchBlockParam: …`
 
                 - `content: BetaRequestDocumentBlock`
-
-                  - `source: Source`
-
-                    - `class BetaBase64PDFSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["application/pdf"]`
-
-                        - `"application/pdf"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class BetaPlainTextSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["text/plain"]`
-
-                        - `"text/plain"`
-
-                      - `type: Literal["text"]`
-
-                        - `"text"`
-
-                    - `class BetaContentBlockSource: …`
-
-                      - `content: Union[str, List[BetaContentBlockSourceContent]]`
-
-                        - `str`
-
-                        - `List[BetaContentBlockSourceContent]`
-
-                          - `class BetaTextBlockParam: …`
-
-                            - `text: str`
-
-                            - `type: Literal["text"]`
-
-                              - `"text"`
-
-                            - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: Literal["ephemeral"]`
-
-                                - `"ephemeral"`
-
-                              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                            - `citations: Optional[List[BetaTextCitationParam]]`
-
-                              - `class BetaCitationCharLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_char_index: int`
-
-                                - `start_char_index: int`
-
-                                - `type: Literal["char_location"]`
-
-                                  - `"char_location"`
-
-                              - `class BetaCitationPageLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_page_number: int`
-
-                                - `start_page_number: int`
-
-                                - `type: Literal["page_location"]`
-
-                                  - `"page_location"`
-
-                              - `class BetaCitationContentBlockLocationParam: …`
-
-                                - `cited_text: str`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `document_index: int`
-
-                                - `document_title: Optional[str]`
-
-                                - `end_block_index: int`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `start_block_index: int`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `type: Literal["content_block_location"]`
-
-                                  - `"content_block_location"`
-
-                              - `class BetaCitationWebSearchResultLocationParam: …`
-
-                                - `cited_text: str`
-
-                                - `encrypted_index: str`
-
-                                - `title: Optional[str]`
-
-                                - `type: Literal["web_search_result_location"]`
-
-                                  - `"web_search_result_location"`
-
-                                - `url: str`
-
-                              - `class BetaCitationSearchResultLocationParam: …`
-
-                                - `cited_text: str`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `end_block_index: int`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `search_result_index: int`
-
-                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                - `source: str`
-
-                                - `start_block_index: int`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `title: Optional[str]`
-
-                                - `type: Literal["search_result_location"]`
-
-                                  - `"search_result_location"`
-
-                          - `class BetaImageBlockParam: …`
-
-                            - `source: Source`
-
-                              - `class BetaBase64ImageSource: …`
-
-                                - `data: str`
-
-                                - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
-
-                                  - `"image/jpeg"`
-
-                                  - `"image/png"`
-
-                                  - `"image/gif"`
-
-                                  - `"image/webp"`
-
-                                - `type: Literal["base64"]`
-
-                                  - `"base64"`
-
-                              - `class BetaURLImageSource: …`
-
-                                - `type: Literal["url"]`
-
-                                  - `"url"`
-
-                                - `url: str`
-
-                              - `class BetaFileImageSource: …`
-
-                                - `file_id: str`
-
-                                - `type: Literal["file"]`
-
-                                  - `"file"`
-
-                            - `type: Literal["image"]`
-
-                              - `"image"`
-
-                            - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: Literal["ephemeral"]`
-
-                                - `"ephemeral"`
-
-                              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                      - `type: Literal["content"]`
-
-                        - `"content"`
-
-                    - `class BetaURLPDFSource: …`
-
-                      - `type: Literal["url"]`
-
-                        - `"url"`
-
-                      - `url: str`
-
-                    - `class BetaFileDocumentSource: …`
-
-                      - `file_id: str`
-
-                      - `type: Literal["file"]`
-
-                        - `"file"`
-
-                  - `type: Literal["document"]`
-
-                    - `"document"`
-
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: Optional[BetaCitationsConfigParam]`
-
-                    - `enabled: Optional[bool]`
-
-                  - `context: Optional[str]`
-
-                  - `title: Optional[str]`
 
                 - `type: Literal["web_fetch_result"]`
 
@@ -40378,25 +26995,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: Optional[Caller]`
 
               Tool invocation directly from the model.
@@ -40405,27 +27003,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaAdvisorToolResultBlockParam: …`
 
@@ -40459,6 +27041,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_result"`
 
+                - `stop_reason: Optional[str]`
+
               - `class BetaAdvisorRedactedResultBlockParam: …`
 
                 - `encrypted_content: str`
@@ -40469,6 +27053,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_redacted_result"`
 
+                - `stop_reason: Optional[str]`
+
             - `tool_use_id: str`
 
             - `type: Literal["advisor_tool_result"]`
@@ -40478,25 +27064,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
 
           - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -40550,8 +27117,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `type: Literal["code_execution_output"]`
 
-                    - `"code_execution_output"`
-
                 - `encrypted_stdout: str`
 
                 - `return_code: int`
@@ -40571,25 +27136,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
 
           - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
@@ -40642,25 +27188,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
 
           - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
@@ -40742,25 +27269,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
           - `class BetaToolSearchToolResultBlockParam: …`
 
             - `content: Content`
@@ -40789,30 +27297,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `type: Literal["tool_reference"]`
 
-                    - `"tool_reference"`
-
                   - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                     Create a cache control breakpoint at this content block.
-
-                    - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
-
-                    - `ttl: Optional[Literal["5m", "1h"]]`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
                 - `type: Literal["tool_search_tool_search_result"]`
 
@@ -40827,25 +27314,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
-
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
 
           - `class BetaMCPToolUseBlockParam: …`
 
@@ -40867,25 +27335,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
           - `class BetaRequestMCPToolResultBlockParam: …`
 
             - `tool_use_id: str`
@@ -40898,25 +27347,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
 
               - `str`
@@ -40927,136 +27357,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `type: Literal["text"]`
 
-                  - `"text"`
-
                 - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                   Create a cache control breakpoint at this content block.
 
-                  - `type: Literal["ephemeral"]`
-
-                    - `"ephemeral"`
-
-                  - `ttl: Optional[Literal["5m", "1h"]]`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
                 - `citations: Optional[List[BetaTextCitationParam]]`
-
-                  - `class BetaCitationCharLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationWebSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocationParam: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
 
             - `is_error: Optional[bool]`
 
@@ -41075,25 +27380,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
           - `class BetaCompactionBlockParam: …`
 
             A compaction block containing summary of previous context.
@@ -41104,10 +27390,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             When content is None, the block represents a failed compaction. The server
             treats these as no-ops. Empty string content is not allowed.
 
-            - `content: Optional[str]`
-
-              Summary of previously compacted content, or null if compaction failed
-
             - `type: Literal["compaction"]`
 
               - `"compaction"`
@@ -41116,34 +27398,50 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: Literal["ephemeral"]`
+            - `content: Optional[str]`
 
-                - `"ephemeral"`
-
-              - `ttl: Optional[Literal["5m", "1h"]]`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
+              Summary of previously compacted content, or null if compaction failed
 
             - `encrypted_content: Optional[str]`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `role: Literal["user", "assistant"]`
+          - `class BetaMidConversationSystemBlockParam: …`
+
+            System instructions that appear mid-conversation.
+
+            Use this block to provide or update system-level instructions at a specific
+            point in the conversation, rather than only via the top-level `system` parameter.
+
+            - `content: List[BetaTextBlockParam]`
+
+              System instruction text blocks.
+
+              - `text: str`
+
+              - `type: Literal["text"]`
+
+              - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+                Create a cache control breakpoint at this content block.
+
+              - `citations: Optional[List[BetaTextCitationParam]]`
+
+            - `type: Literal["mid_conv_system"]`
+
+              - `"mid_conv_system"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+      - `role: Literal["user", "assistant", "system"]`
 
         - `"user"`
 
         - `"assistant"`
+
+        - `"system"`
 
     - `model: ModelParam`
 
@@ -41151,12 +27449,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
         - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -41174,6 +27473,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -41248,25 +27551,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
       Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-      - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
-
-      - `ttl: Optional[Literal["5m", "1h"]]`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `container: Optional[RequestParamsContainer]`
 
@@ -41418,12 +27702,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             When to trigger compaction. Defaults to 150000 input tokens.
 
-            - `type: Literal["input_tokens"]`
-
-              - `"input_tokens"`
-
-            - `value: int`
-
     - `diagnostics: Optional[BetaDiagnosticsParam]`
 
       Request-level diagnostics. Currently carries the previous response
@@ -41521,14 +27799,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-      - `schema: Dict[str, object]`
-
-        The JSON schema of the format
-
-      - `type: Literal["json_schema"]`
-
-        - `"json_schema"`
-
     - `service_tier: Optional[Literal["auto", "standard_only"]]`
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -41575,136 +27845,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[List[BetaTextCitationParam]]`
-
-          - `class BetaCitationCharLocationParam: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
-          - `class BetaCitationPageLocationParam: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
-
-          - `class BetaCitationContentBlockLocationParam: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
-          - `class BetaCitationWebSearchResultLocationParam: …`
-
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
-          - `class BetaCitationSearchResultLocationParam: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
     - `temperature: Optional[float]`
 
@@ -41920,25 +28065,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -41989,25 +28115,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42043,25 +28150,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42099,25 +28187,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42151,25 +28220,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42206,25 +28256,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42268,25 +28299,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42326,25 +28338,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42390,25 +28383,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42448,25 +28422,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42512,25 +28467,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42575,25 +28511,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42630,25 +28547,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42684,25 +28582,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42751,25 +28630,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -42841,30 +28701,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: Optional[bool]`
 
         - `defer_loading: Optional[bool]`
 
@@ -42916,25 +28755,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -42950,26 +28770,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `user_location: Optional[BetaUserLocation]`
 
           Parameters for the user's location. Used to provide more relevant search results.
-
-          - `type: Literal["approximate"]`
-
-            - `"approximate"`
-
-          - `city: Optional[str]`
-
-            The city of the user.
-
-          - `country: Optional[str]`
-
-            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-          - `region: Optional[str]`
-
-            The region of the user.
-
-          - `timezone: Optional[str]`
-
-            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
       - `class BetaWebFetchTool20260209: …`
 
@@ -43005,30 +28805,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: Optional[bool]`
 
         - `defer_loading: Optional[bool]`
 
@@ -43082,30 +28861,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: Optional[BetaCitationsConfigParam]`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: Optional[bool]`
 
         - `defer_loading: Optional[bool]`
 
@@ -43135,100 +28893,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-            - `claude-sonnet-4-6` - Best combination of speed and intelligence
-            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-            - `claude-sonnet-4-5` - High-performance model for agents and coding
-            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-            - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-            - `"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `str`
-
         - `name: Literal["advisor"]`
 
           Name of the tool.
@@ -43253,47 +28917,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caching: Optional[BetaCacheControlEphemeral]`
 
           Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `defer_loading: Optional[bool]`
 
@@ -43335,25 +28961,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -43390,25 +28997,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -43435,25 +29023,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
-
-          - `ttl: Optional[Literal["5m", "1h"]]`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `configs: Optional[Dict[str, BetaMCPToolConfig]]`
 
@@ -43497,7 +29066,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -43548,6 +29117,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43664,7 +29237,30 @@ beta_message_batch = client.beta.messages.batches.create(
 print(beta_message_batch.id)
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Retrieve a Message Batch
 
 `beta.messages.batches.retrieve(strmessage_batch_id, BatchRetrieveParams**kwargs)  -> BetaMessageBatch`
 
@@ -43686,7 +29282,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -43737,6 +29333,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43843,7 +29443,30 @@ beta_message_batch = client.beta.messages.batches.retrieve(
 print(beta_message_batch.id)
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## List Message Batches
 
 `beta.messages.batches.list(BatchListParams**kwargs)  -> SyncPage[BetaMessageBatch]`
 
@@ -43875,7 +29498,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -43926,6 +29549,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44031,7 +29658,37 @@ page = page.data[0]
 print(page.id)
 ```
 
-## Cancel
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Cancel a Message Batch
 
 `beta.messages.batches.cancel(strmessage_batch_id, BatchCancelParams**kwargs)  -> BetaMessageBatch`
 
@@ -44055,7 +29712,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -44106,6 +29763,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44212,7 +29873,30 @@ beta_message_batch = client.beta.messages.batches.cancel(
 print(beta_message_batch.id)
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Delete a Message Batch
 
 `beta.messages.batches.delete(strmessage_batch_id, BatchDeleteParams**kwargs)  -> BetaDeletedMessageBatch`
 
@@ -44236,7 +29920,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -44287,6 +29971,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44319,7 +30007,16 @@ beta_deleted_message_batch = client.beta.messages.batches.delete(
 print(beta_deleted_message_batch.id)
 ```
 
-## Results
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+## Retrieve Message Batch results
 
 `beta.messages.batches.results(strmessage_batch_id, BatchResultsParams**kwargs)  -> BetaMessageBatchIndividualResponse`
 
@@ -44343,7 +30040,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -44394,6 +30091,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44704,27 +30405,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebSearchToolResultBlock: …`
 
@@ -44778,27 +30463,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebFetchToolResultBlock: …`
 
@@ -44813,6 +30482,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `"url_too_long"`
 
                   - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
 
                   - `"url_not_accessible"`
 
@@ -44898,27 +30569,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaAdvisorToolResultBlock: …`
 
@@ -44946,6 +30601,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class BetaAdvisorResultBlock: …`
 
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `text: str`
 
                 - `type: Literal["advisor_result"]`
@@ -44957,6 +30616,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `encrypted_content: str`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: Literal["advisor_redacted_result"]`
 
@@ -45019,8 +30682,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `file_id: str`
 
                   - `type: Literal["code_execution_output"]`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: str`
 
@@ -45236,121 +30897,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-                  - `class BetaCitationCharLocation: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `file_id: Optional[str]`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocation: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `file_id: Optional[str]`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocation: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `file_id: Optional[str]`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationsWebSearchResultLocation: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocation: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
-
                 - `text: str`
 
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
             - `is_error: bool`
 
@@ -45499,12 +31048,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+          - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
             - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -45522,6 +31072,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -45728,14 +31282,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Breakdown of cached tokens by TTL
 
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `cache_creation_input_tokens: int`
 
                 The number of input tokens used to create the cache entry.
@@ -45765,14 +31311,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `cache_creation: Optional[BetaCacheCreation]`
 
                 Breakdown of cached tokens by TTL
-
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `cache_creation_input_tokens: int`
 
@@ -45804,14 +31342,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Breakdown of cached tokens by TTL
 
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `cache_creation_input_tokens: int`
 
                 The number of input tokens used to create the cache entry.
@@ -45830,100 +31360,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-                  The model that will complete your prompt.
-
-                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                  - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-                  - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-                  - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
-                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-                  - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-                  - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-                  - `claude-sonnet-4-5` - High-performance model for agents and coding
-                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-                  - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-                  - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-                  - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-                  - `"claude-opus-4-7"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-mythos-preview"`
-
-                    New class of intelligence, strongest in coding and cybersecurity
-
-                  - `"claude-opus-4-6"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-sonnet-4-6"`
-
-                    Best combination of speed and intelligence
-
-                  - `"claude-haiku-4-5"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-haiku-4-5-20251001"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-opus-4-5"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-opus-4-5-20251101"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-sonnet-4-5"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-sonnet-4-5-20250929"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-opus-4-1"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-1-20250805"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-0"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-opus-4-20250514"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-sonnet-4-0"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-sonnet-4-20250514"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-3-haiku-20240307"`
-
-                    Fast and cost-effective model
-
-                - `str`
-
               - `output_tokens: int`
 
                 The number of output tokens which were used.
@@ -45937,6 +31373,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `output_tokens: int`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: Optional[OutputTokensDetails]`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: int`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -46610,27 +32066,11 @@ for batch in client.beta.messages.batches.results(
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebSearchToolResultBlock: …`
 
@@ -46684,27 +32124,11 @@ for batch in client.beta.messages.batches.results(
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaWebFetchToolResultBlock: …`
 
@@ -46719,6 +32143,8 @@ for batch in client.beta.messages.batches.results(
                   - `"url_too_long"`
 
                   - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
 
                   - `"url_not_accessible"`
 
@@ -46804,27 +32230,11 @@ for batch in client.beta.messages.batches.results(
 
                 Tool invocation directly from the model.
 
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
               - `class BetaServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
               - `class BetaServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
 
           - `class BetaAdvisorToolResultBlock: …`
 
@@ -46852,6 +32262,10 @@ for batch in client.beta.messages.batches.results(
 
               - `class BetaAdvisorResultBlock: …`
 
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `text: str`
 
                 - `type: Literal["advisor_result"]`
@@ -46863,6 +32277,10 @@ for batch in client.beta.messages.batches.results(
                 - `encrypted_content: str`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: Literal["advisor_redacted_result"]`
 
@@ -46925,8 +32343,6 @@ for batch in client.beta.messages.batches.results(
                   - `file_id: str`
 
                   - `type: Literal["code_execution_output"]`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: str`
 
@@ -47142,121 +32558,9 @@ for batch in client.beta.messages.batches.results(
 
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-                  - `class BetaCitationCharLocation: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_char_index: int`
-
-                    - `file_id: Optional[str]`
-
-                    - `start_char_index: int`
-
-                    - `type: Literal["char_location"]`
-
-                      - `"char_location"`
-
-                  - `class BetaCitationPageLocation: …`
-
-                    - `cited_text: str`
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_page_number: int`
-
-                    - `file_id: Optional[str]`
-
-                    - `start_page_number: int`
-
-                    - `type: Literal["page_location"]`
-
-                      - `"page_location"`
-
-                  - `class BetaCitationContentBlockLocation: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: int`
-
-                    - `document_title: Optional[str]`
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `file_id: Optional[str]`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: Literal["content_block_location"]`
-
-                      - `"content_block_location"`
-
-                  - `class BetaCitationsWebSearchResultLocation: …`
-
-                    - `cited_text: str`
-
-                    - `encrypted_index: str`
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["web_search_result_location"]`
-
-                      - `"web_search_result_location"`
-
-                    - `url: str`
-
-                  - `class BetaCitationSearchResultLocation: …`
-
-                    - `cited_text: str`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: int`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: int`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: str`
-
-                    - `start_block_index: int`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: Optional[str]`
-
-                    - `type: Literal["search_result_location"]`
-
-                      - `"search_result_location"`
-
                 - `text: str`
 
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
             - `is_error: bool`
 
@@ -47405,12 +32709,13 @@ for batch in client.beta.messages.batches.results(
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+          - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
             - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -47428,6 +32733,10 @@ for batch in client.beta.messages.batches.results(
             - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -47634,14 +32943,6 @@ for batch in client.beta.messages.batches.results(
 
                 Breakdown of cached tokens by TTL
 
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `cache_creation_input_tokens: int`
 
                 The number of input tokens used to create the cache entry.
@@ -47671,14 +32972,6 @@ for batch in client.beta.messages.batches.results(
               - `cache_creation: Optional[BetaCacheCreation]`
 
                 Breakdown of cached tokens by TTL
-
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `cache_creation_input_tokens: int`
 
@@ -47710,14 +33003,6 @@ for batch in client.beta.messages.batches.results(
 
                 Breakdown of cached tokens by TTL
 
-                - `ephemeral_1h_input_tokens: int`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: int`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `cache_creation_input_tokens: int`
 
                 The number of input tokens used to create the cache entry.
@@ -47736,100 +33021,6 @@ for batch in client.beta.messages.batches.results(
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-                  The model that will complete your prompt.
-
-                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                  - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-                  - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-                  - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
-                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-                  - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-                  - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-                  - `claude-sonnet-4-5` - High-performance model for agents and coding
-                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-                  - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-                  - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-                  - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                  - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-                  - `"claude-opus-4-7"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-mythos-preview"`
-
-                    New class of intelligence, strongest in coding and cybersecurity
-
-                  - `"claude-opus-4-6"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-sonnet-4-6"`
-
-                    Best combination of speed and intelligence
-
-                  - `"claude-haiku-4-5"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-haiku-4-5-20251001"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-opus-4-5"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-opus-4-5-20251101"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-sonnet-4-5"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-sonnet-4-5-20250929"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-opus-4-1"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-1-20250805"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-0"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-opus-4-20250514"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-sonnet-4-0"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-sonnet-4-20250514"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-3-haiku-20240307"`
-
-                    Fast and cost-effective model
-
-                - `str`
-
               - `output_tokens: int`
 
                 The number of output tokens which were used.
@@ -47843,6 +33034,26 @@ for batch in client.beta.messages.batches.results(
           - `output_tokens: int`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: Optional[OutputTokensDetails]`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: int`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -48309,27 +33520,11 @@ for batch in client.beta.messages.batches.results(
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaWebSearchToolResultBlock: …`
 
@@ -48383,27 +33578,11 @@ for batch in client.beta.messages.batches.results(
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaWebFetchToolResultBlock: …`
 
@@ -48418,6 +33597,8 @@ for batch in client.beta.messages.batches.results(
                 - `"url_too_long"`
 
                 - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
 
                 - `"url_not_accessible"`
 
@@ -48503,27 +33684,11 @@ for batch in client.beta.messages.batches.results(
 
               Tool invocation directly from the model.
 
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
             - `class BetaServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
             - `class BetaServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
 
         - `class BetaAdvisorToolResultBlock: …`
 
@@ -48551,6 +33716,10 @@ for batch in client.beta.messages.batches.results(
 
             - `class BetaAdvisorResultBlock: …`
 
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `text: str`
 
               - `type: Literal["advisor_result"]`
@@ -48562,6 +33731,10 @@ for batch in client.beta.messages.batches.results(
               - `encrypted_content: str`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: Literal["advisor_redacted_result"]`
 
@@ -48624,8 +33797,6 @@ for batch in client.beta.messages.batches.results(
                 - `file_id: str`
 
                 - `type: Literal["code_execution_output"]`
-
-                  - `"code_execution_output"`
 
               - `encrypted_stdout: str`
 
@@ -48841,121 +34012,9 @@ for batch in client.beta.messages.batches.results(
 
                 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-                - `class BetaCitationCharLocation: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_char_index: int`
-
-                  - `file_id: Optional[str]`
-
-                  - `start_char_index: int`
-
-                  - `type: Literal["char_location"]`
-
-                    - `"char_location"`
-
-                - `class BetaCitationPageLocation: …`
-
-                  - `cited_text: str`
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_page_number: int`
-
-                  - `file_id: Optional[str]`
-
-                  - `start_page_number: int`
-
-                  - `type: Literal["page_location"]`
-
-                    - `"page_location"`
-
-                - `class BetaCitationContentBlockLocation: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: int`
-
-                  - `document_title: Optional[str]`
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `file_id: Optional[str]`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: Literal["content_block_location"]`
-
-                    - `"content_block_location"`
-
-                - `class BetaCitationsWebSearchResultLocation: …`
-
-                  - `cited_text: str`
-
-                  - `encrypted_index: str`
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["web_search_result_location"]`
-
-                    - `"web_search_result_location"`
-
-                  - `url: str`
-
-                - `class BetaCitationSearchResultLocation: …`
-
-                  - `cited_text: str`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: int`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: int`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: str`
-
-                  - `start_block_index: int`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: Optional[str]`
-
-                  - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
-
               - `text: str`
 
               - `type: Literal["text"]`
-
-                - `"text"`
 
           - `is_error: bool`
 
@@ -49104,12 +34163,13 @@ for batch in client.beta.messages.batches.results(
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+        - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
           - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -49127,6 +34187,10 @@ for batch in client.beta.messages.batches.results(
           - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
           - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -49333,14 +34397,6 @@ for batch in client.beta.messages.batches.results(
 
               Breakdown of cached tokens by TTL
 
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `cache_creation_input_tokens: int`
 
               The number of input tokens used to create the cache entry.
@@ -49370,14 +34426,6 @@ for batch in client.beta.messages.batches.results(
             - `cache_creation: Optional[BetaCacheCreation]`
 
               Breakdown of cached tokens by TTL
-
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
 
             - `cache_creation_input_tokens: int`
 
@@ -49409,14 +34457,6 @@ for batch in client.beta.messages.batches.results(
 
               Breakdown of cached tokens by TTL
 
-              - `ephemeral_1h_input_tokens: int`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `ephemeral_5m_input_tokens: int`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `cache_creation_input_tokens: int`
 
               The number of input tokens used to create the cache entry.
@@ -49435,100 +34475,6 @@ for batch in client.beta.messages.batches.results(
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-              - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-                The model that will complete your prompt.
-
-                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-                - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-                - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-                - `claude-sonnet-4-6` - Best combination of speed and intelligence
-                - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-                - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-                - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-                - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-                - `claude-sonnet-4-5` - High-performance model for agents and coding
-                - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-                - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-                - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-                - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-                - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-mythos-preview"`
-
-                  New class of intelligence, strongest in coding and cybersecurity
-
-                - `"claude-opus-4-6"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-opus-4-1"`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-1-20250805"`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-0"`
-
-                  Powerful model for complex tasks
-
-                - `"claude-opus-4-20250514"`
-
-                  Powerful model for complex tasks
-
-                - `"claude-sonnet-4-0"`
-
-                  High-performance model with extended thinking
-
-                - `"claude-sonnet-4-20250514"`
-
-                  High-performance model with extended thinking
-
-                - `"claude-3-haiku-20240307"`
-
-                  Fast and cost-effective model
-
-              - `str`
-
             - `output_tokens: int`
 
               The number of output tokens which were used.
@@ -49542,6 +34488,26 @@ for batch in client.beta.messages.batches.results(
         - `output_tokens: int`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: Optional[OutputTokensDetails]`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: int`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: Optional[BetaServerToolUsage]`
 
@@ -49970,27 +34936,11 @@ for batch in client.beta.messages.batches.results(
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebSearchToolResultBlock: …`
 
@@ -50044,27 +34994,11 @@ for batch in client.beta.messages.batches.results(
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaWebFetchToolResultBlock: …`
 
@@ -50079,6 +35013,8 @@ for batch in client.beta.messages.batches.results(
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -50164,27 +35100,11 @@ for batch in client.beta.messages.batches.results(
 
             Tool invocation directly from the model.
 
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
           - `class BetaServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
 
       - `class BetaAdvisorToolResultBlock: …`
 
@@ -50212,6 +35132,10 @@ for batch in client.beta.messages.batches.results(
 
           - `class BetaAdvisorResultBlock: …`
 
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `text: str`
 
             - `type: Literal["advisor_result"]`
@@ -50223,6 +35147,10 @@ for batch in client.beta.messages.batches.results(
             - `encrypted_content: str`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: Literal["advisor_redacted_result"]`
 
@@ -50285,8 +35213,6 @@ for batch in client.beta.messages.batches.results(
               - `file_id: str`
 
               - `type: Literal["code_execution_output"]`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: str`
 
@@ -50502,121 +35428,9 @@ for batch in client.beta.messages.batches.results(
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `class BetaCitationCharLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class BetaCitationPageLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class BetaCitationContentBlockLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `file_id: Optional[str]`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class BetaCitationsWebSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class BetaCitationSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
-
             - `text: str`
 
             - `type: Literal["text"]`
-
-              - `"text"`
 
         - `is_error: bool`
 
@@ -50765,12 +35579,13 @@ for batch in client.beta.messages.batches.results(
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
         - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -50788,6 +35603,10 @@ for batch in client.beta.messages.batches.results(
         - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
         - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -50994,14 +35813,6 @@ for batch in client.beta.messages.batches.results(
 
             Breakdown of cached tokens by TTL
 
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `cache_creation_input_tokens: int`
 
             The number of input tokens used to create the cache entry.
@@ -51031,14 +35842,6 @@ for batch in client.beta.messages.batches.results(
           - `cache_creation: Optional[BetaCacheCreation]`
 
             Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
 
           - `cache_creation_input_tokens: int`
 
@@ -51070,14 +35873,6 @@ for batch in client.beta.messages.batches.results(
 
             Breakdown of cached tokens by TTL
 
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `cache_creation_input_tokens: int`
 
             The number of input tokens used to create the cache entry.
@@ -51096,100 +35891,6 @@ for batch in client.beta.messages.batches.results(
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
-
-              The model that will complete your prompt.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-              - `claude-sonnet-4-6` - Best combination of speed and intelligence
-              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-              - `claude-sonnet-4-5` - High-performance model for agents and coding
-              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-              - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-mythos-preview"`
-
-                New class of intelligence, strongest in coding and cybersecurity
-
-              - `"claude-opus-4-6"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-              - `"claude-opus-4-1"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-1-20250805"`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-0"`
-
-                Powerful model for complex tasks
-
-              - `"claude-opus-4-20250514"`
-
-                Powerful model for complex tasks
-
-              - `"claude-sonnet-4-0"`
-
-                High-performance model with extended thinking
-
-              - `"claude-sonnet-4-20250514"`
-
-                High-performance model with extended thinking
-
-              - `"claude-3-haiku-20240307"`
-
-                Fast and cost-effective model
-
-            - `str`
-
           - `output_tokens: int`
 
             The number of output tokens which were used.
@@ -51203,6 +35904,26 @@ for batch in client.beta.messages.batches.results(
       - `output_tokens: int`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: Optional[OutputTokensDetails]`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: int`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: Optional[BetaServerToolUsage]`
 

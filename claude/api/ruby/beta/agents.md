@@ -1,6 +1,6 @@
 # Agents
 
-## Create
+## Create Agent
 
 `beta.agents.create(**kwargs) -> BetaManagedAgentsAgent`
 
@@ -20,7 +20,7 @@ Create Agent
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+    - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
       The model that will power your agent.
 
@@ -62,7 +62,7 @@ Create Agent
 
         High-performance model for agents and coding
 
-    - `String`
+    - `String = String`
 
   - `class BetaManagedAgentsModelConfigParams`
 
@@ -73,50 +73,6 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
-
-        The model that will power your agent.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `:"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-opus-4-6"`
-
-          Most intelligent model for building agents and coding
-
-        - `:"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `:"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-      - `String`
 
     - `speed: :standard | :fast`
 
@@ -162,7 +118,7 @@ Create Agent
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-    - `String`
+    - `String = String`
 
     - `class BetaManagedAgentsAgentParams`
 
@@ -308,17 +264,9 @@ Create Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
   - `class BetaManagedAgentsMCPToolsetParams`
 
@@ -352,17 +300,9 @@ Create Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
     - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -380,17 +320,9 @@ Create Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
   - `class BetaManagedAgentsCustomToolParams`
 
@@ -430,9 +362,9 @@ Create Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -484,6 +416,10 @@ Create Agent
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -524,7 +460,7 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -566,7 +502,7 @@ Create Agent
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -688,17 +624,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -720,17 +648,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -746,17 +666,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -818,7 +730,79 @@ beta_managed_agents_agent = anthropic.beta.agents.create(model: :"claude-sonnet-
 puts(beta_managed_agents_agent)
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## List Agents
 
 `beta.agents.list(**kwargs) -> PageCursor<BetaManagedAgentsAgent>`
 
@@ -852,9 +836,9 @@ List Agents
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -906,6 +890,10 @@ List Agents
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -946,7 +934,7 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -988,7 +976,7 @@ List Agents
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -1110,17 +1098,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -1142,17 +1122,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -1168,17 +1140,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -1240,7 +1204,84 @@ page = anthropic.beta.agents.list
 puts(page)
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Agent
 
 `beta.agents.retrieve(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
@@ -1260,9 +1301,9 @@ Get Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1314,6 +1355,10 @@ Get Agent
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -1354,7 +1399,7 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -1396,7 +1441,7 @@ Get Agent
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -1518,17 +1563,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -1550,17 +1587,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -1576,17 +1605,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -1648,7 +1669,79 @@ beta_managed_agents_agent = anthropic.beta.agents.retrieve("agent_011CZkYpogX7uD
 puts(beta_managed_agents_agent)
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Update Agent
 
 `beta.agents.update(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
@@ -1698,7 +1791,7 @@ Update Agent
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+    - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
       The model that will power your agent.
 
@@ -1740,7 +1833,7 @@ Update Agent
 
         High-performance model for agents and coding
 
-    - `String`
+    - `String = String`
 
   - `class BetaManagedAgentsModelConfigParams`
 
@@ -1751,50 +1844,6 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
-
-        The model that will power your agent.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `:"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-opus-4-6"`
-
-          Most intelligent model for building agents and coding
-
-        - `:"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `:"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-      - `String`
 
     - `speed: :standard | :fast`
 
@@ -1812,7 +1861,7 @@ Update Agent
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-    - `String`
+    - `String = String`
 
     - `class BetaManagedAgentsAgentParams`
 
@@ -1962,17 +2011,9 @@ Update Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
   - `class BetaManagedAgentsMCPToolsetParams`
 
@@ -2006,17 +2047,9 @@ Update Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
     - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -2034,17 +2067,9 @@ Update Agent
 
           Tool calls are automatically approved without user confirmation.
 
-          - `type: :always_allow`
-
-            - `:always_allow`
-
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
-
-          - `type: :always_ask`
-
-            - `:always_ask`
 
   - `class BetaManagedAgentsCustomToolParams`
 
@@ -2084,9 +2109,9 @@ Update Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2138,6 +2163,10 @@ Update Agent
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -2178,7 +2207,7 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -2220,7 +2249,7 @@ Update Agent
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -2342,17 +2371,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -2374,17 +2395,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -2400,17 +2413,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -2472,7 +2477,79 @@ beta_managed_agents_agent = anthropic.beta.agents.update("agent_011CZkYpogX7uDKU
 puts(beta_managed_agents_agent)
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Archive Agent
 
 `beta.agents.archive(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
@@ -2488,9 +2565,9 @@ Archive Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2542,6 +2619,10 @@ Archive Agent
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -2582,7 +2663,7 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -2624,7 +2705,7 @@ Archive Agent
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -2746,17 +2827,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -2778,17 +2851,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -2804,17 +2869,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -2876,6 +2933,78 @@ beta_managed_agents_agent = anthropic.beta.agents.archive("agent_011CZkYpogX7uDK
 puts(beta_managed_agents_agent)
 ```
 
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
 ## Domain Types
 
 ### Beta Managed Agents Agent
@@ -2918,7 +3047,7 @@ puts(beta_managed_agents_agent)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -2960,7 +3089,7 @@ puts(beta_managed_agents_agent)
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -3082,17 +3211,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -3114,17 +3235,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -3140,17 +3253,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -3432,17 +3537,9 @@ puts(beta_managed_agents_agent)
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: :always_allow`
-
-          - `:always_allow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
-
-        - `type: :always_ask`
-
-          - `:always_ask`
 
   - `type: :agent_toolset_20260401`
 
@@ -3605,17 +3702,9 @@ puts(beta_managed_agents_agent)
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: :always_allow`
-
-          - `:always_allow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
-
-        - `type: :always_ask`
-
-          - `:always_ask`
 
 ### Beta Managed Agents Agent Toolset20260401 Read Input
 
@@ -3944,17 +4033,9 @@ puts(beta_managed_agents_agent)
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: :always_allow`
-
-          - `:always_allow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
-
-        - `type: :always_ask`
-
-          - `:always_ask`
 
   - `mcp_server_name: String`
 
@@ -4082,17 +4163,9 @@ puts(beta_managed_agents_agent)
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: :always_allow`
-
-          - `:always_allow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
-
-        - `type: :always_ask`
-
-          - `:always_ask`
 
 ### Beta Managed Agents Model
 
@@ -4102,7 +4175,7 @@ puts(beta_managed_agents_agent)
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+  - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
     The model that will power your agent.
 
@@ -4144,7 +4217,7 @@ puts(beta_managed_agents_agent)
 
       High-performance model for agents and coding
 
-  - `String`
+  - `String = String`
 
 ### Beta Managed Agents Model Config
 
@@ -4158,7 +4231,7 @@ puts(beta_managed_agents_agent)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+    - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
       The model that will power your agent.
 
@@ -4200,7 +4273,7 @@ puts(beta_managed_agents_agent)
 
         High-performance model for agents and coding
 
-    - `String`
+    - `String = String`
 
   - `speed: :standard | :fast`
 
@@ -4222,7 +4295,7 @@ puts(beta_managed_agents_agent)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+    - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
       The model that will power your agent.
 
@@ -4264,7 +4337,7 @@ puts(beta_managed_agents_agent)
 
         High-performance model for agents and coding
 
-    - `String`
+    - `String = String`
 
   - `speed: :standard | :fast`
 
@@ -4306,7 +4379,7 @@ puts(beta_managed_agents_agent)
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-    - `String`
+    - `String = String`
 
     - `class BetaManagedAgentsAgentParams`
 
@@ -4376,7 +4449,7 @@ puts(beta_managed_agents_agent)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -4418,7 +4491,7 @@ puts(beta_managed_agents_agent)
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -4520,17 +4593,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -4552,17 +4617,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -4578,17 +4635,9 @@ puts(beta_managed_agents_agent)
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -4690,7 +4739,7 @@ puts(beta_managed_agents_agent)
 
 # Versions
 
-## List
+## List Agent Versions
 
 `beta.agents.versions.list(agent_id, **kwargs) -> PageCursor<BetaManagedAgentsAgent>`
 
@@ -4714,9 +4763,9 @@ List Agent Versions
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -4768,6 +4817,10 @@ List Agent Versions
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -4808,7 +4861,7 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
+      - `BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more`
 
         The model that will power your agent.
 
@@ -4850,7 +4903,7 @@ List Agent Versions
 
           High-performance model for agents and coding
 
-      - `String`
+      - `String = String`
 
     - `speed: :standard | :fast`
 
@@ -4972,17 +5025,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `type: :agent_toolset_20260401`
 
@@ -5004,17 +5049,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -5030,17 +5067,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: :always_allow`
-
-              - `:always_allow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: :always_ask`
-
-              - `:always_ask`
 
       - `mcp_server_name: String`
 
@@ -5100,4 +5129,81 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 page = anthropic.beta.agents.versions.list("agent_011CZkYpogX7uDKUyvBTophP")
 
 puts(page)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
 ```

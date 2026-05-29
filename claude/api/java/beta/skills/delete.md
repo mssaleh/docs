@@ -1,4 +1,4 @@
-## Delete
+## Delete Skill
 
 `SkillDeleteResponse beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -70,6 +70,10 @@ Delete Skill
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -104,5 +108,14 @@ public final class Main {
 
         SkillDeleteResponse skill = client.beta().skills().delete("skill_id");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
 }
 ```

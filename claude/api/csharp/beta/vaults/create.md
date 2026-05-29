@@ -1,4 +1,4 @@
-## Create
+## Create Vault
 
 `BetaManagedAgentsVault Beta.Vaults.Create(VaultCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -72,6 +72,10 @@ Create Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -114,4 +118,20 @@ VaultCreateParams parameters = new() { DisplayName = "Example vault" };
 var betaManagedAgentsVault = await client.Beta.Vaults.Create(parameters);
 
 Console.WriteLine(betaManagedAgentsVault);
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

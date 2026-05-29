@@ -1,4 +1,4 @@
-## List
+## List Agents
 
 `client.Beta.Agents.List(ctx, params) (*PageCursor[BetaManagedAgentsAgent], error)`
 
@@ -87,6 +87,10 @@ List Agents
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -292,17 +296,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
           - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
             Tool calls require user confirmation before execution.
-
-            - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
@@ -324,17 +320,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
           - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
             Tool calls require user confirmation before execution.
-
-            - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
       - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -350,17 +338,9 @@ List Agents
 
             Tool calls are automatically approved without user confirmation.
 
-            - `Type BetaManagedAgentsAlwaysAllowPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
           - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
             Tool calls require user confirmation before execution.
-
-            - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-              - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
       - `MCPServerName string`
 
@@ -434,5 +414,82 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", page)
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
 }
 ```

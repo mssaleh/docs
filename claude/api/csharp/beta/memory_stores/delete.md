@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -68,6 +68,10 @@ Delete a memory store
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -93,4 +97,13 @@ MemoryStoreDeleteParams parameters = new()
 var betaManagedAgentsDeletedMemoryStore = await client.Beta.MemoryStores.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

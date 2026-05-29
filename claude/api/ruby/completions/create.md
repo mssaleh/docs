@@ -1,4 +1,4 @@
-## Create
+## Create a Text Completion
 
 `completions.create(**kwargs) -> Completion`
 
@@ -24,11 +24,15 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `:"claude-opus-4-7"`
 
@@ -98,7 +102,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       Fast and cost-effective model
 
-  - `String`
+  - `String = String`
 
 - `prompt: String`
 
@@ -172,9 +176,9 @@ Future models and features will not be compatible with Text Completions. See our
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -226,6 +230,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `:"cache-diagnosis-2026-04-07"`
 
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class Completion`
@@ -246,11 +254,15 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -320,7 +332,7 @@ Future models and features will not be compatible with Text Completions. See our
 
         Fast and cost-effective model
 
-    - `String`
+    - `String = String`
 
   - `stop_reason: String`
 
@@ -348,9 +360,21 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 completion = anthropic.completions.create(
   max_tokens_to_sample: 256,
-  model: :"claude-opus-4-7",
+  model: :"claude-opus-4-8",
   prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
 )
 
 puts(completion)
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
 ```

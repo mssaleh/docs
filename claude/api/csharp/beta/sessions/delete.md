@@ -1,4 +1,4 @@
-## Delete
+## Delete Session
 
 `BetaManagedAgentsDeletedSession Beta.Sessions.Delete(SessionDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -68,6 +68,10 @@ Delete Session
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -91,4 +95,13 @@ SessionDeleteParams parameters = new()
 var betaManagedAgentsDeletedSession = await client.Beta.Sessions.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedSession);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

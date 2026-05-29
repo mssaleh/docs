@@ -1,6 +1,6 @@
 # Sessions
 
-## Create
+## Create Session
 
 `client.beta.sessions.create(SessionCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsSession`
 
@@ -144,7 +144,7 @@ Create Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -195,6 +195,10 @@ Create Session
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -298,67 +302,11 @@ Create Session
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -452,17 +400,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -484,17 +424,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -510,17 +442,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -576,25 +500,9 @@ Create Session
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -602,169 +510,11 @@ Create Session
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -999,7 +749,174 @@ const betaManagedAgentsSession = await client.beta.sessions.create({
 console.log(betaManagedAgentsSession.id);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ]
+}
+```
+
+## List Sessions
 
 `client.beta.sessions.list(SessionListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSession>`
 
@@ -1077,7 +994,7 @@ List Sessions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1128,6 +1045,10 @@ List Sessions
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1231,67 +1152,11 @@ List Sessions
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -1385,17 +1250,9 @@ List Sessions
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -1417,17 +1274,9 @@ List Sessions
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -1443,17 +1292,9 @@ List Sessions
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -1509,25 +1350,9 @@ List Sessions
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -1535,169 +1360,11 @@ List Sessions
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -1930,7 +1597,179 @@ for await (const betaManagedAgentsSession of client.beta.sessions.list()) {
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+      "agent": {
+        "id": "agent_011CZkYpogX7uDKUyvBTophP",
+        "description": "A general-purpose starter agent.",
+        "mcp_servers": [
+          {
+            "name": "example-mcp",
+            "type": "url",
+            "url": "https://example-server.modelcontextprotocol.io/sse"
+          }
+        ],
+        "model": {
+          "id": "claude-sonnet-4-6",
+          "speed": "standard"
+        },
+        "multiagent": {
+          "agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "description": "A focused research subagent.",
+              "mcp_servers": [
+                {
+                  "name": "example-mcp",
+                  "type": "url",
+                  "url": "https://example-server.modelcontextprotocol.io/sse"
+                }
+              ],
+              "model": {
+                "id": "claude-sonnet-4-6",
+                "speed": "standard"
+              },
+              "name": "Researcher",
+              "skills": [
+                {
+                  "skill_id": "xlsx",
+                  "type": "anthropic",
+                  "version": "1"
+                }
+              ],
+              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+              "tools": [
+                {
+                  "configs": [
+                    {
+                      "enabled": true,
+                      "name": "bash",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": true,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  },
+                  "type": "agent_toolset_20260401"
+                }
+              ],
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "coordinator"
+        },
+        "name": "My First Agent",
+        "skills": [
+          {
+            "skill_id": "xlsx",
+            "type": "anthropic",
+            "version": "1"
+          },
+          {
+            "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+            "type": "custom",
+            "version": "2"
+          }
+        ],
+        "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+        "tools": [
+          {
+            "configs": [
+              {
+                "enabled": true,
+                "name": "bash",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              }
+            ],
+            "default_config": {
+              "enabled": true,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            "type": "agent_toolset_20260401"
+          }
+        ],
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "metadata": {},
+      "outcome_evaluations": [
+        {
+          "completed_at": "2026-03-15T10:02:31Z",
+          "description": "Produce a 2-page summary as summary.md",
+          "explanation": "All five sections present with inline citations.",
+          "iteration": 0,
+          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+          "result": "satisfied",
+          "type": "outcome_evaluation"
+        }
+      ],
+      "resources": [
+        {
+          "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+          "created_at": "2026-03-15T10:00:00Z",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+          "mount_path": "/uploads/receipt.pdf",
+          "type": "file",
+          "updated_at": "2026-03-15T10:00:00Z"
+        },
+        {
+          "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+          "created_at": "2026-03-15T10:00:00Z",
+          "mount_path": "/workspace/example-repo",
+          "type": "github_repository",
+          "updated_at": "2026-03-15T10:00:00Z",
+          "url": "https://github.com/example-org/example-repo",
+          "checkout": {
+            "name": "main",
+            "type": "branch"
+          }
+        }
+      ],
+      "stats": {
+        "active_seconds": 0,
+        "duration_seconds": 0
+      },
+      "status": "idle",
+      "title": "Order #1234 inquiry",
+      "type": "session",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "vault_ids": [
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+      ]
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Session
 
 `client.beta.sessions.retrieve(stringsessionID, SessionRetrieveParamsparams?, RequestOptionsoptions?): BetaManagedAgentsSession`
 
@@ -1950,7 +1789,7 @@ Get Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2001,6 +1840,10 @@ Get Session
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2104,67 +1947,11 @@ Get Session
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -2258,17 +2045,9 @@ Get Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -2290,17 +2069,9 @@ Get Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -2316,17 +2087,9 @@ Get Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -2382,25 +2145,9 @@ Get Session
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -2408,169 +2155,11 @@ Get Session
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -2804,7 +2393,174 @@ const betaManagedAgentsSession = await client.beta.sessions.retrieve(
 console.log(betaManagedAgentsSession.id);
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ]
+}
+```
+
+## Update Session
 
 `client.beta.sessions.update(stringsessionID, SessionUpdateParamsparams, RequestOptionsoptions?): BetaManagedAgentsSession`
 
@@ -2914,17 +2670,9 @@ Update Session
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
       - `BetaManagedAgentsMCPToolsetParams`
 
@@ -2958,17 +2706,9 @@ Update Session
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config?: BetaManagedAgentsMCPToolsetDefaultConfigParams | null`
 
@@ -2986,17 +2726,9 @@ Update Session
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
       - `BetaManagedAgentsCustomToolParams`
 
@@ -3050,7 +2782,7 @@ Update Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3101,6 +2833,10 @@ Update Session
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -3204,67 +2940,11 @@ Update Session
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -3358,17 +3038,9 @@ Update Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -3390,17 +3062,9 @@ Update Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -3416,17 +3080,9 @@ Update Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -3482,25 +3138,9 @@ Update Session
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -3508,169 +3148,11 @@ Update Session
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -3902,7 +3384,174 @@ const betaManagedAgentsSession = await client.beta.sessions.update('sesn_011CZkZ
 console.log(betaManagedAgentsSession.id);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ]
+}
+```
+
+## Delete Session
 
 `client.beta.sessions.delete(stringsessionID, SessionDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedSession`
 
@@ -3922,7 +3571,7 @@ Delete Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3973,6 +3622,10 @@ Delete Session
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -4002,7 +3655,16 @@ const betaManagedAgentsDeletedSession = await client.beta.sessions.delete(
 console.log(betaManagedAgentsDeletedSession.id);
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
+```
+
+## Archive Session
 
 `client.beta.sessions.archive(stringsessionID, SessionArchiveParamsparams?, RequestOptionsoptions?): BetaManagedAgentsSession`
 
@@ -4022,7 +3684,7 @@ Archive Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -4073,6 +3735,10 @@ Archive Session
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -4176,67 +3842,11 @@ Archive Session
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -4330,17 +3940,9 @@ Archive Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -4362,17 +3964,9 @@ Archive Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -4388,17 +3982,9 @@ Archive Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -4454,25 +4040,9 @@ Archive Session
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -4480,169 +4050,11 @@ Archive Session
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -4874,6 +4286,173 @@ const betaManagedAgentsSession = await client.beta.sessions.archive(
 );
 
 console.log(betaManagedAgentsSession.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ]
+}
 ```
 
 ## Domain Types
@@ -5266,67 +4845,11 @@ console.log(betaManagedAgentsSession.id);
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -5420,17 +4943,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -5452,17 +4967,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -5478,17 +4985,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -5544,25 +5043,9 @@ console.log(betaManagedAgentsSession.id);
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -5570,169 +5053,11 @@ console.log(betaManagedAgentsSession.id);
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -6046,67 +5371,11 @@ console.log(betaManagedAgentsSession.id);
 
         - `type: "url"`
 
-          - `"url"`
-
         - `url: string`
 
       - `model: BetaManagedAgentsModelConfig`
 
         Model identifier and configuration.
-
-        - `id: BetaManagedAgentsModel`
-
-          The model that will power your agent.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-            - `"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-opus-4-6"`
-
-              Most intelligent model for building agents and coding
-
-            - `"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-          - `(string & {})`
-
-        - `speed?: "standard" | "fast"`
-
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-          - `"standard"`
-
-          - `"fast"`
 
       - `name: string`
 
@@ -6200,17 +5469,9 @@ console.log(betaManagedAgentsSession.id);
 
                 Tool calls are automatically approved without user confirmation.
 
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
               - `BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
 
           - `type: "agent_toolset_20260401"`
 
@@ -6232,17 +5493,9 @@ console.log(betaManagedAgentsSession.id);
 
                 Tool calls are automatically approved without user confirmation.
 
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
               - `BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
 
           - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -6258,17 +5511,9 @@ console.log(betaManagedAgentsSession.id);
 
                 Tool calls are automatically approved without user confirmation.
 
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
               - `BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
 
           - `mcp_server_name: string`
 
@@ -6324,25 +5569,9 @@ console.log(betaManagedAgentsSession.id);
 
       A resolved Anthropic-managed skill.
 
-      - `skill_id: string`
-
-      - `type: "anthropic"`
-
-        - `"anthropic"`
-
-      - `version: string`
-
     - `BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
-
-      - `skill_id: string`
-
-      - `type: "custom"`
-
-        - `"custom"`
-
-      - `version: string`
 
   - `system: string | null`
 
@@ -6350,169 +5579,11 @@ console.log(betaManagedAgentsSession.id);
 
     - `BetaManagedAgentsAgentToolset20260401`
 
-      - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-        - `enabled: boolean`
-
-        - `name: "bash" | "edit" | "read" | 5 more`
-
-          Built-in agent tool identifier.
-
-          - `"bash"`
-
-          - `"edit"`
-
-          - `"read"`
-
-          - `"write"`
-
-          - `"glob"`
-
-          - `"grep"`
-
-          - `"web_fetch"`
-
-          - `"web_search"`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-        Resolved default configuration for agent tools.
-
-        - `enabled: boolean`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `type: "agent_toolset_20260401"`
-
-        - `"agent_toolset_20260401"`
-
     - `BetaManagedAgentsMCPToolset`
-
-      - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-        - `enabled: boolean`
-
-        - `name: string`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-        Resolved default configuration for all tools from an MCP server.
-
-        - `enabled: boolean`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `mcp_server_name: string`
-
-      - `type: "mcp_toolset"`
-
-        - `"mcp_toolset"`
 
     - `BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
-
-      - `description: string`
-
-      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-        JSON Schema for custom tool input parameters.
-
-        - `properties?: Record<string, unknown> | null`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required?: Array<string>`
-
-          List of required property names.
-
-        - `type?: "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
-
-      - `name: string`
-
-      - `type: "custom"`
-
-        - `"custom"`
 
   - `type: "agent"`
 
@@ -6618,17 +5689,9 @@ console.log(betaManagedAgentsSession.id);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
     - `BetaManagedAgentsMCPToolsetParams`
 
@@ -6662,17 +5725,9 @@ console.log(betaManagedAgentsSession.id);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config?: BetaManagedAgentsMCPToolsetDefaultConfigParams | null`
 
@@ -6690,17 +5745,9 @@ console.log(betaManagedAgentsSession.id);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
     - `BetaManagedAgentsCustomToolParams`
 
@@ -6910,17 +5957,9 @@ console.log(betaManagedAgentsSession.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -6942,17 +5981,9 @@ console.log(betaManagedAgentsSession.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -6968,17 +5999,9 @@ console.log(betaManagedAgentsSession.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -7152,67 +6175,11 @@ console.log(betaManagedAgentsSession.id);
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
         - `model: BetaManagedAgentsModelConfig`
 
           Model identifier and configuration.
-
-          - `id: BetaManagedAgentsModel`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-              - `"claude-opus-4-7"`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-opus-4-6"`
-
-                Most intelligent model for building agents and coding
-
-              - `"claude-sonnet-4-6"`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"`
-
-                High-performance model for agents and coding
-
-            - `(string & {})`
-
-          - `speed?: "standard" | "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `"standard"`
-
-            - `"fast"`
 
         - `name: string`
 
@@ -7306,17 +6273,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `type: "agent_toolset_20260401"`
 
@@ -7338,17 +6297,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -7364,17 +6315,9 @@ console.log(betaManagedAgentsSession.id);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `type: "always_allow"`
-
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
-
-                  - `type: "always_ask"`
-
-                    - `"always_ask"`
 
             - `mcp_server_name: string`
 
@@ -7430,25 +6373,9 @@ console.log(betaManagedAgentsSession.id);
 
         A resolved Anthropic-managed skill.
 
-        - `skill_id: string`
-
-        - `type: "anthropic"`
-
-          - `"anthropic"`
-
-        - `version: string`
-
       - `BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
-
-        - `skill_id: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
-
-        - `version: string`
 
     - `system: string | null`
 
@@ -7456,169 +6383,11 @@ console.log(betaManagedAgentsSession.id);
 
       - `BetaManagedAgentsAgentToolset20260401`
 
-        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: "bash" | "edit" | "read" | 5 more`
-
-            Built-in agent tool identifier.
-
-            - `"bash"`
-
-            - `"edit"`
-
-            - `"read"`
-
-            - `"write"`
-
-            - `"glob"`
-
-            - `"grep"`
-
-            - `"web_fetch"`
-
-            - `"web_search"`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `type: "agent_toolset_20260401"`
-
-          - `"agent_toolset_20260401"`
-
       - `BetaManagedAgentsMCPToolset`
-
-        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-          - `enabled: boolean`
-
-          - `name: string`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `enabled: boolean`
-
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-            Permission policy for tool execution.
-
-            - `BetaManagedAgentsAlwaysAllowPolicy`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy`
-
-              Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
-
-        - `mcp_server_name: string`
-
-        - `type: "mcp_toolset"`
-
-          - `"mcp_toolset"`
 
       - `BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
-
-        - `description: string`
-
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `properties?: Record<string, unknown> | null`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required?: Array<string>`
-
-            List of required property names.
-
-          - `type?: "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
-
-        - `name: string`
-
-        - `type: "custom"`
-
-          - `"custom"`
 
     - `type: "agent"`
 
@@ -7878,7 +6647,7 @@ console.log(betaManagedAgentsSession.id);
 
 # Events
 
-## List
+## List Events
 
 `client.beta.sessions.events.list(stringsessionID, EventListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionEvent>`
 
@@ -7934,7 +6703,7 @@ List Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -7985,6 +6754,10 @@ List Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -8234,143 +7007,13 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -8466,8 +7109,6 @@ List Events
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -8562,179 +7203,17 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -8806,179 +7285,17 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -9000,143 +7317,13 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -9170,143 +7357,13 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -9408,25 +7465,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -9448,25 +7493,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -9488,25 +7521,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -9532,25 +7553,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -9576,25 +7585,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -9616,25 +7613,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -9892,30 +7877,6 @@ List Events
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -10072,29 +8033,13 @@ List Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -10148,179 +8093,17 @@ List Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -10468,67 +8251,11 @@ List Events
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -10622,17 +8349,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -10654,17 +8373,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -10680,17 +8391,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -10746,25 +8449,9 @@ List Events
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -10772,169 +8459,11 @@ List Events
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -10967,7 +8496,39 @@ for await (const betaManagedAgentsSessionEvent of client.beta.sessions.events.li
 }
 ```
 
-## Send
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "content": [
+        {
+          "text": "Let me look up order #1234 for you.",
+          "type": "text"
+        }
+      ],
+      "processed_at": "2026-03-15T10:00:00Z",
+      "type": "agent.message"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Send Events
 
 `client.beta.sessions.events.send(stringsessionID, EventSendParamsparams, RequestOptionsoptions?): BetaManagedAgentsSendSessionEvents`
 
@@ -11195,143 +8756,13 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
-
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
 
         - `BetaManagedAgentsSearchResultBlock`
 
@@ -11437,179 +8868,17 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
-
         - `BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
-
-          - `citations: BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `enabled: boolean`
-
-              Whether citations are enabled for this search result.
-
-          - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-            Array of text content blocks from the search result.
-
-            - `text: string`
-
-              The text content.
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `source: string`
-
-            The URL source of the search result.
-
-          - `title: string`
-
-            The title of the search result.
-
-          - `type: "search_result"`
-
-            - `"search_result"`
 
       - `is_error?: boolean | null`
 
@@ -11621,7 +8890,7 @@ Send Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -11672,6 +8941,10 @@ Send Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -11925,143 +9198,13 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
-
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
 
         - `BetaManagedAgentsSearchResultBlock`
 
@@ -12191,179 +9334,17 @@ Send Events
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
-
         - `BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
-
-          - `citations: BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `enabled: boolean`
-
-              Whether citations are enabled for this search result.
-
-          - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-            Array of text content blocks from the search result.
-
-            - `text: string`
-
-              The text content.
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `source: string`
-
-            The URL source of the search result.
-
-          - `title: string`
-
-            The title of the search result.
-
-          - `type: "search_result"`
-
-            - `"search_result"`
 
       - `is_error?: boolean | null`
 
@@ -12398,7 +9379,27 @@ const betaManagedAgentsSendSessionEvents = await client.beta.sessions.events.sen
 console.log(betaManagedAgentsSendSessionEvents.data);
 ```
 
-## Stream
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+## Stream Events
 
 `client.beta.sessions.events.stream(stringsessionID, EventStreamParamsparams?, RequestOptionsoptions?): BetaManagedAgentsStreamSessionEvents | Stream<BetaManagedAgentsStreamSessionEvents>`
 
@@ -12418,7 +9419,7 @@ Stream Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -12469,6 +9470,10 @@ Stream Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -12718,143 +9723,13 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -12950,8 +9825,6 @@ Stream Events
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -13046,179 +9919,17 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -13290,179 +10001,17 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -13484,143 +10033,13 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -13654,143 +10073,13 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -13892,25 +10181,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -13932,25 +10209,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -13972,25 +10237,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -14016,25 +10269,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -14060,25 +10301,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -14100,25 +10329,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -14376,30 +10593,6 @@ Stream Events
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -14556,29 +10749,13 @@ Stream Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -14632,179 +10809,17 @@ Stream Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -14952,67 +10967,11 @@ Stream Events
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -15106,17 +11065,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -15138,17 +11089,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -15164,17 +11107,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -15230,25 +11165,9 @@ Stream Events
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -15256,169 +11175,11 @@ Stream Events
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -15448,6 +11209,22 @@ const betaManagedAgentsStreamSessionEvents = await client.beta.sessions.events.s
 );
 
 console.log(betaManagedAgentsStreamSessionEvents);
+```
+
+#### Response
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
+}
 ```
 
 ## Domain Types
@@ -16766,143 +12543,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -17008,179 +12655,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -17878,143 +13363,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
-
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
 
         - `BetaManagedAgentsSearchResultBlock`
 
@@ -18144,179 +13499,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           Regular text content.
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
         - `BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-            Union type for image source variants.
-
-            - `BetaManagedAgentsBase64ImageSource`
-
-              Base64-encoded image data.
-
-              - `data: string`
-
-                Base64-encoded image data.
-
-              - `media_type: string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource`
-
-              Image referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the image to fetch.
-
-            - `BetaManagedAgentsFileImageSource`
-
-              Image referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-            Union type for document source variants.
-
-            - `BetaManagedAgentsBase64DocumentSource`
-
-              Base64-encoded document data.
-
-              - `data: string`
-
-                Base64-encoded document data.
-
-              - `media_type: string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource`
-
-              Plain text document content.
-
-              - `data: string`
-
-                The plain text content.
-
-              - `media_type: "text/plain"`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource`
-
-              Document referenced by URL.
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-                URL of the document to fetch.
-
-            - `BetaManagedAgentsFileDocumentSource`
-
-              Document referenced by file ID.
-
-              - `file_id: string`
-
-                ID of a previously uploaded file.
-
-              - `type: "file"`
-
-                - `"file"`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `context?: string | null`
-
-            Additional context about the document for the model.
-
-          - `title?: string | null`
-
-            The title of the document.
-
         - `BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
-
-          - `citations: BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `enabled: boolean`
-
-              Whether citations are enabled for this search result.
-
-          - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-            Array of text content blocks from the search result.
-
-            - `text: string`
-
-              The text content.
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `source: string`
-
-            The URL source of the search result.
-
-          - `title: string`
-
-            The title of the search result.
-
-          - `type: "search_result"`
-
-            - `"search_result"`
 
       - `is_error?: boolean | null`
 
@@ -18428,25 +13621,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "model_overloaded_error"`
 
@@ -18468,25 +13649,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "model_rate_limited_error"`
 
@@ -18508,25 +13677,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "model_request_failed_error"`
 
@@ -18552,25 +13709,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "mcp_connection_failed_error"`
 
@@ -18596,25 +13741,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "mcp_authentication_failed_error"`
 
@@ -18636,25 +13769,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type: "retrying"`
-
-            - `"retrying"`
-
         - `BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type: "exhausted"`
-
-            - `"exhausted"`
-
         - `BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `type: "terminal"`
-
-            - `"terminal"`
 
       - `type: "billing_error"`
 
@@ -18916,143 +14037,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -19148,8 +14139,6 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -19244,179 +14233,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -19488,179 +14315,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -19682,143 +14347,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -19852,143 +14387,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -20090,25 +14495,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -20130,25 +14523,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -20170,25 +14551,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -20214,25 +14583,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -20258,25 +14615,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -20298,25 +14643,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -20574,30 +14907,6 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -20754,29 +15063,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -20830,179 +15123,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -21150,67 +15281,11 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -21304,17 +15379,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -21336,17 +15403,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -21362,17 +15421,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -21428,25 +15479,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -21454,169 +15489,11 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -22390,143 +16267,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -22622,8 +16369,6 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -22718,179 +16463,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -22962,179 +16545,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -23156,143 +16577,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -23326,143 +16617,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -23564,25 +16725,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -23604,25 +16753,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -23644,25 +16781,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -23688,25 +16813,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -23732,25 +16845,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -23772,25 +16873,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -24048,30 +17137,6 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -24228,29 +17293,13 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -24304,179 +17353,17 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -24624,67 +17511,11 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -24778,17 +17609,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -24810,17 +17633,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -24836,17 +17651,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -24902,25 +17709,9 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -24928,169 +17719,11 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -26356,7 +18989,7 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
 # Resources
 
-## Add
+## Add Session Resource
 
 `client.beta.sessions.resources.add(stringsessionID, ResourceAddParamsparams, RequestOptionsoptions?): BetaManagedAgentsFileResource`
 
@@ -26390,7 +19023,7 @@ Add Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -26441,6 +19074,10 @@ Add Session Resource
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -26481,7 +19118,20 @@ const betaManagedAgentsFileResource = await client.beta.sessions.resources.add(
 console.log(betaManagedAgentsFileResource.id);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
+```
+
+## List Session Resources
 
 `client.beta.sessions.resources.list(stringsessionID, ResourceListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionResource>`
 
@@ -26509,7 +19159,7 @@ List Session Resources
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -26560,6 +19210,10 @@ List Session Resources
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -26682,7 +19336,37 @@ for await (const betaManagedAgentsSessionResource of client.beta.sessions.resour
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Session Resource
 
 `client.beta.sessions.resources.retrieve(stringresourceID, ResourceRetrieveParamsparams, RequestOptionsoptions?): ResourceRetrieveResponse`
 
@@ -26706,7 +19390,7 @@ Get Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -26757,6 +19441,10 @@ Get Session Resource
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -26878,7 +19566,24 @@ const resource = await client.beta.sessions.resources.retrieve('sesrsc_011CZkZBJ
 console.log(resource);
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Update Session Resource
 
 `client.beta.sessions.resources.update(stringresourceID, ResourceUpdateParamsparams, RequestOptionsoptions?): ResourceUpdateResponse`
 
@@ -26906,7 +19611,7 @@ Update Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -26957,6 +19662,10 @@ Update Session Resource
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -27079,7 +19788,24 @@ const resource = await client.beta.sessions.resources.update('sesrsc_011CZkZBJq5
 console.log(resource);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Delete Session Resource
 
 `client.beta.sessions.resources.delete(stringresourceID, ResourceDeleteParamsparams, RequestOptionsoptions?): BetaManagedAgentsDeleteSessionResource`
 
@@ -27103,7 +19829,7 @@ Delete Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -27155,6 +19881,10 @@ Delete Session Resource
 
       - `"cache-diagnosis-2026-04-07"`
 
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `BetaManagedAgentsDeleteSessionResource`
@@ -27182,6 +19912,15 @@ const betaManagedAgentsDeleteSessionResource = await client.beta.sessions.resour
 );
 
 console.log(betaManagedAgentsDeleteSessionResource.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
 ```
 
 ## Domain Types
@@ -27616,7 +20355,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
 # Threads
 
-## List
+## List Session Threads
 
 `client.beta.sessions.threads.list(stringsessionID, ThreadListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionThread>`
 
@@ -27644,7 +20383,7 @@ List Session Threads
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -27695,6 +20434,10 @@ List Session Threads
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -27874,17 +20617,9 @@ List Session Threads
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -27906,17 +20641,9 @@ List Session Threads
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -27932,17 +20659,9 @@ List Session Threads
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -28083,7 +20802,87 @@ for await (const betaManagedAgentsSessionThread of client.beta.sessions.threads.
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "description": "A focused research subagent.",
+        "mcp_servers": [
+          {
+            "name": "example-mcp",
+            "type": "url",
+            "url": "https://example-server.modelcontextprotocol.io/sse"
+          }
+        ],
+        "model": {
+          "id": "claude-sonnet-4-6",
+          "speed": "standard"
+        },
+        "name": "Researcher",
+        "skills": [
+          {
+            "skill_id": "xlsx",
+            "type": "anthropic",
+            "version": "1"
+          }
+        ],
+        "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+        "tools": [
+          {
+            "configs": [
+              {
+                "enabled": true,
+                "name": "bash",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              }
+            ],
+            "default_config": {
+              "enabled": true,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            "type": "agent_toolset_20260401"
+          }
+        ],
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "parent_thread_id": null,
+      "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+      "stats": {
+        "active_seconds": 0,
+        "duration_seconds": 0,
+        "startup_seconds": 0
+      },
+      "status": "idle",
+      "type": "session_thread",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Session Thread
 
 `client.beta.sessions.threads.retrieve(stringthreadID, ThreadRetrieveParamsparams, RequestOptionsoptions?): BetaManagedAgentsSessionThread`
 
@@ -28107,7 +20906,7 @@ Get Session Thread
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -28158,6 +20957,10 @@ Get Session Thread
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -28337,17 +21140,9 @@ Get Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -28369,17 +21164,9 @@ Get Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -28395,17 +21182,9 @@ Get Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -28546,7 +21325,82 @@ const betaManagedAgentsSessionThread = await client.beta.sessions.threads.retrie
 console.log(betaManagedAgentsSessionThread.id);
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "description": "A focused research subagent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "name": "Researcher",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      }
+    ],
+    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "parent_thread_id": null,
+  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0,
+    "startup_seconds": 0
+  },
+  "status": "idle",
+  "type": "session_thread",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Archive Session Thread
 
 `client.beta.sessions.threads.archive(stringthreadID, ThreadArchiveParamsparams, RequestOptionsoptions?): BetaManagedAgentsSessionThread`
 
@@ -28570,7 +21424,7 @@ Archive Session Thread
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -28621,6 +21475,10 @@ Archive Session Thread
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -28800,17 +21658,9 @@ Archive Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -28832,17 +21682,9 @@ Archive Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -28858,17 +21700,9 @@ Archive Session Thread
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -29007,6 +21841,81 @@ const betaManagedAgentsSessionThread = await client.beta.sessions.threads.archiv
 );
 
 console.log(betaManagedAgentsSessionThread.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "description": "A focused research subagent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "name": "Researcher",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      }
+    ],
+    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "parent_thread_id": null,
+  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0,
+    "startup_seconds": 0
+  },
+  "status": "idle",
+  "type": "session_thread",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
 ```
 
 ## Domain Types
@@ -29189,17 +22098,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -29221,17 +22122,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -29247,17 +22140,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -29691,143 +22576,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -29923,8 +22678,6 @@ console.log(betaManagedAgentsSessionThread.id);
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -30019,179 +22772,17 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -30263,179 +22854,17 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -30457,143 +22886,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -30627,143 +22926,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -30865,25 +23034,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -30905,25 +23062,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -30945,25 +23090,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -30989,25 +23122,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -31033,25 +23154,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -31073,25 +23182,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -31349,30 +23446,6 @@ console.log(betaManagedAgentsSessionThread.id);
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -31529,29 +23602,13 @@ console.log(betaManagedAgentsSessionThread.id);
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -31605,179 +23662,17 @@ console.log(betaManagedAgentsSessionThread.id);
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -31925,67 +23820,11 @@ console.log(betaManagedAgentsSessionThread.id);
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -32079,17 +23918,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -32111,17 +23942,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -32137,17 +23960,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -32203,25 +24018,9 @@ console.log(betaManagedAgentsSessionThread.id);
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -32229,169 +24028,11 @@ console.log(betaManagedAgentsSessionThread.id);
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -32409,7 +24050,7 @@ console.log(betaManagedAgentsSessionThread.id);
 
 # Events
 
-## List
+## List Session Thread Events
 
 `client.beta.sessions.threads.events.list(stringthreadID, EventListParamsparams, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionEvent>`
 
@@ -32441,7 +24082,7 @@ List Session Thread Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -32492,6 +24133,10 @@ List Session Thread Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -32741,143 +24386,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -32973,8 +24488,6 @@ List Session Thread Events
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -33069,179 +24582,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -33313,179 +24664,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -33507,143 +24696,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -33677,143 +24736,13 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -33915,25 +24844,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -33955,25 +24872,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -33995,25 +24900,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -34039,25 +24932,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -34083,25 +24964,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -34123,25 +24992,13 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -34399,30 +25256,6 @@ List Session Thread Events
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -34579,29 +25412,13 @@ List Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -34655,179 +25472,17 @@ List Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -34975,67 +25630,11 @@ List Session Thread Events
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -35129,17 +25728,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -35161,17 +25752,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -35187,17 +25770,9 @@ List Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -35253,25 +25828,9 @@ List Session Thread Events
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -35279,169 +25838,11 @@ List Session Thread Events
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -35475,7 +25876,28 @@ for await (const betaManagedAgentsSessionEvent of client.beta.sessions.threads.e
 }
 ```
 
-## Stream
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Stream Session Thread Events
 
 `client.beta.sessions.threads.events.stream(stringthreadID, EventStreamParamsparams, RequestOptionsoptions?): BetaManagedAgentsStreamSessionThreadEvents | Stream<BetaManagedAgentsStreamSessionThreadEvents>`
 
@@ -35499,7 +25921,7 @@ Stream Session Thread Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -35550,6 +25972,10 @@ Stream Session Thread Events
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"thinking-token-count-2026-05-13"`
+
+      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -35799,143 +26225,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
       - `BetaManagedAgentsSearchResultBlock`
 
@@ -36031,8 +26327,6 @@ Stream Session Thread Events
 
       - `type: "text"`
 
-        - `"text"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -36127,179 +26421,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -36371,179 +26503,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -36565,143 +26535,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `from_session_thread_id: string`
 
@@ -36735,143 +26575,13 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
-
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
 
     - `processed_at: string`
 
@@ -36973,25 +26683,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_overloaded_error"`
 
@@ -37013,25 +26711,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_rate_limited_error"`
 
@@ -37053,25 +26739,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "model_request_failed_error"`
 
@@ -37097,25 +26771,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_connection_failed_error"`
 
@@ -37141,25 +26803,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "mcp_authentication_failed_error"`
 
@@ -37181,25 +26831,13 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `type: "retrying"`
-
-              - `"retrying"`
-
           - `BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `type: "exhausted"`
-
-              - `"exhausted"`
-
           - `BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `type: "terminal"`
-
-              - `"terminal"`
 
         - `type: "billing_error"`
 
@@ -37457,30 +27095,6 @@ Stream Session Thread Events
 
       Token usage for a single model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-      - `speed?: "standard" | "fast" | null`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `"standard"`
-
-        - `"fast"`
-
     - `processed_at: string`
 
       A timestamp in RFC 3339 format
@@ -37637,29 +27251,13 @@ Stream Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `type: "end_turn"`
-
-          - `"end_turn"`
-
       - `BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `event_ids: Array<string>`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: "requires_action"`
-
-          - `"requires_action"`
-
       - `BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `type: "retries_exhausted"`
-
-          - `"retries_exhausted"`
 
     - `type: "session.thread_status_idle"`
 
@@ -37713,179 +27311,17 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `text: string`
-
-          The text content.
-
-        - `type: "text"`
-
-          - `"text"`
-
       - `BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
-
-          Union type for image source variants.
-
-          - `BetaManagedAgentsBase64ImageSource`
-
-            Base64-encoded image data.
-
-            - `data: string`
-
-              Base64-encoded image data.
-
-            - `media_type: string`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource`
-
-            Image referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the image to fetch.
-
-          - `BetaManagedAgentsFileImageSource`
-
-            Image referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "image"`
-
-          - `"image"`
 
       - `BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
-
-          Union type for document source variants.
-
-          - `BetaManagedAgentsBase64DocumentSource`
-
-            Base64-encoded document data.
-
-            - `data: string`
-
-              Base64-encoded document data.
-
-            - `media_type: string`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `type: "base64"`
-
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource`
-
-            Plain text document content.
-
-            - `data: string`
-
-              The plain text content.
-
-            - `media_type: "text/plain"`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `"text/plain"`
-
-            - `type: "text"`
-
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource`
-
-            Document referenced by URL.
-
-            - `type: "url"`
-
-              - `"url"`
-
-            - `url: string`
-
-              URL of the document to fetch.
-
-          - `BetaManagedAgentsFileDocumentSource`
-
-            Document referenced by file ID.
-
-            - `file_id: string`
-
-              ID of a previously uploaded file.
-
-            - `type: "file"`
-
-              - `"file"`
-
-        - `type: "document"`
-
-          - `"document"`
-
-        - `context?: string | null`
-
-          Additional context about the document for the model.
-
-        - `title?: string | null`
-
-          The title of the document.
-
       - `BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
-
-        - `citations: BetaManagedAgentsSearchResultCitations`
-
-          Citation settings for a search result.
-
-          - `enabled: boolean`
-
-            Whether citations are enabled for this search result.
-
-        - `content: Array<BetaManagedAgentsSearchResultContent>`
-
-          Array of text content blocks from the search result.
-
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            - `"text"`
-
-        - `source: string`
-
-          The URL source of the search result.
-
-        - `title: string`
-
-          The title of the search result.
-
-        - `type: "search_result"`
-
-          - `"search_result"`
 
     - `is_error?: boolean | null`
 
@@ -38033,67 +27469,11 @@ Stream Session Thread Events
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
           - `model: BetaManagedAgentsModelConfig`
 
             Model identifier and configuration.
-
-            - `id: BetaManagedAgentsModel`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-                - `"claude-opus-4-7"`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-opus-4-6"`
-
-                  Most intelligent model for building agents and coding
-
-                - `"claude-sonnet-4-6"`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"`
-
-                  High-performance model for agents and coding
-
-              - `(string & {})`
-
-            - `speed?: "standard" | "fast"`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `"standard"`
-
-              - `"fast"`
 
           - `name: string`
 
@@ -38187,17 +27567,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `type: "agent_toolset_20260401"`
 
@@ -38219,17 +27591,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -38245,17 +27609,9 @@ Stream Session Thread Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `type: "always_allow"`
-
-                      - `"always_allow"`
-
                   - `BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
-
-                    - `type: "always_ask"`
-
-                      - `"always_ask"`
 
               - `mcp_server_name: string`
 
@@ -38311,25 +27667,9 @@ Stream Session Thread Events
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: string`
-
-          - `type: "anthropic"`
-
-            - `"anthropic"`
-
-          - `version: string`
-
         - `BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
-
-          - `skill_id: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
-
-          - `version: string`
 
       - `system: string | null`
 
@@ -38337,169 +27677,11 @@ Stream Session Thread Events
 
         - `BetaManagedAgentsAgentToolset20260401`
 
-          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: "bash" | "edit" | "read" | 5 more`
-
-              Built-in agent tool identifier.
-
-              - `"bash"`
-
-              - `"edit"`
-
-              - `"read"`
-
-              - `"write"`
-
-              - `"glob"`
-
-              - `"grep"`
-
-              - `"web_fetch"`
-
-              - `"web_search"`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
-
         - `BetaManagedAgentsMCPToolset`
-
-          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-            - `enabled: boolean`
-
-            - `name: string`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `enabled: boolean`
-
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-              Permission policy for tool execution.
-
-              - `BetaManagedAgentsAlwaysAllowPolicy`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `type: "always_allow"`
-
-                  - `"always_allow"`
-
-              - `BetaManagedAgentsAlwaysAskPolicy`
-
-                Tool calls require user confirmation before execution.
-
-                - `type: "always_ask"`
-
-                  - `"always_ask"`
-
-          - `mcp_server_name: string`
-
-          - `type: "mcp_toolset"`
-
-            - `"mcp_toolset"`
 
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
-
-          - `description: string`
-
-          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `properties?: Record<string, unknown> | null`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required?: Array<string>`
-
-              List of required property names.
-
-            - `type?: "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
-
-          - `name: string`
-
-          - `type: "custom"`
-
-            - `"custom"`
 
       - `type: "agent"`
 
@@ -38530,4 +27712,20 @@ const betaManagedAgentsStreamSessionThreadEvents = await client.beta.sessions.th
 );
 
 console.log(betaManagedAgentsStreamSessionThreadEvents);
+```
+
+#### Response
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
+}
 ```

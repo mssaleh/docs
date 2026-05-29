@@ -1,4 +1,4 @@
-## Redact
+## Redact a memory version
 
 `BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -71,6 +71,10 @@ Redact a memory version
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -172,42 +176,6 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `required string SessionID`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
-
-      - `required Type Type`
-
-        - `"session_actor"SessionActor`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `required string ApiKeyID`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `required Type Type`
-
-        - `"api_actor"ApiActor`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `required Type Type`
-
-        - `"user_actor"UserActor`
-
-      - `required string UserID`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```csharp
@@ -220,4 +188,30 @@ MemoryVersionRedactParams parameters = new()
 var betaManagedAgentsMemoryVersion = await client.Beta.MemoryStores.MemoryVersions.Redact(parameters);
 
 Console.WriteLine(betaManagedAgentsMemoryVersion);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
 ```

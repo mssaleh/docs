@@ -1,4 +1,4 @@
-## MCP OAuth Validate
+## Validate Credential
 
 `BetaManagedAgentsCredentialValidation beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -68,6 +68,10 @@ Validate Credential
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaManagedAgentsCredentialValidation:`
@@ -117,22 +121,6 @@ Validate Credential
     - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
 
       An HTTP response captured during a credential validation probe.
-
-      - `String body`
-
-        Response body. May be truncated and has sensitive values scrubbed.
-
-      - `boolean bodyTruncated`
-
-        Whether `body` was truncated.
-
-      - `String contentType`
-
-        Value of the `Content-Type` response header.
-
-      - `long statusCode`
-
-        HTTP status code.
 
     - `Status status`
 
@@ -190,5 +178,36 @@ public final class Main {
             .build();
         BetaManagedAgentsCredentialValidation betaManagedAgentsCredentialValidation = client.beta().vaults().credentials().mcpOAuthValidate(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
 }
 ```

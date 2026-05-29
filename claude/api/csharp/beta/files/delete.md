@@ -1,4 +1,4 @@
-## Delete
+## Delete File
 
 `DeletedFile Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -68,6 +68,10 @@ Delete File
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class DeletedFile:`
@@ -92,4 +96,13 @@ FileDeleteParams parameters = new() { FileID = "file_id" };
 var deletedFile = await client.Beta.Files.Delete(parameters);
 
 Console.WriteLine(deletedFile);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```

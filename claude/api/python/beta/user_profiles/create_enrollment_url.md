@@ -16,7 +16,7 @@ Create Enrollment URL
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,10 @@ Create Enrollment URL
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `class BetaUserProfileEnrollmentURL: …`
@@ -99,4 +103,14 @@ beta_user_profile_enrollment_url = client.beta.user_profiles.create_enrollment_u
     user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
 )
 print(beta_user_profile_enrollment_url.expires_at)
+```
+
+#### Response
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
 ```

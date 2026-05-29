@@ -1,4 +1,4 @@
-## List
+## List Agent Versions
 
 `beta.agents.versions.list(stragent_id, VersionListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
 
@@ -24,7 +24,7 @@ List Agent Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -75,6 +75,10 @@ List Agent Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -290,17 +294,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: Literal["always_allow"]`
-
-              - `"always_allow"`
-
           - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
             Tool calls require user confirmation before execution.
-
-            - `type: Literal["always_ask"]`
-
-              - `"always_ask"`
 
       - `type: Literal["agent_toolset_20260401"]`
 
@@ -322,17 +318,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: Literal["always_allow"]`
-
-              - `"always_allow"`
-
           - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
             Tool calls require user confirmation before execution.
-
-            - `type: Literal["always_ask"]`
-
-              - `"always_ask"`
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -348,17 +336,9 @@ List Agent Versions
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: Literal["always_allow"]`
-
-              - `"always_allow"`
-
           - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
             Tool calls require user confirmation before execution.
-
-            - `type: Literal["always_ask"]`
-
-              - `"always_ask"`
 
       - `mcp_server_name: str`
 
@@ -422,4 +402,81 @@ page = client.beta.agents.versions.list(
 )
 page = page.data[0]
 print(page.id)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
 ```

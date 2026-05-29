@@ -1,4 +1,4 @@
-## Delete
+## Delete Environment
 
 **delete** `/v1/environments/{environment_id}`
 
@@ -14,9 +14,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,9 +68,13 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
+
 ### Returns
 
-- `BetaEnvironmentDeleteResponse = object { id, type }`
+- `BetaEnvironmentDeleteResponse object { id, type }`
 
   Response after deleting an environment.
 
@@ -92,4 +96,13 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
 ```
