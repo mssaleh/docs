@@ -1,7 +1,7 @@
 {
   "react": {
-    "version": "19.2.6",
-    "last_synced_at": "2026-05-07T04:32:00.354Z",
+    "version": "19.2.7",
+    "last_synced_at": "2026-06-02T04:56:57.911Z",
     "reason": "new-release"
   },
   "nextjs": {
@@ -10,8 +10,8 @@
     "reason": "new-release"
   },
   "claude-code": {
-    "version": "2.1.159",
-    "last_synced_at": "2026-06-01T04:59:39.410Z",
+    "version": "2.1.160",
+    "last_synced_at": "2026-06-02T04:56:57.911Z",
     "reason": "new-release"
   },
   "claude-api": {
