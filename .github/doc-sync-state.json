@@ -10,13 +10,13 @@
     "reason": "new-release"
   },
   "claude-code": {
-    "version": "2.1.162",
-    "last_synced_at": "2026-06-04T04:58:17.412Z",
+    "version": "2.1.163",
+    "last_synced_at": "2026-06-05T04:50:43.025Z",
     "reason": "new-release"
   },
   "claude-api": {
     "version": null,
-    "last_synced_at": "2026-05-29T04:48:55.599Z",
+    "last_synced_at": "2026-06-05T04:50:43.025Z",
     "reason": "interval"
   },
   "mcp": {

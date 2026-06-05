@@ -232,7 +232,7 @@ public class CodeExecution {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 4096,
@@ -291,6 +291,23 @@ When you add the code execution tool to your API request:
 3. Claude can use any combination of these capabilities in a single request
 4. All operations run in a secure sandbox environment
 5. Claude provides results with any generated charts, calculations, or analysis
+
+### When Claude runs code
+
+Claude runs code when the request benefits from computation or file handling:
+
+- Non-trivial math (large numbers, many steps, precision-sensitive results)
+- Data analysis, file parsing, or visualization
+- Algorithm execution or simulation
+- Explicit requests to "run", "compute", or "execute"
+
+Claude answers directly without running code for:
+
+- Simple arithmetic and well-known math facts
+- Factual, conversational, or creative requests
+- Simple unit conversions or translations
+
+If you want Claude to run code for a borderline request, ask explicitly (for example, "run code to verify this").
 
 ## Using code execution with other execution tools
 
@@ -617,7 +634,7 @@ public class CodeExecutionWithFiles {
 use Anthropic\Client;
 use Anthropic\Core\FileParam;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Upload a file
 $fileObject = $client->beta->files->upload(
@@ -1015,7 +1032,7 @@ List<String> extractFileIds(BetaMessage response) {
 use Anthropic\Beta\Messages\BetaMessage;
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1617,7 +1634,7 @@ public class ContainerReuse {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response1 = $client->messages->create(
     maxTokens: 4096,
