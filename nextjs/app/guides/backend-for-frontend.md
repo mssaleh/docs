@@ -3,8 +3,8 @@ title: How to use Next.js as a backend for your frontend
 description: Learn how to use Next.js as a backend framework
 url: "https://nextjs.org/docs/app/guides/backend-for-frontend"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

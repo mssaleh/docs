@@ -3,8 +3,8 @@ title: How to optimize memory usage
 description: Optimize memory used by your application in development and production.
 url: "https://nextjs.org/docs/app/guides/memory-usage"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-10-18
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

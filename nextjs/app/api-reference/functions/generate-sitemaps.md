@@ -3,8 +3,8 @@ title: generateSitemaps
 description: Learn how to use the generateSiteMaps function to create multiple sitemaps for your application.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-12-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

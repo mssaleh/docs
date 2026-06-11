@@ -3,8 +3,8 @@ title: Upgrade Guides
 description: Learn how to upgrade to the latest versions of Next.js.
 url: "https://nextjs.org/docs/app/guides/upgrading"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-04-15
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

@@ -3,8 +3,8 @@ title: How to upgrade to version 16
 description: Upgrade your Next.js Application from Version 15 to 16.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-16"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -1214,14 +1214,21 @@ The following options have been removed from [`devIndicators`](/docs/app/api-ref
 
 The indicator itself remains available.
 
-### `experimental.dynamicIO`
+### `experimental.dynamicIO` and `experimental.useCache`
 
-The `experimental.dynamicIO` flag has been renamed to `cacheComponents`:
-
-Update your Next config file, by removing the `dynamicIO` flag.
+The `experimental.dynamicIO` and `experimental.useCache` flags are deprecated. Use top-level [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) instead.
 
 ```js filename="next.config.js"
-// Next.js 15 - experimental.dynamicIO is now removed
+// Before: experimental.useCache
+module.exports = {
+  experimental: {
+    useCache: true,
+  },
+}
+```
+
+```js filename="next.config.js"
+// Before: experimental.dynamicIO
 module.exports = {
   experimental: {
     dynamicIO: true,
@@ -1229,14 +1236,25 @@ module.exports = {
 }
 ```
 
-Add the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) flag set to true.
+```ts filename="next.config.ts" switcher
+import type { NextConfig } from 'next'
 
-```js filename="next.config.js"
-// Next.js 16 - use cacheComponents instead
+// After
+const nextConfig: NextConfig = {
+  cacheComponents: true,
+}
+
+export default nextConfig
+```
+
+```js filename="next.config.js" switcher
+// After
 module.exports = {
   cacheComponents: true,
 }
 ```
+
+For more on Cache Components, see [Migrating to Cache Components](/docs/app/guides/migrating-to-cache-components).
 
 ### `unstable_rootParams`
 

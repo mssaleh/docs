@@ -3,8 +3,8 @@ title: Runtime Integration
 description: Understand how build-time adapters and runtime cache interfaces work together.
 url: "https://nextjs.org/docs/app/api-reference/adapters/runtime-integration"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

@@ -3,8 +3,8 @@ title: Codemods
 description: Use codemods to upgrade your Next.js codebase when new features are released.
 url: "https://nextjs.org/docs/app/guides/upgrading/codemods"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-13
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"

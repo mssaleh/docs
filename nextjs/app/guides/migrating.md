@@ -3,8 +3,8 @@ title: Migrating
 description: Learn how to migrate from popular frameworks to Next.js
 url: "https://nextjs.org/docs/app/guides/migrating"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-04-15
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

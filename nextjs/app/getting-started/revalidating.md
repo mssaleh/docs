@@ -3,8 +3,8 @@ title: Revalidating
 description: Learn how to revalidate cached data using time-based and on-demand strategies.
 url: "https://nextjs.org/docs/app/getting-started/revalidating"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -197,6 +197,8 @@ See the [`revalidatePath` API reference](/docs/app/api-reference/functions/reval
 Cache data that doesn't depend on [runtime data](/docs/app/getting-started/caching#working-with-runtime-apis) and that you're OK serving from cache for a period of time. Use `use cache` with `cacheLife` to describe that behavior.
 
 For content management systems with update mechanisms, use tags with longer cache durations and rely on `revalidateTag` to refresh content when it actually changes, rather than expiring the cache preemptively.
+
+> **Good to know:** In serverless environments, in-memory cache entries may not persist across revalidations. See [runtime caching considerations](/docs/app/api-reference/directives/use-cache#runtime-caching-considerations) for details.
 ## API Reference
 
 Learn more about the APIs mentioned on this page.

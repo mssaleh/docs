@@ -3,8 +3,8 @@ title: src Folder
 description: "Save pages under the `src` folder as an alternative to the root `pages` directory."
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/src-folder"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-10-17
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

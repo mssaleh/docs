@@ -3,14 +3,15 @@ title: Caching
 description: Learn how to cache data and UI in Next.js
 url: "https://nextjs.org/docs/app/getting-started/caching"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
   - app/getting-started/revalidating
   - app/api-reference/directives/use-cache
   - app/api-reference/config/next-config-js/cacheComponents
+  - app/guides/preserving-ui-state
 ---
 
 
@@ -131,9 +132,11 @@ export default function Page() {
 
 The fallback (`<p>Loading posts...</p>`) is included in the static shell, while the component's content streams in at request time.
 
+`<Suspense>` provides a fallback UI while async work completes, but it does not itself opt a component into dynamic rendering. If a component only performs synchronous work, it will complete during prerendering regardless of whether it is wrapped in `<Suspense>`.
+
 ## Working with runtime APIs
 
-Request-time APIs require information that is only available when a user makes a request. These include:
+Runtime APIs require information that is only available when a user makes a request. These include:
 
 * [`cookies`](/docs/app/api-reference/functions/cookies) - User's cookie data
 * [`headers`](/docs/app/api-reference/functions/headers) - Request headers
@@ -197,6 +200,8 @@ async function CachedContent({ sessionId }: { sessionId: string }) {
 
 At request time, `CachedContent` executes if no matching cache entry is found, and stores the result for future requests with the same `sessionId`.
 
+By default, `use cache` stores entries [in-memory](/docs/app/api-reference/directives/use-cache#runtime-caching-considerations). In serverless environments where memory doesn't persist across requests, `CachedContent` may re-evaluate on every request. Consider [`'use cache: remote'`](/docs/app/api-reference/directives/use-cache-remote) for durable, shared caching.
+
 ## Working with non-deterministic operations
 
 Operations like `Math.random()`, `Date.now()`, or `crypto.randomUUID()` produce different values each time they execute. Cache Components requires you to explicitly handle these.
@@ -256,6 +261,8 @@ export default async function Page() {
   )
 }
 ```
+
+> **Good to know:** This includes queries to embedded databases with synchronous APIs, such as `better-sqlite3` or Node.js's built-in [`node:sqlite`](https://nodejs.org/api/sqlite.html). If you need per-request data from a synchronous source, call [`connection()`](/docs/app/api-reference/functions/connection) before the query.
 
 ## How rendering works
 
@@ -412,6 +419,8 @@ Learn more about revalidation and the APIs mentioned on this page.
   - Learn how to use the "use cache" directive to cache data in your Next.js application.
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
   - Learn how to enable the cacheComponents flag in Next.js.
+- [Preserving UI state](/docs/app/guides/preserving-ui-state)
+  - Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets.
 
 ---
 

@@ -3,8 +3,8 @@ title: Route Segment Config
 description: Learn about how to configure options for Next.js route segments.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

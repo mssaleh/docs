@@ -3,8 +3,8 @@ title: typescript
 description: Configure how Next.js handles TypeScript errors during production builds and specify a custom tsconfig file.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/typescript"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

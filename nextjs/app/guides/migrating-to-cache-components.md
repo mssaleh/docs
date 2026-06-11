@@ -3,10 +3,13 @@ title: Migrating to Cache Components
 description: Learn how to migrate from route segment configs to Cache Components in Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating-to-cache-components"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"
+related:
+  - app/guides/preserving-ui-state
+  - app/api-reference/config/next-config-js/cacheComponents
 ---
 
 
@@ -180,6 +183,27 @@ export default async function Page() {
 ## `runtime = 'edge'`
 
 **Not supported.** Cache Components requires the Node.js runtime. Switch to the Node.js runtime (the default) by removing the `runtime = 'edge'` export. If you need edge behavior for specific routes, use [Proxy](/docs/app/api-reference/file-conventions/proxy) instead.
+
+## UI state preservation
+
+**Component state now persists across navigations.** With Cache Components, Next.js preserves routes using React's [`<Activity>`](https://react.dev/reference/react/Activity) component in [`"hidden"`](https://react.dev/reference/react/Activity#activity) mode instead of unmounting them. Effects clean up and re-run normally, but `useState` values, form inputs, and scroll position are no longer reset when navigating away and back.
+
+If your code relied on unmounting to clear state, you may need to add explicit reset logic:
+
+* **Dropdowns and popovers** — stay open when navigating back. Close them in a `useLayoutEffect` cleanup function.
+* **Dialogs with initialization logic** — Effects that depend on dialog state (like focusing an input) won't re-fire if the state was preserved. Derive dialog state from the URL instead.
+* **Forms after submission** — input values and `useActionState` results (success/error messages) persist when returning. Reset in the submit handler or user action when possible, otherwise use a cleanup effect.
+
+See [Preserving UI state across navigations](/docs/app/guides/preserving-ui-state) for detailed examples of each pattern.
+## Next Steps
+
+Learn about other behavior changes when Cache Components is enabled.
+
+- [Preserving UI state](/docs/app/guides/preserving-ui-state)
+  - Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets.
+- [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
+  - Learn how to enable the cacheComponents flag in Next.js.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

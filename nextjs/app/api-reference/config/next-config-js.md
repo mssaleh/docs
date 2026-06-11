@@ -3,8 +3,8 @@ title: next.config.js
 description: Learn how to configure your application with next.config.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-11-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Configuration: /docs/app/api-reference/config"
@@ -256,6 +256,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Learn how to enable FileSystem Caching for Turbopack builds
 - [turbopack.ignoreIssue](/docs/app/api-reference/config/next-config-js/turbopackIgnoreIssue)
   - Suppress specific Turbopack errors and warnings from the CLI output and error overlay.
+- [turbopackLocalPostcssConfig](/docs/app/api-reference/config/next-config-js/turbopackLocalPostcssConfig)
+  - Enable per-directory PostCSS config resolution in Turbopack so that the config closest to each CSS file takes precedence over the project root config.
 - [typedRoutes](/docs/app/api-reference/config/next-config-js/typedRoutes)
   - Enable support for statically typed links.
 - [typescript](/docs/app/api-reference/config/next-config-js/typescript)

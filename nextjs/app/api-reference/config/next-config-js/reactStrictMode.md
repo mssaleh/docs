@@ -3,8 +3,8 @@ title: reactStrictMode
 description: The complete Next.js runtime is now Strict Mode-compliant, learn how to opt-in
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/reactStrictMode"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

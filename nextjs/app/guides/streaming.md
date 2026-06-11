@@ -3,8 +3,8 @@ title: Streaming
 description: Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
 url: "https://nextjs.org/docs/app/guides/streaming"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -774,6 +774,7 @@ The key decisions are **what to cache** and **where to place Suspense boundaries
 * [Streams API on web.dev](https://web.dev/articles/streams) - introduction to the Web Streams API that underpins streaming in Route Handlers
 * [Chunked transfer encoding (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Transfer-Encoding) - the HTTP/1.1 mechanism that enables streaming responses
 * [browser.engineering](https://browser.engineering/) - deep dive into how browsers handle network responses, rendering, and progressive display
+* [Preventing flash before hydration](/docs/app/guides/preventing-flash-before-hydration) - how to update server-rendered HTML with client-specific values (locale, theme, persisted state) before the browser paints
 
 
 Related API references and guides.

@@ -3,8 +3,8 @@ title: Building public pages
 description: "Learn how to build public, \"static\" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites."
 url: "https://nextjs.org/docs/app/guides/public-static-pages"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -51,6 +51,8 @@ export default async function Page() {
 #### Static components
 
 The `<Header />` component doesn't depend on any inputs that change between requests, such as: external data, request headers, route params, the current time, or random values.
+
+> **Good to know**: If you need to display locale-aware dates or times without a visible flash, see [Preventing flash before hydration](/docs/app/guides/preventing-flash-before-hydration).
 
 Since its output never changes and can be determined ahead of time, this kind of component is called a **static** component. With no reason to wait for a request, Next.js can safely **prerender** the page at [build time](/docs/app/glossary#build-time).
 

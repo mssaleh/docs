@@ -3,8 +3,8 @@ title: Docs Contribution Guide
 description: Learn how to contribute to Next.js Documentation
 url: "https://nextjs.org/docs/community/contribution-guide"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Community: /docs/community"
 ---
@@ -250,17 +250,17 @@ Most examples in the docs are written in `tsx` and `jsx`, and a few in `bash`. H
 
 When writing JavaScript code blocks, we use the following language and extension combinations.
 
-|                                | Language | Extension |
-| ------------------------------ | -------- | --------- |
-| JavaScript files with JSX code | `jsx   | .js       |
-| JavaScript files without JSX   | `js    | .js       |
-| TypeScript files with JSX      | `tsx   | .tsx      |
-| TypeScript files without JSX   | `ts    | .ts       |
+|                                | Language   | Extension |
+| ------------------------------ | ---------- | --------- |
+| JavaScript files with JSX code | ` ```jsx ` | .js       |
+| JavaScript files without JSX   | ` ```js `  | .js       |
+| TypeScript files with JSX      | ` ```tsx ` | .tsx      |
+| TypeScript files without JSX   | ` ```ts `  | .ts       |
 
 > **Good to know**:
 >
 > * Make sure to use **`.js`** extension for JavaScript files with **JSX** code.
-> * For example, \`\`\`jsx filename="app/layout.js"
+> * For example, ` ```jsx filename="app/layout.js" `
 
 ### TS and JS Switcher
 

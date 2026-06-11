@@ -3,8 +3,8 @@ title: Configuration
 description: "Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter."
 url: "https://nextjs.org/docs/app/api-reference/adapters/configuration"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

@@ -3,8 +3,8 @@ title: Adapters
 description: Build deployment adapters for Next.js platforms and infrastructure.
 url: "https://nextjs.org/docs/app/api-reference/adapters"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---

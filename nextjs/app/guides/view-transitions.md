@@ -3,8 +3,8 @@ title: Designing view transitions
 description: Learn how to use view transitions to communicate meaning during navigation, loading, and content changes in a Next.js app.
 url: "https://nextjs.org/docs/app/guides/view-transitions"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -43,6 +43,8 @@ const nextConfig: NextConfig = {
 
 export default nextConfig
 ```
+
+App Router uses [React canary releases](https://react.dev/blog/2023/05/03/react-canaries), which contain all stable React 19 changes as well as newer features like `ViewTransition`. You do not need to install `react@canary` yourself.
 
 > \[!NOTE]
 > The View Transitions API is supported in all major browsers, though some animations may behave differently in Safari. Without browser support, your application works normally, the transitions simply do not animate.
@@ -104,7 +106,7 @@ If we click a thumbnail now, the image scales and repositions from its grid cell
 
 #### Customizing the morph animation
 
-To control the morph CSS, add `share="morph"`. This assigns the `morph` class to the view transition, which you can target with CSS pseudo-elements. For example, to soften the morph mid-flight with a [`blur`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur) keyframe:
+The morph works without any CSS. To customize it, add `share="morph"`. This assigns the `morph` class to the view transition, which you can target with CSS pseudo-elements. For example, to soften the morph mid-flight with a [`blur`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur) keyframe:
 
 ```tsx
 <ViewTransition name={`photo-${photo.id}`} share="morph">
@@ -395,7 +397,7 @@ For API details and more patterns:
 
 * [View transition configuration](/docs/app/api-reference/config/next-config-js/viewTransition)
 * [Link `transitionTypes` prop](/docs/app/api-reference/components/link#transitiontypes)
-* [`useRouter`](/docs/app/api-reference/functions/use-router) — also supports `transitionTypes` in `push()` and `replace()`
+* [`useRouter`](/docs/app/api-reference/functions/use-router), which also supports `transitionTypes` in `push()` and `replace()`
 * [React `ViewTransition` component](https://react.dev/reference/react/ViewTransition)
 * [Complete CSS from this guide](https://github.com/vercel-labs/react-view-transitions-demo/blob/main/src/app/globals.css) — all keyframes and view transition rules in one file
 ---

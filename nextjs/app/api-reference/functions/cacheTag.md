@@ -3,8 +3,8 @@ title: cacheTag
 description: Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheTag"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -12,6 +12,7 @@ related:
   - app/api-reference/config/next-config-js/cacheComponents
   - app/api-reference/directives/use-cache
   - app/api-reference/functions/revalidateTag
+  - app/api-reference/functions/updateTag
   - app/api-reference/functions/cacheLife
 ---
 
@@ -65,7 +66,12 @@ export async function getData() {
 }
 ```
 
-You can then purge the cache on-demand using [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) API in another function, for example, a [route handler](/docs/app/api-reference/file-conventions/route) or [Server Action](/docs/app/getting-started/mutating-data):
+You can then purge the cache on-demand from a [Server Function](/docs/app/getting-started/mutating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
+
+* Use [`updateTag`](/docs/app/api-reference/functions/updateTag) inside a Server Function for read-your-own-writes scenarios, where a user makes a change and the next read should fetch fresh data immediately.
+* Use [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) when it is acceptable to serve stale data while revalidation happens in the background, or when revalidating from a route handler.
+
+The example below uses `revalidateTag`:
 
 ```tsx filename="app/action.ts" switcher
 'use server'
@@ -98,7 +104,7 @@ export default async function submit() {
 cacheTag('tag-one', 'tag-two')
 ```
 
-* **Limits**: The max length for a custom tag is 256 characters and the max tag items is 128.
+* **Limits**: A single `cacheTag()` call accepts up to 128 tags, each with a maximum length of 256 characters. Tags longer than 256 characters are skipped, and any tags past the 128th in one call are dropped. Both cases log a console warning.
 
 ## Examples
 
@@ -213,6 +219,8 @@ View related API references.
   - Learn how to use the "use cache" directive to cache data in your Next.js application.
 - [revalidateTag](/docs/app/api-reference/functions/revalidateTag)
   - API Reference for the revalidateTag function.
+- [updateTag](/docs/app/api-reference/functions/updateTag)
+  - API Reference for the updateTag function.
 - [cacheLife](/docs/app/api-reference/functions/cacheLife)
   - Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 

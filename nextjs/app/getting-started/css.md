@@ -3,8 +3,8 @@ title: CSS
 description: Learn about the different ways to add CSS to your application, including Tailwind CSS, CSS Modules, Global CSS, and more.
 url: "https://nextjs.org/docs/app/getting-started/css"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-20
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

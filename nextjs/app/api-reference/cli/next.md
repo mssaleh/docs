@@ -3,8 +3,8 @@ title: next CLI
 description: Learn how to run and build your application with the Next.js CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/next"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"
@@ -314,6 +314,9 @@ next build --debug-build-paths="app/page.tsx"
 
 # Build more than one route
 next build --debug-build-paths="app/page.tsx,pages/index.tsx"
+
+# Include route group folders in the path
+next build --debug-build-paths="app/(marketing)/about/page.tsx"
 
 # Use glob patterns
 next build --debug-build-paths="app/**/page.tsx"

@@ -3,8 +3,8 @@ title: refresh
 description: API Reference for the refresh function.
 url: "https://nextjs.org/docs/app/api-reference/functions/refresh"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

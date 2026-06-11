@@ -3,8 +3,8 @@ title: Link Component
 description: "Enable fast client-side navigation with the built-in `next/link` component."
 url: "https://nextjs.org/docs/app/api-reference/components/link"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -851,6 +851,7 @@ When a user tries to navigate away using `CustomLink` while the form has unsaved
 
 | Version   | Changes                                                                                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `v16.2.0` | Add `transitionTypes` prop.                                                                                                                                                  |
 | `v15.4.0` | Add `auto` as an alias to the default `prefetch` behavior.                                                                                                                   |
 | `v15.3.0` | Add `onNavigate` API                                                                                                                                                         |
 | `v13.0.0` | No longer requires a child `<a>` tag. A [codemod](/docs/app/guides/upgrading/codemods#remove-a-tags-from-link-components) is provided to automatically update your codebase. |

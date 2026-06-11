@@ -3,8 +3,8 @@ title: draftMode
 description: API Reference for the draftMode function.
 url: "https://nextjs.org/docs/app/api-reference/functions/draft-mode"
 docs_index: /docs/llms.txt
-version: 16.2.6
-lastUpdated: 2026-05-07
+version: 16.2.9
+lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -44,10 +44,13 @@ The following methods and properties are available:
 
 ## Good to know
 
-* `draftMode` is an **asynchronous** function that returns a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function.
+* `draftMode` is an **asynchronous** function that returns a promise. You must use `async/await` or React’s [`use`](https://react.dev/reference/react/use) function.
   * In version 14 and earlier, `draftMode` was a synchronous function. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
 * A new bypass cookie value will be generated each time you run `next build`. This ensures that the bypass cookie can’t be guessed.
 * To test Draft Mode locally over HTTP, your browser will need to allow third-party cookies and local storage access.
+* [`isEnabled`](#checking-if-draft-mode-is-enabled) is readable inside a [caching directive](/docs/app/api-reference/directives/use-cache) scope. Other runtime APIs like `cookies()` and `headers()` are not allowed inside caching directive scopes, even when Draft Mode is active.
+* Calling `enable()` or `disable()` inside a caching directive scope will throw an error.
+* When Draft Mode is enabled, all functions and components under a caching directive scope re-execute on every request and results are not saved to the cache. This ensures draft content is always fresh.
 
 ## Examples
 
