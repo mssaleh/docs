@@ -3,7 +3,7 @@ title: File-system conventions
 description: API Reference for Next.js file-system conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -15,7 +15,7 @@ prerequisites:
 - [default.js](/docs/app/api-reference/file-conventions/default)
   - API Reference for the default.js file.
 - [Dynamic Segments](/docs/app/api-reference/file-conventions/dynamic-routes)
-  - Dynamic Route Segments can be used to programmatically generate route segments from dynamic data.
+  - Use Dynamic Segments to read URL path params and generate routes from dynamic data.
 - [error.js](/docs/app/api-reference/file-conventions/error)
   - API reference for the error.js special file.
 - [forbidden.js](/docs/app/api-reference/file-conventions/forbidden)

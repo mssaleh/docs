@@ -3,15 +3,15 @@ title: How to create forms with Server Actions
 description: Learn how to create forms in Next.js with React Server Actions.
 url: "https://nextjs.org/docs/app/guides/forms"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-10
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-React Server Actions are [Server Functions](https://react.dev/reference/rsc/server-functions) that execute on the server. They can be called in Server and Client Components to handle form submissions. This guide will walk you through how to create forms in Next.js with Server Actions.
+React Server Actions are [Server Functions](https://react.dev/reference/rsc/server-functions) that execute on the server. They can be called in Server and Client Components to handle form submissions. This guide will walk you through how to create forms in Next.js with Server Actions. For Server Action behaviors beyond forms (single-roundtrip response, sequential dispatch, security, deployment), see [Server Actions and Mutations](/docs/app/guides/server-actions).
 
 > \[!WARNING]
 > Always verify [authentication and authorization](/docs/app/guides/authentication) inside each Server Action, even if the form is only rendered on an authenticated page. See the [Data Security guide](/docs/app/guides/data-security) for more details.

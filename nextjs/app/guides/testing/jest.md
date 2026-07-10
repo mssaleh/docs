@@ -3,7 +3,7 @@ title: How to set up Jest with Next.js
 description: Learn how to set up Jest with Next.js for Unit Testing and Snapshot Testing.
 url: "https://nextjs.org/docs/app/guides/testing/jest"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"

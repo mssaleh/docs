@@ -30,29 +30,29 @@ Get Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 
@@ -69,7 +69,7 @@ Get Invite
 ```http
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

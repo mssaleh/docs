@@ -3,8 +3,8 @@ title: How to set up a custom server in Next.js
 description: Start a Next.js app programmatically using a custom server.
 url: "https://nextjs.org/docs/app/guides/custom-server"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-02-02
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -15,7 +15,7 @@ Next.js includes its own server with `next start` by default. If you have an exi
 
 > **Good to know**:
 >
-> * Before deciding to use a custom server, keep in mind that it should only be used when the integrated router of Next.js can't meet your app requirements. A custom server will remove important performance optimizations, like **[Automatic Static Optimization](/docs/pages/building-your-application/rendering/automatic-static-optimization).**
+> * Before deciding to use a custom server, keep in mind that it should only be used when the integrated router of Next.js can't meet your app requirements.
 > * When using standalone output mode, it does not trace custom server files. This mode outputs a separate minimal `server.js` file, instead. These cannot be used together.
 
 Take a look at the [following example](https://github.com/vercel/next.js/tree/canary/examples/custom-server) of a custom server:

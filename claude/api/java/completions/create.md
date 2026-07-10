@@ -6,9 +6,9 @@
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) for guidance in migrating from Text Completions to Messages.
 
 ### Parameters
 
@@ -70,6 +70,12 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `long maxTokensToSample`
 
     The maximum number of tokens to generate before stopping.
@@ -100,7 +106,7 @@ Future models and features will not be compatible with Text Completions. See our
     Assistant:"
     ```
 
-    See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting) for more details.
+    See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview) for more details.
 
   - `Optional<Metadata> metadata`
 
@@ -158,6 +164,18 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
       Frontier intelligence for long-running agents and coding
@@ -210,26 +228,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       Exceptional model for specialized complex tasks
 
-    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-      Fast and cost-effective model
-
   - `Optional<String> stopReason`
 
     The reason that we stopped.
@@ -266,7 +264,7 @@ public final class Main {
 
         CompletionCreateParams params = CompletionCreateParams.builder()
             .maxTokensToSample(256L)
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_SONNET_5)
             .prompt("\n\nHuman: Hello, world!\n\nAssistant:")
             .build();
         Completion completion = client.completions().create(params);

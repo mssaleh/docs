@@ -23,10 +23,10 @@ export LLAMA_CLOUD_API_KEY="llx-..."
 
 ## Your first parse job in 60 seconds
 
-- [Python](#tab-panel-32)
-- [TypeScript](#tab-panel-33)
-- [REST API](#tab-panel-34)
-- [Web UI](#tab-panel-35)
+- [Python](#tab-panel-44)
+- [TypeScript](#tab-panel-45)
+- [REST API](#tab-panel-46)
+- [Web UI](#tab-panel-47)
 
 Install the SDK:
 
@@ -187,10 +187,10 @@ Terminal window
 
 ```
 curl -X POST \
-  https://api.cloud.llamaindex.ai/api/v1/files/ \
+  https://api.cloud.llamaindex.ai/api/v1/beta/files \
   -H 'Accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
   -H "Authorization: Bearer $LLAMA_CLOUD_API_KEY" \
+  -F 'purpose=parse' \
   -F 'file=@/path/to/your/file.pdf;type=application/pdf'
 ```
 

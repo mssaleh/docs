@@ -3,7 +3,7 @@ title: generateStaticParams
 description: API reference for the generateStaticParams function.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-static-params"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"

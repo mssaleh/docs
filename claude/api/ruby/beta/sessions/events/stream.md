@@ -10,13 +10,21 @@ Stream Events
 
 - `session_id: String`
 
+- `event_deltas: Array[BetaManagedAgentsDeltaType]`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+  - `:"agent.message"`
+
+  - `:"agent.thinking"`
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -70,9 +78,15 @@ Stream Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
 ### Returns
 
-- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 33 more`
 
   Server-sent event in the session stream.
 
@@ -716,7 +730,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -935,6 +949,42 @@ Stream Events
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -1496,11 +1546,19 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -1730,19 +1788,13 @@ Stream Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -1797,6 +1849,94 @@ Stream Events
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `event: BetaManagedAgentsStartEventPreview`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview`
+
+        - `id: String`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `type: :"agent.message"`
+
+          - `:"agent.message"`
+
+      - `class BetaManagedAgentsAgentThinkingPreview`
+
+        - `id: String`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `type: :"agent.thinking"`
+
+          - `:"agent.thinking"`
+
+    - `type: :event_start`
+
+      - `:event_start`
+
+  - `class BetaManagedAgentsDeltaEvent`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `delta: BetaManagedAgentsDeltaContent`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `content: BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+      - `type: :content_delta`
+
+        - `:content_delta`
+
+      - `index: Integer`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `event_id: String`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `type: :event_delta`
+
+      - `:event_delta`
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

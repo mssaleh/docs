@@ -1,10 +1,10 @@
 ---
 title: Dynamic Route Segments
-description: Dynamic Route Segments can be used to programmatically generate route segments from dynamic data.
+description: Use Dynamic Segments to read URL path params and generate routes from dynamic data.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-03
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -14,7 +14,9 @@ related:
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-When you don't know the exact route segment names ahead of time and want to create routes from dynamic data, you can use Dynamic Segments that are filled in at request time or prerendered at build time.
+A URL path is a sequence of path segments. In the App Router, a segment may be **static** (a literal value matched exactly) or **dynamic** (a placeholder that captures a value from the URL). When you don't know a segment's value ahead of time, define a Dynamic Segment to create routes from dynamic data. Next.js passes the captured values to your page via the path `params` prop, either filled in at request time or prerendered at build time.
+
+> **Good to know**: Dynamic Segments are often referred to as path params, route params, or URL params.
 
 ## Convention
 

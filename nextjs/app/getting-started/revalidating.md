@@ -3,8 +3,8 @@ title: Revalidating
 description: Learn how to revalidate cached data using time-based and on-demand strategies.
 url: "https://nextjs.org/docs/app/getting-started/revalidating"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-05-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -40,14 +40,15 @@ export async function getProducts() {
 
 `cacheLife` accepts a profile name or a custom configuration object:
 
-| Profile   | `stale` | `revalidate` | `expire`    |
-| --------- | ------- | ------------ | ----------- |
-| `seconds` | 0       | 1s           | 60s         |
-| `minutes` | 5m      | 1m           | 1h          |
-| `hours`   | 5m      | 1h           | 1d          |
-| `days`    | 5m      | 1d           | 1w          |
-| `weeks`   | 5m      | 1w           | 30d         |
-| `max`     | 5m      | 30d          | ~indefinite |
+| Profile   | `stale` | `revalidate` | `expire` |
+| --------- | ------- | ------------ | -------- |
+| `default` | 5m      | 15m          | never    |
+| `seconds` | 30s     | 1s           | 60s      |
+| `minutes` | 5m      | 1m           | 1h       |
+| `hours`   | 5m      | 1h           | 1d       |
+| `days`    | 5m      | 1d           | 1w       |
+| `weeks`   | 5m      | 1w           | 30d      |
+| `max`     | 5m      | 30d          | 1y       |
 
 For fine-grained control, pass an object:
 

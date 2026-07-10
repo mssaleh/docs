@@ -2,6 +2,8 @@
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Register a public CA certificate for the tunnel.
 
 Anthropic verifies the gateway's server certificate against this CA
@@ -70,7 +72,7 @@ holds at most two non-archived certificates.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
         }'

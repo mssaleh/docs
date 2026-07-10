@@ -32,19 +32,19 @@ Get User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 
@@ -59,7 +59,7 @@ Get User
 ```http
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -121,19 +121,19 @@ List Users
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 
@@ -160,7 +160,7 @@ List Users
 ```http
 curl https://api.anthropic.com/v1/organizations/users \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -197,17 +197,17 @@ Update User
 
 ### Body Parameters
 
-- `role: "user" or "developer" or "billing" or "claude_code_user"`
+- `role: "billing" or "claude_code_user" or "developer" or "user"`
 
   New role for the User. Cannot be "admin".
-
-  - `"user"`
-
-  - `"developer"`
 
   - `"billing"`
 
   - `"claude_code_user"`
+
+  - `"developer"`
+
+  - `"user"`
 
 ### Returns
 
@@ -229,19 +229,19 @@ Update User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 
@@ -257,7 +257,7 @@ Update User
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "role": "user"
         }'
@@ -308,7 +308,7 @@ Remove User
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -342,19 +342,19 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 

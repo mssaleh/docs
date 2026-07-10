@@ -3,7 +3,7 @@ title: How to set up your Next.js project for AI coding agents
 description: Learn how to configure your Next.js project so AI coding agents use up-to-date documentation instead of outdated training data.
 url: "https://nextjs.org/docs/app/guides/ai-agents"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-20
 prerequisites:
   - "Guides: /docs/app/guides"

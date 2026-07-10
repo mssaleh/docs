@@ -736,6 +736,22 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```php
@@ -866,7 +882,7 @@ var_dump($betaManagedAgentsSendSessionEvents);
 
 ## Stream Events
 
-`$client->beta->sessions->events->stream(string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
+`$client->beta->sessions->events->stream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
 
 **get** `/v1/sessions/{session_id}/events/stream`
 
@@ -875,6 +891,10 @@ Stream Events
 ### Parameters
 
 - `sessionID: string`
+
+- `eventDeltas?:optional list<BetaManagedAgentsDeltaType>`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -1568,6 +1588,42 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```php
@@ -1582,7 +1638,9 @@ $betaManagedAgentsStreamSessionEvents = $client
   ->sessions
   ->events
   ->streamStream(
-  'sesn_011CZkZAtmR3yMPDzynEDxu7', betas: ['message-batches-2024-09-24']
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  betas: ['message-batches-2024-09-24'],
 );
 
 var_dump($betaManagedAgentsStreamSessionEvents);
@@ -1888,6 +1946,28 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
   - `Type type`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `ManagedAgentsCredentialHostUnreachableError`
+
+  - `string credentialID`
+
+    ID of the affected credential.
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+  - `Type type`
+
+  - `string vaultID`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `ManagedAgentsDocumentBlock`
@@ -1989,6 +2069,14 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?bool isError`
 
       Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsSystemMessageEventParams`
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks to append. Text-only.
+
+    - `Type type`
 
 ### Beta Managed Agents File Document Source
 
@@ -2923,6 +3011,22 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -3947,6 +4051,52 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `ManagedAgentsSystemMessageEventParams`
+
+  - `list<BetaManagedAgentsSystemContentBlock> content`
+
+    System content blocks to append. Text-only.
+
+  - `Type type`
 
 ### Beta Managed Agents Text Block
 

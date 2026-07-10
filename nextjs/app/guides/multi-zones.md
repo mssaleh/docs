@@ -3,8 +3,8 @@ title: How to build micro-frontends using multi-zones and Next.js
 description: Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
 url: "https://nextjs.org/docs/app/guides/multi-zones"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-03
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -112,7 +112,7 @@ export async function proxy(request) {
 
 ## Linking between zones
 
-Links to paths in a different zone should use an `a` tag instead of the Next.js [`<Link>`](/docs/pages/api-reference/components/link) component. This is because Next.js will try to prefetch and soft navigate to any relative path in `<Link>` component, which will not work across zones.
+Links to paths in a different zone should use an `a` tag instead of the Next.js [`<Link>`](/docs/app/api-reference/components/link) component. This is because Next.js will try to prefetch and soft navigate to any relative path in `<Link>` component, which will not work across zones.
 
 ## Sharing code
 

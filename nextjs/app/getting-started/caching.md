@@ -3,7 +3,7 @@ title: Caching
 description: Learn how to cache data and UI in Next.js
 url: "https://nextjs.org/docs/app/getting-started/caching"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-05-13
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

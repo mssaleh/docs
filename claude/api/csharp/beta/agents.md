@@ -22,6 +22,14 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
         Frontier intelligence for long-running agents and coding
@@ -71,6 +79,14 @@ Create Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -122,15 +138,15 @@ Create Agent
 
   - `required string name`
 
-    Body param: Human-readable name for the agent. 1-256 characters.
+    Body param: Human-readable name for the agent.
 
   - `string? description`
 
-    Body param: Description of what the agent does. Up to 2048 characters.
+    Body param: Description of what the agent does.
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> mcpServers`
 
-    Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
+    Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
     - `required string Name`
 
@@ -154,7 +170,7 @@ Create Agent
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams> skills`
 
-    Body param: Skills available to the agent. Maximum 20.
+    Body param: Skills available to the agent.
 
     - `class BetaManagedAgentsAnthropicSkillParams:`
 
@@ -190,7 +206,7 @@ Create Agent
 
   - `string? system`
 
-    Body param: System prompt for the agent. Up to 100,000 characters.
+    Body param: System prompt for the agent.
 
   - `IReadOnlyList<Tool> tools`
 
@@ -334,25 +350,17 @@ Create Agent
 
       - `required string Description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -418,6 +426,12 @@ Create Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -457,6 +471,14 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -680,19 +702,11 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -886,13 +900,19 @@ List Agents
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class AgentListPageResponse:`
 
   Paginated list of agents.
 
-  - `IReadOnlyList<BetaManagedAgentsAgent> Data`
+  - `required IReadOnlyList<BetaManagedAgentsAgent> Data`
 
     List of agents.
 
@@ -929,6 +949,14 @@ List Agents
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -1152,19 +1180,11 @@ List Agents
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 
@@ -1353,6 +1373,12 @@ Get Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -1392,6 +1418,14 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -1615,19 +1649,11 @@ Get Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -1754,11 +1780,11 @@ Update Agent
 
   - `string? description`
 
-    Body param: Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+    Body param: Description. Omit to preserve; send empty string or null to clear.
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams>? mcpServers`
 
-    Body param: MCP servers. Full replacement. Omit to preserve; send empty array or null to clear. Names must be unique. Maximum 20.
+    Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
     - `required string Name`
 
@@ -1785,6 +1811,14 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -1835,6 +1869,14 @@ Update Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -1890,11 +1932,11 @@ Update Agent
 
   - `string name`
 
-    Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+    Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams>? skills`
 
-    Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+    Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
     - `class BetaManagedAgentsAnthropicSkillParams:`
 
@@ -1930,7 +1972,7 @@ Update Agent
 
   - `string? system`
 
-    Body param: System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+    Body param: System prompt. Omit to preserve; send empty string or null to clear.
 
   - `IReadOnlyList<Tool>? tools`
 
@@ -2074,25 +2116,17 @@ Update Agent
 
       - `required string Description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -2158,6 +2192,12 @@ Update Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -2197,6 +2237,14 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -2420,19 +2468,11 @@ Update Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -2610,6 +2650,12 @@ Archive Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -2649,6 +2695,14 @@ Archive Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -2872,19 +2926,11 @@ Archive Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -3031,6 +3077,14 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
         Frontier intelligence for long-running agents and coding
@@ -3253,19 +3307,11 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -3815,19 +3861,11 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     JSON Schema for custom tool input parameters.
 
+    - `JsonElement Type "object"constant`
+
     - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-      JSON Schema properties defining the tool's input parameters.
-
-    - `IReadOnlyList<string> Required`
-
-      List of required property names.
-
-    - `Type Type`
-
-      Must be 'object' for tool input schemas.
-
-      - `"object"Object`
+    - `IReadOnlyList<string>? Required`
 
   - `required string Name`
 
@@ -3841,19 +3879,11 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   JSON Schema for custom tool input parameters.
 
+  - `JsonElement Type "object"constant`
+
   - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-    JSON Schema properties defining the tool's input parameters.
-
-  - `IReadOnlyList<string> Required`
-
-    List of required property names.
-
-  - `Type Type`
-
-    Must be 'object' for tool input schemas.
-
-    - `"object"Object`
+  - `IReadOnlyList<string>? Required`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -3863,25 +3893,17 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `required string Description`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
   - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
     JSON Schema for custom tool input parameters.
 
+    - `JsonElement Type "object"constant`
+
     - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-      JSON Schema properties defining the tool's input parameters.
-
-    - `IReadOnlyList<string> Required`
-
-      List of required property names.
-
-    - `Type Type`
-
-      Must be 'object' for tool input schemas.
-
-      - `"object"Object`
+    - `IReadOnlyList<string>? Required`
 
   - `required string Name`
 
@@ -4159,6 +4181,14 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-sonnet-5"ClaudeSonnet5`
+
+      High-performance model for coding and agents
+
+    - `"claude-fable-5"ClaudeFable5`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
       Frontier intelligence for long-running agents and coding
@@ -4218,6 +4248,14 @@ Console.WriteLine(betaManagedAgentsAgent);
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-sonnet-5"ClaudeSonnet5`
+
+      High-performance model for coding and agents
+
+    - `"claude-fable-5"ClaudeFable5`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -4368,6 +4406,14 @@ Console.WriteLine(betaManagedAgentsAgent);
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -4571,19 +4617,11 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -4735,13 +4773,19 @@ List Agent Versions
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class VersionListPageResponse:`
 
   Paginated list of agent versions.
 
-  - `IReadOnlyList<BetaManagedAgentsAgent> Data`
+  - `required IReadOnlyList<BetaManagedAgentsAgent> Data`
 
     Agent versions.
 
@@ -4778,6 +4822,14 @@ List Agent Versions
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -5001,19 +5053,11 @@ List Agent Versions
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 

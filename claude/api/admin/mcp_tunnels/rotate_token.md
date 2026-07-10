@@ -2,6 +2,8 @@
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Invalidate the tunnel's current token for new connections and return a fresh value.
 
 Established connections are not severed by rotation; a connector
@@ -51,7 +53,7 @@ restarted after rotation must use the new value. An optional
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

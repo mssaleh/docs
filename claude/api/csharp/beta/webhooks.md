@@ -2,6 +2,188 @@
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `class BetaWebhookAgentArchivedEventData:`
+
+  - `required string ID`
+
+    ID of the agent that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "agent.archived"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Agent Created Event Data
+
+- `class BetaWebhookAgentCreatedEventData:`
+
+  - `required string ID`
+
+    ID of the agent that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "agent.created"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `class BetaWebhookAgentDeletedEventData:`
+
+  - `required string ID`
+
+    ID of the agent that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "agent.deleted"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Agent Updated Event Data
+
+- `class BetaWebhookAgentUpdatedEventData:`
+
+  - `required string ID`
+
+    ID of the agent that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "agent.updated"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `class BetaWebhookDeploymentArchivedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.archived"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Created Event Data
+
+- `class BetaWebhookDeploymentCreatedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.created"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `class BetaWebhookDeploymentDeletedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.deleted"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `class BetaWebhookDeploymentPausedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.paused"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `class BetaWebhookDeploymentRunFailedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment run that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment_run.failed"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `class BetaWebhookDeploymentRunStartedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment run that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment_run.started"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `class BetaWebhookDeploymentRunSucceededEventData:`
+
+  - `required string ID`
+
+    ID of the deployment run that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment_run.succeeded"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `class BetaWebhookDeploymentUnpausedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.unpaused"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `class BetaWebhookDeploymentUpdatedEventData:`
+
+  - `required string ID`
+
+    ID of the deployment that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "deployment.updated"constant`
+
+  - `required string WorkspaceID`
+
 ### Beta Webhook Event
 
 - `class BetaWebhookEvent:`
@@ -20,7 +202,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -32,7 +214,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -44,7 +226,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -56,7 +238,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -68,7 +250,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -80,7 +262,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -92,7 +274,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -104,7 +286,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -116,7 +298,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -128,7 +310,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -140,7 +322,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -152,9 +334,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_created"constant`
 
@@ -164,9 +350,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_idled"constant`
 
@@ -176,9 +366,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_terminated"constant`
 
@@ -188,7 +382,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -200,7 +394,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -212,7 +406,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -224,7 +418,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -236,7 +430,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -252,7 +446,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -268,7 +462,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -284,7 +478,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -293,6 +487,174 @@
       - `required string VaultID`
 
         ID of the vault that owns this credential.
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookSessionUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the session that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "session.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.created"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.archived"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.deleted"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.paused"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.failed"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.created"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.unpaused"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.archived"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.started"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.deleted"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.succeeded"constant`
 
       - `required string WorkspaceID`
 
@@ -308,7 +670,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -320,7 +682,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -332,7 +694,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -344,7 +706,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -356,7 +718,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -368,7 +730,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -380,7 +742,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -392,7 +754,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -404,7 +766,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -416,7 +778,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -428,7 +790,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -440,9 +802,13 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
+
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `JsonElement Type "session.thread_created"constant`
 
@@ -452,9 +818,13 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
+
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `JsonElement Type "session.thread_idled"constant`
 
@@ -464,9 +834,13 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
+
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `JsonElement Type "session.thread_terminated"constant`
 
@@ -476,7 +850,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `required string OrganizationID`
 
@@ -488,7 +862,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `required string OrganizationID`
 
@@ -500,7 +874,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `required string OrganizationID`
 
@@ -512,7 +886,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `required string OrganizationID`
 
@@ -524,7 +898,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `required string OrganizationID`
 
@@ -540,7 +914,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `required string OrganizationID`
 
@@ -556,7 +930,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `required string OrganizationID`
 
@@ -572,7 +946,7 @@
 
     - `required string ID`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `required string OrganizationID`
 
@@ -584,13 +958,181 @@
 
     - `required string WorkspaceID`
 
+  - `class BetaWebhookSessionUpdatedEventData:`
+
+    - `required string ID`
+
+      ID of the session that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "session.updated"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookAgentCreatedEventData:`
+
+    - `required string ID`
+
+      ID of the agent that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "agent.created"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookAgentArchivedEventData:`
+
+    - `required string ID`
+
+      ID of the agent that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "agent.archived"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookAgentDeletedEventData:`
+
+    - `required string ID`
+
+      ID of the agent that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "agent.deleted"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentPausedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.paused"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentRunFailedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment run that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment_run.failed"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentCreatedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.created"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentUpdatedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.updated"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentUnpausedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.unpaused"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookAgentUpdatedEventData:`
+
+    - `required string ID`
+
+      ID of the agent that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "agent.updated"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentArchivedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.archived"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentRunStartedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment run that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment_run.started"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentDeletedEventData:`
+
+    - `required string ID`
+
+      ID of the deployment that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment.deleted"constant`
+
+    - `required string WorkspaceID`
+
+  - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+    - `required string ID`
+
+      ID of the deployment run that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "deployment_run.succeeded"constant`
+
+    - `required string WorkspaceID`
+
 ### Beta Webhook Session Archived Event Data
 
 - `class BetaWebhookSessionArchivedEventData:`
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -604,7 +1146,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -618,7 +1160,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -632,7 +1174,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -646,7 +1188,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -660,7 +1202,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -674,7 +1216,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -688,7 +1230,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -702,7 +1244,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -716,7 +1258,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -730,7 +1272,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -744,7 +1286,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
@@ -758,9 +1300,13 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
+
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `JsonElement Type "session.thread_created"constant`
 
@@ -772,9 +1318,13 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
+
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `JsonElement Type "session.thread_idled"constant`
 
@@ -786,11 +1336,29 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `required string OrganizationID`
 
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `JsonElement Type "session.thread_terminated"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Session Updated Event Data
+
+- `class BetaWebhookSessionUpdatedEventData:`
+
+  - `required string ID`
+
+    ID of the session that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "session.updated"constant`
 
   - `required string WorkspaceID`
 
@@ -800,7 +1368,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `required string OrganizationID`
 
@@ -814,7 +1382,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `required string OrganizationID`
 
@@ -828,7 +1396,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `required string OrganizationID`
 
@@ -846,7 +1414,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `required string OrganizationID`
 
@@ -864,7 +1432,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `required string OrganizationID`
 
@@ -882,7 +1450,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `required string OrganizationID`
 
@@ -900,7 +1468,7 @@
 
   - `required string ID`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `required string OrganizationID`
 
@@ -926,7 +1494,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -938,7 +1506,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -950,7 +1518,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -962,7 +1530,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -974,7 +1542,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -986,7 +1554,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -998,7 +1566,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1010,7 +1578,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1022,7 +1590,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1034,7 +1602,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1046,7 +1614,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1058,9 +1626,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_created"constant`
 
@@ -1070,9 +1642,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_idled"constant`
 
@@ -1082,9 +1658,13 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_terminated"constant`
 
@@ -1094,7 +1674,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1106,7 +1686,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1118,7 +1698,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1130,7 +1710,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1142,7 +1722,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1158,7 +1738,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1174,7 +1754,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1190,7 +1770,7 @@
 
       - `required string ID`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `required string OrganizationID`
 
@@ -1199,6 +1779,174 @@
       - `required string VaultID`
 
         ID of the vault that owns this credential.
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookSessionUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the session that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "session.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.created"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.archived"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.deleted"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.paused"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.failed"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.created"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.unpaused"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `required string ID`
+
+        ID of the agent that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "agent.updated"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.archived"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.started"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `required string ID`
+
+        ID of the deployment that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment.deleted"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `required string ID`
+
+        ID of the deployment run that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "deployment_run.succeeded"constant`
 
       - `required string WorkspaceID`
 

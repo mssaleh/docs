@@ -6,7 +6,7 @@
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -32,7 +32,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -85,6 +85,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
+
+      - `"server-side-fallback-2026-06-01"`
+
+      - `"fallback-credit-2026-06-01"`
+
+      - `"agent-memory-2026-07-22"`
 
 ### Returns
 

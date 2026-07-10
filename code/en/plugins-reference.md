@@ -73,7 +73,7 @@ Plugin agents support `name`, `description`, `model`, `effort`, `maxTurns`, `too
 
 **Integration points**:
 
-* Agents appear in the `/agents` interface
+* Agents appear in the [@-mention typeahead](/en/sub-agents#invoke-subagents-explicitly) under their scoped name, such as `my-plugin:code-reviewer`, once the plugin is enabled
 * Claude can invoke agents automatically based on task context
 * Agents can be invoked manually by users
 * Plugin agents work alongside built-in Claude agents
@@ -150,6 +150,8 @@ Plugin hooks respond to the same lifecycle events as [user-defined hooks](/en/ho
 * `mcp_tool`: call a tool on a configured [MCP server](/en/mcp)
 * `prompt`: evaluate a prompt with an LLM (uses `$ARGUMENTS` placeholder for context)
 * `agent`: run an agentic verifier with tools for complex verification tasks
+
+Hooks that target the plugin's own [bundled MCP server](#mcp-servers) must use its scoped names. Tool matchers and `if` fields take the scoped tool name `mcp__plugin_<plugin-name>_<server-name>__<tool>`, and an `mcp_tool` hook's `server` field takes `plugin:<plugin-name>:<server-name>`. A matcher written against the bare server key never fires. See [Match MCP tools](/en/hooks#match-mcp-tools) and [Plugin-provided MCP servers](/en/mcp#plugin-provided-mcp-servers).
 
 ### MCP servers
 
@@ -254,8 +256,18 @@ LSP integration provides:
 | `settings`              | Settings passed via `workspace/didChangeConfiguration`                                                                                                              |
 | `workspaceFolder`       | Workspace folder path for the server                                                                                                                                |
 | `startupTimeout`        | Max time to wait for server startup (milliseconds)                                                                                                                  |
+| `shutdownTimeout`       | Max time to wait for graceful shutdown (milliseconds). When the timeout elapses, Claude Code terminates the server process. When unset, no timeout applies          |
+| `restartOnCrash`        | Whether to restart the server after it crashes. Defaults to `true`. Set to `false` to leave a crashed server stopped instead of restarting it                       |
 | `maxRestarts`           | Maximum number of restart attempts before giving up                                                                                                                 |
 | `diagnostics`           | Whether to push diagnostics into Claude's context after edits (default `true`). Set to `false` to keep code navigation but suppress automatic diagnostic injection. |
+
+`restartOnCrash` and `shutdownTimeout` require Claude Code v2.1.205 or later. Before v2.1.205, the config schema accepted both options but setting either one caused Claude Code to skip that LSP server entirely at startup, with the reason visible only in `claude --debug` output.
+
+**Multiple servers for the same extension**: when more than one enabled LSP server declares the same file extension in `extensionToLanguage`, whether the servers come from one plugin or from different plugins, the first server registered handles files with that extension and the others never start. The `/plugin` interface shows a warning naming the plugin whose server is active.
+
+**Servers that fail to initialize**: Claude Code skips a server whose configuration is invalid, for example one missing `command` or `extensionToLanguage`, and the other configured servers still start. Run `claude --debug` to see why a server was skipped.
+
+A skipped server doesn't claim its file extensions, so another valid server that declares the same extension, from the same or a different plugin, still handles those files. Before v2.1.205, a server that failed to initialize still claimed its extensions and blocked another valid server for the same extension.
 
 <Warning>
   **You must install the language server binary separately.** LSP plugins configure how Claude Code connects to a language server, but they don't include the server itself. If you see `Executable not found in $PATH` in the `/plugin` Errors tab, install the required binary for your language.
@@ -446,9 +458,9 @@ The manifest is optional. If omitted, Claude Code auto-discovers components in [
 
 If you include a manifest, `name` is the only required field.
 
-| Field  | Type   | Description                               | Example              |
-| :----- | :----- | :---------------------------------------- | :------------------- |
-| `name` | string | Unique identifier (kebab-case, no spaces) | `"deployment-tools"` |
+| Field  | Type   | Description                                                                                                                                                                                                                       | Example              |
+| :----- | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------- |
+| `name` | string | Unique identifier (kebab-case, no spaces). When a [marketplace entry](/en/plugin-marketplaces#plugin-entries) lists the plugin under a different name, the marketplace entry name is what `enabledPlugins` keys and `/plugin` use | `"deployment-tools"` |
 
 This name is used for namespacing components. For example, in the UI, the
 agent `agent-creator` for the plugin with name `plugin-dev` will appear as
@@ -507,20 +519,20 @@ The same field can appear in a plugin's marketplace entry, where it takes preced
 
 ### Component path fields
 
-| Field                   | Type                  | Description                                                                                                                                               | Example                                              |
-| :---------------------- | :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
-| `skills`                | string\|array         | Custom skill directories containing `<name>/SKILL.md` (in addition to default `skills/`)                                                                  | `"./custom/skills/"`                                 |
-| `commands`              | string\|array         | Custom flat `.md` skill files or directories (replaces default `commands/`)                                                                               | `"./custom/cmd.md"` or `["./cmd1.md"]`               |
-| `agents`                | string\|array         | Custom agent files (replaces default `agents/`)                                                                                                           | `"./custom/agents/reviewer.md"`                      |
-| `hooks`                 | string\|array\|object | Hook config paths or inline config                                                                                                                        | `"./my-extra-hooks.json"`                            |
-| `mcpServers`            | string\|array\|object | MCP config paths or inline config                                                                                                                         | `"./my-extra-mcp-config.json"`                       |
-| `outputStyles`          | string\|array         | Custom output style files/directories (replaces default `output-styles/`)                                                                                 | `"./styles/"`                                        |
-| `lspServers`            | string\|array\|object | [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) configs for code intelligence (go to definition, find references, etc.) | `"./.lsp.json"`                                      |
-| `experimental.themes`   | string\|array         | Color theme files/directories (replaces default `themes/`). See [Themes](#themes)                                                                         | `"./themes/"`                                        |
-| `experimental.monitors` | string\|array         | Background [Monitor](/en/tools-reference#monitor-tool) configurations that start automatically when the plugin is active. See [Monitors](#monitors)       | `"./monitors.json"`                                  |
-| `userConfig`            | object                | User-configurable values prompted at enable time. See [User configuration](#user-configuration)                                                           | See below                                            |
-| `channels`              | array                 | Channel declarations for message injection (Telegram, Slack, Discord style). See [Channels](#channels)                                                    | See below                                            |
-| `dependencies`          | array                 | Other plugins this plugin requires, optionally with semver version constraints. See [Constrain plugin dependency versions](/en/plugin-dependencies)       | `[{ "name": "secrets-vault", "version": "~2.1.0" }]` |
+| Field                   | Type                  | Description                                                                                                                                                                   | Example                                              |
+| :---------------------- | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
+| `skills`                | string\|array         | Custom skill directories containing `<name>/SKILL.md`. Adds to the default `skills/` scan. See [Path behavior rules](#path-behavior-rules) for the marketplace-root exception | `"./custom/skills/"`                                 |
+| `commands`              | string\|array         | Custom flat `.md` skill files or directories (replaces default `commands/`)                                                                                                   | `"./custom/cmd.md"` or `["./cmd1.md"]`               |
+| `agents`                | string\|array         | Custom agent files (replaces default `agents/`)                                                                                                                               | `"./custom/agents/reviewer.md"`                      |
+| `hooks`                 | string\|array\|object | Hook config paths or inline config                                                                                                                                            | `"./my-extra-hooks.json"`                            |
+| `mcpServers`            | string\|array\|object | MCP config paths or inline config                                                                                                                                             | `"./my-extra-mcp-config.json"`                       |
+| `outputStyles`          | string\|array         | Custom output style files/directories (replaces default `output-styles/`)                                                                                                     | `"./styles/"`                                        |
+| `lspServers`            | string\|array\|object | [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) configs for code intelligence (go to definition, find references, etc.)                     | `"./.lsp.json"`                                      |
+| `experimental.themes`   | string\|array         | Color theme files/directories (replaces default `themes/`). See [Themes](#themes)                                                                                             | `"./themes/"`                                        |
+| `experimental.monitors` | string\|array         | Background [Monitor](/en/tools-reference#monitor-tool) configurations that start automatically when the plugin is active. See [Monitors](#monitors)                           | `"./monitors.json"`                                  |
+| `userConfig`            | object                | User-configurable values prompted at enable time. See [User configuration](#user-configuration)                                                                               | See below                                            |
+| `channels`              | array                 | Channel declarations for message injection (Telegram, Slack, Discord style). See [Channels](#channels)                                                                        | See below                                            |
+| `dependencies`          | array                 | Other plugins this plugin requires, optionally with semver version constraints. See [Constrain plugin dependency versions](/en/plugin-dependencies)                           | `[{ "name": "secrets-vault", "version": "~2.1.0" }]` |
 
 ### Experimental components
 
@@ -599,10 +611,10 @@ The `server` field is required and must match a key in the plugin's `mcpServers`
 Whether a custom path replaces or extends the plugin's default directory depends on the field:
 
 * **Replaces the default**: `commands`, `agents`, `outputStyles`, `experimental.themes`, `experimental.monitors`. For example, when the manifest specifies `commands`, the default `commands/` directory is not scanned. To keep the default and add more, list it explicitly: `"commands": ["./commands/", "./extras/"]`
-* **Adds to the default**: `skills`. The default `skills/` directory is always scanned, and directories listed in `skills` are loaded alongside it
+* **Adds to the default**: `skills`. The default `skills/` directory is always scanned, and directories listed in `skills` are loaded alongside it. Exception: for a [marketplace entry whose `source` resolves to the marketplace root](/en/plugin-marketplaces#advanced-plugin-entries), declaring specific subdirectories replaces the default `skills/` scan
 * **Own merge rules**: [hooks](#hooks), [MCP servers](#mcp-servers), and [LSP servers](#lsp-servers). See each section for how multiple sources combine
 
-When a plugin has both a default folder and the matching manifest key, Claude Code v2.1.140 and later flags the ignored folder in `/doctor`, `claude plugin list`, and the `/plugin` detail view. The plugin still loads using the manifest paths. No warning is shown when the manifest key points into the default folder, for example `"commands": ["./commands/deploy.md"]`, because the folder is addressed explicitly in that case.
+When a plugin has both a default folder and the matching manifest key, Claude Code v2.1.140 and later warns about the ignored folder in `claude plugin list` and the `/plugin` detail view. The plugin still loads using the manifest paths. Claude Code doesn't warn when the manifest key points into the default folder, for example `"commands": ["./commands/deploy.md"]`, because that path names the folder explicitly.
 
 For all path fields:
 
@@ -638,7 +650,9 @@ When a plugin updates mid-session, hook commands, monitors, MCP servers, and LSP
 
 **`${CLAUDE_PLUGIN_DATA}`**: a persistent directory for plugin state that survives updates. Use this for installed dependencies such as `node_modules` or Python virtual environments, generated code, caches, and any other files that should persist across plugin versions. The directory is created automatically the first time this variable is referenced.
 
-**`${CLAUDE_PROJECT_DIR}`**: the project root. This is the same directory hooks receive in their `CLAUDE_PROJECT_DIR` variable. Use this to reference project-local scripts or config files. Wrap in quotes to handle paths with spaces, for example `"${CLAUDE_PROJECT_DIR}/scripts/server.sh"`. MCP servers can also call the MCP `roots/list` request, which returns the directory Claude Code was launched from.
+**`${CLAUDE_PROJECT_DIR}`**: the project root. This is the same directory hooks receive in their `CLAUDE_PROJECT_DIR` variable. Use this to reference project-local scripts or config files. Wrap in quotes to handle paths with spaces, for example `"${CLAUDE_PROJECT_DIR}/scripts/server.sh"`.
+
+MCP servers can also call the `roots/list` request to read the session's working directories at runtime. See [what `roots/list` returns and when Claude Code notifies the server of changes](/en/mcp#option-3-add-a-local-stdio-server).
 
 ```json theme={null}
 {

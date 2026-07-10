@@ -14,15 +14,15 @@ Create Agent
 
 - `name: string`
 
-  Human-readable name for the agent. 1-256 characters.
+  Human-readable name for the agent.
 
 - `description?:optional string`
 
-  Description of what the agent does. Up to 2048 characters.
+  Description of what the agent does.
 
 - `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
-  MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
 - `metadata?:optional array<string,string>`
 
@@ -34,11 +34,11 @@ Create Agent
 
 - `skills?:optional list<BetaManagedAgentsSkillParams>`
 
-  Skills available to the agent. Maximum 20.
+  Skills available to the agent.
 
 - `system?:optional string`
 
-  System prompt for the agent. Up to 100,000 characters.
+  System prompt for the agent.
 
 - `tools?:optional list<Tool>`
 

@@ -6,9 +6,9 @@
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) for guidance in migrating from Text Completions to Messages.
 
 ### Parameters
 
@@ -24,11 +24,23 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+  - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-sonnet-5"`
+
+      High-performance model for coding and agents
+
+    - `:"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `:"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `:"claude-opus-4-8"`
 
@@ -82,26 +94,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       Exceptional model for specialized complex tasks
 
-    - `:"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
   - `String = String`
 
 - `prompt: String`
@@ -122,7 +114,7 @@ Future models and features will not be compatible with Text Completions. See our
   Assistant:"
   ```
 
-  See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting) for more details.
+  See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview) for more details.
 
 - `metadata: Metadata`
 
@@ -146,7 +138,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://docs.claude.com/en/api/streaming) for details.
+  See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
 - `temperature: Float`
 
@@ -178,7 +170,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -232,6 +224,12 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `class Completion`
@@ -252,11 +250,23 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+    - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-sonnet-5"`
+
+        High-performance model for coding and agents
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `:"claude-opus-4-8"`
 
@@ -310,26 +320,6 @@ Future models and features will not be compatible with Text Completions. See our
 
         Exceptional model for specialized complex tasks
 
-      - `:"claude-opus-4-0"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-opus-4-20250514"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-sonnet-4-0"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-sonnet-4-20250514"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-3-haiku-20240307"`
-
-        Fast and cost-effective model
-
     - `String = String`
 
   - `stop_reason: String`
@@ -358,7 +348,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 completion = anthropic.completions.create(
   max_tokens_to_sample: 256,
-  model: :"claude-opus-4-8",
+  model: :"claude-sonnet-5",
   prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
 )
 

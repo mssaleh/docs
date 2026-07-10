@@ -68,6 +68,12 @@ Update Session
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Optional<BetaManagedAgentsSessionAgentUpdate> agent`
 
     Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
@@ -119,6 +125,14 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -346,19 +360,13 @@ Update Session
 
               JSON Schema for custom tool input parameters.
 
-              - `Optional<Properties> properties`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `Optional<List<String>> required`
-
-                List of required property names.
-
-              - `Optional<Type> type`
-
-                Must be 'object' for tool input schemas.
+              - `JsonValue; type "object"constant`
 
                 - `OBJECT("object")`
+
+              - `Optional<Properties> properties`
+
+              - `Optional<List<String>> required`
 
             - `String name`
 
@@ -616,6 +624,10 @@ Update Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `Optional<String> deploymentId`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```java
@@ -800,6 +812,7 @@ public final class Main {
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```

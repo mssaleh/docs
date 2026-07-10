@@ -3,8 +3,8 @@ title: Prefetching
 description: Learn how to configure prefetching in Next.js
 url: "https://nextjs.org/docs/app/guides/prefetching"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-10
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -57,10 +57,10 @@ export default function NavLink() {
 }
 ```
 
-| **Context**       | **Prefetched payload**           | **Client Cache TTL**                                                           |
-| ----------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| No `loading.js`   | Entire page                      | Until app reload                                                               |
-| With `loading.js` | Layout to first loading boundary | 30s ([configurable](/docs/app/api-reference/config/next-config-js/staleTimes)) |
+| **Context**       | **Prefetched payload**           | **Client Cache TTL**                                                                              |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| No `loading.js`   | Entire page                      | 5 min ([`staleTimes.static`](/docs/app/api-reference/config/next-config-js/staleTimes))           |
+| With `loading.js` | Layout to first loading boundary | Off by default ([`staleTimes.dynamic`](/docs/app/api-reference/config/next-config-js/staleTimes)) |
 
 Automatic prefetching runs only in production. Disable with `prefetch={false}` or use the wrapper in [Disabled Prefetch](#disabled-prefetch).
 
@@ -86,7 +86,7 @@ export function PricingCard() {
 }
 ```
 
-If the intent is to prefetch a URL when a component loads, see the extending or rejecting a link \[example].
+To prefetch a URL when a component loads, see [Extending or ejecting link](#extending-or-ejecting-link).
 
 ## Hover-triggered prefetch
 

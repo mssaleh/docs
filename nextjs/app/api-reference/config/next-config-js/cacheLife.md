@@ -3,7 +3,7 @@ title: cacheLife
 description: Learn how to set up cacheLife configurations in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheLife"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-11-11
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

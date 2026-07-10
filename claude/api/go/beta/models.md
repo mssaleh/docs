@@ -88,6 +88,12 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -95,6 +101,10 @@ The Models API response can be used to determine which models are available for 
   - `ID string`
 
     Unique model identifier.
+
+  - `AllowedFallbackModels []string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Capabilities BetaModelCapabilities`
 
@@ -254,6 +264,9 @@ func main() {
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -406,6 +419,12 @@ The Models API response can be used to determine information about a specific mo
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -413,6 +432,10 @@ The Models API response can be used to determine information about a specific mo
   - `ID string`
 
     Unique model identifier.
+
+  - `AllowedFallbackModels []string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Capabilities BetaModelCapabilities`
 
@@ -574,6 +597,9 @@ func main() {
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -824,6 +850,10 @@ func main() {
   - `ID string`
 
     Unique model identifier.
+
+  - `AllowedFallbackModels []string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Capabilities BetaModelCapabilities`
 

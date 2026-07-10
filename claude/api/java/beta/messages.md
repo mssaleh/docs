@@ -10,7 +10,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
+Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started)
 
 ### Parameters
 
@@ -72,15 +72,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `Optional<String> userProfileId`
+
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-    Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+    Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-    Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+    Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
   - `List<BetaMessageParam> messages`
 
@@ -127,9 +137,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
     ```
 
-    See [input examples](https://docs.claude.com/en/api/messages-examples).
+    See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-    Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
     There is a limit of 100,000 messages in a single request.
 
@@ -164,7 +174,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `5m`: 5 minutes
               - `1h`: 1 hour
 
-              Defaults to `5m`.
+              Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
               - `TTL_5M("5m")`
 
@@ -730,6 +740,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                - `MODEL_NOT_FOUND("model_not_found")`
+
               - `JsonValue; type "advisor_tool_result_error"constant`
 
                 - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -990,6 +1002,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+              - `Optional<String> errorMessage`
+
             - `class BetaToolSearchToolSearchResultBlockParam:`
 
               - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -1136,6 +1150,108 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
+        - `class BetaFallbackBlockParam:`
+
+          A `fallback` block echoed back from a prior response.
+
+          Accepted in `messages[].content` and not rendered into the prompt; not
+          validated against the request's `fallbacks` chain or top-level `model`.
+
+          Echo the assistant turn back verbatim, including this block in its
+          original position. The block marks the boundary between content produced
+          before and after a fallback hop, and the server relies on that boundary
+          to validate the turn: when thinking runs flank the boundary, omitting
+          the block merges them into one span the server cannot validate (the
+          request is rejected), and moving it into the middle of a single run is
+          likewise rejected; between non-thinking blocks the block's placement has
+          no validation effect.
+
+          - `BetaFallbackInfoParam from`
+
+            Identifies one hop of a fallback transition.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
+              - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                Most capable model for cybersecurity and biology research
+
+              - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+          - `BetaFallbackInfoParam to`
+
+            Identifies one hop of a fallback transition.
+
+          - `JsonValue; type "fallback"constant`
+
+            - `FALLBACK("fallback")`
+
+          - `Optional<JsonValue> trigger`
+
+            The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
     - `Role role`
 
       - `USER("user")`
@@ -1199,6 +1315,137 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     Request-level diagnostics. Currently carries the previous response
     id for prompt-cache divergence reporting.
 
+  - `Optional<String> fallbackCreditToken`
+
+    The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+    When a preceding request was refused and returned a `fallback_credit_token`,
+    pass that code here on the retry to have the retry's cache-creation tokens
+    for the prefix that was warm on the refused model billed at the cache-read
+    rate. Must be redeemed by the same organization and workspace, with the same
+    request body (optionally extended by one appended `assistant` message whose
+    content is the partial text — with any trailing whitespace stripped from
+    the final text block — and paired server-tool blocks streamed before the
+    refusal; the appended-assistant form is not available for requests with
+    `output_format` set or forced `tool_choice`), on an eligible fallback
+    model, on the same platform,
+    and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+    mid-server-tool-loop whose partial content was continuable may only be
+    redeemed with the appended-assistant form — if an exact-body retry is
+    rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry with the appended-assistant form instead.
+
+    When the appended-assistant form is used on a model that otherwise disallows
+    assistant-turn prefill, this token also authorizes that one prefill.
+
+  - `Optional<List<BetaFallbackParam>> fallbacks`
+
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Optional<Long> maxTokens`
+
+    - `Optional<BetaOutputConfig> outputConfig`
+
+      - `Optional<Effort> effort`
+
+        All possible effort levels.
+
+        - `LOW("low")`
+
+        - `MEDIUM("medium")`
+
+        - `HIGH("high")`
+
+        - `XHIGH("xhigh")`
+
+        - `MAX("max")`
+
+      - `Optional<BetaJsonOutputFormat> format`
+
+        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+        - `Schema schema`
+
+          The JSON schema of the format
+
+        - `JsonValue; type "json_schema"constant`
+
+          - `JSON_SCHEMA("json_schema")`
+
+      - `Optional<BetaTokenTaskBudget> taskBudget`
+
+        User-configurable total token budget across contexts.
+
+        - `long total`
+
+          Total token budget across all contexts in the session.
+
+        - `JsonValue; type "tokens"constant`
+
+          The budget type. Currently only 'tokens' is supported.
+
+          - `TOKENS("tokens")`
+
+        - `Optional<Long> remaining`
+
+          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+    - `Optional<Speed> speed`
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+    - `Optional<Thinking> thinking`
+
+      - `class BetaThinkingConfigEnabled:`
+
+        - `long budgetTokens`
+
+          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+          Must be ≥1024 and less than `max_tokens`.
+
+          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+
+        - `JsonValue; type "enabled"constant`
+
+          - `ENABLED("enabled")`
+
+        - `Optional<Display> display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `SUMMARIZED("summarized")`
+
+          - `OMITTED("omitted")`
+
+      - `class BetaThinkingConfigDisabled:`
+
+        - `JsonValue; type "disabled"constant`
+
+          - `DISABLED("disabled")`
+
+      - `class BetaThinkingConfigAdaptive:`
+
+        - `JsonValue; type "adaptive"constant`
+
+          - `ADAPTIVE("adaptive")`
+
+        - `Optional<Display> display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `SUMMARIZED("summarized")`
+
+          - `OMITTED("omitted")`
+
   - `Optional<String> inferenceGeo`
 
     Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -1241,7 +1488,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-    Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+    Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
     - `AUTO("auto")`
 
@@ -1267,7 +1514,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     System prompt.
 
-    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     - `String`
 
@@ -1297,7 +1544,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `Optional<BetaToolChoice> toolChoice`
 
@@ -1309,7 +1556,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
     Each tool definition includes:
 
@@ -1365,7 +1612,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-    See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+    See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
     - `class BetaTool:`
 
@@ -1396,6 +1643,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1447,6 +1696,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1482,6 +1733,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1519,6 +1772,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1552,6 +1807,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1588,6 +1845,46 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `class BetaCodeExecutionTool20260521:`
+
+      Code execution tool with REPL state persistence.
+
+      - `JsonValue; name "code_execution"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `CODE_EXECUTION("code_execution")`
+
+      - `JsonValue; type "code_execution_20260521"constant`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1631,6 +1928,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1670,6 +1969,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1715,6 +2016,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1754,6 +2057,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1799,6 +2104,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1843,6 +2150,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1879,6 +2188,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1914,6 +2225,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1954,6 +2267,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -2025,6 +2340,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -2079,6 +2396,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -2128,6 +2447,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -2185,6 +2506,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -2221,6 +2544,134 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaWebSearchTool20260318:`
+
+      - `JsonValue; name "web_search"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `WEB_SEARCH("web_search")`
+
+      - `JsonValue; type "web_search_20260318"constant`
+
+        - `WEB_SEARCH_20260318("web_search_20260318")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<String>> allowedDomains`
+
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+      - `Optional<List<String>> blockedDomains`
+
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<ResponseInclusion> responseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `FULL("full")`
+
+        - `EXCLUDED("excluded")`
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Optional<BetaUserLocation> userLocation`
+
+        Parameters for the user's location. Used to provide more relevant search results.
+
+    - `class BetaWebFetchTool20260318:`
+
+      - `JsonValue; name "web_fetch"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `WEB_FETCH("web_fetch")`
+
+      - `JsonValue; type "web_fetch_20260318"constant`
+
+        - `WEB_FETCH_20260318("web_fetch_20260318")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<String>> allowedDomains`
+
+        List of domains to allow fetching from
+
+      - `Optional<List<String>> blockedDomains`
+
+        List of domains to block fetching from
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaCitationsConfigParam> citations`
+
+        Citations configuration for fetched documents. Citations are disabled by default.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxContentTokens`
+
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<ResponseInclusion> responseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `FULL("full")`
+
+        - `EXCLUDED("excluded")`
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Optional<Boolean> useCache`
+
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
     - `class BetaAdvisorTool20260301:`
 
       - `Model model`
@@ -2228,78 +2679,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
 
       - `JsonValue; name "advisor"constant`
 
@@ -2321,6 +2700,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2332,6 +2713,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `Optional<Boolean> deferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxTokens`
+
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
       - `Optional<Long> maxUses`
 
@@ -2364,6 +2749,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -2400,6 +2787,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -2463,10 +2852,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
     Recommended for advanced use cases only.
-
-  - `Optional<String> userProfileId`
-
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ### Returns
 
@@ -2949,6 +3334,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+            - `MODEL_NOT_FOUND("model_not_found")`
+
           - `JsonValue; type "advisor_tool_result_error"constant`
 
             - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -3293,6 +3680,122 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `COMPACTION("compaction")`
 
+    - `class BetaFallbackBlock:`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `BetaFallbackInfo from`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+      - `BetaFallbackInfo to`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `BetaFallbackRefusalTrigger trigger`
+
+        What caused the `from` model to hand over at this hop.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered a refusal.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
+
+      - `JsonValue; type "fallback"constant`
+
+        - `FALLBACK("fallback")`
+
   - `Optional<BetaContextManagementResponse> contextManagement`
 
     Context management response.
@@ -3402,78 +3905,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
-    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-      Best combination of speed and intelligence
-
-    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-      Fastest model with near-frontier intelligence
-
-    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-      Fastest model with near-frontier intelligence
-
-    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-      High-performance model for agents and coding
-
-    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-      High-performance model for agents and coding
-
-    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-      Exceptional model for specialized complex tasks
-
-    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-      Exceptional model for specialized complex tasks
-
-    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-      Fast and cost-effective model
-
   - `JsonValue; role "assistant"constant`
 
     Conversational role of the generated message.
@@ -3488,19 +3919,70 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `Optional<Category> category`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `CYBER("cyber")`
 
       - `BIO("bio")`
+
+      - `FRONTIER_LLM("frontier_llm")`
+
+      - `REASONING_EXTRACTION("reasoning_extraction")`
 
     - `Optional<String> explanation`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `Optional<String> fallbackCreditToken`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `Optional<Boolean> fallbackHasPrefillClaim`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `Optional<String> recommendedModel`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `JsonValue; type "refusal"constant`
 
@@ -3621,6 +4103,12 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The number of input tokens which were used.
 
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
         - `long outputTokens`
 
           The number of output tokens which were used.
@@ -3696,6 +4184,47 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           Usage for an advisor sub-inference iteration
 
           - `ADVISOR_MESSAGE("advisor_message")`
+
+      - `class BetaFallbackMessageIterationUsage:`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "fallback_message"constant`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `FALLBACK_MESSAGE("fallback_message")`
 
     - `long outputTokens`
 
@@ -3831,6 +4360,9 @@ public final class Main {
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -3854,6 +4386,7 @@ public final class Main {
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-sonnet-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -3882,7 +4415,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
+Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
 
 ### Parameters
 
@@ -3944,6 +4477,16 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `Optional<String> userProfileId`
+
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
   - `List<BetaMessageParam> messages`
 
     Input messages.
@@ -3989,9 +4532,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
     ```
 
-    See [input examples](https://docs.claude.com/en/api/messages-examples).
+    See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-    Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
     There is a limit of 100,000 messages in a single request.
 
@@ -4026,7 +4569,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `5m`: 5 minutes
               - `1h`: 1 hour
 
-              Defaults to `5m`.
+              Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
               - `TTL_5M("5m")`
 
@@ -4592,6 +5135,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                - `MODEL_NOT_FOUND("model_not_found")`
+
               - `JsonValue; type "advisor_tool_result_error"constant`
 
                 - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -4852,6 +5397,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+              - `Optional<String> errorMessage`
+
             - `class BetaToolSearchToolSearchResultBlockParam:`
 
               - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -4998,6 +5545,108 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
+        - `class BetaFallbackBlockParam:`
+
+          A `fallback` block echoed back from a prior response.
+
+          Accepted in `messages[].content` and not rendered into the prompt; not
+          validated against the request's `fallbacks` chain or top-level `model`.
+
+          Echo the assistant turn back verbatim, including this block in its
+          original position. The block marks the boundary between content produced
+          before and after a fallback hop, and the server relies on that boundary
+          to validate the turn: when thinking runs flank the boundary, omitting
+          the block merges them into one span the server cannot validate (the
+          request is rejected), and moving it into the middle of a single run is
+          likewise rejected; between non-thinking blocks the block's placement has
+          no validation effect.
+
+          - `BetaFallbackInfoParam from`
+
+            Identifies one hop of a fallback transition.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
+              - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                Most capable model for cybersecurity and biology research
+
+              - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+          - `BetaFallbackInfoParam to`
+
+            Identifies one hop of a fallback transition.
+
+          - `JsonValue; type "fallback"constant`
+
+            - `FALLBACK("fallback")`
+
+          - `Optional<JsonValue> trigger`
+
+            The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
     - `Role role`
 
       - `USER("user")`
@@ -5064,7 +5713,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     System prompt.
 
-    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     - `String`
 
@@ -5086,7 +5735,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `Optional<BetaToolChoice> toolChoice`
 
@@ -5098,7 +5747,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
     Each tool definition includes:
 
@@ -5154,7 +5803,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-    See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+    See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
     - `class BetaTool:`
 
@@ -5185,6 +5834,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5236,6 +5887,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5271,6 +5924,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5308,6 +5963,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5341,6 +5998,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5377,6 +6036,46 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `class BetaCodeExecutionTool20260521:`
+
+      Code execution tool with REPL state persistence.
+
+      - `JsonValue; name "code_execution"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `CODE_EXECUTION("code_execution")`
+
+      - `JsonValue; type "code_execution_20260521"constant`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5420,6 +6119,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5459,6 +6160,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5504,6 +6207,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5543,6 +6248,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5588,6 +6295,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5632,6 +6341,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5668,6 +6379,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -5703,6 +6416,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -5743,6 +6458,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -5814,6 +6531,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -5868,6 +6587,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -5917,6 +6638,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -5974,6 +6697,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -6010,6 +6735,134 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaWebSearchTool20260318:`
+
+      - `JsonValue; name "web_search"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `WEB_SEARCH("web_search")`
+
+      - `JsonValue; type "web_search_20260318"constant`
+
+        - `WEB_SEARCH_20260318("web_search_20260318")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<String>> allowedDomains`
+
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+      - `Optional<List<String>> blockedDomains`
+
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<ResponseInclusion> responseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `FULL("full")`
+
+        - `EXCLUDED("excluded")`
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Optional<BetaUserLocation> userLocation`
+
+        Parameters for the user's location. Used to provide more relevant search results.
+
+    - `class BetaWebFetchTool20260318:`
+
+      - `JsonValue; name "web_fetch"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `WEB_FETCH("web_fetch")`
+
+      - `JsonValue; type "web_fetch_20260318"constant`
+
+        - `WEB_FETCH_20260318("web_fetch_20260318")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<List<String>> allowedDomains`
+
+        List of domains to allow fetching from
+
+      - `Optional<List<String>> blockedDomains`
+
+        List of domains to block fetching from
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaCitationsConfigParam> citations`
+
+        Citations configuration for fetched documents. Citations are disabled by default.
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxContentTokens`
+
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<ResponseInclusion> responseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `FULL("full")`
+
+        - `EXCLUDED("excluded")`
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Optional<Boolean> useCache`
+
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
     - `class BetaAdvisorTool20260301:`
 
       - `Model model`
@@ -6017,78 +6870,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
 
       - `JsonValue; name "advisor"constant`
 
@@ -6110,6 +6891,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -6121,6 +6904,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `Optional<Boolean> deferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxTokens`
+
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
       - `Optional<Long> maxUses`
 
@@ -6153,6 +6940,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -6189,6 +6978,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -6328,6 +7119,18 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
       Frontier intelligence for long-running agents and coding
@@ -6379,26 +7182,6 @@ public final class Main {
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
       Exceptional model for specialized complex tasks
-
-    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-      Fast and cost-effective model
 
   - `long outputTokens`
 
@@ -6476,6 +7259,18 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
       Frontier intelligence for long-running agents and coding
@@ -6528,26 +7323,6 @@ public final class Main {
 
       Exceptional model for specialized complex tasks
 
-    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-      Fast and cost-effective model
-
   - `JsonValue; name "advisor"constant`
 
     Name of the tool.
@@ -6568,6 +7343,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -6585,7 +7362,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -6598,6 +7375,10 @@ public final class Main {
   - `Optional<Boolean> deferLoading`
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxTokens`
+
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
   - `Optional<Long> maxUses`
 
@@ -6628,6 +7409,8 @@ public final class Main {
         - `UNAVAILABLE("unavailable")`
 
         - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+        - `MODEL_NOT_FOUND("model_not_found")`
 
       - `JsonValue; type "advisor_tool_result_error"constant`
 
@@ -6687,6 +7470,8 @@ public final class Main {
 
         - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+        - `MODEL_NOT_FOUND("model_not_found")`
+
       - `JsonValue; type "advisor_tool_result_error"constant`
 
         - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -6736,7 +7521,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -6760,6 +7545,8 @@ public final class Main {
 
     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+    - `MODEL_NOT_FOUND("model_not_found")`
+
   - `JsonValue; type "advisor_tool_result_error"constant`
 
     - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -6781,6 +7568,8 @@ public final class Main {
     - `UNAVAILABLE("unavailable")`
 
     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+    - `MODEL_NOT_FOUND("model_not_found")`
 
   - `JsonValue; type "advisor_tool_result_error"constant`
 
@@ -7009,7 +7798,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -7072,7 +7861,7 @@ public final class Main {
     - `5m`: 5 minutes
     - `1h`: 1 hour
 
-    Defaults to `5m`.
+    Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
     - `TTL_5M("5m")`
 
@@ -7734,6 +8523,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -7751,7 +8542,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -7789,6 +8580,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -7806,7 +8599,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -7846,6 +8639,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -7863,7 +8658,66 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Code Execution Tool 20260521
+
+- `class BetaCodeExecutionTool20260521:`
+
+  Code execution tool with REPL state persistence.
+
+  - `JsonValue; name "code_execution"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `CODE_EXECUTION("code_execution")`
+
+  - `JsonValue; type "code_execution_20260521"constant`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -8096,7 +8950,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -8295,7 +9149,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -8469,7 +9323,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -8891,6 +9745,8 @@ public final class Main {
 
           - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+          - `MODEL_NOT_FOUND("model_not_found")`
+
         - `JsonValue; type "advisor_tool_result_error"constant`
 
           - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -9235,6 +10091,122 @@ public final class Main {
 
       - `COMPACTION("compaction")`
 
+  - `class BetaFallbackBlock:`
+
+    Marks the point in `content` where one model's output gives way to the next.
+
+    One block appears per hop where a preceding model actually ran this turn and
+    declined. A turn where no preceding model ran and declined has no such
+    boundary and carries no block — the signal for whether a fallback model
+    served the response is the presence of a `fallback_message` entry in
+    `usage.iterations`, not this block.
+
+    The block is treated like a server-tool content block for streaming: it
+    arrives via the standard `content_block_start` / `content_block_stop`
+    pair and carries no deltas.
+
+    - `BetaFallbackInfo from`
+
+      The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
+        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+    - `BetaFallbackInfo to`
+
+      The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+    - `BetaFallbackRefusalTrigger trigger`
+
+      What caused the `from` model to hand over at this hop.
+
+      - `Optional<Category> category`
+
+        The policy category that triggered a refusal.
+
+        - `CYBER("cyber")`
+
+        - `BIO("bio")`
+
+        - `FRONTIER_LLM("frontier_llm")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
+
+      - `JsonValue; type "refusal"constant`
+
+        - `REFUSAL("refusal")`
+
+    - `JsonValue; type "fallback"constant`
+
+      - `FALLBACK("fallback")`
+
 ### Beta Content Block Param
 
 - `class BetaContentBlockParam: A class that can be one of several variants.union`
@@ -9266,7 +10238,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -9832,6 +10804,8 @@ public final class Main {
 
           - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+          - `MODEL_NOT_FOUND("model_not_found")`
+
         - `JsonValue; type "advisor_tool_result_error"constant`
 
           - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -10092,6 +11066,8 @@ public final class Main {
 
           - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+        - `Optional<String> errorMessage`
+
       - `class BetaToolSearchToolSearchResultBlockParam:`
 
         - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -10238,6 +11214,108 @@ public final class Main {
 
       Create a cache control breakpoint at this content block.
 
+  - `class BetaFallbackBlockParam:`
+
+    A `fallback` block echoed back from a prior response.
+
+    Accepted in `messages[].content` and not rendered into the prompt; not
+    validated against the request's `fallbacks` chain or top-level `model`.
+
+    Echo the assistant turn back verbatim, including this block in its
+    original position. The block marks the boundary between content produced
+    before and after a fallback hop, and the server relies on that boundary
+    to validate the turn: when thinking runs flank the boundary, omitting
+    the block merges them into one span the server cannot validate (the
+    request is rejected), and moving it into the middle of a single run is
+    likewise rejected; between non-thinking blocks the block's placement has
+    no validation effect.
+
+    - `BetaFallbackInfoParam from`
+
+      Identifies one hop of a fallback transition.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
+        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+    - `BetaFallbackInfoParam to`
+
+      Identifies one hop of a fallback transition.
+
+    - `JsonValue; type "fallback"constant`
+
+      - `FALLBACK("fallback")`
+
+    - `Optional<JsonValue> trigger`
+
+      The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
 ### Beta Content Block Source
 
 - `class BetaContentBlockSource:`
@@ -10273,7 +11351,7 @@ public final class Main {
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `TTL_5M("5m")`
 
@@ -10464,7 +11542,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -10960,6 +12038,696 @@ public final class Main {
 
     - `ENCRYPTED_CODE_EXECUTION_RESULT("encrypted_code_execution_result")`
 
+### Beta Fallback Block
+
+- `class BetaFallbackBlock:`
+
+  Marks the point in `content` where one model's output gives way to the next.
+
+  One block appears per hop where a preceding model actually ran this turn and
+  declined. A turn where no preceding model ran and declined has no such
+  boundary and carries no block — the signal for whether a fallback model
+  served the response is the presence of a `fallback_message` entry in
+  `usage.iterations`, not this block.
+
+  The block is treated like a server-tool content block for streaming: it
+  arrives via the standard `content_block_start` / `content_block_stop`
+  pair and carries no deltas.
+
+  - `BetaFallbackInfo from`
+
+    The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
+
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+        Exceptional model for specialized complex tasks
+
+      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+        Exceptional model for specialized complex tasks
+
+  - `BetaFallbackInfo to`
+
+    The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+  - `BetaFallbackRefusalTrigger trigger`
+
+    What caused the `from` model to hand over at this hop.
+
+    - `Optional<Category> category`
+
+      The policy category that triggered a refusal.
+
+      - `CYBER("cyber")`
+
+      - `BIO("bio")`
+
+      - `FRONTIER_LLM("frontier_llm")`
+
+      - `REASONING_EXTRACTION("reasoning_extraction")`
+
+    - `JsonValue; type "refusal"constant`
+
+      - `REFUSAL("refusal")`
+
+  - `JsonValue; type "fallback"constant`
+
+    - `FALLBACK("fallback")`
+
+### Beta Fallback Block Param
+
+- `class BetaFallbackBlockParam:`
+
+  A `fallback` block echoed back from a prior response.
+
+  Accepted in `messages[].content` and not rendered into the prompt; not
+  validated against the request's `fallbacks` chain or top-level `model`.
+
+  Echo the assistant turn back verbatim, including this block in its
+  original position. The block marks the boundary between content produced
+  before and after a fallback hop, and the server relies on that boundary
+  to validate the turn: when thinking runs flank the boundary, omitting
+  the block merges them into one span the server cannot validate (the
+  request is rejected), and moving it into the middle of a single run is
+  likewise rejected; between non-thinking blocks the block's placement has
+  no validation effect.
+
+  - `BetaFallbackInfoParam from`
+
+    Identifies one hop of a fallback transition.
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
+
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+        Exceptional model for specialized complex tasks
+
+      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+        Exceptional model for specialized complex tasks
+
+  - `BetaFallbackInfoParam to`
+
+    Identifies one hop of a fallback transition.
+
+  - `JsonValue; type "fallback"constant`
+
+    - `FALLBACK("fallback")`
+
+  - `Optional<JsonValue> trigger`
+
+    The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
+### Beta Fallback Info
+
+- `class BetaFallbackInfo:`
+
+  Identifies one hop of a fallback transition.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
+    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+### Beta Fallback Info Param
+
+- `class BetaFallbackInfoParam:`
+
+  Identifies one hop of a fallback transition.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
+    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+### Beta Fallback Message Iteration Usage
+
+- `class BetaFallbackMessageIterationUsage:`
+
+  Token usage for the fallback-model attempt of a server-side fallback request.
+
+  Produced in place of a `message` entry for whichever hop served the
+  response. A declined hop produces the existing `message` entry. Whether
+  a fallback model served the response is signalled by the presence of this
+  entry in `usage.iterations`.
+
+  - `Optional<BetaCacheCreation> cacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+    - `long ephemeral1hInputTokens`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `long ephemeral5mInputTokens`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `long cacheCreationInputTokens`
+
+    The number of input tokens used to create the cache entry.
+
+  - `long cacheReadInputTokens`
+
+    The number of input tokens read from the cache.
+
+  - `long inputTokens`
+
+    The number of input tokens which were used.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
+    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+  - `long outputTokens`
+
+    The number of output tokens which were used.
+
+  - `JsonValue; type "fallback_message"constant`
+
+    Usage for the fallback-model attempt that served the response
+
+    - `FALLBACK_MESSAGE("fallback_message")`
+
+### Beta Fallback Param
+
+- `class BetaFallbackParam:`
+
+  One entry in the `fallbacks` chain on a `/v1/messages` request.
+
+  `model` is required. The four override fields (`max_tokens`, `thinking`,
+  `output_config`, and `speed`) replace the corresponding top-level field
+  for this attempt only and are validated as if the request were made to
+  `model`. Any other key is rejected at parse time.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
+    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+  - `Optional<Long> maxTokens`
+
+  - `Optional<BetaOutputConfig> outputConfig`
+
+    - `Optional<Effort> effort`
+
+      All possible effort levels.
+
+      - `LOW("low")`
+
+      - `MEDIUM("medium")`
+
+      - `HIGH("high")`
+
+      - `XHIGH("xhigh")`
+
+      - `MAX("max")`
+
+    - `Optional<BetaJsonOutputFormat> format`
+
+      A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+      - `Schema schema`
+
+        The JSON schema of the format
+
+      - `JsonValue; type "json_schema"constant`
+
+        - `JSON_SCHEMA("json_schema")`
+
+    - `Optional<BetaTokenTaskBudget> taskBudget`
+
+      User-configurable total token budget across contexts.
+
+      - `long total`
+
+        Total token budget across all contexts in the session.
+
+      - `JsonValue; type "tokens"constant`
+
+        The budget type. Currently only 'tokens' is supported.
+
+        - `TOKENS("tokens")`
+
+      - `Optional<Long> remaining`
+
+        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+  - `Optional<Speed> speed`
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
+  - `Optional<Thinking> thinking`
+
+    - `class BetaThinkingConfigEnabled:`
+
+      - `long budgetTokens`
+
+        Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+        Must be ≥1024 and less than `max_tokens`.
+
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+
+      - `JsonValue; type "enabled"constant`
+
+        - `ENABLED("enabled")`
+
+      - `Optional<Display> display`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `SUMMARIZED("summarized")`
+
+        - `OMITTED("omitted")`
+
+    - `class BetaThinkingConfigDisabled:`
+
+      - `JsonValue; type "disabled"constant`
+
+        - `DISABLED("disabled")`
+
+    - `class BetaThinkingConfigAdaptive:`
+
+      - `JsonValue; type "adaptive"constant`
+
+        - `ADAPTIVE("adaptive")`
+
+      - `Optional<Display> display`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `SUMMARIZED("summarized")`
+
+        - `OMITTED("omitted")`
+
+### Beta Fallback Refusal Trigger
+
+- `class BetaFallbackRefusalTrigger:`
+
+  The `from` model declined for policy reasons.
+
+  - `Optional<Category> category`
+
+    The policy category that triggered a refusal.
+
+    - `CYBER("cyber")`
+
+    - `BIO("bio")`
+
+    - `FRONTIER_LLM("frontier_llm")`
+
+    - `REASONING_EXTRACTION("reasoning_extraction")`
+
+  - `JsonValue; type "refusal"constant`
+
+    - `REFUSAL("refusal")`
+
 ### Beta File Document Source
 
 - `class BetaFileDocumentSource:`
@@ -11041,7 +12809,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -11304,7 +13072,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -11344,7 +13112,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -11390,6 +13158,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -11407,7 +13177,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -12120,6 +13890,8 @@ public final class Main {
 
             - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+            - `MODEL_NOT_FOUND("model_not_found")`
+
           - `JsonValue; type "advisor_tool_result_error"constant`
 
             - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -12464,6 +14236,122 @@ public final class Main {
 
         - `COMPACTION("compaction")`
 
+    - `class BetaFallbackBlock:`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `BetaFallbackInfo from`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+      - `BetaFallbackInfo to`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `BetaFallbackRefusalTrigger trigger`
+
+        What caused the `from` model to hand over at this hop.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered a refusal.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
+
+      - `JsonValue; type "fallback"constant`
+
+        - `FALLBACK("fallback")`
+
   - `Optional<BetaContextManagementResponse> contextManagement`
 
     Context management response.
@@ -12573,78 +14461,6 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
-    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-      Best combination of speed and intelligence
-
-    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-      Fastest model with near-frontier intelligence
-
-    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-      Fastest model with near-frontier intelligence
-
-    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-      High-performance model for agents and coding
-
-    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-      High-performance model for agents and coding
-
-    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-      Exceptional model for specialized complex tasks
-
-    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-      Exceptional model for specialized complex tasks
-
-    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-      Powerful model for complex tasks
-
-    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-      High-performance model with extended thinking
-
-    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-      Fast and cost-effective model
-
   - `JsonValue; role "assistant"constant`
 
     Conversational role of the generated message.
@@ -12659,19 +14475,70 @@ public final class Main {
 
     - `Optional<Category> category`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `CYBER("cyber")`
 
       - `BIO("bio")`
+
+      - `FRONTIER_LLM("frontier_llm")`
+
+      - `REASONING_EXTRACTION("reasoning_extraction")`
 
     - `Optional<String> explanation`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `Optional<String> fallbackCreditToken`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `Optional<Boolean> fallbackHasPrefillClaim`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `Optional<String> recommendedModel`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `JsonValue; type "refusal"constant`
 
@@ -12792,6 +14659,12 @@ public final class Main {
 
           The number of input tokens which were used.
 
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
         - `long outputTokens`
 
           The number of output tokens which were used.
@@ -12867,6 +14740,47 @@ public final class Main {
           Usage for an advisor sub-inference iteration
 
           - `ADVISOR_MESSAGE("advisor_message")`
+
+      - `class BetaFallbackMessageIterationUsage:`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "fallback_message"constant`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `FALLBACK_MESSAGE("fallback_message")`
 
     - `long outputTokens`
 
@@ -12976,6 +14890,76 @@ public final class Main {
 
         The number of input tokens which were used.
 
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
+        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
       - `long outputTokens`
 
         The number of output tokens which were used.
@@ -13042,78 +15026,6 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `long outputTokens`
 
         The number of output tokens which were used.
@@ -13123,6 +15035,47 @@ public final class Main {
         Usage for an advisor sub-inference iteration
 
         - `ADVISOR_MESSAGE("advisor_message")`
+
+    - `class BetaFallbackMessageIterationUsage:`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `Optional<BetaCacheCreation> cacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `long cacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `long cacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `long inputTokens`
+
+        The number of input tokens which were used.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `long outputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonValue; type "fallback_message"constant`
+
+        Usage for the fallback-model attempt that served the response
+
+        - `FALLBACK_MESSAGE("fallback_message")`
 
   - `long outputTokens`
 
@@ -13190,6 +15143,76 @@ public final class Main {
 
     The number of input tokens which were used.
 
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
+    - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
   - `long outputTokens`
 
     The number of output tokens which were used.
@@ -13235,7 +15258,7 @@ public final class Main {
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `TTL_5M("5m")`
 
@@ -13801,6 +15824,8 @@ public final class Main {
 
               - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+              - `MODEL_NOT_FOUND("model_not_found")`
+
             - `JsonValue; type "advisor_tool_result_error"constant`
 
               - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -14061,6 +16086,8 @@ public final class Main {
 
               - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+            - `Optional<String> errorMessage`
+
           - `class BetaToolSearchToolSearchResultBlockParam:`
 
             - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -14207,6 +16234,108 @@ public final class Main {
 
           Create a cache control breakpoint at this content block.
 
+      - `class BetaFallbackBlockParam:`
+
+        A `fallback` block echoed back from a prior response.
+
+        Accepted in `messages[].content` and not rendered into the prompt; not
+        validated against the request's `fallbacks` chain or top-level `model`.
+
+        Echo the assistant turn back verbatim, including this block in its
+        original position. The block marks the boundary between content produced
+        before and after a fallback hop, and the server relies on that boundary
+        to validate the turn: when thinking runs flank the boundary, omitting
+        the block merges them into one span the server cannot validate (the
+        request is rejected), and moving it into the middle of a single run is
+        likewise rejected; between non-thinking blocks the block's placement has
+        no validation effect.
+
+        - `BetaFallbackInfoParam from`
+
+          Identifies one hop of a fallback transition.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
+
+            - `CLAUDE_FABLE_5("claude-fable-5")`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+              Most capable model for cybersecurity and biology research
+
+            - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+        - `BetaFallbackInfoParam to`
+
+          Identifies one hop of a fallback transition.
+
+        - `JsonValue; type "fallback"constant`
+
+          - `FALLBACK("fallback")`
+
+        - `Optional<JsonValue> trigger`
+
+          The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
   - `Role role`
 
     - `USER("user")`
@@ -14277,7 +16406,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -15240,6 +17369,8 @@ public final class Main {
 
             - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+            - `MODEL_NOT_FOUND("model_not_found")`
+
           - `JsonValue; type "advisor_tool_result_error"constant`
 
             - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -15584,6 +17715,122 @@ public final class Main {
 
         - `COMPACTION("compaction")`
 
+    - `class BetaFallbackBlock:`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `BetaFallbackInfo from`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+      - `BetaFallbackInfo to`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `BetaFallbackRefusalTrigger trigger`
+
+        What caused the `from` model to hand over at this hop.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered a refusal.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
+
+      - `JsonValue; type "fallback"constant`
+
+        - `FALLBACK("fallback")`
+
   - `long index`
 
   - `JsonValue; type "content_block_start"constant`
@@ -15684,19 +17931,70 @@ public final class Main {
 
       - `Optional<Category> category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `FRONTIER_LLM("frontier_llm")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
 
       - `Optional<String> explanation`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Optional<String> fallbackCreditToken`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `Optional<Boolean> fallbackHasPrefillClaim`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `Optional<String> recommendedModel`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `JsonValue; type "refusal"constant`
 
@@ -15788,6 +18086,76 @@ public final class Main {
 
           The number of input tokens which were used.
 
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
         - `long outputTokens`
 
           The number of output tokens which were used.
@@ -15854,78 +18222,6 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-            Best combination of speed and intelligence
-
-          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-            Fast and cost-effective model
-
         - `long outputTokens`
 
           The number of output tokens which were used.
@@ -15935,6 +18231,47 @@ public final class Main {
           Usage for an advisor sub-inference iteration
 
           - `ADVISOR_MESSAGE("advisor_message")`
+
+      - `class BetaFallbackMessageIterationUsage:`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "fallback_message"constant`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `FALLBACK_MESSAGE("fallback_message")`
 
     - `long outputTokens`
 
@@ -16455,6 +18792,8 @@ public final class Main {
 
               - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+              - `MODEL_NOT_FOUND("model_not_found")`
+
             - `JsonValue; type "advisor_tool_result_error"constant`
 
               - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -16799,6 +19138,122 @@ public final class Main {
 
           - `COMPACTION("compaction")`
 
+      - `class BetaFallbackBlock:`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `BetaFallbackInfo from`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
+
+            - `CLAUDE_FABLE_5("claude-fable-5")`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+              Most capable model for cybersecurity and biology research
+
+            - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+        - `BetaFallbackInfo to`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `BetaFallbackRefusalTrigger trigger`
+
+          What caused the `from` model to hand over at this hop.
+
+          - `Optional<Category> category`
+
+            The policy category that triggered a refusal.
+
+            - `CYBER("cyber")`
+
+            - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
+
+          - `JsonValue; type "refusal"constant`
+
+            - `REFUSAL("refusal")`
+
+        - `JsonValue; type "fallback"constant`
+
+          - `FALLBACK("fallback")`
+
     - `Optional<BetaContextManagementResponse> contextManagement`
 
       Context management response.
@@ -16908,78 +19363,6 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
-      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-        Best combination of speed and intelligence
-
-      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-        High-performance model for agents and coding
-
-      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-        High-performance model for agents and coding
-
-      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-        Exceptional model for specialized complex tasks
-
-      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-        Exceptional model for specialized complex tasks
-
-      - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-        Fast and cost-effective model
-
     - `JsonValue; role "assistant"constant`
 
       Conversational role of the generated message.
@@ -16994,19 +19377,70 @@ public final class Main {
 
       - `Optional<Category> category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `FRONTIER_LLM("frontier_llm")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
 
       - `Optional<String> explanation`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Optional<String> fallbackCreditToken`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `Optional<Boolean> fallbackHasPrefillClaim`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `Optional<String> recommendedModel`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `JsonValue; type "refusal"constant`
 
@@ -17127,6 +19561,12 @@ public final class Main {
 
             The number of input tokens which were used.
 
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
           - `long outputTokens`
 
             The number of output tokens which were used.
@@ -17202,6 +19642,47 @@ public final class Main {
             Usage for an advisor sub-inference iteration
 
             - `ADVISOR_MESSAGE("advisor_message")`
+
+        - `class BetaFallbackMessageIterationUsage:`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `Optional<BetaCacheCreation> cacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+          - `long cacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `long cacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `long inputTokens`
+
+            The number of input tokens which were used.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `long outputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonValue; type "fallback_message"constant`
+
+            Usage for the fallback-model attempt that served the response
+
+            - `FALLBACK_MESSAGE("fallback_message")`
 
       - `long outputTokens`
 
@@ -17754,6 +20235,8 @@ public final class Main {
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                - `MODEL_NOT_FOUND("model_not_found")`
+
               - `JsonValue; type "advisor_tool_result_error"constant`
 
                 - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -18098,6 +20581,122 @@ public final class Main {
 
             - `COMPACTION("compaction")`
 
+        - `class BetaFallbackBlock:`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn where no preceding model ran and declined has no such
+          boundary and carries no block — the signal for whether a fallback model
+          served the response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `BetaFallbackInfo from`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
+              - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                Most capable model for cybersecurity and biology research
+
+              - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+          - `BetaFallbackInfo to`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `BetaFallbackRefusalTrigger trigger`
+
+            What caused the `from` model to hand over at this hop.
+
+            - `Optional<Category> category`
+
+              The policy category that triggered a refusal.
+
+              - `CYBER("cyber")`
+
+              - `BIO("bio")`
+
+              - `FRONTIER_LLM("frontier_llm")`
+
+              - `REASONING_EXTRACTION("reasoning_extraction")`
+
+            - `JsonValue; type "refusal"constant`
+
+              - `REFUSAL("refusal")`
+
+          - `JsonValue; type "fallback"constant`
+
+            - `FALLBACK("fallback")`
+
       - `Optional<BetaContextManagementResponse> contextManagement`
 
         Context management response.
@@ -18207,78 +20806,6 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `JsonValue; role "assistant"constant`
 
         Conversational role of the generated message.
@@ -18293,19 +20820,70 @@ public final class Main {
 
         - `Optional<Category> category`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `CYBER("cyber")`
 
           - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
 
         - `Optional<String> explanation`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `Optional<String> fallbackCreditToken`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `Optional<Boolean> fallbackHasPrefillClaim`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `Optional<String> recommendedModel`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `JsonValue; type "refusal"constant`
 
@@ -18426,6 +21004,12 @@ public final class Main {
 
               The number of input tokens which were used.
 
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
             - `long outputTokens`
 
               The number of output tokens which were used.
@@ -18501,6 +21085,47 @@ public final class Main {
               Usage for an advisor sub-inference iteration
 
               - `ADVISOR_MESSAGE("advisor_message")`
+
+          - `class BetaFallbackMessageIterationUsage:`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `Optional<BetaCacheCreation> cacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+            - `long cacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `long cacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `long inputTokens`
+
+              The number of input tokens which were used.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `long outputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonValue; type "fallback_message"constant`
+
+              Usage for the fallback-model attempt that served the response
+
+              - `FALLBACK_MESSAGE("fallback_message")`
 
         - `long outputTokens`
 
@@ -18630,6 +21255,15 @@ public final class Main {
 
           Token usage for an advisor sub-inference iteration.
 
+        - `class BetaFallbackMessageIterationUsage:`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
       - `long outputTokens`
 
         The cumulative number of output tokens which were used.
@@ -18698,6 +21332,20 @@ public final class Main {
         When content is None, it indicates the compaction failed to produce a valid
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
+
+      - `class BetaFallbackBlock:`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
 
     - `long index`
 
@@ -18817,19 +21465,70 @@ public final class Main {
 
   - `Optional<Category> category`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
     - `CYBER("cyber")`
 
     - `BIO("bio")`
+
+    - `FRONTIER_LLM("frontier_llm")`
+
+    - `REASONING_EXTRACTION("reasoning_extraction")`
 
   - `Optional<String> explanation`
 
     Human-readable explanation of the refusal.
 
     This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `Optional<String> fallbackCreditToken`
+
+    Opaque code that refunds the cache-miss cost when retrying this refused
+    request on the fallback model. Pass it as `fallback_credit_token` on the
+    retry request. Expires 5 minutes after the refusal.
+
+    The retry is sent either with the same request body (`system`, `messages`,
+    `tools`, and other render-shaping fields), or with the same body plus one
+    appended `assistant` message whose content is the partial text (with any
+    trailing whitespace stripped from the final text block) and paired
+    server-tool blocks from this refusal — which also authorizes that
+    appended turn as an assistant-prefill continuation on models that otherwise
+    disallow prefill. A token minted mid-server-tool-loop whose partial content
+    was continuable may only be redeemed the second way — if a same-body retry
+    is rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry the second way instead. Either way: same workspace,
+    same platform; a mismatch is a 400. Resending a token for an already-warm
+    prefix is permitted but yields no additional credit.
+
+    `null` when the refused model isn't eligible for a fallback credit.
+
+  - `Optional<Boolean> fallbackHasPrefillClaim`
+
+    Whether the accompanying `fallback_credit_token` may be redeemed with the
+    appended-assistant retry form. Only set when `fallback_credit_token` is
+    present.
+
+    `true`: retry by resending the same request body plus one appended
+    `assistant` message whose content is this response's `content` with any
+    trailing whitespace stripped from the final text block and unpaired
+    `tool_use` blocks omitted (the same appended-turn shape described on
+    `fallback_credit_token`), with the token attached. `false`: retry by
+    resending the original request body unchanged, with the token attached —
+    the appended-assistant form is not available for this refusal (no
+    continuable partial content, or the request uses `output_format` or a
+    `tool_choice` that forces tool use). One exception: when the request used
+    `output_format` or a forced `tool_choice` and the refusal arrived after
+    server tools (including MCP connector tools) had already executed, the
+    token may not be redeemable by either retry form; if the exact-body retry
+    is then rejected with a 400 saying the token must be redeemed by
+    continuing the partial response, discard the token and retry without it.
+
+    Advisory: if an appended-assistant retry is rejected with a 400 despite
+    `true`, fall back to resending the original request body with the token.
+
+  - `Optional<String> recommendedModel`
+
+    The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
   - `JsonValue; type "refusal"constant`
 
@@ -18898,7 +21597,7 @@ public final class Main {
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`.
+                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                 - `TTL_5M("5m")`
 
@@ -19147,7 +21846,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -19306,7 +22005,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -19575,7 +22274,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -19838,7 +22537,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -20411,7 +23110,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -20567,7 +23266,7 @@ public final class Main {
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `JsonValue; type "enabled"constant`
 
@@ -20589,7 +23288,7 @@ public final class Main {
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `class BetaThinkingConfigEnabled:`
 
@@ -20599,7 +23298,7 @@ public final class Main {
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
     - `JsonValue; type "enabled"constant`
 
@@ -20709,6 +23408,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -20726,7 +23427,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -20780,6 +23481,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -20797,7 +23500,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -20837,6 +23540,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -20854,7 +23559,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21024,6 +23729,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21041,7 +23748,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21093,6 +23800,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21110,7 +23819,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21162,6 +23871,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21179,7 +23890,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21242,7 +23953,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21275,7 +23986,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21597,6 +24308,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21614,7 +24327,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21654,6 +24367,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21671,7 +24386,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21751,6 +24466,8 @@ public final class Main {
 
         - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+      - `Optional<String> errorMessage`
+
     - `class BetaToolSearchToolSearchResultBlockParam:`
 
       - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -21778,7 +24495,7 @@ public final class Main {
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `TTL_5M("5m")`
 
@@ -21836,6 +24553,8 @@ public final class Main {
 
     - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+  - `Optional<String> errorMessage`
+
 ### Beta Tool Search Tool Search Result Block
 
 - `class BetaToolSearchToolSearchResultBlock:`
@@ -21881,7 +24600,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -21915,6 +24634,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21932,7 +24653,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -21972,6 +24693,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -21989,7 +24712,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -22029,6 +24752,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -22046,7 +24771,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -22086,6 +24811,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -22103,7 +24830,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -22159,6 +24886,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22176,7 +24905,7 @@ public final class Main {
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `TTL_5M("5m")`
 
@@ -22228,6 +24957,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22263,6 +24994,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22300,6 +25033,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22333,6 +25068,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22369,6 +25106,46 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Optional<Boolean> deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Optional<Boolean> strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `class BetaCodeExecutionTool20260521:`
+
+    Code execution tool with REPL state persistence.
+
+    - `JsonValue; name "code_execution"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `CODE_EXECUTION("code_execution")`
+
+    - `JsonValue; type "code_execution_20260521"constant`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22412,6 +25189,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22451,6 +25230,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22496,6 +25277,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22535,6 +25318,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22580,6 +25365,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22624,6 +25411,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22660,6 +25449,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -22695,6 +25486,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -22735,6 +25528,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -22806,6 +25601,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<List<String>> allowedDomains`
 
       List of domains to allow fetching from
@@ -22862,6 +25659,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<List<String>> allowedDomains`
 
       If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -22911,6 +25710,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -22968,6 +25769,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<List<String>> allowedDomains`
 
       List of domains to allow fetching from
@@ -23004,6 +25807,134 @@ public final class Main {
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaWebSearchTool20260318:`
+
+    - `JsonValue; name "web_search"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `WEB_SEARCH("web_search")`
+
+    - `JsonValue; type "web_search_20260318"constant`
+
+      - `WEB_SEARCH_20260318("web_search_20260318")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<List<String>> allowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `Optional<List<String>> blockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Optional<Boolean> deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Optional<Long> maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `Optional<ResponseInclusion> responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `FULL("full")`
+
+      - `EXCLUDED("excluded")`
+
+    - `Optional<Boolean> strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `Optional<BetaUserLocation> userLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `class BetaWebFetchTool20260318:`
+
+    - `JsonValue; name "web_fetch"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `WEB_FETCH("web_fetch")`
+
+    - `JsonValue; type "web_fetch_20260318"constant`
+
+      - `WEB_FETCH_20260318("web_fetch_20260318")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<List<String>> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `Optional<List<String>> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Optional<BetaCitationsConfigParam> citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Optional<Boolean> deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Optional<Long> maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `Optional<Long> maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `Optional<ResponseInclusion> responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `FULL("full")`
+
+      - `EXCLUDED("excluded")`
+
+    - `Optional<Boolean> strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `Optional<Boolean> useCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
   - `class BetaAdvisorTool20260301:`
 
     - `Model model`
@@ -23011,6 +25942,18 @@ public final class Main {
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -23064,26 +26007,6 @@ public final class Main {
 
         Exceptional model for specialized complex tasks
 
-      - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-        Fast and cost-effective model
-
     - `JsonValue; name "advisor"constant`
 
       Name of the tool.
@@ -23104,6 +26027,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23115,6 +26040,10 @@ public final class Main {
     - `Optional<Boolean> deferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Optional<Long> maxTokens`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
     - `Optional<Long> maxUses`
 
@@ -23147,6 +26076,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -23183,6 +26114,8 @@ public final class Main {
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
       - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -23306,7 +26239,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -23444,6 +26377,76 @@ public final class Main {
 
         The number of input tokens which were used.
 
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
+        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
       - `long outputTokens`
 
         The number of output tokens which were used.
@@ -23510,78 +26513,6 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `long outputTokens`
 
         The number of output tokens which were used.
@@ -23591,6 +26522,47 @@ public final class Main {
         Usage for an advisor sub-inference iteration
 
         - `ADVISOR_MESSAGE("advisor_message")`
+
+    - `class BetaFallbackMessageIterationUsage:`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `Optional<BetaCacheCreation> cacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `long cacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `long cacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `long inputTokens`
+
+        The number of input tokens which were used.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `long outputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonValue; type "fallback_message"constant`
+
+        Usage for the fallback-model attempt that served the response
+
+        - `FALLBACK_MESSAGE("fallback_message")`
 
   - `long outputTokens`
 
@@ -23793,7 +26765,7 @@ public final class Main {
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`.
+                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                   - `TTL_5M("5m")`
 
@@ -24023,6 +26995,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<List<String>> allowedDomains`
 
     List of domains to allow fetching from
@@ -24048,7 +27022,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -24100,6 +27074,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<List<String>> allowedDomains`
 
     List of domains to allow fetching from
@@ -24125,7 +27101,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -24179,6 +27155,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<List<String>> allowedDomains`
 
     List of domains to allow fetching from
@@ -24204,7 +27182,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -24227,6 +27205,97 @@ public final class Main {
   - `Optional<Long> maxUses`
 
     Maximum number of times the tool can be used in the API request.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `Optional<Boolean> useCache`
+
+    Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+### Beta Web Fetch Tool 20260318
+
+- `class BetaWebFetchTool20260318:`
+
+  - `JsonValue; name "web_fetch"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `WEB_FETCH("web_fetch")`
+
+  - `JsonValue; type "web_fetch_20260318"constant`
+
+    - `WEB_FETCH_20260318("web_fetch_20260318")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<List<String>> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `Optional<List<String>> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<BetaCitationsConfigParam> citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Optional<Boolean> enabled`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `Optional<Long> maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Optional<ResponseInclusion> responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `FULL("full")`
+
+    - `EXCLUDED("excluded")`
 
   - `Optional<Boolean> strict`
 
@@ -24455,7 +27524,7 @@ public final class Main {
                       - `5m`: 5 minutes
                       - `1h`: 1 hour
 
-                      Defaults to `5m`.
+                      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                       - `TTL_5M("5m")`
 
@@ -24835,6 +27904,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<List<String>> allowedDomains`
 
     If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -24860,7 +27931,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -24926,6 +27997,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
   - `Optional<List<String>> allowedDomains`
 
     If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -24951,7 +28024,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -24964,6 +28037,107 @@ public final class Main {
   - `Optional<Long> maxUses`
 
     Maximum number of times the tool can be used in the API request.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `Optional<BetaUserLocation> userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+    - `JsonValue; type "approximate"constant`
+
+      - `APPROXIMATE("approximate")`
+
+    - `Optional<String> city`
+
+      The city of the user.
+
+    - `Optional<String> country`
+
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+    - `Optional<String> region`
+
+      The region of the user.
+
+    - `Optional<String> timezone`
+
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+### Beta Web Search Tool 20260318
+
+- `class BetaWebSearchTool20260318:`
+
+  - `JsonValue; name "web_search"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `WEB_SEARCH("web_search")`
+
+  - `JsonValue; type "web_search_20260318"constant`
+
+    - `WEB_SEARCH_20260318("web_search_20260318")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<List<String>> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `Optional<List<String>> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Optional<ResponseInclusion> responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `FULL("full")`
+
+    - `EXCLUDED("excluded")`
 
   - `Optional<Boolean> strict`
 
@@ -25192,7 +28366,7 @@ public final class Main {
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `TTL_5M("5m")`
 
@@ -25316,7 +28490,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -25378,6 +28552,16 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `Optional<String> userProfileId`
+
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+
   - `List<Request> requests`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
@@ -25392,7 +28576,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Messages API creation parameters for the individual request.
 
-      See the [Messages API reference](https://docs.claude.com/en/api/messages) for full documentation on available parameters.
+      See the [Messages API reference](https://platform.claude.com/docs/en/api/messages) for full documentation on available parameters.
 
       - `long maxTokens`
 
@@ -25400,9 +28584,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-        Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+        Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-        Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+        Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
       - `List<BetaMessageParam> messages`
 
@@ -25449,9 +28633,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
         ```
 
-        See [input examples](https://docs.claude.com/en/api/messages-examples).
+        See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-        Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+        Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
         There is a limit of 100,000 messages in a single request.
 
@@ -25486,7 +28670,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`.
+                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                   - `TTL_5M("5m")`
 
@@ -26052,6 +29236,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                    - `MODEL_NOT_FOUND("model_not_found")`
+
                   - `JsonValue; type "advisor_tool_result_error"constant`
 
                     - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -26312,6 +29498,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+                  - `Optional<String> errorMessage`
+
                 - `class BetaToolSearchToolSearchResultBlockParam:`
 
                   - `List<BetaToolReferenceBlockParam> toolReferences`
@@ -26458,6 +29646,108 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
+            - `class BetaFallbackBlockParam:`
+
+              A `fallback` block echoed back from a prior response.
+
+              Accepted in `messages[].content` and not rendered into the prompt; not
+              validated against the request's `fallbacks` chain or top-level `model`.
+
+              Echo the assistant turn back verbatim, including this block in its
+              original position. The block marks the boundary between content produced
+              before and after a fallback hop, and the server relies on that boundary
+              to validate the turn: when thinking runs flank the boundary, omitting
+              the block merges them into one span the server cannot validate (the
+              request is rejected), and moving it into the middle of a single run is
+              likewise rejected; between non-thinking blocks the block's placement has
+              no validation effect.
+
+              - `BetaFallbackInfoParam from`
+
+                Identifies one hop of a fallback transition.
+
+                - `Model model`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                    High-performance model for coding and agents
+
+                  - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                    Best combination of speed and intelligence
+
+                  - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                    High-performance model for agents and coding
+
+                  - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                    High-performance model for agents and coding
+
+                  - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                    Exceptional model for specialized complex tasks
+
+              - `BetaFallbackInfoParam to`
+
+                Identifies one hop of a fallback transition.
+
+              - `JsonValue; type "fallback"constant`
+
+                - `FALLBACK("fallback")`
+
+              - `Optional<JsonValue> trigger`
+
+                The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
         - `Role role`
 
           - `USER("user")`
@@ -26471,78 +29761,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -26707,6 +29925,137 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
+      - `Optional<String> fallbackCreditToken`
+
+        The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+        When a preceding request was refused and returned a `fallback_credit_token`,
+        pass that code here on the retry to have the retry's cache-creation tokens
+        for the prefix that was warm on the refused model billed at the cache-read
+        rate. Must be redeemed by the same organization and workspace, with the same
+        request body (optionally extended by one appended `assistant` message whose
+        content is the partial text — with any trailing whitespace stripped from
+        the final text block — and paired server-tool blocks streamed before the
+        refusal; the appended-assistant form is not available for requests with
+        `output_format` set or forced `tool_choice`), on an eligible fallback
+        model, on the same platform,
+        and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+        mid-server-tool-loop whose partial content was continuable may only be
+        redeemed with the appended-assistant form — if an exact-body retry is
+        rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry with the appended-assistant form instead.
+
+        When the appended-assistant form is used on a model that otherwise disallows
+        assistant-turn prefill, this token also authorizes that one prefill.
+
+      - `Optional<List<BetaFallbackParam>> fallbacks`
+
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `Optional<Long> maxTokens`
+
+        - `Optional<BetaOutputConfig> outputConfig`
+
+          - `Optional<Effort> effort`
+
+            All possible effort levels.
+
+            - `LOW("low")`
+
+            - `MEDIUM("medium")`
+
+            - `HIGH("high")`
+
+            - `XHIGH("xhigh")`
+
+            - `MAX("max")`
+
+          - `Optional<BetaJsonOutputFormat> format`
+
+            A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+            - `Schema schema`
+
+              The JSON schema of the format
+
+            - `JsonValue; type "json_schema"constant`
+
+              - `JSON_SCHEMA("json_schema")`
+
+          - `Optional<BetaTokenTaskBudget> taskBudget`
+
+            User-configurable total token budget across contexts.
+
+            - `long total`
+
+              Total token budget across all contexts in the session.
+
+            - `JsonValue; type "tokens"constant`
+
+              The budget type. Currently only 'tokens' is supported.
+
+              - `TOKENS("tokens")`
+
+            - `Optional<Long> remaining`
+
+              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+        - `Optional<Speed> speed`
+
+          - `STANDARD("standard")`
+
+          - `FAST("fast")`
+
+        - `Optional<Thinking> thinking`
+
+          - `class BetaThinkingConfigEnabled:`
+
+            - `long budgetTokens`
+
+              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+              Must be ≥1024 and less than `max_tokens`.
+
+              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+
+            - `JsonValue; type "enabled"constant`
+
+              - `ENABLED("enabled")`
+
+            - `Optional<Display> display`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `SUMMARIZED("summarized")`
+
+              - `OMITTED("omitted")`
+
+          - `class BetaThinkingConfigDisabled:`
+
+            - `JsonValue; type "disabled"constant`
+
+              - `DISABLED("disabled")`
+
+          - `class BetaThinkingConfigAdaptive:`
+
+            - `JsonValue; type "adaptive"constant`
+
+              - `ADAPTIVE("adaptive")`
+
+            - `Optional<Display> display`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `SUMMARIZED("summarized")`
+
+              - `OMITTED("omitted")`
+
       - `Optional<String> inferenceGeo`
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -26745,50 +30094,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Configuration options for the model's output, such as the output format.
 
-        - `Optional<Effort> effort`
-
-          All possible effort levels.
-
-          - `LOW("low")`
-
-          - `MEDIUM("medium")`
-
-          - `HIGH("high")`
-
-          - `XHIGH("xhigh")`
-
-          - `MAX("max")`
-
-        - `Optional<BetaJsonOutputFormat> format`
-
-          A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-
-          - `Schema schema`
-
-            The JSON schema of the format
-
-          - `JsonValue; type "json_schema"constant`
-
-            - `JSON_SCHEMA("json_schema")`
-
-        - `Optional<BetaTokenTaskBudget> taskBudget`
-
-          User-configurable total token budget across contexts.
-
-          - `long total`
-
-            Total token budget across all contexts in the session.
-
-          - `JsonValue; type "tokens"constant`
-
-            The budget type. Currently only 'tokens' is supported.
-
-            - `TOKENS("tokens")`
-
-          - `Optional<Long> remaining`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
       - `Optional<BetaJsonOutputFormat> outputFormat`
 
         Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
@@ -26799,7 +30104,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-        Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+        Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
         - `AUTO("auto")`
 
@@ -26825,13 +30130,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Whether to incrementally stream the response using server-sent events.
 
-        See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
+        See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
       - `Optional<System> system`
 
         System prompt.
 
-        A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+        A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
         - `String`
 
@@ -26861,49 +30166,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-        See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
         - `class BetaThinkingConfigEnabled:`
 
-          - `long budgetTokens`
-
-            Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-            Must be ≥1024 and less than `max_tokens`.
-
-            See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
-
-          - `JsonValue; type "enabled"constant`
-
-            - `ENABLED("enabled")`
-
-          - `Optional<Display> display`
-
-            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-            - `SUMMARIZED("summarized")`
-
-            - `OMITTED("omitted")`
-
         - `class BetaThinkingConfigDisabled:`
 
-          - `JsonValue; type "disabled"constant`
-
-            - `DISABLED("disabled")`
-
         - `class BetaThinkingConfigAdaptive:`
-
-          - `JsonValue; type "adaptive"constant`
-
-            - `ADAPTIVE("adaptive")`
-
-          - `Optional<Display> display`
-
-            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-            - `SUMMARIZED("summarized")`
-
-            - `OMITTED("omitted")`
 
       - `Optional<BetaToolChoice> toolChoice`
 
@@ -26969,7 +30238,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-        There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+        There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
         Each tool definition includes:
 
@@ -27025,7 +30294,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-        See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+        See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
         - `class BetaTool:`
 
@@ -27056,6 +30325,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27107,6 +30378,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27142,6 +30415,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27179,6 +30454,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27212,6 +30489,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27248,6 +30527,46 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<Boolean> deferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Boolean> strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `class BetaCodeExecutionTool20260521:`
+
+          Code execution tool with REPL state persistence.
+
+          - `JsonValue; name "code_execution"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `CODE_EXECUTION("code_execution")`
+
+          - `JsonValue; type "code_execution_20260521"constant`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27291,6 +30610,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27330,6 +30651,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27375,6 +30698,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27414,6 +30739,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27459,6 +30786,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27503,6 +30832,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27539,6 +30870,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27574,6 +30907,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27614,6 +30949,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -27685,6 +31022,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<List<String>> allowedDomains`
 
             List of domains to allow fetching from
@@ -27739,6 +31078,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<List<String>> allowedDomains`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -27788,6 +31129,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -27845,6 +31188,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<List<String>> allowedDomains`
 
             List of domains to allow fetching from
@@ -27872,6 +31217,134 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `Optional<Long> maxUses`
 
             Maximum number of times the tool can be used in the API request.
+
+          - `Optional<Boolean> strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+          - `Optional<Boolean> useCache`
+
+            Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+        - `class BetaWebSearchTool20260318:`
+
+          - `JsonValue; name "web_search"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `WEB_SEARCH("web_search")`
+
+          - `JsonValue; type "web_search_20260318"constant`
+
+            - `WEB_SEARCH_20260318("web_search_20260318")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<List<String>> allowedDomains`
+
+            If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+          - `Optional<List<String>> blockedDomains`
+
+            If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<Boolean> deferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Long> maxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `Optional<ResponseInclusion> responseInclusion`
+
+            How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+            - `FULL("full")`
+
+            - `EXCLUDED("excluded")`
+
+          - `Optional<Boolean> strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+          - `Optional<BetaUserLocation> userLocation`
+
+            Parameters for the user's location. Used to provide more relevant search results.
+
+        - `class BetaWebFetchTool20260318:`
+
+          - `JsonValue; name "web_fetch"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `WEB_FETCH("web_fetch")`
+
+          - `JsonValue; type "web_fetch_20260318"constant`
+
+            - `WEB_FETCH_20260318("web_fetch_20260318")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<List<String>> allowedDomains`
+
+            List of domains to allow fetching from
+
+          - `Optional<List<String>> blockedDomains`
+
+            List of domains to block fetching from
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<BetaCitationsConfigParam> citations`
+
+            Citations configuration for fetched documents. Citations are disabled by default.
+
+          - `Optional<Boolean> deferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Long> maxContentTokens`
+
+            Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          - `Optional<Long> maxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `Optional<ResponseInclusion> responseInclusion`
+
+            How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+            - `FULL("full")`
+
+            - `EXCLUDED("excluded")`
 
           - `Optional<Boolean> strict`
 
@@ -27909,6 +31382,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -27920,6 +31395,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `Optional<Boolean> deferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Long> maxTokens`
+
+            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
           - `Optional<Long> maxUses`
 
@@ -27952,6 +31431,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -27988,6 +31469,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -28051,10 +31534,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
         Recommended for advanced use cases only.
-
-      - `Optional<String> userProfileId`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ### Returns
 
@@ -28209,7 +31688,7 @@ public final class Main {
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -28274,6 +31753,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -28417,7 +31902,7 @@ public final class Main {
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -28492,6 +31977,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -28644,7 +32135,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -28709,6 +32200,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -28854,7 +32351,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -28920,6 +32417,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -28976,7 +32479,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -29041,6 +32544,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -29541,6 +33050,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                  - `MODEL_NOT_FOUND("model_not_found")`
+
                 - `JsonValue; type "advisor_tool_result_error"constant`
 
                   - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -29885,6 +33396,122 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `COMPACTION("compaction")`
 
+          - `class BetaFallbackBlock:`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `BetaFallbackInfo from`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                  High-performance model for coding and agents
+
+                - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                  Best combination of speed and intelligence
+
+                - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                  Exceptional model for specialized complex tasks
+
+            - `BetaFallbackInfo to`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `BetaFallbackRefusalTrigger trigger`
+
+              What caused the `from` model to hand over at this hop.
+
+              - `Optional<Category> category`
+
+                The policy category that triggered a refusal.
+
+                - `CYBER("cyber")`
+
+                - `BIO("bio")`
+
+                - `FRONTIER_LLM("frontier_llm")`
+
+                - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              - `JsonValue; type "refusal"constant`
+
+                - `REFUSAL("refusal")`
+
+            - `JsonValue; type "fallback"constant`
+
+              - `FALLBACK("fallback")`
+
         - `Optional<BetaContextManagementResponse> contextManagement`
 
           Context management response.
@@ -29994,78 +33621,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-            Best combination of speed and intelligence
-
-          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-            Fast and cost-effective model
-
         - `JsonValue; role "assistant"constant`
 
           Conversational role of the generated message.
@@ -30080,19 +33635,70 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `Optional<Category> category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
 
           - `Optional<String> explanation`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `Optional<String> fallbackCreditToken`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `Optional<Boolean> fallbackHasPrefillClaim`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `Optional<String> recommendedModel`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `JsonValue; type "refusal"constant`
 
@@ -30213,6 +33819,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 The number of input tokens which were used.
 
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
               - `long outputTokens`
 
                 The number of output tokens which were used.
@@ -30288,6 +33900,47 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for an advisor sub-inference iteration
 
                 - `ADVISOR_MESSAGE("advisor_message")`
+
+            - `class BetaFallbackMessageIterationUsage:`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `Optional<BetaCacheCreation> cacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+              - `long cacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `long cacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `long inputTokens`
+
+                The number of input tokens which were used.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `long outputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonValue; type "fallback_message"constant`
+
+                Usage for the fallback-model attempt that served the response
+
+                - `FALLBACK_MESSAGE("fallback_message")`
 
           - `long outputTokens`
 
@@ -31182,6 +34835,8 @@ public final class Main {
 
                   - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                  - `MODEL_NOT_FOUND("model_not_found")`
+
                 - `JsonValue; type "advisor_tool_result_error"constant`
 
                   - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -31526,6 +35181,122 @@ public final class Main {
 
               - `COMPACTION("compaction")`
 
+          - `class BetaFallbackBlock:`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `BetaFallbackInfo from`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                  High-performance model for coding and agents
+
+                - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                  Best combination of speed and intelligence
+
+                - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                  Exceptional model for specialized complex tasks
+
+            - `BetaFallbackInfo to`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `BetaFallbackRefusalTrigger trigger`
+
+              What caused the `from` model to hand over at this hop.
+
+              - `Optional<Category> category`
+
+                The policy category that triggered a refusal.
+
+                - `CYBER("cyber")`
+
+                - `BIO("bio")`
+
+                - `FRONTIER_LLM("frontier_llm")`
+
+                - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              - `JsonValue; type "refusal"constant`
+
+                - `REFUSAL("refusal")`
+
+            - `JsonValue; type "fallback"constant`
+
+              - `FALLBACK("fallback")`
+
         - `Optional<BetaContextManagementResponse> contextManagement`
 
           Context management response.
@@ -31635,78 +35406,6 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-            Best combination of speed and intelligence
-
-          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-            Fastest model with near-frontier intelligence
-
-          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-            High-performance model for agents and coding
-
-          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-            Exceptional model for specialized complex tasks
-
-          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-            Fast and cost-effective model
-
         - `JsonValue; role "assistant"constant`
 
           Conversational role of the generated message.
@@ -31721,19 +35420,70 @@ public final class Main {
 
           - `Optional<Category> category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
 
           - `Optional<String> explanation`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `Optional<String> fallbackCreditToken`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `Optional<Boolean> fallbackHasPrefillClaim`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `Optional<String> recommendedModel`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `JsonValue; type "refusal"constant`
 
@@ -31854,6 +35604,12 @@ public final class Main {
 
                 The number of input tokens which were used.
 
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
               - `long outputTokens`
 
                 The number of output tokens which were used.
@@ -31929,6 +35685,47 @@ public final class Main {
                 Usage for an advisor sub-inference iteration
 
                 - `ADVISOR_MESSAGE("advisor_message")`
+
+            - `class BetaFallbackMessageIterationUsage:`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `Optional<BetaCacheCreation> cacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+              - `long cacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `long cacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `long inputTokens`
+
+                The number of input tokens which were used.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `long outputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonValue; type "fallback_message"constant`
+
+                Usage for the fallback-model attempt that served the response
+
+                - `FALLBACK_MESSAGE("fallback_message")`
 
           - `long outputTokens`
 
@@ -32609,6 +36406,8 @@ public final class Main {
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+                - `MODEL_NOT_FOUND("model_not_found")`
+
               - `JsonValue; type "advisor_tool_result_error"constant`
 
                 - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -32953,6 +36752,122 @@ public final class Main {
 
             - `COMPACTION("compaction")`
 
+        - `class BetaFallbackBlock:`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn where no preceding model ran and declined has no such
+          boundary and carries no block — the signal for whether a fallback model
+          served the response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `BetaFallbackInfo from`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
+              - `CLAUDE_FABLE_5("claude-fable-5")`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+                Most capable model for cybersecurity and biology research
+
+              - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+          - `BetaFallbackInfo to`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `BetaFallbackRefusalTrigger trigger`
+
+            What caused the `from` model to hand over at this hop.
+
+            - `Optional<Category> category`
+
+              The policy category that triggered a refusal.
+
+              - `CYBER("cyber")`
+
+              - `BIO("bio")`
+
+              - `FRONTIER_LLM("frontier_llm")`
+
+              - `REASONING_EXTRACTION("reasoning_extraction")`
+
+            - `JsonValue; type "refusal"constant`
+
+              - `REFUSAL("refusal")`
+
+          - `JsonValue; type "fallback"constant`
+
+            - `FALLBACK("fallback")`
+
       - `Optional<BetaContextManagementResponse> contextManagement`
 
         Context management response.
@@ -33062,78 +36977,6 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-          Best combination of speed and intelligence
-
-        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-          Fastest model with near-frontier intelligence
-
-        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-          High-performance model for agents and coding
-
-        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-          Exceptional model for specialized complex tasks
-
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `JsonValue; role "assistant"constant`
 
         Conversational role of the generated message.
@@ -33148,19 +36991,70 @@ public final class Main {
 
         - `Optional<Category> category`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `CYBER("cyber")`
 
           - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
 
         - `Optional<String> explanation`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `Optional<String> fallbackCreditToken`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `Optional<Boolean> fallbackHasPrefillClaim`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `Optional<String> recommendedModel`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `JsonValue; type "refusal"constant`
 
@@ -33281,6 +37175,12 @@ public final class Main {
 
               The number of input tokens which were used.
 
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
             - `long outputTokens`
 
               The number of output tokens which were used.
@@ -33356,6 +37256,47 @@ public final class Main {
               Usage for an advisor sub-inference iteration
 
               - `ADVISOR_MESSAGE("advisor_message")`
+
+          - `class BetaFallbackMessageIterationUsage:`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `Optional<BetaCacheCreation> cacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+            - `long cacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `long cacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `long inputTokens`
+
+              The number of input tokens which were used.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `long outputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonValue; type "fallback_message"constant`
+
+              Usage for the fallback-model attempt that served the response
+
+              - `FALLBACK_MESSAGE("fallback_message")`
 
         - `long outputTokens`
 
@@ -33998,6 +37939,8 @@ public final class Main {
 
               - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
+              - `MODEL_NOT_FOUND("model_not_found")`
+
             - `JsonValue; type "advisor_tool_result_error"constant`
 
               - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
@@ -34342,6 +38285,122 @@ public final class Main {
 
           - `COMPACTION("compaction")`
 
+      - `class BetaFallbackBlock:`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `BetaFallbackInfo from`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
+
+            - `CLAUDE_FABLE_5("claude-fable-5")`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+              Most capable model for cybersecurity and biology research
+
+            - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+        - `BetaFallbackInfo to`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `BetaFallbackRefusalTrigger trigger`
+
+          What caused the `from` model to hand over at this hop.
+
+          - `Optional<Category> category`
+
+            The policy category that triggered a refusal.
+
+            - `CYBER("cyber")`
+
+            - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
+
+          - `JsonValue; type "refusal"constant`
+
+            - `REFUSAL("refusal")`
+
+        - `JsonValue; type "fallback"constant`
+
+          - `FALLBACK("fallback")`
+
     - `Optional<BetaContextManagementResponse> contextManagement`
 
       Context management response.
@@ -34451,78 +38510,6 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
-      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-        Best combination of speed and intelligence
-
-      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-        High-performance model for agents and coding
-
-      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-        High-performance model for agents and coding
-
-      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-        Exceptional model for specialized complex tasks
-
-      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-        Exceptional model for specialized complex tasks
-
-      - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-        Fast and cost-effective model
-
     - `JsonValue; role "assistant"constant`
 
       Conversational role of the generated message.
@@ -34537,19 +38524,70 @@ public final class Main {
 
       - `Optional<Category> category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `FRONTIER_LLM("frontier_llm")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
 
       - `Optional<String> explanation`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Optional<String> fallbackCreditToken`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `Optional<Boolean> fallbackHasPrefillClaim`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `Optional<String> recommendedModel`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `JsonValue; type "refusal"constant`
 
@@ -34670,6 +38708,12 @@ public final class Main {
 
             The number of input tokens which were used.
 
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
           - `long outputTokens`
 
             The number of output tokens which were used.
@@ -34745,6 +38789,47 @@ public final class Main {
             Usage for an advisor sub-inference iteration
 
             - `ADVISOR_MESSAGE("advisor_message")`
+
+        - `class BetaFallbackMessageIterationUsage:`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `Optional<BetaCacheCreation> cacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+          - `long cacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `long cacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `long inputTokens`
+
+            The number of input tokens which were used.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `long outputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonValue; type "fallback_message"constant`
+
+            Usage for the fallback-model attempt that served the response
+
+            - `FALLBACK_MESSAGE("fallback_message")`
 
       - `long outputTokens`
 

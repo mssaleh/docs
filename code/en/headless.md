@@ -6,10 +6,6 @@
 
 > Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or TypeScript.
 
-<Note>
-  Starting June 15, 2026, Agent SDK and `claude -p` usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) for details.
-</Note>
-
 The [Agent SDK](/en/agent-sdk/overview) gives you the same tools, agent loop, and context management that power Claude Code. It's available as a CLI for scripts and CI/CD, or as [Python](/en/agent-sdk/python) and [TypeScript](/en/agent-sdk/typescript) packages for full programmatic control.
 
 To run Claude Code in non-interactive mode, pass `-p` with your prompt and any [CLI options](/en/cli-reference):
@@ -56,7 +52,7 @@ In bare mode Claude has access to the Bash, file read, and file edit tools. Pass
 | Custom agents           | `--agents <json>`                                       |
 | A plugin                | `--plugin-dir <path>`, `--plugin-url <url>`             |
 
-Bare mode skips OAuth and keychain reads. Anthropic authentication must come from `ANTHROPIC_API_KEY` or an `apiKeyHelper` in the JSON passed to `--settings`. Bedrock, Vertex, and Foundry use their usual provider credentials.
+Bare mode skips OAuth and keychain reads. Anthropic authentication must come from `ANTHROPIC_API_KEY` or an `apiKeyHelper` in the JSON passed to `--settings`. Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry use their usual provider credentials.
 
 <Note>
   `--bare` is the recommended mode for scripted and SDK calls, and will become the default for `-p` in a future release.
@@ -64,7 +60,9 @@ Bare mode skips OAuth and keychain reads. Anthropic authentication must come fro
 
 ### Background tasks at exit
 
-If Claude starts a [background Bash task](/en/tools-reference#bash-tool-behavior) during a `claude -p` run, for example a dev server or a watch build, that task is terminated about five seconds after Claude has returned its final result and stdin has closed. The grace period lets a task that finishes right after the result still deliver its output. Before v2.1.163, a never-exiting background process would hold the `claude -p` invocation open indefinitely.
+If Claude starts a [background Bash task](/en/tools-reference#bash-tool-behavior) during a `claude -p` run, for example a dev server or a watch build, that shell is terminated about five seconds after Claude has returned its final result and stdin has closed. The grace period lets a task that finishes right after the result still deliver its output. Before v2.1.163, a never-exiting background process would hold the `claude -p` invocation open indefinitely.
+
+Background [subagents](/en/sub-agents) and workflows are exempt from the five-second grace because their result is part of the final output, so `claude -p` waits for them to complete. From v2.1.182, that wait is capped at ten minutes by default so a stuck background agent cannot hold the process open indefinitely. Adjust the cap with [`CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS`](/en/env-vars), or set it to `0` to wait without a limit.
 
 ## Examples
 
@@ -124,6 +122,8 @@ claude -p "Extract the main function names from auth.py" \
   --json-schema '{"type":"object","properties":{"functions":{"type":"array","items":{"type":"string"}}},"required":["functions"]}'
 ```
 
+If the value isn't a valid JSON Schema, `claude` exits with `Error: --json-schema is not a valid JSON Schema` followed by the validator's diagnostic. Claude Code accepts schemas that use the `format` keyword, such as `"format": "email"`, but treats `format` as an annotation and doesn't enforce it. Before v2.1.205, Claude Code silently ignored an invalid schema and returned unstructured text, and treated any schema containing `format` as invalid.
+
 <Tip>
   Use a tool like [jq](https://jqlang.github.io/jq/) to parse the response and extract specific fields:
 
@@ -168,7 +168,11 @@ When an API request fails with a retryable error, Claude Code emits a `system/ap
 | `uuid`           | string          | unique event identifier                                                                                                                                                                                |
 | `session_id`     | string          | session the event belongs to                                                                                                                                                                           |
 
-The `system/init` event reports session metadata including the model, tools, MCP servers, and loaded plugins. It is the first event in the stream unless [`CLAUDE_CODE_SYNC_PLUGIN_INSTALL`](/en/env-vars) is set, in which case `plugin_install` events precede it. Use the plugin fields to fail CI when a plugin did not load:
+The `system/init` event reports session metadata including the model, tools, MCP servers, and loaded plugins. It is the first event in the stream unless [`CLAUDE_CODE_SYNC_PLUGIN_INSTALL`](/en/env-vars) is set, in which case `plugin_install` events precede it.
+
+The event also carries an optional `capabilities` array of strings naming the protocol behaviors this Claude Code version implements, such as `interrupt_receipt_v1`. Check it to feature-detect instead of comparing version strings, and ignore values you don't recognize. The field requires Claude Code v2.1.205 or later and is absent from earlier versions. See [`SDKSystemMessage`](/en/agent-sdk/typescript#sdksystemmessage) for the capability list.
+
+Use the plugin fields to fail CI when a plugin did not load:
 
 | Field           | Type  | Description                                                                                                                                                                                                                                                                                  |
 | --------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -216,7 +220,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
 The `--allowedTools` flag uses [permission rule syntax](/en/settings#permission-rule-syntax). The trailing ` *` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
 <Note>
-  User-invoked [skills](/en/skills) and custom commands work in `-p` mode: include `/skill-name` in the prompt string and Claude Code expands it before running. Built-in commands that open an interactive dialog, such as `/config` and `/login`, are not available in `-p` mode.
+  User-invoked [skills](/en/skills) and custom commands work in `-p` mode: include `/skill-name` in the prompt string and Claude Code expands it before running. Built-in commands that only run in the terminal interface, such as `/login`, aren't available in `-p` mode. {/* min-version: 2.1.205 */}`/model`, `/effort`, `/fast`, `/color`, and `/rename` accept the value as an argument, for example `/model sonnet`, and `/mcp` with no argument prints a text summary of server status; these forms require Claude Code v2.1.205 or later and follow each command's [availability notes](/en/commands#all-commands). {/* min-version: 2.1.181 */}To change a setting from a `-p` invocation, pass `key=value` to `/config`, for example `/config thinking=false`.
 </Note>
 
 ### Customize the system prompt
@@ -250,6 +254,8 @@ If you're running multiple conversations, capture the session ID to resume a spe
 session_id=$(claude -p "Start a review" --output-format json | jq -r '.session_id')
 claude -p "Continue that review" --resume "$session_id"
 ```
+
+Run both commands from the same directory: session ID lookup is scoped to the current project directory and its git worktrees. See [Resume a session](/en/sessions#resume-a-session) for the full scope rules.
 
 ## Next steps
 

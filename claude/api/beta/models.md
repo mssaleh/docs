@@ -32,7 +32,7 @@ The Models API response can be used to determine which models are available for 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -86,6 +86,12 @@ The Models API response can be used to determine which models are available for 
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `data: array of BetaModelInfo`
@@ -93,6 +99,10 @@ The Models API response can be used to determine which models are available for 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 
@@ -245,6 +255,9 @@ curl https://api.anthropic.com/v1/models \
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -341,7 +354,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -395,13 +408,23 @@ The Models API response can be used to determine information about a specific mo
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
-- `BetaModelInfo object { id, capabilities, created_at, 4 more }`
+- `BetaModelInfo object { id, allowed_fallback_models, capabilities, 5 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 
@@ -540,6 +563,9 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -785,11 +811,15 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 
 ### Beta Model Info
 
-- `BetaModelInfo object { id, capabilities, created_at, 4 more }`
+- `BetaModelInfo object { id, allowed_fallback_models, capabilities, 5 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 

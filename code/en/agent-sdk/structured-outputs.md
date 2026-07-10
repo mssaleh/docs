@@ -239,6 +239,10 @@ The `outputFormat` (TypeScript) or `output_format` (Python) option accepts an ob
 
 The SDK supports standard JSON Schema features including all basic types (object, array, string, number, boolean, null), `enum`, `const`, `required`, nested objects, and `$ref` definitions. For the full list of supported features and limitations, see [JSON Schema limitations](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-schema-limitations).
 
+A schema that isn't valid JSON Schema fails the run at startup with an error naming the problem. Before v2.1.205, an invalid schema was silently ignored and the agent returned unstructured text.
+
+The `format` keyword, such as `"format": "email"`, is accepted as an annotation and isn't enforced by the SDK's validator. Before v2.1.205, any schema containing `format` was treated as invalid.
+
 ## Example: TODO tracking agent
 
 This example demonstrates how structured outputs work with multi-step tool use. The agent needs to find TODO comments in the codebase, then look up git blame information for each one. It autonomously decides which tools to use (Grep to search, Bash to run git commands) and combines the results into a single structured response.
@@ -346,14 +350,14 @@ The schema includes optional fields (`author` and `date`) since git blame inform
 
 ## Error handling
 
-Structured output generation can fail when the agent cannot produce valid JSON matching your schema. This typically happens when the schema is too complex for the task, the task itself is ambiguous, or the agent hits its retry limit trying to fix validation errors.
+Structured output generation can fail when the agent cannot produce valid JSON matching your schema. This typically happens when the schema is too complex for the task, the task itself is ambiguous, or the agent hits its retry limit trying to fix validation errors. It can also happen without any validation failure: a [model fallback](/en/model-config#automatic-model-fallback) can retract an already-completed output mid-stream, and if no retry replaces it the run ends with the same error. Check the `errors` field on the result message to tell the two causes apart before debugging your schema.
 
 When an error occurs, the result message has a `subtype` indicating what went wrong:
 
-| Subtype                               | Meaning                                                     |
-| ------------------------------------- | ----------------------------------------------------------- |
-| `success`                             | Output was generated and validated successfully             |
-| `error_max_structured_output_retries` | Agent couldn't produce valid output after multiple attempts |
+| Subtype                               | Meaning                                                                                                                         |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `success`                             | Output was generated and validated successfully                                                                                 |
+| `error_max_structured_output_retries` | No valid output remained after multiple attempts (validation failures, or a model-fallback retraction with no successful retry) |
 
 The example below checks the `subtype` field to determine whether the output was generated successfully or if you need to handle a failure:
 

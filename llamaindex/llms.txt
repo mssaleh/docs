@@ -19,10 +19,10 @@ All API endpoints return JSON with CORS enabled (`Access-Control-Allow-Origin: *
 - [LlamaClassify Examples](https://developers.llamaindex.ai/llamaparse/classify/examples/): Collection of examples demonstrating how to use the LlamaClassify for document classification.
 - [Overview of Classify](https://developers.llamaindex.ai/llamaparse/classify/): Learn what the Classification API is, how rules work, and how to run classifications using the client SDK.
 - [Index Examples](https://developers.llamaindex.ai/llamaparse/cloud-index/examples/): Collection of examples demonstrating how to use Index for building RAG applications.
-- [Data Sinks](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/data_sinks/)
+- [Data Sinks](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/data_sinks/): Data sinks are the vector databases where a LlamaCloud Index stores processed document embeddings; pick the fully managed option or connect your own.
 - [Data Sources](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/data_sources/): Overview of data source integrations for Index for connecting and retrieving data for RAG use cases.
-- [Embedding Models](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/embedding_models/)
-- [Cookbooks](https://developers.llamaindex.ai/llamaparse/cookbooks/)
+- [Embedding Models](https://developers.llamaindex.ai/llamaparse/cloud-index/integrations/embedding_models/): Embedding models convert a LlamaCloud Index processed documents into vectors; choose from supported providers such as OpenAI, Azure, Bedrock, Cohere, Gemini, and HuggingFace.
+- [Cookbooks](https://developers.llamaindex.ai/llamaparse/cookbooks/): Index of LlamaCloud cookbooks and starter/advanced notebooks for parsing, building extraction agents, and indexing, searching, and chatting over your data.
 - [LlamaExtract Examples](https://developers.llamaindex.ai/llamaparse/extract/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.
 - [Overview of Extract](https://developers.llamaindex.ai/llamaparse/extract/): Introduction to LlamaExtract, a tool for extracting structured data from unstructured documents, available as a web UI, Python SDK, and REST API.
 - [LlamaExtract Examples](https://developers.llamaindex.ai/llamaparse/extract/v1/examples/): Collection of examples demonstrating how to use the LlamaExtract Python SDK for document extraction.

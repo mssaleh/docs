@@ -34,6 +34,364 @@ Create Session
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+    - `class BetaManagedAgentsAgentWithOverridesParams:`
+
+      Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+      - `required string ID`
+
+        The `agent` ID.
+
+      - `required Type Type`
+
+        - `"agent_with_overrides"AgentWithOverrides`
+
+      - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> McpServers`
+
+        Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+        - `required string Name`
+
+          Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+        - `required Type Type`
+
+          - `"url"Url`
+
+        - `required string Url`
+
+          Endpoint URL for the MCP server.
+
+      - `Model Model`
+
+        Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+        - `enum BetaManagedAgentsModel:`
+
+          The model that will power your agent.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"ClaudeOpus4_6`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"ClaudeOpus4_5`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+            High-performance model for agents and coding
+
+        - `class BetaManagedAgentsModelConfigParams:`
+
+          An object that defines additional configuration control over model use
+
+          - `required BetaManagedAgentsModel ID`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-sonnet-5"ClaudeSonnet5`
+
+              High-performance model for coding and agents
+
+            - `"claude-fable-5"ClaudeFable5`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-opus-4-8"ClaudeOpus4_8`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Most intelligent model for building agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+          - `Speed? Speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"Standard`
+
+            - `"fast"Fast`
+
+      - `IReadOnlyList<BetaManagedAgentsSkillParams> Skills`
+
+        Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+        - `class BetaManagedAgentsAnthropicSkillParams:`
+
+          An Anthropic-managed skill.
+
+          - `required string SkillID`
+
+            Identifier of the Anthropic skill (e.g., "xlsx").
+
+          - `required Type Type`
+
+            - `"anthropic"Anthropic`
+
+          - `string? Version`
+
+            Version to pin. Defaults to latest if omitted.
+
+        - `class BetaManagedAgentsCustomSkillParams:`
+
+          A user-created custom skill.
+
+          - `required string SkillID`
+
+            Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+          - `required Type Type`
+
+            - `"custom"Custom`
+
+          - `string? Version`
+
+            Version to pin. Defaults to latest if omitted.
+
+      - `string? System`
+
+        Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+      - `IReadOnlyList<Tool> Tools`
+
+        Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+        - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+          Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+          - `required Type Type`
+
+            - `"agent_toolset_20260401"AgentToolset20260401`
+
+          - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
+
+            Per-tool configuration overrides.
+
+            - `required Name Name`
+
+              Built-in agent tool identifier.
+
+              - `"bash"Bash`
+
+              - `"edit"Edit`
+
+              - `"read"Read`
+
+              - `"write"Write`
+
+              - `"glob"Glob`
+
+              - `"grep"Grep`
+
+              - `"web_fetch"WebFetch`
+
+              - `"web_search"WebSearch`
+
+            - `Boolean? Enabled`
+
+              Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+            - `PermissionPolicy? PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `required Type Type`
+
+                  - `"always_allow"AlwaysAllow`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `required Type Type`
+
+                  - `"always_ask"AlwaysAsk`
+
+          - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
+
+            Default configuration for all tools in a toolset.
+
+            - `Boolean? Enabled`
+
+              Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+            - `PermissionPolicy? PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+        - `class BetaManagedAgentsMcpToolsetParams:`
+
+          Configuration for tools from an MCP server defined in `mcp_servers`.
+
+          - `required string McpServerName`
+
+            Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+          - `required Type Type`
+
+            - `"mcp_toolset"McpToolset`
+
+          - `IReadOnlyList<BetaManagedAgentsMcpToolConfigParams> Configs`
+
+            Per-tool configuration overrides.
+
+            - `required string Name`
+
+              Name of the MCP tool to configure. 1-128 characters.
+
+            - `Boolean? Enabled`
+
+              Whether this tool is enabled. Overrides the `default_config` setting.
+
+            - `PermissionPolicy? PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+          - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
+
+            Default configuration for all tools from an MCP server.
+
+            - `Boolean? Enabled`
+
+              Whether tools are enabled by default. Defaults to true if not specified.
+
+            - `PermissionPolicy? PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+        - `class BetaManagedAgentsCustomToolParams:`
+
+          A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+          - `required string Description`
+
+            Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+
+          - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `JsonElement Type "object"constant`
+
+            - `IReadOnlyDictionary<string, JsonElement>? Properties`
+
+            - `IReadOnlyList<string>? Required`
+
+          - `required string Name`
+
+            Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+          - `required Type Type`
+
+            - `"custom"Custom`
+
+      - `Int Version`
+
+        The specific `agent` version to use. Omit to use the latest version.
+
   - `required string environmentID`
 
     Body param: ID of the `environment` defining the container configuration for this session.
@@ -194,6 +552,12 @@ Create Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -229,6 +593,14 @@ Create Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -456,19 +828,11 @@ Create Session
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -726,6 +1090,10 @@ Create Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `string? DeploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```csharp
@@ -903,7 +1271,8 @@ Console.WriteLine(betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -943,6 +1312,10 @@ List Sessions
 
     Query param: Return sessions created at or before this time (inclusive).
 
+  - `string deploymentID`
+
+    Query param: Filter sessions created by this deployment ID.
+
   - `Boolean includeArchived`
 
     Query param: When true, includes archived sessions. Default: false (exclude archived).
@@ -965,7 +1338,7 @@ List Sessions
 
   - `string page`
 
-    Query param: Opaque pagination cursor from a previous response's next_page.
+    Query param: Opaque pagination cursor from a previous response.
 
   - `IReadOnlyList<Status> statuses`
 
@@ -1035,6 +1408,12 @@ List Sessions
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class SessionListPageResponse:`
@@ -1074,6 +1453,14 @@ List Sessions
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -1301,19 +1688,11 @@ List Sessions
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -1571,9 +1950,17 @@ List Sessions
 
       Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+    - `string? DeploymentID`
+
+      Deployment ID when the session was created from a deployment reference. Null otherwise.
+
   - `string? NextPage`
 
     Opaque cursor for the next page. Null when no more results.
+
+  - `string? PrevPage`
+
+    Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
 
 ### Example
 
@@ -1752,10 +2139,12 @@ await foreach (var item in page.Paginate())
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 
@@ -1831,6 +2220,12 @@ Get Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -1866,6 +2261,14 @@ Get Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -2093,19 +2496,11 @@ Get Session
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -2362,6 +2757,10 @@ Get Session
   - `required IReadOnlyList<string> VaultIds`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `string? DeploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -2539,7 +2938,8 @@ Console.WriteLine(betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -2631,6 +3031,12 @@ Update Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -2666,6 +3072,14 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -2893,19 +3307,11 @@ Update Session
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -3162,6 +3568,10 @@ Update Session
   - `required IReadOnlyList<string> VaultIds`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `string? DeploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -3339,7 +3749,8 @@ Console.WriteLine(betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -3414,6 +3825,12 @@ Delete Session
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -3521,6 +3938,12 @@ Archive Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -3556,6 +3979,14 @@ Archive Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -3783,19 +4214,11 @@ Archive Session
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -4053,6 +4476,10 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `string? DeploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```csharp
@@ -4229,11 +4656,24 @@ Console.WriteLine(betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Agent Message Preview
+
+- `class BetaManagedAgentsAgentMessagePreview:`
+
+  - `required string ID`
+
+    The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+  - `required Type Type`
+
+    - `"agent.message"AgentMessage`
 
 ### Beta Managed Agents Agent Params
 
@@ -4252,6 +4692,378 @@ Console.WriteLine(betaManagedAgentsSession);
   - `Int Version`
 
     The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Agent Thinking Preview
+
+- `class BetaManagedAgentsAgentThinkingPreview:`
+
+  - `required string ID`
+
+    The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+  - `required Type Type`
+
+    - `"agent.thinking"AgentThinking`
+
+### Beta Managed Agents Agent With Overrides Params
+
+- `class BetaManagedAgentsAgentWithOverridesParams:`
+
+  Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+  - `required string ID`
+
+    The `agent` ID.
+
+  - `required Type Type`
+
+    - `"agent_with_overrides"AgentWithOverrides`
+
+  - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> McpServers`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+    - `required string Name`
+
+      Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+    - `required Type Type`
+
+      - `"url"Url`
+
+    - `required string Url`
+
+      Endpoint URL for the MCP server.
+
+  - `Model Model`
+
+    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+    - `enum BetaManagedAgentsModel:`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-6"ClaudeOpus4_6`
+
+        Most intelligent model for building agents and coding
+
+      - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"ClaudeOpus4_5`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+        High-performance model for agents and coding
+
+    - `class BetaManagedAgentsModelConfigParams:`
+
+      An object that defines additional configuration control over model use
+
+      - `required BetaManagedAgentsModel ID`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-6"ClaudeOpus4_6`
+
+          Most intelligent model for building agents and coding
+
+        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"ClaudeOpus4_5`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+          High-performance model for agents and coding
+
+      - `Speed? Speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"Standard`
+
+        - `"fast"Fast`
+
+  - `IReadOnlyList<BetaManagedAgentsSkillParams> Skills`
+
+    Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+    - `class BetaManagedAgentsAnthropicSkillParams:`
+
+      An Anthropic-managed skill.
+
+      - `required string SkillID`
+
+        Identifier of the Anthropic skill (e.g., "xlsx").
+
+      - `required Type Type`
+
+        - `"anthropic"Anthropic`
+
+      - `string? Version`
+
+        Version to pin. Defaults to latest if omitted.
+
+    - `class BetaManagedAgentsCustomSkillParams:`
+
+      A user-created custom skill.
+
+      - `required string SkillID`
+
+        Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+      - `required Type Type`
+
+        - `"custom"Custom`
+
+      - `string? Version`
+
+        Version to pin. Defaults to latest if omitted.
+
+  - `string? System`
+
+    Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+  - `IReadOnlyList<Tool> Tools`
+
+    Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+    - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+      Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+      - `required Type Type`
+
+        - `"agent_toolset_20260401"AgentToolset20260401`
+
+      - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
+
+        Per-tool configuration overrides.
+
+        - `required Name Name`
+
+          Built-in agent tool identifier.
+
+          - `"bash"Bash`
+
+          - `"edit"Edit`
+
+          - `"read"Read`
+
+          - `"write"Write`
+
+          - `"glob"Glob`
+
+          - `"grep"Grep`
+
+          - `"web_fetch"WebFetch`
+
+          - `"web_search"WebSearch`
+
+        - `Boolean? Enabled`
+
+          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+        - `PermissionPolicy? PermissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `required Type Type`
+
+              - `"always_allow"AlwaysAllow`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `required Type Type`
+
+              - `"always_ask"AlwaysAsk`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
+
+        Default configuration for all tools in a toolset.
+
+        - `Boolean? Enabled`
+
+          Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+        - `PermissionPolicy? PermissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+    - `class BetaManagedAgentsMcpToolsetParams:`
+
+      Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `required string McpServerName`
+
+        Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+      - `required Type Type`
+
+        - `"mcp_toolset"McpToolset`
+
+      - `IReadOnlyList<BetaManagedAgentsMcpToolConfigParams> Configs`
+
+        Per-tool configuration overrides.
+
+        - `required string Name`
+
+          Name of the MCP tool to configure. 1-128 characters.
+
+        - `Boolean? Enabled`
+
+          Whether this tool is enabled. Overrides the `default_config` setting.
+
+        - `PermissionPolicy? PermissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
+
+        Default configuration for all tools from an MCP server.
+
+        - `Boolean? Enabled`
+
+          Whether tools are enabled by default. Defaults to true if not specified.
+
+        - `PermissionPolicy? PermissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+    - `class BetaManagedAgentsCustomToolParams:`
+
+      A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `required string Description`
+
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+
+      - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `JsonElement Type "object"constant`
+
+        - `IReadOnlyDictionary<string, JsonElement>? Properties`
+
+        - `IReadOnlyList<string>? Required`
+
+      - `required string Name`
+
+        Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+      - `required Type Type`
+
+        - `"custom"Custom`
+
+  - `Int Version`
+
+    The specific `agent` version to use. Omit to use the latest version.
 
 ### Beta Managed Agents Branch Checkout
 
@@ -4302,6 +5114,78 @@ Console.WriteLine(betaManagedAgentsSession);
   - `required Type Type`
 
     - `"session_deleted"SessionDeleted`
+
+### Beta Managed Agents Delta Content
+
+- `class BetaManagedAgentsDeltaContent:`
+
+  - `required BetaManagedAgentsTextBlock Content`
+
+    Regular text content.
+
+    - `required string Text`
+
+      The text content.
+
+    - `required Type Type`
+
+      - `"text"Text`
+
+  - `required Type Type`
+
+    - `"content_delta"ContentDelta`
+
+  - `Long Index`
+
+    Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+### Beta Managed Agents Delta Event
+
+- `class BetaManagedAgentsDeltaEvent:`
+
+  An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `required BetaManagedAgentsDeltaContent Delta`
+
+    One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `required BetaManagedAgentsTextBlock Content`
+
+      Regular text content.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"content_delta"ContentDelta`
+
+    - `Long Index`
+
+      Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+  - `required string EventID`
+
+    The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+  - `required Type Type`
+
+    - `"event_delta"EventDelta`
+
+### Beta Managed Agents Delta Type
+
+- `enum BetaManagedAgentsDeltaType:`
+
+  EventDeltaType enum
+
+  - `"agent.message"AgentMessage`
+
+  - `"agent.thinking"AgentThinking`
 
 ### Beta Managed Agents File Resource Params
 
@@ -4557,6 +5441,14 @@ Console.WriteLine(betaManagedAgentsSession);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
           Frontier intelligence for long-running agents and coding
@@ -4783,19 +5675,11 @@ Console.WriteLine(betaManagedAgentsSession);
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -5053,6 +5937,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `string? DeploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Beta Managed Agents Session Agent
 
 - `class BetaManagedAgentsSessionAgent:`
@@ -5082,6 +5970,14 @@ Console.WriteLine(betaManagedAgentsSession);
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -5309,19 +6205,11 @@ Console.WriteLine(betaManagedAgentsSession);
 
             JSON Schema for custom tool input parameters.
 
+            - `JsonElement Type "object"constant`
+
             - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-              JSON Schema properties defining the tool's input parameters.
-
-            - `IReadOnlyList<string> Required`
-
-              List of required property names.
-
-            - `Type Type`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"Object`
+            - `IReadOnlyList<string>? Required`
 
           - `required string Name`
 
@@ -5533,25 +6421,17 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `required string Description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -5594,6 +6474,14 @@ Console.WriteLine(betaManagedAgentsSession);
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -5797,19 +6685,11 @@ Console.WriteLine(betaManagedAgentsSession);
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 
@@ -5886,6 +6766,14 @@ Console.WriteLine(betaManagedAgentsSession);
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -6113,19 +7001,11 @@ Console.WriteLine(betaManagedAgentsSession);
 
               JSON Schema for custom tool input parameters.
 
+              - `JsonElement Type "object"constant`
+
               - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                JSON Schema properties defining the tool's input parameters.
-
-              - `IReadOnlyList<string> Required`
-
-                List of required property names.
-
-              - `Type Type`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"Object`
+              - `IReadOnlyList<string>? Required`
 
             - `required string Name`
 
@@ -6210,6 +7090,108 @@ Console.WriteLine(betaManagedAgentsSession);
   - `Int OutputTokens`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents Start Event
+
+- `class BetaManagedAgentsStartEvent:`
+
+  Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `required BetaManagedAgentsStartEventPreview Event`
+
+    The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `class BetaManagedAgentsAgentMessagePreview:`
+
+      - `required string ID`
+
+        The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+      - `required Type Type`
+
+        - `"agent.message"AgentMessage`
+
+    - `class BetaManagedAgentsAgentThinkingPreview:`
+
+      - `required string ID`
+
+        The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+      - `required Type Type`
+
+        - `"agent.thinking"AgentThinking`
+
+  - `required Type Type`
+
+    - `"event_start"EventStart`
+
+### Beta Managed Agents Start Event Preview
+
+- `class BetaManagedAgentsStartEventPreview: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsAgentMessagePreview:`
+
+    - `required string ID`
+
+      The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+    - `required Type Type`
+
+      - `"agent.message"AgentMessage`
+
+  - `class BetaManagedAgentsAgentThinkingPreview:`
+
+    - `required string ID`
+
+      The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+    - `required Type Type`
+
+      - `"agent.thinking"AgentThinking`
+
+### Beta Managed Agents System Content Block
+
+- `class BetaManagedAgentsSystemContentBlock:`
+
+  Regular text content.
+
+  - `required string Text`
+
+    The text content.
+
+  - `required Type Type`
+
+    - `"text"Text`
+
+### Beta Managed Agents System Message Event
+
+- `class BetaManagedAgentsSystemMessageEvent:`
+
+  A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `required string ID`
+
+    Unique identifier for this event.
+
+  - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+    System content blocks. Text-only.
+
+    - `required string Text`
+
+      The text content.
+
+    - `required Type Type`
+
+      - `"text"Text`
+
+  - `required Type Type`
+
+    - `"system.message"SystemMessage`
+
+  - `DateTimeOffset? ProcessedAt`
+
+    A timestamp in RFC 3339 format
 
 ### Beta Managed Agents User Tool Result Event
 
@@ -6532,6 +7514,12 @@ List Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -7403,6 +8391,42 @@ List Events
 
             - `"billing_error"BillingError`
 
+        - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+          An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+          - `required string CredentialID`
+
+            ID of the affected credential.
+
+          - `required string Message`
+
+            Human-readable error description.
+
+          - `required RetryStatus RetryStatus`
+
+            What the client should do next in response to this error.
+
+            - `class BetaManagedAgentsRetryStatusRetrying:`
+
+              The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `class BetaManagedAgentsRetryStatusExhausted:`
+
+              This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `class BetaManagedAgentsRetryStatusTerminal:`
+
+              The session encountered a terminal error and will transition to `terminated` state.
+
+          - `required Type Type`
+
+            - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+          - `required string VaultID`
+
+            ID of the vault containing the affected credential.
+
       - `required DateTimeOffset ProcessedAt`
 
         A timestamp in RFC 3339 format
@@ -7963,6 +8987,14 @@ List Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-sonnet-5"ClaudeSonnet5`
+
+              High-performance model for coding and agents
+
+            - `"claude-fable-5"ClaudeFable5`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `"claude-opus-4-8"ClaudeOpus4_8`
 
               Frontier intelligence for long-running agents and coding
@@ -8189,19 +9221,11 @@ List Events
 
                   JSON Schema for custom tool input parameters.
 
+                  - `JsonElement Type "object"constant`
+
                   - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                    JSON Schema properties defining the tool's input parameters.
-
-                  - `IReadOnlyList<string> Required`
-
-                    List of required property names.
-
-                  - `Type Type`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"Object`
+                  - `IReadOnlyList<string>? Required`
 
                 - `required string Name`
 
@@ -8256,6 +9280,34 @@ List Events
       - `string? Title`
 
         The session's new title. Present only when the update changed it.
+
+    - `class BetaManagedAgentsSystemMessageEvent:`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `required string ID`
+
+        Unique identifier for this event.
+
+      - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+        System content blocks. Text-only.
+
+        - `required string Text`
+
+          The text content.
+
+        - `required Type Type`
+
+          - `"text"Text`
+
+      - `required Type Type`
+
+        - `"system.message"SystemMessage`
+
+      - `DateTimeOffset? ProcessedAt`
+
+        A timestamp in RFC 3339 format
 
   - `string? NextPage`
 
@@ -8666,6 +9718,26 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
+    - `class BetaManagedAgentsSystemMessageEventParams:`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+      - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+        System content blocks to append. Text-only.
+
+        - `required string Text`
+
+          The text content.
+
+        - `required Type Type`
+
+          - `"text"Text`
+
+      - `required Type Type`
+
+        - `"system.message"SystemMessage`
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -8721,6 +9793,12 @@ Send Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -9134,6 +10212,34 @@ Send Events
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `class BetaManagedAgentsSystemMessageEvent:`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `required string ID`
+
+        Unique identifier for this event.
+
+      - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+        System content blocks. Text-only.
+
+        - `required string Text`
+
+          The text content.
+
+        - `required Type Type`
+
+          - `"text"Text`
+
+      - `required Type Type`
+
+        - `"system.message"SystemMessage`
+
+      - `DateTimeOffset? ProcessedAt`
+
+        A timestamp in RFC 3339 format
+
 ### Example
 
 ```csharp
@@ -9196,11 +10302,19 @@ Stream Events
 
   - `required string sessionID`
 
-    Path parameter session_id
+    Path param: Path parameter session_id
+
+  - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas`
+
+    Query param: When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+    - `"agent.message"AgentMessage`
+
+    - `"agent.thinking"AgentThinking`
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
-    Optional header to specify the beta version(s) you want to use.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
     - `"message-batches-2024-09-24"MessageBatches2024_09_24`
 
@@ -9253,6 +10367,12 @@ Stream Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -10120,6 +11240,42 @@ Stream Events
 
           - `"billing_error"BillingError`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `required string CredentialID`
+
+          ID of the affected credential.
+
+        - `required string Message`
+
+          Human-readable error description.
+
+        - `required RetryStatus RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `required Type Type`
+
+          - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+        - `required string VaultID`
+
+          ID of the vault containing the affected credential.
+
     - `required DateTimeOffset ProcessedAt`
 
       A timestamp in RFC 3339 format
@@ -10680,6 +11836,14 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
             Frontier intelligence for long-running agents and coding
@@ -10906,19 +12070,11 @@ Stream Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -10973,6 +12129,94 @@ Stream Events
     - `string? Title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsStartEventPreview Event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `required Type Type`
+
+          - `"agent.message"AgentMessage`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `required Type Type`
+
+          - `"agent.thinking"AgentThinking`
+
+    - `required Type Type`
+
+      - `"event_start"EventStart`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsDeltaContent Delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `required BetaManagedAgentsTextBlock Content`
+
+        Regular text content.
+
+      - `required Type Type`
+
+        - `"content_delta"ContentDelta`
+
+      - `Long Index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `required string EventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `required Type Type`
+
+      - `"event_delta"EventDelta`
+
+  - `class BetaManagedAgentsSystemMessageEvent:`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `required string ID`
+
+      Unique identifier for this event.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
+
+    - `DateTimeOffset? ProcessedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -12024,6 +13268,56 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
     - `"billing_error"BillingError`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+  An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+  - `required string CredentialID`
+
+    ID of the affected credential.
+
+  - `required string Message`
+
+    Human-readable error description.
+
+  - `required RetryStatus RetryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `required Type Type`
+
+        - `"retrying"Retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `required Type Type`
+
+        - `"exhausted"Exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `required Type Type`
+
+        - `"terminal"Terminal`
+
+  - `required Type Type`
+
+    - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+  - `required string VaultID`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `class BetaManagedAgentsDocumentBlock:`
@@ -12447,6 +13741,26 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
     - `Boolean? IsError`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsSystemMessageEventParams:`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks to append. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
 
 ### Beta Managed Agents File Document Source
 
@@ -13300,6 +14614,34 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `class BetaManagedAgentsSystemMessageEvent:`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `required string ID`
+
+        Unique identifier for this event.
+
+      - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+        System content blocks. Text-only.
+
+        - `required string Text`
+
+          The text content.
+
+        - `required Type Type`
+
+          - `"text"Text`
+
+      - `required Type Type`
+
+        - `"system.message"SystemMessage`
+
+      - `DateTimeOffset? ProcessedAt`
+
+        A timestamp in RFC 3339 format
+
 ### Beta Managed Agents Session Deleted Event
 
 - `class BetaManagedAgentsSessionDeletedEvent:`
@@ -13557,6 +14899,42 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
       - `required Type Type`
 
         - `"billing_error"BillingError`
+
+    - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+      An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+      - `required string CredentialID`
+
+        ID of the affected credential.
+
+      - `required string Message`
+
+        Human-readable error description.
+
+      - `required RetryStatus RetryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+      - `required Type Type`
+
+        - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+      - `required string VaultID`
+
+        ID of the vault containing the affected credential.
 
   - `required DateTimeOffset ProcessedAt`
 
@@ -14432,6 +15810,42 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           - `"billing_error"BillingError`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `required string CredentialID`
+
+          ID of the affected credential.
+
+        - `required string Message`
+
+          Human-readable error description.
+
+        - `required RetryStatus RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `required Type Type`
+
+          - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+        - `required string VaultID`
+
+          ID of the vault containing the affected credential.
+
     - `required DateTimeOffset ProcessedAt`
 
       A timestamp in RFC 3339 format
@@ -14992,6 +16406,14 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
             Frontier intelligence for long-running agents and coding
@@ -15218,19 +16640,11 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -15285,6 +16699,34 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
     - `string? Title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent:`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `required string ID`
+
+      Unique identifier for this event.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
+
+    - `DateTimeOffset? ProcessedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -16662,6 +18104,42 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           - `"billing_error"BillingError`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `required string CredentialID`
+
+          ID of the affected credential.
+
+        - `required string Message`
+
+          Human-readable error description.
+
+        - `required RetryStatus RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `required Type Type`
+
+          - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+        - `required string VaultID`
+
+          ID of the vault containing the affected credential.
+
     - `required DateTimeOffset ProcessedAt`
 
       A timestamp in RFC 3339 format
@@ -17222,6 +18700,14 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
             Frontier intelligence for long-running agents and coding
@@ -17448,19 +18934,11 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -17515,6 +18993,116 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
     - `string? Title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsStartEventPreview Event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `required Type Type`
+
+          - `"agent.message"AgentMessage`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `required Type Type`
+
+          - `"agent.thinking"AgentThinking`
+
+    - `required Type Type`
+
+      - `"event_start"EventStart`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsDeltaContent Delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `required BetaManagedAgentsTextBlock Content`
+
+        Regular text content.
+
+      - `required Type Type`
+
+        - `"content_delta"ContentDelta`
+
+      - `Long Index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `required string EventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `required Type Type`
+
+      - `"event_delta"EventDelta`
+
+  - `class BetaManagedAgentsSystemMessageEvent:`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `required string ID`
+
+      Unique identifier for this event.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
+
+    - `DateTimeOffset? ProcessedAt`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `class BetaManagedAgentsSystemMessageEventParams:`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+  - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+    System content blocks to append. Text-only.
+
+    - `required string Text`
+
+      The text content.
+
+    - `required Type Type`
+
+      - `"text"Text`
+
+  - `required Type Type`
+
+    - `"system.message"SystemMessage`
 
 ### Beta Managed Agents Text Block
 
@@ -18852,6 +20440,12 @@ Add Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -18981,6 +20575,12 @@ List Session Resources
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -19215,6 +20815,12 @@ Get Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -19430,6 +21036,12 @@ Update Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -19641,6 +21253,12 @@ Delete Session Resource
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -19981,6 +21599,12 @@ List Session Threads
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class ThreadListPageResponse:`
@@ -20022,6 +21646,14 @@ List Session Threads
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -20225,19 +21857,11 @@ List Session Threads
 
             JSON Schema for custom tool input parameters.
 
+            - `JsonElement Type "object"constant`
+
             - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-              JSON Schema properties defining the tool's input parameters.
-
-            - `IReadOnlyList<string> Required`
-
-              List of required property names.
-
-            - `Type Type`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"Object`
+            - `IReadOnlyList<string>? Required`
 
           - `required string Name`
 
@@ -20506,6 +22130,12 @@ Get Session Thread
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread:`
@@ -20543,6 +22173,14 @@ Get Session Thread
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -20746,19 +22384,11 @@ Get Session Thread
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 
@@ -21017,6 +22647,12 @@ Archive Session Thread
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread:`
@@ -21054,6 +22690,14 @@ Archive Session Thread
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -21257,19 +22901,11 @@ Archive Session Thread
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 
@@ -21492,6 +23128,14 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-sonnet-5"ClaudeSonnet5`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
           Frontier intelligence for long-running agents and coding
@@ -21694,19 +23338,11 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
           JSON Schema for custom tool input parameters.
 
+          - `JsonElement Type "object"constant`
+
           - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-            JSON Schema properties defining the tool's input parameters.
-
-          - `IReadOnlyList<string> Required`
-
-            List of required property names.
-
-          - `Type Type`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"Object`
+          - `IReadOnlyList<string>? Required`
 
         - `required string Name`
 
@@ -22728,6 +24364,42 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
           - `"billing_error"BillingError`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `required string CredentialID`
+
+          ID of the affected credential.
+
+        - `required string Message`
+
+          Human-readable error description.
+
+        - `required RetryStatus RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `required Type Type`
+
+          - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+        - `required string VaultID`
+
+          ID of the vault containing the affected credential.
+
     - `required DateTimeOffset ProcessedAt`
 
       A timestamp in RFC 3339 format
@@ -23288,6 +24960,14 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
             Frontier intelligence for long-running agents and coding
@@ -23514,19 +25194,11 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -23581,6 +25253,94 @@ Console.WriteLine(betaManagedAgentsSessionThread);
     - `string? Title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsStartEventPreview Event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `required Type Type`
+
+          - `"agent.message"AgentMessage`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `required Type Type`
+
+          - `"agent.thinking"AgentThinking`
+
+    - `required Type Type`
+
+      - `"event_start"EventStart`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsDeltaContent Delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `required BetaManagedAgentsTextBlock Content`
+
+        Regular text content.
+
+      - `required Type Type`
+
+        - `"content_delta"ContentDelta`
+
+      - `Long Index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `required string EventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `required Type Type`
+
+      - `"event_delta"EventDelta`
+
+  - `class BetaManagedAgentsSystemMessageEvent:`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `required string ID`
+
+      Unique identifier for this event.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
+
+    - `DateTimeOffset? ProcessedAt`
+
+      A timestamp in RFC 3339 format
 
 # Events
 
@@ -23667,6 +25427,12 @@ List Session Thread Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -24538,6 +26304,42 @@ List Session Thread Events
 
             - `"billing_error"BillingError`
 
+        - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+          An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+          - `required string CredentialID`
+
+            ID of the affected credential.
+
+          - `required string Message`
+
+            Human-readable error description.
+
+          - `required RetryStatus RetryStatus`
+
+            What the client should do next in response to this error.
+
+            - `class BetaManagedAgentsRetryStatusRetrying:`
+
+              The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `class BetaManagedAgentsRetryStatusExhausted:`
+
+              This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `class BetaManagedAgentsRetryStatusTerminal:`
+
+              The session encountered a terminal error and will transition to `terminated` state.
+
+          - `required Type Type`
+
+            - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+          - `required string VaultID`
+
+            ID of the vault containing the affected credential.
+
       - `required DateTimeOffset ProcessedAt`
 
         A timestamp in RFC 3339 format
@@ -25098,6 +26900,14 @@ List Session Thread Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-sonnet-5"ClaudeSonnet5`
+
+              High-performance model for coding and agents
+
+            - `"claude-fable-5"ClaudeFable5`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `"claude-opus-4-8"ClaudeOpus4_8`
 
               Frontier intelligence for long-running agents and coding
@@ -25324,19 +27134,11 @@ List Session Thread Events
 
                   JSON Schema for custom tool input parameters.
 
+                  - `JsonElement Type "object"constant`
+
                   - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                    JSON Schema properties defining the tool's input parameters.
-
-                  - `IReadOnlyList<string> Required`
-
-                    List of required property names.
-
-                  - `Type Type`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"Object`
+                  - `IReadOnlyList<string>? Required`
 
                 - `required string Name`
 
@@ -25391,6 +27193,34 @@ List Session Thread Events
       - `string? Title`
 
         The session's new title. Present only when the update changed it.
+
+    - `class BetaManagedAgentsSystemMessageEvent:`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `required string ID`
+
+        Unique identifier for this event.
+
+      - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+        System content blocks. Text-only.
+
+        - `required string Text`
+
+          The text content.
+
+        - `required Type Type`
+
+          - `"text"Text`
+
+      - `required Type Type`
+
+        - `"system.message"SystemMessage`
+
+      - `DateTimeOffset? ProcessedAt`
+
+        A timestamp in RFC 3339 format
 
   - `string? NextPage`
 
@@ -25508,6 +27338,12 @@ Stream Session Thread Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -26375,6 +28211,42 @@ Stream Session Thread Events
 
           - `"billing_error"BillingError`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError:`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `required string CredentialID`
+
+          ID of the affected credential.
+
+        - `required string Message`
+
+          Human-readable error description.
+
+        - `required RetryStatus RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `required Type Type`
+
+          - `"credential_host_unreachable_error"CredentialHostUnreachableError`
+
+        - `required string VaultID`
+
+          ID of the vault containing the affected credential.
+
     - `required DateTimeOffset ProcessedAt`
 
       A timestamp in RFC 3339 format
@@ -26935,6 +28807,14 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-sonnet-5"ClaudeSonnet5`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"ClaudeFable5`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
             Frontier intelligence for long-running agents and coding
@@ -27161,19 +29041,11 @@ Stream Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `JsonElement Type "object"constant`
+
                 - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `IReadOnlyList<string> Required`
-
-                  List of required property names.
-
-                - `Type Type`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"Object`
+                - `IReadOnlyList<string>? Required`
 
               - `required string Name`
 
@@ -27228,6 +29100,94 @@ Stream Session Thread Events
     - `string? Title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsStartEventPreview Event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `required Type Type`
+
+          - `"agent.message"AgentMessage`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `required string ID`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `required Type Type`
+
+          - `"agent.thinking"AgentThinking`
+
+    - `required Type Type`
+
+      - `"event_start"EventStart`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `required BetaManagedAgentsDeltaContent Delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `required BetaManagedAgentsTextBlock Content`
+
+        Regular text content.
+
+      - `required Type Type`
+
+        - `"content_delta"ContentDelta`
+
+      - `Long Index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `required string EventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `required Type Type`
+
+      - `"event_delta"EventDelta`
+
+  - `class BetaManagedAgentsSystemMessageEvent:`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `required string ID`
+
+      Unique identifier for this event.
+
+    - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
+
+      System content blocks. Text-only.
+
+      - `required string Text`
+
+        The text content.
+
+      - `required Type Type`
+
+        - `"text"Text`
+
+    - `required Type Type`
+
+      - `"system.message"SystemMessage`
+
+    - `DateTimeOffset? ProcessedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

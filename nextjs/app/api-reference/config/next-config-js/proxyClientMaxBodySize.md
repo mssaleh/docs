@@ -3,7 +3,7 @@ title: proxyClientMaxBodySize
 description: Configure the maximum request body size when using proxy.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/proxyClientMaxBodySize"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-10-20
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

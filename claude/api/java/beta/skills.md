@@ -2,7 +2,7 @@
 
 ## Create Skill
 
-`SkillCreateResponse beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`SkillCreateResponse beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
 **post** `/v1/skills`
 
@@ -68,17 +68,23 @@ Create Skill
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `List<String> files`
+
+    Files to upload for the skill.
+
+    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
   - `Optional<String> displayTitle`
 
     Display title for the skill.
 
     This is a human-readable label that is not included in the prompt sent to the model.
-
-  - `Optional<List<String>> files`
-
-    Files to upload for the skill.
-
-    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 ### Returns
 
@@ -134,6 +140,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.SkillCreateParams;
 import com.anthropic.models.beta.skills.SkillCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -141,7 +148,10 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        SkillCreateResponse skill = client.beta().skills().create();
+        SkillCreateParams params = SkillCreateParams.builder()
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        SkillCreateResponse skill = client.beta().skills().create(params);
     }
 }
 ```
@@ -248,6 +258,12 @@ List Skills
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -409,6 +425,12 @@ Get Skill
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -563,6 +585,12 @@ Delete Skill
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -613,7 +641,7 @@ public final class Main {
 
 ## Create Skill Version
 
-`VersionCreateResponse beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`VersionCreateResponse beta().skills().versions().create(VersionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
 **post** `/v1/skills/{skill_id}/versions`
 
@@ -685,7 +713,13 @@ Create Skill Version
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-  - `Optional<List<String>> files`
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `List<String> files`
 
     Files to upload for the skill.
 
@@ -748,6 +782,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.versions.VersionCreateParams;
 import com.anthropic.models.beta.skills.versions.VersionCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -755,7 +790,11 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        VersionCreateResponse version = client.beta().skills().versions().create("skill_id");
+        VersionCreateParams params = VersionCreateParams.builder()
+            .skillId("skill_id")
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        VersionCreateResponse version = client.beta().skills().versions().create(params);
     }
 }
 ```
@@ -858,6 +897,12 @@ List Skill Versions
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -1029,6 +1074,12 @@ Download a skill version's content as a zip archive.
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Example
 
 ```java
@@ -1133,6 +1184,12 @@ Get Skill Version
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -1301,6 +1358,12 @@ Delete Skill Version
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 

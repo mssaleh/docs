@@ -3,7 +3,7 @@ title: Turbopack
 description: Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
 url: "https://nextjs.org/docs/app/api-reference/turbopack"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-05-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"

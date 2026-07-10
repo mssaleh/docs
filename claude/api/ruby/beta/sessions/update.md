@@ -172,25 +172,19 @@ Update Session
 
       - `description: String`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -218,7 +212,7 @@ Update Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -272,6 +266,12 @@ Update Session
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -308,11 +308,19 @@ Update Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -542,19 +550,13 @@ Update Session
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -812,6 +814,10 @@ Update Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```ruby
@@ -987,6 +993,7 @@ puts(beta_managed_agents_session)
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```

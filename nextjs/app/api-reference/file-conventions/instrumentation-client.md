@@ -3,7 +3,7 @@ title: instrumentation-client.js
 description: "Learn how to add client-side instrumentation to track and monitor your Next.js application's frontend performance."
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-08-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"

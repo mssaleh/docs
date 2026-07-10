@@ -18,7 +18,7 @@ Create Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,9 +72,15 @@ Create Credential
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Body Parameters
 
-- `auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams`
+- `auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams or BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Authentication details for creating a credential.
 
@@ -174,6 +180,58 @@ Create Credential
 
       - `"static_bearer"`
 
+  - `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, 2 more }`
+
+    Parameters for creating an environment variable credential.
+
+    - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+      Outbound hosts the secret value is substituted on.
+
+      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+        Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+        - `type: "unrestricted"`
+
+          - `"unrestricted"`
+
+      - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+        Substitute the secret only on requests to the listed hosts.
+
+        - `allowed_hosts: array of string`
+
+          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+        - `type: "limited"`
+
+          - `"limited"`
+
+    - `secret_name: string`
+
+      Name of the environment variable. Immutable after create.
+
+    - `secret_value: string`
+
+      Secret value. Write-only; never returned in responses.
+
+    - `type: "environment_variable"`
+
+      - `"environment_variable"`
+
+    - `injection_location: optional BetaManagedAgentsInjectionLocationParams`
+
+      Where in the outbound request the secret value may be substituted.
+
+      - `body: optional boolean`
+
+        Substitute when the placeholder appears in the request body.
+
+      - `header: optional boolean`
+
+        Substitute when the placeholder appears in a request header value.
+
 - `display_name: optional string`
 
   Human-readable name for the credential. Up to 255 characters.
@@ -196,7 +254,7 @@ Create Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -275,6 +333,54 @@ Create Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -374,7 +480,7 @@ List Credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -428,6 +534,12 @@ List Credentials
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsCredential`
@@ -442,7 +554,7 @@ List Credentials
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -521,6 +633,54 @@ List Credentials
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -605,7 +765,7 @@ Get Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -659,6 +819,12 @@ Get Credential
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
@@ -673,7 +839,7 @@ Get Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -752,6 +918,54 @@ Get Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -827,7 +1041,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -881,9 +1095,15 @@ Update Credential
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Body Parameters
 
-- `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams`
+- `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Updated authentication details for a credential.
 
@@ -955,6 +1175,54 @@ Update Credential
 
       Updated static bearer token value.
 
+  - `BetaManagedAgentsEnvironmentVariableUpdateParams object { type, injection_location, networking, secret_value }`
+
+    Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+    - `type: "environment_variable"`
+
+      - `"environment_variable"`
+
+    - `injection_location: optional BetaManagedAgentsInjectionLocationUpdateParams`
+
+      Updated injection location.
+
+      - `body: optional boolean`
+
+        Substitute when the placeholder appears in the request body.
+
+      - `header: optional boolean`
+
+        Substitute when the placeholder appears in a request header value.
+
+    - `networking: optional BetaManagedAgentsCredentialNetworkingParams`
+
+      Updated networking scope. Full replacement.
+
+      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+        Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+        - `type: "unrestricted"`
+
+          - `"unrestricted"`
+
+      - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+        Substitute the secret only on requests to the listed hosts.
+
+        - `allowed_hosts: array of string`
+
+          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+        - `type: "limited"`
+
+          - `"limited"`
+
+    - `secret_value: optional string`
+
+      Updated secret value.
+
 - `display_name: optional string`
 
   Updated human-readable name for the credential. 1-255 characters.
@@ -977,7 +1245,7 @@ Update Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -1056,6 +1324,54 @@ Update Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -1138,7 +1454,7 @@ Delete Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1191,6 +1507,12 @@ Delete Credential
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -1245,7 +1567,7 @@ Archive Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1299,6 +1621,12 @@ Archive Credential
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
@@ -1313,7 +1641,7 @@ Archive Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -1393,6 +1721,54 @@ Archive Credential
 
         - `"static_bearer"`
 
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
@@ -1468,7 +1844,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1521,6 +1897,12 @@ Validate Credential
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -1663,7 +2045,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -1743,6 +2125,54 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"static_bearer"`
 
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
@@ -1766,6 +2196,32 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
   - `display_name: optional string`
 
     Human-readable name for the credential.
+
+### Beta Managed Agents Credential Networking Params
+
+- `BetaManagedAgentsCredentialNetworkingParams = BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+    Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+    - `type: "unrestricted"`
+
+      - `"unrestricted"`
+
+  - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+    Substitute the secret only on requests to the listed hosts.
+
+    - `allowed_hosts: array of string`
+
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+    - `type: "limited"`
+
+      - `"limited"`
 
 ### Beta Managed Agents Credential Validation
 
@@ -1876,6 +2332,230 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
   - `type: "vault_credential_deleted"`
 
     - `"vault_credential_deleted"`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+
+  Environment variable credential details. The secret value is never returned.
+
+  - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+    Where in the outbound request the secret value is substituted.
+
+    - `body: boolean`
+
+      Whether the placeholder is substituted in the request body.
+
+    - `header: boolean`
+
+      Whether the placeholder is substituted in request header values.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+      The secret is substituted on any host the session's Environment network policy permits egress to.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+      The secret is substituted only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, 2 more }`
+
+  Parameters for creating an environment variable credential.
+
+  - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable. Immutable after create.
+
+  - `secret_value: string`
+
+    Secret value. Write-only; never returned in responses.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+  - `injection_location: optional BetaManagedAgentsInjectionLocationParams`
+
+    Where in the outbound request the secret value may be substituted.
+
+    - `body: optional boolean`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `header: optional boolean`
+
+      Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `BetaManagedAgentsEnvironmentVariableUpdateParams object { type, injection_location, networking, secret_value }`
+
+  Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+  - `injection_location: optional BetaManagedAgentsInjectionLocationUpdateParams`
+
+    Updated injection location.
+
+    - `body: optional boolean`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `header: optional boolean`
+
+      Substitute when the placeholder appears in a request header value.
+
+  - `networking: optional BetaManagedAgentsCredentialNetworkingParams`
+
+    Updated networking scope. Full replacement.
+
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_value: optional string`
+
+    Updated secret value.
+
+### Beta Managed Agents Injection Location Params
+
+- `BetaManagedAgentsInjectionLocationParams object { body, header }`
+
+  Where in the outbound request the secret value may be substituted.
+
+  - `body: optional boolean`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `header: optional boolean`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Injection Location Response
+
+- `BetaManagedAgentsInjectionLocationResponse object { body, header }`
+
+  Where in the outbound request the secret value is substituted.
+
+  - `body: boolean`
+
+    Whether the placeholder is substituted in the request body.
+
+  - `header: boolean`
+
+    Whether the placeholder is substituted in request header values.
+
+### Beta Managed Agents Injection Location Update Params
+
+- `BetaManagedAgentsInjectionLocationUpdateParams object { body, header }`
+
+  Updated injection location.
+
+  - `body: optional boolean`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `header: optional boolean`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+
+  Substitute the secret only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `type: "limited"`
+
+    - `"limited"`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+
+  The secret is substituted only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+  - `type: "limited"`
+
+    - `"limited"`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -2468,3 +3148,23 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
   - `client_secret: optional string`
 
     Updated OAuth client secret.
+
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `type: "unrestricted"`
+
+    - `"unrestricted"`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+
+  The secret is substituted on any host the session's Environment network policy permits egress to.
+
+  - `type: "unrestricted"`
+
+    - `"unrestricted"`

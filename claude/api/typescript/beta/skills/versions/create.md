@@ -1,6 +1,6 @@
 ## Create Skill Version
 
-`client.beta.skills.versions.create(stringskillID, VersionCreateParamsparams?, RequestOptionsoptions?): VersionCreateResponse`
+`client.beta.skills.versions.create(stringskillID, VersionCreateParamsparams, RequestOptionsoptions?): VersionCreateResponse`
 
 **post** `/v1/skills/{skill_id}/versions`
 
@@ -16,7 +16,7 @@ Create Skill Version
 
 - `params: VersionCreateParams`
 
-  - `files?: Array<Uploadable> | null`
+  - `files: Array<Uploadable>`
 
     Body param: Files to upload for the skill.
 
@@ -28,7 +28,7 @@ Create Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -81,6 +81,12 @@ Create Skill Version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
+
+      - `"server-side-fallback-2026-06-01"`
+
+      - `"fallback-credit-2026-06-01"`
+
+      - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -139,7 +145,9 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const version = await client.beta.skills.versions.create('skill_id');
+const version = await client.beta.skills.versions.create('skill_id', {
+  files: [fs.createReadStream('path/to/file')],
+});
 
 console.log(version.id);
 ```

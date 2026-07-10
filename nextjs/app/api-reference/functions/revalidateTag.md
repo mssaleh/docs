@@ -3,7 +3,7 @@ title: revalidateTag
 description: API Reference for the revalidateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidateTag"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

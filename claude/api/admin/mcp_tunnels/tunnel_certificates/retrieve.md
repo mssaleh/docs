@@ -2,6 +2,8 @@
 
 **get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Retrieve a single certificate registered on a tunnel by ID.
 
 ### Path Parameters
@@ -61,7 +63,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

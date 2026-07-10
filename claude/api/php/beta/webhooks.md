@@ -2,6 +2,188 @@
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `BetaWebhookAgentArchivedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Created Event Data
+
+- `BetaWebhookAgentCreatedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `BetaWebhookAgentDeletedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.deleted" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Updated Event Data
+
+- `BetaWebhookAgentUpdatedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.updated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `BetaWebhookDeploymentArchivedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Created Event Data
+
+- `BetaWebhookDeploymentCreatedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `BetaWebhookDeploymentDeletedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.deleted" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `BetaWebhookDeploymentPausedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.paused" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `BetaWebhookDeploymentRunFailedEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.failed" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `BetaWebhookDeploymentRunStartedEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.started" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `BetaWebhookDeploymentRunSucceededEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.succeeded" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `BetaWebhookDeploymentUnpausedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.unpaused" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `BetaWebhookDeploymentUpdatedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.updated" type`
+
+  - `string workspaceID`
+
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
@@ -28,7 +210,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -40,7 +222,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -52,7 +234,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -64,7 +246,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -76,7 +258,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -88,7 +270,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -100,7 +282,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -112,7 +294,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -124,7 +306,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -136,7 +318,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -148,7 +330,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -160,9 +342,13 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
+
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `"session.thread_created" type`
 
@@ -172,9 +358,13 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
+
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `"session.thread_idled" type`
 
@@ -184,9 +374,13 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
+
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `"session.thread_terminated" type`
 
@@ -196,7 +390,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `string organizationID`
 
@@ -208,7 +402,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `string organizationID`
 
@@ -220,7 +414,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `string organizationID`
 
@@ -232,7 +426,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `string organizationID`
 
@@ -244,7 +438,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `string organizationID`
 
@@ -260,7 +454,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `string organizationID`
 
@@ -276,7 +470,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `string organizationID`
 
@@ -292,7 +486,7 @@
 
     - `string id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `string organizationID`
 
@@ -304,13 +498,181 @@
 
     - `string workspaceID`
 
+  - `BetaWebhookSessionUpdatedEventData`
+
+    - `string id`
+
+      ID of the session that triggered the event.
+
+    - `string organizationID`
+
+    - `"session.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentCreatedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentArchivedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentDeletedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.deleted" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentPausedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.paused" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunFailedEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.failed" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentCreatedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentUpdatedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentUnpausedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.unpaused" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentUpdatedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentArchivedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunStartedEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.started" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentDeletedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.deleted" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunSucceededEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.succeeded" type`
+
+    - `string workspaceID`
+
 ### Beta Webhook Session Archived Event Data
 
 - `BetaWebhookSessionArchivedEventData`
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -324,7 +686,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -338,7 +700,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -352,7 +714,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -366,7 +728,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -380,7 +742,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -394,7 +756,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -408,7 +770,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -422,7 +784,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -436,7 +798,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -450,7 +812,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -464,7 +826,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
@@ -478,9 +840,13 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
+
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `"session.thread_created" type`
 
@@ -492,9 +858,13 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
+
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `"session.thread_idled" type`
 
@@ -506,11 +876,29 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `string organizationID`
 
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `"session.thread_terminated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Session Updated Event Data
+
+- `BetaWebhookSessionUpdatedEventData`
+
+  - `string id`
+
+    ID of the session that triggered the event.
+
+  - `string organizationID`
+
+  - `"session.updated" type`
 
   - `string workspaceID`
 
@@ -520,7 +908,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `string organizationID`
 
@@ -534,7 +922,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `string organizationID`
 
@@ -548,7 +936,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `string organizationID`
 
@@ -566,7 +954,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `string organizationID`
 
@@ -584,7 +972,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `string organizationID`
 
@@ -602,7 +990,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `string organizationID`
 
@@ -620,7 +1008,7 @@
 
   - `string id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `string organizationID`
 

@@ -8,7 +8,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -26,7 +26,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](https://docs.claude.com/en/api/messages) for full documentation on available parameters.
+    See the [Messages API reference](https://platform.claude.com/docs/en/api/messages) for full documentation on available parameters.
 
     - `max_tokens: int`
 
@@ -34,9 +34,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+      Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+      Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
     - `messages: Iterable[BetaMessageParam]`
 
@@ -83,9 +83,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](https://docs.claude.com/en/api/messages-examples).
+      See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-      Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -120,7 +120,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`.
+                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                 - `"5m"`
 
@@ -672,7 +672,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class BetaAdvisorToolResultErrorParam: …`
 
-                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
 
                   - `"max_uses_exceeded"`
 
@@ -685,6 +685,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `"unavailable"`
 
                   - `"execution_time_exceeded"`
+
+                  - `"model_not_found"`
 
                 - `type: Literal["advisor_tool_result_error"]`
 
@@ -946,6 +948,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"tool_search_tool_result_error"`
 
+                - `error_message: Optional[str]`
+
               - `class BetaToolSearchToolSearchResultBlockParam: …`
 
                 - `tool_references: List[BetaToolReferenceBlockParam]`
@@ -1092,6 +1096,133 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
+          - `class BetaFallbackBlockParam: …`
+
+            A `fallback` block echoed back from a prior response.
+
+            Accepted in `messages[].content` and not rendered into the prompt; not
+            validated against the request's `fallbacks` chain or top-level `model`.
+
+            Echo the assistant turn back verbatim, including this block in its
+            original position. The block marks the boundary between content produced
+            before and after a fallback hop, and the server relies on that boundary
+            to validate the turn: when thinking runs flank the boundary, omitting
+            the block merges them into one span the server cannot validate (the
+            request is rejected), and moving it into the middle of a single run is
+            likewise rejected; between non-thinking blocks the block's placement has
+            no validation effect.
+
+            - `from_: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `claude-sonnet-5` - High-performance model for coding and agents
+                  - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+                  - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+                  - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
+                  - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
+                  - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                  - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+                  - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+                  - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                  - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                  - `"claude-sonnet-5"`
+
+                    High-performance model for coding and agents
+
+                  - `"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `"claude-opus-4-8"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-7"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                - `str`
+
+            - `to: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+            - `type: Literal["fallback"]`
+
+              - `"fallback"`
+
+            - `trigger: Optional[object]`
+
+              The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
       - `role: Literal["user", "assistant", "system"]`
 
         - `"user"`
@@ -1105,105 +1236,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-        - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
-        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-        - `claude-sonnet-4-6` - Best combination of speed and intelligence
-        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-        - `claude-sonnet-4-5` - High-performance model for agents and coding
-        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-        - `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        - `"claude-opus-4-8"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `str`
 
     - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
@@ -1368,6 +1400,137 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
+    - `fallback_credit_token: Optional[str]`
+
+      The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+      When a preceding request was refused and returned a `fallback_credit_token`,
+      pass that code here on the retry to have the retry's cache-creation tokens
+      for the prefix that was warm on the refused model billed at the cache-read
+      rate. Must be redeemed by the same organization and workspace, with the same
+      request body (optionally extended by one appended `assistant` message whose
+      content is the partial text — with any trailing whitespace stripped from
+      the final text block — and paired server-tool blocks streamed before the
+      refusal; the appended-assistant form is not available for requests with
+      `output_format` set or forced `tool_choice`), on an eligible fallback
+      model, on the same platform,
+      and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+      mid-server-tool-loop whose partial content was continuable may only be
+      redeemed with the appended-assistant form — if an exact-body retry is
+      rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry with the appended-assistant form instead.
+
+      When the appended-assistant form is used on a model that otherwise disallows
+      assistant-turn prefill, this token also authorizes that one prefill.
+
+    - `fallbacks: Optional[Iterable[BetaFallbackParam]]`
+
+      Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `max_tokens: Optional[int]`
+
+      - `output_config: Optional[BetaOutputConfig]`
+
+        - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
+
+          All possible effort levels.
+
+          - `"low"`
+
+          - `"medium"`
+
+          - `"high"`
+
+          - `"xhigh"`
+
+          - `"max"`
+
+        - `format: Optional[BetaJSONOutputFormat]`
+
+          A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+          - `schema: Dict[str, object]`
+
+            The JSON schema of the format
+
+          - `type: Literal["json_schema"]`
+
+            - `"json_schema"`
+
+        - `task_budget: Optional[BetaTokenTaskBudget]`
+
+          User-configurable total token budget across contexts.
+
+          - `total: int`
+
+            Total token budget across all contexts in the session.
+
+          - `type: Literal["tokens"]`
+
+            The budget type. Currently only 'tokens' is supported.
+
+            - `"tokens"`
+
+          - `remaining: Optional[int]`
+
+            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+      - `speed: Optional[Literal["standard", "fast"]]`
+
+        - `"standard"`
+
+        - `"fast"`
+
+      - `thinking: Optional[Thinking]`
+
+        - `class BetaThinkingConfigEnabled: …`
+
+          - `budget_tokens: int`
+
+            Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+            Must be ≥1024 and less than `max_tokens`.
+
+            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+
+          - `type: Literal["enabled"]`
+
+            - `"enabled"`
+
+          - `display: Optional[Literal["summarized", "omitted"]]`
+
+            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+            - `"summarized"`
+
+            - `"omitted"`
+
+        - `class BetaThinkingConfigDisabled: …`
+
+          - `type: Literal["disabled"]`
+
+            - `"disabled"`
+
+        - `class BetaThinkingConfigAdaptive: …`
+
+          - `type: Literal["adaptive"]`
+
+            - `"adaptive"`
+
+          - `display: Optional[Literal["summarized", "omitted"]]`
+
+            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+            - `"summarized"`
+
+            - `"omitted"`
+
     - `inference_geo: Optional[str]`
 
       Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -1406,50 +1569,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Configuration options for the model's output, such as the output format.
 
-      - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
-
-        All possible effort levels.
-
-        - `"low"`
-
-        - `"medium"`
-
-        - `"high"`
-
-        - `"xhigh"`
-
-        - `"max"`
-
-      - `format: Optional[BetaJSONOutputFormat]`
-
-        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-
-        - `schema: Dict[str, object]`
-
-          The JSON schema of the format
-
-        - `type: Literal["json_schema"]`
-
-          - `"json_schema"`
-
-      - `task_budget: Optional[BetaTokenTaskBudget]`
-
-        User-configurable total token budget across contexts.
-
-        - `total: int`
-
-          Total token budget across all contexts in the session.
-
-        - `type: Literal["tokens"]`
-
-          The budget type. Currently only 'tokens' is supported.
-
-          - `"tokens"`
-
-        - `remaining: Optional[int]`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
     - `output_format: Optional[BetaJSONOutputFormatParam]`
 
       Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
@@ -1460,7 +1579,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
       - `"auto"`
 
@@ -1486,13 +1605,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
+      See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
     - `system: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
       - `str`
 
@@ -1522,49 +1641,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
       - `class BetaThinkingConfigEnabled: …`
 
-        - `budget_tokens: int`
-
-          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-          Must be ≥1024 and less than `max_tokens`.
-
-          See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
-
-        - `type: Literal["enabled"]`
-
-          - `"enabled"`
-
-        - `display: Optional[Literal["summarized", "omitted"]]`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `"summarized"`
-
-          - `"omitted"`
-
       - `class BetaThinkingConfigDisabled: …`
 
-        - `type: Literal["disabled"]`
-
-          - `"disabled"`
-
       - `class BetaThinkingConfigAdaptive: …`
-
-        - `type: Literal["adaptive"]`
-
-          - `"adaptive"`
-
-        - `display: Optional[Literal["summarized", "omitted"]]`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `"summarized"`
-
-          - `"omitted"`
 
     - `tool_choice: Optional[BetaToolChoiceParam]`
 
@@ -1630,7 +1713,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
       Each tool definition includes:
 
@@ -1686,7 +1769,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+      See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
       - `class BetaTool: …`
 
@@ -1710,13 +1793,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1760,13 +1845,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"bash_20241022"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1796,13 +1883,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"bash_20250124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1832,13 +1921,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250522"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1866,13 +1957,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250825"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1902,13 +1995,53 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20260120"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaCodeExecutionTool20260521: …`
+
+        Code execution tool with REPL state persistence.
+
+        - `name: Literal["code_execution"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `"code_execution"`
+
+        - `type: Literal["code_execution_20260521"]`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1944,13 +2077,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20241022"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1984,13 +2119,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"memory_20250818"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2028,13 +2165,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20250124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2068,13 +2207,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20241022"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2112,13 +2253,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20251124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2156,13 +2299,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2192,13 +2337,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250429"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2228,13 +2375,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250728"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2268,13 +2417,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20250305"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -2338,13 +2489,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20250910"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -2392,13 +2545,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20260209"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -2442,13 +2597,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20260209"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -2498,13 +2655,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20260309"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -2542,6 +2701,134 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+      - `class BetaWebSearchTool20260318: …`
+
+        - `name: Literal["web_search"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `"web_search"`
+
+        - `type: Literal["web_search_20260318"]`
+
+          - `"web_search_20260318"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+        - `blocked_domains: Optional[List[str]]`
+
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+        - `response_inclusion: Optional[Literal["full", "excluded"]]`
+
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+          - `"full"`
+
+          - `"excluded"`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `user_location: Optional[BetaUserLocation]`
+
+          Parameters for the user's location. Used to provide more relevant search results.
+
+      - `class BetaWebFetchTool20260318: …`
+
+        - `name: Literal["web_fetch"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `"web_fetch"`
+
+        - `type: Literal["web_fetch_20260318"]`
+
+          - `"web_fetch_20260318"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          List of domains to allow fetching from
+
+        - `blocked_domains: Optional[List[str]]`
+
+          List of domains to block fetching from
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[BetaCitationsConfigParam]`
+
+          Citations configuration for fetched documents. Citations are disabled by default.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_content_tokens: Optional[int]`
+
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+        - `response_inclusion: Optional[Literal["full", "excluded"]]`
+
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+          - `"full"`
+
+          - `"excluded"`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `use_cache: Optional[bool]`
+
+          Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
       - `class BetaAdvisorTool20260301: …`
 
         - `model: Model`
@@ -2562,13 +2849,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"advisor_20260301"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2581,6 +2870,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `defer_loading: Optional[bool]`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_tokens: Optional[int]`
+
+          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
         - `max_uses: Optional[int]`
 
@@ -2606,13 +2899,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_bm25"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2642,13 +2937,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_regex"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
 
           - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -2713,17 +3010,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Recommended for advanced use cases only.
 
-    - `user_profile_id: Optional[str]`
-
-      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
-
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2776,6 +3069,16 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+- `user_profile_id: Optional[str]`
+
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 ### Returns
 

@@ -3,8 +3,8 @@ title: How to upgrade to version 15
 description: Upgrade your Next.js Application from Version 14 to 15.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-15"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -380,7 +380,7 @@ export async function generateMetadata(props) {
   const query = searchParams.query
 }
 
-export async function Page(props) {
+export default async function Page(props) {
   const params = await props.params
   const searchParams = await props.searchParams
   const slug = params.slug

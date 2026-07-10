@@ -16,11 +16,11 @@ Update Agent
 
 - `description?:optional string`
 
-  Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+  Description. Omit to preserve; send empty string or null to clear.
 
 - `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
-  MCP servers. Full replacement. Omit to preserve; send empty array or null to clear. Names must be unique. Maximum 20.
+  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
 - `metadata?:optional array<string,string>`
 
@@ -36,15 +36,15 @@ Update Agent
 
 - `name?:optional string`
 
-  Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 - `skills?:optional list<BetaManagedAgentsSkillParams>`
 
-  Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+  Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 - `system?:optional string`
 
-  System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+  System prompt. Omit to preserve; send empty string or null to clear.
 
 - `tools?:optional list<Tool>`
 

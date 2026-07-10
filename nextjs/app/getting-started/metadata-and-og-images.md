@@ -3,8 +3,8 @@ title: Metadata and OG images
 description: Learn how to add metadata to your pages and create dynamic OG images.
 url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-03
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -167,17 +167,23 @@ import { getPost } from '@/app/lib/data'
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const post = await getPost(params.slug)
+  const { slug } = await params
+  const post = await getPost(slug)
   return {
     title: post.title,
     description: post.description,
   }
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const post = await getPost(slug)
   return <div>{post.title}</div>
 }
 ```
@@ -186,7 +192,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
 import { getPost } from '@/app/lib/data'
 
 export async function generateMetadata({ params }) {
-  const post = await getPost(params.slug)
+  const { slug } = await params
+  const post = await getPost(slug)
   return {
     title: post.title,
     description: post.description,
@@ -194,7 +201,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const post = await getPost(params.slug)
+  const { slug } = await params
+  const post = await getPost(slug)
   return <div>{post.title}</div>
 }
 ```
@@ -251,8 +259,13 @@ export const size = {
 export const contentType = 'image/png'
 
 // Image generation
-export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const post = await getPost(slug)
 
   return new ImageResponse(
     (
@@ -289,7 +302,8 @@ export const contentType = 'image/png'
 
 // Image generation
 export default async function Image({ params }) {
-  const post = await getPost(params.slug)
+  const { slug } = await params
+  const post = await getPost(slug)
 
   return new ImageResponse(
     (

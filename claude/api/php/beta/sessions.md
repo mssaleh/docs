@@ -90,6 +90,10 @@ Create Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```php
@@ -281,13 +285,14 @@ var_dump($betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
 ## List Sessions
 
-`$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?Order order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsSession>`
+`$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?Order order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): BidirectionalPageCursor<BetaManagedAgentsSession>`
 
 **get** `/v1/sessions`
 
@@ -319,6 +324,10 @@ List Sessions
 
   Return sessions created at or before this time (inclusive).
 
+- `deploymentID?:optional string`
+
+  Filter sessions created by this deployment ID.
+
 - `includeArchived?:optional bool`
 
   When true, includes archived sessions. Default: false (exclude archived).
@@ -337,7 +346,7 @@ List Sessions
 
 - `page?:optional string`
 
-  Opaque pagination cursor from a previous response's next_page.
+  Opaque pagination cursor from a previous response.
 
 - `statuses?:optional list<Status>`
 
@@ -399,6 +408,10 @@ List Sessions
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```php
@@ -415,6 +428,7 @@ $page = $client->beta->sessions->list(
   createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
   createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
   createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  deploymentID: 'deployment_id',
   includeArchived: true,
   limit: 0,
   memoryStoreID: 'memory_store_id',
@@ -592,10 +606,12 @@ var_dump($page);
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 
@@ -666,6 +682,10 @@ Get Session
   - `list<string> vaultIDs`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -846,7 +866,8 @@ var_dump($betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -933,6 +954,10 @@ Update Session
   - `list<string> vaultIDs`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -1141,7 +1166,8 @@ var_dump($betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -1261,6 +1287,10 @@ Archive Session
   - `list<string> vaultIDs`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -1441,11 +1471,22 @@ var_dump($betaManagedAgentsSession);
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Agent Message Preview
+
+- `BetaManagedAgentsAgentMessagePreview`
+
+  - `string id`
+
+    The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+  - `Type type`
 
 ### Beta Managed Agents Agent Params
 
@@ -1460,6 +1501,50 @@ var_dump($betaManagedAgentsSession);
   - `?int version`
 
     The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Agent Thinking Preview
+
+- `BetaManagedAgentsAgentThinkingPreview`
+
+  - `string id`
+
+    The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+  - `Type type`
+
+### Beta Managed Agents Agent With Overrides Params
+
+- `BetaManagedAgentsAgentWithOverridesParams`
+
+  - `string id`
+
+    The `agent` ID.
+
+  - `Type type`
+
+  - `?list<BetaManagedAgentsURLMCPServerParams> mcpServers`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+  - `?Model model`
+
+    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+  - `?list<BetaManagedAgentsSkillParams> skills`
+
+    Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+  - `?string system`
+
+    Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+  - `?list<Tool> tools`
+
+    Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+  - `?int version`
+
+    The specific `agent` version to use. Omit to use the latest version.
 
 ### Beta Managed Agents Branch Checkout
 
@@ -1500,6 +1585,42 @@ var_dump($betaManagedAgentsSession);
   - `string id`
 
   - `Type type`
+
+### Beta Managed Agents Delta Content
+
+- `BetaManagedAgentsDeltaContent`
+
+  - `ManagedAgentsTextBlock content`
+
+    Regular text content.
+
+  - `Type type`
+
+  - `?int index`
+
+    Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+### Beta Managed Agents Delta Event
+
+- `BetaManagedAgentsDeltaEvent`
+
+  - `BetaManagedAgentsDeltaContent delta`
+
+    One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+  - `string eventID`
+
+    The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+  - `Type type`
+
+### Beta Managed Agents Delta Type
+
+- `BetaManagedAgentsDeltaType`
+
+  - `"agent.message"`
+
+  - `"agent.thinking"`
 
 ### Beta Managed Agents File Resource Params
 
@@ -1679,6 +1800,10 @@ var_dump($betaManagedAgentsSession);
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Beta Managed Agents Session Agent
 
 - `BetaManagedAgentsSessionAgent`
@@ -1788,6 +1913,64 @@ var_dump($betaManagedAgentsSession);
   - `?int outputTokens`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents Start Event
+
+- `BetaManagedAgentsStartEvent`
+
+  - `BetaManagedAgentsStartEventPreview event`
+
+    The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+  - `Type type`
+
+### Beta Managed Agents Start Event Preview
+
+- `BetaManagedAgentsStartEventPreview`
+
+  - `BetaManagedAgentsAgentMessagePreview`
+
+    - `string id`
+
+      The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+    - `Type type`
+
+  - `BetaManagedAgentsAgentThinkingPreview`
+
+    - `string id`
+
+      The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+    - `Type type`
+
+### Beta Managed Agents System Content Block
+
+- `BetaManagedAgentsSystemContentBlock`
+
+  - `string text`
+
+    The text content.
+
+  - `Type type`
+
+### Beta Managed Agents System Message Event
+
+- `BetaManagedAgentsSystemMessageEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `list<BetaManagedAgentsSystemContentBlock> content`
+
+    System content blocks. Text-only.
+
+  - `Type type`
+
+  - `?\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
 
 ### Beta Managed Agents User Tool Result Event
 
@@ -2557,6 +2740,22 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```php
@@ -2687,7 +2886,7 @@ var_dump($betaManagedAgentsSendSessionEvents);
 
 ## Stream Events
 
-`$client->beta->sessions->events->stream(string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
+`$client->beta->sessions->events->stream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
 
 **get** `/v1/sessions/{session_id}/events/stream`
 
@@ -2696,6 +2895,10 @@ Stream Events
 ### Parameters
 
 - `sessionID: string`
+
+- `eventDeltas?:optional list<BetaManagedAgentsDeltaType>`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -3389,6 +3592,42 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```php
@@ -3403,7 +3642,9 @@ $betaManagedAgentsStreamSessionEvents = $client
   ->sessions
   ->events
   ->streamStream(
-  'sesn_011CZkZAtmR3yMPDzynEDxu7', betas: ['message-batches-2024-09-24']
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  betas: ['message-batches-2024-09-24'],
 );
 
 var_dump($betaManagedAgentsStreamSessionEvents);
@@ -3709,6 +3950,28 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
   - `Type type`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `ManagedAgentsCredentialHostUnreachableError`
+
+  - `string credentialID`
+
+    ID of the affected credential.
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+  - `Type type`
+
+  - `string vaultID`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `ManagedAgentsDocumentBlock`
@@ -3810,6 +4073,14 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?bool isError`
 
       Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsSystemMessageEventParams`
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks to append. Text-only.
+
+    - `Type type`
 
 ### Beta Managed Agents File Document Source
 
@@ -4744,6 +5015,22 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -5768,6 +6055,52 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `ManagedAgentsSystemMessageEventParams`
+
+  - `list<BetaManagedAgentsSystemContentBlock> content`
+
+    System content blocks to append. Text-only.
+
+  - `Type type`
 
 ### Beta Managed Agents Text Block
 
@@ -8004,6 +8337,42 @@ var_dump($betaManagedAgentsSessionThread);
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 # Events
 
 ## List Session Thread Events
@@ -8719,6 +9088,22 @@ List Session Thread Events
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -9466,6 +9851,42 @@ Stream Session Thread Events
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

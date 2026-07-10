@@ -3,8 +3,8 @@ title: How to use markdown and MDX in Next.js
 description: Learn how to configure MDX and use it in your Next.js apps.
 url: "https://nextjs.org/docs/app/guides/mdx"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-02-11
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -593,6 +593,7 @@ module.exports = withMDX({
     mdxRs: {
       jsxRuntime?: string            // Custom jsx runtime
       jsxImportSource?: string       // Custom jsx import source,
+      providerImportSource?: string  // Module providing a `useMDXComponents` context
       mdxType?: 'gfm' | 'commonmark' // Configure what kind of mdx syntax will be used to parse & transform
     },
   },

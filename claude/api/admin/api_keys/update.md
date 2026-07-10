@@ -16,15 +16,15 @@ Update API Key
 
   Name of the API key.
 
-- `status: optional "active" or "inactive" or "archived"`
+- `status: optional "active" or "archived" or "inactive"`
 
   Status of the API key.
 
   - `"active"`
 
-  - `"inactive"`
-
   - `"archived"`
+
+  - `"inactive"`
 
 ### Returns
 
@@ -62,17 +62,17 @@ Update API Key
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived" or "expired"`
+  - `status: "active" or "archived" or "expired" or "inactive"`
 
     Status of the API key.
 
     - `"active"`
 
-    - `"inactive"`
-
     - `"archived"`
 
     - `"expired"`
+
+    - `"inactive"`
 
   - `type: "api_key"`
 
@@ -92,7 +92,7 @@ Update API Key
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{}'
 ```
 

@@ -1267,6 +1267,42 @@ var_dump($betaManagedAgentsSessionThread);
 
       The session's new title. Present only when the update changed it.
 
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
 # Events
 
 ## List Session Thread Events
@@ -1982,6 +2018,22 @@ List Session Thread Events
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -2729,6 +2781,42 @@ Stream Session Thread Events
     - `?string title`
 
       The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

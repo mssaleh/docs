@@ -14,7 +14,7 @@ Create Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,12 @@ Create Skill
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `id: string`
@@ -115,10 +121,11 @@ Create Skill
 
 ```http
 curl https://api.anthropic.com/v1/skills \
-    -X POST \
+    -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -F files='["Example data"]'
 ```
 
 #### Response
@@ -172,7 +179,7 @@ List Skills
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -225,6 +232,12 @@ List Skills
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -336,7 +349,7 @@ Get Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -389,6 +402,12 @@ Get Skill
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -478,7 +497,7 @@ Delete Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -531,6 +550,12 @@ Delete Skill
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -742,7 +767,7 @@ Create Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -795,6 +820,12 @@ Create Skill Version
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -846,10 +877,11 @@ Create Skill Version
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
-    -X POST \
+    -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -F files='["Example data"]'
 ```
 
 #### Response
@@ -901,7 +933,7 @@ List Skill Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -954,6 +986,12 @@ List Skill Versions
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -1071,7 +1109,7 @@ Download a skill version's content as a zip archive.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1124,6 +1162,12 @@ Download a skill version's content as a zip archive.
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Example
 
@@ -1162,7 +1206,7 @@ Get Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1215,6 +1259,12 @@ Get Skill Version
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -1314,7 +1364,7 @@ Delete Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1367,6 +1417,12 @@ Delete Skill Version
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 

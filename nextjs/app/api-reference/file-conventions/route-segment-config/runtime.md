@@ -3,7 +3,7 @@ title: runtime
 description: API reference for the runtime route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/runtime"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-13
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

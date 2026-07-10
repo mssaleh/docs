@@ -2,9 +2,9 @@
 > Fetch the complete documentation index at: https://modelcontextprotocol.io/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Building Quality Clients
+# Client Best Practices
 
-> Get the most out of MCP when building a client
+> Patterns for scaling MCP host applications across many servers and tools.
 
 As MCP host applications, such as agents, connect to more MCP servers and accumulate access to hundreds or thousands of tools, naive approaches to tool management break down. Loading every tool definition into the model's context window upfront wastes tokens, increases latency, and degrades model performance. Passing large intermediate results through the model between sequential tool calls compounds the problem.
 

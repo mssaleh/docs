@@ -3,7 +3,7 @@ title: Caching and Revalidating (Previous Model)
 description: Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not using Cache Components.
 url: "https://nextjs.org/docs/app/guides/caching-without-cache-components"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"

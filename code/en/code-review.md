@@ -32,11 +32,11 @@ This page covers:
 
 ## How reviews work
 
-Once an admin [enables Code Review](#set-up-code-review) for your organization, reviews trigger when a PR opens, on every push, or when manually requested, depending on the repository's configured behavior. Commenting `@claude review` [starts reviews on a PR](#manually-trigger-reviews) in any mode.
+Once an Owner [enables Code Review](#set-up-code-review) for your organization, reviews trigger when a PR opens, on every push, or when manually requested, depending on the repository's configured behavior. Commenting `@claude review` [starts reviews on a PR](#manually-trigger-reviews) in any mode.
 
 When a review runs, multiple agents analyze the diff and surrounding code in parallel on Anthropic infrastructure. Each agent looks for a different class of issue, then a verification step checks candidates against actual code behavior to filter out false positives. The results are deduplicated, ranked by severity, and posted as inline comments on the specific lines where issues were found, with a summary in the review body. If no issues are found, Code Review updates the GitHub check run to show that no issues were detected. Claude may also post a short confirmation comment on the PR.
 
-Reviews scale in cost with PR size and complexity, completing in 20 minutes on average. Admins can monitor review activity and spend via the [analytics dashboard](#view-usage).
+Reviews scale in cost with PR size and complexity, completing in 20 minutes on average. Owners can monitor review activity and spend via the [analytics dashboard](#view-usage).
 
 ### Severity levels
 
@@ -82,11 +82,11 @@ By default, Code Review focuses on correctness: bugs that would break production
 
 ## Set up Code Review
 
-An admin enables Code Review once for the organization and selects which repositories to include.
+An Owner enables Code Review once for the organization and selects which repositories to include.
 
 <Steps>
   <Step title="Open Claude Code admin settings">
-    Go to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code) and find the Code Review section. You need admin access to your Claude organization and permission to install GitHub Apps in your GitHub organization.
+    Go to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code) and find the Code Review section. You need the Owner or Primary Owner role in your Claude organization and permission to install GitHub Apps in your GitHub organization.
   </Step>
 
   <Step title="Start setup">
@@ -247,7 +247,7 @@ The review trigger you choose affects total cost:
 
 In any mode, commenting `@claude review` [opts the PR into push-triggered reviews](#manually-trigger-reviews), so additional cost accrues per push after that comment. To run a single review without subscribing to future pushes, comment `@claude review once` instead.
 
-Costs appear on your Anthropic bill regardless of whether your organization uses Amazon Bedrock or Google Vertex AI for other Claude Code features. To set a monthly spend cap for Code Review, go to [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage) and configure the limit for the Claude Code Review service.
+Costs appear on your Anthropic bill regardless of whether your organization uses Amazon Bedrock or Google Cloud's Agent Platform for other Claude Code features. To set a monthly spend cap for Code Review, go to [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage) and configure the limit for the Claude Code Review service.
 
 Monitor spend via the weekly cost chart in [analytics](#view-usage) or the per-repo average cost column in admin settings.
 
@@ -277,11 +277,11 @@ If the check run title says issues were found but you don't see inline review co
 
 ## Review a diff locally
 
-The [`/code-review` command](/en/commands) reviews a diff in your terminal without installing the GitHub App. Run it in any Claude Code session: it reports correctness bugs and {/* min-version: 2.1.151 */}reuse, simplification, and efficiency cleanups in the current diff. Pass `--comment` to post findings as inline PR comments, or `--fix` to apply the findings to your working tree after the review.
+The [`/code-review` command](/en/commands) reviews a diff in your terminal without installing the GitHub App. Run it in any Claude Code session: it reports correctness bugs and {/* min-version: 2.1.151 */}reuse, simplification, and efficiency cleanups. By default the local review covers your branch's commits ahead of its upstream plus any uncommitted changes in the working tree. Pass `--comment` to post findings as inline PR comments, or `--fix` to apply the findings to your working tree after the review.
 
-Lower [effort levels](/en/model-config#adjust-effort-level) return fewer, higher-confidence findings, while `high` through `max` give broader coverage and may include uncertain findings. Without an effort argument, the review uses the session's current effort. Pass a path or PR reference to review a specific target instead of the current diff.
+Lower [effort levels](/en/model-config#adjust-effort-level) return fewer, higher-confidence findings, while `high` through `max` give broader coverage and may include uncertain findings. Without an effort argument, the review uses the session's current effort. To review something other than the default diff, pass a target: a file path, a PR number, a branch name, or a ref range such as `main...my-feature`. The ref range form reviews the committed diff a pull request from `my-feature` into `main` would contain, regardless of how the branch's upstream is configured.
 
-`/code-review ultra --fix` runs the deeper [ultrareview](/en/ultrareview) in the cloud, then applies its findings to your working tree when they arrive back in your session.
+`/code-review ultra --fix` runs the deeper [ultrareview](/en/ultrareview) in the cloud, then applies its findings to your working tree when they arrive back in your session. Ultrareview uses its own scope: your current branch against the repository's default branch, plus any uncommitted and staged changes in the working tree.
 
 The command was named `/simplify` before v2.1.147, when it applied fixes by default. {/* min-version: 2.1.154 */}From v2.1.154, `/simplify` runs a separate cleanup-only review that applies fixes without hunting for bugs. If you scripted `/simplify` for bug-finding, switch to `/code-review --fix`, which is unchanged.
 

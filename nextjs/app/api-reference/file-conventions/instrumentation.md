@@ -3,8 +3,8 @@ title: instrumentation.js
 description: API reference for the instrumentation.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-02-16
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -55,10 +55,17 @@ export const onRequestError: Instrumentation.onRequestError = async (
   request,
   context
 ) => {
+  const message = err instanceof Error ? err.message : String(err)
+  const digest =
+    typeof err === 'object' && err !== null && 'digest' in err
+      ? String(err.digest)
+      : undefined
+
   await fetch('https://.../report-error', {
     method: 'POST',
     body: JSON.stringify({
-      message: err.message,
+      message,
+      digest,
       request,
       context,
     }),
@@ -71,10 +78,17 @@ export const onRequestError: Instrumentation.onRequestError = async (
 
 ```js filename="instrumentation.js" switcher
 export async function onRequestError(err, request, context) {
+  const message = err instanceof Error ? err.message : String(err)
+  const digest =
+    typeof err === 'object' && err !== null && 'digest' in err
+      ? String(err.digest)
+      : undefined
+
   await fetch('https://.../report-error', {
     method: 'POST',
     body: JSON.stringify({
-      message: err.message,
+      message,
+      digest,
       request,
       context,
     }),
@@ -91,7 +105,7 @@ The function accepts three parameters: `error`, `request`, and `context`.
 
 ```ts filename="Types"
 export function onRequestError(
-  error: { digest: string } & Error,
+  error: unknown,
   request: {
     path: string // resource path, e.g. /blog?name=foo
     method: string // request method. e.g. GET, POST, etc
@@ -111,7 +125,7 @@ export function onRequestError(
 ): void | Promise<void>
 ```
 
-* `error`: The caught error itself (type is always `Error`), and a `digest` property which is the unique ID of the error.
+* `error`: The caught value is typed as `unknown`. Narrow it before reading properties like `message` or `digest`.
 * `request`: Read-only request information associated with the error.
 * `context`: The context in which the error occurred. This can be the type of router (App or Pages Router), and/or (Server Components (`'render'`), Route Handlers (`'route'`), Server Actions (`'action'`), or Proxy (`'proxy'`)).
 

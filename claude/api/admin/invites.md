@@ -12,17 +12,17 @@ Create Invite
 
   Email of the User.
 
-- `role: "user" or "developer" or "billing" or "claude_code_user"`
+- `role: "billing" or "claude_code_user" or "developer" or "user"`
 
   Role for the invited User. Cannot be "admin".
-
-  - `"user"`
-
-  - `"developer"`
 
   - `"billing"`
 
   - `"claude_code_user"`
+
+  - `"developer"`
+
+  - `"user"`
 
 ### Returns
 
@@ -44,29 +44,29 @@ Create Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 
@@ -84,7 +84,7 @@ Create Invite
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "email": "user@emaildomain.com",
           "role": "user"
@@ -137,29 +137,29 @@ Get Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 
@@ -176,7 +176,7 @@ Get Invite
 ```http
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -235,29 +235,29 @@ List Invites
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 
@@ -286,7 +286,7 @@ List Invites
 ```http
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -342,7 +342,7 @@ Delete Invite
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -376,29 +376,29 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 

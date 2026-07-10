@@ -3,8 +3,8 @@ title: serverActions
 description: Configure Server Actions behavior in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2025-06-16
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -47,6 +47,8 @@ module.exports = {
   },
 }
 ```
+
+The limit applies to the raw HTTP request body, including the bytes that `multipart/form-data` adds for boundaries, part headers, and field metadata. If you expect uploads close to the configured value, leave some room for this overhead. For typical multipart uploads, an additional 10–20 KB is a reasonable rule of thumb.
 
 ## Enabling Server Actions (v13)
 

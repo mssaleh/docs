@@ -44,19 +44,19 @@ List Users
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 
@@ -83,7 +83,7 @@ List Users
 ```http
 curl https://api.anthropic.com/v1/organizations/users \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

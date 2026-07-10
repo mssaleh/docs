@@ -3,7 +3,7 @@ title: notFound
 description: API Reference for the notFound function.
 url: "https://nextjs.org/docs/app/api-reference/functions/not-found"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-02-24
 prerequisites:
   - "API Reference: /docs/app/api-reference"

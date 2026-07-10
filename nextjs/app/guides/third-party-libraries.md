@@ -3,8 +3,8 @@ title: How to optimize third-party libraries
 description: "Optimize the performance of third-party libraries in your application with the `@next/third-parties` package."
 url: "https://nextjs.org/docs/app/guides/third-party-libraries"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-02-11
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -242,6 +242,7 @@ Options to pass to the `<GoogleAnalytics>` component.
 | --------------- | -------- | ------------------------------------------------------------------------------------------------------ |
 | `gaId`          | Required | Your [measurement ID](https://support.google.com/analytics/answer/12270356). Usually starts with `G-`. |
 | `dataLayerName` | Optional | Name of the data layer. Defaults to `dataLayer`.                                                       |
+| `debugMode`     | Optional | Enable Google Analytics [debug mode](https://support.google.com/analytics/answer/7201382).             |
 | `nonce`         | Optional | A [nonce](/docs/app/guides/content-security-policy#nonces).                                            |
 
 ### Google Maps Embed

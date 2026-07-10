@@ -3,8 +3,8 @@ title: Building public pages
 description: "Learn how to build public, \"static\" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites."
 url: "https://nextjs.org/docs/app/guides/public-static-pages"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-05-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -106,7 +106,7 @@ However, if this component is rendered at request time, fetching its data will d
 
 Even though the header is rendered instantly, it can't be sent to the browser until the product list has finished fetching.
 
-To protect us from this performance cliff, Next.js will show us a [warning](/docs/messages/blocking-route) the first time we **await** data: `Blocking data was accessed outside of Suspense`
+To protect us from this performance cliff, the first time we **await** this uncached data Next.js shows a [warning](/docs/messages/blocking-route): accessing uncached data outside of `<Suspense>` prevents the route from being prerendered.
 
 At this point, we have to decide how to **unblock** the response. Either:
 

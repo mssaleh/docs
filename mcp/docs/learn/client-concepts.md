@@ -53,10 +53,10 @@ The flow enables dynamic information gathering. Servers can request specific dat
 
 ```typescript theme={null}
 {
-  method: "elicitation/requestInput",
+  method: "elicitation/create",
   params: {
     message: "Please confirm your Barcelona vacation booking details:",
-    schema: {
+    requestedSchema: {
       type: "object",
       properties: {
         confirmBooking: {

@@ -3,14 +3,15 @@ title: How to think about data security in Next.js
 description: "Learn the built-in data security features in Next.js and learn best practices for protecting your application's data."
 url: "https://nextjs.org/docs/app/guides/data-security"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-05-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
   - app/guides/authentication
   - app/guides/content-security-policy
   - app/guides/forms
+  - app/guides/server-actions
 ---
 
 
@@ -37,7 +38,7 @@ You should follow a **Zero Trust** model when adopting Server Components in an e
 import { cookies } from 'next/headers'
 
 export default async function Page() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const token = cookieStore.get('AUTH_TOKEN')?.value
 
   const res = await fetch('https://api.example.com/profile', {
@@ -77,7 +78,8 @@ import { cookies } from 'next/headers'
 // Component to Server Component which minimizes risk of passing it to a Client
 // Component.
 export const getCurrentUser = cache(async () => {
-  const token = cookies().get('AUTH_TOKEN')
+  const cookieStore = await cookies()
+  const token = cookieStore.get('AUTH_TOKEN')
   const decodedToken = await decryptAndValidate(token)
   // Don't include secret tokens or private information as public fields.
   // Use classes to avoid accidentally passing the whole object to the client.
@@ -120,12 +122,13 @@ export async function getProfileDTO(slug: string) {
 ```
 
 ```tsx filename="app/page.tsx"
-import { getProfile } from '../../data/user'
+import { getProfileDTO } from '../../data/user-dto'
 
-export async function Page({ params: { slug } }) {
+export default async function Page({ params }) {
+  const { slug } = await params
   // This page can now safely pass around this profile knowing
   // that it shouldn't contain anything sensitive.
-  const profile = await getProfile(slug);
+  const profile = await getProfileDTO(slug)
   ...
 }
 ```
@@ -141,7 +144,8 @@ This approach, however, makes it easier to accidentally expose private data to t
 ```tsx filename="app/page.tsx"
 import Profile from './components/profile.tsx'
 
-export async function Page({ params: { slug } }) {
+export default async function Page({ params }) {
+  const { slug } = await params
   const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`
   const userData = rows[0]
   // EXPOSED: This exposes all the fields in userData to the client because
@@ -188,10 +192,11 @@ import { getUser } from '../data/user'
 import Profile from './ui/profile'
 
 export default async function Page({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
+  const { slug } = await params
   const publicProfile = await getUser(slug)
   return <Profile user={publicProfile} />
 }
@@ -311,7 +316,7 @@ You should always validate input from client, as they can be easily modified. Fo
 ```tsx filename="app/page.tsx"
 // BAD: Trusting searchParams directly
 export default async function Page({ searchParams }) {
-  const isAdmin = searchParams.get('isAdmin')
+  const isAdmin = (await searchParams).isAdmin
   if (isAdmin === 'true') {
     // Vulnerable: relies on untrusted client data
     return <AdminPanel />
@@ -323,7 +328,8 @@ import { cookies } from 'next/headers'
 import { verifyAdmin } from './auth'
 
 export default async function Page() {
-  const token = cookies().get('AUTH_TOKEN')
+  const cookieStore = await cookies()
+  const token = cookieStore.get('AUTH_TOKEN')
   const isAdmin = await verifyAdmin(token)
 
   if (isAdmin) {
@@ -569,8 +575,9 @@ Mutations (e.g. logging out users, updating databases, invalidating caches) shou
 ```tsx filename="app/page.tsx"
 // BAD: Triggering a mutation during rendering
 export default async function Page({ searchParams }) {
-  if (searchParams.get('logout')) {
-    cookies().delete('AUTH_TOKEN')
+  if ((await searchParams).logout) {
+    const cookieStore = await cookies()
+    cookieStore.delete('AUTH_TOKEN')
   }
 
   return <UserProfile />
@@ -616,6 +623,8 @@ Learn more about the topics mentioned in this guide.
   - Learn how to set a Content Security Policy (CSP) for your Next.js application.
 - [Forms](/docs/app/guides/forms)
   - Learn how to create forms in Next.js with React Server Actions.
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
 
 ---
 

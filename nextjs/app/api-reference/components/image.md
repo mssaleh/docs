@@ -3,7 +3,7 @@ title: Image Component
 description: "Optimize Images in your Next.js Application using the built-in `next/image` Component."
 url: "https://nextjs.org/docs/app/api-reference/components/image"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"

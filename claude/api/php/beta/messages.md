@@ -2,7 +2,7 @@
 
 ## Create a Message
 
-`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): BetaMessage`
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?string fallbackCreditToken, ?list<BetaFallbackParam> fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
 
 **post** `/v1/messages`
 
@@ -10,7 +10,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
+Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started)
 
 ### Parameters
 
@@ -20,9 +20,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
 - `messages: list<BetaMessageParam>`
 
@@ -69,9 +69,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://docs.claude.com/en/api/messages-examples).
+  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -100,6 +100,33 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   Request-level diagnostics. Currently carries the previous response
   id for prompt-cache divergence reporting.
 
+- `fallbackCreditToken?:optional string`
+
+  The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
+
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
+
+- `fallbacks?:optional list<BetaFallbackParam>`
+
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
 - `inferenceGeo?:optional string`
 
   Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -126,7 +153,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
 - `speed?:optional Speed`
 
@@ -144,13 +171,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
+  See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
 - `system?:optional System`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
 - `temperature?:optional float`
 
@@ -166,7 +193,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
 - `toolChoice?:optional BetaToolChoice`
 
@@ -178,7 +205,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
@@ -234,7 +261,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
 - `topK?:optional int`
 
@@ -252,13 +279,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only.
 
-- `userProfileID?:optional string`
-
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
-
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 
@@ -402,6 +429,22 @@ $betaMessage = $client->beta->messages->create(
     ],
   ],
   diagnostics: ['previousMessageID' => 'previous_message_id'],
+  fallbackCreditToken: 'x',
+  fallbacks: [
+    [
+      'model' => 'claude-sonnet-5',
+      'maxTokens' => 0,
+      'outputConfig' => [
+        'effort' => 'low',
+        'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+        'taskBudget' => ['total' => 1024, 'type' => 'tokens', 'remaining' => 0],
+      ],
+      'speed' => 'standard',
+      'thinking' => [
+        'budgetTokens' => 1024, 'type' => 'enabled', 'display' => 'summarized'
+      ],
+    ],
+  ],
   inferenceGeo: 'inference_geo',
   mcpServers: [
     [
@@ -462,8 +505,8 @@ $betaMessage = $client->beta->messages->create(
   ],
   topK: 5,
   topP: 0.7,
-  userProfileID: 'user_profile_id',
   betas: ['message-batches-2024-09-24'],
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessage);
@@ -522,6 +565,9 @@ var_dump($betaMessage);
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -545,6 +591,7 @@ var_dump($betaMessage);
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-sonnet-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -565,7 +612,7 @@ var_dump($betaMessage);
 
 ## Count tokens in a Message
 
-`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaMessageTokensCount`
+`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessageTokensCount`
 
 **post** `/v1/messages/count_tokens`
 
@@ -573,7 +620,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
+Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
 
 ### Parameters
 
@@ -622,9 +669,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://docs.claude.com/en/api/messages-examples).
+  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -666,7 +713,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
 - `thinking?:optional BetaThinkingConfigParam`
 
@@ -674,7 +721,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
 - `toolChoice?:optional BetaToolChoice`
 
@@ -686,7 +733,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
@@ -742,11 +789,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 
@@ -839,6 +890,7 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
     ],
   ],
   betas: ['message-batches-2024-09-24'],
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessageTokensCount);
@@ -970,6 +1022,10 @@ var_dump($betaMessageTokensCount);
   - `?bool deferLoading`
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxTokens`
+
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
   - `?int maxUses`
 
@@ -1144,7 +1200,7 @@ var_dump($betaMessageTokensCount);
     - `5m`: 5 minutes
     - `1h`: 1 hour
 
-    Defaults to `5m`.
+    Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
 ### Beta Cache Creation
 
@@ -1634,6 +1690,32 @@ var_dump($betaMessageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+### Beta Code Execution Tool 20260521
+
+- `BetaCodeExecutionTool20260521`
+
+  - `"code_execution" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"code_execution_20260521" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
 ### Beta Code Execution Tool Result Block
 
 - `BetaCodeExecutionToolResultBlock`
@@ -2064,6 +2146,22 @@ var_dump($betaMessageTokensCount);
 
     - `"compaction" type`
 
+  - `BetaFallbackBlock`
+
+    - `BetaFallbackInfo from`
+
+      The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+    - `BetaFallbackInfo to`
+
+      The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+    - `BetaFallbackRefusalTrigger trigger`
+
+      What caused the `from` model to hand over at this hop.
+
+    - `"fallback" type`
+
 ### Beta Content Block Param
 
 - `BetaContentBlockParam`
@@ -2350,6 +2448,22 @@ var_dump($betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
+  - `BetaFallbackBlockParam`
+
+    - `BetaFallbackInfoParam from`
+
+      Identifies one hop of a fallback transition.
+
+    - `BetaFallbackInfoParam to`
+
+      Identifies one hop of a fallback transition.
+
+    - `"fallback" type`
+
+    - `?mixed trigger`
+
+      The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
 ### Beta Content Block Source
 
 - `BetaContentBlockSource`
@@ -2474,6 +2588,124 @@ var_dump($betaMessageTokensCount);
 
   - `"encrypted_code_execution_result" type`
 
+### Beta Fallback Block
+
+- `BetaFallbackBlock`
+
+  - `BetaFallbackInfo from`
+
+    The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+  - `BetaFallbackInfo to`
+
+    The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+  - `BetaFallbackRefusalTrigger trigger`
+
+    What caused the `from` model to hand over at this hop.
+
+  - `"fallback" type`
+
+### Beta Fallback Block Param
+
+- `BetaFallbackBlockParam`
+
+  - `BetaFallbackInfoParam from`
+
+    Identifies one hop of a fallback transition.
+
+  - `BetaFallbackInfoParam to`
+
+    Identifies one hop of a fallback transition.
+
+  - `"fallback" type`
+
+  - `?mixed trigger`
+
+    The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
+### Beta Fallback Info
+
+- `BetaFallbackInfo`
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+### Beta Fallback Info Param
+
+- `BetaFallbackInfoParam`
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+### Beta Fallback Message Iteration Usage
+
+- `BetaFallbackMessageIterationUsage`
+
+  - `?BetaCacheCreation cacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+  - `int cacheCreationInputTokens`
+
+    The number of input tokens used to create the cache entry.
+
+  - `int cacheReadInputTokens`
+
+    The number of input tokens read from the cache.
+
+  - `int inputTokens`
+
+    The number of input tokens which were used.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `int outputTokens`
+
+    The number of output tokens which were used.
+
+  - `"fallback_message" type`
+
+    Usage for the fallback-model attempt that served the response
+
+### Beta Fallback Param
+
+- `BetaFallbackParam`
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `?int maxTokens`
+
+  - `?BetaOutputConfig outputConfig`
+
+  - `?Speed speed`
+
+  - `?Thinking thinking`
+
+### Beta Fallback Refusal Trigger
+
+- `BetaFallbackRefusalTrigger`
+
+  - `?Category category`
+
+    The policy category that triggered a refusal.
+
+  - `"refusal" type`
+
 ### Beta File Document Source
 
 - `BetaFileDocumentSource`
@@ -2548,6 +2780,12 @@ var_dump($betaMessageTokensCount);
 
       The number of input tokens which were used.
 
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
     - `int outputTokens`
 
       The number of output tokens which were used.
@@ -2613,6 +2851,38 @@ var_dump($betaMessageTokensCount);
     - `"advisor_message" type`
 
       Usage for an advisor sub-inference iteration
+
+  - `BetaFallbackMessageIterationUsage`
+
+    - `?BetaCacheCreation cacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+    - `int cacheCreationInputTokens`
+
+      The number of input tokens used to create the cache entry.
+
+    - `int cacheReadInputTokens`
+
+      The number of input tokens read from the cache.
+
+    - `int inputTokens`
+
+      The number of input tokens which were used.
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `int outputTokens`
+
+      The number of output tokens which were used.
+
+    - `"fallback_message" type`
+
+      Usage for the fallback-model attempt that served the response
 
 ### Beta JSON Output Format
 
@@ -3104,6 +3374,12 @@ var_dump($betaMessageTokensCount);
 
     The number of input tokens which were used.
 
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
   - `int outputTokens`
 
     The number of output tokens which were used.
@@ -3395,15 +3671,62 @@ var_dump($betaMessageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
   - `?string explanation`
 
     Human-readable explanation of the refusal.
 
     This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `?string fallbackCreditToken`
+
+    Opaque code that refunds the cache-miss cost when retrying this refused
+    request on the fallback model. Pass it as `fallback_credit_token` on the
+    retry request. Expires 5 minutes after the refusal.
+
+    The retry is sent either with the same request body (`system`, `messages`,
+    `tools`, and other render-shaping fields), or with the same body plus one
+    appended `assistant` message whose content is the partial text (with any
+    trailing whitespace stripped from the final text block) and paired
+    server-tool blocks from this refusal — which also authorizes that
+    appended turn as an assistant-prefill continuation on models that otherwise
+    disallow prefill. A token minted mid-server-tool-loop whose partial content
+    was continuable may only be redeemed the second way — if a same-body retry
+    is rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry the second way instead. Either way: same workspace,
+    same platform; a mismatch is a 400. Resending a token for an already-warm
+    prefix is permitted but yields no additional credit.
+
+    `null` when the refused model isn't eligible for a fallback credit.
+
+  - `?bool fallbackHasPrefillClaim`
+
+    Whether the accompanying `fallback_credit_token` may be redeemed with the
+    appended-assistant retry form. Only set when `fallback_credit_token` is
+    present.
+
+    `true`: retry by resending the same request body plus one appended
+    `assistant` message whose content is this response's `content` with any
+    trailing whitespace stripped from the final text block and unpaired
+    `tool_use` blocks omitted (the same appended-turn shape described on
+    `fallback_credit_token`), with the token attached. `false`: retry by
+    resending the original request body unchanged, with the token attached —
+    the appended-assistant form is not available for this refusal (no
+    continuable partial content, or the request uses `output_format` or a
+    `tool_choice` that forces tool use). One exception: when the request used
+    `output_format` or a forced `tool_choice` and the refusal arrived after
+    server tools (including MCP connector tools) had already executed, the
+    token may not be redeemable by either retry form; if the exact-body retry
+    is then rejected with a 400 saying the token must be redeemed by
+    continuing the partial response, discard the token and retry without it.
+
+    Advisory: if an appended-assistant retry is rejected with a 400 despite
+    `true`, fall back to resending the original request body with the token.
+
+  - `?string recommendedModel`
+
+    The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
   - `"refusal" type`
 
@@ -4013,7 +4336,7 @@ var_dump($betaMessageTokensCount);
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `"enabled" type`
 
@@ -4033,7 +4356,7 @@ var_dump($betaMessageTokensCount);
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
     - `"enabled" type`
 
@@ -4531,6 +4854,8 @@ var_dump($betaMessageTokensCount);
 
   - `"tool_search_tool_result_error" type`
 
+  - `?string errorMessage`
+
 ### Beta Tool Search Tool Search Result Block
 
 - `BetaToolSearchToolSearchResultBlock`
@@ -4818,6 +5143,30 @@ var_dump($betaMessageTokensCount);
       This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `"code_execution_20260120" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20260521`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260521" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -5301,6 +5650,102 @@ var_dump($betaMessageTokensCount);
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `BetaWebSearchTool20260318`
+
+    - `"web_search" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_search_20260318" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `?list<string> blockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?ResponseInclusion responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?BetaUserLocation userLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `BetaWebFetchTool20260318`
+
+    - `"web_fetch" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_fetch_20260318" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `?list<string> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCitationsConfigParam citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?ResponseInclusion responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?bool useCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
   - `BetaAdvisorTool20260301`
 
     - `Model model`
@@ -5330,6 +5775,10 @@ var_dump($betaMessageTokensCount);
     - `?bool deferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxTokens`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
     - `?int maxUses`
 
@@ -5730,6 +6179,60 @@ var_dump($betaMessageTokensCount);
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+### Beta Web Fetch Tool 20260318
+
+- `BetaWebFetchTool20260318`
+
+  - `"web_fetch" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_fetch_20260318" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `?list<string> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?ResponseInclusion responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?bool useCache`
+
+    Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 ### Beta Web Fetch Tool Result Block
 
 - `BetaWebFetchToolResultBlock`
@@ -5912,6 +6415,52 @@ var_dump($betaMessageTokensCount);
 
     Parameters for the user's location. Used to provide more relevant search results.
 
+### Beta Web Search Tool 20260318
+
+- `BetaWebSearchTool20260318`
+
+  - `"web_search" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_search_20260318" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `?list<string> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?ResponseInclusion responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?BetaUserLocation userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
 ### Beta Web Search Tool Request Error
 
 - `BetaWebSearchToolRequestError`
@@ -6024,7 +6573,7 @@ var_dump($betaMessageTokensCount);
 
 ## Create a Message Batch
 
-`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): MessageBatch`
+`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`
 
 **post** `/v1/messages/batches`
 
@@ -6032,7 +6581,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -6043,6 +6592,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 ### Returns
 
@@ -6135,6 +6688,28 @@ $betaMessageBatch = $client->beta->messages->batches->create(
           ],
         ],
         'diagnostics' => ['previousMessageID' => 'previous_message_id'],
+        'fallbackCreditToken' => 'x',
+        'fallbacks' => [
+          [
+            'model' => 'claude-sonnet-5',
+            'maxTokens' => 0,
+            'outputConfig' => [
+              'effort' => 'low',
+              'format' => [
+                'schema' => ['foo' => 'bar'], 'type' => 'json_schema'
+              ],
+              'taskBudget' => [
+                'total' => 1024, 'type' => 'tokens', 'remaining' => 0
+              ],
+            ],
+            'speed' => 'standard',
+            'thinking' => [
+              'budgetTokens' => 1024,
+              'type' => 'enabled',
+              'display' => 'summarized',
+            ],
+          ],
+        ],
         'inferenceGeo' => 'inference_geo',
         'mcpServers' => [
           [
@@ -6161,7 +6736,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         'serviceTier' => 'auto',
         'speed' => 'standard',
         'stopSequences' => ['string'],
-        'stream' => true,
+        'stream' => false,
         'system' => [
           [
             'text' => 'Today\'s date is 2024-06-01.',
@@ -6202,11 +6777,11 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         ],
         'topK' => 5,
         'topP' => 0.7,
-        'userProfileID' => 'user_profile_id',
       ],
     ],
   ],
   betas: ['message-batches-2024-09-24'],
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessageBatch);
@@ -6243,7 +6818,7 @@ var_dump($betaMessageBatch);
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -6356,7 +6931,7 @@ var_dump($betaMessageBatch);
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -6491,7 +7066,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -6606,7 +7181,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -6667,7 +7242,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 

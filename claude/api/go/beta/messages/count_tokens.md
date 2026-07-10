@@ -8,7 +8,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
+Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
 
 ### Parameters
 
@@ -59,9 +59,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
     ```
 
-    See [input examples](https://docs.claude.com/en/api/messages-examples).
+    See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-    Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
     There is a limit of 100,000 messages in a single request.
 
@@ -94,7 +94,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `5m`: 5 minutes
               - `1h`: 1 hour
 
-              Defaults to `5m`.
+              Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
               - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
 
@@ -658,6 +658,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorParamErrorCode = "execution_time_exceeded"`
 
+                - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
+
               - `Type AdvisorToolResultError`
 
                 - `const AdvisorToolResultErrorAdvisorToolResultError AdvisorToolResultError = "advisor_tool_result_error"`
@@ -918,6 +920,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+              - `ErrorMessage string`
+
             - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
 
               - `ToolReferences []BetaToolReferenceBlockParamResp`
@@ -1064,6 +1068,116 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
+        - `type BetaFallbackBlockParamResp struct{…}`
+
+          A `fallback` block echoed back from a prior response.
+
+          Accepted in `messages[].content` and not rendered into the prompt; not
+          validated against the request's `fallbacks` chain or top-level `model`.
+
+          Echo the assistant turn back verbatim, including this block in its
+          original position. The block marks the boundary between content produced
+          before and after a fallback hop, and the server relies on that boundary
+          to validate the turn: when thinking runs flank the boundary, omitting
+          the block merges them into one span the server cannot validate (the
+          request is rejected), and moving it into the middle of a single run is
+          likewise rejected; between non-thinking blocks the block's placement has
+          no validation effect.
+
+          - `From BetaFallbackInfoParamResp`
+
+            Identifies one hop of a fallback transition.
+
+            - `Model Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `type Model string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
+
+                  High-performance model for coding and agents
+
+                - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+              - `string`
+
+          - `To BetaFallbackInfoParamResp`
+
+            Identifies one hop of a fallback transition.
+
+          - `Type Fallback`
+
+            - `const FallbackFallback Fallback = "fallback"`
+
+          - `Trigger any`
+
+            The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
     - `Role BetaMessageParamRole`
 
       - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
@@ -1130,7 +1244,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Body param: System prompt.
 
-    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     - `string`
 
@@ -1152,7 +1266,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `ToolChoice param.Field[BetaToolChoiceUnion]`
 
@@ -1164,7 +1278,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
     Each tool definition includes:
 
@@ -1220,7 +1334,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-    See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+    See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
     - `type BetaTool struct{…}`
 
@@ -1251,6 +1365,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolAllowedCallerCodeExecution20250825 BetaToolAllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1302,6 +1418,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolBash20241022AllowedCallerCodeExecution20260521 BetaToolBash20241022AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1337,6 +1455,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash20250124AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolBash20250124AllowedCallerCodeExecution20260521 BetaToolBash20250124AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1374,6 +1494,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250522AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1407,6 +1529,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20250825"`
 
         - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1443,6 +1567,46 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20250825"`
 
         - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `DeferLoading bool`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Strict bool`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `type BetaCodeExecutionTool20260521 struct{…}`
+
+      Code execution tool with REPL state persistence.
+
+      - `Name CodeExecution`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `const CodeExecutionCodeExecution CodeExecution = "code_execution"`
+
+      - `Type CodeExecution20260521`
+
+        - `const CodeExecution20260521CodeExecution20260521 CodeExecution20260521 = "code_execution_20260521"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerDirect BetaCodeExecutionTool20260521AllowedCaller = "direct"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1486,6 +1650,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20241022AllowedCallerCodeExecution20260521 BetaToolComputerUse20241022AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1525,6 +1691,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool20250818AllowedCaller = "code_execution_20250825"`
 
         - `const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaMemoryTool20250818AllowedCallerCodeExecution20260521 BetaMemoryTool20250818AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1570,6 +1738,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20250124AllowedCallerCodeExecution20260521 BetaToolComputerUse20250124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1609,6 +1779,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextEditor20241022AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20260521 BetaToolTextEditor20241022AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1654,6 +1826,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20251124AllowedCallerCodeExecution20260521 BetaToolComputerUse20251124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1698,6 +1872,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolTextEditor20250124AllowedCallerCodeExecution20260521 BetaToolTextEditor20250124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1734,6 +1910,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolTextEditor20250429AllowedCallerCodeExecution20260521 BetaToolTextEditor20250429AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1769,6 +1947,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextEditor20250728AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20260521 BetaToolTextEditor20250728AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1809,6 +1989,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchTool20250305AllowedCaller = "code_execution_20250825"`
 
         - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20260521 BetaWebSearchTool20250305AllowedCaller = "code_execution_20260521"`
 
       - `AllowedDomains []string`
 
@@ -1880,6 +2062,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaWebFetchTool20250910AllowedCallerCodeExecution20260521 BetaWebFetchTool20250910AllowedCaller = "code_execution_20260521"`
+
       - `AllowedDomains []string`
 
         List of domains to allow fetching from
@@ -1934,6 +2118,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaWebSearchTool20260209AllowedCallerCodeExecution20260521 BetaWebSearchTool20260209AllowedCaller = "code_execution_20260521"`
+
       - `AllowedDomains []string`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -1983,6 +2169,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchTool20260209AllowedCaller = "code_execution_20250825"`
 
         - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20260521 BetaWebFetchTool20260209AllowedCaller = "code_execution_20260521"`
 
       - `AllowedDomains []string`
 
@@ -2040,6 +2228,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaWebFetchTool20260309AllowedCallerCodeExecution20260521 BetaWebFetchTool20260309AllowedCaller = "code_execution_20260521"`
+
       - `AllowedDomains []string`
 
         List of domains to allow fetching from
@@ -2076,6 +2266,134 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `type BetaWebSearchTool20260318 struct{…}`
+
+      - `Name WebSearch`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `const WebSearchWebSearch WebSearch = "web_search"`
+
+      - `Type WebSearch20260318`
+
+        - `const WebSearch20260318WebSearch20260318 WebSearch20260318 = "web_search_20260318"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaWebSearchTool20260318AllowedCallerDirect BetaWebSearchTool20260318AllowedCaller = "direct"`
+
+        - `const BetaWebSearchTool20260318AllowedCallerCodeExecution20250825 BetaWebSearchTool20260318AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaWebSearchTool20260318AllowedCallerCodeExecution20260120 BetaWebSearchTool20260318AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebSearchTool20260318AllowedCallerCodeExecution20260521 BetaWebSearchTool20260318AllowedCaller = "code_execution_20260521"`
+
+      - `AllowedDomains []string`
+
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+      - `BlockedDomains []string`
+
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `DeferLoading bool`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `MaxUses int64`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion BetaWebSearchTool20260318ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `const BetaWebSearchTool20260318ResponseInclusionFull BetaWebSearchTool20260318ResponseInclusion = "full"`
+
+        - `const BetaWebSearchTool20260318ResponseInclusionExcluded BetaWebSearchTool20260318ResponseInclusion = "excluded"`
+
+      - `Strict bool`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `UserLocation BetaUserLocation`
+
+        Parameters for the user's location. Used to provide more relevant search results.
+
+    - `type BetaWebFetchTool20260318 struct{…}`
+
+      - `Name WebFetch`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `const WebFetchWebFetch WebFetch = "web_fetch"`
+
+      - `Type WebFetch20260318`
+
+        - `const WebFetch20260318WebFetch20260318 WebFetch20260318 = "web_fetch_20260318"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaWebFetchTool20260318AllowedCallerDirect BetaWebFetchTool20260318AllowedCaller = "direct"`
+
+        - `const BetaWebFetchTool20260318AllowedCallerCodeExecution20250825 BetaWebFetchTool20260318AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaWebFetchTool20260318AllowedCallerCodeExecution20260120 BetaWebFetchTool20260318AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebFetchTool20260318AllowedCallerCodeExecution20260521 BetaWebFetchTool20260318AllowedCaller = "code_execution_20260521"`
+
+      - `AllowedDomains []string`
+
+        List of domains to allow fetching from
+
+      - `BlockedDomains []string`
+
+        List of domains to block fetching from
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Citations BetaCitationsConfigParamResp`
+
+        Citations configuration for fetched documents. Citations are disabled by default.
+
+      - `DeferLoading bool`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `MaxContentTokens int64`
+
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+      - `MaxUses int64`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion BetaWebFetchTool20260318ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `const BetaWebFetchTool20260318ResponseInclusionFull BetaWebFetchTool20260318ResponseInclusion = "full"`
+
+        - `const BetaWebFetchTool20260318ResponseInclusionExcluded BetaWebFetchTool20260318ResponseInclusion = "excluded"`
+
+      - `Strict bool`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `UseCache bool`
+
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
     - `type BetaAdvisorTool20260301 struct{…}`
 
       - `Model Model`
@@ -2083,86 +2401,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `type Model string`
-
-          The model that will complete your prompt.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
-
-            Fastest model with near-frontier intelligence
-
-          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
-
-          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-            High-performance model for agents and coding
-
-          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-            High-performance model for agents and coding
-
-          - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
-
-            Exceptional model for specialized complex tasks
-
-          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-            Exceptional model for specialized complex tasks
-
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
-        - `string`
 
       - `Name Advisor`
 
@@ -2184,6 +2422,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaAdvisorTool20260301AllowedCallerCodeExecution20260521 BetaAdvisorTool20260301AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2195,6 +2435,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `MaxTokens int64`
+
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
       - `MaxUses int64`
 
@@ -2227,6 +2471,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolSearchToolBm25_20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolBm25_20251119AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolSearchToolBm25_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolSearchToolBm25_20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -2263,6 +2509,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -2370,6 +2618,16 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+  - `UserProfileID param.Field[string]`
+
+    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 

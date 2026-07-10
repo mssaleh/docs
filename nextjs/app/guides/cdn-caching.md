@@ -3,8 +3,8 @@ title: Using a CDN with Next.js
 description: Learn how CDN caching works with Next.js, including what works today, cache variability, and the direction toward pathname-based cache keying.
 url: "https://nextjs.org/docs/app/guides/cdn-caching"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-04-02
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -32,7 +32,7 @@ CDNs that respect `s-maxage` and `stale-while-revalidate` can cache static and I
 
 ### Static assets
 
-Static assets (JavaScript, CSS, images, fonts) served from `/_next/static/` include content hashes in their filenames and have a 1 year `max-age` and `immutable` directive: `public,max-age=31536000,immutable`
+Static assets (JavaScript, CSS, images, fonts) served from `/_next/static/` include content hashes in their filenames and have a 1 year `max-age` and `immutable` directive: `public, max-age=31536000, immutable`
 
 You can use [`assetPrefix`](/docs/app/api-reference/config/next-config-js/assetPrefix) to serve static assets from a different domain or CDN origin.
 

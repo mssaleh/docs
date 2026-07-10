@@ -3,8 +3,8 @@ title: Server and Client Components
 description: Learn how you can use React Server and Client Components to render parts of your application on the server or the client.
 url: "https://nextjs.org/docs/app/getting-started/server-and-client-components"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-05-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -19,7 +19,7 @@ This page explains how Server and Client Components work in Next.js and when to 
 
 ## When to use Server and Client Components?
 
-The client and server environments have different capabilities. Server and Client components allow you to run logic in each environment depending on your use case.
+The client and server environments have different capabilities. Server and Client Components allow you to run logic in each environment depending on your use case.
 
 Use **Client Components** when you need:
 

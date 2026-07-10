@@ -2,7 +2,7 @@
 
 ## Create Skill
 
-`SkillCreateResponse Beta.Skills.Create(SkillCreateParams?parameters, CancellationTokencancellationToken = default)`
+`SkillCreateResponse Beta.Skills.Create(SkillCreateParamsparameters, CancellationTokencancellationToken = default)`
 
 **post** `/v1/skills`
 
@@ -12,17 +12,17 @@ Create Skill
 
 - `SkillCreateParams parameters`
 
+  - `required IReadOnlyList<string> files`
+
+    Body param: Files to upload for the skill.
+
+    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
   - `string? displayTitle`
 
     Body param: Display title for the skill.
 
     This is a human-readable label that is not included in the prompt sent to the model.
-
-  - `IReadOnlyList<string>? files`
-
-    Body param: Files to upload for the skill.
-
-    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -80,6 +80,12 @@ Create Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -128,7 +134,13 @@ Create Skill
 ### Example
 
 ```csharp
-SkillCreateParams parameters = new();
+SkillCreateParams parameters = new()
+{
+    Files =
+    [
+        Encoding.UTF8.GetBytes("Example data")
+    ],
+};
 
 var skill = await client.Beta.Skills.Create(parameters);
 
@@ -237,6 +249,12 @@ List Skills
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -405,6 +423,12 @@ Get Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -548,6 +572,12 @@ Delete Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -603,7 +633,7 @@ Create Skill Version
 
     The format and length of IDs may change over time.
 
-  - `IReadOnlyList<string>? files`
+  - `required IReadOnlyList<string> files`
 
     Body param: Files to upload for the skill.
 
@@ -665,6 +695,12 @@ Create Skill Version
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Returns
 
 - `class VersionCreateResponse:`
@@ -716,7 +752,14 @@ Create Skill Version
 ### Example
 
 ```csharp
-VersionCreateParams parameters = new() { SkillID = "skill_id" };
+VersionCreateParams parameters = new()
+{
+    SkillID = "skill_id",
+    Files =
+    [
+        Encoding.UTF8.GetBytes("Example data")
+    ],
+};
 
 var version = await client.Beta.Skills.Versions.Create(parameters);
 
@@ -821,6 +864,12 @@ List Skill Versions
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -995,6 +1044,12 @@ Download a skill version's content as a zip archive.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
 ### Example
 
 ```csharp
@@ -1088,6 +1143,12 @@ Get Skill Version
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 
@@ -1245,6 +1306,12 @@ Delete Skill Version
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
 ### Returns
 

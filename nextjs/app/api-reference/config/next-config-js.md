@@ -3,7 +3,7 @@ title: next.config.js
 description: Learn how to configure your application with next.config.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-11-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -249,7 +249,7 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 - [trailingSlash](/docs/app/api-reference/config/next-config-js/trailingSlash)
   - Configure Next.js pages to resolve with or without a trailing slash.
 - [transpilePackages](/docs/app/api-reference/config/next-config-js/transpilePackages)
-  - Automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`).
+  - Transpile and bundle dependencies from monorepo workspace packages or `node_modules` libraries that ship TypeScript, JSX, or modern syntax.
 - [turbopack](/docs/app/api-reference/config/next-config-js/turbopack)
   - Configure Next.js with Turbopack-specific options
 - [turbopackFileSystemCache](/docs/app/api-reference/config/next-config-js/turbopackFileSystemCache)

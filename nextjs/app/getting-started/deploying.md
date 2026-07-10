@@ -3,8 +3,8 @@ title: Deploying
 description: Learn how to deploy your Next.js application.
 url: "https://nextjs.org/docs/app/getting-started/deploying"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-05-13
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
@@ -47,7 +47,7 @@ Node.js deployments support all Next.js features. Learn how to [configure them](
 
 ## Docker
 
-Next.js can be deployed to any provider that supports [Docker](https://www.docker.com/) containers. This includes container orchestrators like Kubernetes or a cloud provider that runs Docker. For containerization best practices, see the [Docker guide for React.js](https://docs.docker.com/guides/reactjs/).
+Next.js can be deployed to any provider that supports [Docker](https://www.docker.com/) containers. This includes container orchestrators like Kubernetes or a cloud provider that runs Docker. For best practices on containerizing your app, refer to Docker's official [Next.js](https://docs.docker.com/guides/nextjs) and [React.js](https://docs.docker.com/guides/reactjs) guides.
 
 Docker deployments support all Next.js features. Learn how to [configure them](/docs/app/guides/self-hosting) for your infrastructure.
 

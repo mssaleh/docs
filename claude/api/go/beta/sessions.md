@@ -34,6 +34,320 @@ Create Session
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+    - `type BetaManagedAgentsAgentWithOverridesParamsResp struct{…}`
+
+      Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+      - `ID string`
+
+        The `agent` ID.
+
+      - `Type BetaManagedAgentsAgentWithOverridesParamsType`
+
+        - `const BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides BetaManagedAgentsAgentWithOverridesParamsType = "agent_with_overrides"`
+
+      - `MCPServers []BetaManagedAgentsURLMCPServerParamsResp`
+
+        Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+        - `Name string`
+
+          Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+        - `Type BetaManagedAgentsURLMCPServerParamsType`
+
+          - `const BetaManagedAgentsURLMCPServerParamsTypeURL BetaManagedAgentsURLMCPServerParamsType = "url"`
+
+        - `URL string`
+
+          Endpoint URL for the MCP server.
+
+      - `Model BetaManagedAgentsModelConfigParamsResp`
+
+        Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+        - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+
+          An object that defines additional configuration control over model use
+
+          - `ID BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `type BetaManagedAgentsModel string`
+
+              The model that will power your agent.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+                High-performance model for coding and agents
+
+              - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `const BetaManagedAgentsModelClaudeOpus4_7 BetaManagedAgentsModel = "claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `const BetaManagedAgentsModelClaudeOpus4_6 BetaManagedAgentsModel = "claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `const BetaManagedAgentsModelClaudeSonnet4_6 BetaManagedAgentsModel = "claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `const BetaManagedAgentsModelClaudeHaiku4_5 BetaManagedAgentsModel = "claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `const BetaManagedAgentsModelClaudeHaiku4_5_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `const BetaManagedAgentsModelClaudeSonnet4_5 BetaManagedAgentsModel = "claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `string`
+
+          - `Speed BetaManagedAgentsModelConfigParamsSpeed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"`
+
+            - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
+
+      - `Skills []BetaManagedAgentsSkillParamsUnionResp`
+
+        Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+        - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+
+          An Anthropic-managed skill.
+
+          - `SkillID string`
+
+            Identifier of the Anthropic skill (e.g., "xlsx").
+
+          - `Type BetaManagedAgentsAnthropicSkillParamsType`
+
+            - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
+
+          - `Version string`
+
+            Version to pin. Defaults to latest if omitted.
+
+        - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+
+          A user-created custom skill.
+
+          - `SkillID string`
+
+            Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+          - `Type BetaManagedAgentsCustomSkillParamsType`
+
+            - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
+
+          - `Version string`
+
+            Version to pin. Defaults to latest if omitted.
+
+      - `System string`
+
+        Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+      - `Tools []BetaManagedAgentsAgentWithOverridesParamsToolUnionResp`
+
+        Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+        - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+
+          Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+          - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
+
+            - `const BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401ParamsType = "agent_toolset_20260401"`
+
+          - `Configs []BetaManagedAgentsAgentToolConfigParamsResp`
+
+            Per-tool configuration overrides.
+
+            - `Name BetaManagedAgentsAgentToolConfigParamsName`
+
+              Built-in agent tool identifier.
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameEdit BetaManagedAgentsAgentToolConfigParamsName = "edit"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameRead BetaManagedAgentsAgentToolConfigParamsName = "read"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameWrite BetaManagedAgentsAgentToolConfigParamsName = "write"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameGlob BetaManagedAgentsAgentToolConfigParamsName = "glob"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameGrep BetaManagedAgentsAgentToolConfigParamsName = "grep"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentToolConfigParamsName = "web_fetch"`
+
+              - `const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web_search"`
+
+            - `Enabled bool`
+
+              Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+            - `PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionResp`
+
+              Permission policy for tool execution.
+
+              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+
+                  - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
+
+              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type BetaManagedAgentsAlwaysAskPolicyType`
+
+                  - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
+
+          - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+
+            Default configuration for all tools in a toolset.
+
+            - `Enabled bool`
+
+              Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+            - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+
+              Permission policy for tool execution.
+
+              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+                Tool calls require user confirmation before execution.
+
+        - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+
+          Configuration for tools from an MCP server defined in `mcp_servers`.
+
+          - `MCPServerName string`
+
+            Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+          - `Type BetaManagedAgentsMCPToolsetParamsType`
+
+            - `const BetaManagedAgentsMCPToolsetParamsTypeMCPToolset BetaManagedAgentsMCPToolsetParamsType = "mcp_toolset"`
+
+          - `Configs []BetaManagedAgentsMCPToolConfigParamsResp`
+
+            Per-tool configuration overrides.
+
+            - `Name string`
+
+              Name of the MCP tool to configure. 1-128 characters.
+
+            - `Enabled bool`
+
+              Whether this tool is enabled. Overrides the `default_config` setting.
+
+            - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+
+              Permission policy for tool execution.
+
+              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+                Tool calls require user confirmation before execution.
+
+          - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+
+            Default configuration for all tools from an MCP server.
+
+            - `Enabled bool`
+
+              Whether tools are enabled by default. Defaults to true if not specified.
+
+            - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+
+              Permission policy for tool execution.
+
+              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+                Tool calls require user confirmation before execution.
+
+        - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+
+          A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+          - `Description string`
+
+            Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+
+          - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `Type Object`
+
+              - `const ObjectObject Object = "object"`
+
+            - `Properties map[string, any]`
+
+            - `Required []string`
+
+          - `Name string`
+
+            Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+          - `Type BetaManagedAgentsCustomToolParamsType`
+
+            - `const BetaManagedAgentsCustomToolParamsTypeCustom BetaManagedAgentsCustomToolParamsType = "custom"`
+
+      - `Version int64`
+
+        The specific `agent` version to use. Omit to use the latest version.
+
   - `EnvironmentID param.Field[string]`
 
     Body param: ID of the `environment` defining the container configuration for this session.
@@ -198,6 +512,12 @@ Create Session
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -239,6 +559,14 @@ Create Session
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -468,19 +796,13 @@ Create Session
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -737,6 +1059,10 @@ Create Session
   - `VaultIDs []string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -931,13 +1257,14 @@ func main() {
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
 ## List Sessions
 
-`client.Beta.Sessions.List(ctx, params) (*PageCursor[BetaManagedAgentsSession], error)`
+`client.Beta.Sessions.List(ctx, params) (*BidirectionalPageCursor[BetaManagedAgentsSession], error)`
 
 **get** `/v1/sessions`
 
@@ -971,6 +1298,10 @@ List Sessions
 
     Query param: Return sessions created at or before this time (inclusive).
 
+  - `DeploymentID param.Field[string]`
+
+    Query param: Filter sessions created by this deployment ID.
+
   - `IncludeArchived param.Field[bool]`
 
     Query param: When true, includes archived sessions. Default: false (exclude archived).
@@ -993,7 +1324,7 @@ List Sessions
 
   - `Page param.Field[string]`
 
-    Query param: Opaque pagination cursor from a previous response's next_page.
+    Query param: Opaque pagination cursor from a previous response.
 
   - `Statuses param.Field[[]string]`
 
@@ -1067,6 +1398,12 @@ List Sessions
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -1108,6 +1445,14 @@ List Sessions
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -1337,19 +1682,13 @@ List Sessions
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -1606,6 +1945,10 @@ List Sessions
   - `VaultIDs []string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -1799,10 +2142,12 @@ func main() {
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 
@@ -1880,6 +2225,12 @@ Get Session
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -1921,6 +2272,14 @@ Get Session
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -2150,19 +2509,13 @@ Get Session
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -2419,6 +2772,10 @@ Get Session
   - `VaultIDs []string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -2614,7 +2971,8 @@ func main() {
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -2708,6 +3066,12 @@ Update Session
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -2749,6 +3113,14 @@ Update Session
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -2978,19 +3350,13 @@ Update Session
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -3247,6 +3613,10 @@ Update Session
   - `VaultIDs []string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -3442,7 +3812,8 @@ func main() {
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -3519,6 +3890,12 @@ Delete Session
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -3646,6 +4023,12 @@ Archive Session
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -3687,6 +4070,14 @@ Archive Session
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -3916,19 +4307,13 @@ Archive Session
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -4186,6 +4571,10 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```go
@@ -4380,11 +4769,24 @@ func main() {
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Agent Message Preview
+
+- `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+  - `ID string`
+
+    The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+  - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+    - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
 
 ### Beta Managed Agents Agent Params
 
@@ -4403,6 +4805,334 @@ func main() {
   - `Version int64`
 
     The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Agent Thinking Preview
+
+- `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+  - `ID string`
+
+    The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+  - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+    - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+### Beta Managed Agents Agent With Overrides Params
+
+- `type BetaManagedAgentsAgentWithOverridesParamsResp struct{…}`
+
+  Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+  - `ID string`
+
+    The `agent` ID.
+
+  - `Type BetaManagedAgentsAgentWithOverridesParamsType`
+
+    - `const BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides BetaManagedAgentsAgentWithOverridesParamsType = "agent_with_overrides"`
+
+  - `MCPServers []BetaManagedAgentsURLMCPServerParamsResp`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+    - `Name string`
+
+      Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+    - `Type BetaManagedAgentsURLMCPServerParamsType`
+
+      - `const BetaManagedAgentsURLMCPServerParamsTypeURL BetaManagedAgentsURLMCPServerParamsType = "url"`
+
+    - `URL string`
+
+      Endpoint URL for the MCP server.
+
+  - `Model BetaManagedAgentsModelConfigParamsResp`
+
+    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+    - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+
+      An object that defines additional configuration control over model use
+
+      - `ID BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `type BetaManagedAgentsModel string`
+
+          The model that will power your agent.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `const BetaManagedAgentsModelClaudeOpus4_7 BetaManagedAgentsModel = "claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `const BetaManagedAgentsModelClaudeOpus4_6 BetaManagedAgentsModel = "claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `const BetaManagedAgentsModelClaudeSonnet4_6 BetaManagedAgentsModel = "claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `const BetaManagedAgentsModelClaudeHaiku4_5 BetaManagedAgentsModel = "claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `const BetaManagedAgentsModelClaudeHaiku4_5_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `const BetaManagedAgentsModelClaudeSonnet4_5 BetaManagedAgentsModel = "claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `string`
+
+      - `Speed BetaManagedAgentsModelConfigParamsSpeed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"`
+
+        - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
+
+  - `Skills []BetaManagedAgentsSkillParamsUnionResp`
+
+    Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+    - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+
+      An Anthropic-managed skill.
+
+      - `SkillID string`
+
+        Identifier of the Anthropic skill (e.g., "xlsx").
+
+      - `Type BetaManagedAgentsAnthropicSkillParamsType`
+
+        - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
+
+      - `Version string`
+
+        Version to pin. Defaults to latest if omitted.
+
+    - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+
+      A user-created custom skill.
+
+      - `SkillID string`
+
+        Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+      - `Type BetaManagedAgentsCustomSkillParamsType`
+
+        - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
+
+      - `Version string`
+
+        Version to pin. Defaults to latest if omitted.
+
+  - `System string`
+
+    Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+  - `Tools []BetaManagedAgentsAgentWithOverridesParamsToolUnionResp`
+
+    Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+    - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+
+      Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+      - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
+
+        - `const BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401ParamsType = "agent_toolset_20260401"`
+
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsResp`
+
+        Per-tool configuration overrides.
+
+        - `Name BetaManagedAgentsAgentToolConfigParamsName`
+
+          Built-in agent tool identifier.
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameEdit BetaManagedAgentsAgentToolConfigParamsName = "edit"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameRead BetaManagedAgentsAgentToolConfigParamsName = "read"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameWrite BetaManagedAgentsAgentToolConfigParamsName = "write"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameGlob BetaManagedAgentsAgentToolConfigParamsName = "glob"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameGrep BetaManagedAgentsAgentToolConfigParamsName = "grep"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentToolConfigParamsName = "web_fetch"`
+
+          - `const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web_search"`
+
+        - `Enabled bool`
+
+          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+        - `PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionResp`
+
+          Permission policy for tool execution.
+
+          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+
+              - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
+
+          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type BetaManagedAgentsAlwaysAskPolicyType`
+
+              - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
+
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+
+        Default configuration for all tools in a toolset.
+
+        - `Enabled bool`
+
+          Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+
+          Permission policy for tool execution.
+
+          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+            Tool calls require user confirmation before execution.
+
+    - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+
+      Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `MCPServerName string`
+
+        Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+      - `Type BetaManagedAgentsMCPToolsetParamsType`
+
+        - `const BetaManagedAgentsMCPToolsetParamsTypeMCPToolset BetaManagedAgentsMCPToolsetParamsType = "mcp_toolset"`
+
+      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp`
+
+        Per-tool configuration overrides.
+
+        - `Name string`
+
+          Name of the MCP tool to configure. 1-128 characters.
+
+        - `Enabled bool`
+
+          Whether this tool is enabled. Overrides the `default_config` setting.
+
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+
+          Permission policy for tool execution.
+
+          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+            Tool calls require user confirmation before execution.
+
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+
+        Default configuration for all tools from an MCP server.
+
+        - `Enabled bool`
+
+          Whether tools are enabled by default. Defaults to true if not specified.
+
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+
+          Permission policy for tool execution.
+
+          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+
+            Tool calls require user confirmation before execution.
+
+    - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+
+      A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `Description string`
+
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+
+      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Type Object`
+
+          - `const ObjectObject Object = "object"`
+
+        - `Properties map[string, any]`
+
+        - `Required []string`
+
+      - `Name string`
+
+        Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+      - `Type BetaManagedAgentsCustomToolParamsType`
+
+        - `const BetaManagedAgentsCustomToolParamsTypeCustom BetaManagedAgentsCustomToolParamsType = "custom"`
+
+  - `Version int64`
+
+    The specific `agent` version to use. Omit to use the latest version.
 
 ### Beta Managed Agents Branch Checkout
 
@@ -4453,6 +5183,78 @@ func main() {
   - `Type BetaManagedAgentsDeletedSessionType`
 
     - `const BetaManagedAgentsDeletedSessionTypeSessionDeleted BetaManagedAgentsDeletedSessionType = "session_deleted"`
+
+### Beta Managed Agents Delta Content
+
+- `type BetaManagedAgentsDeltaContent struct{…}`
+
+  - `Content BetaManagedAgentsTextBlock`
+
+    Regular text content.
+
+    - `Text string`
+
+      The text content.
+
+    - `Type BetaManagedAgentsTextBlockType`
+
+      - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+  - `Type BetaManagedAgentsDeltaContentType`
+
+    - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+  - `Index int64`
+
+    Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+### Beta Managed Agents Delta Event
+
+- `type BetaManagedAgentsDeltaEvent struct{…}`
+
+  An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `Delta BetaManagedAgentsDeltaContent`
+
+    One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `Content BetaManagedAgentsTextBlock`
+
+      Regular text content.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsTextBlockType`
+
+        - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+    - `Type BetaManagedAgentsDeltaContentType`
+
+      - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+    - `Index int64`
+
+      Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+  - `EventID string`
+
+    The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+  - `Type BetaManagedAgentsDeltaEventType`
+
+    - `const BetaManagedAgentsDeltaEventTypeEventDelta BetaManagedAgentsDeltaEventType = "event_delta"`
+
+### Beta Managed Agents Delta Type
+
+- `type BetaManagedAgentsDeltaType string`
+
+  EventDeltaType enum
+
+  - `const BetaManagedAgentsDeltaTypeAgentMessage BetaManagedAgentsDeltaType = "agent.message"`
+
+  - `const BetaManagedAgentsDeltaTypeAgentThinking BetaManagedAgentsDeltaType = "agent.thinking"`
 
 ### Beta Managed Agents File Resource Params
 
@@ -4714,6 +5516,14 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
             Frontier intelligence for long-running agents and coding
@@ -4942,19 +5752,13 @@ func main() {
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -5212,6 +6016,10 @@ func main() {
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `DeploymentID string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Beta Managed Agents Session Agent
 
 - `type BetaManagedAgentsSessionAgent struct{…}`
@@ -5247,6 +6055,14 @@ func main() {
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+          High-performance model for coding and agents
+
+        - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -5476,19 +6292,13 @@ func main() {
 
             JSON Schema for custom tool input parameters.
 
+            - `Type Object`
+
+              - `const ObjectObject Object = "object"`
+
             - `Properties map[string, any]`
 
-              JSON Schema properties defining the tool's input parameters.
-
             - `Required []string`
-
-              List of required property names.
-
-            - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-              Must be 'object' for tool input schemas.
-
-              - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
           - `Name string`
 
@@ -5700,25 +6510,19 @@ func main() {
 
       - `Description string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `InputSchema BetaManagedAgentsCustomToolInputSchema`
 
         JSON Schema for custom tool input parameters.
 
+        - `Type Object`
+
+          - `const ObjectObject Object = "object"`
+
         - `Properties map[string, any]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `Required []string`
-
-          List of required property names.
-
-        - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-          Must be 'object' for tool input schemas.
-
-          - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
       - `Name string`
 
@@ -5767,6 +6571,14 @@ func main() {
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -5972,19 +6784,13 @@ func main() {
 
           JSON Schema for custom tool input parameters.
 
+          - `Type Object`
+
+            - `const ObjectObject Object = "object"`
+
           - `Properties map[string, any]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `Required []string`
-
-            List of required property names.
-
-          - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-            Must be 'object' for tool input schemas.
-
-            - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
         - `Name string`
 
@@ -6067,6 +6873,14 @@ func main() {
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -6296,19 +7110,13 @@ func main() {
 
               JSON Schema for custom tool input parameters.
 
+              - `Type Object`
+
+                - `const ObjectObject Object = "object"`
+
               - `Properties map[string, any]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `Required []string`
-
-                List of required property names.
-
-              - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                Must be 'object' for tool input schemas.
-
-                - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
             - `Name string`
 
@@ -6393,6 +7201,108 @@ func main() {
   - `OutputTokens int64`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents Start Event
+
+- `type BetaManagedAgentsStartEvent struct{…}`
+
+  Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `Event BetaManagedAgentsStartEventPreviewUnion`
+
+    The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+      - `ID string`
+
+        The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+      - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+        - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+    - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+      - `ID string`
+
+        The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+      - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+        - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+  - `Type BetaManagedAgentsStartEventType`
+
+    - `const BetaManagedAgentsStartEventTypeEventStart BetaManagedAgentsStartEventType = "event_start"`
+
+### Beta Managed Agents Start Event Preview
+
+- `type BetaManagedAgentsStartEventPreviewUnion interface{…}`
+
+  - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+    - `ID string`
+
+      The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+    - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+      - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+  - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+    - `ID string`
+
+      The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+    - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+      - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+### Beta Managed Agents System Content Block
+
+- `type BetaManagedAgentsSystemContentBlock struct{…}`
+
+  Regular text content.
+
+  - `Text string`
+
+    The text content.
+
+  - `Type BetaManagedAgentsSystemContentBlockType`
+
+    - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+### Beta Managed Agents System Message Event
+
+- `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+  A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Content []BetaManagedAgentsSystemContentBlock`
+
+    System content blocks. Text-only.
+
+    - `Text string`
+
+      The text content.
+
+    - `Type BetaManagedAgentsSystemContentBlockType`
+
+      - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+  - `Type BetaManagedAgentsSystemMessageEventType`
+
+    - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
 
 ### Beta Managed Agents User Tool Result Event
 
@@ -6717,6 +7627,12 @@ List Events
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -7584,6 +8500,42 @@ List Events
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -8150,6 +9102,14 @@ List Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -8378,19 +9338,13 @@ List Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -8445,6 +9399,34 @@ List Events
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -8865,6 +9847,26 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
+    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+      - `Content []BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsSystemContentBlockType`
+
+          - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+      - `Type BetaManagedAgentsSystemMessageEventParamsType`
+
+        - `const BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage BetaManagedAgentsSystemMessageEventParamsType = "system.message"`
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -8924,6 +9926,12 @@ Send Events
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -9337,6 +10345,34 @@ Send Events
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `ID string`
+
+        Unique identifier for this event.
+
+      - `Content []BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsSystemContentBlockType`
+
+          - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+      - `Type BetaManagedAgentsSystemMessageEventType`
+
+        - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+      - `ProcessedAt Time`
+
+        A timestamp in RFC 3339 format
+
 ### Example
 
 ```go
@@ -9400,7 +10436,7 @@ func main() {
 
 ## Stream Events
 
-`client.Beta.Sessions.Events.Stream(ctx, sessionID, query) (*BetaManagedAgentsStreamSessionEventsUnion, error)`
+`client.Beta.Sessions.Events.Stream(ctx, sessionID, params) (*BetaManagedAgentsStreamSessionEventsUnion, error)`
 
 **get** `/v1/sessions/{session_id}/events/stream`
 
@@ -9410,11 +10446,19 @@ Stream Events
 
 - `sessionID string`
 
-- `query BetaSessionEventStreamParams`
+- `params BetaSessionEventStreamParams`
+
+  - `EventDeltas param.Field[[]BetaManagedAgentsDeltaType]`
+
+    Query param: When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+    - `const BetaManagedAgentsDeltaTypeAgentMessage BetaManagedAgentsDeltaType = "agent.message"`
+
+    - `const BetaManagedAgentsDeltaTypeAgentThinking BetaManagedAgentsDeltaType = "agent.thinking"`
 
   - `Betas param.Field[[]AnthropicBeta]`
 
-    Optional header to specify the beta version(s) you want to use.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
     - `string`
 
@@ -9471,6 +10515,12 @@ Stream Events
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -10338,6 +11388,42 @@ Stream Events
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -10904,6 +11990,14 @@ Stream Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -11132,19 +12226,13 @@ Stream Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -11199,6 +12287,94 @@ Stream Events
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsStartEvent struct{…}`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Event BetaManagedAgentsStartEventPreviewUnion`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+          - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+          - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+    - `Type BetaManagedAgentsStartEventType`
+
+      - `const BetaManagedAgentsStartEventTypeEventStart BetaManagedAgentsStartEventType = "event_start"`
+
+  - `type BetaManagedAgentsDeltaEvent struct{…}`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Delta BetaManagedAgentsDeltaContent`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `Content BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+      - `Type BetaManagedAgentsDeltaContentType`
+
+        - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+      - `Index int64`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `EventID string`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type BetaManagedAgentsDeltaEventType`
+
+      - `const BetaManagedAgentsDeltaEventTypeEventDelta BetaManagedAgentsDeltaEventType = "event_delta"`
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -12270,6 +13446,56 @@ func main() {
 
     - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+  An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+  - `CredentialID string`
+
+    ID of the affected credential.
+
+  - `Message string`
+
+    Human-readable error description.
+
+  - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+    What the client should do next in response to this error.
+
+    - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type BetaManagedAgentsRetryStatusRetryingType`
+
+        - `const BetaManagedAgentsRetryStatusRetryingTypeRetrying BetaManagedAgentsRetryStatusRetryingType = "retrying"`
+
+    - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type BetaManagedAgentsRetryStatusExhaustedType`
+
+        - `const BetaManagedAgentsRetryStatusExhaustedTypeExhausted BetaManagedAgentsRetryStatusExhaustedType = "exhausted"`
+
+    - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type BetaManagedAgentsRetryStatusTerminalType`
+
+        - `const BetaManagedAgentsRetryStatusTerminalTypeTerminal BetaManagedAgentsRetryStatusTerminalType = "terminal"`
+
+  - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+    - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+  - `VaultID string`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `type BetaManagedAgentsDocumentBlock struct{…}`
@@ -12693,6 +13919,26 @@ func main() {
     - `IsError bool`
 
       Whether the tool execution resulted in an error.
+
+  - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks to append. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventParamsType`
+
+      - `const BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage BetaManagedAgentsSystemMessageEventParamsType = "system.message"`
 
 ### Beta Managed Agents File Document Source
 
@@ -13546,6 +14792,34 @@ func main() {
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `ID string`
+
+        Unique identifier for this event.
+
+      - `Content []BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsSystemContentBlockType`
+
+          - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+      - `Type BetaManagedAgentsSystemMessageEventType`
+
+        - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+      - `ProcessedAt Time`
+
+        A timestamp in RFC 3339 format
+
 ### Beta Managed Agents Session Deleted Event
 
 - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
@@ -13803,6 +15077,42 @@ func main() {
       - `Type BetaManagedAgentsBillingErrorType`
 
         - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
+
+    - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+      An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+      - `CredentialID string`
+
+        ID of the affected credential.
+
+      - `Message string`
+
+        Human-readable error description.
+
+      - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+        What the client should do next in response to this error.
+
+        - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+        - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+      - `VaultID string`
+
+        ID of the vault containing the affected credential.
 
   - `ProcessedAt Time`
 
@@ -14678,6 +15988,42 @@ func main() {
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -15244,6 +16590,14 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -15472,19 +16826,13 @@ func main() {
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -15539,6 +16887,34 @@ func main() {
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -16916,6 +18292,42 @@ func main() {
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -17482,6 +18894,14 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -17710,19 +19130,13 @@ func main() {
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -17777,6 +19191,116 @@ func main() {
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsStartEvent struct{…}`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Event BetaManagedAgentsStartEventPreviewUnion`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+          - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+          - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+    - `Type BetaManagedAgentsStartEventType`
+
+      - `const BetaManagedAgentsStartEventTypeEventStart BetaManagedAgentsStartEventType = "event_start"`
+
+  - `type BetaManagedAgentsDeltaEvent struct{…}`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Delta BetaManagedAgentsDeltaContent`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `Content BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+      - `Type BetaManagedAgentsDeltaContentType`
+
+        - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+      - `Index int64`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `EventID string`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type BetaManagedAgentsDeltaEventType`
+
+      - `const BetaManagedAgentsDeltaEventTypeEventDelta BetaManagedAgentsDeltaEventType = "event_delta"`
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+  - `Content []BetaManagedAgentsSystemContentBlock`
+
+    System content blocks to append. Text-only.
+
+    - `Text string`
+
+      The text content.
+
+    - `Type BetaManagedAgentsSystemContentBlockType`
+
+      - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+  - `Type BetaManagedAgentsSystemMessageEventParamsType`
+
+    - `const BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage BetaManagedAgentsSystemMessageEventParamsType = "system.message"`
 
 ### Beta Managed Agents Text Block
 
@@ -19106,6 +20630,12 @@ Add Session Resource
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsFileResource struct{…}`
@@ -19256,6 +20786,12 @@ List Session Resources
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -19500,6 +21036,12 @@ Get Session Resource
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaSessionResourceGetResponseUnion interface{…}`
@@ -19734,6 +21276,12 @@ Update Session Resource
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaSessionResourceUpdateResponseUnion interface{…}`
@@ -19964,6 +21512,12 @@ Delete Session Resource
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -20323,6 +21877,12 @@ List Session Threads
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionThread struct{…}`
@@ -20366,6 +21926,14 @@ List Session Threads
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -20571,19 +22139,13 @@ List Session Threads
 
           JSON Schema for custom tool input parameters.
 
+          - `Type Object`
+
+            - `const ObjectObject Object = "object"`
+
           - `Properties map[string, any]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `Required []string`
-
-            List of required property names.
-
-          - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-            Must be 'object' for tool input schemas.
-
-            - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
         - `Name string`
 
@@ -20866,6 +22428,12 @@ Get Session Thread
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionThread struct{…}`
@@ -20909,6 +22477,14 @@ Get Session Thread
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -21114,19 +22690,13 @@ Get Session Thread
 
           JSON Schema for custom tool input parameters.
 
+          - `Type Object`
+
+            - `const ObjectObject Object = "object"`
+
           - `Properties map[string, any]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `Required []string`
-
-            List of required property names.
-
-          - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-            Must be 'object' for tool input schemas.
-
-            - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
         - `Name string`
 
@@ -21404,6 +22974,12 @@ Archive Session Thread
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionThread struct{…}`
@@ -21447,6 +23023,14 @@ Archive Session Thread
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -21652,19 +23236,13 @@ Archive Session Thread
 
           JSON Schema for custom tool input parameters.
 
+          - `Type Object`
+
+            - `const ObjectObject Object = "object"`
+
           - `Properties map[string, any]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `Required []string`
-
-            List of required property names.
-
-          - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-            Must be 'object' for tool input schemas.
-
-            - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
         - `Name string`
 
@@ -21910,6 +23488,14 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
             Frontier intelligence for long-running agents and coding
@@ -22114,19 +23700,13 @@ func main() {
 
           JSON Schema for custom tool input parameters.
 
+          - `Type Object`
+
+            - `const ObjectObject Object = "object"`
+
           - `Properties map[string, any]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `Required []string`
-
-            List of required property names.
-
-          - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-            Must be 'object' for tool input schemas.
-
-            - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
         - `Name string`
 
@@ -23148,6 +24728,42 @@ func main() {
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -23714,6 +25330,14 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -23942,19 +25566,13 @@ func main() {
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -24009,6 +25627,94 @@ func main() {
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsStartEvent struct{…}`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Event BetaManagedAgentsStartEventPreviewUnion`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+          - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+          - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+    - `Type BetaManagedAgentsStartEventType`
+
+      - `const BetaManagedAgentsStartEventTypeEventStart BetaManagedAgentsStartEventType = "event_start"`
+
+  - `type BetaManagedAgentsDeltaEvent struct{…}`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Delta BetaManagedAgentsDeltaContent`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `Content BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+      - `Type BetaManagedAgentsDeltaContentType`
+
+        - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+      - `Index int64`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `EventID string`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type BetaManagedAgentsDeltaEventType`
+
+      - `const BetaManagedAgentsDeltaEventTypeEventDelta BetaManagedAgentsDeltaEventType = "event_delta"`
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 # Events
 
@@ -24097,6 +25803,12 @@ List Session Thread Events
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -24964,6 +26676,42 @@ List Session Thread Events
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -25530,6 +27278,14 @@ List Session Thread Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -25758,19 +27514,13 @@ List Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -25825,6 +27575,34 @@ List Session Thread Events
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -25955,6 +27733,12 @@ Stream Session Thread Events
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -26822,6 +28606,42 @@ Stream Session Thread Events
 
           - `const BetaManagedAgentsBillingErrorTypeBillingError BetaManagedAgentsBillingErrorType = "billing_error"`
 
+      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `CredentialID string`
+
+          ID of the affected credential.
+
+        - `Message string`
+
+          Human-readable error description.
+
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+
+          What the client should do next in response to this error.
+
+          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `Type BetaManagedAgentsCredentialHostUnreachableErrorType`
+
+          - `const BetaManagedAgentsCredentialHostUnreachableErrorTypeCredentialHostUnreachableError BetaManagedAgentsCredentialHostUnreachableErrorType = "credential_host_unreachable_error"`
+
+        - `VaultID string`
+
+          ID of the vault containing the affected credential.
+
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
@@ -27388,6 +29208,14 @@ Stream Session Thread Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
+
+              High-performance model for coding and agents
+
+            - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
             - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -27616,19 +29444,13 @@ Stream Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
+                - `Type Object`
+
+                  - `const ObjectObject Object = "object"`
+
                 - `Properties map[string, any]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `Required []string`
-
-                  List of required property names.
-
-                - `Type BetaManagedAgentsCustomToolInputSchemaType`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `const BetaManagedAgentsCustomToolInputSchemaTypeObject BetaManagedAgentsCustomToolInputSchemaType = "object"`
 
               - `Name string`
 
@@ -27683,6 +29505,94 @@ Stream Session Thread Events
     - `Title string`
 
       The session's new title. Present only when the update changed it.
+
+  - `type BetaManagedAgentsStartEvent struct{…}`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Event BetaManagedAgentsStartEventPreviewUnion`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type BetaManagedAgentsAgentMessagePreviewType`
+
+          - `const BetaManagedAgentsAgentMessagePreviewTypeAgentMessage BetaManagedAgentsAgentMessagePreviewType = "agent.message"`
+
+      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+
+        - `ID string`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type BetaManagedAgentsAgentThinkingPreviewType`
+
+          - `const BetaManagedAgentsAgentThinkingPreviewTypeAgentThinking BetaManagedAgentsAgentThinkingPreviewType = "agent.thinking"`
+
+    - `Type BetaManagedAgentsStartEventType`
+
+      - `const BetaManagedAgentsStartEventTypeEventStart BetaManagedAgentsStartEventType = "event_start"`
+
+  - `type BetaManagedAgentsDeltaEvent struct{…}`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Delta BetaManagedAgentsDeltaContent`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `Content BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+      - `Type BetaManagedAgentsDeltaContentType`
+
+        - `const BetaManagedAgentsDeltaContentTypeContentDelta BetaManagedAgentsDeltaContentType = "content_delta"`
+
+      - `Index int64`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `EventID string`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type BetaManagedAgentsDeltaEventType`
+
+      - `const BetaManagedAgentsDeltaEventTypeEventDelta BetaManagedAgentsDeltaEventType = "event_delta"`
+
+  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsSystemContentBlockType`
+
+        - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+
+    - `Type BetaManagedAgentsSystemMessageEventType`
+
+      - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

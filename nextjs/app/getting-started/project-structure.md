@@ -3,8 +3,8 @@ title: Project structure and organization
 description: Learn the folder and file conventions in Next.js, and how to organize your project.
 url: "https://nextjs.org/docs/app/getting-started/project-structure"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2025-12-09
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
@@ -121,7 +121,7 @@ Use `@slot` for named slots rendered by a parent layout. Use intercept patterns 
 | [`favicon`](/docs/app/api-reference/file-conventions/metadata/app-icons#favicon)                                | `.ico`                              | Favicon file             |
 | [`icon`](/docs/app/api-reference/file-conventions/metadata/app-icons#icon)                                      | `.ico` `.jpg` `.jpeg` `.png` `.svg` | App Icon file            |
 | [`icon`](/docs/app/api-reference/file-conventions/metadata/app-icons#generate-icons-using-code-js-ts-tsx)       | `.js` `.ts` `.tsx`                  | Generated App Icon       |
-| [`apple-icon`](/docs/app/api-reference/file-conventions/metadata/app-icons#apple-icon)                          | `.jpg` `.jpeg`, `.png`              | Apple App Icon file      |
+| [`apple-icon`](/docs/app/api-reference/file-conventions/metadata/app-icons#apple-icon)                          | `.jpg` `.jpeg` `.png`               | Apple App Icon file      |
 | [`apple-icon`](/docs/app/api-reference/file-conventions/metadata/app-icons#generate-icons-using-code-js-ts-tsx) | `.js` `.ts` `.tsx`                  | Generated Apple App Icon |
 
 #### Open Graph and Twitter images

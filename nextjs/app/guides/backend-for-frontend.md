@@ -3,8 +3,8 @@ title: How to use Next.js as a backend for your frontend
 description: Learn how to use Next.js as a backend framework
 url: "https://nextjs.org/docs/app/guides/backend-for-frontend"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-03
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -355,9 +355,9 @@ export async function POST(request: Request) {
   try {
     const clonedRequest = request.clone()
 
-    await request.body()
-    await clonedRequest.body()
-    await request.body() // Throws error
+    await request.text()
+    await clonedRequest.text()
+    await request.text() // Throws error
 
     return new Response(null, { status: 204 })
   } catch {
@@ -371,9 +371,9 @@ export async function POST(request) {
   try {
     const clonedRequest = request.clone()
 
-    await request.body()
-    await clonedRequest.body()
-    await request.body() // Throws error
+    await request.text()
+    await clonedRequest.text()
+    await request.text() // Throws error
 
     return new Response(null, { status: 204 })
   } catch {
@@ -616,7 +616,13 @@ export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('session_token')
   const redirectUrl = request.nextUrl.searchParams.get('redirect_url')
 
-  const response = NextResponse.redirect(new URL(redirectUrl, request.url))
+  const destination = new URL(redirectUrl ?? '/', request.url)
+  // Prevent open redirects: only allow same-origin destinations
+  if (destination.origin !== request.nextUrl.origin) {
+    return new Response('Invalid redirect', { status: 400 })
+  }
+
+  const response = NextResponse.redirect(destination)
 
   response.cookies.set({
     value: token,
@@ -638,7 +644,13 @@ export async function GET(request) {
   const token = request.nextUrl.searchParams.get('session_token')
   const redirectUrl = request.nextUrl.searchParams.get('redirect_url')
 
-  const response = NextResponse.redirect(new URL(redirectUrl, request.url))
+  const destination = new URL(redirectUrl ?? '/', request.url)
+  // Prevent open redirects: only allow same-origin destinations
+  if (destination.origin !== request.nextUrl.origin) {
+    return new Response('Invalid redirect', { status: 400 })
+  }
+
+  const response = NextResponse.redirect(destination)
 
   response.cookies.set({
     value: token,

@@ -3,7 +3,7 @@ title: CLI
 description: API Reference for the Next.js Command Line Interface (CLI) tools.
 url: "https://nextjs.org/docs/app/api-reference/cli"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,7 +3,7 @@ title: cookies
 description: API Reference for the cookies function.
 url: "https://nextjs.org/docs/app/api-reference/functions/cookies"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

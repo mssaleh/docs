@@ -8,7 +8,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
+Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started)
 
 ### Parameters
 
@@ -18,9 +18,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
 - `--message: array of BetaMessageParam`
 
@@ -67,13 +67,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://docs.claude.com/en/api/messages-examples).
+  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+- `--model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -97,6 +97,33 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Body param: Request-level diagnostics. Currently carries the previous response
   id for prompt-cache divergence reporting.
+
+- `--fallback-credit-token: optional string`
+
+  Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
+
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
+
+- `--fallback: optional array of BetaFallbackParam`
+
+  Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
 - `--inference-geo: optional string`
 
@@ -124,7 +151,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
 - `--speed: optional "standard" or "fast"`
 
@@ -142,7 +169,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Body param: System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
 - `--temperature: optional number`
 
@@ -158,7 +185,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
 - `--tool-choice: optional BetaToolChoiceAuto or BetaToolChoiceAny or BetaToolChoiceTool or BetaToolChoiceNone`
 
@@ -170,7 +197,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
@@ -226,7 +253,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
 - `--top-k: optional number`
 
@@ -244,13 +271,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only.
 
-- `--user-profile-id: optional string`
-
-  Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
-
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
+
+- `--user-profile-id: optional string`
+
+  Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 
@@ -671,7 +698,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `beta_advisor_tool_result_error: object { error_code, type }`
 
-          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
             - `"max_uses_exceeded"`
 
@@ -684,6 +711,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `"unavailable"`
 
             - `"execution_time_exceeded"`
+
+            - `"model_not_found"`
 
           - `type: "advisor_tool_result_error"`
 
@@ -977,6 +1006,124 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `type: "compaction"`
 
+    - `beta_fallback_block: object { from, to, trigger, type }`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: object { model }`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+      - `to: object { model }`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `trigger: object { category, type }`
+
+        What caused the `from` model to hand over at this hop.
+
+        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+
+          The policy category that triggered a refusal.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+          - `"frontier_llm"`
+
+          - `"reasoning_extraction"`
+
+        - `type: "refusal"`
+
+      - `type: "fallback"`
+
   - `context_management: object { applied_edits }`
 
     Context management response.
@@ -1064,11 +1211,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `type: "unavailable"`
 
-  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+  - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-sonnet-5"`
+
+      High-performance model for coding and agents
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `"claude-opus-4-8"`
 
@@ -1122,51 +1281,82 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Exceptional model for specialized complex tasks
 
-    - `"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
   - `role: "assistant"`
 
     Conversational role of the generated message.
 
     This will always be `"assistant"`.
 
-  - `stop_details: object { category, explanation, type }`
+  - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio"`
+    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `"cyber"`
 
       - `"bio"`
+
+      - `"frontier_llm"`
+
+      - `"reasoning_extraction"`
 
     - `explanation: string`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `fallback_credit_token: string`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `fallback_has_prefill_claim: boolean`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `recommended_model: string`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `type: "refusal"`
 
@@ -1253,7 +1443,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of input tokens which were used.
 
-    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
       Per-iteration token usage breakdown.
 
@@ -1263,7 +1453,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - Calculate the true context window size from the last iteration
       - Understand token accumulation across server-side tool use loops
 
-      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
         Token usage for a sampling iteration.
 
@@ -1290,6 +1480,76 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `input_tokens: number`
 
           The number of input tokens which were used.
+
+        - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
 
         - `output_tokens: number`
 
@@ -1363,11 +1623,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -1421,26 +1693,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Exceptional model for specialized complex tasks
 
-          - `"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
         - `output_tokens: number`
 
           The number of output tokens which were used.
@@ -1448,6 +1700,117 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `type: "advisor_message"`
 
           Usage for an advisor sub-inference iteration
+
+      - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
 
     - `output_tokens: number`
 
@@ -1566,6 +1929,9 @@ ant beta:messages create \
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -1589,6 +1955,7 @@ ant beta:messages create \
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-sonnet-5",
         "output_tokens": 0,
         "type": "message"
       }

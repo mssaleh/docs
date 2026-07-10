@@ -3,7 +3,7 @@ title: assetPrefix
 description: Learn how to use the assetPrefix config option to configure your CDN.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/assetPrefix"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

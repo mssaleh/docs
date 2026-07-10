@@ -82,6 +82,12 @@ Create Skill Version
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
 ### Returns
 
 - `type BetaSkillVersionNewResponse struct{…}`
@@ -136,8 +142,10 @@ Create Skill Version
 package main
 
 import (
+  "bytes"
   "context"
   "fmt"
+  "io"
 
   "github.com/anthropics/anthropic-sdk-go"
   "github.com/anthropics/anthropic-sdk-go/option"
@@ -151,7 +159,7 @@ func main() {
     context.TODO(),
     "skill_id",
     anthropic.BetaSkillVersionNewParams{
-
+      Files: []io.Reader{io.Reader(bytes.NewBuffer([]byte("Example data")))},
     },
   )
   if err != nil {

@@ -10,5 +10,5 @@ The URL `/docs/pages/llms.txt` does not exist.
 
 ## Tips for requesting documentation
 
-- For markdown responses, append `.md` to URLs (e.g., `/docs/getting-started/installation.md`)
+- For markdown responses, append `.md` to URLs (e.g., `/docs/app/getting-started/installation.md`)
 - Use `Accept: text/markdown` header for content negotiation

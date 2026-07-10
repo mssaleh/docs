@@ -66,6 +66,12 @@ Create Agent
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Model model`
 
     Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
@@ -75,6 +81,14 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -136,15 +150,15 @@ Create Agent
 
   - `String name`
 
-    Human-readable name for the agent. 1-256 characters.
+    Human-readable name for the agent.
 
   - `Optional<String> description`
 
-    Description of what the agent does. Up to 2048 characters.
+    Description of what the agent does.
 
   - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
-    MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
+    MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
     - `String name`
 
@@ -168,7 +182,7 @@ Create Agent
 
   - `Optional<List<BetaManagedAgentsSkillParams>> skills`
 
-    Skills available to the agent. Maximum 20.
+    Skills available to the agent.
 
     - `class BetaManagedAgentsAnthropicSkillParams:`
 
@@ -204,7 +218,7 @@ Create Agent
 
   - `Optional<String> system`
 
-    System prompt for the agent. Up to 100,000 characters.
+    System prompt for the agent.
 
   - `Optional<List<Tool>> tools`
 
@@ -348,25 +362,19 @@ Create Agent
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
         JSON Schema for custom tool input parameters.
 
-        - `Optional<Properties> properties`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `Optional<List<String>> required`
-
-          List of required property names.
-
-        - `Optional<Type> type`
-
-          Must be 'object' for tool input schemas.
+        - `JsonValue; type "object"constant`
 
           - `OBJECT("object")`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
 
       - `String name`
 
@@ -415,6 +423,14 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -638,19 +654,13 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `Optional<Properties> properties`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `Optional<List<String>> required`
-
-          List of required property names.
-
-        - `Optional<Type> type`
-
-          Must be 'object' for tool input schemas.
+        - `JsonValue; type "object"constant`
 
           - `OBJECT("object")`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
 
       - `String name`
 

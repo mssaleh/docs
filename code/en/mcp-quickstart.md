@@ -56,13 +56,14 @@ The steps are the same for any server: add it, check the connection status, then
 
     The server appears with a status indicator:
 
-    | Status                   | Meaning                                                                                                                                                                       |
-    | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `✓ Connected`            | Ready to use. This is what you should see for `claude-code-docs`                                                                                                              |
-    | `! Needs authentication` | The server is reachable but needs a browser sign-in, or a token passed with `--header`. See [Connect a server that requires sign-in](#connect-a-server-that-requires-sign-in) |
-    | `✗ Failed to connect`    | Server didn't respond. See [Troubleshooting](#troubleshooting)                                                                                                                |
-    | `✗ Connection error`     | The connection attempt threw an error. See [Troubleshooting](#troubleshooting)                                                                                                |
-    | `⏸ Pending approval`     | A project-scoped server you haven't approved yet. See [Edit .mcp.json directly](#edit-mcp-json-directly)                                                                      |
+    | Status                             | Meaning                                                                                                                                                                       |
+    | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `✓ Connected`                      | Ready to use. This is what you should see for `claude-code-docs`                                                                                                              |
+    | `! Connected · tools fetch failed` | The server connected but couldn't list its tools. Run `claude mcp get <name>` for the error detail                                                                            |
+    | `! Needs authentication`           | The server is reachable but needs a browser sign-in, or a token passed with `--header`. See [Connect a server that requires sign-in](#connect-a-server-that-requires-sign-in) |
+    | `✗ Failed to connect`              | Server didn't respond. See [Troubleshooting](#troubleshooting)                                                                                                                |
+    | `✗ Connection error`               | The connection attempt threw an error. See [Troubleshooting](#troubleshooting)                                                                                                |
+    | `⏸ Pending approval`               | A project-scoped server you haven't approved yet. See [Edit .mcp.json directly](#edit-mcp-json-directly)                                                                      |
   </Step>
 
   <Step title="Use the server">
@@ -288,11 +289,13 @@ If a server doesn't connect, check its status with `/mcp` inside a session or `c
     Claude Code didn't find any servers for the current directory. The most common causes:
 
     * You ran `claude mcp add` from a different project. Local-scoped servers are tied to the project where you added them: the repository root, or the exact directory if you weren't in a git repository. Re-add the server from the project you're in now, or add it with `--scope user` so it isn't tied to a project.
-    * You edited a configuration file at the wrong path. The correct files are `~/.claude.json` and `<project>/.mcp.json`. Claude Code doesn't read paths such as `~/.claude/config/mcp.json`, `~/.claude/mcp.json`, or `%APPDATA%\Claude\mcp.json`.
+    * You edited a configuration file at the wrong path. The correct files are `~/.claude.json` and `<project>/.mcp.json`. Claude Code doesn't read paths such as `~/.claude/.mcp.json`, `~/.claude/config/mcp.json`, `~/.claude/mcp.json`, or `%APPDATA%\Claude\mcp.json`. For user-scoped servers, run `claude mcp add --scope user`, which writes to the `mcpServers` key in `~/.claude.json`; for project-scoped servers, edit `.mcp.json` at the project root.
   </Accordion>
 
   <Accordion title="Status shows Failed to connect or Connection error">
     Both statuses mean the server didn't start or the URL didn't respond. They can also appear for HTTP servers that expect a token rather than the browser sign-in covered in [Connect a server that requires sign-in](#connect-a-server-that-requires-sign-in).
+
+    As of v2.1.191, an HTTP server that returns `404 Not Found` shows `MCP endpoint not found at <url>. Check the URL in your MCP config.` when you select the server in `/mcp`, with the URL Claude Code tried. Earlier versions show a generic `Error POSTing to endpoint` message without the URL. Compare the URL to the server's documented MCP endpoint path, then run `claude mcp remove <name>` and re-add with the correct URL.
 
     For HTTP servers, confirm the URL is reachable from your machine:
 

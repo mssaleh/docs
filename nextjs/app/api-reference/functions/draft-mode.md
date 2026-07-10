@@ -3,7 +3,7 @@ title: draftMode
 description: API Reference for the draftMode function.
 url: "https://nextjs.org/docs/app/api-reference/functions/draft-mode"
 docs_index: /docs/llms.txt
-version: 16.2.9
+version: 16.2.10
 lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -149,7 +149,7 @@ export default async function Page() {
 Learn how to use Draft Mode with this step-by-step guide.
 
 - [Draft Mode](/docs/app/guides/draft-mode)
-  - Next.js has draft mode to toggle between static and dynamic pages. You can learn how it works with App Router here.
+  - Bypass Next.js caching for a request so editors can preview unpublished content from a headless CMS.
 
 ---
 

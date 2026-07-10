@@ -3,11 +3,12 @@ title: Mutating Data
 description: Learn how to mutate data using Server Functions and Server Actions in Next.js.
 url: "https://nextjs.org/docs/app/getting-started/mutating-data"
 docs_index: /docs/llms.txt
-version: 16.2.9
-lastUpdated: 2026-03-10
+version: 16.2.10
+lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
+  - app/guides/server-actions
   - app/api-reference/functions/revalidatePath
   - app/api-reference/functions/revalidateTag
   - app/api-reference/functions/redirect
@@ -15,7 +16,7 @@ related:
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-You can mutate data in Next.js using [React Server Functions](https://react.dev/reference/rsc/server-functions). This page will go through how you can [create](#creating-server-functions) and [invoke](#invoking-server-functions) Server Functions.
+You can mutate data in Next.js using [React Server Functions](https://react.dev/reference/rsc/server-functions). This page will go through how you can [create](#creating-server-functions) and [invoke](#invoking-server-functions) Server Functions. For Next.js-specific behaviors (single-roundtrip response, sequential dispatch, security, deployment), see [Server Actions and Mutations](/docs/app/guides/server-actions).
 
 ## What are Server Functions?
 
@@ -597,10 +598,12 @@ export default function ViewCount({ initialViews }) {
   return <p>Total Views: {views}</p>
 }
 ```
-## API Reference
+## Next steps
 
-Learn more about the features mentioned in this page by reading the API Reference.
+Learn more about Server Actions and the APIs mentioned in this page.
 
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
 - [revalidatePath](/docs/app/api-reference/functions/revalidatePath)
   - API Reference for the revalidatePath function.
 - [revalidateTag](/docs/app/api-reference/functions/revalidateTag)

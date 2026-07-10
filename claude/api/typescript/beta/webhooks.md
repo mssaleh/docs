@@ -2,6 +2,214 @@
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `BetaWebhookAgentArchivedEventData`
+
+  - `id: string`
+
+    ID of the agent that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "agent.archived"`
+
+    - `"agent.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Agent Created Event Data
+
+- `BetaWebhookAgentCreatedEventData`
+
+  - `id: string`
+
+    ID of the agent that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "agent.created"`
+
+    - `"agent.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `BetaWebhookAgentDeletedEventData`
+
+  - `id: string`
+
+    ID of the agent that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "agent.deleted"`
+
+    - `"agent.deleted"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Agent Updated Event Data
+
+- `BetaWebhookAgentUpdatedEventData`
+
+  - `id: string`
+
+    ID of the agent that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "agent.updated"`
+
+    - `"agent.updated"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `BetaWebhookDeploymentArchivedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.archived"`
+
+    - `"deployment.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Created Event Data
+
+- `BetaWebhookDeploymentCreatedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.created"`
+
+    - `"deployment.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `BetaWebhookDeploymentDeletedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.deleted"`
+
+    - `"deployment.deleted"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `BetaWebhookDeploymentPausedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.paused"`
+
+    - `"deployment.paused"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `BetaWebhookDeploymentRunFailedEventData`
+
+  - `id: string`
+
+    ID of the deployment run that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment_run.failed"`
+
+    - `"deployment_run.failed"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `BetaWebhookDeploymentRunStartedEventData`
+
+  - `id: string`
+
+    ID of the deployment run that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment_run.started"`
+
+    - `"deployment_run.started"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `BetaWebhookDeploymentRunSucceededEventData`
+
+  - `id: string`
+
+    ID of the deployment run that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment_run.succeeded"`
+
+    - `"deployment_run.succeeded"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `BetaWebhookDeploymentUnpausedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.unpaused"`
+
+    - `"deployment.unpaused"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `BetaWebhookDeploymentUpdatedEventData`
+
+  - `id: string`
+
+    ID of the deployment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "deployment.updated"`
+
+    - `"deployment.updated"`
+
+  - `workspace_id: string`
+
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
@@ -20,7 +228,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -34,7 +242,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -48,7 +256,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -62,7 +270,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -76,7 +284,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -90,7 +298,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -104,7 +312,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -118,7 +326,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -132,7 +340,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -146,7 +354,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -160,7 +368,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -174,9 +382,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
@@ -188,9 +400,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
@@ -202,9 +418,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -216,7 +436,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -230,7 +450,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -244,7 +464,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -258,7 +478,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -272,7 +492,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -290,7 +510,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -308,7 +528,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -326,7 +546,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -340,6 +560,202 @@
 
       - `workspace_id: string`
 
+    - `BetaWebhookSessionUpdatedEventData`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.updated"`
+
+        - `"session.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentCreatedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.created"`
+
+        - `"agent.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentArchivedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.archived"`
+
+        - `"agent.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentDeletedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.deleted"`
+
+        - `"agent.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentPausedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.paused"`
+
+        - `"deployment.paused"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunFailedEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.failed"`
+
+        - `"deployment_run.failed"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentCreatedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.created"`
+
+        - `"deployment.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentUpdatedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.updated"`
+
+        - `"deployment.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentUnpausedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.unpaused"`
+
+        - `"deployment.unpaused"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentUpdatedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.updated"`
+
+        - `"agent.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentArchivedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.archived"`
+
+        - `"deployment.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunStartedEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.started"`
+
+        - `"deployment_run.started"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentDeletedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.deleted"`
+
+        - `"deployment.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunSucceededEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.succeeded"`
+
+        - `"deployment_run.succeeded"`
+
+      - `workspace_id: string`
+
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
@@ -348,13 +764,13 @@
 
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 19 more`
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 33 more`
 
   - `BetaWebhookSessionCreatedEventData`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -368,7 +784,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -382,7 +798,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -396,7 +812,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -410,7 +826,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -424,7 +840,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -438,7 +854,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -452,7 +868,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -466,7 +882,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -480,7 +896,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -494,7 +910,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -508,9 +924,13 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_created"`
 
@@ -522,9 +942,13 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_idled"`
 
@@ -536,9 +960,13 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_terminated"`
 
@@ -550,7 +978,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -564,7 +992,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -578,7 +1006,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -592,7 +1020,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -606,7 +1034,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -624,7 +1052,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -642,7 +1070,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -660,7 +1088,7 @@
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -674,13 +1102,209 @@
 
     - `workspace_id: string`
 
+  - `BetaWebhookSessionUpdatedEventData`
+
+    - `id: string`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.updated"`
+
+      - `"session.updated"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookAgentCreatedEventData`
+
+    - `id: string`
+
+      ID of the agent that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "agent.created"`
+
+      - `"agent.created"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookAgentArchivedEventData`
+
+    - `id: string`
+
+      ID of the agent that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "agent.archived"`
+
+      - `"agent.archived"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookAgentDeletedEventData`
+
+    - `id: string`
+
+      ID of the agent that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "agent.deleted"`
+
+      - `"agent.deleted"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentPausedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.paused"`
+
+      - `"deployment.paused"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentRunFailedEventData`
+
+    - `id: string`
+
+      ID of the deployment run that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment_run.failed"`
+
+      - `"deployment_run.failed"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentCreatedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.created"`
+
+      - `"deployment.created"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentUpdatedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.updated"`
+
+      - `"deployment.updated"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentUnpausedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.unpaused"`
+
+      - `"deployment.unpaused"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookAgentUpdatedEventData`
+
+    - `id: string`
+
+      ID of the agent that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "agent.updated"`
+
+      - `"agent.updated"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentArchivedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.archived"`
+
+      - `"deployment.archived"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentRunStartedEventData`
+
+    - `id: string`
+
+      ID of the deployment run that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment_run.started"`
+
+      - `"deployment_run.started"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentDeletedEventData`
+
+    - `id: string`
+
+      ID of the deployment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment.deleted"`
+
+      - `"deployment.deleted"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookDeploymentRunSucceededEventData`
+
+    - `id: string`
+
+      ID of the deployment run that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "deployment_run.succeeded"`
+
+      - `"deployment_run.succeeded"`
+
+    - `workspace_id: string`
+
 ### Beta Webhook Session Archived Event Data
 
 - `BetaWebhookSessionArchivedEventData`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -696,7 +1320,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -712,7 +1336,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -728,7 +1352,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -744,7 +1368,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -760,7 +1384,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -776,7 +1400,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -792,7 +1416,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -808,7 +1432,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -824,7 +1448,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -840,7 +1464,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -856,7 +1480,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -872,9 +1496,13 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_created"`
 
@@ -888,9 +1516,13 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_idled"`
 
@@ -904,13 +1536,33 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_terminated"`
 
     - `"session.thread_terminated"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Updated Event Data
+
+- `BetaWebhookSessionUpdatedEventData`
+
+  - `id: string`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.updated"`
+
+    - `"session.updated"`
 
   - `workspace_id: string`
 
@@ -920,7 +1572,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -936,7 +1588,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -952,7 +1604,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -972,7 +1624,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -992,7 +1644,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -1012,7 +1664,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -1032,7 +1684,7 @@
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -1060,7 +1712,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1074,7 +1726,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1088,7 +1740,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1102,7 +1754,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1116,7 +1768,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1130,7 +1782,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1144,7 +1796,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1158,7 +1810,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1172,7 +1824,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1186,7 +1838,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1200,7 +1852,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1214,9 +1866,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
@@ -1228,9 +1884,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
@@ -1242,9 +1902,13 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -1256,7 +1920,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1270,7 +1934,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1284,7 +1948,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1298,7 +1962,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1312,7 +1976,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1330,7 +1994,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1348,7 +2012,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1366,7 +2030,7 @@
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1377,6 +2041,202 @@
       - `vault_id: string`
 
         ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionUpdatedEventData`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.updated"`
+
+        - `"session.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentCreatedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.created"`
+
+        - `"agent.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentArchivedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.archived"`
+
+        - `"agent.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentDeletedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.deleted"`
+
+        - `"agent.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentPausedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.paused"`
+
+        - `"deployment.paused"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunFailedEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.failed"`
+
+        - `"deployment_run.failed"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentCreatedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.created"`
+
+        - `"deployment.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentUpdatedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.updated"`
+
+        - `"deployment.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentUnpausedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.unpaused"`
+
+        - `"deployment.unpaused"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookAgentUpdatedEventData`
+
+      - `id: string`
+
+        ID of the agent that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "agent.updated"`
+
+        - `"agent.updated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentArchivedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.archived"`
+
+        - `"deployment.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunStartedEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.started"`
+
+        - `"deployment_run.started"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentDeletedEventData`
+
+      - `id: string`
+
+        ID of the deployment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment.deleted"`
+
+        - `"deployment.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookDeploymentRunSucceededEventData`
+
+      - `id: string`
+
+        ID of the deployment run that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "deployment_run.succeeded"`
+
+        - `"deployment_run.succeeded"`
 
       - `workspace_id: string`
 
