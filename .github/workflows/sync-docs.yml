@@ -273,7 +273,17 @@ jobs:
                 ensureWithinRoot(targetDir, targetFile);
                 fs.mkdirSync(path.dirname(targetFile), { recursive: true });
 
-                const markdown = await fetchText(url);
+                let markdown;
+                try {
+                  markdown = await fetchText(url);
+                } catch (error) {
+                  core.warning(`Skipping ${url}: ${error.message}`);
+                  if (fs.existsSync(targetFile)) {
+                    expectedMarkdownFiles.add(path.resolve(targetFile));
+                  }
+                  skipped += 1;
+                  continue;
+                }
                 if (looksLikeHtml(markdown.contentType, markdown.text)) {
                   core.warning(`Skipping ${url} because it returned HTML instead of markdown.`);
                   if (fs.existsSync(targetFile)) {
@@ -293,7 +303,17 @@ jobs:
                 ensureWithinRoot(targetDir, targetFile);
                 fs.mkdirSync(path.dirname(targetFile), { recursive: true });
 
-                const extraContent = await fetchText(extraFile.url);
+                let extraContent;
+                try {
+                  extraContent = await fetchText(extraFile.url);
+                } catch (error) {
+                  core.warning(`Skipping ${extraFile.url}: ${error.message}`);
+                  if (fs.existsSync(targetFile) && targetFile.endsWith('.md')) {
+                    expectedMarkdownFiles.add(path.resolve(targetFile));
+                  }
+                  skipped += 1;
+                  continue;
+                }
                 if (looksLikeHtml(extraContent.contentType, extraContent.text)) {
                   core.warning(`Skipping ${extraFile.url} because it returned HTML instead of markdown.`);
                   if (fs.existsSync(targetFile) && targetFile.endsWith('.md')) {
