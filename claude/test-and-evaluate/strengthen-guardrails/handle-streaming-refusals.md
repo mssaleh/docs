@@ -1,4 +1,4 @@
-# Streaming refusals
+# Handle streaming refusals
 
 Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
 
@@ -62,10 +62,10 @@ Here's how to detect and handle streaming refusals in your application:
   ```bash cURL
   # Stream request and check for refusal
   response=$(curl -N https://api.anthropic.com/v1/messages \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --data '{
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -d '{
       "model": "claude-opus-4-8",
       "messages": [{"role": "user", "content": "Hello"}],
       "max_tokens": 1024,
@@ -137,49 +137,36 @@ Here's how to detect and handle streaming refusals in your application:
   ```
 
   ```csharp C#
-  using System;
-  using System.Collections.Generic;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  List<Message> messages = new();
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      private static List<Message> messages = new();
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "Hello" }]
+  };
 
-      static async Task Main(string[] args)
+  try
+  {
+      await foreach (var msg in client.Messages.CreateStreaming(parameters))
       {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
+          if (msg.Type == "message_delta" && msg.Delta?.StopReason == "refusal")
           {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = "Hello" }]
-          };
-
-          try
-          {
-              await foreach (var msg in client.Messages.CreateStreaming(parameters))
-              {
-                  if (msg.Type == "message_delta" && msg.Delta?.StopReason == "refusal")
-                  {
-                      ResetConversation();
-                      break;
-                  }
-              }
-          }
-          catch (Exception e)
-          {
-              Console.WriteLine($"Error: {e.Message}");
+              ResetConversation();
+              break;
           }
       }
+  }
+  catch (Exception e)
+  {
+      Console.WriteLine($"Error: {e.Message}");
+  }
 
-      private static void ResetConversation()
-      {
-          messages.Clear();
-          Console.WriteLine("Conversation reset due to refusal");
-      }
+  void ResetConversation()
+  {
+      messages.Clear();
+      Console.WriteLine("Conversation reset due to refusal");
   }
   ```
 
@@ -319,11 +306,11 @@ Here's how to detect and handle streaming refusals in your application:
 
 The API currently handles refusals in three different ways:
 
-| Refusal Type                       | Response Format              | When It Occurs                                  |
+| Refusal type                       | Response format              | When it occurs                                  |
 | ---------------------------------- | ---------------------------- | ----------------------------------------------- |
 | Streaming classifier refusals      | **`stop_reason`: `refusal`** | During streaming when content violates policies |
 | API input and copyright validation | 400 error codes              | When input fails validation checks              |
-| Model-generated refusals           | Standard text responses      | When the model itself decides to refuse         |
+| Model-generated refusals           | Standard text responses      | When the model itself refuses                   |
 
 <Note>
   Future API versions will expand the **`stop_reason`: `refusal`** pattern to unify refusal handling across all types.
