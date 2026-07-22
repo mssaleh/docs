@@ -3,7 +3,7 @@ title: Designing view transitions
 description: Learn how to use view transitions to communicate meaning during navigation, loading, and content changes in a Next.js app.
 url: "https://nextjs.org/docs/app/guides/view-transitions"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-05-13
 prerequisites:
   - "Guides: /docs/app/guides"

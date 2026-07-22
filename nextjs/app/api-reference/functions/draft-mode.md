@@ -3,7 +3,7 @@ title: draftMode
 description: API Reference for the draftMode function.
 url: "https://nextjs.org/docs/app/api-reference/functions/draft-mode"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-05-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,7 +3,7 @@ title: How to set up a custom server in Next.js
 description: Start a Next.js app programmatically using a custom server.
 url: "https://nextjs.org/docs/app/guides/custom-server"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"

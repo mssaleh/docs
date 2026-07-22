@@ -3,7 +3,7 @@ title: redirects
 description: Add redirects to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/redirects"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2025-11-12
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

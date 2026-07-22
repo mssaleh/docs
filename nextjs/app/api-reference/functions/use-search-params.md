@@ -3,7 +3,7 @@ title: useSearchParams
 description: API Reference for the useSearchParams hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-search-params"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,7 +3,7 @@ title: How to set a Content Security Policy (CSP) for your Next.js application
 description: Learn how to set a Content Security Policy (CSP) for your Next.js application.
 url: "https://nextjs.org/docs/app/guides/content-security-policy"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-20
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -3,7 +3,7 @@ title: generateMetadata
 description: Learn how to add Metadata to your Next.js application for improved search engine optimization (SEO) and web shareability.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

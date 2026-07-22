@@ -3,7 +3,7 @@ title: Directives
 description: Directives are used to modify the behavior of your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/directives"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

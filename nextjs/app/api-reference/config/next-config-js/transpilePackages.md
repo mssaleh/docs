@@ -3,7 +3,7 @@ title: transpilePackages
 description: "Transpile and bundle dependencies from monorepo workspace packages or `node_modules` libraries that ship TypeScript, JSX, or modern syntax."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/transpilePackages"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

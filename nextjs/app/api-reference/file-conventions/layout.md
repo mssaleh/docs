@@ -3,7 +3,7 @@ title: layout.js
 description: API reference for the layout.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/layout"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"

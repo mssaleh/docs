@@ -1,17 +1,17 @@
 {
   "react": {
-    "version": "19.2.7",
-    "last_synced_at": "2026-07-10T23:00:43.513Z",
-    "reason": "forced"
+    "version": "19.2.8",
+    "last_synced_at": "2026-07-22T04:27:17.855Z",
+    "reason": "new-release"
   },
   "nextjs": {
-    "version": "16.2.10",
-    "last_synced_at": "2026-07-11T04:24:57.994Z",
+    "version": "16.2.11",
+    "last_synced_at": "2026-07-22T04:27:17.855Z",
     "reason": "new-release"
   },
   "claude-code": {
-    "version": "2.1.216",
-    "last_synced_at": "2026-07-21T04:26:19.218Z",
+    "version": "2.1.217",
+    "last_synced_at": "2026-07-22T04:27:17.855Z",
     "reason": "new-release"
   },
   "claude-api": {

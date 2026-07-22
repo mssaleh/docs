@@ -3,7 +3,7 @@ title: Configuration
 description: Learn how to configure Next.js applications.
 url: "https://nextjs.org/docs/app/api-reference/config"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

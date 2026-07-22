@@ -3,7 +3,7 @@ title: Deploying
 description: Learn how to deploy your Next.js application.
 url: "https://nextjs.org/docs/app/getting-started/deploying"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

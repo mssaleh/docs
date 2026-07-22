@@ -3,7 +3,7 @@ title: Using a CDN with Next.js
 description: Learn how CDN caching works with Next.js, including what works today, cache variability, and the direction toward pathname-based cache keying.
 url: "https://nextjs.org/docs/app/guides/cdn-caching"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"

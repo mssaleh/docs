@@ -3,7 +3,7 @@ title: webVitalsAttribution
 description: Learn how to use the webVitalsAttribution option to pinpoint the source of Web Vitals issues.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/webVitalsAttribution"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

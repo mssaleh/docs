@@ -3,7 +3,7 @@ title: headers
 description: API reference for the headers function.
 url: "https://nextjs.org/docs/app/api-reference/functions/headers"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-03
 prerequisites:
   - "API Reference: /docs/app/api-reference"

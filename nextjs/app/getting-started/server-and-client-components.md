@@ -3,7 +3,7 @@ title: Server and Client Components
 description: Learn how you can use React Server and Client Components to render parts of your application on the server or the client.
 url: "https://nextjs.org/docs/app/getting-started/server-and-client-components"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

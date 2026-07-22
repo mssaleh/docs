@@ -3,7 +3,7 @@ title: maxDuration
 description: API reference for the maxDuration route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/maxDuration"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-13
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

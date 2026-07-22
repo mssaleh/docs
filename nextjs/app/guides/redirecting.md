@@ -3,7 +3,7 @@ title: How to handle redirects in Next.js
 description: Learn the different ways to handle redirects in Next.js.
 url: "https://nextjs.org/docs/app/guides/redirecting"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -3,7 +3,7 @@ title: Invoking Entrypoints
 description: Invoke Node.js and Edge build entrypoints with adapter runtime context.
 url: "https://nextjs.org/docs/app/api-reference/adapters/invoking-entrypoints"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-03-31
 prerequisites:
   - "API Reference: /docs/app/api-reference"

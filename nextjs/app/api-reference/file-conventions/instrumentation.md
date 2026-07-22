@@ -3,7 +3,7 @@ title: instrumentation.js
 description: API reference for the instrumentation.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation"
 docs_index: /docs/llms.txt
-version: 16.2.10
+version: 16.2.11
 lastUpdated: 2026-06-23
 prerequisites:
   - "API Reference: /docs/app/api-reference"
