@@ -14,19 +14,19 @@ List Events
 
 - `"created_at[gt]": optional string`
 
-  Return events created after this time (exclusive).
+  Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
 - `"created_at[gte]": optional string`
 
-  Return events created at or after this time (inclusive).
+  Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
 - `"created_at[lt]": optional string`
 
-  Return events created before this time (exclusive).
+  Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
 - `"created_at[lte]": optional string`
 
-  Return events created at or before this time (inclusive).
+  Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
 - `limit: optional number`
 
@@ -34,7 +34,7 @@ List Events
 
 - `order: optional "asc" or "desc"`
 
-  Sort direction for results, ordered by created_at. Defaults to asc (chronological).
+  Sort direction for results, ordered by the event's `processed_at`. Defaults to asc (chronological).
 
   - `"asc"`
 
@@ -56,7 +56,7 @@ List Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -108,11 +108,17 @@ List Events
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"dreaming-2026-04-21"`
+
     - `"thinking-token-count-2026-05-13"`
 
     - `"server-side-fallback-2026-06-01"`
 
+    - `"server-side-fallback-2026-07-01"`
+
     - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
 
@@ -120,7 +126,7 @@ List Events
 
 - `data: optional array of BetaManagedAgentsSessionEvent`
 
-  Events for the session, ordered by `created_at`.
+  Events for the session, ordered by `processed_at`.
 
   - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
 
@@ -1096,7 +1102,7 @@ List Events
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -1432,7 +1438,7 @@ List Events
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -1578,7 +1584,7 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more`
 
             The model that will power your agent.
 
@@ -1592,17 +1598,21 @@ List Events
 
               Next generation of intelligence for the hardest knowledge work and coding problems
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-6"`
 
-              Most intelligent model for building agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -1618,11 +1628,11 @@ List Events
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -1633,6 +1643,50 @@ List Events
               High-performance model for agents and coding
 
           - `string`
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `BetaManagedAgentsEffortLow object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `BetaManagedAgentsEffortMedium object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `BetaManagedAgentsEffortHigh object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `BetaManagedAgentsEffortXhigh object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `BetaManagedAgentsEffortMax object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
 
         - `speed: optional "standard" or "fast"`
 
@@ -1973,7 +2027,7 @@ Send Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2025,11 +2079,17 @@ Send Events
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"dreaming-2026-04-21"`
+
     - `"thinking-token-count-2026-05-13"`
 
     - `"server-side-fallback-2026-06-01"`
 
+    - `"server-side-fallback-2026-07-01"`
+
     - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
 
@@ -2908,7 +2968,7 @@ Stream Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2960,11 +3020,17 @@ Stream Events
 
     - `"cache-diagnosis-2026-04-07"`
 
+    - `"dreaming-2026-04-21"`
+
     - `"thinking-token-count-2026-05-13"`
 
     - `"server-side-fallback-2026-06-01"`
 
+    - `"server-side-fallback-2026-07-01"`
+
     - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
 
@@ -3948,7 +4014,7 @@ Stream Events
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -4284,7 +4350,7 @@ Stream Events
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -4430,7 +4496,7 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more`
 
             The model that will power your agent.
 
@@ -4444,17 +4510,21 @@ Stream Events
 
               Next generation of intelligence for the hardest knowledge work and coding problems
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-6"`
 
-              Most intelligent model for building agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -4470,11 +4540,11 @@ Stream Events
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -4485,6 +4555,50 @@ Stream Events
               High-performance model for agents and coding
 
           - `string`
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `BetaManagedAgentsEffortLow object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `BetaManagedAgentsEffortMedium object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `BetaManagedAgentsEffortHigh object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `BetaManagedAgentsEffortXhigh object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `BetaManagedAgentsEffortMax object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
 
         - `speed: optional "standard" or "fast"`
 
@@ -8523,7 +8637,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -8859,7 +8973,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -9005,7 +9119,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more`
 
             The model that will power your agent.
 
@@ -9019,17 +9133,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Next generation of intelligence for the hardest knowledge work and coding problems
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-6"`
 
-              Most intelligent model for building agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -9045,11 +9163,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -9060,6 +9178,50 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
               High-performance model for agents and coding
 
           - `string`
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `BetaManagedAgentsEffortLow object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `BetaManagedAgentsEffortMedium object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `BetaManagedAgentsEffortHigh object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `BetaManagedAgentsEffortXhigh object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `BetaManagedAgentsEffortMax object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
 
         - `speed: optional "standard" or "fast"`
 
@@ -9355,7 +9517,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-  The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+  The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: "retries_exhausted"`
 
@@ -9401,7 +9563,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
@@ -9539,7 +9701,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
@@ -10827,7 +10989,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -11163,7 +11325,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `BetaManagedAgentsSessionRetriesExhausted object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -11309,7 +11471,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more`
 
             The model that will power your agent.
 
@@ -11323,17 +11485,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Next generation of intelligence for the hardest knowledge work and coding problems
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-6"`
 
-              Most intelligent model for building agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -11349,11 +11515,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -11364,6 +11530,50 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
               High-performance model for agents and coding
 
           - `string`
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `BetaManagedAgentsEffortLow object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `BetaManagedAgentsEffortMedium object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `BetaManagedAgentsEffortHigh object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `BetaManagedAgentsEffortXhigh object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `BetaManagedAgentsEffortMax object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
 
         - `speed: optional "standard" or "fast"`
 

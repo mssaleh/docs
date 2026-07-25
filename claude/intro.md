@@ -11,7 +11,7 @@ Claude is a highly performant, trustworthy, and intelligent AI platform built by
 
   **Claude Mythos 5** - Shares Claude Fable 5's capabilities without the safety classifiers. Available in limited release through [Project Glasswing](https://anthropic.com/glasswing).
 
-  **Claude Opus 4.8** - For complex agentic coding and enterprise work. Read the [Claude Opus 4.8 announcement](https://www.anthropic.com/news/claude-opus-4-8).
+  **Claude Opus 5** - For complex agentic coding and enterprise work. Read the [Claude Opus 5 announcement](https://www.anthropic.com/news/claude-opus-5).
 
   **Claude Sonnet 5** - Frontier intelligence at scale, built for coding, agents, and enterprise workflows. Read the [Claude Sonnet 5 announcement](https://www.anthropic.com/news/claude-sonnet-5).
 
@@ -68,7 +68,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="/">
-    Prototype and test prompts in your browser with the Workbench and prompt generator.
+    Prototype and test prompts in your browser with the Workbench.
   </Card>
 
   <Card title="API Reference" icon="code" href="/docs/en/api/overview">
