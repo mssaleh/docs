@@ -266,6 +266,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Configure Next.js to allow importing modules from external URLs.
 - [useLightningcss](/docs/app/api-reference/config/next-config-js/useLightningcss)
   - Enable experimental support for Lightning CSS.
+- [useTypeScriptCli](/docs/app/api-reference/config/next-config-js/useTypeScriptCli)
+  - Run the project-local TypeScript CLI for type checking during production builds.
 - [viewTransition](/docs/app/api-reference/config/next-config-js/viewTransition)
   - Enable ViewTransition API from React in App Router
 - [webpack](/docs/app/api-reference/config/next-config-js/webpack)

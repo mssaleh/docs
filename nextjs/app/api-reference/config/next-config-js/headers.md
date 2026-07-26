@@ -4,7 +4,7 @@ description: Add custom HTTP headers to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -18,7 +18,7 @@ To set custom HTTP headers you can use the `headers` key in `next.config.js`:
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         source: '/about',
@@ -38,7 +38,7 @@ module.exports = {
 }
 ```
 
-`headers` is an async function that expects an array to be returned holding objects with `source` and `headers` properties:
+`headers` can be defined as a synchronous or async function. It should return, or resolve to, an array of objects with `source` and `headers` properties:
 
 * `source` is the incoming request path pattern.
 * `headers` is an array of response header objects, with `key` and `value` properties.
@@ -55,7 +55,7 @@ If two headers match the same path and set the same header key, the last header 
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         source: '/:path*',
@@ -86,7 +86,7 @@ Path matches are allowed, for example `/blog/:slug` will match `/blog/first-post
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         source: '/blog/:slug',
@@ -118,7 +118,7 @@ To match a wildcard path you can use `*` after a parameter, for example `/blog/:
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         source: '/blog/:slug*',
@@ -144,7 +144,7 @@ To match a regex path you can wrap the regex in parenthesis after a parameter, f
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         source: '/blog/:post(\\d{1,})',
@@ -164,7 +164,7 @@ The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for reg
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       {
         // this will match `/english(default)/something` being requested
@@ -193,7 +193,7 @@ To only apply a header when header, cookie, or query values also match the `has`
 
 ```js filename="next.config.js"
 module.exports = {
-  async headers() {
+  headers() {
     return [
       // if the header `x-add-header` is present,
       // the `x-another-header` header will be applied
@@ -303,7 +303,7 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 module.exports = {
   basePath: '/docs',
 
-  async headers() {
+  headers() {
     return [
       {
         source: '/with-basePath', // becomes /docs/with-basePath
@@ -340,7 +340,7 @@ module.exports = {
     defaultLocale: 'en',
   },
 
-  async headers() {
+  headers() {
     return [
       {
         source: '/with-locale', // automatically handles all locales
@@ -404,7 +404,7 @@ Learn more about [caching](/docs/app/getting-started/caching) with the App Route
 [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS) is a security feature that allows you to control which sites can access your resources. You can set the `Access-Control-Allow-Origin` header to allow a specific origin to access your Route Handlers.
 
 ```js
-async headers() {
+headers() {
     return [
       {
         source: "/api/:path*",

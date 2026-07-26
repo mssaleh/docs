@@ -4,7 +4,7 @@ description: Learn how to revalidate cached data using time-based and on-demand 
 url: "https://nextjs.org/docs/app/getting-started/revalidating"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-06-23
+lastUpdated: 2026-07-22
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -123,7 +123,7 @@ See the [`revalidateTag` API reference](/docs/app/api-reference/functions/revali
 
 ## `updateTag`
 
-`updateTag` immediately expires cached data for read-your-own-writes scenarios — the user sees their change right away instead of stale content. Unlike `revalidateTag`, it can only be used in [Server Actions](/docs/app/getting-started/mutating-data).
+`updateTag` immediately expires cached data for read-your-own-writes scenarios — the user sees their change right away instead of stale content. Unlike `revalidateTag`, it can only be used in [Server Actions](/docs/app/guides/server-actions).
 
 ```tsx filename="app/lib/actions.ts" highlight={1,12} switcher
 import { updateTag } from 'next/cache'

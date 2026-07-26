@@ -4,7 +4,7 @@ description: "Learn how to create a new Next.js application with the `create-nex
 url: "https://nextjs.org/docs/app/getting-started/installation"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
@@ -257,6 +257,35 @@ You can enable the plugin in VS Code by:
 ![TypeScript Command Palette](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/typescript-command-palette.png)
 
 See the [TypeScript reference](/docs/app/api-reference/config/typescript) page for more information.
+
+## Set up your editor
+
+The App Router names files by convention, like `page.tsx`, `layout.tsx`, and `route.ts`, so your editor quickly fills with same-named tabs. Label each tab with its enclosing folders, like `blog/[id]`, so you can tell them apart.
+
+In VS Code 1.88+ or Cursor, add [custom editor labels](https://code.visualstudio.com/updates/v1_88#_customize-editor-labels) to `.vscode/settings.json`. Labeling two folders deep keeps dynamic routes like `blog/[id]/page.tsx` from all collapsing to the same `[id]` label:
+
+```json filename=".vscode/settings.json"
+{
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname(1)}/${dirname} - page.tsx",
+    "**/app/**/layout.tsx": "${dirname(1)}/${dirname} - layout.tsx",
+    "**/app/**/loading.tsx": "${dirname(1)}/${dirname} - loading.tsx",
+    "**/app/**/error.tsx": "${dirname(1)}/${dirname} - error.tsx",
+    "**/app/**/not-found.tsx": "${dirname(1)}/${dirname} - not-found.tsx",
+    "**/app/**/template.tsx": "${dirname(1)}/${dirname} - template.tsx",
+    "**/app/**/default.tsx": "${dirname(1)}/${dirname} - default.tsx",
+    "**/app/**/route.ts": "${dirname(1)}/${dirname} - route.ts"
+  }
+}
+```
+
+Or copy this prompt to have your coding agent set it up:
+
+```prompt
+Set up custom editor labels so my Next.js App Router files are easy to tell apart. Read https://nextjs.org/docs/app/getting-started/installation#set-up-your-editor and add the workbench.editor.customLabels.patterns config shown there to my .vscode/settings.json, creating the file if it doesn't exist. Adjust the labels to taste. If I use a different editor, apply the equivalent setting or tell me it's automatic, and leave my other settings untouched.
+```
+
+> **Good to know:** JetBrains IDEs (WebStorm, IntelliJ) show the folder for same-named files automatically, so no setup is needed.
 
 ## Set up linting
 

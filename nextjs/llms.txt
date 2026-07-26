@@ -245,6 +245,7 @@ Next.js API Reference for the App Router.
     - [typescript](https://nextjs.org/docs/app/api-reference/config/next-config-js/typescript.md): Configure how Next.js handles TypeScript errors during production builds and specify a custom tsconfig file.
     - [urlImports](https://nextjs.org/docs/app/api-reference/config/next-config-js/urlImports.md): Configure Next.js to allow importing modules from external URLs.
     - [useLightningcss](https://nextjs.org/docs/app/api-reference/config/next-config-js/useLightningcss.md): Enable experimental support for Lightning CSS.
+    - [useTypeScriptCli](https://nextjs.org/docs/app/api-reference/config/next-config-js/useTypeScriptCli.md): Run the project-local TypeScript CLI for type checking during production builds.
     - [viewTransition](https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition.md): Enable ViewTransition API from React in App Router
     - [webpack](https://nextjs.org/docs/app/api-reference/config/next-config-js/webpack.md): Learn how to customize the webpack config used by Next.js
     - [webVitalsAttribution](https://nextjs.org/docs/app/api-reference/config/next-config-js/webVitalsAttribution.md): Learn how to use the webVitalsAttribution option to pinpoint the source of Web Vitals issues.

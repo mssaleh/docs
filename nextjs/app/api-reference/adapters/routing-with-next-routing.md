@@ -4,7 +4,7 @@ description: "Use `@next/routing` to apply Next.js route matching behavior in ad
 url: "https://nextjs.org/docs/app/api-reference/adapters/routing-with-next-routing"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-04-02
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -13,9 +13,6 @@ prerequisites:
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 You can use [`@next/routing`](https://www.npmjs.com/package/@next/routing) to reproduce Next.js route matching behavior with data from `onBuildComplete`.
-
-> \[!NOTE]
-> `@next/routing` is experimental and will stabilize with the adapters API.
 
 ```typescript
 import { resolveRoutes } from '@next/routing'

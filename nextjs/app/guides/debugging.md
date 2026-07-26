@@ -4,7 +4,7 @@ description: Learn how to debug your Next.js application with VS Code, Chrome De
 url: "https://nextjs.org/docs/app/guides/debugging"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-02-11
+lastUpdated: 2026-07-22
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -13,7 +13,7 @@ prerequisites:
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 This documentation explains how you can debug your Next.js frontend and backend code with full source maps support using the [VS Code debugger](https://code.visualstudio.com/docs/editor/debugging), [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools), or [Firefox DevTools](https://firefox-source-docs.mozilla.org/devtools-user/).
 
-Any debugger that can attach to Node.js can also be used to debug a Next.js application. You can find more details in the Node.js [Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/).
+Any debugger that can attach to Node.js can also be used to debug a Next.js application. You can find more details in the Node.js [Debugging Guide](https://nodejs.org/learn/getting-started/debugging/).
 
 ## Debugging with VS Code
 
@@ -142,7 +142,7 @@ Launching the Next.js server with the `--inspect` flag will look something like 
 
 ```bash filename="Terminal"
 Debugger listening on ws://127.0.0.1:9229/0cf90313-350d-4466-a748-cd60f4e47c95
-For help, see: https://nodejs.org/en/docs/inspector
+For help, see: https://nodejs.org/learn/getting-started/debugging
 ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 ```
 

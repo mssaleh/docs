@@ -4,7 +4,7 @@ description: API Reference for the unstable_cache function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_cache"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -81,20 +81,20 @@ export default async function Page({
 ```
 
 ```jsx filename="app/page.jsx" switcher
-import { unstable_cache } from 'next/cache';
+import { unstable_cache } from 'next/cache'
 
-export default async function Page({ params } }) {
+export default async function Page({ params }) {
   const { userId } = await params
   const getCachedUser = unstable_cache(
     async () => {
-      return { id: userId };
+      return { id: userId }
     },
     [userId], // add the user ID to the cache key
     {
-      tags: ["users"],
+      tags: ['users'],
       revalidate: 60,
     }
-  );
+  )
 
   //...
 }

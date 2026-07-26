@@ -4,7 +4,7 @@ description: API reference for the error.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/error"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-25
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -156,6 +156,8 @@ In most cases, you should use [`unstable_retry()`](#unstable_retry) instead. How
 ### Global Error
 
 While less common, you can handle errors in the root layout or template using `global-error.jsx`, located in the root app directory, even when leveraging [internationalization](/docs/app/guides/internationalization). Global error UI must define its own `<html>` and `<body>` tags, global styles, fonts, or other dependencies that your error page requires. This file replaces the root layout or template when active.
+
+> **Good to know**: `global-error` and the built-in 500 page render their own document and do **not** include your global styles, so an app-level theme toggle (a class or `data-theme` attribute) won't reach them. The default UI follows the OS color scheme; to match your app's theme, apply it inside your own `global-error` component.
 
 > **Good to know**: Error boundaries must be [Client Components](/docs/app/getting-started/server-and-client-components#using-client-components), which means that [`metadata` and `generateMetadata`](/docs/app/getting-started/metadata-and-og-images) exports are not supported in `global-error.jsx`. As an alternative, you can use the React [`<title>`](https://react.dev/reference/react-dom/components/title) component.
 

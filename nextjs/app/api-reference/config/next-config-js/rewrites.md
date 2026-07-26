@@ -4,7 +4,7 @@ description: Add rewrites to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-06-23
+lastUpdated: 2026-07-22
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -20,7 +20,7 @@ To use rewrites you can use the `rewrites` key in `next.config.js`:
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/about',
@@ -33,7 +33,7 @@ module.exports = {
 
 Rewrites are applied to client-side routing. In the example above, navigating to `<Link href="/about">` will serve content from `/` while keeping the URL as `/about`.
 
-`rewrites` is an async function that expects to return either an array or an object of arrays (see below) holding objects with `source` and `destination` properties:
+`rewrites` can be defined as a synchronous or async function. It should return, or resolve to, either an array or an object of arrays (see below) holding objects with `source` and `destination` properties:
 
 * `source`: `String` - is the incoming request path pattern.
 * `destination`: `String` is the path you want to route to.
@@ -46,7 +46,7 @@ When the `rewrites` function returns an array, rewrites are applied after checki
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return {
       beforeFiles: [
         // These rewrites are checked after headers/redirects
@@ -98,7 +98,7 @@ When using parameters in a rewrite the parameters will be passed in the query by
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/old-about/:path*',
@@ -113,7 +113,7 @@ If a parameter is used in the destination none of the parameters will be automat
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/docs/:path*',
@@ -128,7 +128,7 @@ You can still pass the parameters manually in the query if one is already used i
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/:first/:second',
@@ -150,7 +150,7 @@ Path matches are allowed, for example `/blog/:slug` will match `/blog/first-post
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/blog/:slug',
@@ -173,7 +173,7 @@ To match a wildcard path you can use `*` after a parameter, for example `/blog/:
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/blog/:slug*',
@@ -190,7 +190,7 @@ To match a regex path you can wrap the regex in parenthesis after a parameter, f
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/old-blog/:post(\\d{1,})',
@@ -205,7 +205,7 @@ The following characters `(`, `)`, `{`, `}`, `[`, `]`, `|`, `\`, `^`, `.`, `:`, 
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         // this will match `/english(default)/something` being requested
@@ -229,7 +229,7 @@ To only match a rewrite when header, cookie, or query values also match the `has
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       // if the header `x-rewrite-me` is present,
       // this rewrite will be applied
@@ -319,7 +319,7 @@ Rewrites allow you to rewrite to an external URL. This is especially useful for 
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/blog',
@@ -339,7 +339,7 @@ If you're using `trailingSlash: true`, you also need to insert a trailing slash 
 ```js filename="next.config.js"
 module.exports = {
   trailingSlash: true,
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/blog/',
@@ -362,7 +362,7 @@ This way you don't have to change the rewrites configuration when migrating more
 
 ```js filename="next.config.js"
 module.exports = {
-  async rewrites() {
+  rewrites() {
     return {
       fallback: [
         {
@@ -383,7 +383,7 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 module.exports = {
   basePath: '/docs',
 
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/with-basePath', // automatically becomes /docs/with-basePath

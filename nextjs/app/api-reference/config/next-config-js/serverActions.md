@@ -4,15 +4,17 @@ description: Configure Server Actions behavior in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-06-23
+lastUpdated: 2026-07-22
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
+related:
+  - app/guides/server-actions
 ---
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-Options for configuring Server Actions behavior in your Next.js application.
+Options for configuring Server Actions behavior in your Next.js application. For how Server Actions work, including the security boundary these options tune, see the [Server Actions guide](/docs/app/guides/server-actions).
 
 ## `allowedOrigins`
 
@@ -64,6 +66,9 @@ const config = {
 
 module.exports = config
 ```
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

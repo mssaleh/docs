@@ -4,7 +4,7 @@ description: Learn how to fetch data and stream content that depends on data.
 url: "https://nextjs.org/docs/app/getting-started/fetching-data"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-13
+lastUpdated: 2026-07-22
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -355,7 +355,7 @@ export default function BlogPage() {
 
 Sequential data fetching happens when one request depends on data from another.
 
-For example, `<Playlists>` can only fetch data after `<Artist>` completes because it needs the `artistID`:
+For example, `<Playlists>` can only fetch data after `getArtist()` resolves because it needs the `artistID`:
 
 ```tsx filename="app/artist/[username]/page.tsx" switcher
 export default async function Page({

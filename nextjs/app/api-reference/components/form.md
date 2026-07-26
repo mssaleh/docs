@@ -4,7 +4,7 @@ description: "Learn how to use the `<Form>` component to handle form submissions
 url: "https://nextjs.org/docs/app/api-reference/components/form"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -334,7 +334,7 @@ export default async function PostPage({ params }) {
 }
 ```
 
-See the [Server Actions](/docs/app/getting-started/mutating-data) docs for more examples.
+See [Mutating data](/docs/app/getting-started/mutating-data) for more examples.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

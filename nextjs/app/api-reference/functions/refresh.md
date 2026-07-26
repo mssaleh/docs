@@ -4,15 +4,17 @@ description: API Reference for the refresh function.
 url: "https://nextjs.org/docs/app/api-reference/functions/refresh"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
+related:
+  - app/guides/server-actions
 ---
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-`refresh` allows you to refresh the client router from within a [Server Action](/docs/app/getting-started/mutating-data).
+`refresh` allows you to refresh the client router from within a [Server Action](/docs/app/guides/server-actions).
 
 ## Usage
 
@@ -76,6 +78,9 @@ export async function POST() {
   refresh()
 }
 ```
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

@@ -4,12 +4,13 @@ description: API Reference for the redirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/redirect"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
 related:
   - app/api-reference/functions/permanentRedirect
+  - app/guides/server-actions
 ---
 
 
@@ -230,6 +231,8 @@ The `redirect()` method uses a `307` by default, instead of a `302` temporary re
 | `v13.0.0` | `redirect` introduced. |
 - [permanentRedirect](/docs/app/api-reference/functions/permanentRedirect)
   - API Reference for the permanentRedirect function.
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
 
 ---
 

@@ -4,10 +4,12 @@ description: API Reference for the revalidatePath function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidatePath"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
+related:
+  - app/guides/server-actions
 ---
 
 
@@ -233,6 +235,9 @@ export async function GET(request) {
   })
 }
 ```
+- [Server Actions](/docs/app/guides/server-actions)
+  - How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

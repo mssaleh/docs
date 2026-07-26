@@ -4,7 +4,7 @@ description: Next.js enables starting as a static site or Single-Page Applicatio
 url: "https://nextjs.org/docs/app/guides/static-exports"
 docs_index: /docs/llms.txt
 version: 16.2.11
-lastUpdated: 2026-03-03
+lastUpdated: 2026-07-22
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -310,6 +310,8 @@ server {
   }
 }
 ```
+
+To deploy to GitHub Pages, use our [template](https://github.com/nextjs/deploy-github-pages) to create a new project or as a reference for configuring an existing project.
 
 ## Version History
 
