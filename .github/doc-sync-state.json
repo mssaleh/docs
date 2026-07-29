@@ -20,9 +20,9 @@
     "reason": "interval"
   },
   "mcp": {
-    "version": "2025-11-25",
-    "last_synced_at": "2026-07-10T23:00:43.513Z",
-    "reason": "forced"
+    "version": "2026-07-28",
+    "last_synced_at": "2026-07-29T04:25:53.157Z",
+    "reason": "new-release"
   },
   "llamaindex": {
     "version": "0.14.23",
