@@ -3,8 +3,8 @@ title: API Reference
 description: "Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface."
 url: "https://nextjs.org/docs/app/api-reference/adapters/api-reference"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-05-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -21,6 +21,7 @@ Called for any CLI command that loads the `next.config.js` file to allow modific
 * `config`: The complete Next.js configuration object
 * `context.phase`: The current build phase (see [phases](/docs/app/api-reference/config/next-config-js#phase))
 * `context.nextVersion`: Version of Next.js being used
+* `context.projectDir`: Absolute path to the Next.js project directory
 
 **Returns:** The modified configuration object (can be async)
 

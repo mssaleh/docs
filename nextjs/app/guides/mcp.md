@@ -3,8 +3,8 @@ title: Enabling Next.js MCP Server for Coding Agents
 description: Learn how to use Next.js MCP support to allow coding agents access to your application state
 url: "https://nextjs.org/docs/app/guides/mcp"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-03
+version: 16.3.0
+lastUpdated: 2026-07-08
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -50,9 +50,7 @@ For more configuration options, see the [next-devtools-mcp repository](https://g
 
 ### Development Tools
 
-* **Next.js Knowledge Base**: Query comprehensive Next.js documentation and best practices
-* **Migration and Upgrade Tools**: Automated helpers for upgrading to Next.js 16 with codemods
-* **Caching Guide**: Setup and configuration assistance for Cache Components
+* **Documentation Gateway**: Points your agent at the version-accurate docs bundled with your installed Next.js (in `node_modules/next/dist/docs/`), so explanations and generated code match the version you are running
 * **Browser Testing**: [Playwright MCP](https://github.com/microsoft/playwright-mcp) integration for verifying pages in the browser
 
 > **Note:** The Next.js team is actively expanding these capabilities. New tools and features are added regularly to improve the agent development experience.
@@ -93,6 +91,8 @@ Through `next-devtools-mcp`, agents can use the following tools:
 * **`get_project_metadata`**: Retrieve project structure, configuration, and dev server URL
 * **`get_routes`**: Get all routes that will become entry points by scanning the filesystem. Returns routes grouped by router type (appRouter, pagesRouter). Dynamic segments appear as `[param]` or `[...slug]` patterns
 * **`get_server_action_by_id`**: Look up Server Actions by their ID to find the source file and function name
+* **`get_compilation_issues`**: Retrieve compilation warnings and errors for the whole project from the bundler. Turbopack only.
+* **`compile_route`**: Trigger on-demand compilation of a specific route without making an HTTP request to it. Accepts either a `routeSpecifier` (e.g. `/blog/[slug]`, as returned by `get_routes`) or a `path` (e.g. `/blog/hello-world`) which is resolved to the matching route using the dev router's live route table. Returns any compilation issues for the route. Turbopack only.
 
 ## Using with agents
 
@@ -164,7 +164,7 @@ Get help with Next.js concepts and migrations:
 User: "Help me upgrade my Next.js app to version 16"
 ```
 
-The agent will analyze your current version, guide you through automated migrations with codemods, and provide step-by-step instructions for handling breaking changes.
+The agent will run the official upgrade codemod (`npx @next/codemod@latest upgrade latest`) and provide step-by-step instructions for handling breaking changes.
 
 Ask conceptual questions:
 
@@ -172,7 +172,7 @@ Ask conceptual questions:
 User: "When should I use 'use client' in App Router?"
 ```
 
-The agent will query the Next.js knowledge base and provide documentation-backed explanations with examples from your codebase.
+The agent will read the version-accurate Next.js docs bundled with your project and provide documentation-backed explanations with examples from your codebase.
 
 ## How it works
 

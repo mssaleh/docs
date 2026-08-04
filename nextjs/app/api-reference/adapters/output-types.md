@@ -3,8 +3,8 @@ title: Output Types
 description: Reference for all build output types exposed to adapters.
 url: "https://nextjs.org/docs/app/api-reference/adapters/output-types"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-04-02
+version: 16.3.0
+lastUpdated: 2026-07-24
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -24,7 +24,7 @@ The `outputs` object contains arrays of build output types:
 
 > **Note:** When `config.output` is set to `'export'`, only `outputs.staticFiles` is populated. All other arrays (`pages`, `appPages`, `pagesApi`, `appRoutes`, `prerenders`) will be empty since the entire application is exported as static files.
 
-For any route output with `runtime: 'edge'`, `edgeRuntime` is included and contains the canonical entry metadata for invoking that output in your edge runtime.
+For any route output with `runtime: 'edge'`, `edgeRuntime` is included and contains the canonical entry metadata for invoking that output in your edge runtime. Note that the Edge Runtime is [deprecated](/docs/messages/edge-runtime-deprecated).
 
 ## Pages (`outputs.pages`)
 
@@ -47,7 +47,7 @@ React pages from the `pages/` directory:
   }
   config: {
     maxDuration?: number  // Maximum duration of the route in seconds
-    preferredRegion?: string | string[]  // Preferred deployment region
+    preferredRegion?: string | string[]  // Preferred deployment region (deprecated)
     env?: Record<string, string>  // Environment variables (edge runtime only)
   }
 }
@@ -74,7 +74,7 @@ API routes from `pages/api/`:
   }
   config: {
     maxDuration?: number  // Maximum duration of the route in seconds
-    preferredRegion?: string | string[]  // Preferred deployment region
+    preferredRegion?: string | string[]  // Preferred deployment region (deprecated)
     env?: Record<string, string>  // Environment variables (edge runtime only)
   }
 }
@@ -101,7 +101,7 @@ React pages from the `app/` directory:
   }
   config: {
     maxDuration?: number  // Maximum duration of the route in seconds
-    preferredRegion?: string | string[]  // Preferred deployment region
+    preferredRegion?: string | string[]  // Preferred deployment region (deprecated)
     env?: Record<string, string>  // Environment variables (edge runtime only)
   }
 }
@@ -128,7 +128,7 @@ API and metadata routes from the `app/` directory:
   }
   config: {
     maxDuration?: number  // Maximum duration of the route in seconds
-    preferredRegion?: string | string[]  // Preferred deployment region
+    preferredRegion?: string | string[]  // Preferred deployment region (deprecated)
     env?: Record<string, string>  // Environment variables (edge runtime only)
   }
 }
@@ -145,6 +145,11 @@ ISR-enabled routes and static prerenders:
   pathname: string     // URL pathname
   parentOutputId: string  // ID of the source page/route
   groupId: number        // Revalidation group identifier (prerenders with same groupId revalidate together)
+  route: string           // Source route matcher aligned with the filesystem route, keeping dynamic segments (e.g. /blog/[slug] for the prerendered path /blog/first)
+  routeType?: 'route' | 'fallback' | 'shell' | 'page'  // Kind of canonical response
+  response?: 'empty' | 'initial' | 'complete'  // Completeness before request-time work
+  compute?: 'blocking' | 'resuming' | 'static'  // Request-time compute needed for the completed response
+  htmlSize?: number       // Byte size of the prerendered App Router HTML shell
   pprChain?: {
     headers: Record<string, string>  // PPR chain headers (e.g., 'next-resume': '1')
   }
@@ -168,6 +173,31 @@ ISR-enabled routes and static prerenders:
 }
 ```
 
+### Prerender classification
+
+`routeType`, `response`, and `compute` are emitted together on the primary response in a prerender group. Related RSC, data, and segment outputs omit these fields. Pages Router templates with `fallback: false` also omit them because those templates are never served for unmatched URLs.
+
+`routeType` identifies the kind of canonical response:
+
+* `route`: a non-UI route, such as a Route Handler
+* `page`: a page whose URL has no missing prerenderable parameters
+* `shell`: the most specific reusable page shell for its class of URLs
+* `fallback`: a reusable page response that can be specialized by filling more prerenderable parameters
+
+`response` describes how complete the response is before request-time work:
+
+* `empty`: no initial page response can be served
+* `initial`: an initial response can be served, but it is not the completed page UI. In practice, this only applies to UI routes that are partially prerenderable
+* `complete`: the response is complete; this can include a zero-byte response body, such as a `204` Route Handler response
+
+`compute` describes the request-time compute needed to serve the completed response:
+
+* `blocking`: no initial response can be sent before request-time compute starts; once started, the response can stream while compute continues
+* `resuming`: an initial response is served while postponed work resumes on the server
+* `static`: no server compute is required per request
+
+`htmlSize` is only included on the primary App Router HTML output. A value of `0` means that the HTML shell is empty. Pages Router prerenders, Route Handlers, and related RSC, data, and segment outputs omit it.
+
 ## Static Files (`outputs.staticFiles`)
 
 Static assets and auto-statically optimized pages:
@@ -175,12 +205,14 @@ Static assets and auto-statically optimized pages:
 ```typescript
 {
   type: 'STATIC_FILE'
-  id: string // Route identifier
-  filePath: string // Path to the built file
-  pathname: string // URL pathname
+  id: string // Unique identifier for this static file output
+  filePath: string // Absolute filesystem path to the built file
+  pathname: string // The routable URL pathname for this static file
   immutableHash: string | undefined // Content hash when the filename contains a hash, indicating the file is immutable
 }
 ```
+
+See [Supporting immutable static assets](/docs/app/api-reference/adapters/immutable-static-assets) for more information about `immutableHash`.
 
 ## Middleware (`outputs.middleware`)
 
@@ -203,7 +235,7 @@ Static assets and auto-statically optimized pages:
   }
   config: {
     maxDuration?: number  // Maximum duration of the route in seconds
-    preferredRegion?: string | string[]  // Preferred deployment region
+    preferredRegion?: string | string[]  // Preferred deployment region (deprecated)
     env?: Record<string, string>  // Environment variables (edge runtime only)
     matchers?: Array<{
       source: string  // Source pattern

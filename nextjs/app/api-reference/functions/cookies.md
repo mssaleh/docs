@@ -3,8 +3,8 @@ title: cookies
 description: API Reference for the cookies function.
 url: "https://nextjs.org/docs/app/api-reference/functions/cookies"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-03
+version: 16.3.0
+lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -76,6 +76,7 @@ To learn more about these options, see the [MDN docs](https://developer.mozilla.
 * `cookies` is an **asynchronous** function that returns a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access cookies.
   * In version 14 and earlier, `cookies` was a synchronous function. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
 * `cookies` is a [Request-time API](/docs/app/glossary#request-time-apis) whose returned values cannot be known ahead of time. Using it in a layout or page will opt a route into [dynamic rendering](/docs/app/glossary#dynamic-rendering).
+* With [Cache Components](/docs/app/getting-started/caching), calling `cookies()` outside of a [`<Suspense>`](https://react.dev/reference/react/Suspense) boundary prevents the route from being prerendered. See [Next.js encountered runtime data during prerendering](/docs/messages/blocking-prerender-runtime) for fix options.
 * The `.delete` method can only be called:
   * In a [Server Function](/docs/app/getting-started/mutating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route).
   * If it belongs to the same domain from which `.set` is called. For wildcard domains, the specific subdomain must be an exact match. Additionally, the code must be executed on the same protocol (HTTP or HTTPS) as the cookie you want to delete.

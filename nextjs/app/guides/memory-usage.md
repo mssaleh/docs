@@ -3,8 +3,8 @@ title: How to optimize memory usage
 description: Optimize memory used by your application in development and production.
 url: "https://nextjs.org/docs/app/guides/memory-usage"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2025-10-18
+version: 16.3.0
+lastUpdated: 2026-04-28
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -132,7 +132,7 @@ Generating source maps consumes extra memory during the build process.
 
 You can disable source map generation by adding `productionBrowserSourceMaps: false` and `experimental.serverSourceMaps: false` to your Next.js configuration.
 
-When using the `cacheComponents` feature, Next.js will use source maps by default during the prerender phase of `next build`.
+Next.js will use source maps by default during the prerender phase of `next build`.
 If you consistently encounter memory issues during that phase (after "Generating static pages"),
 you can try disabling source maps in that phase by adding `enablePrerenderSourceMaps: false` to your Next.js configuration.
 

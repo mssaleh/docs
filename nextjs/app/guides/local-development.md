@@ -3,8 +3,8 @@ title: How to optimize your local development environment
 description: Learn how to optimize your local development environment with Next.js.
 url: "https://nextjs.org/docs/app/guides/local-development"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-02-11
+version: 16.3.0
+lastUpdated: 2026-07-01
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -232,44 +232,44 @@ It provides detailed information about the time taken for each module to compile
 2. Generate a Turbopack trace file:
 
    ```bash package="pnpm"
-   NEXT_TURBOPACK_TRACING=1 pnpm dev
+   pnpm dev --internal-trace
    ```
 
    ```bash package="npm"
-   NEXT_TURBOPACK_TRACING=1 npm run dev
+   npm run dev -- --internal-trace
    ```
 
    ```bash package="yarn"
-   NEXT_TURBOPACK_TRACING=1 yarn dev
+   yarn dev --internal-trace
    ```
 
    ```bash package="bun"
-   NEXT_TURBOPACK_TRACING=1 bun dev
+   bun dev --internal-trace
    ```
 
 3. Navigate around your application or make edits to files to reproduce the problem.
 
 4. Stop the Next.js development server.
 
-5. A file called `trace-turbopack` will be available in the `.next/dev` folder.
+5. A file called `trace-turbopack.bin` will be available in the `.next-profiles` folder.
 
 6. You can interpret the file using `npx next internal trace [path-to-file]`:
 
    ```bash
-   npx next internal trace .next/dev/trace-turbopack
+   npx next internal trace .next-profiles/trace-turbopack.bin
    ```
 
    On versions where `trace` is not available, the command was named `turbo-trace-server`:
 
    ```bash
-   npx next internal turbo-trace-server .next/dev/trace-turbopack
+   npx next internal turbo-trace-server .next-profiles/trace-turbopack.bin
    ```
 
 7. Once the trace server is running you can view the trace at https://trace.nextjs.org/.
 
 8. By default the trace viewer will aggregate timings, in order to see each individual time you can switch from "Aggregated in order" to "Spans in order" at the top right of the viewer.
 
-> **Good to know**: The trace file is placed under the development server directory, which defaults to `.next/dev`.
+> **Good to know**: The trace file is placed in the `.next-profiles` directory at the project root.
 
 ### Still having problems?
 

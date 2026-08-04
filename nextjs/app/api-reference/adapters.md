@@ -3,8 +3,8 @@ title: Adapters
 description: Build deployment adapters for Next.js platforms and infrastructure.
 url: "https://nextjs.org/docs/app/api-reference/adapters"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-07-29
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
@@ -24,6 +24,7 @@ Use this section to build and validate deployment adapters that integrate with t
 * [Output Types](/docs/app/api-reference/adapters/output-types)
 * [Routing Information](/docs/app/api-reference/adapters/routing-information)
 * [Use Cases](/docs/app/api-reference/adapters/use-cases)
+* [Supporting Immutable Static Assets](/docs/app/api-reference/adapters/immutable-static-assets)
 
 - [Configuration](/docs/app/api-reference/adapters/configuration)
   - Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter.
@@ -47,6 +48,8 @@ Use this section to build and validate deployment adapters that integrate with t
   - Reference for routing phases and route fields exposed in `onBuildComplete`.
 - [Use Cases](/docs/app/api-reference/adapters/use-cases)
   - Common patterns and examples for deployment adapter implementations.
+- [Supporting Immutable Static Assets](/docs/app/api-reference/adapters/immutable-static-assets)
+  - Support immutable static assets in an adapter
 
 ---
 

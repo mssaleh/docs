@@ -3,8 +3,8 @@ title: Route Segment Config
 description: Learn about how to configure options for Next.js route segments.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-13
+version: 16.3.0
+lastUpdated: 2026-04-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -14,12 +14,12 @@ prerequisites:
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 The Route Segment Config options allow you to configure the behavior of a [Page](/docs/app/api-reference/file-conventions/page), [Layout](/docs/app/api-reference/file-conventions/layout), or [Route Handler](/docs/app/api-reference/file-conventions/route) by directly exporting the following variables:
 
-| Option                                                                                             | Type                                                 | Default                    |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | -------------------------- |
-| [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)     | `boolean`                                            | `true`                     |
-| [`runtime`](/docs/app/api-reference/file-conventions/route-segment-config/runtime)                 | `'nodejs' \| 'edge'`                                 | `'nodejs'`                 |
-| [`preferredRegion`](/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion) | `'auto' \| 'global' \| 'home' \| string \| string[]` | `'auto'`                   |
-| [`maxDuration`](/docs/app/api-reference/file-conventions/route-segment-config/maxDuration)         | `number`                                             | Set by deployment platform |
+| Option                                                                                             | Type                                                              | Default                    |
+| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | -------------------------- |
+| [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)     | `boolean`                                                         | `true`                     |
+| [`runtime`](/docs/app/api-reference/file-conventions/route-segment-config/runtime)                 | `'nodejs' \| 'edge' (deprecated)`                                 | `'nodejs'`                 |
+| [`preferredRegion`](/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion) | `'auto' \| 'global' \| 'home' \| string \| string[] (deprecated)` | `'auto'`                   |
+| [`maxDuration`](/docs/app/api-reference/file-conventions/route-segment-config/maxDuration)         | `number`                                                          | Set by deployment platform |
 
 ## Version History
 
@@ -31,10 +31,14 @@ The Route Segment Config options allow you to configure the behavior of a [Page]
 
 - [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)
   - API reference for the dynamicParams route segment config option.
+- [instant](/docs/app/api-reference/file-conventions/route-segment-config/instant)
+  - API reference for the instant route segment config.
 - [maxDuration](/docs/app/api-reference/file-conventions/route-segment-config/maxDuration)
   - API reference for the maxDuration route segment config option.
-- [preferredRegion](/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion)
+- [preferredRegion (deprecated)](/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion)
   - API reference for the preferredRegion route segment config option.
+- [prefetch](/docs/app/api-reference/file-conventions/route-segment-config/prefetch)
+  - API reference for the prefetch route segment config.
 - [runtime](/docs/app/api-reference/file-conventions/route-segment-config/runtime)
   - API reference for the runtime route segment config option.
 

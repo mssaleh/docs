@@ -3,7 +3,7 @@ title: Functions
 description: API Reference for Next.js Functions and Hooks.
 url: "https://nextjs.org/docs/app/api-reference/functions"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -18,8 +18,8 @@ prerequisites:
   - Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 - [cacheTag](/docs/app/api-reference/functions/cacheTag)
   - Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
-- [unstable_catchError](/docs/app/api-reference/functions/catchError)
-  - API Reference for the unstable_catchError function.
+- [catchError](/docs/app/api-reference/functions/catchError)
+  - API Reference for the catchError function.
 - [connection](/docs/app/api-reference/functions/connection)
   - API Reference for the connection function.
 - [cookies](/docs/app/api-reference/functions/cookies)
@@ -44,10 +44,14 @@ prerequisites:
   - API reference for the headers function.
 - [ImageResponse](/docs/app/api-reference/functions/image-response)
   - API Reference for the ImageResponse constructor.
+- [io](/docs/app/api-reference/functions/io)
+  - API Reference for the io function.
 - [NextRequest](/docs/app/api-reference/functions/next-request)
   - API Reference for NextRequest.
 - [NextResponse](/docs/app/api-reference/functions/next-response)
   - API Reference for NextResponse.
+- [root-params](/docs/app/api-reference/functions/next-root-params)
+  - API Reference for the next/root-params module that provides access to root-level route parameters.
 - [notFound](/docs/app/api-reference/functions/not-found)
   - API Reference for the notFound function.
 - [permanentRedirect](/docs/app/api-reference/functions/permanentRedirect)
@@ -72,6 +76,8 @@ prerequisites:
   - API Reference for the updateTag function.
 - [useLinkStatus](/docs/app/api-reference/functions/use-link-status)
   - API Reference for the useLinkStatus hook.
+- [useOffline](/docs/app/api-reference/functions/use-offline)
+  - API Reference for the useOffline hook.
 - [useParams](/docs/app/api-reference/functions/use-params)
   - API Reference for the useParams hook.
 - [usePathname](/docs/app/api-reference/functions/use-pathname)

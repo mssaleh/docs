@@ -99,7 +99,7 @@ The prompt box supports several features:
   * **Plan**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full Markdown document where you can add inline comments to give feedback before Claude begins.
   * **Edit automatically**: Claude makes edits without asking.
 * **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (`/usage`), and starting a [Remote Control](/docs/en/remote-control) session (`/remote-control`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
-  * {/* min-version: 2.1.203 */}The Settings section includes **Enable Remote Control for all sessions**, which sets [`remoteControlAtStartup`](/docs/en/settings#available-settings) so [every new interactive session connects to Remote Control automatically](/docs/en/remote-control#enable-remote-control-for-all-sessions). Requires Claude Code v2.1.203 or later.
+  * The Settings section includes **Enable Remote Control for all sessions**, which sets [`remoteControlAtStartup`](/docs/en/settings#available-settings) so [every new interactive session connects to Remote Control automatically](/docs/en/remote-control#enable-remote-control-for-all-sessions). Requires Claude Code v2.1.203 or later.
 * **Context indicator**: the prompt box shows how much of Claude's context window you're using. Claude automatically compacts when needed, or you can run `/compact` manually.
 * **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). Claude's reasoning appears in the conversation as collapsed blocks: click a block to read it, or press `Ctrl+O` to expand or collapse every thinking block in the session. See [Extended thinking](/docs/en/model-config#extended-thinking) for details.
 * **Multi-line input**: press `Shift+Enter` to add a new line without sending. This also works in the "Other" free-text input of question dialogs.
@@ -108,9 +108,9 @@ The prompt box supports several features:
 
 Use @-mentions to give Claude context about specific files or folders. When you type `@` followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:
 
-```text theme={null}
-> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
-> What's in @src/components/ (include a trailing slash for folders)
+```text wrap theme={null}
+Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
+What's in @src/components/ (include a trailing slash for folders)
 ```
 
 For large PDFs, you can ask Claude to read specific pages instead of the whole file: a single page, a range like pages 1-10, or an open-ended range like page 3 onward.
@@ -210,7 +210,7 @@ Switch to the **Marketplaces** tab to add or remove plugin sources:
 * Click the refresh icon to update a marketplace's plugin list
 * Click the trash icon to remove a marketplace
 
-After making changes, a banner prompts you to restart Claude Code to apply the updates.
+After you make changes, a banner prompts you to restart Claude Code to apply them.
 
 <Note>
   Plugin management in VS Code uses the same CLI commands under the hood. Plugins and marketplaces you configure in the extension are also available in the CLI, and vice versa.
@@ -224,7 +224,7 @@ Connect Claude to your Chrome browser to test web apps, debug with console logs,
 
 Type `@browser` in the prompt box followed by what you want Claude to do:
 
-```text theme={null}
+```text wrap theme={null}
 @browser go to localhost:3000 and check the console for errors
 ```
 
@@ -324,7 +324,7 @@ The extension has two types of settings:
 | Setting                             | Default   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `useTerminal`                       | `false`   | Launch Claude in terminal mode instead of graphical panel                                                                                                                                                                                                                                                                                                                                                                                   |
-| `initialPermissionMode`             | `default` | Controls approval prompts for new conversations: `default`, `plan`, `acceptEdits`, or `bypassPermissions`. {/* min-version: 2.1.200 */}`manual` is an alias for `default` and selects the mode labeled **Manual** in the mode indicator. Requires Claude Code v2.1.200 or later. See [permission modes](/docs/en/permission-modes).                                                                                                              |
+| `initialPermissionMode`             | `default` | Controls approval prompts for new conversations: `default`, `plan`, `acceptEdits`, or `bypassPermissions`. `manual` is an alias for `default` and selects the mode labeled **Manual** in the mode indicator. Requires Claude Code v2.1.200 or later. See [permission modes](/docs/en/permission-modes).                                                                                                                                          |
 | `preferredLocation`                 | `panel`   | Where Claude opens: `sidebar` (right) or `panel` (new tab)                                                                                                                                                                                                                                                                                                                                                                                  |
 | `autosave`                          | `true`    | Auto-save files before Claude reads or writes them                                                                                                                                                                                                                                                                                                                                                                                          |
 | `useCtrlEnterToSend`                | `false`   | Use Ctrl/Cmd+Enter instead of Enter to send prompts                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -405,10 +405,10 @@ Claude Code integrates with git to help with version control workflows directly 
 
 Claude can stage changes, write commit messages, and create pull requests based on your work:
 
-```text theme={null}
-> commit my changes with a descriptive message
-> create a pr for this feature
-> summarize the changes I've made to the auth module
+```text wrap theme={null}
+commit my changes with a descriptive message
+create a pr for this feature
+summarize the changes I've made to the auth module
 ```
 
 When creating pull requests, Claude generates descriptions based on the actual code changes and can add context about testing or implementation decisions.
@@ -528,7 +528,7 @@ To uninstall the Claude Code extension:
 2. Search for "Claude Code"
 3. Click **Uninstall**
 
-Running `claude` in a VS Code integrated terminal reinstalls the extension automatically. To keep it uninstalled, turn off **Auto-install IDE extension** in `/config`, or set [`autoInstallIdeExtension`](/docs/en/settings#global-config-settings) to `false`. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](/docs/en/env-vars) environment variable to `1`.
+If you run `claude` in a VS Code integrated terminal, Claude Code reinstalls the extension automatically. To keep it uninstalled, turn off **Auto-install IDE extension** in `/config`, or set [`autoInstallIdeExtension`](/docs/en/settings#global-config-settings) to `false`. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](/docs/en/env-vars) environment variable to `1`.
 
 To also remove extension data and reset all settings, delete the extension's storage directory for your platform.
 

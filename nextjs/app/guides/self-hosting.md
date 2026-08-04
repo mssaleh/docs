@@ -3,8 +3,8 @@ title: How to self-host your Next.js application
 description: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
 url: "https://nextjs.org/docs/app/guides/self-hosting"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-25
+version: 16.3.0
+lastUpdated: 2026-04-30
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -34,8 +34,6 @@ Image Optimization can be used with a [static export](/docs/app/guides/static-ex
 ## Proxy
 
 [Proxy](/docs/app/api-reference/file-conventions/proxy) works self-hosted with zero configuration when deploying using `next start`. Since it requires access to the incoming request, it is not supported when using a [static export](/docs/app/guides/static-exports).
-
-Proxy uses the [Edge runtime](/docs/app/api-reference/edge), a subset of all available Node.js APIs to help ensure low latency, since it may run in front of every route or asset in your application. If you do not want this, you can use the [full Node.js runtime](/blog/next-15-2#nodejs-middleware-experimental) to run Proxy.
 
 If you are looking to add logic (or use an external package) that requires all Node.js APIs, you might be able to move this logic to a [layout](/docs/app/api-reference/file-conventions/layout) as a [Server Component](/docs/app/getting-started/server-and-client-components). For example, checking [headers](/docs/app/api-reference/functions/headers) and [redirecting](/docs/app/api-reference/functions/redirect). You can also use headers, cookies, or query parameters to [redirect](/docs/app/api-reference/config/next-config-js/redirects#header-cookie-and-query-matching) or [rewrite](/docs/app/api-reference/config/next-config-js/rewrites#header-cookie-and-query-matching) through `next.config.js`. If that does not work, you can also use a [custom server](/docs/pages/guides/custom-server).
 

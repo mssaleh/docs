@@ -3,8 +3,8 @@ title: How to migrate from Create React App to Next.js
 description: Learn how to migrate your existing React application from Create React App to Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating/from-create-react-app"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-02-11
+version: 16.3.0
+lastUpdated: 2026-07-09
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Migrating: /docs/app/guides/migrating"
@@ -537,7 +537,13 @@ export default nextConfig
 
 ### Handling a Custom `Service Worker`
 
-If you used CRA’s service worker (e.g., `serviceWorker.js` from `create-react-app`), you can learn how to create [Progressive Web Applications (PWAs)](/docs/app/guides/progressive-web-apps) with Next.js.
+If you used CRA’s service worker (e.g., `serviceWorker.js` from `create-react-app`), you can register this service worker using the following syntax:
+
+```ts
+await navigator.serviceWorker.register(new URL('../serviceWorker.js', import.meta.url), ...)
+```
+
+Learn more about how to create [Progressive Web Applications (PWAs)](/docs/app/guides/progressive-web-apps) with Next.js.
 
 ### Proxying API Requests
 

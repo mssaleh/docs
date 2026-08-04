@@ -3,8 +3,8 @@ title: Invoking Entrypoints
 description: Invoke Node.js and Edge build entrypoints with adapter runtime context.
 url: "https://nextjs.org/docs/app/api-reference/adapters/invoking-entrypoints"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-04-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -57,7 +57,9 @@ Relevant files in the Next.js core:
 * [`packages/next/src/build/templates/app-route.ts`](https://github.com/vercel/next.js/blob/canary/packages/next/src/build/templates/app-route.ts)
 * and [`packages/next/src/build/templates/pages-api.ts`](https://github.com/vercel/next.js/blob/canary/packages/next/src/build/templates/pages-api.ts)
 
-## Edge runtime (`runtime: 'edge'`)
+## Edge runtime (`runtime: 'edge'`) (deprecated)
+
+> The Edge Runtime is [deprecated](/docs/messages/edge-runtime-deprecated). New routes should use the Node.js runtime.
 
 Edge entrypoints use the following interface:
 

@@ -3,10 +3,12 @@ title: Building public pages
 description: "Learn how to build public, \"static\" pages that share data across users, such as landing pages, list pages (products, blogs, etc.), marketing and news sites."
 url: "https://nextjs.org/docs/app/guides/public-static-pages"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-09
 prerequisites:
   - "Guides: /docs/app/guides"
+related:
+  - app/guides/incremental-static-regeneration-cache-components
 ---
 
 
@@ -106,7 +108,7 @@ However, if this component is rendered at request time, fetching its data will d
 
 Even though the header is rendered instantly, it can't be sent to the browser until the product list has finished fetching.
 
-To protect us from this performance cliff, the first time we **await** this uncached data Next.js shows a [warning](/docs/messages/blocking-route): accessing uncached data outside of `<Suspense>` prevents the route from being prerendered.
+To protect us from this performance cliff, the first time we **await** this uncached data Next.js shows a [warning](/docs/messages/blocking-prerender-dynamic): accessing uncached data outside of `<Suspense>` prevents the route from being prerendered.
 
 At this point, we have to decide how to **unblock** the response. Either:
 
@@ -260,6 +262,9 @@ In future guides, we'll learn how to:
 * Revalidate prerendered pages or cached data.
 * Create variants of the same page with route params.
 * Create private pages with personalized user data.
+- [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components)
+  - Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

@@ -3,8 +3,8 @@ title: How to prevent flash before hydration
 description: Learn how to correct server-rendered content before the browser paints, avoiding visible flash when the page hydrates.
 url: "https://nextjs.org/docs/app/guides/preventing-flash-before-hydration"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-07-29
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -253,11 +253,7 @@ export default async function Page() {
 Your page may be server-rendered with a default theme (e.g. light), but the user has a saved preference in `localStorage`. The same inline script technique works: read the value and set a `data-theme` attribute on `<html>` before the browser paints.
 
 ```tsx filename="app/layout.tsx" switcher
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
@@ -303,6 +299,52 @@ export default function RootLayout({ children }) {
 ```
 
 The script runs in `<head>`, so the correct theme is applied before any content is painted. The `try/catch` handles cases where `localStorage` is unavailable.
+
+### Storing the theme in a cookie
+
+Unlike `localStorage`, a cookie is sent with every request, so the server *can* read it with [`cookies()`](/docs/app/api-reference/functions/cookies). But reading it in the root layout opts the entire app out of static prerendering (and under [Cache Components](/docs/app/api-reference/config/next-config-js/cacheComponents), forces blocking every segment under the layout). To keep the page statically prerendered with a generic default and still avoid the flash, read the cookie in the inline script instead:
+
+```tsx filename="app/layout.tsx" switcher
+export default function RootLayout({ children }: LayoutProps<'/'>) {
+  return (
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var m=document.cookie.match(/(?:^|; )theme=([^;]*)/);if(m)document.documentElement.setAttribute("data-theme",decodeURIComponent(m[1]))}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+```jsx filename="app/layout.js" switcher
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var m=document.cookie.match(/(?:^|; )theme=([^;]*)/);if(m)document.documentElement.setAttribute("data-theme",decodeURIComponent(m[1]))}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+To switch themes, set the attribute on `<html>` and persist the choice to the cookie:
+
+```js
+const theme = 'dark'
+document.documentElement.setAttribute('data-theme', theme)
+document.cookie = `theme=${encodeURIComponent(theme)}; path=/; max-age=31536000; SameSite=Lax`
+```
 
 ## Syncing with React state
 
@@ -443,6 +485,35 @@ export function Accordion() {
 ```
 
 The inline script and the lazy `useState` initializer both read from `localStorage`. They always agree, so React's initial state matches the DOM.
+
+## Re-applying attributes in development
+
+The inline script sets the attribute during parsing, which is all a production build needs. In development, though, [React's Strict Mode](https://react.dev/reference/react/StrictMode) remounts components once to surface bugs, and on that remount it resets `<html>`, `<head>`, and `<body>` to only the attributes it manages from JSX, clearing the one the script set. The page then renders without the attribute, ignoring the value's source of truth.
+
+One way to fix this is to do what you would do without the inline script at all. Read the stored value on the client and apply it, in the component that owns the theme, in a [`useLayoutEffect`](https://react.dev/reference/react/useLayoutEffect) that runs [before paint](#why-not-useeffect):
+
+```tsx filename="app/components/theme-toggle.tsx"
+'use client'
+
+import { useLayoutEffect } from 'react'
+
+export function ThemeToggle() {
+  // Re-apply after React clears it on the dev remount. This is a no-op in production.
+  useLayoutEffect(() => {
+    const theme = localStorage.getItem('theme')
+    if (theme) document.documentElement.setAttribute('data-theme', theme)
+  }, [])
+
+  function toggle() {
+    const next =
+      (localStorage.getItem('theme') ?? 'light') === 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', next)
+    document.documentElement.setAttribute('data-theme', next)
+  }
+
+  return <button onClick={toggle}>Toggle theme</button>
+}
+```
 
 ## When to use other approaches
 

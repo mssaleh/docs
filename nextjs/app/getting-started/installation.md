@@ -3,8 +3,8 @@ title: Installation
 description: "Learn how to create a new Next.js application with the `create-next-app` CLI, and set up TypeScript, ESLint, and Module Path Aliases."
 url: "https://nextjs.org/docs/app/getting-started/installation"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-07-21
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
@@ -366,6 +366,34 @@ For example, the following configuration maps `@/components/*` to `components/*`
 ```
 
 Each of the `"paths"` are relative to the `baseUrl` location.
+
+## Upgrade your Next.js app
+
+Keep your Next.js version up to date. Each release ships security patches, bug fixes, and performance optimizations alongside new features, and staying current keeps every individual upgrade small. Run the `upgrade` command:
+
+```bash package="pnpm"
+pnpm next upgrade
+```
+
+```bash package="npm"
+npx next upgrade
+```
+
+```bash package="yarn"
+yarn next upgrade
+```
+
+```bash package="bun"
+bunx next upgrade
+```
+
+Upgrading also updates the documentation bundled inside the `next` package at `node_modules/next/dist/docs/`. New features arrive with their docs, and existing pages pick up new guidance and pitfalls discovered along the way. [AI coding agents](/docs/app/guides/ai-agents) in your project then work from the version you have installed rather than their training data. After an upgrade, you can prompt your agent to catch up:
+
+```prompt
+Let's get our Next.js knowledge up to speed, and give me a summary of what's new for you
+```
+
+See [Upgrading](/docs/app/getting-started/upgrading) for version guides and manual upgrade steps, or the [preview docs](https://preview.nextjs.org) to explore features before they ship in a stable version.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

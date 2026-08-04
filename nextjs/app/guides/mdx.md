@@ -3,8 +3,8 @@ title: How to use markdown and MDX in Next.js
 description: Learn how to configure MDX and use it in your Next.js apps.
 url: "https://nextjs.org/docs/app/guides/mdx"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-01
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

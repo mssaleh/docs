@@ -3,13 +3,15 @@ title: Migrating to Cache Components
 description: Learn how to migrate from route segment configs to Cache Components in Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating-to-cache-components"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-07-14
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
+  - app/guides/instant-navigation
   - app/getting-started/caching
   - app/guides/preserving-ui-state
+  - app/guides/incremental-static-regeneration-cache-components
   - app/api-reference/functions/generate-static-params
   - app/api-reference/config/next-config-js/cacheComponents
 ---
@@ -18,9 +20,36 @@ related:
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 When [Cache Components](/docs/app/api-reference/config/next-config-js/cacheComponents) is enabled, route segment configs like `dynamic`, `revalidate`, and `fetchCache` are replaced by [`use cache`](/docs/app/api-reference/directives/use-cache) and [`cacheLife`](/docs/app/api-reference/functions/cacheLife).
 
-Start by removing the route segment configs (`dynamic`, `revalidate`, `fetchCache`). With Cache Components enabled, Next.js surfaces uncached dynamic data as errors in development, naming the code to fix, most often uncached data to cache with [`use cache`](/docs/app/api-reference/directives/use-cache) or runtime data to wrap in [`<Suspense>`](https://react.dev/reference/react/Suspense).
+The migration is driven by **instant navigation validation**. With Cache Components enabled, Next.js validates in development whether navigating into each route renders instantly, and surfaces the code that would block it as an error or insight.
 
-Your existing `fetch` and `unstable_cache` caching keeps working as a separate layer, so let the errors guide what to change.
+## Use the adoption skill (recommended)
+
+The [`next-cache-components-adoption`](https://github.com/vercel/next.js/tree/canary/skills/next-cache-components-adoption) skill drives this migration with a coding agent, one feature at a time, checking in at every feature boundary. It supports two modes:
+
+* **Incremental.** Opens a single mechanical PR that opts every route out of validation, then ships each feature as a follow-up PR. This automates the [Adopting incrementally](#adopting-incrementally) flow below.
+* **Direct.** Adopts every route in place on one branch.
+
+Install the skill:
+
+```bash filename="Terminal"
+npx skills add vercel/next.js --skill next-cache-components-adoption
+```
+
+Then give the agent this prompt:
+
+```prompt
+Adopt Cache Components in this project using the next-cache-components-adoption skill.
+```
+
+## Or migrate by hand
+
+Migrating an existing app by hand follows a few steps, in order:
+
+1. [Enable Cache Components](#enable-cache-components) in `next.config.ts`.
+2. Decide your approach: convert every route now, or [adopt incrementally](#adopting-incrementally) by [opting routes out of validation](#opting-out-of-validation) first and converting one at a time.
+3. [Follow the validation errors and insights](#following-validation) it surfaces, replacing each route segment config with its Cache Components equivalent and caching uncached data with [`use cache`](/docs/app/api-reference/directives/use-cache) or wrapping runtime data in [`<Suspense>`](https://react.dev/reference/react/Suspense). The per-key sections below cover each config and API.
+
+Your existing `fetch` and `unstable_cache` caching keeps working as a separate layer, so let the insights and errors guide what to change.
 
 Some surfaces have their own steps:
 
@@ -46,6 +75,44 @@ export default nextConfig
 ```
 
 > **Good to know:** If you were using `experimental.dynamicIO` or `experimental.useCache`, `cacheComponents` replaces them. See the [version 16 upgrade guide](/docs/app/guides/upgrading/version-16#experimentaldynamicio-and-experimentalusecache).
+
+After enabling the flag, route segments that still export `dynamic`, `revalidate`, or `fetchCache` will error. Start by replacing those configs. The sections below explain what to do for each one.
+
+## Opting out of validation
+
+A validation insight or error tells you a route won't render instantly. Resolve it by following the recommendation: cache the data with [`use cache`](/docs/app/api-reference/directives/use-cache) or wrap it in [`<Suspense>`](https://react.dev/reference/react/Suspense). If you're not ready to address it yet, set the [`instant`](/docs/app/api-reference/file-conventions/route-segment-config/instant) config to `false` on the segment that raised it (a layout, page, or parallel slot), then come back to it later.
+
+```tsx filename="app/dashboard/layout.tsx"
+export const instant = false
+```
+
+> **Good to know**: `instant = false` marks a segment as *allowed to block*. It does not force the route to be dynamic, so a genuinely prerenderable route still ships a static shell. It also does not clear synchronous IO build errors: calls like `new Date()`, `Math.random()`, and `crypto.randomUUID()` still fail the prerender. See [Adopting incrementally](#adopting-incrementally).
+
+## Adopting incrementally
+
+You don't have to migrate every route at once. `instant = false` lets you get the whole app building and running first, then convert routes one at a time:
+
+1. **Enable the flag and remove the route segment configs** (`dynamic`, `revalidate`, `fetchCache`). Routes that still render instantly need no further work.
+
+2. **Opt out the routes that aren't ready.** Where an insight or error appears, set `instant = false` on the segment that raised it. To do this in one pass across the whole app, run the [`cache-components-instant-false`](/docs/app/guides/upgrading/codemods#cache-components-instant-false) codemod, which adds the opt-out to every `page`, `layout`, and `default` that doesn't already declare `instant`:
+
+   ```bash filename="Terminal"
+   npx @next/codemod@canary cache-components-instant-false ./app
+   ```
+
+   The app keeps building and serving, now with validation deferred for the opted-out routes.
+
+3. **Fix synchronous IO. It can't be deferred.** Calls like `new Date()`, `Date.now()`, `Math.random()`, and `crypto.randomUUID()` during prerender throw a build error that `instant = false` does not clear, so a route that uses them won't build until you address it, opt-out or not. Move the call out of the prerendered shell so it runs at request time: wrap the part that needs it in [`<Suspense>`](https://react.dev/reference/react/Suspense) and call [`connection()`](/docs/app/api-reference/functions/connection) before the call, or move it into a Client Component.
+
+4. **Convert one route at a time.** Remove `instant = false` from a route, then resolve its insights by caching data with [`use cache`](/docs/app/api-reference/directives/use-cache) or wrapping runtime data in [`<Suspense>`](https://react.dev/reference/react/Suspense). Repeat until no routes opt out.
+
+## Following validation
+
+Cache Components validates your routes in development and surfaces errors and insights in the dev overlay. Some look like this, naming the affected component and pointing at a fix:
+
+Each card is clickable and opens a page with patterns, code samples, and trade-offs. Work through the insights and errors until they're gone. For the full validation workflow, the DevTools, and CI testing, see the [instant navigation guide](/docs/app/guides/instant-navigation).
+
+Insights don't show up in the HTTP response. An offending route still returns `200` with rendered HTML in dev. The insight only appears in the dev overlay, the dev-server log, or the [MCP `get_errors` tool](/docs/app/guides/mcp). To see them, read the overlay (or query the MCP).
 
 ## `dynamic = "force-dynamic"`
 
@@ -178,6 +245,8 @@ export default async function Page() {
   return <div>...</div>
 }
 ```
+
+> **Good to know**: If your `revalidate` value doesn't match a built-in [`cacheLife`](/docs/app/api-reference/functions/cacheLife) profile (`'seconds'`, `'minutes'`, `'hours'`, `'days'`, `'weeks'`, `'max'`), pick the closest one or define a [custom profile](/docs/app/api-reference/functions/cacheLife#custom-cache-profiles) to match your conventions. You can also [redefine a built-in profile](/docs/app/api-reference/functions/cacheLife#overriding-the-default-cache-profiles), including `default`, when its timings don't match your application's caching needs.
 
 ## `fetchCache`
 
@@ -352,7 +421,7 @@ Like the `fetch` Data Cache, `unstable_cache` persists cached values across depl
 On-demand invalidation still works by tagging cached data and expiring it after an event. Tag data with [`cacheTag`](/docs/app/api-reference/functions/cacheTag) inside a `use cache` function instead of the `fetch` `next.tags` option, then choose the invalidation API by the behavior you want:
 
 * [`updateTag`](/docs/app/api-reference/functions/updateTag): for mutations whose result the user must see immediately (read-your-own-writes). Called from a Server Action, it expires the tag so the next request waits for fresh data instead of serving stale content.
-* [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag): for stale-while-revalidate. Pass a cache profile like `'max'` to serve cached data while it refreshes in the background. Works in Server Actions and Route Handlers.
+* [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag): for stale-while-revalidate. A cache profile is **required** as the second argument, for example use `'max'` to serve cached data while it refreshes in the background. Works in Server Actions and Route Handlers.
 * [`revalidatePath`](/docs/app/api-reference/functions/revalidatePath): unchanged from the previous caching model.
 
 `updateTag` isn't exclusive to Cache Components (it also works with the previous caching model), but migrating is a good time to adopt it. After a mutation in a Server Action, reach for it when the user should see their own change right away.
@@ -377,7 +446,49 @@ export async function createPost(formData) {
 }
 ```
 
-> **Good to know:** `updateTag` can only be called from a Server Action; calling it elsewhere throws. In Route Handlers or webhooks, use `revalidateTag` instead.
+> **Good to know:** `updateTag` can only be called from a Server Action; calling it elsewhere throws. In Route Handlers or webhooks, use `revalidateTag` instead with a cache profile.
+
+Pass `'max'` as the second argument to `revalidateTag` to expire the tag with stale-while-revalidate semantics:
+
+```tsx filename="app/api/webhook/route.ts" switcher
+// Before
+import { revalidateTag } from 'next/cache'
+
+export async function POST() {
+  revalidateTag('posts')
+  return Response.json({ ok: true })
+}
+```
+
+```js filename="app/api/webhook/route.js" switcher
+// Before
+import { revalidateTag } from 'next/cache'
+
+export async function POST() {
+  revalidateTag('posts')
+  return Response.json({ ok: true })
+}
+```
+
+```tsx filename="app/api/webhook/route.ts" switcher
+// After - Pass a cache profile
+import { revalidateTag } from 'next/cache'
+
+export async function POST() {
+  revalidateTag('posts', 'max')
+  return Response.json({ ok: true })
+}
+```
+
+```js filename="app/api/webhook/route.js" switcher
+// After - Pass a cache profile
+import { revalidateTag } from 'next/cache'
+
+export async function POST() {
+  revalidateTag('posts', 'max')
+  return Response.json({ ok: true })
+}
+```
 
 ## `unstable_noStore`
 
@@ -423,11 +534,11 @@ export default async function Page() {
 
 ## `generateStaticParams` and `dynamicParams`
 
-One behavior changes for [dynamic routes](/docs/app/api-reference/file-conventions/dynamic-routes) when Cache Components is enabled.
+Two behaviors change for [dynamic routes](/docs/app/api-reference/file-conventions/dynamic-routes) when Cache Components is enabled.
 
 ### `generateStaticParams` must return at least one param
 
-**Returning an empty array now errors.** Without Cache Components, returning `[]` defers every path to the first runtime visit. With Cache Components, [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) must return at least one param so Next.js can prerender the route. An empty array raises [`empty-generate-static-params`](/docs/messages/empty-generate-static-params).
+**Returning an empty array now errors.** Without Cache Components, returning `[]` defers every path to the first runtime visit. With Cache Components, [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) must return at least one param so Next.js can prerender the route and validate it produces a non-empty [App Shell](/docs/app/glossary#app-shell). An empty array raises [`empty-generate-static-params`](/docs/messages/empty-generate-static-params).
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 // Before - defer all paths to runtime
@@ -458,10 +569,83 @@ export async function generateStaticParams() {
   return posts.slice(0, 1).map((post) => ({ slug: post.slug }))
 }
 ```
+
+Paths you don't return are still served. Next.js serves the App Shell instantly, then upgrades it in the background once the params are known. See [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components) for the full prerender-a-subset workflow.
+
+### `dynamicParams` no longer blocks the first visit
+
+**`dynamicParams: true` (the default) now serves an App Shell instead of blocking.** Previously, visiting a param not returned by `generateStaticParams` blocked the response while the page rendered. With Cache Components, Next.js serves the App Shell instantly, then upgrades it in the background with the now-known params. `dynamicParams: false` is unchanged: unspecified paths still 404.
+
+To produce the App Shell, pass the `params` promise into a [`<Suspense>`](/docs/app/api-reference/file-conventions/loading) boundary instead of awaiting it at the top of the component, so unknown params can still prerender.
+
+```tsx filename="app/blog/[slug]/page.tsx" switcher
+// Before - awaiting params at the top blocks the shell
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  return <Post slug={slug} />
+}
+```
+
+```jsx filename="app/blog/[slug]/page.js" switcher
+// Before - awaiting params at the top blocks the shell
+export default async function Page({ params }) {
+  const { slug } = await params
+  return <Post slug={slug} />
+}
+```
+
+```tsx filename="app/blog/[slug]/page.tsx" switcher
+import { Suspense } from 'react'
+
+// After - await inside Suspense so the shell can prerender
+export default function Page({ params }: PageProps<'/blog/[slug]'>) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Post params={params} />
+    </Suspense>
+  )
+}
+
+async function Post({ params }: Pick<PageProps<'/blog/[slug]'>, 'params'>) {
+  const { slug } = await params
+  // ...
+}
+```
+
+```jsx filename="app/blog/[slug]/page.js" switcher
+import { Suspense } from 'react'
+
+// After - await inside Suspense so the shell can prerender
+export default function Page({ params }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Post params={params} />
+    </Suspense>
+  )
+}
+
+async function Post({ params }) {
+  const { slug } = await params
+  // ...
+}
+```
+
+The same applies to client hooks that read the route. When the route's pathname is fully known, they resolve during prerendering and need no boundary. When it depends on dynamic params not yet known, they suspend, wherever the component sits. A nav or breadcrumb in a shared layout, for instance, suspends while Next.js generates the App Shell for any route below it that has dynamic params. Wrap the component that reads the hook in `<Suspense>` (push the read down to the smallest leaf so the rest stays prerendered), or the build fails:
+
+* [`usePathname`](/docs/app/api-reference/functions/use-pathname)
+* [`useParams`](/docs/app/api-reference/functions/use-params)
+* [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment)
+* [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments)
+
+The [`useSearchParams`](/docs/app/api-reference/functions/use-search-params) hook always needs a `<Suspense>` boundary, since search params are only known at request time. See [Next.js encountered URL data in a Client Component outside of Suspense](/docs/messages/blocking-prerender-client-hook) for fixes.
 
 ## `cookies`, `headers`, and `searchParams`
 
-**Wrap runtime data access in `<Suspense>`.** Without Cache Components, reading [`cookies()`](/docs/app/api-reference/functions/cookies), [`headers()`](/docs/app/api-reference/functions/headers), or [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) opts the whole route into dynamic rendering. With Cache Components, accessing them outside a [`<Suspense>`](https://react.dev/reference/react/Suspense) boundary surfaces the [**blocking-route** insight](/docs/messages/blocking-route). Move the access into a component wrapped in `<Suspense>` so the rest of the page prerenders as a static shell and the dynamic part streams in at request time.
+**Wrap runtime data access in `<Suspense>`.** Without Cache Components, reading [`cookies()`](/docs/app/api-reference/functions/cookies), [`headers()`](/docs/app/api-reference/functions/headers), or [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) opts the whole route into dynamic rendering. With Cache Components, accessing them outside a [`<Suspense>`](https://react.dev/reference/react/Suspense) boundary surfaces the [**blocking-prerender-runtime** insight](/docs/messages/blocking-prerender-runtime). Move the access into a component wrapped in `<Suspense>` so the rest of the page prerenders as a static shell and the dynamic part streams in at request time.
 
 ```tsx filename="app/page.tsx" switcher
 import { cookies } from 'next/headers'
@@ -556,6 +740,8 @@ async function Results({ searchParams }) {
   // ...
 }
 ```
+
+> **Good to know**: When a cookie or header value drives an attribute on the `<html>` element in the root layout (`lang`, `dir`, `data-theme`, etc.), reading it on the server makes the whole subtree request-bound, so there's no child to wrap in `<Suspense>`. An inline `<script>` in `<head>` that sets the attribute before paint keeps the shell static; see [Preventing flash before hydration](/docs/app/guides/preventing-flash-before-hydration) for the pattern.
 
 ## Route Handlers (`GET`)
 
@@ -676,7 +862,7 @@ See [`generateMetadata` with Cache Components](/docs/app/api-reference/functions
 
 ## `runtime = 'edge'`
 
-**Not supported.** Cache Components requires the Node.js runtime. Switch to the Node.js runtime (the default) by removing the `runtime = 'edge'` export. If you need edge behavior for specific routes, use [Proxy](/docs/app/api-reference/file-conventions/proxy) instead.
+**Not supported.** Cache Components requires the Node.js runtime. Switch to the Node.js runtime (the default) by removing the [deprecated](/docs/messages/edge-runtime-deprecated) `runtime = 'edge'` export. If you need edge behavior for specific routes, use [Proxy](/docs/app/api-reference/file-conventions/proxy) instead.
 
 ## `experimental_ppr`
 
@@ -729,10 +915,14 @@ See [Preserving UI state across navigations](/docs/app/guides/preserving-ui-stat
 
 Learn about other behavior changes when Cache Components is enabled.
 
+- [Instant navigation](/docs/app/guides/instant-navigation)
+  - Learn how to structure your app to prefetch and prerender more content, providing instant page loads and client navigations.
 - [Caching](/docs/app/getting-started/caching)
   - Learn how to cache data and UI in Next.js
 - [Preserving UI state](/docs/app/guides/preserving-ui-state)
   - Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets.
+- [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components)
+  - Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit.
 - [generateStaticParams](/docs/app/api-reference/functions/generate-static-params)
   - API reference for the generateStaticParams function.
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)

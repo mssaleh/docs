@@ -3,8 +3,8 @@ title: connection
 description: API Reference for the connection function.
 url: "https://nextjs.org/docs/app/api-reference/functions/connection"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-05-13
+version: 16.3.0
+lastUpdated: 2026-06-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -90,6 +90,7 @@ function connection(): Promise<void>
 
 * `connection` replaces [`unstable_noStore`](/docs/app/api-reference/functions/unstable_noStore) to better align with the future of Next.js.
 * The function is only necessary when dynamic rendering is required and common Request-time APIs are not used.
+* With [Cache Components](/docs/app/api-reference/config/next-config-js/cacheComponents), prefer [`io()`](/docs/app/api-reference/functions/io) for excluding content from the static shell. It works the same way but can also be cached and prefetched. Reach for `connection()` only when rendering should wait for a real user request.
 
 ### Version History
 

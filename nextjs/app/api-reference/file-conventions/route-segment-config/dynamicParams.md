@@ -3,7 +3,7 @@ title: dynamicParams
 description: API reference for the dynamicParams route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2026-03-13
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

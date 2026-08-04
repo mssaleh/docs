@@ -3,7 +3,7 @@ title: How to build multi-tenant apps in Next.js
 description: Learn how to build multi-tenant apps with the App Router.
 url: "https://nextjs.org/docs/app/guides/multi-tenant"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2025-04-15
 prerequisites:
   - "Guides: /docs/app/guides"

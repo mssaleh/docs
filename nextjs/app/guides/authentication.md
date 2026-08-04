@@ -3,8 +3,8 @@ title: How to implement authentication in Next.js
 description: Learn how to implement authentication in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/authentication"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-07-29
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -423,7 +423,7 @@ const secretKey = process.env.SESSION_SECRET
 
 #### 2. Encrypting and decrypting sessions
 
-Next, you can use your preferred [session management library](#session-management-libraries) to encrypt and decrypt sessions. Continuing from the previous example, we'll use [Jose](https://www.npmjs.com/package/jose) (compatible with the [Edge Runtime](/docs/app/api-reference/edge)) and React's [`server-only`](https://www.npmjs.com/package/server-only) package to ensure that your session management logic is only executed on the server.
+Next, you can use your preferred [session management library](#session-management-libraries) to encrypt and decrypt sessions. Continuing from the previous example, we'll use [Jose](https://www.npmjs.com/package/jose) and React's [`server-only`](https://www.npmjs.com/package/server-only) package to ensure that your session management logic is only executed on the server.
 
 ```tsx filename="app/lib/session.ts" switcher
 import 'server-only'
@@ -880,7 +880,7 @@ While Proxy can be useful for initial checks, it should not be your only line of
 > **Tips**:
 >
 > * In Proxy, you can also read cookies using `req.cookies.get('session')?.value`.
-> * Proxy uses the Node.js runtime, check if your Auth library and session management library are compatible. You may need to use [Middleware](https://github.com/vercel/next.js/blob/v15.5.6/docs/01-app/03-api-reference/03-file-conventions/middleware.mdx) if your Auth library only supports [Edge Runtime](/docs/app/api-reference/edge)
+> * Proxy uses the Node.js runtime, check if your Auth library and session management library are compatible.
 > * You can use the `matcher` property in the Proxy to specify which routes Proxy should run on. Although, for auth, it's recommended Proxy runs on all routes.
 
 ### Creating a Data Access Layer (DAL)
@@ -1106,6 +1106,8 @@ In the example, we use the `verifySession()` function from our DAL to check for 
 
 Due to [Partial Rendering](/docs/app/getting-started/linking-and-navigating#client-side-transitions), be cautious when doing checks in [Layouts](/docs/app/api-reference/file-conventions/layout) as these don't re-render on navigation, meaning the user session won't be checked on every route change.
 
+A layout also does not control whether the rest of the route renders. Route segments and [parallel route slots](/docs/app/api-reference/file-conventions/parallel-routes#conditional-routes) are rendered by the router, so a layout that hides or swaps them does not stop them from running or from appearing in the [RSC Payload](/docs/app/glossary#rsc-payload).
+
 Instead, you should do the checks close to your data source or the component that'll be conditionally rendered.
 
 For example, consider a shared layout that fetches the user data and displays the user image in a nav. Instead of doing the auth check in the layout, you should fetch the user data (`getUser()`) in the layout and do the auth check in your [DAL](#creating-a-data-access-layer-dal).
@@ -1118,7 +1120,7 @@ Session and user data often appear in shell UI (header, nav) that repeats across
 
 If only part of the shell needs session data (for example, a user menu), move the `await` into a nested Server Component and wrap it in `<Suspense>` so the rest of the page streams first. See [Push dynamic access down](/docs/app/guides/streaming#push-dynamic-access-down) for the pattern.
 
-Client Components can't import the DAL. Run `verifySession()`, `getUser()`, or similar in a parent Server Component, then pass data to client children as props or through a [Context Provider](#context-providers). To share data across multiple Server Components without re-fetching, see [Sharing data with context and `React.cache`](/docs/app/getting-started/fetching-data#sharing-data-with-context-and-reactcache).
+Client Components can't import the DAL. Run `verifySession()`, `getUser()`, or similar in a parent Server Component, then pass data to client children as props or through a [Context Provider](#context-providers). To share data across multiple Server Components without re-fetching, see [Reusing data with `React.cache`](/docs/app/getting-started/fetching-data#reusing-data-with-reactcache).
 
 #### Auth checks in page components
 
@@ -1356,6 +1358,8 @@ export default function Profile() {
 ```
 
 If session data is needed in Client Components (e.g. for client-side data fetching), use React’s [`taintUniqueValue`](https://react.dev/reference/react/experimental_taintUniqueValue) API to prevent sensitive session data from being exposed to the client.
+
+For the general pattern of passing server-fetched data through context and reading it with `use()`, see [Using React's `use` within a Context Provider](/docs/app/guides/single-page-applications#using-reacts-use-within-a-context-provider).
 
 ## Resources
 

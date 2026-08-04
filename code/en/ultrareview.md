@@ -107,7 +107,7 @@ Claude Code asks you to confirm usage-credits billing once per conversation: whe
 
 A review typically takes 5 to 10 minutes. The review runs as a background task, so you can keep working in your session, start other commands, or close the terminal entirely.
 
-Use `/tasks` to see running and completed reviews, open the detail view for a review, or stop a review that is in progress. Stopping a review archives the cloud session, and partial findings are not returned. When the review finishes, the verified findings appear as a notification in your session. Each finding includes the file location and an explanation of the issue so you can ask Claude to fix it directly.
+Use `/tasks` to see running and completed reviews, open the detail view for a review, or stop a review that is in progress. If you stop a review, Claude Code archives the cloud session and doesn't return partial findings. When the review finishes, the verified findings appear as a notification in your session. Each finding includes the file location and an explanation of the issue so you can ask Claude to fix it directly.
 
 ## Run ultrareview non-interactively
 
@@ -123,7 +123,7 @@ Without arguments, the subcommand reviews the diff between your current branch a
 
 You consent to the whole-repository fallback and to the billing and terms prompt when you run the subcommand, so the run starts without waiting for input.
 
-{/* min-version: 2.1.218 */}On Claude Code v2.1.218 or later, you can also start the cloud review by running `/code-review ultra` in a non-interactive session, for example `claude -p '/code-review ultra'`. Claude Code launches the review and prints a tracking link without waiting for the findings, unlike `claude ultrareview`, which blocks until they arrive. When the review would bill usage credits, Claude Code stops before launching and points you to `claude ultrareview`, because the billing confirmation needs an interactive session. Before v2.1.218, `/code-review ultra` in a non-interactive session ran a local review.
+On Claude Code v2.1.218 or later, you can also start the cloud review by running `/code-review ultra` in a non-interactive session, for example `claude -p '/code-review ultra'`. Claude Code launches the review and prints a tracking link without waiting for the findings, unlike `claude ultrareview`, which blocks until they arrive. When the review would bill usage credits, Claude Code stops before launching and points you to `claude ultrareview`, because the billing confirmation needs an interactive session. Before v2.1.218, `/code-review ultra` in a non-interactive session ran a local review.
 
 Progress messages and the live session URL go to stderr so stdout stays parseable. Use these flags to control the output and timeout:
 

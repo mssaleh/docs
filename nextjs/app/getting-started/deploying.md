@@ -3,8 +3,8 @@ title: Deploying
 description: Learn how to deploy your Next.js application.
 url: "https://nextjs.org/docs/app/getting-started/deploying"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-07-10
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 ---
@@ -34,7 +34,7 @@ Next.js can be deployed to any provider that supports Node.js. Ensure your `pack
 }
 ```
 
-Then, run `npm run build` to build your application and `npm run start` to start the Node.js server. This server supports all Next.js features. If needed, you can also eject to a [custom server](/docs/app/guides/custom-server).
+Then, run `npm run build` to [build your application](/docs/app/guides/building) and `npm run start` to start the Node.js server. This server supports all Next.js features. If needed, you can also eject to a [custom server](/docs/app/guides/custom-server).
 
 Node.js deployments support all Next.js features. Learn how to [configure them](/docs/app/guides/self-hosting) for your infrastructure.
 

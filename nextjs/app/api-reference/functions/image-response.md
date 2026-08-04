@@ -3,8 +3,8 @@ title: ImageResponse
 description: API Reference for the ImageResponse constructor.
 url: "https://nextjs.org/docs/app/api-reference/functions/image-response"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2025-06-16
+version: 16.3.0
+lastUpdated: 2026-07-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -167,7 +167,7 @@ export default async function Image() {
 
 ### Custom fonts
 
-You can use custom fonts in your `ImageResponse` by providing a `fonts` array in the options.
+You can use custom fonts in your `ImageResponse` by providing a `fonts` array in the options. The font doesn't depend on request data, so read it once at module scope. See [Predictable values](/docs/app/getting-started/caching#predictable-values).
 
 ```tsx filename="app/opengraph-image.tsx"
 import { ImageResponse } from 'next/og'
@@ -183,13 +183,12 @@ export const size = {
 
 export const contentType = 'image/png'
 
+const interSemiBold = await readFile(
+  join(process.cwd(), 'assets/Inter-SemiBold.ttf')
+)
+
 // Image generation
 export default async function Image() {
-  // Font loading, process.cwd() is Next.js project directory
-  const interSemiBold = await readFile(
-    join(process.cwd(), 'assets/Inter-SemiBold.ttf')
-  )
-
   return new ImageResponse(
     (
       // ...

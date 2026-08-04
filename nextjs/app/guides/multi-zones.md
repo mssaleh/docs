@@ -3,8 +3,8 @@ title: How to build micro-frontends using multi-zones and Next.js
 description: Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
 url: "https://nextjs.org/docs/app/guides/multi-zones"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-01
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

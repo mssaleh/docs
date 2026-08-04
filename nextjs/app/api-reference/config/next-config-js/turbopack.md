@@ -3,8 +3,8 @@ title: turbopack
 description: Configure Next.js with Turbopack-specific options
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-02-13
+version: 16.3.0
+lastUpdated: 2026-04-30
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -236,7 +236,7 @@ In addition, a number of built-in conditions are supported:
 * `development`: Matches when using `next dev`.
 * `production`: Matches when using `next build`.
 * `node`: Matches code that will run on the default Node.js runtime.
-* `edge-light`: Matches code that will run on the [Edge runtime](/docs/app/api-reference/edge).
+* `edge-light`: Matches code that will run on the [Edge runtime](/docs/app/api-reference/edge) (deprecated).
 
 Rules can be an object or an array of objects. An array is often useful for modeling disjoint conditions:
 

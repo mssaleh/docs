@@ -3,8 +3,8 @@ title: Implementing Partial Prerendering on your platform
 description: A guide for platform engineers on implementing PPR support, from basic origin rendering to optimized CDN integration.
 url: "https://nextjs.org/docs/app/guides/ppr-platform-guide"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-03-30
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

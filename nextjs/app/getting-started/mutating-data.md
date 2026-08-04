@@ -3,8 +3,8 @@ title: Mutating Data
 description: Learn how to mutate data using Server Functions and Server Actions in Next.js.
 url: "https://nextjs.org/docs/app/getting-started/mutating-data"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-07-28
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -378,6 +378,10 @@ export function Button() {
   )
 }
 ```
+
+See the [Building interactive apps](/docs/app/guides/interactive-apps) guide for a deeper walkthrough of responsive interactions, including pending feedback, optimistic UI, transitions, and error handling.
+
+> **Good to know**: With the **experimental** [`useOffline`](/docs/app/guides/offline-support) config enabled, a Server Action interrupted by a connectivity drop stays pending and completes when the network returns.
 
 ### Refresh data
 

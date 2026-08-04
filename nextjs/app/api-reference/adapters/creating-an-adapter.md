@@ -3,8 +3,8 @@ title: Creating an Adapter
 description: "Create an adapter module that implements the `NextAdapter` interface."
 url: "https://nextjs.org/docs/app/api-reference/adapters/creating-an-adapter"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-05-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -51,6 +51,7 @@ export interface NextAdapter {
     ctx: {
       phase: PHASE_TYPE
       nextVersion: string
+      projectDir: string
     }
   ) => Promise<NextConfigComplete> | NextConfigComplete
   onBuildComplete?: (ctx: {

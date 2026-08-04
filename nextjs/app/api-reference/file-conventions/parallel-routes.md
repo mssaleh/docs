@@ -3,13 +3,14 @@ title: Parallel Routes
 description: Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynamic applications.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-03
+version: 16.3.0
+lastUpdated: 2026-07-29
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
 related:
   - app/api-reference/file-conventions/default
+  - app/guides/authentication
 ---
 
 
@@ -150,6 +151,26 @@ import { checkUserRole } from '@/lib/auth'
 export default function Layout({ user, admin }) {
   const role = checkUserRole()
   return role === 'admin' ? admin : user
+}
+```
+
+Both slots render on the server, regardless of which one the layout returns. The conditional decides what the user sees, not what runs: `@admin/page.js` executes its data fetches for every user, and its output is included in the response sent to the browser. Authorize inside each slot's page, or in your [Data Access Layer](/docs/app/guides/authentication#creating-a-data-access-layer-dal):
+
+```tsx filename="app/dashboard/@admin/page.tsx" switcher
+import { getAdminStats } from '@/lib/dal'
+
+export default async function AdminPage() {
+  const stats = await getAdminStats()
+  return <Stats stats={stats} />
+}
+```
+
+```jsx filename="app/dashboard/@admin/page.js" switcher
+import { getAdminStats } from '@/lib/dal'
+
+export default async function AdminPage() {
+  const stats = await getAdminStats()
+  return <Stats stats={stats} />
 }
 ```
 
@@ -440,6 +461,8 @@ Parallel Routes can be streamed independently, allowing you to define independen
 See the [Loading UI](/docs/app/api-reference/file-conventions/loading) and [Error Handling](/docs/app/getting-started/error-handling) documentation for more information.
 - [default.js](/docs/app/api-reference/file-conventions/default)
   - API Reference for the default.js file.
+- [Authentication](/docs/app/guides/authentication)
+  - Learn how to implement authentication in your Next.js application.
 
 ---
 

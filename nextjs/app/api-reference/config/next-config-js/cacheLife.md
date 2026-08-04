@@ -3,8 +3,8 @@ title: cacheLife
 description: Learn how to set up cacheLife configurations in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheLife"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2025-11-11
+version: 16.3.0
+lastUpdated: 2026-07-01
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -75,6 +75,8 @@ export async function getCachedData() {
   return data
 }
 ```
+
+You can also override a built-in profile by defining one with the same name (`default`, `seconds`, `minutes`, `hours`, `days`, `weeks`, or `max`). See [Overriding the default cache profiles](/docs/app/api-reference/functions/cacheLife#overriding-the-default-cache-profiles).
 
 ## Reference
 

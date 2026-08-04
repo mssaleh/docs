@@ -3,7 +3,7 @@ title: pageExtensions
 description: Extend the default page extensions used by Next.js when resolving pages in the Pages Router.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/pageExtensions"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2025-10-17
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

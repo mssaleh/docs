@@ -3,8 +3,8 @@ title: turbopackLocalPostcssConfig
 description: Enable per-directory PostCSS config resolution in Turbopack so that the config closest to each CSS file takes precedence over the project root config.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackLocalPostcssConfig"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-05-31
+version: 16.3.0
+lastUpdated: 2026-04-11
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

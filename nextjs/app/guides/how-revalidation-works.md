@@ -3,8 +3,8 @@ title: How revalidation works in Next.js
 description: A deep dive into how Next.js revalidates cached content, including the tag system, cache consistency, and multi-instance coordination.
 url: "https://nextjs.org/docs/app/guides/how-revalidation-works"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-01
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -47,7 +47,7 @@ Next.js uses a tag-based system to track which cached content needs to be invali
 
 ### Explicit tags
 
-Explicit tags are set by the developer using [`cacheTag()`](/docs/app/api-reference/functions/cacheTag) inside a `use cache` function, or via `next: { tags: [...] }` on a `fetch` call. When [`revalidateTag('my-tag')`](/docs/app/api-reference/functions/revalidateTag) is called, all cache entries with that tag are invalidated.
+Explicit tags are set by the developer using [`cacheTag()`](/docs/app/api-reference/functions/cacheTag) inside a `use cache` function, or via `next: { tags: [...] }` on a `fetch` call. When [`revalidateTag('my-tag', 'max')`](/docs/app/api-reference/functions/revalidateTag) is called, all cache entries with that tag are invalidated.
 
 ### Soft tags
 

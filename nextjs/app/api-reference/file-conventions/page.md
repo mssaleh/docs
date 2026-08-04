@@ -3,8 +3,8 @@ title: page.js
 description: API reference for the page.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/page"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-05
+version: 16.3.0
+lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -126,6 +126,7 @@ export default function Page({ searchParams }) {
 * Since the `searchParams` prop is a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.
   * In version 14 and earlier, `searchParams` was a synchronous prop. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
 * `searchParams` is a **[Request-time API](/docs/app/glossary#request-time-apis)** whose values cannot be known ahead of time. Using it will opt the page into **[dynamic rendering](/docs/app/glossary#dynamic-rendering)** at request time.
+* With [Cache Components](/docs/app/getting-started/caching), where you access `searchParams` in the component tree determines how much of the page can be prerendered. See [Maximizing the static shell](/docs/app/getting-started/caching#maximizing-the-static-shell).
 * `searchParams` is a plain JavaScript object, not a `URLSearchParams` instance.
 
 ### Page Props Helper

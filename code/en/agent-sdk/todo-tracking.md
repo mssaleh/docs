@@ -14,16 +14,16 @@ Todo tracking provides a structured way to manage tasks and display progress to 
 
 ### Todo Lifecycle
 
-Todos follow a predictable lifecycle:
+Claude moves each todo through a predictable lifecycle:
 
-1. **Created** as `pending` when tasks are identified
-2. **Activated** to `in_progress` when work begins
-3. **Completed** when the task finishes successfully
-4. **Removed** when all tasks in a group are completed
+1. **Created**: Claude adds the todo as `pending` when it identifies a task
+2. **Activated**: Claude sets the todo to `in_progress` when it starts the work
+3. **Completed**: Claude marks it completed when the task finishes successfully
+4. **Removed**: Claude deletes a todo it no longer needs by setting `status: "deleted"` in a `TaskUpdate` call
 
 ### When Todos Are Used
 
-The SDK creates todos for most multi-step work, such as:
+Claude creates todos for most multi-step work, such as:
 
 * **Complex multi-step tasks** requiring 3 or more distinct actions
 * **User-provided task lists** when multiple items are mentioned
@@ -241,7 +241,7 @@ See [Handle the result](/docs/en/agent-sdk/agent-loop#handle-the-result) for the
 
 ## Migrate to Task tools
 
-The Task tools split the single `TodoWrite` call into `TaskCreate` for each new item and `TaskUpdate` for each status change, with `TaskList` and `TaskGet` available for the model to read back the current list. Your monitoring code still inspects `tool_use` blocks in the assistant stream, but maintains a map keyed by task ID instead of replacing the whole list on every call. {/* min-version: 2.1.142 */}The Task tools are the default as of TypeScript Agent SDK 0.3.142 and Claude Code v2.1.142, so no `options.env` change is needed.
+The Task tools split the single `TodoWrite` call into `TaskCreate` for each new item and `TaskUpdate` for each status change, with `TaskList` and `TaskGet` available for the model to read back the current list. Your monitoring code still inspects `tool_use` blocks in the assistant stream, but maintains a map keyed by task ID instead of replacing the whole list on every call. The Task tools are the default as of TypeScript Agent SDK 0.3.142 and Claude Code v2.1.142, so no `options.env` change is needed.
 
 | With `TodoWrite`                              | With Task tools                                                                                                                                                                                                                                                                                     |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

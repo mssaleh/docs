@@ -30,12 +30,24 @@ A resumed session restores the conversation along with the state saved in it:
 
 * Conversation history: the full history, including tool calls and results.
 * Model: the session continues on the model it was using. The model isn't restored when it has been retired or isn't allowed by `availableModels`, when a `--model` flag or `ANTHROPIC_MODEL`-family environment variable picks one at launch, or on providers that use provider-specific deployment IDs, such as [Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry](/docs/en/third-party-integrations); see [model configuration](/docs/en/model-config#setting-your-model) for the resolution order.
-* Agent: a session started with [`--agent`](/docs/en/sub-agents#invoke-subagents-explicitly) or the `agent` setting continues as that agent, keeping its system prompt, tool restrictions, and model. Pass `--agent` when resuming to pick a different one. {/* min-version: 2.1.216 */}Claude Code looks for the agent in two places: the session's original directory, provided you have [trusted that workspace](/docs/en/permissions#project-allow-rules-and-workspace-trust), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn't find the agent in either place, the session resumes with the default tools and system prompt and shows a [warning naming the agent](/docs/en/errors#session-agent-no-longer-available).
+* Agent: a session started with [`--agent`](/docs/en/sub-agents#invoke-subagents-explicitly) or the `agent` setting continues as that agent, keeping its system prompt, tool restrictions, and model. Pass `--agent` when resuming to pick a different one. Claude Code looks for the agent in two places: the session's original directory, provided you have [trusted that workspace](/docs/en/permissions#project-allow-rules-and-workspace-trust), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn't find the agent in either place, the session resumes with the default tools and system prompt and shows a [warning naming the agent](/docs/en/errors#session-agent-no-longer-available).
 * Permission mode: the mode the session was in. `plan` and `bypassPermissions` are never restored; [bypassing permissions](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) must be enabled again at launch, with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](/docs/en/settings#permission-settings). `auto` is restored only when your account still meets the [auto mode requirements](/docs/en/permission-modes#eliminate-prompts-with-auto-mode). Pass `--permission-mode` to override the restored mode.
 * Active goal: a [goal](/docs/en/goal#resume-with-an-active-goal) that was still active when the session ended carries over; its turn count, timer, and token-spend baseline reset.
 * Scheduled tasks: [tasks that haven't expired](/docs/en/scheduled-tasks#limitations) are restored. Background Bash and monitor tasks aren't.
 
 Not every configuration flag from the original launch is restored. If the session depended on `--mcp-config`, `--settings`, `--plugin-dir`, `--fallback-model`, or directories added with `--add-dir`, pass them again when you resume; directories added mid-session with `/add-dir` aren't restored either, though the session picker still uses them to locate the session. The standard settings files, such as `settings.json` and `settings.local.json`, are re-read at launch, so configuration that lives in them doesn't need to be passed again.
+
+### Resume from a summary
+
+On a Pro or Max plan, when you resume a session that has been inactive for more than about an hour and is over 100,000 tokens, Claude Code restores the conversation and then opens a dialog before you send your first message. The session's [prompt cache](/docs/en/prompt-caching#cache-lifetime) has expired by then, so the next request processes the full history once no matter which of the dialog's options you pick.
+
+The dialog offers three ways to continue the session. They differ in how much of the conversation each one carries forward into later requests, which is a tradeoff between keeping every detail and sending fewer tokens per request:
+
+* **Resume from summary**: runs [`/compact`](/docs/en/context-window#what-survives-compaction) immediately. Claude Code sends one summarization request over the full history, then replaces the history with the summary, your most recent exchanges, and up to five recently read files. Later requests carry the summary instead of the full history.
+* **Resume full session as-is**: loads the conversation unchanged. After you send your first message, Claude Code reprocesses and re-caches the full history, then re-reads it from the cache on later requests while the cache stays warm.
+* **Don't ask me again**: resumes the full session and stops showing the dialog on all future resumes.
+
+Resuming as-is keeps every detail of the conversation available, at a per-request cost that scales with the conversation's size. Resuming from the summary costs less on each later request because it carries the summary instead of the full history, but whatever the summary leaves out is no longer in Claude's context. See [why usage climbs in a long session](/docs/en/costs#why-usage-climbs-in-a-long-session) for where that per-request cost comes from.
 
 ### Where the session picker looks
 
@@ -46,11 +58,11 @@ Claude Code stores sessions per project directory. By default the session picker
 
 Use `Ctrl+W` to widen to all worktrees of the repository or `Ctrl+A` to widen to every project on this machine.
 
-{/* min-version: 2.1.211 */}Sessions whose first prompt was a [`/loop`](/docs/en/scheduled-tasks#run-a-prompt-repeatedly-with-%2Floop) command don't appear in the picker; running `/loop` later in a conversation doesn't hide the session. Before v2.1.211, a `/loop` run early in a conversation hid the session from the picker permanently.
+Sessions whose first prompt was a [`/loop`](/docs/en/scheduled-tasks#run-a-prompt-repeatedly-with-%2Floop) command don't appear in the picker; running `/loop` later in a conversation doesn't hide the session. Before v2.1.211, a `/loop` run early in a conversation hid the session from the picker permanently.
 
-{/* min-version: 2.1.169 */}From v2.1.169, moving a session with [`/cd`](/docs/en/commands) relocates it to the new directory's project storage, so it appears in that directory's picker afterward. {/* min-version: 2.1.196 */}As of v2.1.196, a moved session stays out of the old directory's picker even after a crash or forced exit. On earlier versions, it could also reappear in the old directory's list after an exit that wasn't clean when the old path contained special characters such as underscores.
+From v2.1.169, moving a session with [`/cd`](/docs/en/commands) relocates it to the new directory's project storage, so it appears in that directory's picker afterward. As of v2.1.196, a moved session stays out of the old directory's picker even after a crash or forced exit. On earlier versions, it could also reappear in the old directory's list after an exit that wasn't clean when the old path contained special characters such as underscores.
 
-Selecting a session from another worktree of the same repository resumes it in place. Selecting a session from an unrelated project copies a `cd` and resume command to your clipboard instead.
+When you select a session from another worktree of the same repository, Claude Code resumes it in place. When you select a session from an unrelated project, Claude Code copies a `cd` and resume command to your clipboard instead.
 
 Resuming by name resolves across the current repository and its worktrees. Both forms look for an exact match and resume it directly even if it lives in a different worktree:
 
@@ -72,7 +84,7 @@ Give sessions descriptive names so they're findable in the session picker and re
 
 Once a session is named, return to it with `claude --resume <name>` or `/resume <name>`. See [Resume a session](#resume-a-session) for how name resolution behaves across worktrees.
 
-{/* min-version: 2.1.196 */}Interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory's name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](/docs/en/agent-view) and `claude agents --json` output.
+Interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory's name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](/docs/en/agent-view) and `claude agents --json` output.
 
 The default isn't a resume handle: `claude --resume <name>`, `/resume <name>`, and the session picker match only names you set. Naming the session replaces the default.
 
@@ -135,7 +147,7 @@ If you resume the same session in two terminals without forking, messages from b
 
 These commands control what's in the context window without leaving the session:
 
-* **`/clear`**: start fresh with an empty context. Claude Code saves the previous conversation; resume it with `/resume`, or, in the same Claude Code process, {/* min-version: 2.1.191 */}from [the rewind menu's previous-session entry](/docs/en/checkpointing#rewind-past-a-cleared-conversation). You keep a name you set with `--name` or `/rename` in the new conversation, but not an AI-generated session title
+* **`/clear`**: start fresh with an empty context. Claude Code saves the previous conversation; resume it with `/resume`, or, in the same Claude Code process, from [the rewind menu's previous-session entry](/docs/en/checkpointing#rewind-past-a-cleared-conversation). You keep a name you set with `--name` or `/rename` in the new conversation, but not an AI-generated session title
 * **`/compact [instructions]`**: replace history with a summary, optionally focused on what you specify
 * **`/context`**: show what is currently consuming context
 

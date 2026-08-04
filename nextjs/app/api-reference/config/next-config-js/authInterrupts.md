@@ -3,7 +3,7 @@ title: authInterrupts
 description: "Learn how to enable the experimental `authInterrupts` configuration option to use `forbidden` and `unauthorized`."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/authInterrupts"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

@@ -3,8 +3,8 @@ title: How to create forms with Server Actions
 description: Learn how to create forms in Next.js with React Server Actions.
 url: "https://nextjs.org/docs/app/guides/forms"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-07-28
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -385,6 +385,8 @@ export function Signup() {
 ```
 
 > **Good to know:** In React 19, `useFormStatus` includes additional keys on the returned object, like data, method, and action. If you are not using React 19, only the `pending` key is available.
+
+> **Good to know**: With the **experimental** [`useOffline`](/docs/app/guides/offline-support) config enabled, a Server Action interrupted by a connectivity drop stays pending and completes when the network returns, so a user does not lose their submission.
 
 ## Optimistic updates
 

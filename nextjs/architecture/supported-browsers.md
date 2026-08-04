@@ -3,8 +3,8 @@ title: Supported Browsers
 description: Browser support and which JavaScript features are supported by Next.js.
 url: "https://nextjs.org/docs/architecture/supported-browsers"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2025-10-01
+version: 16.3.0
+lastUpdated: 2026-07-28
 prerequisites:
   - "Architecture: /docs/architecture"
 ---
@@ -84,9 +84,8 @@ import { useCallback } from 'react'
 export const useAnalytics = () => {
   const tracker = useCallback(async (data: unknown) => {
     if (!('structuredClone' in globalThis)) {
-      import('polyfills/structured-clone').then((mod) => {
-        globalThis.structuredClone = mod.default
-      })
+      const mod = await import('polyfills/structured-clone')
+      globalThis.structuredClone = mod.default
     }
 
     /* Do some work that uses structured clone */
@@ -102,9 +101,8 @@ import { useCallback } from 'react'
 export const useAnalytics = () => {
   const tracker = useCallback(async (data) => {
     if (!('structuredClone' in globalThis)) {
-      import('polyfills/structured-clone').then((mod) => {
-        globalThis.structuredClone = mod.default
-      })
+      const mod = await import('polyfills/structured-clone')
+      globalThis.structuredClone = mod.default
     }
 
     /* Do some work that uses structured clone */

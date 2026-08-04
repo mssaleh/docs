@@ -3,8 +3,8 @@ title: cacheHandlers
 description: Configure custom cache handlers for use cache directives in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheHandlers"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-25
+version: 16.3.0
+lastUpdated: 2026-03-23
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

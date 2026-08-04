@@ -3,8 +3,8 @@ title: Server Actions and Mutations
 description: How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and caching integration.
 url: "https://nextjs.org/docs/app/guides/server-actions"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-17
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

@@ -3,8 +3,8 @@ title: deploymentId
 description: Configure a deployment identifier used for version skew protection and cache busting.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/deploymentId"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-02-12
+version: 16.3.0
+lastUpdated: 2026-06-08
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -36,6 +36,7 @@ When a `deploymentId` is configured, Next.js:
 2. Adds an `x-deployment-id` header to client-side navigation requests
 3. Adds an `x-nextjs-deployment-id` header to navigation responses
 4. Injects a `data-dpl-id` attribute on the `<html>` element
+5. Includes the `deploymentId` in the [`'use cache'` cache key](/docs/app/api-reference/directives/use-cache#cache-keys), invalidating cache entries when the deployment ID changes
 
 When the client detects a mismatch between its deployment ID and the server's (via the response header), it triggers a hard navigation (full page reload) instead of a client-side navigation. This ensures users always receive assets and Server Functions from a consistent deployment version.
 

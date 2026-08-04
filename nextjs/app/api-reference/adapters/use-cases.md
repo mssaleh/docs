@@ -3,8 +3,8 @@ title: Use Cases
 description: Common patterns and examples for deployment adapter implementations.
 url: "https://nextjs.org/docs/app/api-reference/adapters/use-cases"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-31
+version: 16.3.0
+lastUpdated: 2026-03-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"

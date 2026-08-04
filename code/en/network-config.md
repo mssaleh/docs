@@ -8,6 +8,8 @@
 
 Claude Code supports various enterprise network and security configurations through environment variables. This includes routing traffic through corporate proxy servers, trusting custom Certificate Authorities (CA), and authenticating with mutual Transport Layer Security (mTLS) certificates for enhanced security.
 
+Set these environment variables before you launch Claude Code. Variables exported in your shell are read once at startup, so a running session doesn't pick up later changes to your shell environment.
+
 <Note>
   All environment variables shown on this page can also be configured in [`settings.json`](/docs/en/settings).
 </Note>
@@ -16,7 +18,7 @@ Claude Code supports various enterprise network and security configurations thro
 
 ### Environment variables
 
-Claude Code respects standard proxy environment variables. {/* min-version: 2.1.217 */}In Claude Desktop sessions where the app manages the provider connection, Claude Code reads them only from managed settings and `~/.claude/settings.json`; see [mTLS authentication](#mtls-authentication) for the scope rules.
+Claude Code respects standard proxy environment variables. In Claude Desktop sessions where the app manages the provider connection, Claude Code reads them only from managed settings and `~/.claude/settings.json`; see [mTLS authentication](#mtls-authentication) for the scope rules.
 
 ```bash theme={null}
 # HTTPS proxy (recommended)
@@ -32,6 +34,8 @@ export NO_PROXY="localhost,192.168.1.1,example.com,.example.com"
 # Bypass proxy for all requests
 export NO_PROXY="*"
 ```
+
+Lowercase variants also work, and Claude Code uses the first one that's set in the order `https_proxy`, `HTTPS_PROXY`, `http_proxy`, `HTTP_PROXY`.
 
 <Note>
   Claude Code does not support SOCKS proxies.
@@ -113,6 +117,32 @@ Claude Code notes each ignored key in the session's debug log.
 
 In [Claude Desktop](/docs/en/desktop) sessions where the app manages the provider connection, such as the Code tab on a [third-party provider](/docs/en/third-party-integrations) and Cowork sessions, Claude Code reads these variables and the proxy variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` only from [managed settings](/docs/en/settings#settings-files) and `~/.claude/settings.json`: it ignores them in a repository's own settings files, so a checked-out repository can't redirect the TLS or proxy path of a session whose credentials come from the app. In a local, SSH, or WSL Code tab session signed in through claude.ai, the app doesn't manage the connection, and Claude Code reads these variables from every settings scope, like any terminal session; [cloud sessions](/docs/en/claude-code-on-the-web) follow the cloud-session rules above wherever you start them. Before v2.1.217, Claude Code ignored these variables in every settings file when the app managed the connection.
 
+## Verify your configuration
+
+You usually find out about a wrong proxy address or a bad certificate path from a [connection or certificate error](/docs/en/errors#network-and-connection-errors) on a later request, since Claude Code doesn't validate most of these settings when it reads them. The one setting it checks at startup is the proxy URL: when it can't parse the value, such as one missing the `http://` scheme, Claude Code stops launch with an error naming the variable to fix.
+
+To confirm your configuration loaded before you send a request, start Claude Code with debug logging:
+
+```bash theme={null}
+claude --debug
+```
+
+Debug output goes to `~/.claude/debug/<session-id>.txt` rather than the terminal, or to a path you set with `--debug-file <path>`. In the log, look for the lines that confirm each file loaded:
+
+```text theme={null}
+CA certs: Appended extra certificates from NODE_EXTRA_CA_CERTS (/etc/ssl/certs/corp-ca.pem)
+mTLS: Loaded client certificate from CLAUDE_CODE_CLIENT_CERT
+mTLS: Loaded client key from CLAUDE_CODE_CLIENT_KEY
+```
+
+If Claude Code can't read one of these files, the log shows a `Failed to read` or `Failed to load` line with the reason instead.
+
+You can also run `/status` in an interactive session and check these rows:
+
+* **Proxy**: shows the active proxy URL, and marks a value it can't parse as invalid and ignored.
+* **mTLS client cert** and **mTLS client key**: appear only when the files loaded, so a missing row means the load failed and the debug log has the reason.
+* **Additional CA cert(s)**: shows the `NODE_EXTRA_CA_CERTS` path without checking that the file loaded, so confirm this one in the debug log.
+
 ## Apply network settings to background agents
 
 [Background agents](/docs/en/agent-view) don't run inside the terminal that dispatched them. A per-user supervisor process starts on demand, outlives your shell, and hosts every `claude agents`, `--bg`, and `/background` session. See [How background sessions are hosted](/docs/en/agent-view#how-background-sessions-are-hosted). This changes how the configuration on this page reaches those sessions.
@@ -146,7 +176,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `mcp-proxy.anthropic.com`            | [MCP connectors from claude.ai](/docs/en/mcp#use-mcp-servers-from-claude-ai), including connectors an organization administrator configures. Connector traffic routes through this proxy; connectors are enabled by default for claude.ai-authenticated users. To disable, set [`ENABLE_CLAUDEAI_MCP_SERVERS=false`](/docs/en/env-vars) or the [`disableClaudeAiConnectors`](/docs/en/settings#available-settings) setting |
 | `downloads.claude.ai`                | Plugin executable downloads; native installer, native auto-updater, and update version checks                                                                                                                                                                                                                                                                                                               |
 | `storage.googleapis.com`             | Install counts and plugin metadata shown in `/plugin`. Signed [artifact](/docs/en/artifacts) uploads try this host first; publishing falls back to `api.anthropic.com` when it is blocked                                                                                                                                                                                                                        |
-| `storage.googleapis.com`             | {/* max-version: 2.1.115 */}Native installer and native auto-updater on versions prior to 2.1.116                                                                                                                                                                                                                                                                                                           |
+| `storage.googleapis.com`             | Native installer and native auto-updater on versions prior to 2.1.116                                                                                                                                                                                                                                                                                                                                       |
 | `bridge.claudeusercontent.com`       | [Claude in Chrome](/docs/en/chrome) extension WebSocket bridge                                                                                                                                                                                                                                                                                                                                                   |
 | `raw.githubusercontent.com`          | Changelog feed for [`/release-notes`](/docs/en/commands) and the release notes shown after updating                                                                                                                                                                                                                                                                                                              |
 | `http-intake.logs.us5.datadoghq.com` | Operational telemetry events, sent only when the CLI uses the Anthropic API directly, never for Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. Optional: disable with [`DISABLE_TELEMETRY`](/docs/en/data-usage#telemetry-services) or `DO_NOT_TRACK`                                                                                                                                      |

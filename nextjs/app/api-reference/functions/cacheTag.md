@@ -3,8 +3,8 @@ title: cacheTag
 description: Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheTag"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-05-13
+version: 16.3.0
+lastUpdated: 2026-06-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -68,30 +68,30 @@ export async function getData() {
 
 You can then purge the cache on-demand from a [Server Function](/docs/app/getting-started/mutating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
 
-* Use [`updateTag`](/docs/app/api-reference/functions/updateTag) inside a Server Function for read-your-own-writes scenarios, where a user makes a change and the next read should fetch fresh data immediately.
-* Use [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) when it is acceptable to serve stale data while revalidation happens in the background, or when revalidating from a route handler.
+* Use [`updateTag`](/docs/app/api-reference/functions/updateTag) for read-your-own-writes scenarios, such as forms and other user-triggered mutations, where a user makes a change and the next read should fetch fresh data immediately. `updateTag` is only available inside Server Functions.
+* Use [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) when it is acceptable to serve stale data while revalidation happens in the background, or when revalidating from a [Route Handler](/docs/app/api-reference/file-conventions/route) or other context.
 
-The example below uses `revalidateTag`:
+For example, this Server Function adds a post and then purges every cache entry tagged `'my-data'` so the next read reflects the change:
 
 ```tsx filename="app/action.ts" switcher
 'use server'
 
-import { revalidateTag } from 'next/cache'
+import { updateTag } from 'next/cache'
 
 export default async function submit() {
   await addPost()
-  revalidateTag('my-data')
+  updateTag('my-data')
 }
 ```
 
 ```jsx filename="app/action.js" switcher
 'use server'
 
-import { revalidateTag } from 'next/cache'
+import { updateTag } from 'next/cache'
 
 export default async function submit() {
   await addPost()
-  revalidateTag('my-data')
+  updateTag('my-data')
 }
 ```
 
@@ -195,7 +195,7 @@ import { revalidateTag } from 'next/cache'
 
 export async function updateBookings() {
   await updateBookingData()
-  revalidateTag('bookings-data')
+  revalidateTag('bookings-data', 'max')
 }
 ```
 
@@ -206,7 +206,7 @@ import { revalidateTag } from 'next/cache'
 
 export async function updateBookings() {
   await updateBookingData()
-  revalidateTag('bookings-data')
+  revalidateTag('bookings-data', 'max')
 }
 ```
 ## Related

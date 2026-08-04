@@ -3,8 +3,8 @@ title: route.js
 description: API reference for the route.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-03
+version: 16.3.0
+lastUpdated: 2026-04-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -656,7 +656,7 @@ export const dynamicParams = true
 export const revalidate = false
 export const fetchCache = 'auto'
 export const runtime = 'nodejs'
-export const preferredRegion = 'auto'
+export const preferredRegion = 'auto' // deprecated
 ```
 
 ```js filename="app/items/route.js" switcher
@@ -665,7 +665,7 @@ export const dynamicParams = true
 export const revalidate = false
 export const fetchCache = 'auto'
 export const runtime = 'nodejs'
-export const preferredRegion = 'auto'
+export const preferredRegion = 'auto' // deprecated
 ```
 
 See the [API reference](/docs/app/api-reference/file-conventions/route-segment-config) for more details.

@@ -3,8 +3,8 @@ title: opengraph-image and twitter-image
 description: API Reference for the Open Graph Image and Twitter Image file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-03
+version: 16.3.0
+lastUpdated: 2026-07-09
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -62,7 +62,7 @@ Add a `twitter-image.(jpg|jpeg|png|gif)` image file to any route segment.
 
 ### `opengraph-image.alt.txt`
 
-Add an accompanying `opengraph-image.alt.txt` file in the same route segment as the `opengraph-image.(jpg|jpeg|png|gif)` image it's alt text.
+Add an accompanying `opengraph-image.alt.txt` file in the same route segment as the `opengraph-image.(jpg|jpeg|png|gif)` image its alt text.
 
 ```txt filename="opengraph-image.alt.txt"
 About Acme
@@ -74,14 +74,14 @@ About Acme
 
 ### `twitter-image.alt.txt`
 
-Add an accompanying `twitter-image.alt.txt` file in the same route segment as the `twitter-image.(jpg|jpeg|png|gif)` image it's alt text.
+Add an accompanying `twitter-image.alt.txt` file in the same route segment as the `twitter-image.(jpg|jpeg|png|gif)` image its alt text.
 
 ```txt filename="twitter-image.alt.txt"
 About Acme
 ```
 
 ```html filename="<head> output"
-<meta property="twitter:image:alt" content="About Acme" />
+<meta name="twitter:image:alt" content="About Acme" />
 ```
 
 ## Generate images using code (.js, .ts, .tsx)
@@ -99,7 +99,7 @@ Generate a route segment's shared image by creating an `opengraph-image` or `twi
 >
 > * By default, generated images are [**statically optimized**](/docs/app/glossary#prerendering) (generated at build time and cached) unless they use [Request-time APIs](/docs/app/glossary#request-time-apis) or uncached data.
 > * You can generate multiple Images in the same file using [`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata).
-> * `opengraph-image.js` and `twitter-image.js` are special Route Handlers that is cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
+> * `opengraph-image.js` and `twitter-image.js` are special Route Handlers that are cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 The easiest way to generate an image is to use the [ImageResponse](/docs/app/api-reference/functions/image-response) API from `next/og`.
 
@@ -117,13 +117,12 @@ export const size = {
 
 export const contentType = 'image/png'
 
+const interSemiBold = await readFile(
+  join(process.cwd(), 'assets/Inter-SemiBold.ttf')
+)
+
 // Image generation
 export default async function Image() {
-  // Font loading, process.cwd() is Next.js project directory
-  const interSemiBold = await readFile(
-    join(process.cwd(), 'assets/Inter-SemiBold.ttf')
-  )
-
   return new ImageResponse(
     (
       // ImageResponse JSX element
@@ -173,13 +172,12 @@ export const size = {
 
 export const contentType = 'image/png'
 
+const interSemiBold = await readFile(
+  join(process.cwd(), 'assets/Inter-SemiBold.ttf')
+)
+
 // Image generation
 export default async function Image() {
-  // Font loading, process.cwd() is Next.js project directory
-  const interSemiBold = await readFile(
-    join(process.cwd(), 'assets/Inter-SemiBold.ttf')
-  )
-
   return new ImageResponse(
     (
       // ImageResponse JSX element
@@ -259,7 +257,7 @@ export default async function Image({ params }) {
 
 ### Returns
 
-The default export function should return a `Blob` | `ArrayBuffer` | `TypedArray` | `DataView` | `ReadableStream` | `Response`.
+The default export function should return a `Response`.
 
 > **Good to know**: `ImageResponse` satisfies this return type.
 
@@ -427,15 +425,17 @@ export default async function Image({ params }) {
 
 These examples use the Node.js runtime to fetch a local image from the file system and pass it to the `<img>` `src` attribute, either as a base64 string or an `ArrayBuffer`. Place the local asset relative to the project root, not the example source file.
 
+The asset doesn't depend on request data, so read it once at module scope. See [Predictable values](/docs/app/getting-started/caching#predictable-values).
+
 ```tsx filename="app/opengraph-image.tsx" switcher
 import { ImageResponse } from 'next/og'
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 
-export default async function Image() {
-  const logoData = await readFile(join(process.cwd(), 'logo.png'), 'base64')
-  const logoSrc = `data:image/png;base64,${logoData}`
+const logoData = await readFile(join(process.cwd(), 'logo.png'), 'base64')
+const logoSrc = `data:image/png;base64,${logoData}`
 
+export default async function Image() {
   return new ImageResponse(
     (
       <div
@@ -457,10 +457,10 @@ import { ImageResponse } from 'next/og'
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 
-export default async function Image() {
-  const logoData = await readFile(join(process.cwd(), 'logo.png'), 'base64')
-  const logoSrc = `data:image/png;base64,${logoData}`
+const logoData = await readFile(join(process.cwd(), 'logo.png'), 'base64')
+const logoSrc = `data:image/png;base64,${logoData}`
 
+export default async function Image() {
   return new ImageResponse(
     (
       <div
@@ -484,10 +484,10 @@ import { ImageResponse } from 'next/og'
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 
-export default async function Image() {
-  const logoData = await readFile(join(process.cwd(), 'logo.png'))
-  const logoSrc = Uint8Array.from(logoData).buffer
+const logoData = await readFile(join(process.cwd(), 'logo.png'))
+const logoSrc = Uint8Array.from(logoData).buffer
 
+export default async function Image() {
   return new ImageResponse(
     (
       <div
@@ -510,10 +510,10 @@ import { ImageResponse } from 'next/og'
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 
-export default async function Image() {
-  const logoData = await readFile(join(process.cwd(), 'logo.png'))
-  const logoSrc = Uint8Array.from(logoData).buffer
+const logoData = await readFile(join(process.cwd(), 'logo.png'))
+const logoSrc = Uint8Array.from(logoData).buffer
 
+export default async function Image() {
   return new ImageResponse(
     (
       <div

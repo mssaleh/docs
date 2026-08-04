@@ -3,8 +3,8 @@ title: Dynamic Route Segments
 description: Use Dynamic Segments to read URL path params and generate routes from dynamic data.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-06-23
+version: 16.3.0
+lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -47,6 +47,8 @@ Dynamic Segments are passed as the `params` prop to [`layout`](/docs/app/api-ref
 | `app/blog/[slug]/page.js` | `/blog/a`   | `{ slug: 'a' }` |
 | `app/blog/[slug]/page.js` | `/blog/b`   | `{ slug: 'b' }` |
 | `app/blog/[slug]/page.js` | `/blog/c`   | `{ slug: 'c' }` |
+
+Dynamic segments that appear before the [root layout](/docs/app/api-reference/file-conventions/layout#root-layout) are **root parameters**, which can additionally be read from any Server Component with [`next/root-params`](/docs/app/api-reference/functions/next-root-params).
 
 ### In Client Components
 
@@ -165,7 +167,10 @@ The sections below demonstrate both patterns.
 
 All params are runtime data. Param access must be wrapped by Suspense fallback UI. Next.js generates a static shell at build time, and content loads on each request.
 
-> **Good to know**: You can also use [`loading.tsx`](/docs/app/api-reference/file-conventions/loading) for page-level fallback UI.
+> **Good to know**:
+>
+> * You can also use [`loading.tsx`](/docs/app/api-reference/file-conventions/loading) for page-level fallback UI.
+> * In layouts, avoid awaiting `params` at the top level. Doing so prevents the layout from being prerendered. Instead, pass the params promise down to the component that needs it and await there. See [Maximizing the static shell](/docs/app/getting-started/caching#maximizing-the-static-shell) for examples.
 
 ```tsx filename="app/blog/[slug]/page.tsx"
 import { Suspense } from 'react'

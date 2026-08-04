@@ -3,8 +3,8 @@ title: not-found.js
 description: API reference for the not-found.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/not-found"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-07-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"

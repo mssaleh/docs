@@ -3,8 +3,8 @@ title: Image Component
 description: "Optimize Images in your Next.js Application using the built-in `next/image` Component."
 url: "https://nextjs.org/docs/app/api-reference/components/image"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-03-10
+version: 16.3.0
+lastUpdated: 2026-05-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -849,6 +849,8 @@ module.exports = {
   },
 }
 ```
+
+This might be necessary when hosting Next.js in a VPC with split-horizon DNS and you receive status 400 Bad Request. Only enable once you understand the SSRF risk.
 
 #### `dangerouslyAllowSVG`
 

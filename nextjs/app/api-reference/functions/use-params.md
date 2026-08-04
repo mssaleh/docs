@@ -3,8 +3,8 @@ title: useParams
 description: API Reference for the useParams hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-params"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2025-06-16
+version: 16.3.0
+lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -74,6 +74,17 @@ For example:
 | `app/shop/[slug]/page.js`       | `/shop/1`   | `{ slug: '1' }`           |
 | `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | `{ tag: '1', item: '2' }` |
 | `app/shop/[...slug]/page.js`    | `/shop/1/2` | `{ slug: ['1', '2'] }`    |
+
+## Behavior
+
+### Cache Components
+
+When [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) is enabled, `useParams` may require a [`Suspense`](https://react.dev/reference/react/Suspense) boundary. This depends on whether the params can be resolved during prerendering.
+
+* **Static routes and routes with [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params)**: every dynamic param is known at build time. `useParams` resolves on the server and no `Suspense` boundary is required.
+* **Routes with dynamic params not covered by `generateStaticParams`**: the param is not known until request time. `useParams` suspends. Wrap the component (or a parent) in a `Suspense` boundary so its fallback can be rendered during prerendering; otherwise, the build fails.
+
+See [Next.js encountered URL data in a Client Component outside of Suspense](/docs/messages/blocking-prerender-client-hook) for full fix options and trade-offs.
 
 ## Version History
 

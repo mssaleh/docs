@@ -17,9 +17,9 @@ As you work with Claude, checkpointing automatically captures the state of your 
 Claude Code tracks all changes made by its file editing tools:
 
 * Every user prompt creates a new checkpoint
-* Claude Code keeps file snapshots for the 100 most recent checkpoints in a session. Discarding an older checkpoint deletes the snapshot files that no remaining checkpoint references, except each file's first snapshot, which the VS Code extension uses as the baseline for its session diffs. {/* min-version: 2.1.208 */}Before v2.1.208, those superseded snapshot files stayed on disk until the session was cleaned up.
-* Checkpoints are saved with the conversation, so a resumed session can still `/rewind` to them
-* Automatically cleaned up along with sessions after 30 days, configurable via [`cleanupPeriodDays`](/docs/en/settings#available-settings)
+* Claude Code keeps file snapshots for the 100 most recent checkpoints in a session. Discarding an older checkpoint deletes the snapshot files that no remaining checkpoint references, except each file's first snapshot, which the VS Code extension uses as the baseline for its session diffs. Before v2.1.208, those superseded snapshot files stayed on disk until the session was cleaned up.
+* Claude Code saves checkpoints with the conversation, so you can still run `/rewind` after you resume a session
+* Claude Code deletes checkpoints along with sessions after 30 days; change the period with [`cleanupPeriodDays`](/docs/en/settings#available-settings)
 
 ### Rewind and summarize
 
@@ -48,17 +48,12 @@ Choosing Summarize up to here leaves you at the end of the conversation with the
 
 If you ran `/clear` earlier in the same Claude Code process, the rewind menu shows an additional entry at the top of the list labeled `/resume <session-id> (previous session)`. Select it to resume the conversation that was active before `/clear` ran. The entry is available until you exit Claude Code or resume a different session, and requires Claude Code v2.1.191 or later. On earlier versions, run `/resume` and pick the previous session from the list instead.
 
-#### Restore vs. summarize
+#### Guide a summary
 
-The restore options revert state: they undo code changes, conversation history, or both. The summarize options compress part of the conversation into an AI-generated summary without changing files on disk:
-
-* **Summarize from here**: messages before the selected message stay intact. The selected message and everything after it are replaced with a summary. Use this to discard a side discussion while keeping early context in full detail.
-* **Summarize up to here**: messages before the selected message are replaced with a summary. The selected message and everything after it stay intact, and you remain at the end of the conversation. Use this to compress early setup discussion while keeping recent work in full detail.
-
-In both cases the original messages are preserved in the session transcript, so Claude can reference the details if needed. To guide what the summary focuses on, highlight a **Summarize** option with the arrow keys and type instructions inline where the row reads **add context (optional)**, then press `Enter` to summarize; selecting the option by its number key summarizes immediately without instructions. This is similar to `/compact`, but targeted: instead of summarizing the entire conversation, you choose which side of the selected message to compress.
+Summarizing doesn't change files on disk, and the original messages stay in the session transcript, so Claude can still reference the details. To guide what the summary focuses on, highlight a **Summarize** option with the arrow keys and type instructions where the row reads **add context (optional)**, then press `Enter`. Selecting the option with its number key summarizes immediately without instructions.
 
 <Note>
-  Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use [`/branch`](/docs/en/sessions#branch-a-session) or `claude --continue --fork-session` instead.
+  Summarize keeps you in the same session and compresses context, like a targeted `/compact`. To branch off and try a different approach while preserving the original session intact, use [`/branch`](/docs/en/sessions#branch-a-session) or `claude --continue --fork-session` instead.
 </Note>
 
 ## Common use cases
@@ -86,7 +81,7 @@ These file modifications cannot be undone through rewind. Only direct file edits
 
 ### Subagent edits not restored
 
-Except for a [skill with `context: fork`](/docs/en/skills#run-skills-in-a-subagent) that runs in the foreground, edits a [subagent](/docs/en/sub-agents) applies land outside your session's checkpoints, so rewinding doesn't restore them, even though the subagent makes them with Claude's file editing tools. This includes a background [`/code-review --fix`](/docs/en/code-review) run and any forked skill that runs in the background. Use git to revert those edits. The foreground fork edits your working tree during your own turn, so rewinding restores its edits as usual. {/* min-version: 2.1.218 */}A forked skill runs in the background by default; set `background: false` in its frontmatter to run it in the foreground, where the invoking turn waits for the result. Before v2.1.218, forked skills always ran in the foreground.
+Except for a [skill with `context: fork`](/docs/en/skills#run-skills-in-a-subagent) that runs in the foreground, edits a [subagent](/docs/en/sub-agents) applies land outside your session's checkpoints, so rewinding doesn't restore them, even though the subagent makes them with Claude's file editing tools. This includes a background [`/code-review --fix`](/docs/en/code-review) run and any forked skill that runs in the background. Use git to revert those edits. The foreground fork edits your working tree during your own turn, so rewinding restores its edits as usual. A forked skill runs in the background by default; set `background: false` in its frontmatter to run it in the foreground, where the invoking turn waits for the result. Before v2.1.218, forked skills always ran in the foreground.
 
 ### External changes not tracked
 

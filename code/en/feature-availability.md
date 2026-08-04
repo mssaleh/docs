@@ -19,7 +19,7 @@ How you authenticate determines which features Claude Code can reach. For a sing
 * **Amazon Bedrock**: you use Claude models from the Amazon Bedrock model catalog and set `CLAUDE_CODE_USE_BEDROCK`. The [Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint) (`CLAUDE_CODE_USE_MANTLE`) is covered by this column
 * **Claude Platform on AWS**: you bought Claude through AWS Marketplace but call the Anthropic API, and set `CLAUDE_CODE_USE_ANTHROPIC_AWS`
 * **Google Cloud's Agent Platform**: Google-operated; you set `CLAUDE_CODE_USE_VERTEX`
-* **Microsoft Foundry**: Anthropic-operated on Azure; you set `CLAUDE_CODE_USE_FOUNDRY`
+* **Microsoft Foundry**: Anthropic-operated; you set `CLAUDE_CODE_USE_FOUNDRY`
 
 ### Features available on every provider
 
@@ -34,7 +34,7 @@ These work on every provider:
 
 Three of these have provider-specific differences:
 
-* **MCP servers**: [connectors from claude.ai](/docs/en/mcp#use-mcp-servers-from-claude-ai) load only when your claude.ai subscription is the active authentication method, and [tool search](/docs/en/mcp#configure-tool-search) is off by default on Google Cloud's Agent Platform and when `ANTHROPIC_BASE_URL` points to a non-first-party host
+* **MCP servers**: [connectors from claude.ai](/docs/en/mcp#use-mcp-servers-from-claude-ai) load only when your claude.ai subscription is the active authentication method. [Tool search](/docs/en/mcp#configure-tool-search) is off by default on Google Cloud's Agent Platform and when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn't supported on Microsoft Foundry [deployments hosted on Azure](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options)
 * **Subagents**: the built-in [Explore subagent](/docs/en/sub-agents#built-in-subagents) caps its inherited model at Opus on the Claude API, and inherits the main conversation's model directly on any other provider, including Claude Platform on AWS
 * **[Commands](/docs/en/commands#all-commands)**: `/design-sync` and `/radio` are unavailable on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and Claude Platform on AWS, and `/voice` requires a claude.ai account
 
@@ -80,7 +80,7 @@ These features work in the local CLI but depend on a server-side capability that
       <td>✗</td>
       <td>✓</td>
       <td>See note <sup><a href="#fn1">1</a></sup></td>
-      <td>✓</td>
+      <td>✓ ([deployments hosted on Anthropic](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options))</td>
     </tr>
 
     <tr>
@@ -196,7 +196,7 @@ Organization-level controls and usage visibility.
 </table>
 
 <span id="fn1" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>1</sup> On Google Cloud's Agent Platform, web search is available for Claude 4 models and later.<br />
-<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and Fable 5. See [Auto mode configuration](/docs/en/auto-mode-config). {/* min-version: 2.1.207 */}In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
+<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and Fable 5. See [Auto mode configuration](/docs/en/auto-mode-config). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
 <span id="fn3" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>3</sup> Explicit intervals such as `/loop every 2 hours` work on every provider. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, `/loop` cannot pick its own interval or supply the default maintenance prompt, so a prompt with no interval runs every 10 minutes, and `/loop` with no arguments shows the usage message. See [Scheduled tasks](/docs/en/scheduled-tasks).<br />
 <span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Subject to your agreement with the cloud provider.<br />
 <span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Dashboard and API only. [Contribution metrics](/docs/en/analytics#enable-contribution-metrics) requires a claude.ai Team or Enterprise organization.
@@ -255,6 +255,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](/docs/en/desktop): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
+    * [Web search](/docs/en/tools-reference#websearch-tool-behavior): [deployments hosted on Anthropic](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options) only
     * [Auto mode](/docs/en/auto-mode-config): Sonnet 5, Opus 4.7 or later, and Fable 5 only
     * [`/loop`](/docs/en/scheduled-tasks): explicit intervals only
     * [Zero Data Retention](/docs/en/zero-data-retention): subject to your Azure agreement

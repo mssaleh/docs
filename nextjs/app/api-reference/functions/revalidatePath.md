@@ -3,8 +3,8 @@ title: revalidatePath
 description: API Reference for the revalidatePath function.
 url: "https://nextjs.org/docs/app/api-reference/functions/revalidatePath"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-06-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

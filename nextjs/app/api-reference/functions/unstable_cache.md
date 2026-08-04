@@ -3,8 +3,8 @@ title: unstable_cache
 description: API Reference for the unstable_cache function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unstable_cache"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-07-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"

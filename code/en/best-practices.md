@@ -65,9 +65,9 @@ The recommended workflow has four phases:
 
 <Steps>
   <Step title="Explore">
-    Enter plan mode. Claude reads files and answers questions without making changes.
+    Enter plan mode by pressing `Shift+Tab` until the status bar shows `⏸ plan mode on`, or start the session with `claude --permission-mode plan`. Claude reads files and answers questions without making changes.
 
-    ```txt claude (plan mode) theme={null}
+    ```txt title="claude (plan mode)" wrap theme={null}
     read /src/auth and understand how we handle sessions and login.
     also look at how we manage environment variables for secrets.
     ```
@@ -76,7 +76,7 @@ The recommended workflow has four phases:
   <Step title="Plan">
     Ask Claude to create a detailed implementation plan.
 
-    ```txt claude (plan mode) theme={null}
+    ```txt title="claude (plan mode)" wrap theme={null}
     I want to add Google OAuth. What files need to change?
     What's the session flow? Create a plan.
     ```
@@ -85,9 +85,9 @@ The recommended workflow has four phases:
   </Step>
 
   <Step title="Implement">
-    Switch out of plan mode and let Claude code, verifying against its plan.
+    Switch out of plan mode by approving the plan or pressing `Shift+Tab`, then let Claude code, verifying against its plan.
 
-    ```txt claude (default mode) theme={null}
+    ```txt title="claude (default mode)" wrap theme={null}
     implement the OAuth flow from your plan. write tests for the
     callback handler, run the test suite and fix any failures.
     ```
@@ -96,7 +96,7 @@ The recommended workflow has four phases:
   <Step title="Commit">
     Ask Claude to commit with a descriptive message and create a PR.
 
-    ```txt claude (default mode) theme={null}
+    ```txt title="claude (default mode)" wrap theme={null}
     commit with a descriptive message and open a PR
     ```
   </Step>
@@ -234,7 +234,7 @@ Claude is also effective at learning CLI tools it doesn't already know. Try prom
 ### Connect MCP servers
 
 <Tip>
-  Run `claude mcp add` to connect external tools like Notion, Figma, or your database.
+  Run `claude mcp add` with a server name and URL or command to connect external tools like Notion, Figma, or your database. For example: `claude mcp add --transport http notion https://mcp.notion.com/mcp`.
 </Tip>
 
 With [MCP servers](/docs/en/mcp), you can ask Claude to implement features from issue trackers, query databases, analyze monitoring data, integrate designs from Figma, and automate workflows.
@@ -359,7 +359,7 @@ Using Claude Code this way is an effective onboarding workflow, improving ramp-u
 
 Claude asks about things you might not have considered yet, including technical implementation, UI/UX, edge cases, and tradeoffs. Replace `[brief description]` with your feature before sending the prompt.
 
-```text theme={null}
+```text wrap theme={null}
 I want to build [brief description]. Interview me in detail using the AskUserQuestion tool.
 
 Ask about technical implementation, UI/UX, edge cases, concerns, and tradeoffs. Don't ask obvious questions, dig into the hard parts I might not have considered.
@@ -405,7 +405,7 @@ During long sessions, Claude's context window can fill with irrelevant conversat
 * Use `/clear` frequently between tasks to reset the context window entirely
 * When auto compaction triggers, Claude summarizes what matters most, including code patterns, file states, and key decisions
 * For more control, run `/compact <instructions>`, like `/compact Focus on the API changes`
-* To compact only part of the conversation, use `Esc + Esc` or `/rewind`, select a message checkpoint, and choose **Summarize from here** or **Summarize up to here**. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See [Restore vs. summarize](/docs/en/checkpointing#restore-vs-summarize).
+* To compact only part of the conversation, use `Esc + Esc` or `/rewind`, select a message checkpoint, and choose **Summarize from here** or **Summarize up to here**. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See [the rewind menu's summarize options](/docs/en/checkpointing#rewind-and-summarize).
 * Customize compaction behavior in CLAUDE.md with instructions like `"When compacting, always preserve the full list of modified files and any test commands"` to ensure critical context survives summarization
 * For quick questions that don't need to stay in context, use [`/btw`](/docs/en/interactive-mode#side-questions-with-%2Fbtw). The answer appears in a dismissible overlay and never enters conversation history, so you can check a detail without growing context.
 
@@ -417,7 +417,7 @@ During long sessions, Claude's context window can fill with irrelevant conversat
 
 Since context is your fundamental constraint, subagents are one of the most powerful tools available. When Claude researches a codebase it reads lots of files, all of which consume your context. Subagents run in separate context windows and report back summaries:
 
-```text theme={null}
+```text wrap theme={null}
 Use subagents to investigate how our authentication system handles token
 refresh, and whether we have any existing OAuth utilities I should reuse.
 ```
@@ -426,7 +426,7 @@ The subagent explores the codebase, reads relevant files, and reports back with 
 
 You can also use subagents for verification after Claude implements something:
 
-```text theme={null}
+```text wrap theme={null}
 use a subagent to review this code for edge cases
 ```
 
@@ -516,7 +516,7 @@ For large migrations or analyses, you can distribute work across many parallel C
 
 <Steps>
   <Step title="Generate a task list">
-    Have Claude list all files that need migrating (e.g., `list all 2,000 Python files that need migrating`)
+    Have Claude write the list of files that need migrating to a file, so the loop in the next step can read it, with a prompt like `list all 2,000 Python files that need migrating and save the list to files.txt`
   </Step>
 
   <Step title="Write a script to loop through the list">
@@ -561,7 +561,7 @@ The longer Claude works unattended, the more an independent check matters before
 
 For a correctness check, run the bundled [`/code-review` skill](/docs/en/commands), which reviews the current diff for bugs in a fresh subagent and returns findings to the session. To check the diff against your plan instead, write the review prompt yourself. Name the work to check, the plan to check it against, and what counts as a finding:
 
-```text theme={null}
+```text wrap theme={null}
 Use a subagent to review the rate limiter diff against PLAN.md. Check that
 every requirement is implemented, the listed edge cases have tests, and
 nothing outside the task's scope changed. Report gaps, not style preferences.

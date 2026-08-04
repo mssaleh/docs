@@ -3,7 +3,7 @@ title: "staticGeneration*"
 description: Learn how to configure static generation in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/staticGeneration"
 docs_index: /docs/llms.txt
-version: 16.2.11
+version: 16.3.0
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

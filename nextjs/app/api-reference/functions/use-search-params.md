@@ -3,8 +3,8 @@ title: useSearchParams
 description: API Reference for the useSearchParams hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-search-params"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-07-22
+version: 16.3.0
+lastUpdated: 2026-07-14
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -93,6 +93,8 @@ If a route is [prerendered](/docs/app/glossary#prerendering), calling `useSearch
 This allows a part of the route to be prerendered while the dynamic part that uses `useSearchParams` is client-side rendered.
 
 We recommend wrapping the Client Component that uses `useSearchParams` in a `<Suspense/>` boundary. This will allow any Client Components above it to be prerendered and sent as part of initial HTML.
+
+See [Next.js encountered URL data in a Client Component outside of Suspense](/docs/messages/blocking-prerender-client-hook) for full fix options and trade-offs.
 
 For example:
 

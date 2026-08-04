@@ -3,11 +3,16 @@ title: cacheComponents
 description: Learn how to enable the cacheComponents flag in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents"
 docs_index: /docs/llms.txt
-version: 16.2.11
-lastUpdated: 2026-05-13
+version: 16.3.0
+lastUpdated: 2026-06-22
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
+related:
+  - app/getting-started/caching
+  - app/guides/incremental-static-regeneration-cache-components
+  - app/api-reference/directives/use-cache
+  - app/api-reference/directives/use-cache-remote
 ---
 
 
@@ -28,6 +33,8 @@ const nextConfig: NextConfig = {
 export default nextConfig
 ```
 
+> **Good to know**: Cache Components requires the Node.js runtime. Migrate any routes that set the deprecated `runtime = 'edge'` export, and note that other server-side JavaScript runtimes are not guaranteed to work. See [Migrating to Cache Components](/docs/app/guides/migrating-to-cache-components#runtime--edge).
+
 When `cacheComponents` is enabled, you can use the following cache functions and configurations:
 
 * The [`use cache` directive](/docs/app/api-reference/directives/use-cache)
@@ -38,7 +45,7 @@ When `cacheComponents` is enabled, you can use the following cache functions and
 
 Additionally, `cacheComponents` implements **[Partial Prerendering (PPR)](/docs/app/glossary#partial-prerendering-ppr)** as the default behavior in the App Router. This means the `experimental.ppr` configuration flag and the `experimental_ppr` route segment configuration are no longer necessary and have been removed.
 
-Read [How rendering works](/docs/app/getting-started/caching#how-rendering-works) for how the static shell and streaming fit together.
+Read [Prerendering](/docs/app/getting-started/caching#prerendering) for how the static shell and streaming fit together.
 
 > **Good to know**: If you used experimental PPR in Next.js 15, refer to the [Partial Prerendering (PPR)](/docs/app/guides/upgrading/version-16#partial-prerendering-ppr) section of the Version 16 upgrade guide when migrating.
 
@@ -63,6 +70,15 @@ Some UI patterns behave differently when components stay mounted instead of unmo
 | Version | Change                                                                                                                            |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | 16.0.0  | `cacheComponents` introduced. This flag controls the `ppr`, `useCache`, and `dynamicIO` flags as a single, unified configuration. |
+- [Caching](/docs/app/getting-started/caching)
+  - Learn how to cache data and UI in Next.js
+- [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components)
+  - Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit.
+- [use cache](/docs/app/api-reference/directives/use-cache)
+  - Learn how to use the "use cache" directive to cache data in your Next.js application.
+- [use cache: remote](/docs/app/api-reference/directives/use-cache-remote)
+  - Learn how to use the "use cache: remote" directive for persistent, shared caching using remote cache handlers.
+
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

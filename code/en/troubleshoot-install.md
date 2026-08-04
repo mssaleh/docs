@@ -56,13 +56,23 @@ If your issue isn't listed, work through the diagnostic checks below to narrow d
 
 The installer downloads from `downloads.claude.ai`. Verify you can reach it:
 
-```bash theme={null}
-curl -sI https://downloads.claude.ai/claude-code-releases/latest
-```
+<Tabs>
+  <Tab title="macOS/Linux">
+    ```bash theme={null}
+    curl -sI https://downloads.claude.ai/claude-code-releases/latest
+    ```
+  </Tab>
 
-In PowerShell, run `curl.exe -sI` instead. PowerShell aliases `curl` to `Invoke-WebRequest`, which rejects the `-sI` flags.
+  <Tab title="Windows PowerShell">
+    ```powershell theme={null}
+    curl.exe -sI https://downloads.claude.ai/claude-code-releases/latest
+    ```
 
-An `HTTP/2 200` line means you reached the server. Other results point to the cause:
+    PowerShell aliases `curl` to `Invoke-WebRequest`, which rejects the `-sI` flags, so call `curl.exe` explicitly.
+  </Tab>
+</Tabs>
+
+You reached the server if the first line shows a `200` status. You see `HTTP/2 200` on macOS and Linux, and `HTTP/1.1 200 OK` from the `curl.exe` included with Windows. Other results point to the cause:
 
 * `403`: usually a proxy or network filter blocking the host, or Claude Code is [not available in your region](https://www.anthropic.com/supported-countries)
 * `5xx`: usually a temporary service issue; wait a few minutes and retry
@@ -352,6 +362,8 @@ Otherwise, this can happen due to network issues, regional routing, or a tempora
    winget install Anthropic.ClaudeCode
    ```
 
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn't found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
+
 2. **Retry after a few minutes**: the issue is often temporary. Wait and try the original command again.
 
 ### `command not found: claude` after installation
@@ -398,6 +410,8 @@ The `curl ... | bash` command downloads the script and pipes it to Bash for exec
    ```powershell theme={null}
    winget install Anthropic.ClaudeCode
    ```
+
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn't found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
 
 ### Homebrew cask unavailable or outdated
 
@@ -485,6 +499,8 @@ The installer couldn't reach the download server. This typically means `download
    winget install Anthropic.ClaudeCode
    ```
 
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn't found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
+
 ### Wrong install command on Windows
 
 If you see `'irm' is not recognized`, `The token '&&' is not valid`, `A parameter cannot be found that matches parameter name 'fsSL'`, or `'bash' is not recognized as the name of a cmdlet`, you copied the install command for a different shell or operating system.
@@ -554,11 +570,11 @@ irm https://claude.ai/install.ps1 | iex
 
 ### Install killed on low-memory Linux servers
 
-A `Killed` message during install usually means the Linux out-of-memory (OOM) killer terminated the `claude install` step because the system ran out of free memory. This is common on small VPS and cloud instances. The install script reports the cause and exits with code 137:
+A `Killed` message during install usually means the Linux out-of-memory (OOM) killer terminated the `claude install` step because the system ran out of free memory. This is common on small VPS and cloud instances. The install script reports the cause and exits with code 137. In this example, the line number and process ID vary by release and run:
 
 ```text theme={null}
 Setting up Claude Code...
-bash: line 142: 34803 Killed    "$binary_path" install ${TARGET:+"$TARGET"}
+bash: line 183: 34803 Killed    "$binary_path" install ${TARGET:+"$TARGET"}
 Installation was killed before it could finish (exit code 137). This usually means the system ran out of memory.
 Claude Code needs roughly 512MB of free memory to install. Free up memory, then run this script again.
 ```
@@ -609,7 +625,7 @@ When installing Claude Code in a Docker container, installing as root into `/` c
 
 ### `claude update` or `claude doctor` hangs
 
-`claude update` and `claude doctor` scan your shell configuration files for an outdated `claude` alias: `~/.zshrc`, `~/.bashrc`, and `~/.config/fish/config.fish`, plus on macOS the first of `~/.bash_profile`, `~/.bash_login`, or `~/.profile` that exists. If you set `ZDOTDIR`, the Zsh file is `$ZDOTDIR/.zshrc` instead. {/* min-version: 2.1.214 */}When one of those paths is a directory, Claude Code skips it and both commands complete normally. Before v2.1.214, a directory at one of those paths made both commands hang and left the System diagnostics section of `/status` blank. `claude doctor` hung with no output; `claude update` hung right after printing `Checking for updates`.
+`claude update` and `claude doctor` scan your shell configuration files for an outdated `claude` alias: `~/.zshrc`, `~/.bashrc`, and `~/.config/fish/config.fish`, plus on macOS the first of `~/.bash_profile`, `~/.bash_login`, or `~/.profile` that exists. If you set `ZDOTDIR`, the Zsh file is `$ZDOTDIR/.zshrc` instead. When one of those paths is a directory, Claude Code skips it and both commands complete normally. Before v2.1.214, a directory at one of those paths made both commands hang and left the System diagnostics section of `/status` blank. `claude doctor` hung with no output; `claude update` hung right after printing `Checking for updates`.
 
 If you hit the hang on an earlier version, find the directory. In this command's output, a line starting with `d` marks that path as a directory. A `No such file or directory` line means nothing exists at that path and isn't the cause:
 
@@ -645,7 +661,9 @@ Git for Windows is optional. Claude Code uses the [PowerShell tool](/docs/en/too
 
 If your Git is installed somewhere else, find the path by running `where.exe git` in PowerShell and use the `bin\bash.exe` path from that directory.
 
-**If the path is correct and the file exists** but Claude Code still reports it as not found, endpoint security software such as AppLocker, Group Policy software restriction policies, or EDR agents may be interfering. On versions before v2.1.116, Claude Code spawned a child process (`cmd.exe`) to verify the path, which these policies can block — a common signal is that `cmd.exe /c dir "C:\Program Files\Git\bin\bash.exe"` works when you run it directly in PowerShell but fails silently when launched by `claude.exe`.
+**If the path is correct and the file exists** but Claude Code still doesn't use it, check the file's name first. Claude Code accepts only a file named `bash.exe`, `sh.exe`, `bash`, or `sh`; with any other name, such as Git for Windows' `git-bash.exe` launcher, it ignores the variable and auto-detects Git Bash as if it were unset, logging a warning visible with `--debug`. A path that doesn't exist gets the same fallback and warning. Before v2.1.219, Claude Code used any existing file as the shell without checking its name, and exited at startup with `Claude Code was unable to find CLAUDE_CODE_GIT_BASH_PATH path` when the path didn't exist.
+
+If the file's name is right, endpoint security software such as AppLocker, Group Policy software restriction policies, or EDR agents may be interfering. On versions before v2.1.116, Claude Code spawned a `cmd.exe` child process to verify the path, which these policies can block. A common signal is that `cmd.exe /c dir "C:\Program Files\Git\bin\bash.exe"` works when you run it directly in PowerShell but fails silently when launched by `claude.exe`.
 
 Claude Code v2.1.116 and later check the filesystem directly, so update first. If the error persists on a current version, ask your IT team to allowlist `claude.exe` and the processes it spawns, including `cmd.exe` and `bash.exe`, in your endpoint protection policy.
 
@@ -788,7 +806,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 ### Native binary not found after npm install
 
-The `@anthropic-ai/claude-code` npm package downloads the native binary as a per-platform optional dependency, such as `@anthropic-ai/claude-code-darwin-arm64`. npm then runs the package's postinstall script, which copies that binary into place as the `claude` command; until it runs, `claude` is a placeholder script. {/* min-version: 2.1.113 */}If either the download or the postinstall step is skipped, the placeholder stays in place, and running `claude` on macOS and Linux prints:
+The `@anthropic-ai/claude-code` npm package downloads the native binary as a per-platform optional dependency, such as `@anthropic-ai/claude-code-darwin-arm64`. npm then runs the package's postinstall script, which copies that binary into place as the `claude` command; until it runs, `claude` is a placeholder script. If either the download or the postinstall step is skipped, the placeholder stays in place, and running `claude` on macOS and Linux prints:
 
 ```text theme={null}
 Error: claude native binary not installed.
@@ -809,7 +827,7 @@ Check the following causes:
 
 * **Optional dependencies are disabled.** Remove `--omit=optional` from your npm install command, `--no-optional` from pnpm, or `--ignore-optional` from yarn, and check that `.npmrc` does not set `optional=false`. Then reinstall. The native binary is delivered only as an optional dependency, so there is no JavaScript fallback if it is skipped, and running `install.cjs` again can't place a binary that was never downloaded.
 * **Install scripts are disabled.** `--ignore-scripts` and some pnpm configurations skip the postinstall step but still download the platform package. Run `node node_modules/@anthropic-ai/claude-code/install.cjs` as the message suggests, or reinstall without the flag. If postinstall can't run in your environment at all, `node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs` finds the downloaded package and launches it, at the cost of an extra Node process on each start. If the wrapper prints `Could not find native binary package` instead, the platform package was never downloaded, so fix the optional-dependencies cause above first.
-* **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](/docs/en/setup#system-requirements). {/* min-version: 2.1.205 */}On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn't run.
+* **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](/docs/en/setup#system-requirements). On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn't run.
 * **Corporate npm mirror is missing the platform packages.** Ensure your registry mirrors all eight `@anthropic-ai/claude-code-*` platform packages in addition to the meta package.
 
 Before v2.1.113, the npm package shipped Claude Code as JavaScript that ran directly in Node rather than as a native binary, so there was no download or postinstall step to skip and this error didn't exist.
@@ -888,7 +906,7 @@ If Claude Code prompts you to log in again after a session, your OAuth token may
 
 Run `/login` to re-authenticate. If this happens frequently, check that your system clock is accurate, as token validation depends on correct timestamps.
 
-Parallel sessions on one machine share a saved login and coordinate its renewal so that only one process refreshes the token at a time. {/* min-version: 2.1.211 */}Before v2.1.211, waking the machine from sleep could cause two sessions to renew with the same token, which revoked the saved login and prompted every open session to log in again at once.
+Parallel sessions on one machine share a saved login and coordinate its renewal so that only one process refreshes the token at a time. Before v2.1.211, waking the machine from sleep could cause two sessions to renew with the same token, which revoked the saved login and prompted every open session to log in again at once.
 
 On macOS, login can also fail when the Keychain is locked or its password is out of sync with your account password, which prevents Claude Code from saving credentials. Run `claude doctor` to check Keychain access. To unlock the Keychain manually, run `security unlock-keychain ~/Library/Keychains/login.keychain-db`. If unlocking doesn't help, open Keychain Access, select the `login` keychain, and choose Edit > Change Password for Keychain "login" to resync it with your account password.
 
