@@ -95,10 +95,12 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
   </Tab>
 
   <Tab title="Desktop">
-    **During a session**: use the mode selector next to the send button. Not every mode appears in the selector:
+    **During a session**: in the Code tab, use the mode selector next to the send button. Not every mode appears in the selector:
 
     * **Auto**: appears when your account meets the [auto mode requirements](#eliminate-prompts-with-auto-mode)
     * **Bypass permissions**: requires the **Allow bypass permissions mode** toggle in Desktop settings on Pro and Max plans; on Team and Enterprise plans, organization policy controls it instead
+
+    The Cowork tab doesn't use these modes. Cowork has its own permission modes, enabled separately, and the Cowork tab shows no mode selector at all until a mode beyond its default is enabled for your account. See the [Cowork docs](https://claude.com/docs/cowork/overview).
 
     For desktop-specific details, see [Choose a permission mode](/docs/en/desktop#choose-a-permission-mode) in the Desktop guide.
 
@@ -196,6 +198,8 @@ To make plan mode the default for a project, set `defaultMode` in `.claude/setti
 </Note>
 
 Auto mode lets Claude execute without routine permission prompts. A separate classifier model reviews actions before they run, blocking anything that escalates beyond your request, targets unrecognized infrastructure, or appears driven by hostile content Claude read. Explicit [ask rules](/docs/en/permissions#manage-permissions) still force a prompt.
+
+The classifier also reviews each message Claude sends to another agent with [`SendMessage`](/docs/en/tools-reference), plain or structured, before Claude Code delivers it, both in auto mode and in [plan mode while the classifier reviews commands](#analyze-before-you-edit-with-plan-mode); the send review requires Claude Code v2.1.222 or later.
 
 The classifier also decides removals targeting the filesystem root or home directory, such as `rm -rf /` and `rm -rf ~`, including when the removal sits inside command or process substitution. Before v2.1.218, the plain forms prompted for approval instead, and the substitution forms prompted in v2.1.208 through v2.1.217.
 
