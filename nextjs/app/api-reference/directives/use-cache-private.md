@@ -3,8 +3,8 @@ title: "use cache: private"
 description: "Learn how to use the \"use cache: private\" directive to cache functions that access runtime request APIs."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache-private"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-31
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"
@@ -157,7 +157,7 @@ async function getRecommendations(productId) {
 }
 ```
 
-> **Good to know**: The `stale` time must be at least 30 seconds for runtime prefetching to work, and at least 5 minutes for the content to be included in the route's [App Shell](/docs/app/glossary#app-shell). See [`cacheLife` prerendering behavior](/docs/app/api-reference/functions/cacheLife#prerendering-behavior) for details.
+> **Good to know**: The `stale` time must be at least 30 seconds for per-link prefetching to work, and at least 5 minutes for the content to be included in the route's [App Shell](/docs/app/glossary#app-shell). See [`cacheLife` prerendering behavior](/docs/app/api-reference/functions/cacheLife#prerendering-behavior) for details.
 
 ## Request APIs allowed in private caches
 

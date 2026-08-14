@@ -3,8 +3,8 @@ title: ImageResponse
 description: API Reference for the ImageResponse constructor.
 url: "https://nextjs.org/docs/app/api-reference/functions/image-response"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-09
+version: 16.3.1
+lastUpdated: 2026-08-06
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -55,7 +55,7 @@ Please refer to [Satori’s documentation](https://github.com/vercel/satori#css)
 
 ## Behavior
 
-* `ImageResponse` uses [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation), [Satori](https://github.com/vercel/satori), and Resvg to convert HTML and CSS into PNG.
+* `ImageResponse` uses [@vercel/og](https://vercel.com/docs/og-image-generation), [Satori](https://github.com/vercel/satori), and Resvg to convert HTML and CSS into PNG.
 * Only flexbox and a subset of CSS properties are supported. Advanced layouts (e.g. `display: grid`) will not work.
 * Maximum bundle size of `500KB`. The bundle size includes your JSX, CSS, fonts, images, and any other assets. If you exceed the limit, consider reducing the size of any assets or fetching at runtime.
 * Only `ttf`, `otf`, and `woff` font formats are supported. To maximize the font parsing speed, `ttf` or `otf` are preferred over `woff`.

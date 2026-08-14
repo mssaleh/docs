@@ -3,8 +3,8 @@ title: Migrating to Cache Components
 description: Learn how to migrate from route segment configs to Cache Components in Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating-to-cache-components"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-14
+version: 16.3.1
+lastUpdated: 2026-08-07
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -12,6 +12,7 @@ related:
   - app/getting-started/caching
   - app/guides/preserving-ui-state
   - app/guides/incremental-static-regeneration-cache-components
+  - app/guides/authentication-with-cache-components
   - app/api-reference/functions/generate-static-params
   - app/api-reference/config/next-config-js/cacheComponents
 ---
@@ -99,6 +100,8 @@ You don't have to migrate every route at once. `instant = false` lets you get th
    ```bash filename="Terminal"
    npx @next/codemod@canary cache-components-instant-false ./app
    ```
+
+   > **Good to know**: Pass `./src/app` in a `src/` project. A wrong path reports `0 ok` instead of failing, so check the file count.
 
    The app keeps building and serving, now with validation deferred for the opted-out routes.
 
@@ -534,11 +537,11 @@ export default async function Page() {
 
 ## `generateStaticParams` and `dynamicParams`
 
-Two behaviors change for [dynamic routes](/docs/app/api-reference/file-conventions/dynamic-routes) when Cache Components is enabled.
+Cache Components changes how [dynamic routes](/docs/app/api-reference/file-conventions/dynamic-routes) handle params.
 
 ### `generateStaticParams` must return at least one param
 
-**Returning an empty array now errors.** Without Cache Components, returning `[]` defers every path to the first runtime visit. With Cache Components, [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) must return at least one param so Next.js can prerender the route and validate it produces a non-empty [App Shell](/docs/app/glossary#app-shell). An empty array raises [`empty-generate-static-params`](/docs/messages/empty-generate-static-params).
+**Returning an empty array now errors.** Without Cache Components, returning `[]` defers every path to the first runtime visit. With Cache Components, [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) must return at least one param so Next.js can prerender the route and validate it produces a non-empty [static shell](/docs/app/glossary#static-shell). An empty array raises [`empty-generate-static-params`](/docs/messages/empty-generate-static-params).
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 // Before - defer all paths to runtime
@@ -570,13 +573,19 @@ export async function generateStaticParams() {
 }
 ```
 
-Paths you don't return are still served. Next.js serves the App Shell instantly, then upgrades it in the background once the params are known. See [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components) for the full prerender-a-subset workflow.
+Paths you don't return are still served. Next.js prerenders a static shell for the unknown params and streams the rest at request time. See [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components) for the full prerender-a-subset workflow.
 
-### `dynamicParams` no longer blocks the first visit
+### `dynamicParams` is not supported
 
-**`dynamicParams: true` (the default) now serves an App Shell instead of blocking.** Previously, visiting a param not returned by `generateStaticParams` blocked the response while the page rendered. With Cache Components, Next.js serves the App Shell instantly, then upgrades it in the background with the now-known params. `dynamicParams: false` is unchanged: unspecified paths still 404.
+**Delete the export.** With Cache Components enabled, exporting `dynamicParams` fails the build with this error message:
 
-To produce the App Shell, pass the `params` promise into a [`<Suspense>`](/docs/app/api-reference/file-conventions/loading) boundary instead of awaiting it at the top of the component, so unknown params can still prerender.
+> Route segment config "dynamicParams" is not compatible with `nextConfig.cacheComponents`.
+
+Params not returned by `generateStaticParams` are rendered on request. If you used `dynamicParams: false` to reject them, call [`notFound()`](/docs/app/api-reference/functions/not-found) in the page when the param doesn't resolve to real data.
+
+### Await `params` inside `<Suspense>`
+
+To produce the static shell, pass the `params` promise into a [`<Suspense>`](/docs/app/api-reference/file-conventions/loading) boundary instead of awaiting it at the top of the component, so unknown params can still prerender.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 // Before - awaiting params at the top blocks the shell
@@ -634,7 +643,7 @@ async function Post({ params }) {
 }
 ```
 
-The same applies to client hooks that read the route. When the route's pathname is fully known, they resolve during prerendering and need no boundary. When it depends on dynamic params not yet known, they suspend, wherever the component sits. A nav or breadcrumb in a shared layout, for instance, suspends while Next.js generates the App Shell for any route below it that has dynamic params. Wrap the component that reads the hook in `<Suspense>` (push the read down to the smallest leaf so the rest stays prerendered), or the build fails:
+The same applies to client hooks that read the route. When the route's pathname is fully known, they resolve during prerendering and need no boundary. When it depends on dynamic params not yet known, they suspend, wherever the component sits. A nav or breadcrumb in a shared layout, for instance, suspends while Next.js generates the static shell for any route below it that has dynamic params. Wrap the component that reads the hook in `<Suspense>` (push the read down to the smallest leaf so the rest stays prerendered), or the build fails:
 
 * [`usePathname`](/docs/app/api-reference/functions/use-pathname)
 * [`useParams`](/docs/app/api-reference/functions/use-params)
@@ -923,6 +932,8 @@ Learn about other behavior changes when Cache Components is enabled.
   - Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets.
 - [ISR with Cache Components](/docs/app/guides/incremental-static-regeneration-cache-components)
   - Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit.
+- [Authentication with Cache Components](/docs/app/guides/authentication-with-cache-components)
+  - Learn how to read the user session, show authenticated UI without slowing down the page, and cache data derived from the session when Cache Components is enabled.
 - [generateStaticParams](/docs/app/api-reference/functions/generate-static-params)
   - API reference for the generateStaticParams function.
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)

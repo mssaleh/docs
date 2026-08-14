@@ -3,7 +3,7 @@ title: catchError
 description: API Reference for the catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-06-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"

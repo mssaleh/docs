@@ -3,8 +3,8 @@ title: create-next-app
 description: Create Next.js apps using one command with the create-next-app CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/create-next-app"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-03-03
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"
@@ -149,7 +149,7 @@ You can view a list of all available examples along with setup instructions in t
 
 ### With any public GitHub example
 
-To create a new app using any public GitHub example, use the `--example` option with the GitHub repo's URL. For example:
+To create a new app using any public GitHub example, use the `--example` option with the GitHub repository's URL. For example:
 
 ```bash package="pnpm"
 pnpm create next-app --example "https://github.com/.../" [your-project-name]

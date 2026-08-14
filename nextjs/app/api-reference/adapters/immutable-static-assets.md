@@ -3,7 +3,7 @@ title: Supporting Immutable Static Assets
 description: Support immutable static assets in an adapter
 url: "https://nextjs.org/docs/app/api-reference/adapters/immutable-static-assets"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-07-20
 prerequisites:
   - "API Reference: /docs/app/api-reference"

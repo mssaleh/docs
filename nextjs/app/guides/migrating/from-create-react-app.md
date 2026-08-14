@@ -3,8 +3,8 @@ title: How to migrate from Create React App to Next.js
 description: Learn how to migrate your existing React application from Create React App to Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating/from-create-react-app"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-09
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Migrating: /docs/app/guides/migrating"
@@ -363,7 +363,7 @@ This tells Next.js to generate a single route for the empty slug (`/`), effectiv
 
 ### Step 7: Add a Client-Only Entrypoint
 
-Next, we’ll embed your CRA’s root App component inside a [Client Component](/docs/app/getting-started/server-and-client-components) so that all logic remains client-side. If this is your first time using Next.js, it's worth knowing that clients components (by default) are still prerendered on the server. You can think about them as having the additional capability of running client-side JavaScript.
+Next, we’ll embed your CRA’s root App component inside a [Client Component](/docs/app/getting-started/server-and-client-components) so that all logic remains client-side. If this is your first time using Next.js, it's worth knowing that Client Components (by default) are still prerendered on the server. You can think about them as having the additional capability of running client-side JavaScript.
 
 Create a `client.tsx` (or `client.js`) in `app/[[...slug]]/`:
 

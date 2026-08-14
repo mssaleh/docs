@@ -3,7 +3,7 @@ title: permanentRedirect
 description: API Reference for the permanentRedirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/permanentRedirect"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-07-28
 prerequisites:
   - "API Reference: /docs/app/api-reference"

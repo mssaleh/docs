@@ -3,7 +3,7 @@ title: public Folder
 description: Next.js allows you to serve static files, like images, in the public directory. You can learn how it works here.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/public-folder"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

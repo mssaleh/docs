@@ -3,8 +3,8 @@ title: How to think about data security in Next.js
 description: "Learn the built-in data security features in Next.js and learn best practices for protecting your application's data."
 url: "https://nextjs.org/docs/app/guides/data-security"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-06-17
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -59,7 +59,7 @@ This approach works well when:
 
 ### Data Access Layer
 
-For new projects, we recommend creating a dedicated **Data Access Layer (DAL)**. This is a internal library that controls how and when data is fetched, and what gets passed to your render context.
+For new projects, we recommend creating a dedicated **Data Access Layer (DAL)**. This is an internal library that controls how and when data is fetched, and what gets passed to your render context.
 
 A Data Access Layer should:
 

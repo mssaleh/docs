@@ -3,7 +3,7 @@ title: How to upgrade to version 16
 description: Upgrade your Next.js Application from Version 15 to 16.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-16"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-08-03
 prerequisites:
   - "Guides: /docs/app/guides"

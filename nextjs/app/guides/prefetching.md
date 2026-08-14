@@ -3,8 +3,8 @@ title: Prefetching
 description: Learn how to configure prefetching in Next.js
 url: "https://nextjs.org/docs/app/guides/prefetching"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-28
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -93,10 +93,10 @@ Next.js stores prefetched React Server Component payloads in memory, keyed by ro
 With [Partial Prefetching](/docs/app/glossary#partial-prefetching) enabled via the [`partialPrefetching`](/docs/app/api-reference/config/next-config-js/partialPrefetching) config (which requires [Cache Components](/docs/app/getting-started/caching)), prefetching switches from the all-or-nothing model above to a per-route [App Shell](/docs/app/glossary#app-shell):
 
 * **One shell per route, shared across links.** `<Link>` prefetches the route's App Shell, which holds its static and session output. Any number of links to the same route reuse that one shell, fetched once as the first link enters the viewport, so a page with many links makes fewer prefetch requests than prefetching each route in full.
-* **The rest streams in.** Uncached data streams in after navigation, behind the shell's `<Suspense>` boundaries. A link can also resolve its URL data (`searchParams`, `params`) at prefetch time with [`prefetch={true}`](/docs/app/guides/runtime-prefetching).
+* **The rest streams in.** Uncached data streams in after navigation, behind the shell's `<Suspense>` boundaries. A link can also resolve its URL data (`searchParams`, `params`) at prefetch time with [`prefetch={true}`](/docs/app/guides/optimizing-prefetching).
 * **Invalidations refresh prefetches.** Data invalidations (`revalidateTag`, `revalidatePath`) silently refresh associated prefetches.
 
-See [Adopting Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) for the behavior change and the recommended adoption path.
+See [Adopting Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) for the behavior change and the recommended adoption path. See [Optimizing prefetching](/docs/app/guides/optimizing-prefetching) to resolve cached URL-specific content before navigation with `prefetch={true}`.
 
 ## Controlling prefetching
 

@@ -3,8 +3,8 @@ title: How to upgrade to version 15
 description: Upgrade your Next.js Application from Version 14 to 15.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-15"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-06-01
+version: 16.3.1
+lastUpdated: 2026-08-06
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -604,7 +604,7 @@ To continue using Speed Insights, follow the [Vercel Speed Insights Quickstart](
 
 The `geo` and `ip` properties on `NextRequest` have been removed as these values are provided by your hosting provider. A [codemod](/docs/app/guides/upgrading/codemods#150) is available to automate this migration.
 
-If you are using Vercel, you can alternatively use the `geolocation` and `ipAddress` functions from [`@vercel/functions`](https://vercel.com/docs/functions/vercel-functions-package) instead:
+If you are using Vercel, you can alternatively use the `geolocation` and `ipAddress` functions from [`@vercel/functions`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package) instead:
 
 ```ts filename="middleware.ts"
 import { geolocation } from '@vercel/functions'

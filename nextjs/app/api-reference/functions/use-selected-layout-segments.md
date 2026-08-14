@@ -3,7 +3,7 @@ title: useSelectedLayoutSegments
 description: API Reference for the useSelectedLayoutSegments hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"

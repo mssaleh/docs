@@ -3,7 +3,7 @@ title: inlineCss
 description: Enable inline CSS support.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/inlineCss"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-03-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

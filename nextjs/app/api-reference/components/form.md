@@ -3,7 +3,7 @@ title: Form Component
 description: "Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation."
 url: "https://nextjs.org/docs/app/api-reference/components/form"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-06-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"

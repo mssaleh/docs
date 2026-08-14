@@ -3,8 +3,8 @@ title: Handling connectivity drops
 description: How a Next.js app can recover when the network drops mid-fetch or mid-Server Action, and how to communicate that state to the user.
 url: "https://nextjs.org/docs/app/guides/offline-support"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-28
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -313,7 +313,7 @@ For most apps, the pending loading state is enough. Add a banner in the root lay
 
 The same pattern extends to parameterized routes. A route like `/chats/[id]` renders its shared [App Shell](/docs/app/glossary#app-shell) when you navigate to `/chats/42` offline, and the dynamic messages behind its `<Suspense>` boundary load when the connection returns.
 
-If the route also prefetches its per-link URL data ahead of the click, `/chats/42` renders its messages from that prefetch immediately, even offline, instead of waiting for the connection to return. See [runtime prefetching](/docs/app/guides/runtime-prefetching) to learn more.
+If the route also prefetches its per-link URL data ahead of the click, `/chats/42` renders its messages from that prefetch immediately, even offline, instead of waiting for the connection to return. See [Optimizing prefetching](/docs/app/guides/optimizing-prefetching) to learn more.
 
 ## Retry Server Actions after the network returns
 

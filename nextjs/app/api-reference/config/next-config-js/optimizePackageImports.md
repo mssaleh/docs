@@ -3,7 +3,7 @@ title: optimizePackageImports
 description: API Reference for optimizePackageImports Next.js Config Option
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/optimizePackageImports"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2025-12-19
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

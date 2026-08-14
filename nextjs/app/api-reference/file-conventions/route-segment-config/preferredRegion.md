@@ -3,7 +3,7 @@ title: preferredRegion (deprecated)
 description: API reference for the preferredRegion route segment config option.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/preferredRegion"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-04-30
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

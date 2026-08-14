@@ -3,7 +3,7 @@ title: route.js
 description: API reference for the route.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-04-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"

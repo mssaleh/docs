@@ -3,7 +3,7 @@ title: mdx-components.js
 description: API reference for the mdx-components.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/mdx-components"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2025-07-29
 prerequisites:
   - "API Reference: /docs/app/api-reference"

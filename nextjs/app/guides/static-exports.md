@@ -3,8 +3,8 @@ title: How to create a static export of your Next.js application
 description: Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use features that require a server.
 url: "https://nextjs.org/docs/app/guides/static-exports"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-21
+version: 16.3.1
+lastUpdated: 2026-08-09
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -208,15 +208,19 @@ export default function Page() {
 
 ### Route Handlers
 
-Route Handlers will render a static response when running `next build`. Only the `GET` HTTP verb is supported. This can be used to generate static HTML, JSON, TXT, or other files from cached or uncached data. For example:
+Route Handlers will render a static response when running `next build`. Only the `GET` HTTP verb is supported. This can be used to generate static HTML, JSON, TXT, or other files from cached or uncached data. To ensure Route Handlers are prerendered, you must explicitly mark the handler as static by adding `export const dynamic = 'force-static'` when a static export is enabled. For example:
 
 ```ts filename="app/data.json/route.ts" switcher
+export const dynamic = 'force-static'
+
 export async function GET() {
   return Response.json({ name: 'Lee' })
 }
 ```
 
 ```js filename="app/data.json/route.js" switcher
+export const dynamic = 'force-static'
+
 export async function GET() {
   return Response.json({ name: 'Lee' })
 }

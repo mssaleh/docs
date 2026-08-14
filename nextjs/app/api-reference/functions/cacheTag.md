@@ -3,7 +3,7 @@ title: cacheTag
 description: Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheTag"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-06-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"

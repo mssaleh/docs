@@ -3,8 +3,8 @@ title: proxy.js
 description: API reference for the proxy.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-05-05
+version: 16.3.1
+lastUpdated: 2026-08-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -145,9 +145,11 @@ Read more details on [path-to-regexp](https://github.com/pillarjs/path-to-regexp
 
 ## Params
 
+Next.js calls the Proxy function with two arguments, [`request`](#request) and [`event`](#event), in that order. Declare only the ones you use.
+
 ### `request`
 
-When defining Proxy, the default export function accepts a single parameter, `request`. This parameter is an instance of `NextRequest`, which represents the incoming HTTP request.
+The first parameter is an instance of `NextRequest`, which represents the incoming HTTP request.
 
 ```tsx filename="proxy.ts" switcher
 import type { NextRequest } from 'next/server'
@@ -162,6 +164,36 @@ export function proxy(request) {
   // Proxy logic goes here
 }
 ```
+
+### `event`
+
+The second parameter is an instance of `NextFetchEvent`. It exposes a single method, `waitUntil(promise)`, which keeps the Proxy invocation alive until the promise settles, so background work like logging or analytics can finish after the response is sent. See [`waitUntil` and `NextFetchEvent`](#waituntil-and-nextfetchevent) for a full example.
+
+```tsx filename="proxy.ts" switcher
+import type { NextFetchEvent, NextRequest } from 'next/server'
+
+export function proxy(request: NextRequest, event: NextFetchEvent) {
+  event.waitUntil(
+    fetch('https://example.com/log', {
+      method: 'POST',
+      body: JSON.stringify({ pathname: request.nextUrl.pathname }),
+    })
+  )
+}
+```
+
+```js filename="proxy.js" switcher
+export function proxy(request, event) {
+  event.waitUntil(
+    fetch('https://example.com/log', {
+      method: 'POST',
+      body: JSON.stringify({ pathname: request.nextUrl.pathname }),
+    })
+  )
+}
+```
+
+### `NextProxy` type
 
 If you prefer a shorthand, you can use the `NextProxy` type. It infers the parameter types for both `request` (`NextRequest`) and `event` (`NextFetchEvent`) automatically:
 

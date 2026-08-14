@@ -3,7 +3,7 @@ title: useOffline
 description: "Learn how to enable the experimental `useOffline` configuration option to detect connectivity and retry failed requests automatically."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/useOffline"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-07-28
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

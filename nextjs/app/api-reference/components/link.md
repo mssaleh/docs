@@ -3,8 +3,8 @@ title: Link Component
 description: "Enable fast client-side navigation with the built-in `next/link` component."
 url: "https://nextjs.org/docs/app/api-reference/components/link"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-29
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -154,7 +154,7 @@ Prefetching happens when a `<Link />` component enters the user's viewport (init
 The following values can be passed to the `prefetch` prop:
 
 * **`"auto"` or `null` (default)**: Prefetch behavior depends on whether the route is static or dynamic. For static routes, the full route will be prefetched (including all its data). For dynamic routes, the partial route down to the nearest segment with a [`loading.js`](/docs/app/api-reference/file-conventions/loading#instant-loading-states) boundary will be prefetched.
-* **`true`**: The full route is prefetched for both static and dynamic routes. With [Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) enabled, the prefetch is the [App Shell](/docs/app/glossary#app-shell) plus the per-link runtime data and the cached content behind it. See [Runtime prefetching](/docs/app/guides/runtime-prefetching).
+* **`true`**: The full route is prefetched for both static and dynamic routes. With [Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) enabled, the prefetch includes the [App Shell](/docs/app/glossary#app-shell) and cached content that depends on the link's URL data. See [Optimizing prefetching](/docs/app/guides/optimizing-prefetching).
 * `false`: Prefetching will never happen both on entering the viewport and on hover.
 
 > **With Partial Prefetching enabled** ([`partialPrefetching: true`](/docs/app/api-reference/config/next-config-js/partialPrefetching)): the default changes. `auto` prefetches the per-route [App Shell](/docs/app/glossary#app-shell) (the route's static and cached content) instead of the full page. See [Adopting Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) for the full behavior change.

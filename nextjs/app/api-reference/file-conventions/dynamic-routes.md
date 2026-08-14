@@ -3,7 +3,7 @@ title: Dynamic Route Segments
 description: Use Dynamic Segments to read URL path params and generate routes from dynamic data.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"

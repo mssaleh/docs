@@ -3,8 +3,8 @@ title: How to use markdown and MDX in Next.js
 description: Learn how to configure MDX and use it in your Next.js apps.
 url: "https://nextjs.org/docs/app/guides/mdx"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-06-01
+version: 16.3.1
+lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -79,7 +79,7 @@ This allows `.mdx` files to act as pages, routes, or imports in your application
 
 ### Handling `.md` files
 
-By default, `next/mdx` only compiles files with the `.mdx` extension. To handle `.md` files with webpack, update the `extension` option:
+By default, `@next/mdx` only compiles files with the `.mdx` extension. To handle `.md` files with webpack, update the `extension` option:
 
 ```js filename="next.config.mjs"
 const withMDX = createMDX({

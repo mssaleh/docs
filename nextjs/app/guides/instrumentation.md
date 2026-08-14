@@ -3,8 +3,8 @@ title: How to set up instrumentation
 description: Learn how to use instrumentation to run code at server startup in your Next.js app
 url: "https://nextjs.org/docs/app/guides/instrumentation"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-02-16
+version: 16.3.1
+lastUpdated: 2026-08-06
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -21,7 +21,7 @@ To set up instrumentation, create `instrumentation.ts|js` file in the **root dir
 
 Then, export a `register` function in the file. This function will be called **once** when a new Next.js server instance is initiated, and must complete before the server is ready to handle requests.
 
-For example, to use Next.js with [OpenTelemetry](https://opentelemetry.io/) and [@vercel/otel](https://vercel.com/docs/observability/otel-overview):
+For example, to use Next.js with [OpenTelemetry](https://opentelemetry.io/) and [@vercel/otel](https://vercel.com/docs/tracing/instrumentation):
 
 ```ts filename="instrumentation.ts" switcher
 import { registerOTel } from '@vercel/otel'

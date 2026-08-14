@@ -3,8 +3,8 @@ title: next CLI
 description: Learn how to run and build your application with the Next.js CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/next"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-10
+version: 16.3.1
+lastUpdated: 2026-08-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"
@@ -306,7 +306,7 @@ This helps surface more readable stack traces and code frames in the build outpu
 
 ### Building specific routes
 
-You can build only specific routes in the App and Pages Routers using the `--debug-build-paths` option. This is useful for faster debugging when working with large applications. The `--debug-build-paths` option accepts comma-separated file paths and supports glob patterns:
+You can build only specific routes in the App and Pages Routers using the `--debug-build-paths` option. This is useful for faster debugging when working with large applications. The `--debug-build-paths` option accepts comma-separated file paths, supports glob patterns, and excludes any path prefixed with `!`:
 
 ```bash filename="Terminal"
 # Build a specific route
@@ -321,7 +321,12 @@ next build --debug-build-paths="app/(marketing)/about/page.tsx"
 # Use glob patterns
 next build --debug-build-paths="app/**/page.tsx"
 next build --debug-build-paths="pages/*.tsx"
+
+# Exclude routes with a ! prefix
+next build --debug-build-paths="app/**/page.tsx,!app/admin/**"
 ```
+
+In projects that keep routes under `src/`, paths resolve with or without the `src/` prefix, so both `app/page.tsx` and `src/app/page.tsx` match the same route.
 
 ### Changing the default port
 

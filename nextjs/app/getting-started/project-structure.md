@@ -3,7 +3,7 @@ title: Project structure and organization
 description: Learn the folder and file conventions in Next.js, and how to organize your project.
 url: "https://nextjs.org/docs/app/getting-started/project-structure"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-07-21
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

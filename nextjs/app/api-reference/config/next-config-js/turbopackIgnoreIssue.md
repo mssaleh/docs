@@ -3,7 +3,7 @@ title: turbopack.ignoreIssue
 description: Suppress specific Turbopack errors and warnings from the CLI output and error overlay.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackIgnoreIssue"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-02-13
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

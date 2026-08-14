@@ -3,7 +3,7 @@ title: instant
 description: API reference for the instant route segment config.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/instant"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-08-03
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

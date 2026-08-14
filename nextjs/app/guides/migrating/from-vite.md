@@ -3,8 +3,8 @@ title: How to migrate from Vite to Next.js
 description: Learn how to migrate your existing React application from Vite to Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating/from-vite"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-07-28
+version: 16.3.1
+lastUpdated: 2026-08-07
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Migrating: /docs/app/guides/migrating"
@@ -538,7 +538,9 @@ properties with no changes needed. `BASE_URL` reflects the Next.js
 [`basePath`](/docs/app/api-reference/config/next-config-js/basePath) configuration and includes a
 trailing slash, matching Vite's format.
 
-**`import.meta.glob`** is supported by Turbopack (the default Next.js bundler) with no changes needed. If you were using the `as` option (deprecated in Vite 5), replace it with `query`:
+**`import.meta.glob`** is supported by Turbopack (the default Next.js bundler) with no changes needed.
+
+Turbopack has no built-in handling for Vite's `?raw` and `?url` queries, so the `as` option (deprecated in Vite 5) and its `query` replacement need a matching rule in `next.config.ts`:
 
 ```js
 // Before (Vite)
@@ -546,6 +548,21 @@ const modules = import.meta.glob('./dir/*.txt', { as: 'raw' })
 
 // After (Next.js / Turbopack)
 const modules = import.meta.glob('./dir/*.txt', { query: '?raw' })
+```
+
+```ts filename="next.config.ts"
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  turbopack: {
+    rules: {
+      // Any file imported with `?raw` is loaded as a string
+      '*': { condition: { query: '?raw' }, type: 'text' },
+    },
+  },
+}
+
+export default nextConfig
 ```
 
 See the [import.meta.glob docs](/docs/app/api-reference/turbopack#importmetaglob) for the full API.

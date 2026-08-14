@@ -3,8 +3,8 @@ title: turbopack
 description: Configure Next.js with Turbopack-specific options
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-04-30
+version: 16.3.1
+lastUpdated: 2026-08-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -300,9 +300,12 @@ Available module types:
 | `typescript` | Process as TypeScript                                    |
 | `css`        | Process as CSS                                           |
 | `css-module` | Process as CSS module                                    |
+| `json`       | Parse as JSON and export it                              |
 | `wasm`       | Process as WebAssembly                                   |
-| `raw`        | Return raw contents as string                            |
-| `bytes`      | Inline contents as bytes                                 |
+| `node`       | Process as a native Node.js addon                        |
+| `raw`        | Export the contents as a string (an alias of `text`)     |
+| `text`       | Export the contents as a string                          |
+| `bytes`      | Export the contents as a `Uint8Array`                    |
 
 ### Inline loader configuration with import attributes
 

@@ -3,8 +3,8 @@ title: How to set up instrumentation with OpenTelemetry
 description: Learn how to instrument your Next.js app with OpenTelemetry.
 url: "https://nextjs.org/docs/app/guides/open-telemetry"
 docs_index: /docs/llms.txt
-version: 16.3.0
-lastUpdated: 2026-02-11
+version: 16.3.1
+lastUpdated: 2026-08-06
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -171,7 +171,7 @@ It will work both on Vercel and when self-hosted.
 
 We made sure that OpenTelemetry works out of the box on Vercel.
 
-Follow [Vercel documentation](https://vercel.com/docs/concepts/observability/otel-overview/quickstart) to connect your project to an observability provider.
+Follow [Vercel documentation](https://vercel.com/docs/tracing/instrumentation) to connect your project to an observability provider.
 
 #### Self-hosting
 

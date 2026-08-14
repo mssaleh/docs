@@ -3,7 +3,7 @@ title: Mutating Data
 description: Learn how to mutate data using Server Functions and Server Actions in Next.js.
 url: "https://nextjs.org/docs/app/getting-started/mutating-data"
 docs_index: /docs/llms.txt
-version: 16.3.0
+version: 16.3.1
 lastUpdated: 2026-07-28
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
