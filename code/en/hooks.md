@@ -306,7 +306,7 @@ Each event type matches on a different field:
 | `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `PermissionRequest`, `PermissionDenied`                                                        | tool name                                                    | `Bash`, `Edit\|Write`, `mcp__.*`                                                                                                                                                           |
 | `SessionStart`                                                                                                                                    | how the session started                                      | `startup`, `resume`, `clear`, `compact`, `fork`                                                                                                                                            |
 | `Setup`                                                                                                                                           | which CLI flag triggered setup                               | `init`, `maintenance`                                                                                                                                                                      |
-| `SessionEnd`                                                                                                                                      | why the session ended                                        | `clear`, `resume`, `logout`, `prompt_input_exit`, `bypass_permissions_disabled`, `other`                                                                                                   |
+| `SessionEnd`                                                                                                                                      | why the session ended                                        | `clear`, `resume`, `logout`, `prompt_input_exit`, `other`                                                                                                                                  |
 | `Notification`                                                                                                                                    | notification type                                            | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog`, `elicitation_url_dialog`, `elicitation_complete`, `elicitation_response`, `agent_needs_input`, `agent_completed` |
 | `SubagentStart`                                                                                                                                   | agent type                                                   | `general-purpose`, `Explore`, `Plan`, custom agent names, or plugin-scoped names like `^my-plugin:reviewer$`                                                                               |
 | `PreCompact`, `PostCompact`                                                                                                                       | what triggered compaction                                    | `manual`, `auto`                                                                                                                                                                           |
@@ -1707,12 +1707,12 @@ In `PostToolUse`, `tool_response` is an object with `plan` and `filePath` fields
 
 `PreToolUse` hooks can control whether a tool call proceeds. Unlike other hooks that use a top-level `decision` field, PreToolUse returns its decision inside a `hookSpecificOutput` object. This gives it richer control: four outcomes (allow, deny, ask, or defer) plus the ability to modify tool input before execution.
 
-| Field                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `permissionDecision`       | `"allow"` skips the permission prompt, except for [tools that require user interaction](#pretooluse-decision-control) and connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools). `"deny"` prevents the tool call. `"ask"` prompts the user to confirm. `"defer"` exits gracefully so the tool can be resumed later. [Deny and ask rules](/docs/en/permissions#manage-permissions) are still evaluated regardless of what the hook returns |
-| `permissionDecisionReason` | For `"allow"` and `"ask"`, shown to the user but not Claude. For `"deny"`, shown to Claude. For `"defer"`, ignored                                                                                                                                                                                                                                                                                                                                                                |
-| `updatedInput`             | Modifies the tool's input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user. For `"defer"`, ignored                                                                                                                                                                                                                   |
-| `additionalContext`        | String added to Claude's context alongside the tool result. Ignored when `permissionDecision` is `"defer"`. See [Add context for Claude](#add-context-for-claude)                                                                                                                                                                                                                                                                                                                 |
+| Field                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `permissionDecision`       | `"allow"` skips the permission prompt, except for the [actions no mode auto-approves](/docs/en/permission-modes#actions-no-mode-auto-approves) and for `AskUserQuestion` and `ExitPlanMode`, which need [`updatedInput` paired with it](#allow-with-updatedinput). `"deny"` prevents the tool call. `"ask"` prompts the user to confirm. `"defer"` exits gracefully so the tool can be resumed later. [Deny and ask rules](/docs/en/permissions#manage-permissions) are still evaluated regardless of what the hook returns |
+| `permissionDecisionReason` | For `"allow"` and `"ask"`, shown to the user but not Claude. For `"deny"`, shown to Claude. For `"defer"`, ignored                                                                                                                                                                                                                                                                                                                                                                                                |
+| `updatedInput`             | Modifies the tool's input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user. For `"defer"`, ignored                                                                                                                                                                                                                                                   |
+| `additionalContext`        | String added to Claude's context alongside the tool result. Ignored when `permissionDecision` is `"defer"`. See [Add context for Claude](#add-context-for-claude)                                                                                                                                                                                                                                                                                                                                                 |
 
 When multiple PreToolUse hooks return different decisions, precedence is `deny` > `defer` > `ask` > `allow`.
 
@@ -1735,6 +1735,8 @@ A hook's `"ask"` also forces a permission prompt in [auto mode](/docs/en/permiss
   }
 }
 ```
+
+<span id="allow-with-updatedinput" />
 
 `AskUserQuestion` and `ExitPlanMode` require user interaction and normally block in [non-interactive mode](/docs/en/headless) with the `-p` flag. Returning `permissionDecision: "allow"` together with `updatedInput` satisfies that requirement: the hook reads the tool's input from stdin, collects the answer through your own UI, and returns it in `updatedInput` so the tool runs without prompting. Returning `"allow"` alone is not sufficient for these tools. For `AskUserQuestion`, echo back the original `questions` array and add an [`answers`](#askuserquestion) object mapping each question's text to the chosen answer.
 
@@ -1787,7 +1789,7 @@ If the deferred tool is no longer available when you resume, the process exits w
 Runs when Claude Code is about to ask you for permission. In sessions that can't show a prompt, such as background subagents in [non-interactive mode](/docs/en/headless), Claude Code still runs these hooks, and if no hook returns a decision, it denies the tool call.
 Use [PermissionRequest decision control](#permissionrequest-decision-control) to allow or deny on behalf of the user.
 
-Use this event when you need a signal the moment Claude asks for permission. The [Notification](#notification) event's `permission_prompt` type reaches you only after about 6 seconds without terminal input.
+Use this event when you need a signal the moment Claude asks for permission. The [Notification](#notification) event's `permission_prompt` type reaches you only after the prompt has waited about six seconds.
 
 Matches on tool name, same values as PreToolUse.
 
@@ -2121,11 +2123,11 @@ You receive these hook events even with desktop notifications turned off: the `p
 
 | Matcher                  | When it fires                                                                                                          |
 | :----------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `permission_prompt`      | Claude needs you to approve a tool use and you haven't typed for about 6 seconds                                       |
+| `permission_prompt`      | Claude needs you to approve a tool use and the prompt has waited about six seconds                                     |
 | `idle_prompt`            | Claude finished responding about 60 seconds ago and you haven't typed since                                            |
 | `auth_success`           | Authentication completes                                                                                               |
-| `elicitation_dialog`     | An MCP server opens an elicitation form and you haven't typed for about 6 seconds                                      |
-| `elicitation_url_dialog` | An MCP server asks you to open a browser URL and you haven't typed for about 6 seconds                                 |
+| `elicitation_dialog`     | An MCP server opens an elicitation form and you haven't typed for about six seconds                                    |
+| `elicitation_url_dialog` | An MCP server asks you to open a browser URL and you haven't typed for about six seconds                               |
 | `elicitation_complete`   | An MCP elicitation form is submitted or dismissed                                                                      |
 | `elicitation_response`   | An MCP elicitation response is sent back to the server                                                                 |
 | `agent_needs_input`      | A background session starts waiting on your input. Fires only while [agent view](/docs/en/agent-view) is open in a terminal |
@@ -2134,12 +2136,20 @@ You receive these hook events even with desktop notifications turned off: the `p
 The `agent_needs_input` and `agent_completed` types require Claude Code v2.1.198 or later.
 
 <Note>
-  The `permission_prompt`, `idle_prompt`, `elicitation_dialog`, and `elicitation_url_dialog` types share their timing with desktop notifications, so you only see them when you appear to be away from the terminal:
+  The `permission_prompt`, `idle_prompt`, `elicitation_dialog`, and `elicitation_url_dialog` types share their timing with desktop notifications, so in terminal sessions you only see them when you appear to be away from the terminal:
 
-  * Expect `permission_prompt` once you haven't typed for about 6 seconds. The timer starts when the permission prompt appears, and each keystroke defers it. To run a hook immediately on every permission ask, use [PermissionRequest](#permissionrequest) instead.
+  * Expect `permission_prompt` once you haven't typed for about six seconds. The timer starts when the permission prompt appears, and each keystroke defers it. To run a hook immediately on every permission ask, use [PermissionRequest](#permissionrequest) instead.
   * Expect `idle_prompt` about 60 seconds after Claude finishes responding, and only if you haven't typed since.
-  * Expect `elicitation_dialog` for an elicitation form, or `elicitation_url_dialog` for a browser URL request, once you haven't typed for about 6 seconds. Both share the same 6-second gate as `permission_prompt`: the timer starts when the dialog appears, and each keystroke defers it.
+  * Expect `elicitation_dialog` for an elicitation form, or `elicitation_url_dialog` for a browser URL request, once you haven't typed for about six seconds. Both share the same six-second gate as `permission_prompt`: the timer starts when the dialog appears, and each keystroke defers it.
 </Note>
+
+Claude Code times `permission_prompt` differently in sessions where it sends permission requests to the Agent SDK's [`canUseTool` callback](/docs/en/agent-sdk/user-input), which is how Claude Desktop and the VS Code extension host Claude Code:
+
+* Expect `permission_prompt` about six seconds after Claude asks for permission. Claude Code doesn't defer it while you type.
+* If you or a [PermissionRequest](#permissionrequest) hook answer sooner, Claude Code doesn't run `permission_prompt`.
+* Set [`CLAUDE_CODE_DISABLE_PERMISSION_PROMPT_NOTIFY_HOOKS`](/docs/en/env-vars) to `1` to turn `permission_prompt` off in these sessions.
+
+Before v2.1.233, `permission_prompt` didn't fire in these sessions.
 
 Use separate matchers to run different handlers depending on the notification type. This configuration triggers a permission-specific alert script when Claude needs permission approval and a different notification when Claude has been idle:
 
@@ -2255,7 +2265,7 @@ SubagentStop hooks use the same decision control format as [Stop hooks](#stop-de
 
 ### TaskCreated
 
-Runs when a task is being created via the `TaskCreate` tool. Use this to enforce naming conventions, require task descriptions, or prevent certain tasks from being created.
+Runs when a task is being created via the `TaskCreate` tool. Use this to enforce naming conventions, require task descriptions, or prevent certain tasks from being created. In a [session without the Task tools](/docs/en/tools-reference#task-tool-availability), this event doesn't fire.
 
 TaskCreated hooks don't support matchers and fire on every occurrence.
 
@@ -2910,14 +2920,14 @@ statistics, or saving session state. Supports matchers to filter by exit reason.
 
 The `reason` field in the hook input indicates why the session ended:
 
-| Reason                        | Description                                |
-| :---------------------------- | :----------------------------------------- |
-| `clear`                       | Session cleared with `/clear` command      |
-| `resume`                      | Session switched via interactive `/resume` |
-| `logout`                      | User logged out                            |
-| `prompt_input_exit`           | User exited while prompt input was visible |
-| `bypass_permissions_disabled` | Bypass permissions mode was disabled       |
-| `other`                       | Other exit reasons                         |
+| Reason                        | Description                                                                               |
+| :---------------------------- | :---------------------------------------------------------------------------------------- |
+| `clear`                       | Session cleared with `/clear` command                                                     |
+| `resume`                      | Session switched via interactive `/resume`                                                |
+| `logout`                      | User logged out                                                                           |
+| `prompt_input_exit`           | User exited while prompt input was visible                                                |
+| `other`                       | Other exit reasons                                                                        |
+| `bypass_permissions_disabled` | Removed in v2.1.234; Claude Code doesn't send it. Drop it from your `SessionEnd` matchers |
 
 #### SessionEnd input
 
@@ -3365,7 +3375,7 @@ Async hooks have additional constraints compared to synchronous hooks:
 
 Claude Code checks workspace trust before it runs any hook from a settings file. What counts as trusted depends on the session type:
 
-* **Interactive session**: Claude Code holds back hooks from every settings file, including your own `~/.claude/settings.json`, until you accept the [workspace trust dialog](/docs/en/permissions#project-allow-rules-and-workspace-trust) for the folder or one of its parent directories
+* **Interactive session**: Claude Code holds back hooks from every settings file, including your own `~/.claude/settings.json`, until you accept the [workspace trust dialog](/docs/en/permissions#project-allow-rules-and-workspace-trust) for the folder, or for a parent directory whose trust extends to it
 * **`-p` or SDK session**: Claude Code never shows the dialog and treats the folder as trusted, so hooks committed in a repository's `.claude/settings.json` run in a folder you've never trusted
 
 Before you script `claude -p` over a repository you didn't write, review its `.claude/` settings files, start with [`--bare`](/docs/en/headless#start-faster-with-bare-mode), or [turn hooks off for that run](#disable-or-remove-hooks) with `--settings '{"disableAllHooks": true}'`. Frontmatter hooks in a project subagent follow a stricter rule than settings-file hooks. [What runs before you trust a folder](/docs/en/permissions#what-runs-before-you-trust-a-folder) lists each kind of repository content by session type.
