@@ -3,7 +3,7 @@ title: cacheComponents
 description: Learn how to enable the cacheComponents flag in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-06-22
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

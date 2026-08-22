@@ -3,8 +3,8 @@ title: How to create forms with Server Actions
 description: Learn how to create forms in Next.js with React Server Actions.
 url: "https://nextjs.org/docs/app/guides/forms"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-28
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -138,7 +138,7 @@ export async function updateUser(userId, formData) {}
 Forms can be validated on the client or server.
 
 * For **client-side validation**, you can use the HTML attributes like `required` and `type="email"` for basic validation.
-* For **server-side validation**, you can use a library like [zod](https://zod.dev/) to validate the form fields. For example:
+* For **server-side validation**, you can use a schema validation library like [Zod](https://zod.dev/) or [Valibot](https://valibot.dev/) to validate the form fields. For example:
 
 ```tsx filename="app/actions.ts" switcher
 'use server'

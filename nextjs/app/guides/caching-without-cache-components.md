@@ -3,8 +3,8 @@ title: Caching and Revalidating (Previous Model)
 description: Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not using Cache Components.
 url: "https://nextjs.org/docs/app/guides/caching-without-cache-components"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-06-23
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -115,7 +115,7 @@ export const dynamic = 'auto'
 <details>
 <summary>This is an advanced option that should only be used if you specifically need to override the default behavior.</summary>
 
-By default, Next.js **will cache** any `fetch()` requests that are reachable **before** any Request-time APIs are used and **will not cache** `fetch` requests that are discovered **after** Request-time APIs are used.
+A `fetch` request that sets no `cache` option is fetched once during `next build` if it is reachable **before** any Request-time APIs are used, because the route is prerendered up to that point. Requests discovered **after** a Request-time API run on every request.
 
 `fetchCache` allows you to override the default `cache` option of all `fetch` requests in a layout or page.
 

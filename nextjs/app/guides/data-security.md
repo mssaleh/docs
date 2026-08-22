@@ -3,7 +3,7 @@ title: How to think about data security in Next.js
 description: "Learn the built-in data security features in Next.js and learn best practices for protecting your application's data."
 url: "https://nextjs.org/docs/app/guides/data-security"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"

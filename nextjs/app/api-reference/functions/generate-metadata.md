@@ -3,8 +3,8 @@ title: generateMetadata
 description: Learn how to add Metadata to your Next.js application for improved search engine optimization (SEO) and web shareability.
 url: "https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-06-09
+version: 16.3.2
+lastUpdated: 2026-08-19
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -389,7 +389,6 @@ export const metadata = {
 <meta name="generator" content="Next.js" />
 <meta name="keywords" content="Next.js,React,JavaScript" />
 <meta name="referrer" content="origin-when-cross-origin" />
-<meta name="color-scheme" content="dark" />
 <meta name="creator" content="Jiachi Liu" />
 <meta name="publisher" content="Sebastian Markbåge" />
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
@@ -428,6 +427,7 @@ export const metadata = {
 > **Good to know**:
 >
 > * `metadataBase` is typically set in root `app/layout.js` to apply to URL-based `metadata` fields across all routes.
+> * When `generateMetadata` uses `'use cache'`, its return value must be serializable. `URL` instances are not supported by Cache Functions, so values such as `metadataBase` should be returned as strings (for example, `url.toString()`). See [`use cache` serialization requirements](/docs/app/api-reference/directives/use-cache#serialization).
 > * All URL-based `metadata` fields that require absolute URLs can be configured with a `metadataBase` option.
 > * `metadataBase` can contain a subdomain e.g. `https://app.acme.com` or base path e.g. `https://acme.com/start/from/here`
 > * If a `metadata` field provides an absolute URL, `metadataBase` will be ignored.
@@ -930,6 +930,24 @@ export const metadata = {
 <link rel="bookmarks" href="https://nextjs.org/13" />
 ```
 
+### `pagination`
+
+Describes the previous and next pages in a paginated sequence.
+
+```jsx filename="layout.js | page.js"
+export const metadata = {
+  pagination: {
+    previous: 'https://nextjs.org/blog?page=1',
+    next: 'https://nextjs.org/blog?page=3',
+  },
+}
+```
+
+```html filename="<head> output" hideLineNumbers
+<link rel="prev" href="https://nextjs.org/blog?page=1" />
+<link rel="next" href="https://nextjs.org/blog?page=3" />
+```
+
 ### `category`
 
 ```jsx filename="layout.js | page.js"
@@ -1130,7 +1148,7 @@ The following metadata types do not currently have built-in support. However, th
 | `<style>`                     | Learn more about [styling in Next.js](/docs/app/getting-started/css).                                                                                                                                                                        |
 | `<script>`                    | Learn more about [using scripts](/docs/app/guides/scripts).                                                                                                                                                                                  |
 | `<link rel="stylesheet" />`   | `import` stylesheets directly in the layout or page itself.                                                                                                                                                                                  |
-| `<link rel="preload />`       | Use [ReactDOM preload method](#link-relpreload)                                                                                                                                                                                              |
+| `<link rel="preload" />`      | Use [ReactDOM preload method](#link-relpreload)                                                                                                                                                                                              |
 | `<link rel="preconnect" />`   | Use [ReactDOM preconnect method](#link-relpreconnect)                                                                                                                                                                                        |
 | `<link rel="dns-prefetch" />` | Use [ReactDOM prefetchDNS method](#link-reldns-prefetch)                                                                                                                                                                                     |
 
@@ -1428,7 +1446,7 @@ export const metadata = {
 | Version   | Changes                                                                                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `v15.2.0` | Introduced streaming support to `generateMetadata`.                                                                                                     |
-| `v13.2.0` | `viewport`, `themeColor`, and `colorScheme` deprecated in favor of the [`viewport` configuration](/docs/app/api-reference/functions/generate-viewport). |
+| `v14.0.0` | `viewport`, `themeColor`, and `colorScheme` deprecated in favor of the [`viewport` configuration](/docs/app/api-reference/functions/generate-viewport). |
 | `v13.2.0` | `metadata` and `generateMetadata` introduced.                                                                                                           |
 ## Next Steps
 

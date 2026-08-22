@@ -3,8 +3,8 @@ title: cacheHandlers
 description: Configure custom cache handlers for use cache directives in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheHandlers"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-03-23
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -477,7 +477,7 @@ For a full explanation of the tag architecture (including soft tags and multi-in
 
 ## Soft Tags
 
-Soft tags are implicit tags that Next.js automatically generates based on the route path. For example, the route `/blog/hello` generates soft tags for `/`, `/blog`, `/blog/hello`, and their corresponding layout entries. These tags are prefixed internally with `_N_T_`.
+Soft tags are implicit tags that Next.js automatically generates based on the route path. Every segment in the path gets a layout tag, plus the leaf route itself. For example, the route `/blog/hello` generates soft tags for `/layout`, `/blog/layout`, `/blog/hello/layout`, and `/blog/hello`. These tags are prefixed internally with `_N_T_`.
 
 Soft tags enable [`revalidatePath()`](/docs/app/api-reference/functions/revalidatePath) to work through the same tag-based cache system. When `revalidatePath('/blog/hello')` is called, it invalidates all cache entries associated with that path's soft tags.
 

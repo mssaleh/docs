@@ -3,8 +3,8 @@ title: cacheLife
 description: Learn how to set up cacheLife configurations in Next.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheLife"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-01
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -60,7 +60,8 @@ import { cacheLife } from 'next/cache'
 export async function getCachedData() {
   'use cache'
   cacheLife('blog')
-  const data = await fetch('/api/data')
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
   return data
 }
 ```
@@ -71,7 +72,8 @@ import { cacheLife } from 'next/cache'
 export async function getCachedData() {
   'use cache'
   cacheLife('blog')
-  const data = await fetch('/api/data')
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
   return data
 }
 ```

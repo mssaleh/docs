@@ -3,8 +3,8 @@ title: updateTag
 description: API Reference for the updateTag function.
 url: "https://nextjs.org/docs/app/api-reference/functions/updateTag"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-03-03
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -130,7 +130,7 @@ export async function createPost(formData) {
 ### Error when used outside Server Actions
 
 ```ts filename="app/api/posts/route.ts" switcher
-import { updateTag } from 'next/cache'
+import { revalidateTag, updateTag } from 'next/cache'
 
 export async function POST() {
   // This will throw an error

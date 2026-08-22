@@ -3,8 +3,8 @@ title: Image Component
 description: "Optimize Images in your Next.js Application using the built-in `next/image` Component."
 url: "https://nextjs.org/docs/app/api-reference/components/image"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-05-04
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -210,7 +210,7 @@ An integer between `1` and `100` that sets the quality of the optimized image. H
 <Image quality={75} />
 ```
 
-If you’ve configured [qualities](#qualities) in `next.config.js`, the value must match one of the allowed entries.
+If you’ve configured [qualities](#qualities) in `next.config.js`, a value outside that list is coerced to the closest allowed entry. For example, with `qualities: [50, 75, 100]`, a `quality` of `80` is served as `75`. Development logs a warning so you can add the value to the allowlist.
 
 > **Good to know**: If the original image is already low quality, setting a high quality value will increase the file size without improving appearance.
 
@@ -1002,7 +1002,7 @@ export default function MyImage() {
 }
 ```
 
-When using `fill`, the parent element must have `position: relative` or `display: block`. This is necessary for the proper rendering of the image element in that layout mode.
+When using `fill`, the parent element must be positioned, with `position: relative`, `fixed`, or `absolute`. The image itself uses `position: absolute`, so it sizes against the nearest positioned ancestor.
 
 ```jsx
 <div style={{ position: 'relative' }}>

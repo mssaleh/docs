@@ -3,8 +3,8 @@ title: How to upgrade to version 16
 description: Upgrade your Next.js Application from Version 15 to 16.
 url: "https://nextjs.org/docs/app/guides/upgrading/version-16"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-03
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Upgrading: /docs/app/guides/upgrading"
@@ -282,7 +282,7 @@ export default nextConfig
 
 ### Turbopack File System Caching
 
-Turbopack stores compiler artifacts on disk between runs, for significantly faster compile times across restarts. Filesystem caching is enabled by default for both `next dev` and `next build`. See [`turbopackFileSystemCache`](/docs/app/api-reference/config/next-config-js/turbopackFileSystemCache) to configure or disable it.
+Turbopack stores compiler artifacts on disk between runs, for significantly faster compile times across restarts. Filesystem caching is enabled by default for both `next dev` and `next build`, through `experimental.turbopackFileSystemCacheForDev` and `experimental.turbopackFileSystemCacheForBuild`. See [Turbopack FileSystem Caching](/docs/app/api-reference/config/next-config-js/turbopackFileSystemCache) to configure or disable either one.
 
 ## Async Request APIs (Breaking change)
 
@@ -1080,7 +1080,7 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+module.exports = nextConfig
 ```
 
 Evaluate if AMP is still necessary for your use case. Most performance benefits can now be achieved through Next.js's built-in optimizations and modern web standards.

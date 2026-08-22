@@ -3,8 +3,8 @@ title: How to build single-page applications with Next.js
 description: Next.js fully supports building Single-Page Applications (SPAs).
 url: "https://nextjs.org/docs/app/guides/single-page-applications"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-11
+version: 16.3.2
+lastUpdated: 2026-08-14
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -331,7 +331,7 @@ export function DeletePost({ id }) {
 
 For list-like state where each change should appear instantly, you can combine `useActionState` with `useOptimistic`. The example below is a to-do list: a pure reducer defines how each action changes the list, so the client and server share one copy of that logic:
 
-```ts filename="app/reducer.ts" switcher
+```ts filename="app/todos-reducer.ts" switcher
 export type Todo = { id: string; text: string; done: boolean }
 
 export type TodoAction =
@@ -340,7 +340,7 @@ export type TodoAction =
   | { type: 'edit'; id: string; text: string }
   | { type: 'delete'; id: string }
 
-export function applyAction(todos: Todo[], action: TodoAction): Todo[] {
+export function todosReducer(todos: Todo[], action: TodoAction): Todo[] {
   switch (action.type) {
     case 'add':
       return [...todos, { id: action.id, text: action.text, done: false }]
@@ -360,8 +360,8 @@ export function applyAction(todos: Todo[], action: TodoAction): Todo[] {
 }
 ```
 
-```js filename="app/reducer.js" switcher
-export function applyAction(todos, action) {
+```js filename="app/todos-reducer.js" switcher
+export function todosReducer(todos, action) {
   switch (action.type) {
     case 'add':
       return [...todos, { id: action.id, text: action.text, done: false }]
@@ -387,13 +387,13 @@ The Server Action applies the reducer, persists the result, and returns the next
 'use server'
 
 import { db } from './db'
-import { applyAction, type Todo, type TodoAction } from './reducer'
+import { todosReducer, type Todo, type TodoAction } from './todos-reducer'
 
-export async function todosReducer(
+export async function saveTodos(
   todos: Todo[],
   action: TodoAction
 ): Promise<Todo[]> {
-  const next = applyAction(todos, action)
+  const next = todosReducer(todos, action)
   await db.saveTodos(next)
   return next
 }
@@ -403,10 +403,10 @@ export async function todosReducer(
 'use server'
 
 import { db } from './db'
-import { applyAction } from './reducer'
+import { todosReducer } from './todos-reducer'
 
-export async function todosReducer(todos, action) {
-  const next = applyAction(todos, action)
+export async function saveTodos(todos, action) {
+  const next = todosReducer(todos, action)
   await db.saveTodos(next)
   return next
 }
@@ -418,15 +418,12 @@ The client passes the same reducer to `useOptimistic`, so the optimistic update 
 'use client'
 
 import { useActionState, useOptimistic, startTransition } from 'react'
-import { todosReducer } from './actions'
-import { applyAction, type Todo, type TodoAction } from './reducer'
+import { saveTodos } from './actions'
+import { todosReducer, type Todo, type TodoAction } from './todos-reducer'
 
 export function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
-  const [todos, dispatch, isPending] = useActionState(
-    todosReducer,
-    initialTodos
-  )
-  const [optimisticTodos, addOptimistic] = useOptimistic(todos, applyAction)
+  const [todos, dispatch, isPending] = useActionState(saveTodos, initialTodos)
+  const [optimisticTodos, addOptimistic] = useOptimistic(todos, todosReducer)
 
   function runAction(action: TodoAction) {
     startTransition(() => {
@@ -478,15 +475,12 @@ export function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
 'use client'
 
 import { useActionState, useOptimistic, startTransition } from 'react'
-import { todosReducer } from './actions'
-import { applyAction } from './reducer'
+import { saveTodos } from './actions'
+import { todosReducer } from './todos-reducer'
 
 export function TodoList({ initialTodos }) {
-  const [todos, dispatch, isPending] = useActionState(
-    todosReducer,
-    initialTodos
-  )
-  const [optimisticTodos, addOptimistic] = useOptimistic(todos, applyAction)
+  const [todos, dispatch, isPending] = useActionState(saveTodos, initialTodos)
+  const [optimisticTodos, addOptimistic] = useOptimistic(todos, todosReducer)
 
   function runAction(action) {
     startTransition(() => {

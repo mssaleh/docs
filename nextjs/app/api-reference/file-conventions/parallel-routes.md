@@ -3,8 +3,8 @@ title: Parallel Routes
 description: Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynamic applications.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-29
+version: 16.3.2
+lastUpdated: 2026-08-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -98,7 +98,7 @@ By default, Next.js keeps track of the active *state* (or subpage) for each slot
 
 ### With `useSelectedLayoutSegment(s)`
 
-Both [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment) and [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments) accept a `parallelRoutesKey` parameter, which allows you to read the active route segment within a slot.
+Both [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment) and [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments) accept a `parallelRouteKey` parameter, which allows you to read the active route segment within a slot.
 
 ```tsx filename="app/layout.tsx" switcher
 'use client'

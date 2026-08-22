@@ -3,8 +3,8 @@ title: Ensuring instant navigations
 description: Learn how to structure your app to prefetch and prerender more content, providing instant page loads and client navigations.
 url: "https://nextjs.org/docs/app/guides/instant-navigation"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-10
+version: 16.3.2
+lastUpdated: 2026-08-19
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -480,7 +480,7 @@ For opted-out segments, the navigation blocks on the server. If the content depe
 
 ## Next steps
 
-* [Adopting Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) for the recommended `<Link>` defaults and the migration path off `unstable_eager`
+* [Adopting Partial Prefetching](/docs/app/guides/adopting-partial-prefetching) for the recommended `<Link>` defaults and a step-by-step adoption path
 * [`instant` API reference](/docs/app/api-reference/file-conventions/route-segment-config/instant) for the full configuration
 * [Optimizing prefetching](/docs/app/guides/optimizing-prefetching) when parts of your route depend on URL data (`searchParams` or `params`) and should resolve before navigation
 * [Caching](/docs/app/getting-started/caching) for background on `use cache`, Suspense, and Partial Prerendering

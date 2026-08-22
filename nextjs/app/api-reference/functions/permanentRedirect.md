@@ -3,8 +3,8 @@ title: permanentRedirect
 description: API Reference for the permanentRedirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/permanentRedirect"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-28
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -19,8 +19,6 @@ The `permanentRedirect` function allows you to redirect the user to another URL.
 When used in a streaming context, this will insert a meta tag to emit the redirect on the client side. In a Server Action, `permanentRedirect` performs a client-side navigation when JavaScript is available. For progressive enhancement form submissions, it serves a 303 HTTP redirect response. Otherwise, it serves a 308 (Permanent) HTTP redirect response.
 
 If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api-reference/functions/not-found) instead.
-
-> **Good to know**: If you prefer to return a 307 (Temporary) HTTP redirect instead of 308 (Permanent), you can use the [`redirect` function](/docs/app/api-reference/functions/redirect) instead.
 
 ## Parameters
 
@@ -52,6 +50,11 @@ The `type` parameter has no effect when used in Server Components.
 ## Returns
 
 `permanentRedirect` does not return a value.
+
+## Behavior
+
+* In Server Actions and Route Handlers, `permanentRedirect` should be called **outside** the `try` block when using `try/catch` statements because it throws an error.
+* If you prefer to return a 307 (Temporary) HTTP redirect instead of 308 (Permanent), you can use the [`redirect` function](/docs/app/api-reference/functions/redirect) instead.
 
 ## Example
 

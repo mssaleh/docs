@@ -3,8 +3,8 @@ title: useSelectedLayoutSegments
 description: API Reference for the useSelectedLayoutSegments hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-06-09
+version: 16.3.2
+lastUpdated: 2026-08-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -61,10 +61,10 @@ export default function ExampleClientComponent() {
 ## Parameters
 
 ```tsx
-const segments = useSelectedLayoutSegments(parallelRoutesKey?: string)
+const segments = useSelectedLayoutSegments(parallelRouteKey?: string)
 ```
 
-`useSelectedLayoutSegments` *optionally* accepts a [`parallelRoutesKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
+`useSelectedLayoutSegments` *optionally* accepts a [`parallelRouteKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
 
 ## Returns
 

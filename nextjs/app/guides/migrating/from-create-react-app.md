@@ -3,7 +3,7 @@ title: How to migrate from Create React App to Next.js
 description: Learn how to migrate your existing React application from Create React App to Next.js.
 url: "https://nextjs.org/docs/app/guides/migrating/from-create-react-app"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-10
 prerequisites:
   - "Guides: /docs/app/guides"

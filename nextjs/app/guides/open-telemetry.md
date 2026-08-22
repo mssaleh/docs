@@ -3,7 +3,7 @@ title: How to set up instrumentation with OpenTelemetry
 description: Learn how to instrument your Next.js app with OpenTelemetry.
 url: "https://nextjs.org/docs/app/guides/open-telemetry"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-06
 prerequisites:
   - "Guides: /docs/app/guides"

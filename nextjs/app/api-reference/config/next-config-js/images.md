@@ -3,8 +3,8 @@ title: images
 description: Custom configuration for the next/image loader
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/images"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2025-06-16
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -145,8 +145,8 @@ export default function gumletLoader({ src, width, quality }) {
 // Docs: https://support.imageengine.io/hc/en-us/articles/360058880672-Directives
 export default function imageengineLoader({ src, width, quality }) {
   const compression = 100 - (quality || 50)
-  const params = [`w_${width}`, `cmpr_${compression}`)]
-  return `https://example.com${src}?imgeng=/${params.join('/')`
+  const params = [`w_${width}`, `cmpr_${compression}`]
+  return `https://example.com${src}?imgeng=/${params.join('/')}`
 }
 ```
 

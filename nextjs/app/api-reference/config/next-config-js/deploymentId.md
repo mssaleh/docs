@@ -3,8 +3,8 @@ title: deploymentId
 description: Configure a deployment identifier used for version skew protection and cache busting.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/deploymentId"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-06-08
+version: 16.3.2
+lastUpdated: 2026-08-20
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -64,12 +64,15 @@ module.exports = {
 }
 ```
 
+A per-deployment value only avoids skew if requests are also routed by deployment. Next.js does not route on `?dpl=`, so that routing comes from your host or CDN. Without it, clients that reach an instance from another deployment during a rollout will reload rather than navigate.
+
 ## Version History
 
-| Version    | Changes                                               |
-| ---------- | ----------------------------------------------------- |
-| `v14.1.4`  | `deploymentId` stabilized as top-level config option. |
-| `v13.4.10` | `experimental.deploymentId` introduced.               |
+| Version    | Changes                                                                                                                                       |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `v16.2.0`  | Pages Router detects version skew from the response header rather than the build ID, and the build ID is constant when `deploymentId` is set. |
+| `v14.1.4`  | `deploymentId` stabilized as top-level config option.                                                                                         |
+| `v13.4.10` | `experimental.deploymentId` introduced.                                                                                                       |
 
 ## Related
 

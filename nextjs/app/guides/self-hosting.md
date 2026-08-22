@@ -3,8 +3,8 @@ title: How to self-host your Next.js application
 description: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports).
 url: "https://nextjs.org/docs/app/guides/self-hosting"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-04-30
+version: 16.3.2
+lastUpdated: 2026-08-20
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -176,6 +176,8 @@ module.exports = {
   },
 }
 ```
+
+> **Good to know:** When [`deploymentId`](/docs/app/api-reference/config/next-config-js/deploymentId) is set, Next.js uses a constant build ID and `generateBuildId` has no effect. [Version skew](#version-skew) is detected from the deployment ID instead.
 
 ## Multi-Server Deployments
 

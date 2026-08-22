@@ -3,8 +3,8 @@ title: How to implement authentication in Next.js
 description: Learn how to implement authentication in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/authentication"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-13
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -99,7 +99,7 @@ export async function signup(formData) {}
 
 #### 2. Validate form fields on the server
 
-Use the Server Action to validate the form fields on the server. If your authentication provider doesn't provide form validation, you can use a schema validation library like [Zod](https://zod.dev/) or [Yup](https://github.com/jquense/yup).
+Use the Server Action to validate the form fields on the server. If your authentication provider doesn't provide form validation, you can use a schema validation library like [Zod](https://zod.dev/), [Valibot](https://valibot.dev/) or [Yup](https://github.com/jquense/yup).
 
 Using Zod as an example, you can define a form schema with appropriate error messages:
 

@@ -3,7 +3,7 @@ title: Creating an Adapter
 description: "Create an adapter module that implements the `NextAdapter` interface."
 url: "https://nextjs.org/docs/app/api-reference/adapters/creating-an-adapter"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-05-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"

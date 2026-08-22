@@ -3,7 +3,7 @@ title: error.js
 description: API reference for the error.js special file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/error"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-07-10
 prerequisites:
   - "API Reference: /docs/app/api-reference"

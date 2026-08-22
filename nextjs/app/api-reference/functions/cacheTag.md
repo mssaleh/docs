@@ -3,8 +3,8 @@ title: cacheTag
 description: Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheTag"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-06-08
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -39,7 +39,7 @@ const nextConfig = {
   cacheComponents: true,
 }
 
-export default nextConfig
+module.exports = nextConfig
 ```
 
 The `cacheTag` function takes one or more string values.
@@ -50,7 +50,8 @@ import { cacheTag } from 'next/cache'
 export async function getData() {
   'use cache'
   cacheTag('my-data')
-  const data = await fetch('/api/data')
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
   return data
 }
 ```
@@ -61,7 +62,8 @@ import { cacheTag } from 'next/cache'
 export async function getData() {
   'use cache'
   cacheTag('my-data')
-  const data = await fetch('/api/data')
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
   return data
 }
 ```
@@ -124,7 +126,10 @@ export async function Bookings({ type = 'haircut' }: BookingsProps) {
   cacheTag('bookings-data')
 
   async function getBookingsData() {
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
+    const response = await fetch(
+      `https://api.example.com/bookings?type=${encodeURIComponent(type)}`
+    )
+    const data = await response.json()
     return data
   }
 
@@ -140,7 +145,10 @@ export async function Bookings({ type = 'haircut' }) {
   cacheTag('bookings-data')
 
   async function getBookingsData() {
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
+    const response = await fetch(
+      `https://api.example.com/bookings?type=${encodeURIComponent(type)}`
+    )
+    const data = await response.json()
     return data
   }
 
@@ -162,7 +170,10 @@ interface BookingsProps {
 export async function Bookings({ type = 'haircut' }: BookingsProps) {
   async function getBookingsData() {
     'use cache'
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
+    const response = await fetch(
+      `https://api.example.com/bookings?type=${encodeURIComponent(type)}`
+    )
+    const data = await response.json()
     cacheTag('bookings-data', data.id)
     return data
   }
@@ -176,7 +187,10 @@ import { cacheTag } from 'next/cache'
 export async function Bookings({ type = 'haircut' }) {
   async function getBookingsData() {
     'use cache'
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
+    const response = await fetch(
+      `https://api.example.com/bookings?type=${encodeURIComponent(type)}`
+    )
+    const data = await response.json()
     cacheTag('bookings-data', data.id)
     return data
   }

@@ -3,7 +3,7 @@ title: Building your application
 description: Learn what happens when you run next build and how to read the build output.
 url: "https://nextjs.org/docs/app/guides/building"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-07-21
 prerequisites:
   - "Guides: /docs/app/guides"

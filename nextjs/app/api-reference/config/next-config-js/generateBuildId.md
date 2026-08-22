@@ -3,8 +3,8 @@ title: generateBuildId
 description: Configure the build id, which is used to identify the current build in which your application is being served.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/generateBuildId"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2025-06-16
+version: 16.3.2
+lastUpdated: 2026-08-20
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -24,6 +24,8 @@ module.exports = {
   },
 }
 ```
+
+> **Good to know:** When [`deploymentId`](/docs/app/api-reference/config/next-config-js/deploymentId) is set, Next.js uses a constant build ID and `generateBuildId` has no effect. [Version skew](/docs/app/guides/self-hosting#version-skew) is detected from the deployment ID instead.
 ---
 
 For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)

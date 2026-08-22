@@ -3,8 +3,8 @@ title: Custom Next.js Cache Handler
 description: Configure the Next.js cache used for storing and revalidating data to use any external service like Redis, Memcached, or others.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/incrementalCacheHandlerPath"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-01-08
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -14,7 +14,7 @@ prerequisites:
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 You can configure the Next.js cache location if you want to persist cached pages and data to durable storage, or share the cache across multiple containers or instances of your Next.js application.
 
-> **Good to know**: The `cacheHandler` (singular) configuration is specifically used by Next.js for server cache operations such as storing and revalidating ISR, route handler responses, and optimized images. It is **not** used by `'use cache'` directives. For `'use cache'` directives, use [`cacheHandlers`](/docs/app/api-reference/config/next-config-js/cacheHandlers) (plural) instead.
+> **Good to know**: The `cacheHandler` (singular) configuration is specifically used by Next.js for server cache operations such as storing and revalidating ISR, route handler responses, and optimized images. It is **not** used by `'use cache'` directives. For `'use cache'` directives, use [`cacheHandlers`](/docs/app/api-reference/config/next-config-js/cacheHandlers) (plural) instead. [`cacheMaxMemorySize`](/docs/app/api-reference/config/next-config-js/cacheMaxMemorySize) is separate from both, and sizes the in-memory cache for each.
 
 ```js filename="next.config.js"
 module.exports = {

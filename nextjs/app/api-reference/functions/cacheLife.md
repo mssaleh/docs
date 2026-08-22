@@ -3,8 +3,8 @@ title: cacheLife
 description: Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 url: "https://nextjs.org/docs/app/api-reference/functions/cacheLife"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-31
+version: 16.3.2
+lastUpdated: 2026-08-21
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -40,7 +40,7 @@ const nextConfig = {
   cacheComponents: true,
 }
 
-export default nextConfig
+module.exports = nextConfig
 ```
 
 `cacheLife` can only be used within a cache directive scope.
@@ -271,7 +271,7 @@ A short cache lifetime changes where the cached content can be delivered from:
 
 * **`revalidate` of `0`, or `expire` under 5 minutes**: excluded from prerenders, becoming a "dynamic hole" resolved at request time.
 * **`stale` under 30 seconds**: excluded from prerenders, because a prefetch would expire before the user could click.
-* **`stale` from 30 seconds up to 5 minutes**: included in prerenders, but excluded from the route's [App Shell](/docs/app/glossary#app-shell).
+* **`stale` of at least 30 seconds but under 5 minutes**: included in prerenders, but excluded from the route's [App Shell](/docs/app/glossary#app-shell).
 
 Of the presets, only `seconds` falls under any of these thresholds: its `expire` of 1 minute excludes it from prerenders.
 

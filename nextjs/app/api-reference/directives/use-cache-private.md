@@ -3,8 +3,8 @@ title: "use cache: private"
 description: "Learn how to use the \"use cache: private\" directive to cache functions that access runtime request APIs."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache-private"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-10
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"
@@ -50,12 +50,10 @@ const nextConfig = {
   cacheComponents: true,
 }
 
-export default nextConfig
+module.exports = nextConfig
 ```
 
 Then add `'use cache: private'` to your function along with a `cacheLife` configuration.
-
-> **Good to know**: This directive is not available in Route Handlers.
 
 ### Basic example
 

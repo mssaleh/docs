@@ -3,7 +3,7 @@ title: How to implement Incremental Static Regeneration (ISR)
 description: Learn how to create or update static pages at runtime with Incremental Static Regeneration.
 url: "https://nextjs.org/docs/app/guides/incremental-static-regeneration"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-06-23
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -3,7 +3,7 @@ title: Turbopack FileSystem Caching
 description: Learn how to enable and configure FileSystem Caching for Turbopack builds
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackFileSystemCache"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

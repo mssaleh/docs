@@ -3,8 +3,8 @@ title: How to handle redirects in Next.js
 description: Learn the different ways to handle redirects in Next.js.
 url: "https://nextjs.org/docs/app/guides/redirecting"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-06
+version: 16.3.2
+lastUpdated: 2026-08-19
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -316,11 +316,11 @@ Consider the following data structure:
 }
 ```
 
-In [Proxy](/docs/app/api-reference/file-conventions/proxy), you can read from a database such as Vercel's [Edge Config](https://vercel.com/docs/global-config/get-started) or [Redis](https://vercel.com/docs/redis), and redirect the user based on the incoming request:
+In [Proxy](/docs/app/api-reference/file-conventions/proxy), you can read from a database such as Vercel's [Global Config](https://vercel.com/docs/global-config/get-started) or [Redis](https://vercel.com/docs/redis), and redirect the user based on the incoming request:
 
 ```ts filename="proxy.ts" switcher
 import { NextResponse, NextRequest } from 'next/server'
-import { get } from '@vercel/edge-config'
+import { get } from '@vercel/global-config'
 
 type RedirectEntry = {
   destination: string
@@ -344,7 +344,7 @@ export async function proxy(request: NextRequest) {
 
 ```js filename="proxy.js" switcher
 import { NextResponse } from 'next/server'
-import { get } from '@vercel/edge-config'
+import { get } from '@vercel/global-config'
 
 export async function proxy(request) {
   const pathname = request.nextUrl.pathname

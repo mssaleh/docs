@@ -3,7 +3,7 @@ title: outputHashSalt
 description: Learn how to incorporate a custom salt string into content-addressed output filenames.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/outputHashSalt"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-07-20
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

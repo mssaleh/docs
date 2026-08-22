@@ -3,8 +3,8 @@ title: taint
 description: Enable tainting Objects and Values.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/taint"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2025-06-16
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -74,7 +74,7 @@ In this case, the `getUserDetails` function returns data about a given user. We 
 ```ts switcher
 import { experimental_taintObjectReference } from 'react'
 
-function getUserDetails(id: string): UserDetails {
+async function getUserDetails(id: string): Promise<UserDetails> {
   const user = await db.queryUserById(id)
 
   experimental_taintObjectReference(
@@ -89,7 +89,7 @@ function getUserDetails(id: string): UserDetails {
 ```js switcher
 import { experimental_taintObjectReference } from 'react'
 
-function getUserDetails(id) {
+async function getUserDetails(id) {
   const user = await db.queryUserById(id)
 
   experimental_taintObjectReference(
@@ -162,15 +162,15 @@ export async function ContactPage({ params }) {
 
 ### Tainting a unique value
 
-In this case, we can access the server configuration by awaiting calls to `config.getConfigDetails`. However, the system configuration contains the `SERVICE_API_KEY` that we don't want to expose to clients.
+In this case, we can access the server configuration by awaiting calls to `configService.getConfigDetails`. However, the system configuration contains the `SERVICE_API_KEY` that we don't want to expose to clients.
 
 We can taint the `config.SERVICE_API_KEY` value.
 
 ```ts switcher
 import { experimental_taintUniqueValue } from 'react'
 
-function getSystemConfig(): SystemConfig {
-  const config = await config.getConfigDetails()
+async function getSystemConfig(): Promise<SystemConfig> {
+  const config = await configService.getConfigDetails()
 
   experimental_taintUniqueValue(
     'Do not pass configuration tokens to the client',
@@ -185,8 +185,8 @@ function getSystemConfig(): SystemConfig {
 ```js switcher
 import { experimental_taintUniqueValue } from 'react'
 
-function getSystemConfig() {
-  const config = await config.getConfigDetails()
+async function getSystemConfig() {
+  const config = await configService.getConfigDetails()
 
   experimental_taintUniqueValue(
     'Do not pass configuration tokens to the client',

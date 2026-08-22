@@ -3,8 +3,8 @@ title: Linking and Navigating
 description: Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, and how to optimize navigation for dynamic routes and slow networks.
 url: "https://nextjs.org/docs/app/getting-started/linking-and-navigating"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-07-28
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -147,7 +147,7 @@ Next.js avoids this with client-side transitions using the `<Link>` component. I
 * Keeping any shared layouts and UI.
 * Replacing the current page with the prefetched loading state or a new page if available.
 
-Client-side transitions are what makes a server-rendered apps *feel* like client-rendered apps. And when paired with [prefetching](#prefetching) and [streaming](#streaming), it enables fast transitions, even for dynamic routes.
+Client-side transitions make server-rendered apps *feel* like client-rendered apps. And when paired with [prefetching](#prefetching) and [streaming](#streaming), they enable fast transitions, even for dynamic routes.
 
 Next.js also handles [scrolling to the top of the page](/docs/app/api-reference/components/link#scroll) during client-side transitions. If content scrolls behind a sticky or fixed header after navigation, you can fix this with CSS [`scroll-padding-top`](/docs/app/api-reference/components/link#scroll-offset-with-sticky-headers).
 

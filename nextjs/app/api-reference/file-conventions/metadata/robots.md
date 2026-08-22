@@ -3,7 +3,7 @@ title: robots.txt
 description: API Reference for robots.txt file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-05-01
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

@@ -3,7 +3,7 @@ title: io
 description: API Reference for the io function.
 url: "https://nextjs.org/docs/app/api-reference/functions/io"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-06-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,7 +3,7 @@ title: next.config.js
 description: Learn how to configure your application with next.config.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2025-11-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -170,6 +170,8 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Configure custom cache handlers for use cache directives in Next.js.
 - [cacheLife](/docs/app/api-reference/config/next-config-js/cacheLife)
   - Learn how to set up cacheLife configurations in Next.js.
+- [cacheMaxMemorySize](/docs/app/api-reference/config/next-config-js/cacheMaxMemorySize)
+  - Configure the size of the in-memory cache that Next.js keeps in each server instance.
 - [compress](/docs/app/api-reference/config/next-config-js/compress)
   - Next.js provides gzip compression to compress rendered content and static files, it only works with the server target. Learn more about it here.
 - [crossOrigin](/docs/app/api-reference/config/next-config-js/crossOrigin)

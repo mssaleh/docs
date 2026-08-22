@@ -3,8 +3,8 @@ title: Caching
 description: Learn how to cache data and UI in Next.js
 url: "https://nextjs.org/docs/app/getting-started/caching"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-10
+version: 16.3.2
+lastUpdated: 2026-08-20
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -56,7 +56,7 @@ A cache directive gives a result a lifetime, information Next.js uses to apply r
 
 > **Good to know:** We recommend pairing every cache directive with a [`cacheLife`](/docs/app/api-reference/functions/cacheLife). Without one, the implicit `default` profile applies.
 
-Arguments and any closed-over values from parent scopes automatically become part of the [cache key](/docs/app/api-reference/directives/use-cache#cache-keys), which means different inputs will produce separate cache entries. See [serialization requirements and constraints](/docs/app/api-reference/directives/use-cache#constraints) for details on what can be cached and how arguments work.
+Arguments and any values captured from parent scopes automatically become part of the [cache key](/docs/app/api-reference/directives/use-cache#cache-keys), which means different inputs will produce separate cache entries. See [cache output](/docs/app/api-reference/directives/use-cache#cache-output) for what an entry holds, and [serialization requirements and constraints](/docs/app/api-reference/directives/use-cache#constraints) for details on what can be cached and how arguments work.
 
 ### Data-level caching
 

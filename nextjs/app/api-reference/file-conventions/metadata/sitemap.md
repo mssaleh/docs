@@ -3,8 +3,8 @@ title: sitemap.xml
 description: API Reference for the sitemap.xml file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-03-03
+version: 16.3.2
+lastUpdated: 2026-08-18
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Metadata Files: /docs/app/api-reference/file-conventions/metadata"
@@ -395,7 +395,7 @@ export default async function sitemap(props) {
 }
 ```
 
-Your generated sitemaps will be available at `/.../sitemap/[id]`. For example, `/product/sitemap/1.xml`.
+Your generated sitemaps will be available at `/.../sitemap/[id].xml`. For example, `/product/sitemap/1.xml`.
 
 See the [`generateSitemaps` API reference](/docs/app/api-reference/functions/generate-sitemaps) for more information.
 
@@ -419,6 +419,8 @@ type Sitemap = Array<{
   alternates?: {
     languages?: Languages<string>
   }
+  images?: string[]
+  videos?: Videos[]
 }>
 ```
 

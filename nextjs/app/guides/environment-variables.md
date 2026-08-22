@@ -3,7 +3,7 @@ title: How to use environment variables in Next.js
 description: Learn to add and access environment variables in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/environment-variables"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-03-03
 prerequisites:
   - "Guides: /docs/app/guides"

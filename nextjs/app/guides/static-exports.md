@@ -3,7 +3,7 @@ title: How to create a static export of your Next.js application
 description: Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use features that require a server.
 url: "https://nextjs.org/docs/app/guides/static-exports"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-09
 prerequisites:
   - "Guides: /docs/app/guides"

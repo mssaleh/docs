@@ -3,7 +3,7 @@ title: How to implement authentication with Cache Components
 description: Learn how to read the user session, show authenticated UI without slowing down the page, and cache data derived from the session when Cache Components is enabled.
 url: "https://nextjs.org/docs/app/guides/authentication-with-cache-components"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-08-11
 prerequisites:
   - "Guides: /docs/app/guides"

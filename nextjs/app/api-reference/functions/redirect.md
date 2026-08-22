@@ -3,7 +3,7 @@ title: redirect
 description: API Reference for the redirect function.
 url: "https://nextjs.org/docs/app/api-reference/functions/redirect"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-07-28
 prerequisites:
   - "API Reference: /docs/app/api-reference"

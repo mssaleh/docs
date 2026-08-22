@@ -3,7 +3,7 @@ title: How to use debugging tools with Next.js
 description: Learn how to debug your Next.js application with VS Code, Chrome DevTools, or Firefox DevTools.
 url: "https://nextjs.org/docs/app/guides/debugging"
 docs_index: /docs/llms.txt
-version: 16.3.1
+version: 16.3.2
 lastUpdated: 2026-06-18
 prerequisites:
   - "Guides: /docs/app/guides"

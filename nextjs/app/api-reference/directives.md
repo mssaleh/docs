@@ -3,8 +3,8 @@ title: Directives
 description: Learn how React and Next.js directives define client entry points, Server Functions, and cached output.
 url: "https://nextjs.org/docs/app/api-reference/directives"
 docs_index: /docs/llms.txt
-version: 16.3.1
-lastUpdated: 2026-08-11
+version: 16.3.2
+lastUpdated: 2026-08-20
 prerequisites:
   - "API Reference: /docs/app/api-reference"
 ---
@@ -81,7 +81,7 @@ A directive imposes rules on the code it covers:
 * **`'use server'`** marks the functions it covers as [Server Functions](/docs/app/glossary#server-function). Server Functions must be `async`. When invoked from a Client Component, their arguments and return values are serialized across the network. The Client Component receives a reference that invokes the function on the server, not the function's code.
 * **`'use cache'`** caches the output of the functions or components it covers based on their inputs. Cached functions and components must be `async`. Their arguments and return values must be serializable, except for non-serializable values that the cached code passes through without inspecting. Cached code cannot read request-time APIs like `cookies()`, `headers()`, or `searchParams` directly.
 
-File-level directive rules also apply to framework exports. With `'use cache'` at the top of a page or layout file, exported functions such as `generateMetadata` and `generateStaticParams` must be `async`. A file-level `'use cache'` directive does not allow non-function exports.
+With `'use cache'` at the top of a page or layout file, exported functions such as `generateMetadata` and `generateStaticParams` must be `async`.
 
 ## Placement decides what you cache
 
