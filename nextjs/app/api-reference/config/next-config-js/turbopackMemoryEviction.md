@@ -3,7 +3,7 @@ title: Turbopack Memory Eviction
 description: "Learn how to control Turbopack's memory eviction strategy for the persistent cache."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackMemoryEviction"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

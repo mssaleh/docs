@@ -3,7 +3,7 @@ title: Next.js Rendering Philosophy
 description: Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for deployment.
 url: "https://nextjs.org/docs/app/guides/rendering-philosophy"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-03-30
 prerequisites:
   - "Guides: /docs/app/guides"

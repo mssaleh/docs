@@ -3,8 +3,8 @@ title: The Server and Client Boundary
 description: Learn where Server and Client Components run in the App Router and how the boundary between them works.
 url: "https://nextjs.org/docs/app/guides/server-and-client-boundary"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

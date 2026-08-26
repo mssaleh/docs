@@ -3,8 +3,8 @@ title: "use cache: remote"
 description: "Learn how to use the \"use cache: remote\" directive for persistent, shared caching using remote cache handlers."
 url: "https://nextjs.org/docs/app/api-reference/directives/use-cache-remote"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Directives: /docs/app/api-reference/directives"

@@ -1,8 +1,8 @@
 # Next.js Documentation
 
-> Reference and guides for Next.js 16.3.2 — the React framework for building full-stack web applications. Sections cover Getting Started, App Router, Architecture, and Community Resources.
+> Reference and guides for Next.js 16.3.3 — the React framework for building full-stack web applications. Sections cover Getting Started, App Router, Architecture, and Community Resources.
 
-@doc-version: 16.3.2
+@doc-version: 16.3.3
 @doc-version-notes: Some features may have extended or refined behavior in minor or patch releases
 
 

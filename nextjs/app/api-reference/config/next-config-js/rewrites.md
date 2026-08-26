@@ -3,7 +3,7 @@ title: rewrites
 description: Add rewrites to your Next.js app.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-06-30
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

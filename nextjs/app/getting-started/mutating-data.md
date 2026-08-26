@@ -3,8 +3,8 @@ title: Mutating Data
 description: Learn how to mutate data using Server Functions and Server Actions in Next.js.
 url: "https://nextjs.org/docs/app/getting-started/mutating-data"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-07-28
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -446,7 +446,7 @@ export async function createPost(formData: FormData) {
 }
 ```
 
-```js filename="app/actions.js" switcher
+```js filename="app/lib/actions.js" switcher
 import { auth } from '@/lib/auth'
 import { revalidatePath } from 'next/cache'
 
@@ -486,7 +486,7 @@ export async function createPost(formData: FormData) {
 }
 ```
 
-```js filename="app/actions.js" switcher
+```js filename="app/lib/actions.js" switcher
 'use server'
 
 import { auth } from '@/lib/auth'

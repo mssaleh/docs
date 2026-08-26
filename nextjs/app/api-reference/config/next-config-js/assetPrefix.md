@@ -3,8 +3,8 @@ title: assetPrefix
 description: Learn how to use the assetPrefix config option to configure your CDN.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/assetPrefix"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2025-06-16
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -13,7 +13,7 @@ prerequisites:
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
 > **Attention**: [Deploying to Vercel](/docs/app/getting-started/deploying) automatically configures a global CDN for your Next.js project.
-> You do not need to manually setup an Asset Prefix.
+> You do not need to manually set up an Asset Prefix.
 
 > **Good to know**: Next.js 9.5+ added support for a customizable [Base Path](/docs/app/api-reference/config/next-config-js/basePath), which is better
 > suited for hosting your application on a sub-path like `/docs`.

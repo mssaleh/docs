@@ -3,8 +3,8 @@ title: Adopting Partial Prefetching
 description: "Learn how to enable Partial Prefetching and what changes for `<Link>`."
 url: "https://nextjs.org/docs/app/guides/adopting-partial-prefetching"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

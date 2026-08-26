@@ -3,8 +3,8 @@ title: Server and Client Components
 description: Learn how you can use React Server and Client Components to render parts of your application on the server or the client.
 url: "https://nextjs.org/docs/app/getting-started/server-and-client-components"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -28,7 +28,7 @@ Use **Client Components** when you need:
 
 * [State](https://react.dev/learn/managing-state) and [event handlers](https://react.dev/learn/responding-to-events). E.g. `onClick`, `onChange`.
 * [Lifecycle logic](https://react.dev/learn/lifecycle-of-reactive-effects). E.g. `useEffect`.
-* Browser-only APIs. E.g. `localStorage`, `window`, `Navigator.geolocation`, etc.
+* Browser-only APIs. E.g. `localStorage`, `window`, `navigator.geolocation`, etc.
 * [Custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks).
 
 Use **Server Components** when you need:
@@ -64,12 +64,13 @@ export default async function Page({
 }
 ```
 
-```jsx filename="app/[id]/page.js" highlight={1,12} switcher
+```jsx filename="app/[id]/page.js" highlight={1,13} switcher
 import LikeButton from '@/app/ui/like-button'
 import { getPost } from '@/lib/data'
 
 export default async function Page({ params }) {
-  const post = await getPost(params.id)
+  const { id } = await params
+  const post = await getPost(id)
 
   return (
     <div>
@@ -143,7 +144,7 @@ On subsequent navigations:
 
 ### Using Client Components
 
-You can create a Client Component by adding the [`"use client"`](https://react.dev/reference/react/use-client) directive at the top of the file, above your imports.
+You can create a Client Component by adding the [`"use client"`](https://react.dev/reference/rsc/use-client) directive at the top of the file, above your imports.
 
 ```tsx filename="app/ui/counter.tsx" highlight={1} switcher
 'use client'
@@ -269,12 +270,13 @@ export default async function Page({
 }
 ```
 
-```jsx filename="app/[id]/page.js" highlight={1,7} switcher
+```jsx filename="app/[id]/page.js" highlight={1,8} switcher
 import LikeButton from '@/app/ui/like-button'
 import { getPost } from '@/lib/data'
 
 export default async function Page({ params }) {
-  const post = await getPost(params.id)
+  const { id } = await params
+  const post = await getPost(id)
 
   return <LikeButton likes={post.likes} />
 }

@@ -3,8 +3,8 @@ title: Link Component
 description: "Enable fast client-side navigation with the built-in `next/link` component."
 url: "https://nextjs.org/docs/app/api-reference/components/link"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -36,14 +36,14 @@ export default function Page() {
 
 The following props can be passed to the `<Link>` component:
 
-| Prop                                  | Example                          | Type             | Required |
-| ------------------------------------- | -------------------------------- | ---------------- | -------- |
-| [`href`](#href-required)              | `href="/dashboard"`              | String or Object | Yes      |
-| [`replace`](#replace)                 | `replace={false}`                | Boolean          | -        |
-| [`scroll`](#scroll)                   | `scroll={false}`                 | Boolean          | -        |
-| [`prefetch`](#prefetch)               | `prefetch={false}`               | Boolean or null  | -        |
-| [`onNavigate`](#onnavigate)           | `onNavigate={(e) => {}}`         | Function         | -        |
-| [`transitionTypes`](#transitiontypes) | `transitionTypes={['slide-in']}` | `string[]`       | -        |
+| Prop                                  | Example                          | Type                       | Required |
+| ------------------------------------- | -------------------------------- | -------------------------- | -------- |
+| [`href`](#href-required)              | `href="/dashboard"`              | String or Object           | Yes      |
+| [`replace`](#replace)                 | `replace={false}`                | Boolean                    | -        |
+| [`scroll`](#scroll)                   | `scroll={false}`                 | Boolean                    | -        |
+| [`prefetch`](#prefetch)               | `prefetch={false}`               | Boolean, `"auto"`, or null | -        |
+| [`onNavigate`](#onnavigate)           | `onNavigate={(e) => {}}`         | Function                   | -        |
+| [`transitionTypes`](#transitiontypes) | `transitionTypes={['slide-in']}` | `string[]`                 | -        |
 
 > **Good to know**: `<a>` tag attributes such as `className` or `target="_blank"` can be added to `<Link>` as props and will be passed to the underlying `<a>` element.
 

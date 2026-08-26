@@ -3,7 +3,7 @@ title: How Next.js preserves UI state with Activity
 description: "Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets."
 url: "https://nextjs.org/docs/app/guides/preserving-ui-state"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-01
 prerequisites:
   - "Guides: /docs/app/guides"

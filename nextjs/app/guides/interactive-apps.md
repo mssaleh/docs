@@ -3,8 +3,8 @@ title: Building interactive apps
 description: Learn how to build responsive interactions with Server Functions, transitions, optimistic UI, and pending feedback.
 url: "https://nextjs.org/docs/app/guides/interactive-apps"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-19
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

@@ -3,8 +3,8 @@ title: prefetch
 description: API reference for the prefetch route segment config.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/prefetch"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"
   - "Route Segment Config: /docs/app/api-reference/file-conventions/route-segment-config"

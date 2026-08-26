@@ -3,7 +3,7 @@ title: useTypeScriptCli
 description: Run the project-local TypeScript CLI for type checking during production builds.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/useTypeScriptCli"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-08-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

@@ -3,8 +3,8 @@ title: Form Component
 description: "Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation."
 url: "https://nextjs.org/docs/app/api-reference/components/form"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-06-25
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Components: /docs/app/api-reference/components"
@@ -218,7 +218,7 @@ export default function Page() {
 }
 ```
 
-```jsx filename="/app/ui/search-button.js" switcher
+```jsx filename="/app/page.js" switcher
 import Form from 'next/form'
 import { SearchButton } from '@/ui/search-button'
 

@@ -3,8 +3,8 @@ title: How to set up Vitest with Next.js
 description: Learn how to set up Vitest with Next.js for Unit Testing.
 url: "https://nextjs.org/docs/app/guides/testing/vitest"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-02-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Testing: /docs/app/guides/testing"
@@ -12,7 +12,7 @@ prerequisites:
 
 
 > For an index of all Next.js documentation, see [/docs/llms.txt](/docs/llms.txt).
-Vitest and React Testing Library are frequently used together for **Unit Testing**. This guide will show you how to setup Vitest with Next.js and write your first tests.
+Vitest and React Testing Library are frequently used together for **Unit Testing**. This guide will show you how to set up Vitest with Next.js and write your first tests.
 
 > **Good to know:** Since `async` Server Components are new to the React ecosystem, Vitest currently does not support them. While you can still run **unit tests** for synchronous Server and Client Components, we recommend using **E2E tests** for `async` components.
 

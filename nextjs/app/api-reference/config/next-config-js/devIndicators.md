@@ -3,7 +3,7 @@ title: devIndicators
 description: "Configuration options for the on-screen indicator that gives context about the current route you're viewing during development."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/devIndicators"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-05-12
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

@@ -3,8 +3,8 @@ title: How to migrate from Pages to the App Router
 description: Learn how to upgrade your existing Next.js application from the Pages Router to the App Router.
 url: "https://nextjs.org/docs/app/guides/migrating/app-router-migration"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-21
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Migrating: /docs/app/guides/migrating"

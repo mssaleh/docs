@@ -3,7 +3,7 @@ title: opengraph-image and twitter-image
 description: API Reference for the Open Graph Image and Twitter Image file conventions.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-09
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

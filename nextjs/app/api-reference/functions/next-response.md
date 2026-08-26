@@ -3,7 +3,7 @@ title: NextResponse
 description: API Reference for NextResponse.
 url: "https://nextjs.org/docs/app/api-reference/functions/next-response"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-12-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"

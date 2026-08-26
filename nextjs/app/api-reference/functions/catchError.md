@@ -3,8 +3,8 @@ title: catchError
 description: API Reference for the catchError function.
 url: "https://nextjs.org/docs/app/api-reference/functions/catchError"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-06-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Functions: /docs/app/api-reference/functions"
@@ -96,7 +96,7 @@ The `fallback` function must be a Client Component (or defined in a `'use client
 
 ## Examples
 
-### Client Component
+### Basic usage
 
 Define a fallback and use the returned component to wrap parts of your UI:
 

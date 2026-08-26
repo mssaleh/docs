@@ -3,8 +3,8 @@ title: next CLI
 description: Learn how to run and build your application with the Next.js CLI.
 url: "https://nextjs.org/docs/app/api-reference/cli/next"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "CLI: /docs/app/api-reference/cli"

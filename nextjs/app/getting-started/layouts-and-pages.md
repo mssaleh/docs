@@ -3,8 +3,8 @@ title: Layouts and Pages
 description: Learn how to create your first pages and layouts, and link between them with the Link component.
 url: "https://nextjs.org/docs/app/getting-started/layouts-and-pages"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-05-28
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -139,7 +139,7 @@ You can continue nesting folders to create nested routes. For example, to create
 ![File hierarchy showing blog folder with a nested slug folder and a page.js file](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/blog-post-nested-route.png)
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-function generateStaticParams() {}
+export function generateStaticParams() {}
 
 export default function Page() {
   return <h1>Hello, Blog Post Page!</h1>
@@ -147,7 +147,7 @@ export default function Page() {
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
-function generateStaticParams() {}
+export function generateStaticParams() {}
 
 export default function Page() {
   return <h1>Hello, Blog Post Page!</h1>
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }) {
 
 Learn more about [Dynamic Segments](/docs/app/api-reference/file-conventions/dynamic-routes) and the [`params`](/docs/app/api-reference/file-conventions/page#params-optional) props.
 
-Nested [layouts within Dynamic Segments](/docs/app/api-reference/file-conventions/layout#params-optional), can also access the `params` props.
+Nested [layouts within Dynamic Segments](/docs/app/api-reference/file-conventions/layout#params-optional) can also access the `params` props.
 
 ## Rendering with search params
 

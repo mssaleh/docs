@@ -3,8 +3,8 @@ title: Output Types
 description: Reference for all build output types exposed to adapters.
 url: "https://nextjs.org/docs/app/api-reference/adapters/output-types"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-07-24
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -39,6 +39,7 @@ React pages from the `pages/` directory:
   sourcePage: string   // Original source file path in pages/ directory
   runtime: 'nodejs' | 'edge'
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)
+  assetsHashes: Record<string, string>  // Content hashes of each `assets` entry (key: same as `assets`, value: content hash)
   wasmAssets?: Record<string, string>  // Bundled wasm files (key: name, value: absolute path)
   edgeRuntime?: {
     modulePath: string    // Absolute path to the module registered in the edge runtime
@@ -66,6 +67,7 @@ API routes from `pages/api/`:
   sourcePage: string   // Original relative source file path
   runtime: 'nodejs' | 'edge'
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)
+  assetsHashes: Record<string, string>  // Content hashes of each `assets` entry (key: same as `assets`, value: content hash)
   wasmAssets?: Record<string, string>  // Bundled wasm files (key: name, value: absolute path)
   edgeRuntime?: {
     modulePath: string    // Absolute path to the module registered in the edge runtime
@@ -93,6 +95,7 @@ React pages from the `app/` directory:
   sourcePage: string   // Original relative source file path
   runtime: 'nodejs' | 'edge' // Runtime the route is built for
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)
+  assetsHashes: Record<string, string>  // Content hashes of each `assets` entry (key: same as `assets`, value: content hash)
   wasmAssets?: Record<string, string>  // Bundled wasm files (key: name, value: absolute path)
   edgeRuntime?: {
     modulePath: string    // Absolute path to the module registered in the edge runtime
@@ -120,6 +123,7 @@ API and metadata routes from the `app/` directory:
   sourcePage: string   // Original relative source file path
   runtime: 'nodejs' | 'edge' // Runtime the route is built for
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)
+  assetsHashes: Record<string, string>  // Content hashes of each `assets` entry (key: same as `assets`, value: content hash)
   wasmAssets?: Record<string, string>  // Bundled wasm files (key: name, value: absolute path)
   edgeRuntime?: {
     modulePath: string    // Absolute path to the module registered in the edge runtime
@@ -227,6 +231,7 @@ See [Supporting immutable static assets](/docs/app/api-reference/adapters/immuta
   sourcePage: string    // Always 'middleware'
   runtime: 'nodejs' | 'edge' // Runtime the route is built for
   assets: Record<string, string>  // Traced dependencies (key: relative path from repo root, value: absolute path)
+  assetsHashes: Record<string, string>  // Content hashes of each `assets` entry (key: same as `assets`, value: content hash)
   wasmAssets?: Record<string, string>  // Bundled wasm files (key: name, value: absolute path)
   edgeRuntime?: {
     modulePath: string    // Absolute path to the module registered in the edge runtime

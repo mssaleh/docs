@@ -3,7 +3,7 @@ title: page.js
 description: API reference for the page.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/page"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"

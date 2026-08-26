@@ -3,7 +3,7 @@ title: expireTime
 description: Customize stale-while-revalidate expire time for ISR enabled pages.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/expireTime"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

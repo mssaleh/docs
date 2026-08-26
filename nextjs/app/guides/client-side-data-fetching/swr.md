@@ -3,8 +3,8 @@ title: How to fetch client-side data with SWR
 description: Fetch client-side data with SWR, optionally provide initial data from a Server Component, and coordinate server and client caches.
 url: "https://nextjs.org/docs/app/guides/client-side-data-fetching/swr"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Client-side data fetching: /docs/app/guides/client-side-data-fetching"

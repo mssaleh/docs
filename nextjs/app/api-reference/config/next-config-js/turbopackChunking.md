@@ -3,8 +3,8 @@ title: turbopackChunking
 description: Configure how Turbopack splits your client-side JavaScript into chunks in production.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackChunking"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-12
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"
@@ -17,7 +17,7 @@ prerequisites:
 
 `experimental.turbopackChunking` lets you configure Turbopack's production JavaScript
 chunker. These options allow you to change the assumptions the chunker makes about user
-behaviour, tweak the raw size thresholds it uses, and enable the experimental component
+behavior, tweak the raw size thresholds it uses, and enable the experimental component
 chunks feature.
 
 By default, Turbopack's chunking is configured as follows:
@@ -102,11 +102,6 @@ This avoids re-downloading JavaScript the browser already has when navigating.
 These change the assumptions the chunker makes when weighing whether merging two
 chunks is worth it.
 
-* **`clusters`** (an array of arrays of `RegExp`, e.g.
-  `[[/^\/dashboard/, /^\/settings/]]`): groups of routes that are commonly
-  visited together, matched against the route pathname. Turbopack assumes
-  navigations are likely to stay within a cluster, so chunks shared by a
-  cluster's routes are merged more eagerly.
 * **`firstPageLoadPriority`** (a number between `0` and `1`): how heavily to
   weight the benefit of merging chunks for a single page load. Higher values
   merge more eagerly. If you don't have a better value, your site's bounce rate

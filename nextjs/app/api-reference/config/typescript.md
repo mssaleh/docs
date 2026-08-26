@@ -3,8 +3,8 @@ title: TypeScript
 description: Next.js provides a TypeScript-first development experience for building your React application.
 url: "https://nextjs.org/docs/app/api-reference/config/typescript"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-03
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Configuration: /docs/app/api-reference/config"
@@ -276,6 +276,7 @@ export function proxy(request: NextRequest) {
 
 ```tsx filename="app/some/page.tsx"
 import type { Route } from 'next'
+import Link from 'next/link'
 
 export default function Page() {
   return <Link href={'/proxy-redirect' as Route}>Link Text</Link>

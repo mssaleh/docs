@@ -3,8 +3,8 @@ title: Custom Next.js Cache Handler
 description: Configure the Next.js cache used for storing and revalidating data to use any external service like Redis, Memcached, or others.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/incrementalCacheHandlerPath"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"
   - "next.config.js: /docs/app/api-reference/config/next-config-js"

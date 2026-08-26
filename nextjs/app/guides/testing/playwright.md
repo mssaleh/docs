@@ -3,8 +3,8 @@ title: How to set up Playwright with Next.js
 description: Learn how to set up Playwright with Next.js for End-to-End (E2E) Testing.
 url: "https://nextjs.org/docs/app/guides/testing/playwright"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-02-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Testing: /docs/app/guides/testing"
@@ -54,7 +54,7 @@ yarn create playwright
 bun create playwright
 ```
 
-This will take you through a series of prompts to setup and configure Playwright for your project, including adding a `playwright.config.ts` file. Please refer to the [Playwright installation guide](https://playwright.dev/docs/intro#installation) for the step-by-step guide.
+This will take you through a series of prompts to set up and configure Playwright for your project, including adding a `playwright.config.ts` file. Please refer to the [Playwright installation guide](https://playwright.dev/docs/intro#installation) for the step-by-step guide.
 
 ## Creating your first Playwright E2E test
 

@@ -3,8 +3,8 @@ title: How to set up a custom server in Next.js
 description: Start a Next.js app programmatically using a custom server.
 url: "https://nextjs.org/docs/app/guides/custom-server"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-05-29
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -63,6 +63,16 @@ app.prepare().then(() => {
   )
 })
 ```
+
+> **Set your own response headers before calling `handle`**: Next.js begins sending the response inside `handle(req, res)`, so by the time its promise resolves `res.headersSent` is already `true` and any later `res.setHeader()` call is silently discarded. Set headers you own, such as `Set-Cookie`, before handing the request to Next.js:
+>
+> ```js
+> res.setHeader('Set-Cookie', 'sessionId=abc123; Max-Age=2592000')
+>
+> await handle(req, res)
+> ```
+>
+> The same ordering applies when wrapping Next.js in another framework, for example `reply.raw` in Fastify or `res` in Express.
 
 > `server.js` does not run through the Next.js Compiler or bundling process. Make sure the syntax and source code this file requires are compatible with the current Node.js version you are using. [View an example](https://github.com/vercel/next.js/tree/canary/examples/custom-server).
 

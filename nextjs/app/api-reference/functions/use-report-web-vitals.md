@@ -3,7 +3,7 @@ title: useReportWebVitals
 description: API Reference for the useReportWebVitals function.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-report-web-vitals"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-02-27
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,7 +3,7 @@ title: unauthorized
 description: API Reference for the unauthorized function.
 url: "https://nextjs.org/docs/app/api-reference/functions/unauthorized"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-24
 prerequisites:
   - "API Reference: /docs/app/api-reference"

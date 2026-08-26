@@ -3,7 +3,7 @@ title: userAgent
 description: The userAgent helper extends the Web Request API with additional properties and methods to interact with the user agent object from the request.
 url: "https://nextjs.org/docs/app/api-reference/functions/userAgent"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-10-17
 prerequisites:
   - "API Reference: /docs/app/api-reference"

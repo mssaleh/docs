@@ -3,7 +3,7 @@ title: useOffline
 description: API Reference for the useOffline hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-offline"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-28
 prerequisites:
   - "API Reference: /docs/app/api-reference"

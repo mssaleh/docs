@@ -3,8 +3,8 @@ title: Optimizing prefetching
 description: Resolve per-link URL data with the prefetch prop, or include session data in the App Shell.
 url: "https://nextjs.org/docs/app/guides/optimizing-prefetching"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 related:

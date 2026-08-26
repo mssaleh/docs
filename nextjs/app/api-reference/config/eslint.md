@@ -3,8 +3,8 @@ title: ESLint Plugin
 description: Learn how to use and configure the ESLint plugin to catch common issues and problems in a Next.js application.
 url: "https://nextjs.org/docs/app/api-reference/config/eslint"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2025-11-10
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Configuration: /docs/app/api-reference/config"
@@ -145,7 +145,7 @@ const eslintConfig = defineConfig([
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
-      next: eslintNextPlugin,
+      '@next/next': eslintNextPlugin,
     },
     settings: {
       next: {

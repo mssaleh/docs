@@ -3,7 +3,7 @@ title: Testing Adapters
 description: Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
 url: "https://nextjs.org/docs/app/api-reference/adapters/testing-adapters"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2026-07-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"

@@ -3,8 +3,8 @@ title: How to use debugging tools with Next.js
 description: Learn how to debug your Next.js application with VS Code, Chrome DevTools, or Firefox DevTools.
 url: "https://nextjs.org/docs/app/guides/debugging"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-06-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 ---
@@ -81,7 +81,7 @@ Now go to the Debug panel (`Ctrl+Shift+D` on Windows/Linux, `⇧+⌘+D` on macOS
 
 ## Using the Debugger in Jetbrains WebStorm
 
-Click the drop down menu listing the runtime configuration, and click `Edit Configurations...`. Create a `JavaScript Debug` debug configuration with `http://localhost:3000` as the URL. Customize to your liking (e.g. Browser for debugging, store as project file), and click `OK`. Run this debug configuration, and the selected browser should automatically open. At this point, you should have 2 applications in debug mode: the NextJS node application, and the client/browser application.
+Click the drop down menu listing the runtime configuration, and click `Edit Configurations...`. Create a `JavaScript Debug` debug configuration with `http://localhost:3000` as the URL. Customize to your liking (e.g. Browser for debugging, store as project file), and click `OK`. Run this debug configuration, and the selected browser should automatically open. At this point, you should have 2 applications in debug mode: the Next.js node application, and the client/browser application.
 
 ## Debugging with Browser DevTools
 

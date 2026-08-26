@@ -3,7 +3,7 @@ title: htmlLimitedBots
 description: Specify a list of user agents that should receive blocking metadata.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-10-03
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

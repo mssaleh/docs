@@ -3,7 +3,7 @@ title: Components
 description: API Reference for Next.js built-in components.
 url: "https://nextjs.org/docs/app/api-reference/components"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

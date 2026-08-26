@@ -3,8 +3,8 @@ title: How to set up Jest with Next.js
 description: Learn how to set up Jest with Next.js for Unit Testing and Snapshot Testing.
 url: "https://nextjs.org/docs/app/guides/testing/jest"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-02-11
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
   - "Testing: /docs/app/guides/testing"
@@ -76,7 +76,7 @@ yarn create jest@latest
 bun create jest@latest
 ```
 
-This will take you through a series of prompts to setup Jest for your project, including automatically creating a `jest.config.ts|js` file.
+This will take you through a series of prompts to set up Jest for your project, including automatically creating a `jest.config.ts|js` file.
 
 Update your config file to use `next/jest`. This transformer has all the necessary configuration options for Jest to work with Next.js:
 

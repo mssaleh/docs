@@ -3,8 +3,8 @@ title: How to implement authentication in Next.js
 description: Learn how to implement authentication in your Next.js application.
 url: "https://nextjs.org/docs/app/guides/authentication"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-08-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"
 ---

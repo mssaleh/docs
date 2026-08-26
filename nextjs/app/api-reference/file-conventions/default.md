@@ -3,7 +3,7 @@ title: default.js
 description: API Reference for the default.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/default"
 docs_index: /docs/llms.txt
-version: 16.3.2
+version: 16.3.3
 lastUpdated: 2025-10-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"

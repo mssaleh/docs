@@ -3,8 +3,8 @@ title: Routing Information
 description: "Reference for routing phases and route fields exposed in `onBuildComplete`."
 url: "https://nextjs.org/docs/app/api-reference/adapters/routing-information"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-03-30
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -17,6 +17,10 @@ The `routing` object in `onBuildComplete` provides complete routing information 
 ## `routing.beforeMiddleware`
 
 Routes applied before middleware execution. These include generated header and redirect behavior.
+
+## `routing.middlewareMatchers`
+
+Middleware matcher definitions emitted for this build. Use these to decide whether middleware should be invoked for a given request.
 
 ## `routing.beforeFiles`
 

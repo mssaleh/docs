@@ -3,8 +3,8 @@ title: Metadata and OG images
 description: Learn how to add metadata to your pages and create dynamic OG images.
 url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-06-01
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:
@@ -244,7 +244,7 @@ The more specific image will take precedence over any OG images above it in the 
 
 The [`ImageResponse` constructor](/docs/app/api-reference/functions/image-response) allows you to generate dynamic images using JSX and CSS. This is useful for OG images that depend on data.
 
-For example, to generate a unique OG image for each blog post, add a `opengraph-image.tsx` file inside the `blog` folder, and import the `ImageResponse` constructor from `next/og`:
+For example, to generate a unique OG image for each blog post, add an `opengraph-image.tsx` file inside the `blog/[slug]` folder, and import the `ImageResponse` constructor from `next/og`:
 
 ```tsx filename="app/blog/[slug]/opengraph-image.tsx" switcher
 import { ImageResponse } from 'next/og'

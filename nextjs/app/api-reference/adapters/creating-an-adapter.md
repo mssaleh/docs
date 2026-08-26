@@ -3,8 +3,8 @@ title: Creating an Adapter
 description: "Create an adapter module that implements the `NextAdapter` interface."
 url: "https://nextjs.org/docs/app/api-reference/adapters/creating-an-adapter"
 docs_index: /docs/llms.txt
-version: 16.3.2
-lastUpdated: 2026-05-18
+version: 16.3.3
+lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "Adapters: /docs/app/api-reference/adapters"
@@ -57,6 +57,7 @@ export interface NextAdapter {
   onBuildComplete?: (ctx: {
     routing: {
       beforeMiddleware: Array<Route>
+      middlewareMatchers: Array<Route>
       beforeFiles: Array<Route>
       afterFiles: Array<Route>
       dynamicRoutes: Array<Route>
