@@ -1,27 +1,24 @@
----
-title: Create Invite
-url: https://platform.claude.com/docs/en/api/admin/invites/create
----
+# Create Invite
 
-## Create Invite
+**POST** `/v1/organizations/invites`
 
-**post** `/v1/organizations/invites`
-
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Invite a user to join the organization by email.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
 
-### Body Parameters
+## Body parameters
 
 - `email: string`
 
   Email of the User.
 
+  format: email
+
 - `role: "billing" or "claude_code_user" or "developer" or 2 more`
 
   Role for the invited User.
 
-  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
 
   - `"billing"`
 
@@ -35,11 +32,13 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
 - `rbac_group_ids: optional array of string`
 
-  RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups (beta), and requires the key to carry the `write:rbac_groups` scope.
+  RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups, and requires the key to carry the `write:rbac_groups` scope.
 
-### Returns
+  maxItems: 100
 
-- `Invite object { id, accepted_at, email, 6 more }`
+## Returns
+
+- `Invite object`
 
   - `id: string`
 
@@ -49,6 +48,8 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
+    format: date-time
+
   - `email: string`
 
     Email of the User being invited.
@@ -57,13 +58,17 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     RFC 3339 datetime string indicating when the Invite expires.
 
+    format: date-time
+
   - `invited_at: string`
 
     RFC 3339 datetime string indicating when the Invite was created.
 
+    format: date-time
+
   - `rbac_group_ids: array of string`
 
-    RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+    RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
   - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
@@ -105,11 +110,11 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     For Invites, this is always `"invite"`.
 
-    - `"invite"`
+    default: invite
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -120,7 +125,7 @@ curl https://api.anthropic.com/v1/organizations/invites \
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

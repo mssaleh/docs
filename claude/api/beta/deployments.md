@@ -1,17 +1,12 @@
----
-title: Deployments
-url: https://platform.claude.com/docs/en/api/beta/deployments
----
-
 # Deployments
 
 ## Create Deployment
 
-**post** `/v1/deployments`
+**POST** `/v1/deployments`
 
 Create Deployment
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -19,7 +14,7 @@ Create Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -89,7 +84,21 @@ Create Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `agent: string or BetaManagedAgentsAgentParams`
 
@@ -97,7 +106,7 @@ Create Deployment
 
   - `string`
 
-  - `BetaManagedAgentsAgentParams object { id, type, version }`
+  - `BetaManagedAgentsAgentParams object`
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -105,23 +114,27 @@ Create Deployment
 
       The `agent` ID.
 
-    - `type: "agent"`
+      minLength: 1, maxLength: 128
 
-      - `"agent"`
+    - `type: "agent"`
 
     - `version: optional number`
 
       The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+      format: int32
+
 - `environment_id: string`
 
   ID of the `environment` defining the container configuration for sessions created from this deployment.
+
+  minLength: 1, maxLength: 128
 
 - `initial_events: array of BetaManagedAgentsDeploymentInitialEventParams`
 
   Events to send to each session immediately after creation. At least 1, maximum 50.
 
-  - `BetaManagedAgentsUserMessageEventParams object { content, type }`
+  - `BetaManagedAgentsUserMessageEventParams object`
 
     Parameters for sending a user message to the session.
 
@@ -129,7 +142,7 @@ Create Deployment
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -137,11 +150,11 @@ Create Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -149,7 +162,7 @@ Create Deployment
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -157,27 +170,29 @@ Create Deployment
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -185,15 +200,13 @@ Create Deployment
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -201,7 +214,7 @@ Create Deployment
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -209,15 +222,17 @@ Create Deployment
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -225,29 +240,27 @@ Create Deployment
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -255,13 +268,11 @@ Create Deployment
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -271,19 +282,15 @@ Create Deployment
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -295,7 +302,7 @@ Create Deployment
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+      - `BetaManagedAgentsFileRubricParams object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -305,9 +312,7 @@ Create Deployment
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubricParams object { content, type }`
+      - `BetaManagedAgentsTextRubricParams object`
 
         Rubric content provided inline as text.
 
@@ -315,19 +320,19 @@ Create Deployment
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+      format: int32
+
+  - `BetaManagedAgentsSystemMessageEventParams object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -339,17 +344,17 @@ Create Deployment
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
 - `name: string`
 
   Human-readable name for the deployment.
+
+  minLength: 1, maxLength: 256
 
 - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -367,15 +372,13 @@ Create Deployment
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `"USD"`
-
   - `type: "limit"`
-
-    - `"limit"`
 
 - `description: optional string or null`
 
   Description of what the deployment does.
+
+  maxLength: 2048
 
 - `metadata: optional map[string]`
 
@@ -385,7 +388,7 @@ Create Deployment
 
   Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-  - `BetaManagedAgentsGitHubRepositoryResourceParams object { authorization_token, type, url, 2 more }`
+  - `BetaManagedAgentsGitHubRepositoryResourceParams object`
 
     Mount a GitHub repository into the session's container.
 
@@ -393,43 +396,47 @@ Create Deployment
 
       GitHub authorization token used to clone the repository.
 
-    - `type: "github_repository"`
+      minLength: 1, maxLength: 4096
 
-      - `"github_repository"`
+    - `type: "github_repository"`
 
     - `url: string`
 
       Github URL of the repository
 
+      minLength: 1, maxLength: 2048
+
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
-      - `BetaManagedAgentsBranchCheckout object { name, type }`
+      - `BetaManagedAgentsBranchCheckout object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `BetaManagedAgentsCommitCheckout object { sha, type }`
+      - `BetaManagedAgentsCommitCheckout object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-  - `BetaManagedAgentsFileResourceParams object { file_id, type, mount_path }`
+      minLength: 1, maxLength: 4096
+
+  - `BetaManagedAgentsFileResourceParams object`
 
     Mount a file uploaded via the Files API into the session.
 
@@ -437,15 +444,17 @@ Create Deployment
 
       ID of a previously uploaded file.
 
-    - `type: "file"`
+      minLength: 1, maxLength: 128
 
-      - `"file"`
+    - `type: "file"`
 
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-  - `BetaManagedAgentsMemoryStoreResourceParam object { memory_store_id, type, access, instructions }`
+      minLength: 1, maxLength: 4096
+
+  - `BetaManagedAgentsMemoryStoreResourceParam object`
 
     Parameters for attaching a memory store to an agent session.
 
@@ -454,8 +463,6 @@ Create Deployment
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only" or null`
 
@@ -469,6 +476,8 @@ Create Deployment
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+      maxLength: 4096
+
 - `schedule: optional BetaManagedAgentsScheduleParams or null`
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
@@ -477,13 +486,15 @@ Create Deployment
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
 - `vault_ids: optional array of string`
 
@@ -491,7 +502,7 @@ Create Deployment
 
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -507,17 +518,21 @@ Create Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -531,7 +546,7 @@ Create Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -539,7 +554,7 @@ Create Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -547,11 +562,11 @@ Create Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -559,7 +574,7 @@ Create Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -567,27 +582,29 @@ Create Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -595,15 +612,13 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -611,7 +626,7 @@ Create Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -619,15 +634,17 @@ Create Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -635,29 +652,27 @@ Create Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -665,13 +680,11 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -681,19 +694,15 @@ Create Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -705,7 +714,7 @@ Create Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -715,9 +724,7 @@ Create Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -727,17 +734,15 @@ Create Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -749,13 +754,11 @@ Create Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -769,15 +772,13 @@ Create Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -785,133 +786,101 @@ Create Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -921,31 +890,31 @@ Create Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -955,13 +924,11 @@ Create Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -970,8 +937,6 @@ Create Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -993,17 +958,21 @@ Create Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -1019,11 +988,11 @@ Create Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -1045,15 +1014,11 @@ Create Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -1077,7 +1042,7 @@ curl https://api.anthropic.com/v1/deployments \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1146,11 +1111,11 @@ curl https://api.anthropic.com/v1/deployments \
 
 ## List Deployments
 
-**get** `/v1/deployments`
+**GET** `/v1/deployments`
 
 List Deployments
 
-### Query Parameters
+### Query parameters
 
 - `agent_id: optional string`
 
@@ -1160,9 +1125,13 @@ List Deployments
 
   Return deployments created at or after this time (inclusive).
 
+  format: date-time
+
 - `"created_at[lte]": optional string`
 
   Return deployments created at or before this time (inclusive).
+
+  format: date-time
 
 - `include_archived: optional boolean`
 
@@ -1171,6 +1140,8 @@ List Deployments
 - `limit: optional number`
 
   Maximum results per page. Default 20, maximum 100.
+
+  format: int32
 
 - `page: optional string`
 
@@ -1184,7 +1155,7 @@ List Deployments
 
   - `"paused"`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1192,7 +1163,7 @@ List Deployments
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1262,6 +1233,20 @@ List Deployments
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
 - `data: array of BetaManagedAgentsDeployment`
@@ -1280,17 +1265,21 @@ List Deployments
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -1304,7 +1293,7 @@ List Deployments
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -1312,7 +1301,7 @@ List Deployments
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -1320,11 +1309,11 @@ List Deployments
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1332,7 +1321,7 @@ List Deployments
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -1340,27 +1329,29 @@ List Deployments
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -1368,15 +1359,13 @@ List Deployments
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1384,7 +1373,7 @@ List Deployments
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -1392,15 +1381,17 @@ List Deployments
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -1408,29 +1399,27 @@ List Deployments
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -1438,13 +1427,11 @@ List Deployments
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -1454,19 +1441,15 @@ List Deployments
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -1478,7 +1461,7 @@ List Deployments
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -1488,9 +1471,7 @@ List Deployments
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -1500,17 +1481,15 @@ List Deployments
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -1522,13 +1501,11 @@ List Deployments
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -1542,15 +1519,13 @@ List Deployments
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -1558,133 +1533,101 @@ List Deployments
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -1694,31 +1637,31 @@ List Deployments
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -1728,13 +1671,11 @@ List Deployments
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -1743,8 +1684,6 @@ List Deployments
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -1766,17 +1705,21 @@ List Deployments
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -1792,11 +1735,11 @@ List Deployments
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -1818,11 +1761,7 @@ List Deployments
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 - `next_page: optional string or null`
 
@@ -1830,14 +1769,14 @@ List Deployments
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1911,15 +1850,15 @@ curl https://api.anthropic.com/v1/deployments \
 
 ## Get Deployment
 
-**get** `/v1/deployments/{deployment_id}`
+**GET** `/v1/deployments/{deployment_id}`
 
 Get Deployment
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1927,7 +1866,7 @@ Get Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1997,9 +1936,23 @@ Get Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -2015,17 +1968,21 @@ Get Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -2039,7 +1996,7 @@ Get Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -2047,7 +2004,7 @@ Get Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -2055,11 +2012,11 @@ Get Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2067,7 +2024,7 @@ Get Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -2075,27 +2032,29 @@ Get Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -2103,15 +2062,13 @@ Get Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2119,7 +2076,7 @@ Get Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -2127,15 +2084,17 @@ Get Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -2143,29 +2102,27 @@ Get Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -2173,13 +2130,11 @@ Get Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -2189,19 +2144,15 @@ Get Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -2213,7 +2164,7 @@ Get Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -2223,9 +2174,7 @@ Get Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -2235,17 +2184,15 @@ Get Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -2257,13 +2204,11 @@ Get Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -2277,15 +2222,13 @@ Get Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -2293,133 +2236,101 @@ Get Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -2429,31 +2340,31 @@ Get Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -2463,13 +2374,11 @@ Get Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -2478,8 +2387,6 @@ Get Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -2501,17 +2408,21 @@ Get Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -2527,11 +2438,11 @@ Get Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -2553,22 +2464,18 @@ Get Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2637,15 +2544,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
 
 ## Update Deployment
 
-**post** `/v1/deployments/{deployment_id}`
+**POST** `/v1/deployments/{deployment_id}`
 
 Update Deployment
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2653,7 +2560,7 @@ Update Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2723,7 +2630,21 @@ Update Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `agent: optional string or BetaManagedAgentsAgentParams`
 
@@ -2731,7 +2652,7 @@ Update Deployment
 
   - `string`
 
-  - `BetaManagedAgentsAgentParams object { id, type, version }`
+  - `BetaManagedAgentsAgentParams object`
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -2739,13 +2660,15 @@ Update Deployment
 
       The `agent` ID.
 
-    - `type: "agent"`
+      minLength: 1, maxLength: 128
 
-      - `"agent"`
+    - `type: "agent"`
 
     - `version: optional number`
 
       The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+      format: int32
 
 - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -2763,25 +2686,25 @@ Update Deployment
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `"USD"`
-
   - `type: "limit"`
-
-    - `"limit"`
 
 - `description: optional string or null`
 
   Description. Omit to preserve; send empty string or null to clear.
 
+  maxLength: 2048
+
 - `environment_id: optional string`
 
   ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
+
+  maxLength: 128
 
 - `initial_events: optional array of BetaManagedAgentsDeploymentInitialEventParams`
 
   Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
-  - `BetaManagedAgentsUserMessageEventParams object { content, type }`
+  - `BetaManagedAgentsUserMessageEventParams object`
 
     Parameters for sending a user message to the session.
 
@@ -2789,7 +2712,7 @@ Update Deployment
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -2797,11 +2720,11 @@ Update Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2809,7 +2732,7 @@ Update Deployment
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -2817,27 +2740,29 @@ Update Deployment
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -2845,15 +2770,13 @@ Update Deployment
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2861,7 +2784,7 @@ Update Deployment
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -2869,15 +2792,17 @@ Update Deployment
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -2885,29 +2810,27 @@ Update Deployment
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -2915,13 +2838,11 @@ Update Deployment
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -2931,19 +2852,15 @@ Update Deployment
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -2955,7 +2872,7 @@ Update Deployment
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+      - `BetaManagedAgentsFileRubricParams object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -2965,9 +2882,7 @@ Update Deployment
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubricParams object { content, type }`
+      - `BetaManagedAgentsTextRubricParams object`
 
         Rubric content provided inline as text.
 
@@ -2975,19 +2890,19 @@ Update Deployment
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+      format: int32
+
+  - `BetaManagedAgentsSystemMessageEventParams object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -2999,13 +2914,11 @@ Update Deployment
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
 - `metadata: optional map[string] or null`
 
@@ -3015,11 +2928,13 @@ Update Deployment
 
   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
+  maxLength: 256
+
 - `resources: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams or BetaManagedAgentsMemoryStoreResourceParam or null`
 
   Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-  - `BetaManagedAgentsGitHubRepositoryResourceParams object { authorization_token, type, url, 2 more }`
+  - `BetaManagedAgentsGitHubRepositoryResourceParams object`
 
     Mount a GitHub repository into the session's container.
 
@@ -3027,43 +2942,47 @@ Update Deployment
 
       GitHub authorization token used to clone the repository.
 
-    - `type: "github_repository"`
+      minLength: 1, maxLength: 4096
 
-      - `"github_repository"`
+    - `type: "github_repository"`
 
     - `url: string`
 
       Github URL of the repository
 
+      minLength: 1, maxLength: 2048
+
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
-      - `BetaManagedAgentsBranchCheckout object { name, type }`
+      - `BetaManagedAgentsBranchCheckout object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `BetaManagedAgentsCommitCheckout object { sha, type }`
+      - `BetaManagedAgentsCommitCheckout object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-  - `BetaManagedAgentsFileResourceParams object { file_id, type, mount_path }`
+      minLength: 1, maxLength: 4096
+
+  - `BetaManagedAgentsFileResourceParams object`
 
     Mount a file uploaded via the Files API into the session.
 
@@ -3071,15 +2990,17 @@ Update Deployment
 
       ID of a previously uploaded file.
 
-    - `type: "file"`
+      minLength: 1, maxLength: 128
 
-      - `"file"`
+    - `type: "file"`
 
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-  - `BetaManagedAgentsMemoryStoreResourceParam object { memory_store_id, type, access, instructions }`
+      minLength: 1, maxLength: 4096
+
+  - `BetaManagedAgentsMemoryStoreResourceParam object`
 
     Parameters for attaching a memory store to an agent session.
 
@@ -3088,8 +3009,6 @@ Update Deployment
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only" or null`
 
@@ -3103,6 +3022,8 @@ Update Deployment
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+      maxLength: 4096
+
 - `schedule: optional BetaManagedAgentsScheduleParams or null`
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
@@ -3111,13 +3032,15 @@ Update Deployment
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
 - `vault_ids: optional array of string or null`
 
@@ -3125,7 +3048,7 @@ Update Deployment
 
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -3141,17 +3064,21 @@ Update Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -3165,7 +3092,7 @@ Update Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -3173,7 +3100,7 @@ Update Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -3181,11 +3108,11 @@ Update Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3193,7 +3120,7 @@ Update Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -3201,27 +3128,29 @@ Update Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -3229,15 +3158,13 @@ Update Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3245,7 +3172,7 @@ Update Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -3253,15 +3180,17 @@ Update Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -3269,29 +3198,27 @@ Update Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -3299,13 +3226,11 @@ Update Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -3315,19 +3240,15 @@ Update Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -3339,7 +3260,7 @@ Update Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -3349,9 +3270,7 @@ Update Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -3361,17 +3280,15 @@ Update Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -3383,13 +3300,11 @@ Update Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -3403,15 +3318,13 @@ Update Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -3419,133 +3332,101 @@ Update Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -3555,31 +3436,31 @@ Update Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -3589,13 +3470,11 @@ Update Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -3604,8 +3483,6 @@ Update Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -3627,17 +3504,21 @@ Update Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -3653,11 +3534,11 @@ Update Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -3679,15 +3560,11 @@ Update Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -3696,7 +3573,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
     -d '{}'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3765,15 +3642,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
 
 ## Archive Deployment
 
-**post** `/v1/deployments/{deployment_id}/archive`
+**POST** `/v1/deployments/{deployment_id}/archive`
 
 Archive Deployment
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3781,7 +3658,7 @@ Archive Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3851,9 +3728,23 @@ Archive Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -3869,17 +3760,21 @@ Archive Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -3893,7 +3788,7 @@ Archive Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -3901,7 +3796,7 @@ Archive Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -3909,11 +3804,11 @@ Archive Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3921,7 +3816,7 @@ Archive Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -3929,27 +3824,29 @@ Archive Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -3957,15 +3854,13 @@ Archive Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3973,7 +3868,7 @@ Archive Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -3981,15 +3876,17 @@ Archive Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -3997,29 +3894,27 @@ Archive Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -4027,13 +3922,11 @@ Archive Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -4043,19 +3936,15 @@ Archive Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -4067,7 +3956,7 @@ Archive Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -4077,9 +3966,7 @@ Archive Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -4089,17 +3976,15 @@ Archive Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -4111,13 +3996,11 @@ Archive Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -4131,15 +4014,13 @@ Archive Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -4147,133 +4028,101 @@ Archive Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -4283,31 +4132,31 @@ Archive Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -4317,13 +4166,11 @@ Archive Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -4332,8 +4179,6 @@ Archive Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -4355,17 +4200,21 @@ Archive Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -4381,11 +4230,11 @@ Archive Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -4407,15 +4256,11 @@ Archive Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -4423,7 +4268,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -4492,15 +4337,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive \
 
 ## Run Deployment Now
 
-**post** `/v1/deployments/{deployment_id}/run`
+**POST** `/v1/deployments/{deployment_id}/run`
 
 Run Deployment Now
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4508,7 +4353,7 @@ Run Deployment Now
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4578,9 +4423,23 @@ Run Deployment Now
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeploymentRun object { id, agent, created_at, 5 more }`
+- `BetaManagedAgentsDeploymentRun object`
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
@@ -4596,13 +4455,15 @@ Run Deployment Now
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `deployment_id: string`
 
@@ -4612,7 +4473,7 @@ Run Deployment Now
 
     Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-    - `BetaManagedAgentsEnvironmentArchivedRunError object { message, type }`
+    - `BetaManagedAgentsEnvironmentArchivedRunError object`
 
       The deployment's environment was archived.
 
@@ -4622,9 +4483,7 @@ Run Deployment Now
 
       - `type: "environment_archived_error"`
 
-        - `"environment_archived_error"`
-
-    - `BetaManagedAgentsAgentArchivedRunError object { message, type }`
+    - `BetaManagedAgentsAgentArchivedRunError object`
 
       The deployment's agent was archived.
 
@@ -4634,9 +4493,7 @@ Run Deployment Now
 
       - `type: "agent_archived_error"`
 
-        - `"agent_archived_error"`
-
-    - `BetaManagedAgentsEnvironmentNotFoundRunError object { message, type }`
+    - `BetaManagedAgentsEnvironmentNotFoundRunError object`
 
       The deployment's environment no longer exists.
 
@@ -4646,9 +4503,7 @@ Run Deployment Now
 
       - `type: "environment_not_found_error"`
 
-        - `"environment_not_found_error"`
-
-    - `BetaManagedAgentsVaultNotFoundRunError object { message, type }`
+    - `BetaManagedAgentsVaultNotFoundRunError object`
 
       A vault referenced by the deployment no longer exists.
 
@@ -4658,9 +4513,7 @@ Run Deployment Now
 
       - `type: "vault_not_found_error"`
 
-        - `"vault_not_found_error"`
-
-    - `BetaManagedAgentsVaultArchivedRunError object { message, type }`
+    - `BetaManagedAgentsVaultArchivedRunError object`
 
       A vault referenced by the deployment is archived.
 
@@ -4670,9 +4523,7 @@ Run Deployment Now
 
       - `type: "vault_archived_error"`
 
-        - `"vault_archived_error"`
-
-    - `BetaManagedAgentsFileNotFoundRunError object { message, type }`
+    - `BetaManagedAgentsFileNotFoundRunError object`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -4682,9 +4533,7 @@ Run Deployment Now
 
       - `type: "file_not_found_error"`
 
-        - `"file_not_found_error"`
-
-    - `BetaManagedAgentsMemoryStoreArchivedRunError object { message, type }`
+    - `BetaManagedAgentsMemoryStoreArchivedRunError object`
 
       A memory store referenced by the deployment is archived.
 
@@ -4694,9 +4543,7 @@ Run Deployment Now
 
       - `type: "memory_store_archived_error"`
 
-        - `"memory_store_archived_error"`
-
-    - `BetaManagedAgentsSkillNotFoundRunError object { message, type }`
+    - `BetaManagedAgentsSkillNotFoundRunError object`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -4706,9 +4553,7 @@ Run Deployment Now
 
       - `type: "skill_not_found_error"`
 
-        - `"skill_not_found_error"`
-
-    - `BetaManagedAgentsSessionResourceNotFoundRunError object { message, type }`
+    - `BetaManagedAgentsSessionResourceNotFoundRunError object`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -4718,9 +4563,7 @@ Run Deployment Now
 
       - `type: "session_resource_not_found_error"`
 
-        - `"session_resource_not_found_error"`
-
-    - `BetaManagedAgentsWorkspaceArchivedRunError object { message, type }`
+    - `BetaManagedAgentsWorkspaceArchivedRunError object`
 
       The deployment's workspace was archived.
 
@@ -4730,9 +4573,7 @@ Run Deployment Now
 
       - `type: "workspace_archived_error"`
 
-        - `"workspace_archived_error"`
-
-    - `BetaManagedAgentsOrganizationDisabledRunError object { message, type }`
+    - `BetaManagedAgentsOrganizationDisabledRunError object`
 
       The deployment's organization is disabled.
 
@@ -4742,9 +4583,7 @@ Run Deployment Now
 
       - `type: "organization_disabled_error"`
 
-        - `"organization_disabled_error"`
-
-    - `BetaManagedAgentsSessionRateLimitedRunError object { message, type }`
+    - `BetaManagedAgentsSessionRateLimitedRunError object`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -4754,9 +4593,7 @@ Run Deployment Now
 
       - `type: "session_rate_limited_error"`
 
-        - `"session_rate_limited_error"`
-
-    - `BetaManagedAgentsSessionCreationRejectedRunError object { message, type }`
+    - `BetaManagedAgentsSessionCreationRejectedRunError object`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -4766,9 +4603,7 @@ Run Deployment Now
 
       - `type: "session_creation_rejected_error"`
 
-        - `"session_creation_rejected_error"`
-
-    - `BetaManagedAgentsUnknownRunError object { message, type }`
+    - `BetaManagedAgentsUnknownRunError object`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -4778,9 +4613,7 @@ Run Deployment Now
 
       - `type: "unknown_error"`
 
-        - `"unknown_error"`
-
-    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError object { message, type }`
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError object`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -4790,9 +4623,7 @@ Run Deployment Now
 
       - `type: "self_hosted_resources_unsupported_error"`
 
-        - `"self_hosted_resources_unsupported_error"`
-
-    - `BetaManagedAgentsMCPEgressBlockedRunError object { message, type }`
+    - `BetaManagedAgentsMCPEgressBlockedRunError object`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -4802,8 +4633,6 @@ Run Deployment Now
 
       - `type: "mcp_egress_blocked_error"`
 
-        - `"mcp_egress_blocked_error"`
-
   - `session_id: string or null`
 
     Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
@@ -4812,7 +4641,7 @@ Run Deployment Now
 
     Describes what triggered a deployment run, with trigger-specific metadata.
 
-    - `BetaManagedAgentsScheduleTriggerContext object { scheduled_at, type }`
+    - `BetaManagedAgentsScheduleTriggerContext object`
 
       The run was fired by the deployment's cron schedule.
 
@@ -4820,25 +4649,21 @@ Run Deployment Now
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `type: "schedule"`
 
-        - `"schedule"`
-
-    - `BetaManagedAgentsManualTriggerContext object { type }`
+    - `BetaManagedAgentsManualTriggerContext object`
 
       The run was started manually by creating a session directly against the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
   - `type: "deployment_run"`
-
-    - `"deployment_run"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -4846,7 +4671,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -4873,15 +4698,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run \
 
 ## Pause Deployment
 
-**post** `/v1/deployments/{deployment_id}/pause`
+**POST** `/v1/deployments/{deployment_id}/pause`
 
 Pause Deployment
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4889,7 +4714,7 @@ Pause Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4959,9 +4784,23 @@ Pause Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -4977,17 +4816,21 @@ Pause Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -5001,7 +4844,7 @@ Pause Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -5009,7 +4852,7 @@ Pause Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -5017,11 +4860,11 @@ Pause Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -5029,7 +4872,7 @@ Pause Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -5037,27 +4880,29 @@ Pause Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -5065,15 +4910,13 @@ Pause Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -5081,7 +4924,7 @@ Pause Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -5089,15 +4932,17 @@ Pause Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -5105,29 +4950,27 @@ Pause Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -5135,13 +4978,11 @@ Pause Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -5151,19 +4992,15 @@ Pause Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -5175,7 +5012,7 @@ Pause Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -5185,9 +5022,7 @@ Pause Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -5197,17 +5032,15 @@ Pause Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -5219,13 +5052,11 @@ Pause Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -5239,15 +5070,13 @@ Pause Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -5255,133 +5084,101 @@ Pause Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -5391,31 +5188,31 @@ Pause Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -5425,13 +5222,11 @@ Pause Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -5440,8 +5235,6 @@ Pause Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -5463,17 +5256,21 @@ Pause Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -5489,11 +5286,11 @@ Pause Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -5515,15 +5312,11 @@ Pause Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -5531,7 +5324,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -5600,15 +5393,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause \
 
 ## Unpause Deployment
 
-**post** `/v1/deployments/{deployment_id}/unpause`
+**POST** `/v1/deployments/{deployment_id}/unpause`
 
 Unpause Deployment
 
-### Path Parameters
+### Path parameters
 
 - `deployment_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5616,7 +5409,7 @@ Unpause Deployment
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -5686,9 +5479,23 @@ Unpause Deployment
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -5704,17 +5511,21 @@ Unpause Deployment
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -5728,7 +5539,7 @@ Unpause Deployment
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -5736,7 +5547,7 @@ Unpause Deployment
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -5744,11 +5555,11 @@ Unpause Deployment
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -5756,7 +5567,7 @@ Unpause Deployment
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -5764,27 +5575,29 @@ Unpause Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -5792,15 +5605,13 @@ Unpause Deployment
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -5808,7 +5619,7 @@ Unpause Deployment
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -5816,15 +5627,17 @@ Unpause Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -5832,29 +5645,27 @@ Unpause Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -5862,13 +5673,11 @@ Unpause Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -5878,19 +5687,15 @@ Unpause Deployment
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -5902,7 +5707,7 @@ Unpause Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -5912,9 +5717,7 @@ Unpause Deployment
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -5924,17 +5727,15 @@ Unpause Deployment
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -5946,13 +5747,11 @@ Unpause Deployment
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -5966,15 +5765,13 @@ Unpause Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -5982,133 +5779,101 @@ Unpause Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -6118,31 +5883,31 @@ Unpause Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -6152,13 +5917,11 @@ Unpause Deployment
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -6167,8 +5930,6 @@ Unpause Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -6190,17 +5951,21 @@ Unpause Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -6216,11 +5981,11 @@ Unpause Deployment
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -6242,15 +6007,11 @@ Unpause Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -6258,7 +6019,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -6325,21 +6086,19 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Agent Archived Deployment Paused Reason Error
 
-- `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
   The deployment's agent was archived.
 
   - `type: "agent_archived_error"`
 
-    - `"agent_archived_error"`
-
 ### Beta Managed Agents Cron Schedule
 
-- `BetaManagedAgentsCronSchedule object { expression, timezone, type, 2 more }`
+- `BetaManagedAgentsCronSchedule object`
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -6347,17 +6106,21 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
   - `last_run_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `upcoming_runs_at: optional array of string`
 
@@ -6365,7 +6128,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Cron Schedule Params
 
-- `BetaManagedAgentsCronScheduleParams object { expression, timezone, type }`
+- `BetaManagedAgentsCronScheduleParams object`
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -6373,17 +6136,19 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
 ### Beta Managed Agents Deployment
 
-- `BetaManagedAgentsDeployment object { id, agent, archived_at, 14 more }`
+- `BetaManagedAgentsDeployment object`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -6399,17 +6164,21 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string or null`
 
@@ -6423,7 +6192,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     Events sent to each session immediately after creation.
 
-    - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+    - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
       A user message sent to the session.
 
@@ -6431,7 +6200,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -6439,11 +6208,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6451,7 +6220,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -6459,27 +6228,29 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -6487,15 +6258,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6503,7 +6272,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -6511,15 +6280,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -6527,29 +6298,27 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -6557,13 +6326,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -6573,19 +6340,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
 
-        - `"user.message"`
-
-    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+    - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -6597,7 +6360,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -6607,9 +6370,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -6619,17 +6380,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations: optional number or null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
-    - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+        format: int32
+
+    - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -6641,13 +6400,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: map[string]`
 
@@ -6661,15 +6418,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+    - `BetaManagedAgentsManualDeploymentPausedReason object`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `type: "manual"`
 
-        - `"manual"`
-
-    - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+    - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -6677,133 +6432,101 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-            - `"agent_archived_error"`
-
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-            - `"vault_not_found_error"`
-
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-            - `"session_resource_not_found_error"`
-
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-            - `"organization_disabled_error"`
-
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-            - `"skill_not_found_error"`
-
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-            - `"unknown_error"`
-
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: array of BetaManagedAgentsSessionResourceConfig`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+    - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -6813,31 +6536,31 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout object { name, type }`
+        - `BetaManagedAgentsBranchCheckout object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout object { sha, type }`
+        - `BetaManagedAgentsCommitCheckout object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+    - `BetaManagedAgentsFileResourceConfig object`
 
       A file mounted into each session's container.
 
@@ -6847,13 +6570,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path: optional string or null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+    - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
       A memory store attached to each session created from this deployment.
 
@@ -6862,8 +6583,6 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only" or null`
 
@@ -6885,17 +6604,21 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at: optional array of string`
 
@@ -6911,11 +6634,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: array of string`
 
@@ -6937,11 +6660,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
-
-      - `"limit"`
 
 ### Beta Managed Agents Deployment Initial Event
 
@@ -6949,7 +6668,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
-  - `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+  - `BetaManagedAgentsDeploymentUserMessageEvent object`
 
     A user message sent to the session.
 
@@ -6957,7 +6676,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -6965,11 +6684,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6977,7 +6696,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -6985,27 +6704,29 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -7013,15 +6734,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7029,7 +6748,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -7037,15 +6756,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -7053,29 +6774,27 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -7083,13 +6802,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -7099,19 +6816,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
     An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -7123,7 +6836,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubric object { file_id, type }`
+      - `BetaManagedAgentsFileRubric object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -7133,9 +6846,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubric object { content, type }`
+      - `BetaManagedAgentsTextRubric object`
 
         Rubric content provided inline as text.
 
@@ -7145,17 +6856,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+      format: int32
+
+  - `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -7167,13 +6876,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
 ### Beta Managed Agents Deployment Initial Event Params
 
@@ -7181,7 +6888,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
-  - `BetaManagedAgentsUserMessageEventParams object { content, type }`
+  - `BetaManagedAgentsUserMessageEventParams object`
 
     Parameters for sending a user message to the session.
 
@@ -7189,7 +6896,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -7197,11 +6904,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7209,7 +6916,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -7217,27 +6924,29 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -7245,15 +6954,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7261,7 +6968,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -7269,15 +6976,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -7285,29 +6994,27 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -7315,13 +7022,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -7331,19 +7036,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -7355,7 +7056,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+      - `BetaManagedAgentsFileRubricParams object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -7365,9 +7066,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubricParams object { content, type }`
+      - `BetaManagedAgentsTextRubricParams object`
 
         Rubric content provided inline as text.
 
@@ -7375,19 +7074,19 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+      format: int32
+
+  - `BetaManagedAgentsSystemMessageEventParams object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -7399,13 +7098,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
 ### Beta Managed Agents Deployment Paused Reason
 
@@ -7413,15 +7110,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-  - `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+  - `BetaManagedAgentsManualDeploymentPausedReason object`
 
     The caller invoked the pause endpoint on the deployment.
 
     - `type: "manual"`
 
-      - `"manual"`
-
-  - `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+  - `BetaManagedAgentsErrorDeploymentPausedReason object`
 
     A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -7429,121 +7124,91 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-      - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
         The deployment's environment was archived.
 
         - `type: "environment_archived_error"`
 
-          - `"environment_archived_error"`
-
-      - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
         The deployment's agent was archived.
 
         - `type: "agent_archived_error"`
 
-          - `"agent_archived_error"`
-
-      - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
         The deployment's environment no longer exists.
 
         - `type: "environment_not_found_error"`
 
-          - `"environment_not_found_error"`
-
-      - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
         A vault referenced by the deployment no longer exists.
 
         - `type: "vault_not_found_error"`
 
-          - `"vault_not_found_error"`
-
-      - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
         A file resource referenced by the deployment no longer exists.
 
         - `type: "file_not_found_error"`
 
-          - `"file_not_found_error"`
-
-      - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
         A referenced resource no longer exists and its kind was not reported.
 
         - `type: "session_resource_not_found_error"`
 
-          - `"session_resource_not_found_error"`
-
-      - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
         The deployment's workspace was archived.
 
         - `type: "workspace_archived_error"`
 
-          - `"workspace_archived_error"`
-
-      - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
         The deployment's organization is disabled.
 
         - `type: "organization_disabled_error"`
 
-          - `"organization_disabled_error"`
-
-      - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
         A memory store referenced by the deployment is archived.
 
         - `type: "memory_store_archived_error"`
 
-          - `"memory_store_archived_error"`
-
-      - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
         A skill referenced by the deployment's agent no longer exists.
 
         - `type: "skill_not_found_error"`
 
-          - `"skill_not_found_error"`
-
-      - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
         A vault referenced by the deployment is archived.
 
         - `type: "vault_archived_error"`
 
-          - `"vault_archived_error"`
-
-      - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
         An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
         - `type: "unknown_error"`
 
-          - `"unknown_error"`
-
-      - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
         The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
         - `type: "self_hosted_resources_unsupported_error"`
 
-          - `"self_hosted_resources_unsupported_error"`
-
-      - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+      - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
         An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
         - `type: "mcp_egress_blocked_error"`
 
-          - `"mcp_egress_blocked_error"`
-
     - `type: "error"`
-
-      - `"error"`
 
 ### Beta Managed Agents Deployment Paused Reason Error
 
@@ -7551,117 +7216,89 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-  - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
     The deployment's environment was archived.
 
     - `type: "environment_archived_error"`
 
-      - `"environment_archived_error"`
-
-  - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
     The deployment's agent was archived.
 
     - `type: "agent_archived_error"`
 
-      - `"agent_archived_error"`
-
-  - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
     The deployment's environment no longer exists.
 
     - `type: "environment_not_found_error"`
 
-      - `"environment_not_found_error"`
-
-  - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
     A vault referenced by the deployment no longer exists.
 
     - `type: "vault_not_found_error"`
 
-      - `"vault_not_found_error"`
-
-  - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
     A file resource referenced by the deployment no longer exists.
 
     - `type: "file_not_found_error"`
 
-      - `"file_not_found_error"`
-
-  - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
     A referenced resource no longer exists and its kind was not reported.
 
     - `type: "session_resource_not_found_error"`
 
-      - `"session_resource_not_found_error"`
-
-  - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
     The deployment's workspace was archived.
 
     - `type: "workspace_archived_error"`
 
-      - `"workspace_archived_error"`
-
-  - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
     The deployment's organization is disabled.
 
     - `type: "organization_disabled_error"`
 
-      - `"organization_disabled_error"`
-
-  - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
     A memory store referenced by the deployment is archived.
 
     - `type: "memory_store_archived_error"`
 
-      - `"memory_store_archived_error"`
-
-  - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
     A skill referenced by the deployment's agent no longer exists.
 
     - `type: "skill_not_found_error"`
 
-      - `"skill_not_found_error"`
-
-  - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
     A vault referenced by the deployment is archived.
 
     - `type: "vault_archived_error"`
 
-      - `"vault_archived_error"`
-
-  - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
     An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
     - `type: "unknown_error"`
 
-      - `"unknown_error"`
-
-  - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
     The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
     - `type: "self_hosted_resources_unsupported_error"`
 
-      - `"self_hosted_resources_unsupported_error"`
-
-  - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+  - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
     An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
     - `type: "mcp_egress_blocked_error"`
-
-      - `"mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Deployment Status
 
@@ -7675,7 +7312,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Deployment System Message Event
 
-- `BetaManagedAgentsDeploymentSystemMessageEvent object { content, type }`
+- `BetaManagedAgentsDeploymentSystemMessageEvent object`
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -7687,17 +7324,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       The text content.
 
-    - `type: "text"`
+      minLength: 1
 
-      - `"text"`
+    - `type: "text"`
 
   - `type: "system.message"`
 
-    - `"system.message"`
-
 ### Beta Managed Agents Deployment User Define Outcome Event
 
-- `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object { description, rubric, type, max_iterations }`
+- `BetaManagedAgentsDeploymentUserDefineOutcomeEvent object`
 
   An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -7709,7 +7344,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     Rubric for grading the quality of an outcome.
 
-    - `BetaManagedAgentsFileRubric object { file_id, type }`
+    - `BetaManagedAgentsFileRubric object`
 
       Rubric referenced by a file uploaded via the Files API.
 
@@ -7719,9 +7354,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `type: "file"`
 
-        - `"file"`
-
-    - `BetaManagedAgentsTextRubric object { content, type }`
+    - `BetaManagedAgentsTextRubric object`
 
       Rubric content provided inline as text.
 
@@ -7731,19 +7364,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `type: "text"`
 
-        - `"text"`
-
   - `type: "user.define_outcome"`
-
-    - `"user.define_outcome"`
 
   - `max_iterations: optional number or null`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
+    format: int32
+
 ### Beta Managed Agents Deployment User Message Event
 
-- `BetaManagedAgentsDeploymentUserMessageEvent object { content, type }`
+- `BetaManagedAgentsDeploymentUserMessageEvent object`
 
   A user message sent to the session.
 
@@ -7751,7 +7382,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     Array of content blocks for the user message.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -7759,11 +7390,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7771,7 +7402,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -7779,27 +7410,29 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -7807,15 +7440,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7823,7 +7454,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -7831,15 +7462,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -7847,29 +7480,27 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -7877,13 +7508,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -7893,41 +7522,33 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         The title of the document.
 
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
 
-        - `"redacted"`
-
   - `type: "user.message"`
-
-    - `"user.message"`
 
 ### Beta Managed Agents Environment Archived Deployment Paused Reason Error
 
-- `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
   The deployment's environment was archived.
 
   - `type: "environment_archived_error"`
 
-    - `"environment_archived_error"`
-
 ### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
 
-- `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
   The deployment's environment no longer exists.
 
   - `type: "environment_not_found_error"`
 
-    - `"environment_not_found_error"`
-
 ### Beta Managed Agents Error Deployment Paused Reason
 
-- `BetaManagedAgentsErrorDeploymentPausedReason object { error, type }`
+- `BetaManagedAgentsErrorDeploymentPausedReason object`
 
   A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -7935,135 +7556,103 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-    - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
       The deployment's environment was archived.
 
       - `type: "environment_archived_error"`
 
-        - `"environment_archived_error"`
-
-    - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
 
       The deployment's agent was archived.
 
       - `type: "agent_archived_error"`
 
-        - `"agent_archived_error"`
-
-    - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
 
       The deployment's environment no longer exists.
 
       - `type: "environment_not_found_error"`
 
-        - `"environment_not_found_error"`
-
-    - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
       A vault referenced by the deployment no longer exists.
 
       - `type: "vault_not_found_error"`
 
-        - `"vault_not_found_error"`
-
-    - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
       A file resource referenced by the deployment no longer exists.
 
       - `type: "file_not_found_error"`
 
-        - `"file_not_found_error"`
-
-    - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
       A referenced resource no longer exists and its kind was not reported.
 
       - `type: "session_resource_not_found_error"`
 
-        - `"session_resource_not_found_error"`
-
-    - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
       The deployment's workspace was archived.
 
       - `type: "workspace_archived_error"`
 
-        - `"workspace_archived_error"`
-
-    - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
       The deployment's organization is disabled.
 
       - `type: "organization_disabled_error"`
 
-        - `"organization_disabled_error"`
-
-    - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
       A memory store referenced by the deployment is archived.
 
       - `type: "memory_store_archived_error"`
 
-        - `"memory_store_archived_error"`
-
-    - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
       A skill referenced by the deployment's agent no longer exists.
 
       - `type: "skill_not_found_error"`
 
-        - `"skill_not_found_error"`
-
-    - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
       A vault referenced by the deployment is archived.
 
       - `type: "vault_archived_error"`
 
-        - `"vault_archived_error"`
-
-    - `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
       An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
       - `type: "unknown_error"`
 
-        - `"unknown_error"`
-
-    - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
       - `type: "self_hosted_resources_unsupported_error"`
 
-        - `"self_hosted_resources_unsupported_error"`
-
-    - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+    - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
       - `type: "mcp_egress_blocked_error"`
 
-        - `"mcp_egress_blocked_error"`
-
   - `type: "error"`
-
-    - `"error"`
 
 ### Beta Managed Agents File Not Found Deployment Paused Reason Error
 
-- `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
 
   A file resource referenced by the deployment no longer exists.
 
   - `type: "file_not_found_error"`
 
-    - `"file_not_found_error"`
-
 ### Beta Managed Agents File Resource Config
 
-- `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+- `BetaManagedAgentsFileResourceConfig object`
 
   A file mounted into each session's container.
 
@@ -8073,21 +7662,17 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `type: "file"`
 
-    - `"file"`
-
   - `mount_path: optional string or null`
 
     Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
 ### Beta Managed Agents GitHub Repository Resource Config
 
-- `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+- `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
   A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
   - `type: "github_repository"`
-
-    - `"github_repository"`
 
   - `url: string`
 
@@ -8097,25 +7682,25 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     Branch or commit to check out. Defaults to the repository's default branch.
 
-    - `BetaManagedAgentsBranchCheckout object { name, type }`
+    - `BetaManagedAgentsBranchCheckout object`
 
       - `name: string`
 
         Branch name to check out.
 
+        minLength: 1, maxLength: 255
+
       - `type: "branch"`
 
-        - `"branch"`
-
-    - `BetaManagedAgentsCommitCheckout object { sha, type }`
+    - `BetaManagedAgentsCommitCheckout object`
 
       - `sha: string`
 
         Full commit SHA to check out.
 
-      - `type: "commit"`
+        minLength: 7, maxLength: 64
 
-        - `"commit"`
+      - `type: "commit"`
 
   - `mount_path: optional string or null`
 
@@ -8123,37 +7708,31 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Manual Deployment Paused Reason
 
-- `BetaManagedAgentsManualDeploymentPausedReason object { type }`
+- `BetaManagedAgentsManualDeploymentPausedReason object`
 
   The caller invoked the pause endpoint on the deployment.
 
   - `type: "manual"`
 
-    - `"manual"`
-
 ### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
 
-- `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
 
   An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
   - `type: "mcp_egress_blocked_error"`
 
-    - `"mcp_egress_blocked_error"`
-
 ### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
 
-- `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
 
   A memory store referenced by the deployment is archived.
 
   - `type: "memory_store_archived_error"`
 
-    - `"memory_store_archived_error"`
-
 ### Beta Managed Agents Memory Store Resource Config
 
-- `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+- `BetaManagedAgentsMemoryStoreResourceConfig object`
 
   A memory store attached to each session created from this deployment.
 
@@ -8162,8 +7741,6 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
   - `type: "memory_store"`
-
-    - `"memory_store"`
 
   - `access: optional "read_write" or "read_only" or null`
 
@@ -8179,17 +7756,15 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Organization Disabled Deployment Paused Reason Error
 
-- `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
 
   The deployment's organization is disabled.
 
   - `type: "organization_disabled_error"`
 
-    - `"organization_disabled_error"`
-
 ### Beta Managed Agents Schedule
 
-- `BetaManagedAgentsSchedule object { expression, timezone, type, 2 more }`
+- `BetaManagedAgentsSchedule object`
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -8197,17 +7772,21 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
   - `last_run_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `upcoming_runs_at: optional array of string`
 
@@ -8215,7 +7794,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Schedule Params
 
-- `BetaManagedAgentsScheduleParams object { expression, timezone, type }`
+- `BetaManagedAgentsScheduleParams object`
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -8223,23 +7802,23 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+    minLength: 1, maxLength: 256
+
   - `timezone: string`
 
     Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
 
-  - `type: "cron"`
+    minLength: 1
 
-    - `"cron"`
+  - `type: "cron"`
 
 ### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
 
-- `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
 
   The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
   - `type: "self_hosted_resources_unsupported_error"`
-
-    - `"self_hosted_resources_unsupported_error"`
 
 ### Beta Managed Agents Session Resource Config
 
@@ -8247,13 +7826,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   A configured session resource. Echoes the input minus write-only credentials.
 
-  - `BetaManagedAgentsGitHubRepositoryResourceConfig object { type, url, checkout, mount_path }`
+  - `BetaManagedAgentsGitHubRepositoryResourceConfig object`
 
     A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
     - `type: "github_repository"`
-
-      - `"github_repository"`
 
     - `url: string`
 
@@ -8263,31 +7840,31 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
-      - `BetaManagedAgentsBranchCheckout object { name, type }`
+      - `BetaManagedAgentsBranchCheckout object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `BetaManagedAgentsCommitCheckout object { sha, type }`
+      - `BetaManagedAgentsCommitCheckout object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-  - `BetaManagedAgentsFileResourceConfig object { file_id, type, mount_path }`
+  - `BetaManagedAgentsFileResourceConfig object`
 
     A file mounted into each session's container.
 
@@ -8297,13 +7874,11 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `type: "file"`
 
-      - `"file"`
-
     - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-  - `BetaManagedAgentsMemoryStoreResourceConfig object { memory_store_id, type, access, instructions }`
+  - `BetaManagedAgentsMemoryStoreResourceConfig object`
 
     A memory store attached to each session created from this deployment.
 
@@ -8312,8 +7887,6 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only" or null`
 
@@ -8329,60 +7902,48 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 ### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error
 
-- `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
 
   A referenced resource no longer exists and its kind was not reported.
 
   - `type: "session_resource_not_found_error"`
 
-    - `"session_resource_not_found_error"`
-
 ### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
 
-- `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
 
   A skill referenced by the deployment's agent no longer exists.
 
   - `type: "skill_not_found_error"`
 
-    - `"skill_not_found_error"`
-
 ### Beta Managed Agents Unknown Deployment Paused Reason Error
 
-- `BetaManagedAgentsUnknownDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
 
   An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
   - `type: "unknown_error"`
 
-    - `"unknown_error"`
-
 ### Beta Managed Agents Vault Archived Deployment Paused Reason Error
 
-- `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
 
   A vault referenced by the deployment is archived.
 
   - `type: "vault_archived_error"`
 
-    - `"vault_archived_error"`
-
 ### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
 
-- `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
 
   A vault referenced by the deployment no longer exists.
 
   - `type: "vault_not_found_error"`
 
-    - `"vault_not_found_error"`
-
 ### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
 
-- `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object { type }`
+- `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
 
   The deployment's workspace was archived.
 
   - `type: "workspace_archived_error"`
-
-    - `"workspace_archived_error"`

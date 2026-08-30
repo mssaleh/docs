@@ -1,41 +1,46 @@
----
-title: Events
-url: https://platform.claude.com/docs/en/api/beta/sessions/events
----
-
 # Events
 
 ## List Events
 
-**get** `/v1/sessions/{session_id}/events`
+**GET** `/v1/sessions/{session_id}/events`
 
 List Events
 
-### Path Parameters
+### Path parameters
 
 - `session_id: string`
 
-### Query Parameters
+### Query parameters
 
 - `"created_at[gt]": optional string`
 
   Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `"created_at[gte]": optional string`
 
   Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
+
+  format: date-time
 
 - `"created_at[lt]": optional string`
 
   Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `"created_at[lte]": optional string`
 
   Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `limit: optional number`
 
   Query parameter for limit
+
+  format: int32
 
 - `order: optional "asc" or "desc"`
 
@@ -53,7 +58,7 @@ List Events
 
   Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -61,7 +66,7 @@ List Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -131,13 +136,27 @@ List Events
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsSessionEvent`
 
   Events for the session, ordered by `processed_at`.
 
-  - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsUserMessageEvent object`
 
     A user message event in the session conversation.
 
@@ -149,7 +168,7 @@ List Events
 
       Array of content blocks comprising the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -157,11 +176,11 @@ List Events
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -169,7 +188,7 @@ List Events
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -177,27 +196,29 @@ List Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -205,15 +226,13 @@ List Events
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -221,7 +240,7 @@ List Events
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -229,15 +248,17 @@ List Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -245,29 +266,27 @@ List Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -275,13 +294,11 @@ List Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -291,23 +308,21 @@ List Events
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
-
-      - `"user.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+      format: date-time
+
+  - `BetaManagedAgentsUserInterruptEvent object`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -317,17 +332,17 @@ List Events
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+  - `BetaManagedAgentsUserToolConfirmationEvent object`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -349,21 +364,23 @@ List Events
 
     - `type: "user.tool_confirmation"`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-  - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserCustomToolResultEvent object`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -377,25 +394,23 @@ List Events
 
     - `type: "user.custom_tool_result"`
 
-      - `"user.custom_tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -415,21 +430,23 @@ List Events
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
@@ -439,11 +456,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }`
+  - `BetaManagedAgentsAgentCustomToolUseEvent object`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -463,15 +482,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.custom_tool_use"`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: "agent.custom_tool_use"`
 
     - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-  - `BetaManagedAgentsAgentMessageEvent object { id, content, processed_at, type }`
+  - `BetaManagedAgentsAgentMessageEvent object`
 
     An agent response event in the session conversation.
 
@@ -483,11 +502,11 @@ List Events
 
       Array of text blocks comprising the agent response.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -495,11 +514,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.message"`
 
-      - `"agent.message"`
-
-  - `BetaManagedAgentsAgentThinkingEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThinkingEvent object`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -511,11 +530,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thinking"`
 
-      - `"agent.thinking"`
-
-  - `BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp_server_name, 5 more }`
+  - `BetaManagedAgentsAgentMCPToolUseEvent object`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -539,9 +558,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_use"`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: "agent.mcp_tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -557,7 +576,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp_tool_use_id, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentMCPToolResultEvent object`
 
     Event representing the result of an MCP tool execution.
 
@@ -573,27 +592,27 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_result"`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: "agent.mcp_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -601,7 +620,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }`
+  - `BetaManagedAgentsAgentToolUseEvent object`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -621,9 +640,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.tool_use"`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: "agent.tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -639,7 +658,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentToolResultEvent object { id, processed_at, tool_use_id, 3 more }`
+  - `BetaManagedAgentsAgentToolResultEvent object`
 
     Event representing the result of an agent tool execution.
 
@@ -651,31 +670,31 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: string`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: "agent.tool_result"`
 
-      - `"agent.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -683,7 +702,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from_session_thread_id, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -695,19 +714,19 @@ List Events
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -719,15 +738,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.thread_message_received"`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: "agent.thread_message_received"`
 
     - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageSentEvent object`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -739,19 +758,19 @@ List Events
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -759,19 +778,19 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: string`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: "agent.thread_message_sent"`
 
-      - `"agent.thread_message_sent"`
-
     - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent object`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -783,11 +802,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thread_context_compacted"`
 
-      - `"agent.thread_context_compacted"`
-
-  - `BetaManagedAgentsSessionErrorEvent object { id, error, processed_at, type }`
+  - `BetaManagedAgentsSessionErrorEvent object`
 
     An error event indicating a problem occurred during session execution.
 
@@ -799,7 +818,7 @@ List Events
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-      - `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+      - `BetaManagedAgentsUnknownError object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -811,35 +830,27 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: "retrying"`
 
-              - `"retrying"`
-
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: "exhausted"`
 
-              - `"exhausted"`
-
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: "terminal"`
 
-              - `"terminal"`
-
         - `type: "unknown_error"`
 
-          - `"unknown_error"`
-
-      - `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelOverloadedError object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -851,23 +862,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_overloaded_error"`
 
-          - `"model_overloaded_error"`
-
-      - `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRateLimitedError object`
 
         The model request was rate-limited.
 
@@ -879,23 +888,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_rate_limited_error"`
 
-          - `"model_rate_limited_error"`
-
-      - `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRequestFailedError object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -907,23 +914,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_request_failed_error"`
 
-          - `"model_request_failed_error"`
-
-      - `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPConnectionFailedError object`
 
         Failed to connect to an MCP server.
 
@@ -939,23 +944,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_connection_failed_error"`
 
-          - `"mcp_connection_failed_error"`
-
-      - `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPAuthenticationFailedError object`
 
         Authentication to an MCP server failed.
 
@@ -971,23 +974,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_authentication_failed_error"`
 
-          - `"mcp_authentication_failed_error"`
-
-      - `BetaManagedAgentsBillingError object { message, retry_status, type }`
+      - `BetaManagedAgentsBillingError object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -999,23 +1000,21 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "billing_error"`
 
-          - `"billing_error"`
-
-      - `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+      - `BetaManagedAgentsCredentialHostUnreachableError object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -1031,21 +1030,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "credential_host_unreachable_error"`
-
-          - `"credential_host_unreachable_error"`
 
         - `vault_id: string`
 
@@ -1055,11 +1052,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.error"`
 
-      - `"session.error"`
-
-  - `BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRescheduledEvent object`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -1071,11 +1068,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_rescheduled"`
 
-      - `"session.status_rescheduled"`
-
-  - `BetaManagedAgentsSessionStatusRunningEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRunningEvent object`
 
     Indicates the session is actively running and the agent is working.
 
@@ -1087,11 +1084,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_running"`
 
-      - `"session.status_running"`
-
-  - `BetaManagedAgentsSessionStatusIdleEvent object { id, processed_at, stop_reason, type }`
+  - `BetaManagedAgentsSessionStatusIdleEvent object`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -1103,19 +1100,19 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or BetaManagedAgentsSessionBudgetReached`
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: "end_turn"`
 
-          - `"end_turn"`
-
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -1125,29 +1122,21 @@ List Events
 
         - `type: "requires_action"`
 
-          - `"requires_action"`
-
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
-          - `"retries_exhausted"`
-
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: "budget_reached"`
 
-          - `"budget_reached"`
-
     - `type: "session.status_idle"`
 
-      - `"session.status_idle"`
-
-  - `BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusTerminatedEvent object`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -1159,11 +1148,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_terminated"`
 
-      - `"session.status_terminated"`
-
-  - `BetaManagedAgentsSessionThreadCreatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadCreatedEvent object`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -1179,15 +1168,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: "session.thread_created"`
 
-      - `"session.thread_created"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -1199,6 +1188,8 @@ List Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1207,11 +1198,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_start"`
 
-      - `"span.outcome_evaluation_start"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -1227,6 +1218,8 @@ List Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: string`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -1239,13 +1232,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: string`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: "span.outcome_evaluation_end"`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -1255,17 +1248,25 @@ List Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: number`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: number`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: number`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: optional "standard" or "fast" or null`
 
@@ -1275,7 +1276,7 @@ List Events
 
         - `"fast"`
 
-  - `BetaManagedAgentsSpanModelRequestStartEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSpanModelRequestStartEvent object`
 
     Emitted when a model request is initiated by the agent.
 
@@ -1287,11 +1288,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_start"`
 
-      - `"span.model_request_start"`
-
-  - `BetaManagedAgentsSpanModelRequestEndEvent object { id, is_error, model_request_start_id, 3 more }`
+  - `BetaManagedAgentsSpanModelRequestEndEvent object`
 
     Emitted when a model request completes.
 
@@ -1315,11 +1316,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_end"`
 
-      - `"span.model_request_end"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -1331,6 +1332,8 @@ List Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1339,11 +1342,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_ongoing"`
 
-      - `"span.outcome_evaluation_ongoing"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+  - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -1359,6 +1362,8 @@ List Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: string`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -1367,11 +1372,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubric object { file_id, type }`
+      - `BetaManagedAgentsFileRubric object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -1381,9 +1388,7 @@ List Events
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubric object { content, type }`
+      - `BetaManagedAgentsTextRubric object`
 
         Rubric content provided inline as text.
 
@@ -1393,13 +1398,9 @@ List Events
 
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
 
-      - `"user.define_outcome"`
-
-  - `BetaManagedAgentsSessionDeletedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionDeletedEvent object`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -1411,11 +1412,11 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.deleted"`
 
-      - `"session.deleted"`
-
-  - `BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent object`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1431,15 +1432,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: "session.thread_status_running"`
 
-      - `"session.thread_status_running"`
-
-  - `BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent_name, processed_at, 3 more }`
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent object`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1455,6 +1456,8 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that went idle.
@@ -1463,27 +1466,25 @@ List Events
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
     - `type: "session.thread_status_idle"`
 
-      - `"session.thread_status_idle"`
-
-  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1499,15 +1500,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: "session.thread_status_terminated"`
 
-      - `"session.thread_status_terminated"`
-
-  - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserToolResultEvent object`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -1521,25 +1522,23 @@ List Events
 
     - `type: "user.tool_result"`
 
-      - `"user.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -1551,11 +1550,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1571,15 +1572,15 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: "session.thread_status_rescheduled"`
 
-      - `"session.thread_status_rescheduled"`
-
-  - `BetaManagedAgentsSessionUpdatedEvent object { id, processed_at, type, 4 more }`
+  - `BetaManagedAgentsSessionUpdatedEvent object`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -1591,9 +1592,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.updated"`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: "session.updated"`
 
     - `agent: optional BetaManagedAgentsSessionAgent or null`
 
@@ -1608,8 +1609,6 @@ List Events
         - `name: string`
 
         - `type: "url"`
-
-          - `"url"`
 
         - `url: string`
 
@@ -1687,45 +1686,35 @@ List Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `BetaManagedAgentsEffortLow object { type }`
+          - `BetaManagedAgentsEffortLow object`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: "low"`
 
-              - `"low"`
-
-          - `BetaManagedAgentsEffortMedium object { type }`
+          - `BetaManagedAgentsEffortMedium object`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
 
-              - `"medium"`
-
-          - `BetaManagedAgentsEffortHigh object { type }`
+          - `BetaManagedAgentsEffortHigh object`
 
             High effort. Favors reasoning depth.
 
             - `type: "high"`
 
-              - `"high"`
-
-          - `BetaManagedAgentsEffortXhigh object { type }`
+          - `BetaManagedAgentsEffortXhigh object`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
-          - `BetaManagedAgentsEffortMax object { type }`
+          - `BetaManagedAgentsEffortMax object`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo: optional string`
 
@@ -1747,7 +1736,7 @@ List Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `BetaManagedAgentsSessionThreadAgent object { id, description, mcp_servers, 7 more }`
+          - `BetaManagedAgentsSessionThreadAgent object`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -1771,7 +1760,7 @@ List Events
 
             - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-              - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsAnthropicSkill object`
 
                 A resolved Anthropic-managed skill.
 
@@ -1779,11 +1768,9 @@ List Events
 
                 - `type: "anthropic"`
 
-                  - `"anthropic"`
-
                 - `version: string`
 
-              - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsCustomSkill object`
 
                 A resolved user-created custom skill.
 
@@ -1791,19 +1778,17 @@ List Events
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
                 - `version: string`
 
             - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-              - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+              - `BetaManagedAgentsAgentToolset20260401 object`
 
                 - `configs: array of BetaManagedAgentsAgentToolConfig`
 
-                  - `BetaManagedAgentsBashToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsBashToolConfig object`
 
                     Configuration for the bash tool.
 
@@ -1811,33 +1796,25 @@ List Events
 
                     - `name: "bash"`
 
-                      - `"bash"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: "always_allow"`
 
-                          - `"always_allow"`
-
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: "always_ask"`
 
-                          - `"always_ask"`
-
                     - `type: "bash"`
 
-                      - `"bash"`
-
-                  - `BetaManagedAgentsEditToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsEditToolConfig object`
 
                     Configuration for the edit tool.
 
@@ -1845,25 +1822,21 @@ List Events
 
                     - `name: "edit"`
 
-                      - `"edit"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "edit"`
 
-                      - `"edit"`
-
-                  - `BetaManagedAgentsReadToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsReadToolConfig object`
 
                     Configuration for the read tool.
 
@@ -1871,25 +1844,21 @@ List Events
 
                     - `name: "read"`
 
-                      - `"read"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "read"`
 
-                      - `"read"`
-
-                  - `BetaManagedAgentsWriteToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsWriteToolConfig object`
 
                     Configuration for the write tool.
 
@@ -1897,25 +1866,21 @@ List Events
 
                     - `name: "write"`
 
-                      - `"write"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "write"`
 
-                      - `"write"`
-
-                  - `BetaManagedAgentsGlobToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGlobToolConfig object`
 
                     Configuration for the glob tool.
 
@@ -1923,25 +1888,21 @@ List Events
 
                     - `name: "glob"`
 
-                      - `"glob"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "glob"`
 
-                      - `"glob"`
-
-                  - `BetaManagedAgentsGrepToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGrepToolConfig object`
 
                     Configuration for the grep tool.
 
@@ -1949,25 +1910,21 @@ List Events
 
                     - `name: "grep"`
 
-                      - `"grep"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "grep"`
 
-                      - `"grep"`
-
-                  - `BetaManagedAgentsWebFetchToolConfig object { enabled, name, permission_policy, 4 more }`
+                  - `BetaManagedAgentsWebFetchToolConfig object`
 
                     Configuration for the web_fetch tool.
 
@@ -1975,23 +1932,19 @@ List Events
 
                     - `name: "web_fetch"`
 
-                      - `"web_fetch"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_fetch"`
-
-                      - `"web_fetch"`
 
                     - `allowed_domains: optional array of string`
 
@@ -1999,7 +1952,9 @@ List Events
 
                     - `max_content_tokens: optional number or null`
 
-                  - `BetaManagedAgentsWebSearchToolConfig object { enabled, name, permission_policy, 4 more }`
+                      format: int32
+
+                  - `BetaManagedAgentsWebSearchToolConfig object`
 
                     Configuration for the web_search tool.
 
@@ -2007,23 +1962,19 @@ List Events
 
                     - `name: "web_search"`
 
-                      - `"web_search"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_search"`
-
-                      - `"web_search"`
 
                     - `allowed_domains: optional array of string`
 
@@ -2037,11 +1988,11 @@ List Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: optional string or null`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: optional string or null`
 
@@ -2051,9 +2002,13 @@ List Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: optional string or null`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -2065,19 +2020,17 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
                 - `type: "agent_toolset_20260401"`
 
-                  - `"agent_toolset_20260401"`
-
-              - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+              - `BetaManagedAgentsMCPToolset object`
 
                 - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -2089,11 +2042,11 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -2107,11 +2060,11 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -2119,9 +2072,7 @@ List Events
 
                 - `type: "mcp_toolset"`
 
-                  - `"mcp_toolset"`
-
-              - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+              - `BetaManagedAgentsCustomTool object`
 
                 A custom tool as returned in API responses.
 
@@ -2133,8 +2084,6 @@ List Events
 
                   - `type: "object"`
 
-                    - `"object"`
-
                   - `properties: optional map[unknown] or null`
 
                   - `required: optional array of string or null`
@@ -2143,15 +2092,13 @@ List Events
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
             - `type: "agent"`
-
-              - `"agent"`
 
             - `version: number`
 
-          - `BetaManagedAgentsAdvisor object { model, type }`
+              format: int32
+
+          - `BetaManagedAgentsAdvisor object`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -2161,21 +2108,17 @@ List Events
 
             - `type: "advisor"`
 
-              - `"advisor"`
-
         - `type: "coordinator"`
-
-          - `"coordinator"`
 
       - `name: string`
 
       - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-        - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsAnthropicSkill object`
 
           A resolved Anthropic-managed skill.
 
-        - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsCustomSkill object`
 
           A resolved user-created custom skill.
 
@@ -2183,19 +2126,19 @@ List Events
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-        - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+        - `BetaManagedAgentsAgentToolset20260401 object`
 
-        - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+        - `BetaManagedAgentsMCPToolset object`
 
-        - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+        - `BetaManagedAgentsCustomTool object`
 
           A custom tool as returned in API responses.
 
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -2213,11 +2156,7 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: "limit"`
-
-        - `"limit"`
 
     - `metadata: optional map[string]`
 
@@ -2227,7 +2166,7 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsSystemMessageEvent object`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -2243,19 +2182,19 @@ List Events
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent object { id, processed_at, type, 2 more }`
+      format: date-time
+
+  - `BetaManagedAgentsSessionUsageEvent object`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -2267,9 +2206,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.usage"`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: "session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -2279,6 +2218,8 @@ List Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -2287,17 +2228,25 @@ List Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: optional number`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: optional number`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: optional number`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: optional BetaMonetaryAmount`
 
@@ -2307,6 +2256,8 @@ List Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -2315,9 +2266,13 @@ List Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: optional number`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -2329,14 +2284,14 @@ List Events
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2370,15 +2325,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
 
 ## Send Events
 
-**post** `/v1/sessions/{session_id}/events`
+**POST** `/v1/sessions/{session_id}/events`
 
 Send Events
 
-### Path Parameters
+### Path parameters
 
 - `session_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2386,7 +2341,7 @@ Send Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2456,13 +2411,27 @@ Send Events
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `events: array of BetaManagedAgentsEventParams`
 
   Events to send to the `session`.
 
-  - `BetaManagedAgentsUserMessageEventParams object { content, type }`
+  - `BetaManagedAgentsUserMessageEventParams object`
 
     Parameters for sending a user message to the session.
 
@@ -2470,7 +2439,7 @@ Send Events
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -2478,11 +2447,11 @@ Send Events
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2490,7 +2459,7 @@ Send Events
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -2498,27 +2467,29 @@ Send Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -2526,15 +2497,13 @@ Send Events
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2542,7 +2511,7 @@ Send Events
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -2550,15 +2519,17 @@ Send Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -2566,29 +2537,27 @@ Send Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -2596,13 +2565,11 @@ Send Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -2612,31 +2579,25 @@ Send Events
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsUserInterruptEventParams object { type, session_thread_id }`
+  - `BetaManagedAgentsUserInterruptEventParams object`
 
     Parameters for sending an interrupt to pause the agent.
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEventParams object { result, tool_use_id, type, deny_message }`
+  - `BetaManagedAgentsUserToolConfirmationEventParams object`
 
     Parameters for confirming or denying a tool execution request.
 
@@ -2652,15 +2613,17 @@ Send Events
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.tool_confirmation"`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_confirmation"`
+    - `type: "user.tool_confirmation"`
 
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-  - `BetaManagedAgentsUserCustomToolResultEventParams object { custom_tool_use_id, type, content, is_error }`
+      maxLength: 10000
+
+  - `BetaManagedAgentsUserCustomToolResultEventParams object`
 
     Parameters for providing the result of a custom tool execution.
 
@@ -2668,27 +2631,27 @@ Send Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.custom_tool_result"`
+      minLength: 1, maxLength: 128
 
-      - `"user.custom_tool_result"`
+    - `type: "user.custom_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -2708,27 +2671,29 @@ Send Events
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -2740,7 +2705,7 @@ Send Events
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+      - `BetaManagedAgentsFileRubricParams object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -2750,9 +2715,7 @@ Send Events
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubricParams object { content, type }`
+      - `BetaManagedAgentsTextRubricParams object`
 
         Rubric content provided inline as text.
 
@@ -2760,19 +2723,19 @@ Send Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsUserToolResultEventParams object { tool_use_id, type, content, is_error }`
+      format: int32
+
+  - `BetaManagedAgentsUserToolResultEventParams object`
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -2780,27 +2743,27 @@ Send Events
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.tool_result"`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_result"`
+    - `type: "user.tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -2808,7 +2771,7 @@ Send Events
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+  - `BetaManagedAgentsSystemMessageEventParams object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -2820,17 +2783,15 @@ Send Events
 
         The text content.
 
-      - `type: "text"`
+        minLength: 1
 
-        - `"text"`
+      - `type: "text"`
 
     - `type: "system.message"`
 
-      - `"system.message"`
-
 ### Returns
 
-- `BetaManagedAgentsSendSessionEvents object { data }`
+- `BetaManagedAgentsSendSessionEvents object`
 
   Events that were successfully sent to the session.
 
@@ -2838,7 +2799,7 @@ Send Events
 
     Sent events
 
-    - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+    - `BetaManagedAgentsUserMessageEvent object`
 
       A user message event in the session conversation.
 
@@ -2850,7 +2811,7 @@ Send Events
 
         Array of content blocks comprising the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -2858,11 +2819,11 @@ Send Events
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2870,7 +2831,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -2878,27 +2839,29 @@ Send Events
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -2906,15 +2869,13 @@ Send Events
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2922,7 +2883,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -2930,15 +2891,17 @@ Send Events
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -2946,29 +2909,27 @@ Send Events
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -2976,13 +2937,11 @@ Send Events
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -2992,23 +2951,21 @@ Send Events
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
-
-        - `"user.message"`
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-    - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+        format: date-time
+
+    - `BetaManagedAgentsUserInterruptEvent object`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -3018,17 +2975,17 @@ Send Events
 
       - `type: "user.interrupt"`
 
-        - `"user.interrupt"`
-
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: optional string or null`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+    - `BetaManagedAgentsUserToolConfirmationEvent object`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -3050,21 +3007,23 @@ Send Events
 
       - `type: "user.tool_confirmation"`
 
-        - `"user.tool_confirmation"`
-
       - `deny_message: optional string or null`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+        maxLength: 10000
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-    - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+    - `BetaManagedAgentsUserCustomToolResultEvent object`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -3078,25 +3037,23 @@ Send Events
 
       - `type: "user.custom_tool_result"`
 
-        - `"user.custom_tool_result"`
-
       - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
         The result content returned by the tool.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+        - `BetaManagedAgentsSearchResultBlock object`
 
           A block containing a web search result.
 
@@ -3116,21 +3073,23 @@ Send Events
 
               The text content.
 
-            - `type: "text"`
+              minLength: 1
 
-              - `"text"`
+            - `type: "text"`
 
           - `source: string`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `title: string`
 
             The title of the search result.
 
-          - `type: "search_result"`
+            minLength: 1
 
-            - `"search_result"`
+          - `type: "search_result"`
 
       - `is_error: optional boolean or null`
 
@@ -3140,11 +3099,13 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-    - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+    - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -3160,6 +3121,8 @@ Send Events
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+        format: int32
+
       - `outcome_id: string`
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -3168,11 +3131,13 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -3182,9 +3147,7 @@ Send Events
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -3194,13 +3157,9 @@ Send Events
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
 
-        - `"user.define_outcome"`
-
-    - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+    - `BetaManagedAgentsUserToolResultEvent object`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -3214,25 +3173,23 @@ Send Events
 
       - `type: "user.tool_result"`
 
-        - `"user.tool_result"`
-
       - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
         The result content returned by the tool.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+        - `BetaManagedAgentsSearchResultBlock object`
 
           A block containing a web search result.
 
@@ -3244,11 +3201,13 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-    - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+    - `BetaManagedAgentsSystemMessageEvent object`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -3264,21 +3223,21 @@ Send Events
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -3299,7 +3258,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3321,15 +3280,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
 
 ## Stream Events
 
-**get** `/v1/sessions/{session_id}/events/stream`
+**GET** `/v1/sessions/{session_id}/events/stream`
 
 Stream Events
 
-### Path Parameters
+### Path parameters
 
 - `session_id: string`
 
-### Query Parameters
+### Query parameters
 
 - `event_deltas: optional array of BetaManagedAgentsDeltaType`
 
@@ -3339,7 +3298,7 @@ Stream Events
 
   - `"agent.thinking"`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3347,7 +3306,7 @@ Stream Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3417,13 +3376,27 @@ Stream Events
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
 - `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 34 more`
 
   Server-sent event in the session stream.
 
-  - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsUserMessageEvent object`
 
     A user message event in the session conversation.
 
@@ -3435,7 +3408,7 @@ Stream Events
 
       Array of content blocks comprising the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -3443,11 +3416,11 @@ Stream Events
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3455,7 +3428,7 @@ Stream Events
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -3463,27 +3436,29 @@ Stream Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -3491,15 +3466,13 @@ Stream Events
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3507,7 +3480,7 @@ Stream Events
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -3515,15 +3488,17 @@ Stream Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -3531,29 +3506,27 @@ Stream Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -3561,13 +3534,11 @@ Stream Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -3577,23 +3548,21 @@ Stream Events
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
-
-      - `"user.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+      format: date-time
+
+  - `BetaManagedAgentsUserInterruptEvent object`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -3603,17 +3572,17 @@ Stream Events
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+  - `BetaManagedAgentsUserToolConfirmationEvent object`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -3635,21 +3604,23 @@ Stream Events
 
     - `type: "user.tool_confirmation"`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-  - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserCustomToolResultEvent object`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -3663,25 +3634,23 @@ Stream Events
 
     - `type: "user.custom_tool_result"`
 
-      - `"user.custom_tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -3701,21 +3670,23 @@ Stream Events
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
@@ -3725,11 +3696,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }`
+  - `BetaManagedAgentsAgentCustomToolUseEvent object`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -3749,15 +3722,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.custom_tool_use"`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: "agent.custom_tool_use"`
 
     - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-  - `BetaManagedAgentsAgentMessageEvent object { id, content, processed_at, type }`
+  - `BetaManagedAgentsAgentMessageEvent object`
 
     An agent response event in the session conversation.
 
@@ -3769,11 +3742,11 @@ Stream Events
 
       Array of text blocks comprising the agent response.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -3781,11 +3754,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.message"`
 
-      - `"agent.message"`
-
-  - `BetaManagedAgentsAgentThinkingEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThinkingEvent object`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -3797,11 +3770,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thinking"`
 
-      - `"agent.thinking"`
-
-  - `BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp_server_name, 5 more }`
+  - `BetaManagedAgentsAgentMCPToolUseEvent object`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -3825,9 +3798,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_use"`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: "agent.mcp_tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -3843,7 +3816,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp_tool_use_id, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentMCPToolResultEvent object`
 
     Event representing the result of an MCP tool execution.
 
@@ -3859,27 +3832,27 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_result"`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: "agent.mcp_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -3887,7 +3860,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }`
+  - `BetaManagedAgentsAgentToolUseEvent object`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -3907,9 +3880,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.tool_use"`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: "agent.tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -3925,7 +3898,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentToolResultEvent object { id, processed_at, tool_use_id, 3 more }`
+  - `BetaManagedAgentsAgentToolResultEvent object`
 
     Event representing the result of an agent tool execution.
 
@@ -3937,31 +3910,31 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: string`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: "agent.tool_result"`
 
-      - `"agent.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -3969,7 +3942,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from_session_thread_id, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -3981,19 +3954,19 @@ Stream Events
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4005,15 +3978,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.thread_message_received"`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: "agent.thread_message_received"`
 
     - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageSentEvent object`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -4025,19 +3998,19 @@ Stream Events
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4045,19 +4018,19 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: string`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: "agent.thread_message_sent"`
 
-      - `"agent.thread_message_sent"`
-
     - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent object`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -4069,11 +4042,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thread_context_compacted"`
 
-      - `"agent.thread_context_compacted"`
-
-  - `BetaManagedAgentsSessionErrorEvent object { id, error, processed_at, type }`
+  - `BetaManagedAgentsSessionErrorEvent object`
 
     An error event indicating a problem occurred during session execution.
 
@@ -4085,7 +4058,7 @@ Stream Events
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-      - `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+      - `BetaManagedAgentsUnknownError object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -4097,35 +4070,27 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: "retrying"`
 
-              - `"retrying"`
-
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: "exhausted"`
 
-              - `"exhausted"`
-
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: "terminal"`
 
-              - `"terminal"`
-
         - `type: "unknown_error"`
 
-          - `"unknown_error"`
-
-      - `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelOverloadedError object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -4137,23 +4102,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_overloaded_error"`
 
-          - `"model_overloaded_error"`
-
-      - `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRateLimitedError object`
 
         The model request was rate-limited.
 
@@ -4165,23 +4128,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_rate_limited_error"`
 
-          - `"model_rate_limited_error"`
-
-      - `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRequestFailedError object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -4193,23 +4154,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_request_failed_error"`
 
-          - `"model_request_failed_error"`
-
-      - `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPConnectionFailedError object`
 
         Failed to connect to an MCP server.
 
@@ -4225,23 +4184,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_connection_failed_error"`
 
-          - `"mcp_connection_failed_error"`
-
-      - `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPAuthenticationFailedError object`
 
         Authentication to an MCP server failed.
 
@@ -4257,23 +4214,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_authentication_failed_error"`
 
-          - `"mcp_authentication_failed_error"`
-
-      - `BetaManagedAgentsBillingError object { message, retry_status, type }`
+      - `BetaManagedAgentsBillingError object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -4285,23 +4240,21 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "billing_error"`
 
-          - `"billing_error"`
-
-      - `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+      - `BetaManagedAgentsCredentialHostUnreachableError object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -4317,21 +4270,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "credential_host_unreachable_error"`
-
-          - `"credential_host_unreachable_error"`
 
         - `vault_id: string`
 
@@ -4341,11 +4292,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.error"`
 
-      - `"session.error"`
-
-  - `BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRescheduledEvent object`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -4357,11 +4308,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_rescheduled"`
 
-      - `"session.status_rescheduled"`
-
-  - `BetaManagedAgentsSessionStatusRunningEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRunningEvent object`
 
     Indicates the session is actively running and the agent is working.
 
@@ -4373,11 +4324,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_running"`
 
-      - `"session.status_running"`
-
-  - `BetaManagedAgentsSessionStatusIdleEvent object { id, processed_at, stop_reason, type }`
+  - `BetaManagedAgentsSessionStatusIdleEvent object`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -4389,19 +4340,19 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or BetaManagedAgentsSessionBudgetReached`
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: "end_turn"`
 
-          - `"end_turn"`
-
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -4411,29 +4362,21 @@ Stream Events
 
         - `type: "requires_action"`
 
-          - `"requires_action"`
-
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
-          - `"retries_exhausted"`
-
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: "budget_reached"`
 
-          - `"budget_reached"`
-
     - `type: "session.status_idle"`
 
-      - `"session.status_idle"`
-
-  - `BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusTerminatedEvent object`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -4445,11 +4388,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_terminated"`
 
-      - `"session.status_terminated"`
-
-  - `BetaManagedAgentsSessionThreadCreatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadCreatedEvent object`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -4465,15 +4408,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: "session.thread_created"`
 
-      - `"session.thread_created"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -4485,6 +4428,8 @@ Stream Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4493,11 +4438,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_start"`
 
-      - `"span.outcome_evaluation_start"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -4513,6 +4458,8 @@ Stream Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: string`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -4525,13 +4472,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: string`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: "span.outcome_evaluation_end"`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -4541,17 +4488,25 @@ Stream Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: number`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: number`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: number`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: optional "standard" or "fast" or null`
 
@@ -4561,7 +4516,7 @@ Stream Events
 
         - `"fast"`
 
-  - `BetaManagedAgentsSpanModelRequestStartEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSpanModelRequestStartEvent object`
 
     Emitted when a model request is initiated by the agent.
 
@@ -4573,11 +4528,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_start"`
 
-      - `"span.model_request_start"`
-
-  - `BetaManagedAgentsSpanModelRequestEndEvent object { id, is_error, model_request_start_id, 3 more }`
+  - `BetaManagedAgentsSpanModelRequestEndEvent object`
 
     Emitted when a model request completes.
 
@@ -4601,11 +4556,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_end"`
 
-      - `"span.model_request_end"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -4617,6 +4572,8 @@ Stream Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4625,11 +4582,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_ongoing"`
 
-      - `"span.outcome_evaluation_ongoing"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+  - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -4645,6 +4602,8 @@ Stream Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: string`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -4653,11 +4612,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubric object { file_id, type }`
+      - `BetaManagedAgentsFileRubric object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -4667,9 +4628,7 @@ Stream Events
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubric object { content, type }`
+      - `BetaManagedAgentsTextRubric object`
 
         Rubric content provided inline as text.
 
@@ -4679,13 +4638,9 @@ Stream Events
 
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
 
-      - `"user.define_outcome"`
-
-  - `BetaManagedAgentsSessionDeletedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionDeletedEvent object`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -4697,11 +4652,11 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.deleted"`
 
-      - `"session.deleted"`
-
-  - `BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent object`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4717,15 +4672,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: "session.thread_status_running"`
 
-      - `"session.thread_status_running"`
-
-  - `BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent_name, processed_at, 3 more }`
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent object`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4741,6 +4696,8 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that went idle.
@@ -4749,27 +4706,25 @@ Stream Events
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
     - `type: "session.thread_status_idle"`
 
-      - `"session.thread_status_idle"`
-
-  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4785,15 +4740,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: "session.thread_status_terminated"`
 
-      - `"session.thread_status_terminated"`
-
-  - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserToolResultEvent object`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -4807,25 +4762,23 @@ Stream Events
 
     - `type: "user.tool_result"`
 
-      - `"user.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -4837,11 +4790,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4857,15 +4812,15 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: "session.thread_status_rescheduled"`
 
-      - `"session.thread_status_rescheduled"`
-
-  - `BetaManagedAgentsSessionUpdatedEvent object { id, processed_at, type, 4 more }`
+  - `BetaManagedAgentsSessionUpdatedEvent object`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -4877,9 +4832,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.updated"`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: "session.updated"`
 
     - `agent: optional BetaManagedAgentsSessionAgent or null`
 
@@ -4894,8 +4849,6 @@ Stream Events
         - `name: string`
 
         - `type: "url"`
-
-          - `"url"`
 
         - `url: string`
 
@@ -4973,45 +4926,35 @@ Stream Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `BetaManagedAgentsEffortLow object { type }`
+          - `BetaManagedAgentsEffortLow object`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: "low"`
 
-              - `"low"`
-
-          - `BetaManagedAgentsEffortMedium object { type }`
+          - `BetaManagedAgentsEffortMedium object`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
 
-              - `"medium"`
-
-          - `BetaManagedAgentsEffortHigh object { type }`
+          - `BetaManagedAgentsEffortHigh object`
 
             High effort. Favors reasoning depth.
 
             - `type: "high"`
 
-              - `"high"`
-
-          - `BetaManagedAgentsEffortXhigh object { type }`
+          - `BetaManagedAgentsEffortXhigh object`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
-          - `BetaManagedAgentsEffortMax object { type }`
+          - `BetaManagedAgentsEffortMax object`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo: optional string`
 
@@ -5033,7 +4976,7 @@ Stream Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `BetaManagedAgentsSessionThreadAgent object { id, description, mcp_servers, 7 more }`
+          - `BetaManagedAgentsSessionThreadAgent object`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -5057,7 +5000,7 @@ Stream Events
 
             - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-              - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsAnthropicSkill object`
 
                 A resolved Anthropic-managed skill.
 
@@ -5065,11 +5008,9 @@ Stream Events
 
                 - `type: "anthropic"`
 
-                  - `"anthropic"`
-
                 - `version: string`
 
-              - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsCustomSkill object`
 
                 A resolved user-created custom skill.
 
@@ -5077,19 +5018,17 @@ Stream Events
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
                 - `version: string`
 
             - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-              - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+              - `BetaManagedAgentsAgentToolset20260401 object`
 
                 - `configs: array of BetaManagedAgentsAgentToolConfig`
 
-                  - `BetaManagedAgentsBashToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsBashToolConfig object`
 
                     Configuration for the bash tool.
 
@@ -5097,33 +5036,25 @@ Stream Events
 
                     - `name: "bash"`
 
-                      - `"bash"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: "always_allow"`
 
-                          - `"always_allow"`
-
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: "always_ask"`
 
-                          - `"always_ask"`
-
                     - `type: "bash"`
 
-                      - `"bash"`
-
-                  - `BetaManagedAgentsEditToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsEditToolConfig object`
 
                     Configuration for the edit tool.
 
@@ -5131,25 +5062,21 @@ Stream Events
 
                     - `name: "edit"`
 
-                      - `"edit"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "edit"`
 
-                      - `"edit"`
-
-                  - `BetaManagedAgentsReadToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsReadToolConfig object`
 
                     Configuration for the read tool.
 
@@ -5157,25 +5084,21 @@ Stream Events
 
                     - `name: "read"`
 
-                      - `"read"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "read"`
 
-                      - `"read"`
-
-                  - `BetaManagedAgentsWriteToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsWriteToolConfig object`
 
                     Configuration for the write tool.
 
@@ -5183,25 +5106,21 @@ Stream Events
 
                     - `name: "write"`
 
-                      - `"write"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "write"`
 
-                      - `"write"`
-
-                  - `BetaManagedAgentsGlobToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGlobToolConfig object`
 
                     Configuration for the glob tool.
 
@@ -5209,25 +5128,21 @@ Stream Events
 
                     - `name: "glob"`
 
-                      - `"glob"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "glob"`
 
-                      - `"glob"`
-
-                  - `BetaManagedAgentsGrepToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGrepToolConfig object`
 
                     Configuration for the grep tool.
 
@@ -5235,25 +5150,21 @@ Stream Events
 
                     - `name: "grep"`
 
-                      - `"grep"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "grep"`
 
-                      - `"grep"`
-
-                  - `BetaManagedAgentsWebFetchToolConfig object { enabled, name, permission_policy, 4 more }`
+                  - `BetaManagedAgentsWebFetchToolConfig object`
 
                     Configuration for the web_fetch tool.
 
@@ -5261,23 +5172,19 @@ Stream Events
 
                     - `name: "web_fetch"`
 
-                      - `"web_fetch"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_fetch"`
-
-                      - `"web_fetch"`
 
                     - `allowed_domains: optional array of string`
 
@@ -5285,7 +5192,9 @@ Stream Events
 
                     - `max_content_tokens: optional number or null`
 
-                  - `BetaManagedAgentsWebSearchToolConfig object { enabled, name, permission_policy, 4 more }`
+                      format: int32
+
+                  - `BetaManagedAgentsWebSearchToolConfig object`
 
                     Configuration for the web_search tool.
 
@@ -5293,23 +5202,19 @@ Stream Events
 
                     - `name: "web_search"`
 
-                      - `"web_search"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_search"`
-
-                      - `"web_search"`
 
                     - `allowed_domains: optional array of string`
 
@@ -5323,11 +5228,11 @@ Stream Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: optional string or null`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: optional string or null`
 
@@ -5337,9 +5242,13 @@ Stream Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: optional string or null`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -5351,19 +5260,17 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
                 - `type: "agent_toolset_20260401"`
 
-                  - `"agent_toolset_20260401"`
-
-              - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+              - `BetaManagedAgentsMCPToolset object`
 
                 - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -5375,11 +5282,11 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -5393,11 +5300,11 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -5405,9 +5312,7 @@ Stream Events
 
                 - `type: "mcp_toolset"`
 
-                  - `"mcp_toolset"`
-
-              - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+              - `BetaManagedAgentsCustomTool object`
 
                 A custom tool as returned in API responses.
 
@@ -5419,8 +5324,6 @@ Stream Events
 
                   - `type: "object"`
 
-                    - `"object"`
-
                   - `properties: optional map[unknown] or null`
 
                   - `required: optional array of string or null`
@@ -5429,15 +5332,13 @@ Stream Events
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
             - `type: "agent"`
-
-              - `"agent"`
 
             - `version: number`
 
-          - `BetaManagedAgentsAdvisor object { model, type }`
+              format: int32
+
+          - `BetaManagedAgentsAdvisor object`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -5447,21 +5348,17 @@ Stream Events
 
             - `type: "advisor"`
 
-              - `"advisor"`
-
         - `type: "coordinator"`
-
-          - `"coordinator"`
 
       - `name: string`
 
       - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-        - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsAnthropicSkill object`
 
           A resolved Anthropic-managed skill.
 
-        - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsCustomSkill object`
 
           A resolved user-created custom skill.
 
@@ -5469,19 +5366,19 @@ Stream Events
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-        - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+        - `BetaManagedAgentsAgentToolset20260401 object`
 
-        - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+        - `BetaManagedAgentsMCPToolset object`
 
-        - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+        - `BetaManagedAgentsCustomTool object`
 
           A custom tool as returned in API responses.
 
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -5499,11 +5396,7 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: "limit"`
-
-        - `"limit"`
 
     - `metadata: optional map[string]`
 
@@ -5513,7 +5406,7 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsStartEvent object { event, type }`
+  - `BetaManagedAgentsStartEvent object`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -5521,7 +5414,7 @@ Stream Events
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `BetaManagedAgentsAgentMessagePreview object { id, type }`
+      - `BetaManagedAgentsAgentMessagePreview object`
 
         - `id: string`
 
@@ -5529,9 +5422,7 @@ Stream Events
 
         - `type: "agent.message"`
 
-          - `"agent.message"`
-
-      - `BetaManagedAgentsAgentThinkingPreview object { id, type }`
+      - `BetaManagedAgentsAgentThinkingPreview object`
 
         - `id: string`
 
@@ -5539,13 +5430,9 @@ Stream Events
 
         - `type: "agent.thinking"`
 
-          - `"agent.thinking"`
-
     - `type: "event_start"`
 
-      - `"event_start"`
-
-  - `BetaManagedAgentsDeltaEvent object { delta, event_id, type }`
+  - `BetaManagedAgentsDeltaEvent object`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -5559,11 +5446,11 @@ Stream Events
 
       - `type: "content_delta"`
 
-        - `"content_delta"`
-
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `event_id: string`
 
@@ -5571,9 +5458,7 @@ Stream Events
 
     - `type: "event_delta"`
 
-      - `"event_delta"`
-
-  - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsSystemMessageEvent object`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -5589,19 +5474,19 @@ Stream Events
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent object { id, processed_at, type, 2 more }`
+      format: date-time
+
+  - `BetaManagedAgentsSessionUsageEvent object`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -5613,9 +5498,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.usage"`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: "session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -5625,6 +5510,8 @@ Stream Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -5633,17 +5520,25 @@ Stream Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: optional number`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: optional number`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: optional number`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: optional BetaMonetaryAmount`
 
@@ -5653,6 +5548,8 @@ Stream Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -5661,24 +5558,32 @@ Stream Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: optional number`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 34 more`
+
+  Server-sent event in the session stream.
+
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -5694,11 +5599,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Agent Custom Tool Use Event
 
-- `BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }`
+- `BetaManagedAgentsAgentCustomToolUseEvent object`
 
   Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -5718,9 +5623,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.custom_tool_use"`
+    format: date-time
 
-    - `"agent.custom_tool_use"`
+  - `type: "agent.custom_tool_use"`
 
   - `session_thread_id: optional string or null`
 
@@ -5728,7 +5633,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
-- `BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp_tool_use_id, processed_at, 3 more }`
+- `BetaManagedAgentsAgentMCPToolResultEvent object`
 
   Event representing the result of an MCP tool execution.
 
@@ -5744,15 +5649,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.mcp_tool_result"`
+    format: date-time
 
-    - `"agent.mcp_tool_result"`
+  - `type: "agent.mcp_tool_result"`
 
   - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
     The result content returned by the tool.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -5760,11 +5665,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -5772,7 +5677,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -5780,27 +5685,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -5808,15 +5715,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -5824,7 +5729,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -5832,15 +5737,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -5848,29 +5755,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -5878,13 +5783,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -5894,7 +5797,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+    - `BetaManagedAgentsSearchResultBlock object`
 
       A block containing a web search result.
 
@@ -5914,21 +5817,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
-        - `type: "text"`
+          minLength: 1
 
-          - `"text"`
+        - `type: "text"`
 
       - `source: string`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: string`
 
         The title of the search result.
 
-      - `type: "search_result"`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: "search_result"`
 
   - `is_error: optional boolean or null`
 
@@ -5936,7 +5841,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Agent MCP Tool Use Event
 
-- `BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp_server_name, 5 more }`
+- `BetaManagedAgentsAgentMCPToolUseEvent object`
 
   Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -5960,9 +5865,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.mcp_tool_use"`
+    format: date-time
 
-    - `"agent.mcp_tool_use"`
+  - `type: "agent.mcp_tool_use"`
 
   - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -5980,7 +5885,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Agent Message Event
 
-- `BetaManagedAgentsAgentMessageEvent object { id, content, processed_at, type }`
+- `BetaManagedAgentsAgentMessageEvent object`
 
   An agent response event in the session conversation.
 
@@ -5992,7 +5897,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Array of text blocks comprising the agent response.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -6000,29 +5905,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
 
-        - `"redacted"`
-
   - `processed_at: string`
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.message"`
+    format: date-time
 
-    - `"agent.message"`
+  - `type: "agent.message"`
 
 ### Beta Managed Agents Agent Thinking Event
 
-- `BetaManagedAgentsAgentThinkingEvent object { id, processed_at, type }`
+- `BetaManagedAgentsAgentThinkingEvent object`
 
   Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -6034,13 +5937,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.thinking"`
+    format: date-time
 
-    - `"agent.thinking"`
+  - `type: "agent.thinking"`
 
 ### Beta Managed Agents Agent Thread Context Compacted Event
 
-- `BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed_at, type }`
+- `BetaManagedAgentsAgentThreadContextCompactedEvent object`
 
   Indicates that context compaction (summarization) occurred during the session.
 
@@ -6052,13 +5955,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.thread_context_compacted"`
+    format: date-time
 
-    - `"agent.thread_context_compacted"`
+  - `type: "agent.thread_context_compacted"`
 
 ### Beta Managed Agents Agent Thread Message Received Event
 
-- `BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from_session_thread_id, 3 more }`
+- `BetaManagedAgentsAgentThreadMessageReceivedEvent object`
 
   Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -6070,7 +5973,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Message content blocks.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -6078,11 +5981,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6090,7 +5993,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -6098,27 +6001,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -6126,15 +6031,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6142,7 +6045,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -6150,15 +6053,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -6166,29 +6071,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -6196,13 +6099,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -6212,13 +6113,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
-
-        - `"redacted"`
 
   - `from_session_thread_id: string`
 
@@ -6228,9 +6127,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.thread_message_received"`
+    format: date-time
 
-    - `"agent.thread_message_received"`
+  - `type: "agent.thread_message_received"`
 
   - `from_agent_name: optional string or null`
 
@@ -6238,7 +6137,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Agent Thread Message Sent Event
 
-- `BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed_at, 3 more }`
+- `BetaManagedAgentsAgentThreadMessageSentEvent object`
 
   Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -6250,7 +6149,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Message content blocks.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -6258,11 +6157,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6270,7 +6169,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -6278,27 +6177,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -6306,15 +6207,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6322,7 +6221,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -6330,15 +6229,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -6346,29 +6247,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -6376,13 +6275,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -6392,17 +6289,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
 
-        - `"redacted"`
-
   - `processed_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `to_session_thread_id: string`
 
@@ -6410,15 +6307,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "agent.thread_message_sent"`
 
-    - `"agent.thread_message_sent"`
-
   - `to_agent_name: optional string or null`
 
     Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 ### Beta Managed Agents Agent Tool Result Event
 
-- `BetaManagedAgentsAgentToolResultEvent object { id, processed_at, tool_use_id, 3 more }`
+- `BetaManagedAgentsAgentToolResultEvent object`
 
   Event representing the result of an agent tool execution.
 
@@ -6430,19 +6325,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `tool_use_id: string`
 
     The id of the `agent.tool_use` event this result corresponds to.
 
   - `type: "agent.tool_result"`
 
-    - `"agent.tool_result"`
-
   - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
     The result content returned by the tool.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -6450,11 +6345,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6462,7 +6357,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -6470,27 +6365,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -6498,15 +6395,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6514,7 +6409,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -6522,15 +6417,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -6538,29 +6435,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -6568,13 +6463,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -6584,7 +6477,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+    - `BetaManagedAgentsSearchResultBlock object`
 
       A block containing a web search result.
 
@@ -6604,21 +6497,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
-        - `type: "text"`
+          minLength: 1
 
-          - `"text"`
+        - `type: "text"`
 
       - `source: string`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: string`
 
         The title of the search result.
 
-      - `type: "search_result"`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: "search_result"`
 
   - `is_error: optional boolean or null`
 
@@ -6626,7 +6521,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Agent Tool Use Event
 
-- `BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }`
+- `BetaManagedAgentsAgentToolUseEvent object`
 
   Event emitted when the agent invokes a built-in agent tool.
 
@@ -6646,9 +6541,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "agent.tool_use"`
+    format: date-time
 
-    - `"agent.tool_use"`
+  - `type: "agent.tool_use"`
 
   - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -6666,7 +6561,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Base64 Document Source
 
-- `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+- `BetaManagedAgentsBase64DocumentSource object`
 
   Base64-encoded document data.
 
@@ -6674,17 +6569,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Base64-encoded document data.
 
+    minLength: 1
+
   - `media_type: string`
 
     MIME type of the document (e.g., "application/pdf").
 
-  - `type: "base64"`
+    minLength: 1
 
-    - `"base64"`
+  - `type: "base64"`
 
 ### Beta Managed Agents Base64 Image Source
 
-- `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+- `BetaManagedAgentsBase64ImageSource object`
 
   Base64-encoded image data.
 
@@ -6692,17 +6589,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Base64-encoded image data.
 
+    minLength: 1
+
   - `media_type: string`
 
     MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-  - `type: "base64"`
+    minLength: 1
 
-    - `"base64"`
+  - `type: "base64"`
 
 ### Beta Managed Agents Billing Error
 
-- `BetaManagedAgentsBillingError object { message, retry_status, type }`
+- `BetaManagedAgentsBillingError object`
 
   The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -6714,37 +6613,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "billing_error"`
-
-    - `"billing_error"`
 
 ### Beta Managed Agents Credential Host Unreachable Error
 
-- `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+- `BetaManagedAgentsCredentialHostUnreachableError object`
 
   An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -6760,33 +6651,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "credential_host_unreachable_error"`
-
-    - `"credential_host_unreachable_error"`
 
   - `vault_id: string`
 
@@ -6794,7 +6677,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Document Block
 
-- `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+- `BetaManagedAgentsDocumentBlock object`
 
   Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6802,7 +6685,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Union type for document source variants.
 
-    - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+    - `BetaManagedAgentsBase64DocumentSource object`
 
       Base64-encoded document data.
 
@@ -6810,15 +6693,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Base64-encoded document data.
 
+        minLength: 1
+
       - `media_type: string`
 
         MIME type of the document (e.g., "application/pdf").
 
+        minLength: 1
+
       - `type: "base64"`
 
-        - `"base64"`
-
-    - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+    - `BetaManagedAgentsPlainTextDocumentSource object`
 
       Plain text document content.
 
@@ -6826,29 +6711,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The plain text content.
 
+        minLength: 1
+
       - `media_type: "text/plain"`
 
         MIME type of the text content. Must be "text/plain".
 
-        - `"text/plain"`
-
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsURLDocumentSource object { type, url }`
+    - `BetaManagedAgentsURLDocumentSource object`
 
       Document referenced by URL.
 
       - `type: "url"`
 
-        - `"url"`
-
       - `url: string`
 
         URL of the document to fetch.
 
-    - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+        minLength: 1
+
+    - `BetaManagedAgentsFileDocumentSource object`
 
       Document referenced by file ID.
 
@@ -6856,13 +6739,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         ID of a previously uploaded file.
 
+        minLength: 1
+
       - `type: "file"`
 
-        - `"file"`
-
   - `type: "document"`
-
-    - `"document"`
 
   - `context: optional string or null`
 
@@ -6878,7 +6759,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   Union type for event parameters that can be sent to a session.
 
-  - `BetaManagedAgentsUserMessageEventParams object { content, type }`
+  - `BetaManagedAgentsUserMessageEventParams object`
 
     Parameters for sending a user message to the session.
 
@@ -6886,7 +6767,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Array of content blocks for the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -6894,11 +6775,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6906,7 +6787,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -6914,27 +6795,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -6942,15 +6825,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6958,7 +6839,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -6966,15 +6847,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -6982,29 +6865,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -7012,13 +6893,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -7028,31 +6907,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
 
-      - `"user.message"`
-
-  - `BetaManagedAgentsUserInterruptEventParams object { type, session_thread_id }`
+  - `BetaManagedAgentsUserInterruptEventParams object`
 
     Parameters for sending an interrupt to pause the agent.
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEventParams object { result, tool_use_id, type, deny_message }`
+  - `BetaManagedAgentsUserToolConfirmationEventParams object`
 
     Parameters for confirming or denying a tool execution request.
 
@@ -7068,15 +6941,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.tool_confirmation"`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_confirmation"`
+    - `type: "user.tool_confirmation"`
 
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-  - `BetaManagedAgentsUserCustomToolResultEventParams object { custom_tool_use_id, type, content, is_error }`
+      maxLength: 10000
+
+  - `BetaManagedAgentsUserCustomToolResultEventParams object`
 
     Parameters for providing the result of a custom tool execution.
 
@@ -7084,27 +6959,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.custom_tool_result"`
+      minLength: 1, maxLength: 128
 
-      - `"user.custom_tool_result"`
+    - `type: "user.custom_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -7124,27 +6999,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+  - `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -7156,7 +7033,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+      - `BetaManagedAgentsFileRubricParams object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -7166,9 +7043,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubricParams object { content, type }`
+      - `BetaManagedAgentsTextRubricParams object`
 
         Rubric content provided inline as text.
 
@@ -7176,19 +7051,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `BetaManagedAgentsUserToolResultEventParams object { tool_use_id, type, content, is_error }`
+      format: int32
+
+  - `BetaManagedAgentsUserToolResultEventParams object`
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -7196,27 +7071,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: "user.tool_result"`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_result"`
+    - `type: "user.tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -7224,7 +7099,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+  - `BetaManagedAgentsSystemMessageEventParams object`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -7236,17 +7111,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
-      - `type: "text"`
+        minLength: 1
 
-        - `"text"`
+      - `type: "text"`
 
     - `type: "system.message"`
 
-      - `"system.message"`
-
 ### Beta Managed Agents File Document Source
 
-- `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+- `BetaManagedAgentsFileDocumentSource object`
 
   Document referenced by file ID.
 
@@ -7254,13 +7127,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     ID of a previously uploaded file.
 
-  - `type: "file"`
+    minLength: 1
 
-    - `"file"`
+  - `type: "file"`
 
 ### Beta Managed Agents File Image Source
 
-- `BetaManagedAgentsFileImageSource object { file_id, type }`
+- `BetaManagedAgentsFileImageSource object`
 
   Image referenced by file ID.
 
@@ -7268,13 +7141,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     ID of a previously uploaded file.
 
-  - `type: "file"`
+    minLength: 1
 
-    - `"file"`
+  - `type: "file"`
 
 ### Beta Managed Agents File Rubric
 
-- `BetaManagedAgentsFileRubric object { file_id, type }`
+- `BetaManagedAgentsFileRubric object`
 
   Rubric referenced by a file uploaded via the Files API.
 
@@ -7283,12 +7156,10 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
     ID of the rubric file.
 
   - `type: "file"`
-
-    - `"file"`
 
 ### Beta Managed Agents File Rubric Params
 
-- `BetaManagedAgentsFileRubricParams object { file_id, type }`
+- `BetaManagedAgentsFileRubricParams object`
 
   Rubric referenced by a file uploaded via the Files API.
 
@@ -7298,11 +7169,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "file"`
 
-    - `"file"`
-
 ### Beta Managed Agents Image Block
 
-- `BetaManagedAgentsImageBlock object { source, type }`
+- `BetaManagedAgentsImageBlock object`
 
   Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7310,7 +7179,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Union type for image source variants.
 
-    - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+    - `BetaManagedAgentsBase64ImageSource object`
 
       Base64-encoded image data.
 
@@ -7318,27 +7187,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Base64-encoded image data.
 
+        minLength: 1
+
       - `media_type: string`
 
         MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+        minLength: 1
+
       - `type: "base64"`
 
-        - `"base64"`
-
-    - `BetaManagedAgentsURLImageSource object { type, url }`
+    - `BetaManagedAgentsURLImageSource object`
 
       Image referenced by URL.
 
       - `type: "url"`
 
-        - `"url"`
-
       - `url: string`
 
         URL of the image to fetch.
 
-    - `BetaManagedAgentsFileImageSource object { file_id, type }`
+        minLength: 1
+
+    - `BetaManagedAgentsFileImageSource object`
 
       Image referenced by file ID.
 
@@ -7346,17 +7217,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         ID of a previously uploaded file.
 
-      - `type: "file"`
+        minLength: 1
 
-        - `"file"`
+      - `type: "file"`
 
   - `type: "image"`
 
-    - `"image"`
-
 ### Beta Managed Agents MCP Authentication Failed Error
 
-- `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+- `BetaManagedAgentsMCPAuthenticationFailedError object`
 
   Authentication to an MCP server failed.
 
@@ -7372,37 +7241,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "mcp_authentication_failed_error"`
-
-    - `"mcp_authentication_failed_error"`
 
 ### Beta Managed Agents MCP Connection Failed Error
 
-- `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+- `BetaManagedAgentsMCPConnectionFailedError object`
 
   Failed to connect to an MCP server.
 
@@ -7418,37 +7279,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "mcp_connection_failed_error"`
-
-    - `"mcp_connection_failed_error"`
 
 ### Beta Managed Agents Model Overloaded Error
 
-- `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+- `BetaManagedAgentsModelOverloadedError object`
 
   The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -7460,37 +7313,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "model_overloaded_error"`
-
-    - `"model_overloaded_error"`
 
 ### Beta Managed Agents Model Rate Limited Error
 
-- `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+- `BetaManagedAgentsModelRateLimitedError object`
 
   The model request was rate-limited.
 
@@ -7502,37 +7347,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "model_rate_limited_error"`
-
-    - `"model_rate_limited_error"`
 
 ### Beta Managed Agents Model Request Failed Error
 
-- `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+- `BetaManagedAgentsModelRequestFailedError object`
 
   A model request failed for a reason other than overload or rate-limiting.
 
@@ -7544,37 +7381,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "model_request_failed_error"`
-
-    - `"model_request_failed_error"`
 
 ### Beta Managed Agents Plain Text Document Source
 
-- `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+- `BetaManagedAgentsPlainTextDocumentSource object`
 
   Plain text document content.
 
@@ -7582,59 +7411,49 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The plain text content.
 
+    minLength: 1
+
   - `media_type: "text/plain"`
 
     MIME type of the text content. Must be "text/plain".
 
-    - `"text/plain"`
-
   - `type: "text"`
-
-    - `"text"`
 
 ### Beta Managed Agents Redacted Block
 
-- `BetaManagedAgentsRedactedBlock object { type }`
+- `BetaManagedAgentsRedactedBlock object`
 
   Placeholder for content withheld by Anthropic model policy.
 
   - `type: "redacted"`
 
-    - `"redacted"`
-
 ### Beta Managed Agents Retry Status Exhausted
 
-- `BetaManagedAgentsRetryStatusExhausted object { type }`
+- `BetaManagedAgentsRetryStatusExhausted object`
 
   This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
   - `type: "exhausted"`
 
-    - `"exhausted"`
-
 ### Beta Managed Agents Retry Status Retrying
 
-- `BetaManagedAgentsRetryStatusRetrying object { type }`
+- `BetaManagedAgentsRetryStatusRetrying object`
 
   The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
   - `type: "retrying"`
 
-    - `"retrying"`
-
 ### Beta Managed Agents Retry Status Terminal
 
-- `BetaManagedAgentsRetryStatusTerminal object { type }`
+- `BetaManagedAgentsRetryStatusTerminal object`
 
   The session encountered a terminal error and will transition to `terminated` state.
 
   - `type: "terminal"`
 
-    - `"terminal"`
-
 ### Beta Managed Agents Search Result Block
 
-- `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+- `BetaManagedAgentsSearchResultBlock object`
 
   A block containing a web search result.
 
@@ -7654,25 +7473,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The text content.
 
-    - `type: "text"`
+      minLength: 1
 
-      - `"text"`
+    - `type: "text"`
 
   - `source: string`
 
     The URL source of the search result.
 
+    minLength: 1
+
   - `title: string`
 
     The title of the search result.
 
-  - `type: "search_result"`
+    minLength: 1
 
-    - `"search_result"`
+  - `type: "search_result"`
 
 ### Beta Managed Agents Search Result Citations
 
-- `BetaManagedAgentsSearchResultCitations object { enabled }`
+- `BetaManagedAgentsSearchResultCitations object`
 
   Citation settings for a search result.
 
@@ -7682,7 +7503,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Search Result Content
 
-- `BetaManagedAgentsSearchResultContent object { text, type }`
+- `BetaManagedAgentsSearchResultContent object`
 
   Text content within a search result.
 
@@ -7690,13 +7511,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The text content.
 
-  - `type: "text"`
+    minLength: 1
 
-    - `"text"`
+  - `type: "text"`
 
 ### Beta Managed Agents Send Session Events
 
-- `BetaManagedAgentsSendSessionEvents object { data }`
+- `BetaManagedAgentsSendSessionEvents object`
 
   Events that were successfully sent to the session.
 
@@ -7704,7 +7525,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Sent events
 
-    - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+    - `BetaManagedAgentsUserMessageEvent object`
 
       A user message event in the session conversation.
 
@@ -7716,7 +7537,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Array of content blocks comprising the user message.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
@@ -7724,11 +7545,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The text content.
 
+            minLength: 1
+
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7736,7 +7557,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64ImageSource object`
 
               Base64-encoded image data.
 
@@ -7744,27 +7565,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsURLImageSource object { type, url }`
+            - `BetaManagedAgentsURLImageSource object`
 
               Image referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
 
-            - `BetaManagedAgentsFileImageSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileImageSource object`
 
               Image referenced by file ID.
 
@@ -7772,15 +7595,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 ID of a previously uploaded file.
 
-              - `type: "file"`
+                minLength: 1
 
-                - `"file"`
+              - `type: "file"`
 
           - `type: "image"`
 
-            - `"image"`
-
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7788,7 +7609,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsBase64DocumentSource object`
 
               Base64-encoded document data.
 
@@ -7796,15 +7617,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
+                minLength: 1
+
               - `type: "base64"`
 
-                - `"base64"`
-
-            - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+            - `BetaManagedAgentsPlainTextDocumentSource object`
 
               Plain text document content.
 
@@ -7812,29 +7635,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
 
-                - `"text"`
-
-            - `BetaManagedAgentsURLDocumentSource object { type, url }`
+            - `BetaManagedAgentsURLDocumentSource object`
 
               Document referenced by URL.
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
 
-            - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+                minLength: 1
+
+            - `BetaManagedAgentsFileDocumentSource object`
 
               Document referenced by file ID.
 
@@ -7842,13 +7663,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context: optional string or null`
 
@@ -7858,23 +7677,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock object { type }`
+        - `BetaManagedAgentsRedactedBlock object`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
-
-        - `"user.message"`
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-    - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+        format: date-time
+
+    - `BetaManagedAgentsUserInterruptEvent object`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -7884,17 +7701,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "user.interrupt"`
 
-        - `"user.interrupt"`
-
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: optional string or null`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+    - `BetaManagedAgentsUserToolConfirmationEvent object`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -7916,21 +7733,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "user.tool_confirmation"`
 
-        - `"user.tool_confirmation"`
-
       - `deny_message: optional string or null`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+        maxLength: 10000
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-    - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+    - `BetaManagedAgentsUserCustomToolResultEvent object`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -7944,25 +7763,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "user.custom_tool_result"`
 
-        - `"user.custom_tool_result"`
-
       - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
         The result content returned by the tool.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+        - `BetaManagedAgentsSearchResultBlock object`
 
           A block containing a web search result.
 
@@ -7982,21 +7799,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               The text content.
 
-            - `type: "text"`
+              minLength: 1
 
-              - `"text"`
+            - `type: "text"`
 
           - `source: string`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `title: string`
 
             The title of the search result.
 
-          - `type: "search_result"`
+            minLength: 1
 
-            - `"search_result"`
+          - `type: "search_result"`
 
       - `is_error: optional boolean or null`
 
@@ -8006,11 +7825,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-    - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+    - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -8026,6 +7847,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+        format: int32
+
       - `outcome_id: string`
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -8034,11 +7857,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubric object { file_id, type }`
+        - `BetaManagedAgentsFileRubric object`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -8048,9 +7873,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `type: "file"`
 
-            - `"file"`
-
-        - `BetaManagedAgentsTextRubric object { content, type }`
+        - `BetaManagedAgentsTextRubric object`
 
           Rubric content provided inline as text.
 
@@ -8060,13 +7883,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
 
-        - `"user.define_outcome"`
-
-    - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+    - `BetaManagedAgentsUserToolResultEvent object`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -8080,25 +7899,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "user.tool_result"`
 
-        - `"user.tool_result"`
-
       - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
         The result content returned by the tool.
 
-        - `BetaManagedAgentsTextBlock object { text, type }`
+        - `BetaManagedAgentsTextBlock object`
 
           Regular text content.
 
-        - `BetaManagedAgentsImageBlock object { source, type }`
+        - `BetaManagedAgentsImageBlock object`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+        - `BetaManagedAgentsDocumentBlock object`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+        - `BetaManagedAgentsSearchResultBlock object`
 
           A block containing a web search result.
 
@@ -8110,11 +7927,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-    - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+    - `BetaManagedAgentsSystemMessageEvent object`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -8130,31 +7949,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
       - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
 ### Beta Managed Agents Session Budget Reached
 
-- `BetaManagedAgentsSessionBudgetReached object { type }`
+- `BetaManagedAgentsSessionBudgetReached object`
 
   The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
   - `type: "budget_reached"`
 
-    - `"budget_reached"`
-
 ### Beta Managed Agents Session Deleted Event
 
-- `BetaManagedAgentsSessionDeletedEvent object { id, processed_at, type }`
+- `BetaManagedAgentsSessionDeletedEvent object`
 
   Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -8166,23 +7983,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "session.deleted"`
+    format: date-time
 
-    - `"session.deleted"`
+  - `type: "session.deleted"`
 
 ### Beta Managed Agents Session End Turn
 
-- `BetaManagedAgentsSessionEndTurn object { type }`
+- `BetaManagedAgentsSessionEndTurn object`
 
   The agent completed its turn naturally and is ready for the next user message.
 
   - `type: "end_turn"`
 
-    - `"end_turn"`
-
 ### Beta Managed Agents Session Error Event
 
-- `BetaManagedAgentsSessionErrorEvent object { id, error, processed_at, type }`
+- `BetaManagedAgentsSessionErrorEvent object`
 
   An error event indicating a problem occurred during session execution.
 
@@ -8194,7 +8009,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-    - `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+    - `BetaManagedAgentsUnknownError object`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -8206,35 +8021,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
           - `type: "retrying"`
 
-            - `"retrying"`
-
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
           - `type: "exhausted"`
 
-            - `"exhausted"`
-
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
           - `type: "terminal"`
 
-            - `"terminal"`
-
       - `type: "unknown_error"`
 
-        - `"unknown_error"`
-
-    - `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+    - `BetaManagedAgentsModelOverloadedError object`
 
       The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -8246,23 +8053,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "model_overloaded_error"`
 
-        - `"model_overloaded_error"`
-
-    - `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+    - `BetaManagedAgentsModelRateLimitedError object`
 
       The model request was rate-limited.
 
@@ -8274,23 +8079,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "model_rate_limited_error"`
 
-        - `"model_rate_limited_error"`
-
-    - `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+    - `BetaManagedAgentsModelRequestFailedError object`
 
       A model request failed for a reason other than overload or rate-limiting.
 
@@ -8302,23 +8105,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "model_request_failed_error"`
 
-        - `"model_request_failed_error"`
-
-    - `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+    - `BetaManagedAgentsMCPConnectionFailedError object`
 
       Failed to connect to an MCP server.
 
@@ -8334,23 +8135,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "mcp_connection_failed_error"`
 
-        - `"mcp_connection_failed_error"`
-
-    - `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+    - `BetaManagedAgentsMCPAuthenticationFailedError object`
 
       Authentication to an MCP server failed.
 
@@ -8366,23 +8165,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "mcp_authentication_failed_error"`
 
-        - `"mcp_authentication_failed_error"`
-
-    - `BetaManagedAgentsBillingError object { message, retry_status, type }`
+    - `BetaManagedAgentsBillingError object`
 
       The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -8394,23 +8191,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "billing_error"`
 
-        - `"billing_error"`
-
-    - `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+    - `BetaManagedAgentsCredentialHostUnreachableError object`
 
       An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -8426,21 +8221,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the client should do next in response to this error.
 
-        - `BetaManagedAgentsRetryStatusRetrying object { type }`
+        - `BetaManagedAgentsRetryStatusRetrying object`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `BetaManagedAgentsRetryStatusExhausted object { type }`
+        - `BetaManagedAgentsRetryStatusExhausted object`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `BetaManagedAgentsRetryStatusTerminal object { type }`
+        - `BetaManagedAgentsRetryStatusTerminal object`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "credential_host_unreachable_error"`
-
-        - `"credential_host_unreachable_error"`
 
       - `vault_id: string`
 
@@ -8450,9 +8243,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "session.error"`
+    format: date-time
 
-    - `"session.error"`
+  - `type: "session.error"`
 
 ### Beta Managed Agents Session Event
 
@@ -8460,7 +8253,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   Union type for all event types in a session.
 
-  - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsUserMessageEvent object`
 
     A user message event in the session conversation.
 
@@ -8472,7 +8265,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Array of content blocks comprising the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -8480,11 +8273,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -8492,7 +8285,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -8500,27 +8293,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -8528,15 +8323,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -8544,7 +8337,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -8552,15 +8345,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -8568,29 +8363,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -8598,13 +8391,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -8614,23 +8405,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
-
-      - `"user.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+      format: date-time
+
+  - `BetaManagedAgentsUserInterruptEvent object`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -8640,17 +8429,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+  - `BetaManagedAgentsUserToolConfirmationEvent object`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -8672,21 +8461,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.tool_confirmation"`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-  - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserCustomToolResultEvent object`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -8700,25 +8491,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.custom_tool_result"`
 
-      - `"user.custom_tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -8738,21 +8527,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
@@ -8762,11 +8553,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }`
+  - `BetaManagedAgentsAgentCustomToolUseEvent object`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -8786,15 +8579,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.custom_tool_use"`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: "agent.custom_tool_use"`
 
     - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-  - `BetaManagedAgentsAgentMessageEvent object { id, content, processed_at, type }`
+  - `BetaManagedAgentsAgentMessageEvent object`
 
     An agent response event in the session conversation.
 
@@ -8806,11 +8599,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Array of text blocks comprising the agent response.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -8818,11 +8611,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.message"`
 
-      - `"agent.message"`
-
-  - `BetaManagedAgentsAgentThinkingEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThinkingEvent object`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -8834,11 +8627,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thinking"`
 
-      - `"agent.thinking"`
-
-  - `BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp_server_name, 5 more }`
+  - `BetaManagedAgentsAgentMCPToolUseEvent object`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -8862,9 +8655,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_use"`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: "agent.mcp_tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -8880,7 +8673,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp_tool_use_id, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentMCPToolResultEvent object`
 
     Event representing the result of an MCP tool execution.
 
@@ -8896,27 +8689,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_result"`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: "agent.mcp_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -8924,7 +8717,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }`
+  - `BetaManagedAgentsAgentToolUseEvent object`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -8944,9 +8737,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.tool_use"`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: "agent.tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -8962,7 +8755,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentToolResultEvent object { id, processed_at, tool_use_id, 3 more }`
+  - `BetaManagedAgentsAgentToolResultEvent object`
 
     Event representing the result of an agent tool execution.
 
@@ -8974,31 +8767,31 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: string`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: "agent.tool_result"`
 
-      - `"agent.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -9006,7 +8799,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from_session_thread_id, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -9018,19 +8811,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9042,15 +8835,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.thread_message_received"`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: "agent.thread_message_received"`
 
     - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageSentEvent object`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -9062,19 +8855,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9082,19 +8875,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: string`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: "agent.thread_message_sent"`
 
-      - `"agent.thread_message_sent"`
-
     - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent object`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -9106,11 +8899,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thread_context_compacted"`
 
-      - `"agent.thread_context_compacted"`
-
-  - `BetaManagedAgentsSessionErrorEvent object { id, error, processed_at, type }`
+  - `BetaManagedAgentsSessionErrorEvent object`
 
     An error event indicating a problem occurred during session execution.
 
@@ -9122,7 +8915,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-      - `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+      - `BetaManagedAgentsUnknownError object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -9134,35 +8927,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: "retrying"`
 
-              - `"retrying"`
-
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: "exhausted"`
 
-              - `"exhausted"`
-
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: "terminal"`
 
-              - `"terminal"`
-
         - `type: "unknown_error"`
 
-          - `"unknown_error"`
-
-      - `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelOverloadedError object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -9174,23 +8959,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_overloaded_error"`
 
-          - `"model_overloaded_error"`
-
-      - `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRateLimitedError object`
 
         The model request was rate-limited.
 
@@ -9202,23 +8985,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_rate_limited_error"`
 
-          - `"model_rate_limited_error"`
-
-      - `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRequestFailedError object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -9230,23 +9011,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_request_failed_error"`
 
-          - `"model_request_failed_error"`
-
-      - `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPConnectionFailedError object`
 
         Failed to connect to an MCP server.
 
@@ -9262,23 +9041,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_connection_failed_error"`
 
-          - `"mcp_connection_failed_error"`
-
-      - `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPAuthenticationFailedError object`
 
         Authentication to an MCP server failed.
 
@@ -9294,23 +9071,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_authentication_failed_error"`
 
-          - `"mcp_authentication_failed_error"`
-
-      - `BetaManagedAgentsBillingError object { message, retry_status, type }`
+      - `BetaManagedAgentsBillingError object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -9322,23 +9097,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "billing_error"`
 
-          - `"billing_error"`
-
-      - `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+      - `BetaManagedAgentsCredentialHostUnreachableError object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -9354,21 +9127,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "credential_host_unreachable_error"`
-
-          - `"credential_host_unreachable_error"`
 
         - `vault_id: string`
 
@@ -9378,11 +9149,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.error"`
 
-      - `"session.error"`
-
-  - `BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRescheduledEvent object`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -9394,11 +9165,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_rescheduled"`
 
-      - `"session.status_rescheduled"`
-
-  - `BetaManagedAgentsSessionStatusRunningEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRunningEvent object`
 
     Indicates the session is actively running and the agent is working.
 
@@ -9410,11 +9181,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_running"`
 
-      - `"session.status_running"`
-
-  - `BetaManagedAgentsSessionStatusIdleEvent object { id, processed_at, stop_reason, type }`
+  - `BetaManagedAgentsSessionStatusIdleEvent object`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -9426,19 +9197,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or BetaManagedAgentsSessionBudgetReached`
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: "end_turn"`
 
-          - `"end_turn"`
-
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -9448,29 +9219,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "requires_action"`
 
-          - `"requires_action"`
-
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
-          - `"retries_exhausted"`
-
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: "budget_reached"`
 
-          - `"budget_reached"`
-
     - `type: "session.status_idle"`
 
-      - `"session.status_idle"`
-
-  - `BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusTerminatedEvent object`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -9482,11 +9245,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_terminated"`
 
-      - `"session.status_terminated"`
-
-  - `BetaManagedAgentsSessionThreadCreatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadCreatedEvent object`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -9502,15 +9265,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: "session.thread_created"`
 
-      - `"session.thread_created"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -9522,6 +9285,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9530,11 +9295,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_start"`
 
-      - `"span.outcome_evaluation_start"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -9550,6 +9315,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: string`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -9562,13 +9329,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: string`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: "span.outcome_evaluation_end"`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -9578,17 +9345,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: number`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: number`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: number`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: optional "standard" or "fast" or null`
 
@@ -9598,7 +9373,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"fast"`
 
-  - `BetaManagedAgentsSpanModelRequestStartEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSpanModelRequestStartEvent object`
 
     Emitted when a model request is initiated by the agent.
 
@@ -9610,11 +9385,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_start"`
 
-      - `"span.model_request_start"`
-
-  - `BetaManagedAgentsSpanModelRequestEndEvent object { id, is_error, model_request_start_id, 3 more }`
+  - `BetaManagedAgentsSpanModelRequestEndEvent object`
 
     Emitted when a model request completes.
 
@@ -9638,11 +9413,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_end"`
 
-      - `"span.model_request_end"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -9654,6 +9429,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9662,11 +9439,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_ongoing"`
 
-      - `"span.outcome_evaluation_ongoing"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+  - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -9682,6 +9459,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: string`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -9690,11 +9469,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubric object { file_id, type }`
+      - `BetaManagedAgentsFileRubric object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -9704,9 +9485,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubric object { content, type }`
+      - `BetaManagedAgentsTextRubric object`
 
         Rubric content provided inline as text.
 
@@ -9716,13 +9495,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
 
-      - `"user.define_outcome"`
-
-  - `BetaManagedAgentsSessionDeletedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionDeletedEvent object`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -9734,11 +9509,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.deleted"`
 
-      - `"session.deleted"`
-
-  - `BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent object`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -9754,15 +9529,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: "session.thread_status_running"`
 
-      - `"session.thread_status_running"`
-
-  - `BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent_name, processed_at, 3 more }`
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent object`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -9778,6 +9553,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that went idle.
@@ -9786,27 +9563,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
     - `type: "session.thread_status_idle"`
 
-      - `"session.thread_status_idle"`
-
-  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -9822,15 +9597,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: "session.thread_status_terminated"`
 
-      - `"session.thread_status_terminated"`
-
-  - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserToolResultEvent object`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -9844,25 +9619,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.tool_result"`
 
-      - `"user.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -9874,11 +9647,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -9894,15 +9669,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: "session.thread_status_rescheduled"`
 
-      - `"session.thread_status_rescheduled"`
-
-  - `BetaManagedAgentsSessionUpdatedEvent object { id, processed_at, type, 4 more }`
+  - `BetaManagedAgentsSessionUpdatedEvent object`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -9914,9 +9689,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.updated"`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: "session.updated"`
 
     - `agent: optional BetaManagedAgentsSessionAgent or null`
 
@@ -9931,8 +9706,6 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
         - `name: string`
 
         - `type: "url"`
-
-          - `"url"`
 
         - `url: string`
 
@@ -10010,45 +9783,35 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `BetaManagedAgentsEffortLow object { type }`
+          - `BetaManagedAgentsEffortLow object`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: "low"`
 
-              - `"low"`
-
-          - `BetaManagedAgentsEffortMedium object { type }`
+          - `BetaManagedAgentsEffortMedium object`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
 
-              - `"medium"`
-
-          - `BetaManagedAgentsEffortHigh object { type }`
+          - `BetaManagedAgentsEffortHigh object`
 
             High effort. Favors reasoning depth.
 
             - `type: "high"`
 
-              - `"high"`
-
-          - `BetaManagedAgentsEffortXhigh object { type }`
+          - `BetaManagedAgentsEffortXhigh object`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
-          - `BetaManagedAgentsEffortMax object { type }`
+          - `BetaManagedAgentsEffortMax object`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo: optional string`
 
@@ -10070,7 +9833,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `BetaManagedAgentsSessionThreadAgent object { id, description, mcp_servers, 7 more }`
+          - `BetaManagedAgentsSessionThreadAgent object`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -10094,7 +9857,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-              - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsAnthropicSkill object`
 
                 A resolved Anthropic-managed skill.
 
@@ -10102,11 +9865,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "anthropic"`
 
-                  - `"anthropic"`
-
                 - `version: string`
 
-              - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsCustomSkill object`
 
                 A resolved user-created custom skill.
 
@@ -10114,19 +9875,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
                 - `version: string`
 
             - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-              - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+              - `BetaManagedAgentsAgentToolset20260401 object`
 
                 - `configs: array of BetaManagedAgentsAgentToolConfig`
 
-                  - `BetaManagedAgentsBashToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsBashToolConfig object`
 
                     Configuration for the bash tool.
 
@@ -10134,33 +9893,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "bash"`
 
-                      - `"bash"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: "always_allow"`
 
-                          - `"always_allow"`
-
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: "always_ask"`
 
-                          - `"always_ask"`
-
                     - `type: "bash"`
 
-                      - `"bash"`
-
-                  - `BetaManagedAgentsEditToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsEditToolConfig object`
 
                     Configuration for the edit tool.
 
@@ -10168,25 +9919,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "edit"`
 
-                      - `"edit"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "edit"`
 
-                      - `"edit"`
-
-                  - `BetaManagedAgentsReadToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsReadToolConfig object`
 
                     Configuration for the read tool.
 
@@ -10194,25 +9941,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "read"`
 
-                      - `"read"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "read"`
 
-                      - `"read"`
-
-                  - `BetaManagedAgentsWriteToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsWriteToolConfig object`
 
                     Configuration for the write tool.
 
@@ -10220,25 +9963,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "write"`
 
-                      - `"write"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "write"`
 
-                      - `"write"`
-
-                  - `BetaManagedAgentsGlobToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGlobToolConfig object`
 
                     Configuration for the glob tool.
 
@@ -10246,25 +9985,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "glob"`
 
-                      - `"glob"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "glob"`
 
-                      - `"glob"`
-
-                  - `BetaManagedAgentsGrepToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGrepToolConfig object`
 
                     Configuration for the grep tool.
 
@@ -10272,25 +10007,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "grep"`
 
-                      - `"grep"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "grep"`
 
-                      - `"grep"`
-
-                  - `BetaManagedAgentsWebFetchToolConfig object { enabled, name, permission_policy, 4 more }`
+                  - `BetaManagedAgentsWebFetchToolConfig object`
 
                     Configuration for the web_fetch tool.
 
@@ -10298,23 +10029,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "web_fetch"`
 
-                      - `"web_fetch"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_fetch"`
-
-                      - `"web_fetch"`
 
                     - `allowed_domains: optional array of string`
 
@@ -10322,7 +10049,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `max_content_tokens: optional number or null`
 
-                  - `BetaManagedAgentsWebSearchToolConfig object { enabled, name, permission_policy, 4 more }`
+                      format: int32
+
+                  - `BetaManagedAgentsWebSearchToolConfig object`
 
                     Configuration for the web_search tool.
 
@@ -10330,23 +10059,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "web_search"`
 
-                      - `"web_search"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_search"`
-
-                      - `"web_search"`
 
                     - `allowed_domains: optional array of string`
 
@@ -10360,11 +10085,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: optional string or null`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: optional string or null`
 
@@ -10374,9 +10099,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: optional string or null`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -10388,19 +10117,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
                 - `type: "agent_toolset_20260401"`
 
-                  - `"agent_toolset_20260401"`
-
-              - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+              - `BetaManagedAgentsMCPToolset object`
 
                 - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -10412,11 +10139,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -10430,11 +10157,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -10442,9 +10169,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "mcp_toolset"`
 
-                  - `"mcp_toolset"`
-
-              - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+              - `BetaManagedAgentsCustomTool object`
 
                 A custom tool as returned in API responses.
 
@@ -10456,8 +10181,6 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                   - `type: "object"`
 
-                    - `"object"`
-
                   - `properties: optional map[unknown] or null`
 
                   - `required: optional array of string or null`
@@ -10466,15 +10189,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
             - `type: "agent"`
-
-              - `"agent"`
 
             - `version: number`
 
-          - `BetaManagedAgentsAdvisor object { model, type }`
+              format: int32
+
+          - `BetaManagedAgentsAdvisor object`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -10484,21 +10205,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `type: "advisor"`
 
-              - `"advisor"`
-
         - `type: "coordinator"`
-
-          - `"coordinator"`
 
       - `name: string`
 
       - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-        - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsAnthropicSkill object`
 
           A resolved Anthropic-managed skill.
 
-        - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsCustomSkill object`
 
           A resolved user-created custom skill.
 
@@ -10506,19 +10223,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-        - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+        - `BetaManagedAgentsAgentToolset20260401 object`
 
-        - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+        - `BetaManagedAgentsMCPToolset object`
 
-        - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+        - `BetaManagedAgentsCustomTool object`
 
           A custom tool as returned in API responses.
 
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -10536,11 +10253,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: "limit"`
-
-        - `"limit"`
 
     - `metadata: optional map[string]`
 
@@ -10550,7 +10263,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsSystemMessageEvent object`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -10566,19 +10279,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent object { id, processed_at, type, 2 more }`
+      format: date-time
+
+  - `BetaManagedAgentsSessionUsageEvent object`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -10590,9 +10303,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.usage"`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: "session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -10602,6 +10315,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -10610,17 +10325,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: optional number`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: optional number`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: optional number`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: optional BetaMonetaryAmount`
 
@@ -10630,6 +10353,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -10638,9 +10363,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: optional number`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -10648,7 +10377,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Session Requires Action
 
-- `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+- `BetaManagedAgentsSessionRequiresAction object`
 
   The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -10658,21 +10387,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "requires_action"`
 
-    - `"requires_action"`
-
 ### Beta Managed Agents Session Retries Exhausted
 
-- `BetaManagedAgentsSessionRetriesExhausted object { type }`
+- `BetaManagedAgentsSessionRetriesExhausted object`
 
   The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: "retries_exhausted"`
 
-    - `"retries_exhausted"`
-
 ### Beta Managed Agents Session Status Idle Event
 
-- `BetaManagedAgentsSessionStatusIdleEvent object { id, processed_at, stop_reason, type }`
+- `BetaManagedAgentsSessionStatusIdleEvent object`
 
   Indicates the agent has paused and is awaiting user input.
 
@@ -10684,19 +10409,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or BetaManagedAgentsSessionBudgetReached`
 
     The agent completed its turn naturally and is ready for the next user message.
 
-    - `BetaManagedAgentsSessionEndTurn object { type }`
+    - `BetaManagedAgentsSessionEndTurn object`
 
       The agent completed its turn naturally and is ready for the next user message.
 
       - `type: "end_turn"`
 
-        - `"end_turn"`
-
-    - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+    - `BetaManagedAgentsSessionRequiresAction object`
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -10706,31 +10431,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "requires_action"`
 
-        - `"requires_action"`
-
-    - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+    - `BetaManagedAgentsSessionRetriesExhausted object`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
-        - `"retries_exhausted"`
-
-    - `BetaManagedAgentsSessionBudgetReached object { type }`
+    - `BetaManagedAgentsSessionBudgetReached object`
 
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
       - `type: "budget_reached"`
 
-        - `"budget_reached"`
-
   - `type: "session.status_idle"`
-
-    - `"session.status_idle"`
 
 ### Beta Managed Agents Session Status Rescheduled Event
 
-- `BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed_at, type }`
+- `BetaManagedAgentsSessionStatusRescheduledEvent object`
 
   Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -10742,13 +10459,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "session.status_rescheduled"`
+    format: date-time
 
-    - `"session.status_rescheduled"`
+  - `type: "session.status_rescheduled"`
 
 ### Beta Managed Agents Session Status Running Event
 
-- `BetaManagedAgentsSessionStatusRunningEvent object { id, processed_at, type }`
+- `BetaManagedAgentsSessionStatusRunningEvent object`
 
   Indicates the session is actively running and the agent is working.
 
@@ -10760,13 +10477,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "session.status_running"`
+    format: date-time
 
-    - `"session.status_running"`
+  - `type: "session.status_running"`
 
 ### Beta Managed Agents Session Status Terminated Event
 
-- `BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed_at, type }`
+- `BetaManagedAgentsSessionStatusTerminatedEvent object`
 
   Indicates the session has terminated, either due to an error or completion.
 
@@ -10778,13 +10495,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "session.status_terminated"`
+    format: date-time
 
-    - `"session.status_terminated"`
+  - `type: "session.status_terminated"`
 
 ### Beta Managed Agents Session Thread Created Event
 
-- `BetaManagedAgentsSessionThreadCreatedEvent object { id, agent_name, processed_at, 2 more }`
+- `BetaManagedAgentsSessionThreadCreatedEvent object`
 
   Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -10800,17 +10517,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: string`
 
     Public `sthr_` ID of the newly created thread.
 
   - `type: "session.thread_created"`
 
-    - `"session.thread_created"`
-
 ### Beta Managed Agents Session Thread Status Idle Event
 
-- `BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent_name, processed_at, 3 more }`
+- `BetaManagedAgentsSessionThreadStatusIdleEvent object`
 
   A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10826,6 +10543,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: string`
 
     Public sthr_ ID of the thread that went idle.
@@ -10834,15 +10553,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The agent completed its turn naturally and is ready for the next user message.
 
-    - `BetaManagedAgentsSessionEndTurn object { type }`
+    - `BetaManagedAgentsSessionEndTurn object`
 
       The agent completed its turn naturally and is ready for the next user message.
 
       - `type: "end_turn"`
 
-        - `"end_turn"`
-
-    - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+    - `BetaManagedAgentsSessionRequiresAction object`
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -10852,31 +10569,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "requires_action"`
 
-        - `"requires_action"`
-
-    - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+    - `BetaManagedAgentsSessionRetriesExhausted object`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
-        - `"retries_exhausted"`
-
-    - `BetaManagedAgentsSessionBudgetReached object { type }`
+    - `BetaManagedAgentsSessionBudgetReached object`
 
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
       - `type: "budget_reached"`
 
-        - `"budget_reached"`
-
   - `type: "session.thread_status_idle"`
-
-    - `"session.thread_status_idle"`
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
-- `BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent_name, processed_at, 2 more }`
+- `BetaManagedAgentsSessionThreadStatusRescheduledEvent object`
 
   A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10892,17 +10601,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: string`
 
     Public sthr_ ID of the thread that is retrying.
 
   - `type: "session.thread_status_rescheduled"`
 
-    - `"session.thread_status_rescheduled"`
-
 ### Beta Managed Agents Session Thread Status Running Event
 
-- `BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent_name, processed_at, 2 more }`
+- `BetaManagedAgentsSessionThreadStatusRunningEvent object`
 
   A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10918,17 +10627,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: string`
 
     Public sthr_ ID of the thread that started running.
 
   - `type: "session.thread_status_running"`
 
-    - `"session.thread_status_running"`
-
 ### Beta Managed Agents Session Thread Status Terminated Event
 
-- `BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent_name, processed_at, 2 more }`
+- `BetaManagedAgentsSessionThreadStatusTerminatedEvent object`
 
   A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10944,23 +10653,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: string`
 
     Public sthr_ ID of the thread that terminated.
 
   - `type: "session.thread_status_terminated"`
 
-    - `"session.thread_status_terminated"`
-
 ### Beta Managed Agents Session Usage Snapshot
 
-- `BetaManagedAgentsSessionUsageSnapshot object { active_seconds, cache_creation, cache_read_input_tokens, 4 more }`
+- `BetaManagedAgentsSessionUsageSnapshot object`
 
   Point-in-time snapshot of a session's cumulative usage.
 
   - `active_seconds: optional number`
 
     Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+    format: double
 
   - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
@@ -10970,17 +10681,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Tokens used to create 1-hour ephemeral cache entries.
 
+      format: int32
+
     - `ephemeral_5m_input_tokens: optional number`
 
       Tokens used to create 5-minute ephemeral cache entries.
+
+      format: int32
 
   - `cache_read_input_tokens: optional number`
 
     Total tokens read from prompt cache.
 
+    format: int32
+
   - `input_tokens: optional number`
 
     Total input tokens consumed across all turns.
+
+    format: int32
 
   - `list_cost: optional BetaMonetaryAmount`
 
@@ -10994,11 +10713,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `"USD"`
-
   - `output_tokens: optional number`
 
     Total output tokens generated across all turns.
+
+    format: int32
 
   - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
@@ -11008,13 +10727,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Number of server-executed web fetch requests.
 
+      format: int32
+
     - `web_search_requests: optional number`
 
       Number of server-executed web search requests.
 
+      format: int32
+
 ### Beta Managed Agents Span Model Request End Event
 
-- `BetaManagedAgentsSpanModelRequestEndEvent object { id, is_error, model_request_start_id, 3 more }`
+- `BetaManagedAgentsSpanModelRequestEndEvent object`
 
   Emitted when a model request completes.
 
@@ -11038,17 +10761,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Tokens used to create prompt cache in this request.
 
+      format: int32
+
     - `cache_read_input_tokens: number`
 
       Tokens read from prompt cache in this request.
+
+      format: int32
 
     - `input_tokens: number`
 
       Input tokens consumed by this request.
 
+      format: int32
+
     - `output_tokens: number`
 
       Output tokens generated by this request.
+
+      format: int32
 
     - `speed: optional "standard" or "fast" or null`
 
@@ -11062,13 +10793,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "span.model_request_end"`
+    format: date-time
 
-    - `"span.model_request_end"`
+  - `type: "span.model_request_end"`
 
 ### Beta Managed Agents Span Model Request Start Event
 
-- `BetaManagedAgentsSpanModelRequestStartEvent object { id, processed_at, type }`
+- `BetaManagedAgentsSpanModelRequestStartEvent object`
 
   Emitted when a model request is initiated by the agent.
 
@@ -11080,13 +10811,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "span.model_request_start"`
+    format: date-time
 
-    - `"span.model_request_start"`
+  - `type: "span.model_request_start"`
 
 ### Beta Managed Agents Span Model Usage
 
-- `BetaManagedAgentsSpanModelUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 2 more }`
+- `BetaManagedAgentsSpanModelUsage object`
 
   Token usage for a single model request.
 
@@ -11094,17 +10825,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Tokens used to create prompt cache in this request.
 
+    format: int32
+
   - `cache_read_input_tokens: number`
 
     Tokens read from prompt cache in this request.
+
+    format: int32
 
   - `input_tokens: number`
 
     Input tokens consumed by this request.
 
+    format: int32
+
   - `output_tokens: number`
 
     Output tokens generated by this request.
+
+    format: int32
 
   - `speed: optional "standard" or "fast" or null`
 
@@ -11116,7 +10855,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Span Outcome Evaluation End Event
 
-- `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }`
+- `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object`
 
   Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -11132,6 +10871,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+    format: int32
+
   - `outcome_evaluation_start_id: string`
 
     The id of the corresponding `span.outcome_evaluation_start` event.
@@ -11144,13 +10885,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `result: string`
 
     Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
   - `type: "span.outcome_evaluation_end"`
-
-    - `"span.outcome_evaluation_end"`
 
   - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -11160,17 +10901,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Tokens used to create prompt cache in this request.
 
+      format: int32
+
     - `cache_read_input_tokens: number`
 
       Tokens read from prompt cache in this request.
+
+      format: int32
 
     - `input_tokens: number`
 
       Input tokens consumed by this request.
 
+      format: int32
+
     - `output_tokens: number`
 
       Output tokens generated by this request.
+
+      format: int32
 
     - `speed: optional "standard" or "fast" or null`
 
@@ -11182,7 +10931,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents Span Outcome Evaluation Ongoing Event
 
-- `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome_id, 2 more }`
+- `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object`
 
   Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -11194,6 +10943,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+    format: int32
+
   - `outcome_id: string`
 
     The `outc_` ID of the outcome being evaluated.
@@ -11202,13 +10953,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "span.outcome_evaluation_ongoing"`
+    format: date-time
 
-    - `"span.outcome_evaluation_ongoing"`
+  - `type: "span.outcome_evaluation_ongoing"`
 
 ### Beta Managed Agents Span Outcome Evaluation Start Event
 
-- `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome_id, 2 more }`
+- `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object`
 
   Emitted when an outcome evaluation cycle begins.
 
@@ -11220,6 +10971,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+    format: int32
+
   - `outcome_id: string`
 
     The `outc_` ID of the outcome being evaluated.
@@ -11228,9 +10981,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
-  - `type: "span.outcome_evaluation_start"`
+    format: date-time
 
-    - `"span.outcome_evaluation_start"`
+  - `type: "span.outcome_evaluation_start"`
 
 ### Beta Managed Agents Stream Session Events
 
@@ -11238,7 +10991,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   Server-sent event in the session stream.
 
-  - `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsUserMessageEvent object`
 
     A user message event in the session conversation.
 
@@ -11250,7 +11003,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Array of content blocks comprising the user message.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
@@ -11258,11 +11011,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -11270,7 +11023,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for image source variants.
 
-          - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64ImageSource object`
 
             Base64-encoded image data.
 
@@ -11278,27 +11031,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsURLImageSource object { type, url }`
+          - `BetaManagedAgentsURLImageSource object`
 
             Image referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the image to fetch.
 
-          - `BetaManagedAgentsFileImageSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileImageSource object`
 
             Image referenced by file ID.
 
@@ -11306,15 +11061,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
-            - `type: "file"`
+              minLength: 1
 
-              - `"file"`
+            - `type: "file"`
 
         - `type: "image"`
 
-          - `"image"`
-
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -11322,7 +11075,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Union type for document source variants.
 
-          - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsBase64DocumentSource object`
 
             Base64-encoded document data.
 
@@ -11330,15 +11083,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: string`
 
               MIME type of the document (e.g., "application/pdf").
 
+              minLength: 1
+
             - `type: "base64"`
 
-              - `"base64"`
-
-          - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+          - `BetaManagedAgentsPlainTextDocumentSource object`
 
             Plain text document content.
 
@@ -11346,29 +11101,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: "text"`
 
-              - `"text"`
-
-          - `BetaManagedAgentsURLDocumentSource object { type, url }`
+          - `BetaManagedAgentsURLDocumentSource object`
 
             Document referenced by URL.
 
             - `type: "url"`
 
-              - `"url"`
-
             - `url: string`
 
               URL of the document to fetch.
 
-          - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+              minLength: 1
+
+          - `BetaManagedAgentsFileDocumentSource object`
 
             Document referenced by file ID.
 
@@ -11376,13 +11129,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: "file"`
 
-              - `"file"`
-
         - `type: "document"`
-
-          - `"document"`
 
         - `context: optional string or null`
 
@@ -11392,23 +11143,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The title of the document.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: "redacted"`
 
-          - `"redacted"`
-
     - `type: "user.message"`
-
-      - `"user.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+      format: date-time
+
+  - `BetaManagedAgentsUserInterruptEvent object`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -11418,17 +11167,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.interrupt"`
 
-      - `"user.interrupt"`
-
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+  - `BetaManagedAgentsUserToolConfirmationEvent object`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -11450,21 +11199,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.tool_confirmation"`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-  - `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserCustomToolResultEvent object`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -11478,25 +11229,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.custom_tool_result"`
 
-      - `"user.custom_tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -11516,21 +11265,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `source: string`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: string`
 
           The title of the search result.
 
-        - `type: "search_result"`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: "search_result"`
 
     - `is_error: optional boolean or null`
 
@@ -11540,11 +11291,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }`
+  - `BetaManagedAgentsAgentCustomToolUseEvent object`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -11564,15 +11317,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.custom_tool_use"`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: "agent.custom_tool_use"`
 
     - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-  - `BetaManagedAgentsAgentMessageEvent object { id, content, processed_at, type }`
+  - `BetaManagedAgentsAgentMessageEvent object`
 
     An agent response event in the session conversation.
 
@@ -11584,11 +11337,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Array of text blocks comprising the agent response.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11596,11 +11349,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.message"`
 
-      - `"agent.message"`
-
-  - `BetaManagedAgentsAgentThinkingEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThinkingEvent object`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -11612,11 +11365,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thinking"`
 
-      - `"agent.thinking"`
-
-  - `BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp_server_name, 5 more }`
+  - `BetaManagedAgentsAgentMCPToolUseEvent object`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -11640,9 +11393,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_use"`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: "agent.mcp_tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -11658,7 +11411,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp_tool_use_id, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentMCPToolResultEvent object`
 
     Event representing the result of an MCP tool execution.
 
@@ -11674,27 +11427,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.mcp_tool_result"`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: "agent.mcp_tool_result"`
 
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -11702,7 +11455,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }`
+  - `BetaManagedAgentsAgentToolUseEvent object`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -11722,9 +11475,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.tool_use"`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: "agent.tool_use"`
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
@@ -11740,7 +11493,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-  - `BetaManagedAgentsAgentToolResultEvent object { id, processed_at, tool_use_id, 3 more }`
+  - `BetaManagedAgentsAgentToolResultEvent object`
 
     Event representing the result of an agent tool execution.
 
@@ -11752,31 +11505,31 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: string`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: "agent.tool_result"`
 
-      - `"agent.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -11784,7 +11537,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Whether the tool execution resulted in an error.
 
-  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from_session_thread_id, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent object`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -11796,19 +11549,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11820,15 +11573,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "agent.thread_message_received"`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: "agent.thread_message_received"`
 
     - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed_at, 3 more }`
+  - `BetaManagedAgentsAgentThreadMessageSentEvent object`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -11840,19 +11593,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Message content blocks.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsRedactedBlock object { type }`
+      - `BetaManagedAgentsRedactedBlock object`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11860,19 +11613,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: string`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: "agent.thread_message_sent"`
 
-      - `"agent.thread_message_sent"`
-
     - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent object`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -11884,11 +11637,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "agent.thread_context_compacted"`
 
-      - `"agent.thread_context_compacted"`
-
-  - `BetaManagedAgentsSessionErrorEvent object { id, error, processed_at, type }`
+  - `BetaManagedAgentsSessionErrorEvent object`
 
     An error event indicating a problem occurred during session execution.
 
@@ -11900,7 +11653,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-      - `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+      - `BetaManagedAgentsUnknownError object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -11912,35 +11665,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: "retrying"`
 
-              - `"retrying"`
-
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: "exhausted"`
 
-              - `"exhausted"`
-
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: "terminal"`
 
-              - `"terminal"`
-
         - `type: "unknown_error"`
 
-          - `"unknown_error"`
-
-      - `BetaManagedAgentsModelOverloadedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelOverloadedError object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -11952,23 +11697,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_overloaded_error"`
 
-          - `"model_overloaded_error"`
-
-      - `BetaManagedAgentsModelRateLimitedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRateLimitedError object`
 
         The model request was rate-limited.
 
@@ -11980,23 +11723,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_rate_limited_error"`
 
-          - `"model_rate_limited_error"`
-
-      - `BetaManagedAgentsModelRequestFailedError object { message, retry_status, type }`
+      - `BetaManagedAgentsModelRequestFailedError object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -12008,23 +11749,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "model_request_failed_error"`
 
-          - `"model_request_failed_error"`
-
-      - `BetaManagedAgentsMCPConnectionFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPConnectionFailedError object`
 
         Failed to connect to an MCP server.
 
@@ -12040,23 +11779,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_connection_failed_error"`
 
-          - `"mcp_connection_failed_error"`
-
-      - `BetaManagedAgentsMCPAuthenticationFailedError object { mcp_server_name, message, retry_status, type }`
+      - `BetaManagedAgentsMCPAuthenticationFailedError object`
 
         Authentication to an MCP server failed.
 
@@ -12072,23 +11809,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "mcp_authentication_failed_error"`
 
-          - `"mcp_authentication_failed_error"`
-
-      - `BetaManagedAgentsBillingError object { message, retry_status, type }`
+      - `BetaManagedAgentsBillingError object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -12100,23 +11835,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "billing_error"`
 
-          - `"billing_error"`
-
-      - `BetaManagedAgentsCredentialHostUnreachableError object { credential_id, message, retry_status, 2 more }`
+      - `BetaManagedAgentsCredentialHostUnreachableError object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -12132,21 +11865,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           What the client should do next in response to this error.
 
-          - `BetaManagedAgentsRetryStatusRetrying object { type }`
+          - `BetaManagedAgentsRetryStatusRetrying object`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `BetaManagedAgentsRetryStatusExhausted object { type }`
+          - `BetaManagedAgentsRetryStatusExhausted object`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `BetaManagedAgentsRetryStatusTerminal object { type }`
+          - `BetaManagedAgentsRetryStatusTerminal object`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: "credential_host_unreachable_error"`
-
-          - `"credential_host_unreachable_error"`
 
         - `vault_id: string`
 
@@ -12156,11 +11887,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.error"`
 
-      - `"session.error"`
-
-  - `BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRescheduledEvent object`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -12172,11 +11903,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_rescheduled"`
 
-      - `"session.status_rescheduled"`
-
-  - `BetaManagedAgentsSessionStatusRunningEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusRunningEvent object`
 
     Indicates the session is actively running and the agent is working.
 
@@ -12188,11 +11919,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_running"`
 
-      - `"session.status_running"`
-
-  - `BetaManagedAgentsSessionStatusIdleEvent object { id, processed_at, stop_reason, type }`
+  - `BetaManagedAgentsSessionStatusIdleEvent object`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -12204,19 +11935,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or BetaManagedAgentsSessionBudgetReached`
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: "end_turn"`
 
-          - `"end_turn"`
-
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -12226,29 +11957,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "requires_action"`
 
-          - `"requires_action"`
-
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
-          - `"retries_exhausted"`
-
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: "budget_reached"`
 
-          - `"budget_reached"`
-
     - `type: "session.status_idle"`
 
-      - `"session.status_idle"`
-
-  - `BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionStatusTerminatedEvent object`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -12260,11 +11983,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.status_terminated"`
 
-      - `"session.status_terminated"`
-
-  - `BetaManagedAgentsSessionThreadCreatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadCreatedEvent object`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -12280,15 +12003,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: "session.thread_created"`
 
-      - `"session.thread_created"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent object`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -12300,6 +12023,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -12308,11 +12033,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_start"`
 
-      - `"span.outcome_evaluation_start"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent object`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -12328,6 +12053,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: string`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -12340,13 +12067,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: string`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: "span.outcome_evaluation_end"`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -12356,17 +12083,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: number`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: number`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: number`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: optional "standard" or "fast" or null`
 
@@ -12376,7 +12111,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"fast"`
 
-  - `BetaManagedAgentsSpanModelRequestStartEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSpanModelRequestStartEvent object`
 
     Emitted when a model request is initiated by the agent.
 
@@ -12388,11 +12123,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_start"`
 
-      - `"span.model_request_start"`
-
-  - `BetaManagedAgentsSpanModelRequestEndEvent object { id, is_error, model_request_start_id, 3 more }`
+  - `BetaManagedAgentsSpanModelRequestEndEvent object`
 
     Emitted when a model request completes.
 
@@ -12416,11 +12151,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.model_request_end"`
 
-      - `"span.model_request_end"`
-
-  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome_id, 2 more }`
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -12432,6 +12167,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: string`
 
       The `outc_` ID of the outcome being evaluated.
@@ -12440,11 +12177,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "span.outcome_evaluation_ongoing"`
 
-      - `"span.outcome_evaluation_ongoing"`
-
-  - `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+  - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -12460,6 +12197,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: string`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -12468,11 +12207,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
       Rubric for grading the quality of an outcome.
 
-      - `BetaManagedAgentsFileRubric object { file_id, type }`
+      - `BetaManagedAgentsFileRubric object`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -12482,9 +12223,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "file"`
 
-          - `"file"`
-
-      - `BetaManagedAgentsTextRubric object { content, type }`
+      - `BetaManagedAgentsTextRubric object`
 
         Rubric content provided inline as text.
 
@@ -12494,13 +12233,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "text"`
 
-          - `"text"`
-
     - `type: "user.define_outcome"`
 
-      - `"user.define_outcome"`
-
-  - `BetaManagedAgentsSessionDeletedEvent object { id, processed_at, type }`
+  - `BetaManagedAgentsSessionDeletedEvent object`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -12512,11 +12247,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `type: "session.deleted"`
 
-      - `"session.deleted"`
-
-  - `BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent object`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -12532,15 +12267,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: "session.thread_status_running"`
 
-      - `"session.thread_status_running"`
-
-  - `BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent_name, processed_at, 3 more }`
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent object`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -12556,6 +12291,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that went idle.
@@ -12564,27 +12301,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionEndTurn object { type }`
+      - `BetaManagedAgentsSessionEndTurn object`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `BetaManagedAgentsSessionRequiresAction object { event_ids, type }`
+      - `BetaManagedAgentsSessionRequiresAction object`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `BetaManagedAgentsSessionRetriesExhausted object { type }`
+      - `BetaManagedAgentsSessionRetriesExhausted object`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `BetaManagedAgentsSessionBudgetReached object { type }`
+      - `BetaManagedAgentsSessionBudgetReached object`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
     - `type: "session.thread_status_idle"`
 
-      - `"session.thread_status_idle"`
-
-  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent object`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -12600,15 +12335,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: "session.thread_status_terminated"`
 
-      - `"session.thread_status_terminated"`
-
-  - `BetaManagedAgentsUserToolResultEvent object { id, tool_use_id, type, 4 more }`
+  - `BetaManagedAgentsUserToolResultEvent object`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -12622,25 +12357,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "user.tool_result"`
 
-      - `"user.tool_result"`
-
     - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
       The result content returned by the tool.
 
-      - `BetaManagedAgentsTextBlock object { text, type }`
+      - `BetaManagedAgentsTextBlock object`
 
         Regular text content.
 
-      - `BetaManagedAgentsImageBlock object { source, type }`
+      - `BetaManagedAgentsImageBlock object`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+      - `BetaManagedAgentsDocumentBlock object`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+      - `BetaManagedAgentsSearchResultBlock object`
 
         A block containing a web search result.
 
@@ -12652,11 +12385,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent_name, processed_at, 2 more }`
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent object`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -12672,15 +12407,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: string`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: "session.thread_status_rescheduled"`
 
-      - `"session.thread_status_rescheduled"`
-
-  - `BetaManagedAgentsSessionUpdatedEvent object { id, processed_at, type, 4 more }`
+  - `BetaManagedAgentsSessionUpdatedEvent object`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -12692,9 +12427,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.updated"`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: "session.updated"`
 
     - `agent: optional BetaManagedAgentsSessionAgent or null`
 
@@ -12709,8 +12444,6 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
         - `name: string`
 
         - `type: "url"`
-
-          - `"url"`
 
         - `url: string`
 
@@ -12788,45 +12521,35 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `BetaManagedAgentsEffortLow object { type }`
+          - `BetaManagedAgentsEffortLow object`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: "low"`
 
-              - `"low"`
-
-          - `BetaManagedAgentsEffortMedium object { type }`
+          - `BetaManagedAgentsEffortMedium object`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
 
-              - `"medium"`
-
-          - `BetaManagedAgentsEffortHigh object { type }`
+          - `BetaManagedAgentsEffortHigh object`
 
             High effort. Favors reasoning depth.
 
             - `type: "high"`
 
-              - `"high"`
-
-          - `BetaManagedAgentsEffortXhigh object { type }`
+          - `BetaManagedAgentsEffortXhigh object`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
-          - `BetaManagedAgentsEffortMax object { type }`
+          - `BetaManagedAgentsEffortMax object`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo: optional string`
 
@@ -12848,7 +12571,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `BetaManagedAgentsSessionThreadAgent object { id, description, mcp_servers, 7 more }`
+          - `BetaManagedAgentsSessionThreadAgent object`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -12872,7 +12595,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-              - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsAnthropicSkill object`
 
                 A resolved Anthropic-managed skill.
 
@@ -12880,11 +12603,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "anthropic"`
 
-                  - `"anthropic"`
-
                 - `version: string`
 
-              - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+              - `BetaManagedAgentsCustomSkill object`
 
                 A resolved user-created custom skill.
 
@@ -12892,19 +12613,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
                 - `version: string`
 
             - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-              - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+              - `BetaManagedAgentsAgentToolset20260401 object`
 
                 - `configs: array of BetaManagedAgentsAgentToolConfig`
 
-                  - `BetaManagedAgentsBashToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsBashToolConfig object`
 
                     Configuration for the bash tool.
 
@@ -12912,33 +12631,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "bash"`
 
-                      - `"bash"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: "always_allow"`
 
-                          - `"always_allow"`
-
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: "always_ask"`
 
-                          - `"always_ask"`
-
                     - `type: "bash"`
 
-                      - `"bash"`
-
-                  - `BetaManagedAgentsEditToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsEditToolConfig object`
 
                     Configuration for the edit tool.
 
@@ -12946,25 +12657,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "edit"`
 
-                      - `"edit"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "edit"`
 
-                      - `"edit"`
-
-                  - `BetaManagedAgentsReadToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsReadToolConfig object`
 
                     Configuration for the read tool.
 
@@ -12972,25 +12679,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "read"`
 
-                      - `"read"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "read"`
 
-                      - `"read"`
-
-                  - `BetaManagedAgentsWriteToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsWriteToolConfig object`
 
                     Configuration for the write tool.
 
@@ -12998,25 +12701,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "write"`
 
-                      - `"write"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "write"`
 
-                      - `"write"`
-
-                  - `BetaManagedAgentsGlobToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGlobToolConfig object`
 
                     Configuration for the glob tool.
 
@@ -13024,25 +12723,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "glob"`
 
-                      - `"glob"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "glob"`
 
-                      - `"glob"`
-
-                  - `BetaManagedAgentsGrepToolConfig object { enabled, name, permission_policy, type }`
+                  - `BetaManagedAgentsGrepToolConfig object`
 
                     Configuration for the grep tool.
 
@@ -13050,25 +12745,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "grep"`
 
-                      - `"grep"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "grep"`
 
-                      - `"grep"`
-
-                  - `BetaManagedAgentsWebFetchToolConfig object { enabled, name, permission_policy, 4 more }`
+                  - `BetaManagedAgentsWebFetchToolConfig object`
 
                     Configuration for the web_fetch tool.
 
@@ -13076,23 +12767,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "web_fetch"`
 
-                      - `"web_fetch"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_fetch"`
-
-                      - `"web_fetch"`
 
                     - `allowed_domains: optional array of string`
 
@@ -13100,7 +12787,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `max_content_tokens: optional number or null`
 
-                  - `BetaManagedAgentsWebSearchToolConfig object { enabled, name, permission_policy, 4 more }`
+                      format: int32
+
+                  - `BetaManagedAgentsWebSearchToolConfig object`
 
                     Configuration for the web_search tool.
 
@@ -13108,23 +12797,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `name: "web_search"`
 
-                      - `"web_search"`
-
                     - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
 
                       Permission policy for tool execution.
 
-                      - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                      - `BetaManagedAgentsAlwaysAskPolicy object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "web_search"`
-
-                      - `"web_search"`
 
                     - `allowed_domains: optional array of string`
 
@@ -13138,11 +12823,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: optional string or null`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: optional string or null`
 
@@ -13152,9 +12837,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: optional string or null`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -13166,19 +12855,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
                 - `type: "agent_toolset_20260401"`
 
-                  - `"agent_toolset_20260401"`
-
-              - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+              - `BetaManagedAgentsMCPToolset object`
 
                 - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -13190,11 +12877,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -13208,11 +12895,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAllowPolicy object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy object { type }`
+                    - `BetaManagedAgentsAlwaysAskPolicy object`
 
                       Tool calls require user confirmation before execution.
 
@@ -13220,9 +12907,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "mcp_toolset"`
 
-                  - `"mcp_toolset"`
-
-              - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+              - `BetaManagedAgentsCustomTool object`
 
                 A custom tool as returned in API responses.
 
@@ -13234,8 +12919,6 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                   - `type: "object"`
 
-                    - `"object"`
-
                   - `properties: optional map[unknown] or null`
 
                   - `required: optional array of string or null`
@@ -13244,15 +12927,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
             - `type: "agent"`
-
-              - `"agent"`
 
             - `version: number`
 
-          - `BetaManagedAgentsAdvisor object { model, type }`
+              format: int32
+
+          - `BetaManagedAgentsAdvisor object`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -13262,21 +12943,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `type: "advisor"`
 
-              - `"advisor"`
-
         - `type: "coordinator"`
-
-          - `"coordinator"`
 
       - `name: string`
 
       - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-        - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsAnthropicSkill object`
 
           A resolved Anthropic-managed skill.
 
-        - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
+        - `BetaManagedAgentsCustomSkill object`
 
           A resolved user-created custom skill.
 
@@ -13284,19 +12961,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-        - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
+        - `BetaManagedAgentsAgentToolset20260401 object`
 
-        - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
+        - `BetaManagedAgentsMCPToolset object`
 
-        - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
+        - `BetaManagedAgentsCustomTool object`
 
           A custom tool as returned in API responses.
 
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -13314,11 +12991,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: "limit"`
-
-        - `"limit"`
 
     - `metadata: optional map[string]`
 
@@ -13328,7 +13001,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsStartEvent object { event, type }`
+  - `BetaManagedAgentsStartEvent object`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -13336,7 +13009,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `BetaManagedAgentsAgentMessagePreview object { id, type }`
+      - `BetaManagedAgentsAgentMessagePreview object`
 
         - `id: string`
 
@@ -13344,9 +13017,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "agent.message"`
 
-          - `"agent.message"`
-
-      - `BetaManagedAgentsAgentThinkingPreview object { id, type }`
+      - `BetaManagedAgentsAgentThinkingPreview object`
 
         - `id: string`
 
@@ -13354,13 +13025,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `type: "agent.thinking"`
 
-          - `"agent.thinking"`
-
     - `type: "event_start"`
 
-      - `"event_start"`
-
-  - `BetaManagedAgentsDeltaEvent object { delta, event_id, type }`
+  - `BetaManagedAgentsDeltaEvent object`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -13374,11 +13041,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "content_delta"`
 
-        - `"content_delta"`
-
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `event_id: string`
 
@@ -13386,9 +13053,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `type: "event_delta"`
 
-      - `"event_delta"`
-
-  - `BetaManagedAgentsSystemMessageEvent object { id, content, type, processed_at }`
+  - `BetaManagedAgentsSystemMessageEvent object`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -13404,19 +13069,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
     - `type: "system.message"`
-
-      - `"system.message"`
 
     - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent object { id, processed_at, type, 2 more }`
+      format: date-time
+
+  - `BetaManagedAgentsSessionUsageEvent object`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -13428,9 +13093,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       A timestamp in RFC 3339 format
 
-    - `type: "session.usage"`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: "session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -13440,6 +13105,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -13448,17 +13115,25 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: optional number`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: optional number`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: optional number`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: optional BetaMonetaryAmount`
 
@@ -13468,6 +13143,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -13476,9 +13153,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: optional number`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -13486,7 +13167,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents System Message Event Params
 
-- `BetaManagedAgentsSystemMessageEventParams object { content, type }`
+- `BetaManagedAgentsSystemMessageEventParams object`
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -13498,17 +13179,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The text content.
 
-    - `type: "text"`
+      minLength: 1
 
-      - `"text"`
+    - `type: "text"`
 
   - `type: "system.message"`
 
-    - `"system.message"`
-
 ### Beta Managed Agents Text Block
 
-- `BetaManagedAgentsTextBlock object { text, type }`
+- `BetaManagedAgentsTextBlock object`
 
   Regular text content.
 
@@ -13516,13 +13195,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The text content.
 
-  - `type: "text"`
+    minLength: 1
 
-    - `"text"`
+  - `type: "text"`
 
 ### Beta Managed Agents Text Rubric
 
-- `BetaManagedAgentsTextRubric object { content, type }`
+- `BetaManagedAgentsTextRubric object`
 
   Rubric content provided inline as text.
 
@@ -13532,11 +13211,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "text"`
 
-    - `"text"`
-
 ### Beta Managed Agents Text Rubric Params
 
-- `BetaManagedAgentsTextRubricParams object { content, type }`
+- `BetaManagedAgentsTextRubricParams object`
 
   Rubric content provided inline as text.
 
@@ -13544,13 +13221,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-  - `type: "text"`
+    maxLength: 262144
 
-    - `"text"`
+  - `type: "text"`
 
 ### Beta Managed Agents Unknown Error
 
-- `BetaManagedAgentsUnknownError object { message, retry_status, type }`
+- `BetaManagedAgentsUnknownError object`
 
   An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -13562,65 +13239,57 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the client should do next in response to this error.
 
-    - `BetaManagedAgentsRetryStatusRetrying object { type }`
+    - `BetaManagedAgentsRetryStatusRetrying object`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: "retrying"`
 
-        - `"retrying"`
-
-    - `BetaManagedAgentsRetryStatusExhausted object { type }`
+    - `BetaManagedAgentsRetryStatusExhausted object`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: "exhausted"`
 
-        - `"exhausted"`
-
-    - `BetaManagedAgentsRetryStatusTerminal object { type }`
+    - `BetaManagedAgentsRetryStatusTerminal object`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: "terminal"`
 
-        - `"terminal"`
-
   - `type: "unknown_error"`
-
-    - `"unknown_error"`
 
 ### Beta Managed Agents URL Document Source
 
-- `BetaManagedAgentsURLDocumentSource object { type, url }`
+- `BetaManagedAgentsURLDocumentSource object`
 
   Document referenced by URL.
 
   - `type: "url"`
 
-    - `"url"`
-
   - `url: string`
 
     URL of the document to fetch.
 
+    minLength: 1
+
 ### Beta Managed Agents URL Image Source
 
-- `BetaManagedAgentsURLImageSource object { type, url }`
+- `BetaManagedAgentsURLImageSource object`
 
   Image referenced by URL.
 
   - `type: "url"`
 
-    - `"url"`
-
   - `url: string`
 
     URL of the image to fetch.
 
+    minLength: 1
+
 ### Beta Managed Agents User Custom Tool Result Event
 
-- `BetaManagedAgentsUserCustomToolResultEvent object { id, custom_tool_use_id, type, 4 more }`
+- `BetaManagedAgentsUserCustomToolResultEvent object`
 
   Event sent by the client providing the result of a custom tool execution.
 
@@ -13634,13 +13303,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "user.custom_tool_result"`
 
-    - `"user.custom_tool_result"`
-
   - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
     The result content returned by the tool.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -13648,11 +13315,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -13660,7 +13327,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -13668,27 +13335,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -13696,15 +13365,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -13712,7 +13379,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -13720,15 +13387,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -13736,29 +13405,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -13766,13 +13433,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -13782,7 +13447,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+    - `BetaManagedAgentsSearchResultBlock object`
 
       A block containing a web search result.
 
@@ -13802,21 +13467,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
-        - `type: "text"`
+          minLength: 1
 
-          - `"text"`
+        - `type: "text"`
 
       - `source: string`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: string`
 
         The title of the search result.
 
-      - `type: "search_result"`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: "search_result"`
 
   - `is_error: optional boolean or null`
 
@@ -13826,13 +13493,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: optional string or null`
 
     Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
 ### Beta Managed Agents User Custom Tool Result Event Params
 
-- `BetaManagedAgentsUserCustomToolResultEventParams object { custom_tool_use_id, type, content, is_error }`
+- `BetaManagedAgentsUserCustomToolResultEventParams object`
 
   Parameters for providing the result of a custom tool execution.
 
@@ -13840,15 +13509,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: "user.custom_tool_result"`
+    minLength: 1, maxLength: 128
 
-    - `"user.custom_tool_result"`
+  - `type: "user.custom_tool_result"`
 
   - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
     The result content returned by the tool.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -13856,11 +13525,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -13868,7 +13537,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -13876,27 +13545,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -13904,15 +13575,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -13920,7 +13589,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -13928,15 +13597,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -13944,29 +13615,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -13974,13 +13643,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -13990,7 +13657,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+    - `BetaManagedAgentsSearchResultBlock object`
 
       A block containing a web search result.
 
@@ -14010,21 +13677,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
-        - `type: "text"`
+          minLength: 1
 
-          - `"text"`
+        - `type: "text"`
 
       - `source: string`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: string`
 
         The title of the search result.
 
-      - `type: "search_result"`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: "search_result"`
 
   - `is_error: optional boolean or null`
 
@@ -14032,7 +13701,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents User Define Outcome Event
 
-- `BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max_iterations, 4 more }`
+- `BetaManagedAgentsUserDefineOutcomeEvent object`
 
   Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -14048,6 +13717,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+    format: int32
+
   - `outcome_id: string`
 
     Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -14056,11 +13727,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
     Rubric for grading the quality of an outcome.
 
-    - `BetaManagedAgentsFileRubric object { file_id, type }`
+    - `BetaManagedAgentsFileRubric object`
 
       Rubric referenced by a file uploaded via the Files API.
 
@@ -14070,9 +13743,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "file"`
 
-        - `"file"`
-
-    - `BetaManagedAgentsTextRubric object { content, type }`
+    - `BetaManagedAgentsTextRubric object`
 
       Rubric content provided inline as text.
 
@@ -14082,15 +13753,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "text"`
 
-        - `"text"`
-
   - `type: "user.define_outcome"`
-
-    - `"user.define_outcome"`
 
 ### Beta Managed Agents User Define Outcome Event Params
 
-- `BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max_iterations }`
+- `BetaManagedAgentsUserDefineOutcomeEventParams object`
 
   Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -14102,7 +13769,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Rubric for grading the quality of an outcome.
 
-    - `BetaManagedAgentsFileRubricParams object { file_id, type }`
+    - `BetaManagedAgentsFileRubricParams object`
 
       Rubric referenced by a file uploaded via the Files API.
 
@@ -14112,9 +13779,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `type: "file"`
 
-        - `"file"`
-
-    - `BetaManagedAgentsTextRubricParams object { content, type }`
+    - `BetaManagedAgentsTextRubricParams object`
 
       Rubric content provided inline as text.
 
@@ -14122,21 +13787,21 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+        maxLength: 262144
+
       - `type: "text"`
 
-        - `"text"`
-
   - `type: "user.define_outcome"`
-
-    - `"user.define_outcome"`
 
   - `max_iterations: optional number or null`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
+    format: int32
+
 ### Beta Managed Agents User Interrupt Event
 
-- `BetaManagedAgentsUserInterruptEvent object { id, type, processed_at, session_thread_id }`
+- `BetaManagedAgentsUserInterruptEvent object`
 
   An interrupt event that pauses agent execution and returns control to the user.
 
@@ -14146,11 +13811,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "user.interrupt"`
 
-    - `"user.interrupt"`
-
   - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `session_thread_id: optional string or null`
 
@@ -14158,13 +13823,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents User Interrupt Event Params
 
-- `BetaManagedAgentsUserInterruptEventParams object { type, session_thread_id }`
+- `BetaManagedAgentsUserInterruptEventParams object`
 
   Parameters for sending an interrupt to pause the agent.
 
   - `type: "user.interrupt"`
-
-    - `"user.interrupt"`
 
   - `session_thread_id: optional string or null`
 
@@ -14172,7 +13835,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents User Message Event
 
-- `BetaManagedAgentsUserMessageEvent object { id, content, type, processed_at }`
+- `BetaManagedAgentsUserMessageEvent object`
 
   A user message event in the session conversation.
 
@@ -14184,7 +13847,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Array of content blocks comprising the user message.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -14192,11 +13855,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14204,7 +13867,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -14212,27 +13875,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -14240,15 +13905,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14256,7 +13919,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -14264,15 +13927,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -14280,29 +13945,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -14310,13 +13973,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -14326,25 +13987,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
 
-        - `"redacted"`
-
   - `type: "user.message"`
-
-    - `"user.message"`
 
   - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
 ### Beta Managed Agents User Message Event Params
 
-- `BetaManagedAgentsUserMessageEventParams object { content, type }`
+- `BetaManagedAgentsUserMessageEventParams object`
 
   Parameters for sending a user message to the session.
 
@@ -14352,7 +14011,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Array of content blocks for the user message.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -14360,11 +14019,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14372,7 +14031,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -14380,27 +14039,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -14408,15 +14069,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14424,7 +14083,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -14432,15 +14091,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -14448,29 +14109,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -14478,13 +14137,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -14494,21 +14151,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsRedactedBlock object { type }`
+    - `BetaManagedAgentsRedactedBlock object`
 
       Placeholder for content withheld by Anthropic model policy.
 
       - `type: "redacted"`
 
-        - `"redacted"`
-
   - `type: "user.message"`
-
-    - `"user.message"`
 
 ### Beta Managed Agents User Tool Confirmation Event
 
-- `BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool_use_id, 4 more }`
+- `BetaManagedAgentsUserToolConfirmationEvent object`
 
   A tool confirmation event that approves or denies a pending tool execution.
 
@@ -14530,15 +14183,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `type: "user.tool_confirmation"`
 
-    - `"user.tool_confirmation"`
-
   - `deny_message: optional string or null`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+    maxLength: 10000
+
   - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `session_thread_id: optional string or null`
 
@@ -14546,7 +14201,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
 ### Beta Managed Agents User Tool Confirmation Event Params
 
-- `BetaManagedAgentsUserToolConfirmationEventParams object { result, tool_use_id, type, deny_message }`
+- `BetaManagedAgentsUserToolConfirmationEventParams object`
 
   Parameters for confirming or denying a tool execution request.
 
@@ -14562,17 +14217,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: "user.tool_confirmation"`
+    minLength: 1, maxLength: 128
 
-    - `"user.tool_confirmation"`
+  - `type: "user.tool_confirmation"`
 
   - `deny_message: optional string or null`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+    maxLength: 10000
+
 ### Beta Managed Agents User Tool Result Event Params
 
-- `BetaManagedAgentsUserToolResultEventParams object { tool_use_id, type, content, is_error }`
+- `BetaManagedAgentsUserToolResultEventParams object`
 
   Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -14580,15 +14237,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: "user.tool_result"`
+    minLength: 1, maxLength: 128
 
-    - `"user.tool_result"`
+  - `type: "user.tool_result"`
 
   - `content: optional array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock or BetaManagedAgentsSearchResultBlock`
 
     The result content returned by the tool.
 
-    - `BetaManagedAgentsTextBlock object { text, type }`
+    - `BetaManagedAgentsTextBlock object`
 
       Regular text content.
 
@@ -14596,11 +14253,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The text content.
 
+        minLength: 1
+
       - `type: "text"`
 
-        - `"text"`
-
-    - `BetaManagedAgentsImageBlock object { source, type }`
+    - `BetaManagedAgentsImageBlock object`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14608,7 +14265,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for image source variants.
 
-        - `BetaManagedAgentsBase64ImageSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64ImageSource object`
 
           Base64-encoded image data.
 
@@ -14616,27 +14273,29 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsURLImageSource object { type, url }`
+        - `BetaManagedAgentsURLImageSource object`
 
           Image referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the image to fetch.
 
-        - `BetaManagedAgentsFileImageSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileImageSource object`
 
           Image referenced by file ID.
 
@@ -14644,15 +14303,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
-          - `type: "file"`
+            minLength: 1
 
-            - `"file"`
+          - `type: "file"`
 
       - `type: "image"`
 
-        - `"image"`
-
-    - `BetaManagedAgentsDocumentBlock object { source, type, context, title }`
+    - `BetaManagedAgentsDocumentBlock object`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14660,7 +14317,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Union type for document source variants.
 
-        - `BetaManagedAgentsBase64DocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsBase64DocumentSource object`
 
           Base64-encoded document data.
 
@@ -14668,15 +14325,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: string`
 
             MIME type of the document (e.g., "application/pdf").
 
+            minLength: 1
+
           - `type: "base64"`
 
-            - `"base64"`
-
-        - `BetaManagedAgentsPlainTextDocumentSource object { data, media_type, type }`
+        - `BetaManagedAgentsPlainTextDocumentSource object`
 
           Plain text document content.
 
@@ -14684,29 +14343,27 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: "text"`
 
-            - `"text"`
-
-        - `BetaManagedAgentsURLDocumentSource object { type, url }`
+        - `BetaManagedAgentsURLDocumentSource object`
 
           Document referenced by URL.
 
           - `type: "url"`
 
-            - `"url"`
-
           - `url: string`
 
             URL of the document to fetch.
 
-        - `BetaManagedAgentsFileDocumentSource object { file_id, type }`
+            minLength: 1
+
+        - `BetaManagedAgentsFileDocumentSource object`
 
           Document referenced by file ID.
 
@@ -14714,13 +14371,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: "file"`
 
-            - `"file"`
-
       - `type: "document"`
-
-        - `"document"`
 
       - `context: optional string or null`
 
@@ -14730,7 +14385,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         The title of the document.
 
-    - `BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }`
+    - `BetaManagedAgentsSearchResultBlock object`
 
       A block containing a web search result.
 
@@ -14750,21 +14405,23 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           The text content.
 
-        - `type: "text"`
+          minLength: 1
 
-          - `"text"`
+        - `type: "text"`
 
       - `source: string`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: string`
 
         The title of the search result.
 
-      - `type: "search_result"`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: "search_result"`
 
   - `is_error: optional boolean or null`
 
