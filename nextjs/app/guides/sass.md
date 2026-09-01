@@ -3,7 +3,7 @@ title: How to use Sass
 description: Style your Next.js application using Sass.
 url: "https://nextjs.org/docs/app/guides/sass"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-02-11
 prerequisites:
   - "Guides: /docs/app/guides"

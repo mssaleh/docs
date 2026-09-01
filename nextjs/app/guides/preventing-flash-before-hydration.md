@@ -3,7 +3,7 @@ title: How to prevent flash before hydration
 description: Learn how to correct server-rendered content before the browser paints, avoiding visible flash when the page hydrates.
 url: "https://nextjs.org/docs/app/guides/preventing-flash-before-hydration"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-07-29
 prerequisites:
   - "Guides: /docs/app/guides"

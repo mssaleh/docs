@@ -3,7 +3,7 @@ title: Custom Webpack Config
 description: Learn how to customize the webpack config used by Next.js
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/webpack"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2025-10-17
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

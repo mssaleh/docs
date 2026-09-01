@@ -3,7 +3,7 @@ title: Directives
 description: Learn how React and Next.js directives define client entry points, Server Functions, and cached output.
 url: "https://nextjs.org/docs/app/api-reference/directives"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"

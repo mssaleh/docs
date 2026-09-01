@@ -3,7 +3,7 @@ title: Incremental Static Regeneration with Cache Components
 description: Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit.
 url: "https://nextjs.org/docs/app/guides/incremental-static-regeneration-cache-components"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-03
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -3,7 +3,7 @@ title: partialPrefetching
 description: Configure the default link prefetch behavior to fetch only the static parts of each route.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/partialPrefetching"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

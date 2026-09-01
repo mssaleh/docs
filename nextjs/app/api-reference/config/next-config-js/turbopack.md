@@ -3,7 +3,7 @@ title: turbopack
 description: Configure Next.js with Turbopack-specific options
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

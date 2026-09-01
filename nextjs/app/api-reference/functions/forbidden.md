@@ -3,7 +3,7 @@ title: forbidden
 description: API Reference for the forbidden function.
 url: "https://nextjs.org/docs/app/api-reference/functions/forbidden"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-07-24
 prerequisites:
   - "API Reference: /docs/app/api-reference"

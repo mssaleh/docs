@@ -3,7 +3,7 @@ title: instrumentationClientInject
 description: "Inject additional client-side instrumentation modules before the user's `instrumentation-client.{js,ts}` file."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/instrumentationClientInject"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-05-20
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

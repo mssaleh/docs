@@ -3,7 +3,7 @@ title: template.js
 description: API Reference for the template.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/template"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-03-05
 prerequisites:
   - "API Reference: /docs/app/api-reference"

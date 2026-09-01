@@ -3,7 +3,7 @@ title: loading.js
 description: API reference for the loading.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/loading"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-06-08
 prerequisites:
   - "API Reference: /docs/app/api-reference"

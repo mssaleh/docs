@@ -3,7 +3,7 @@ title: deploymentId
 description: Configure a deployment identifier used for version skew protection and cache busting.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/deploymentId"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

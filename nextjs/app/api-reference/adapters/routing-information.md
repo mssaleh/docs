@@ -3,7 +3,7 @@ title: Routing Information
 description: "Reference for routing phases and route fields exposed in `onBuildComplete`."
 url: "https://nextjs.org/docs/app/api-reference/adapters/routing-information"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "API Reference: /docs/app/api-reference"

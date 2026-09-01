@@ -3,7 +3,7 @@ title: after
 description: API Reference for the after function.
 url: "https://nextjs.org/docs/app/api-reference/functions/after"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-03-13
 prerequisites:
   - "API Reference: /docs/app/api-reference"

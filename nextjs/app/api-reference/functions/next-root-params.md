@@ -3,7 +3,7 @@ title: next/root-params
 description: API Reference for the next/root-params module that provides access to root-level route parameters.
 url: "https://nextjs.org/docs/app/api-reference/functions/next-root-params"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-06-24
 prerequisites:
   - "API Reference: /docs/app/api-reference"

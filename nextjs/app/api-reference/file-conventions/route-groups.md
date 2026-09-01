@@ -3,7 +3,7 @@ title: Route Groups
 description: Route Groups can be used to partition your Next.js application into different sections.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/route-groups"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

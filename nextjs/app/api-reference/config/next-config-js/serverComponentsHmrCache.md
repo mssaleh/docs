@@ -3,7 +3,7 @@ title: serverComponentsHmrCache
 description: Configure whether fetch responses in Server Components are cached across HMR refresh requests.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverComponentsHmrCache"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2025-06-16
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

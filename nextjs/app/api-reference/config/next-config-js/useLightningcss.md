@@ -3,7 +3,7 @@ title: useLightningcss
 description: Enable experimental support for Lightning CSS.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/useLightningcss"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-03-11
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

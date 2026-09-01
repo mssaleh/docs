@@ -3,7 +3,7 @@ title: Revalidating
 description: Learn how to revalidate cached data using time-based and on-demand strategies.
 url: "https://nextjs.org/docs/app/getting-started/revalidating"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-06-25
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

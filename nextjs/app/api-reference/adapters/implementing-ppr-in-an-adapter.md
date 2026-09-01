@@ -3,7 +3,7 @@ title: Implementing PPR in an Adapter
 description: Implement Partial Prerendering support in an adapter using fallback output and cache hooks.
 url: "https://nextjs.org/docs/app/api-reference/adapters/implementing-ppr-in-an-adapter"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-03-30
 prerequisites:
   - "API Reference: /docs/app/api-reference"

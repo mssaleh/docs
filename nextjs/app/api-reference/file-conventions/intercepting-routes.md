@@ -3,7 +3,7 @@ title: Intercepting Routes
 description: Use intercepting routes to load a new route within the current layout while masking the browser URL, useful for advanced routing patterns such as modals.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/intercepting-routes"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2025-06-16
 prerequisites:
   - "API Reference: /docs/app/api-reference"

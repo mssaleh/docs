@@ -3,7 +3,7 @@ title: How to fetch client-side data with TanStack Query
 description: Fetch client-side data with TanStack Query, optionally provide initial data from a Server Component, and coordinate server and client caches.
 url: "https://nextjs.org/docs/app/guides/client-side-data-fetching/tanstack-query"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"

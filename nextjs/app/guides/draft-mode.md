@@ -3,7 +3,7 @@ title: How to preview content with Draft Mode in Next.js
 description: Bypass Next.js caching for a request so editors can preview unpublished content from a headless CMS.
 url: "https://nextjs.org/docs/app/guides/draft-mode"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-06-02
 prerequisites:
   - "Guides: /docs/app/guides"

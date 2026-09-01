@@ -3,7 +3,7 @@ title: sitemap.xml
 description: API Reference for the sitemap.xml file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-08-25
 prerequisites:
   - "File-system conventions: /docs/app/api-reference/file-conventions"

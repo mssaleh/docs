@@ -3,7 +3,7 @@ title: useParams
 description: API Reference for the useParams hook.
 url: "https://nextjs.org/docs/app/api-reference/functions/use-params"
 docs_index: /docs/llms.txt
-version: 16.3.3
+version: 16.3.4
 lastUpdated: 2026-06-09
 prerequisites:
   - "API Reference: /docs/app/api-reference"
