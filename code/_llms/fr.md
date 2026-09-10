@@ -23,7 +23,7 @@
 #### Utiliser Claude Code
 
 - [Comment Claude se souvient de votre projet](https://code.claude.com/docs/fr/memory.md): Donnez à Claude des instructions persistantes avec les fichiers CLAUDE.md, et laissez Claude accumuler automatiquement les apprentissages avec la mémoire automatique.
-- [Choisir un mode de permission](https://code.claude.com/docs/fr/permission-modes.md): Contrôlez si Claude demande une approbation avant de modifier des fichiers ou d'exécuter des commandes. Basculez entre les modes avec Maj+Tab dans l'interface de ligne de commande ou utilisez le sélecteur de mode dans VS Code, Desktop et claude.ai.
+- [Choisir un mode de permission](https://code.claude.com/docs/fr/permission-modes.md): Contrôlez si Claude demande une approbation avant d'agir. Basculez entre les modes avec Maj+Tab dans la CLI, l'indicateur de mode dans VS Code, ou le sélecteur de mode dans Desktop.
 - [Gérer les sessions](https://code.claude.com/docs/fr/sessions.md): Nommez, reprenez, créez des branches et basculez entre les conversations Claude Code. Couvre `--continue`, `--resume`, `--from-pr`, le sélecteur `/resume`, la dénomination des sessions, l'export des transcriptions et l'emplacement des transcriptions.
 - [Flux de travail courants](https://code.claude.com/docs/fr/common-workflows.md): Guides étape par étape pour explorer les bases de code, corriger les bogues, refactoriser, tester et autres tâches quotidiennes avec Claude Code.
 - [Bibliothèque de prompts](https://code.claude.com/docs/fr/prompt-library.md): Copiez-collez des prompts pour Claude Code, étiquetés par tâche et rôle.
@@ -37,13 +37,13 @@
 - [Laisser Claude utiliser votre ordinateur depuis la CLI](https://code.claude.com/docs/fr/computer-use.md): Activez l'utilisation de l'ordinateur dans la CLI Claude Code pour que Claude puisse ouvrir des applications, cliquer, taper et voir votre écran sur macOS. Testez les applications natives, déboguez les problèmes visuels et automatisez les outils GUI uniquement sans quitter votre terminal.
 - [Utiliser Claude Code dans VS Code](https://code.claude.com/docs/fr/vs-code.md): Installez et configurez l'extension Claude Code pour VS Code. Obtenez une assistance de codage IA avec des diffs en ligne, des mentions @, un examen du plan et des raccourcis clavier.
 - [JetBrains IDEs](https://code.claude.com/docs/fr/jetbrains.md): Utilisez Claude Code avec les IDEs JetBrains, notamment IntelliJ, PyCharm, WebStorm et bien d'autres
-- [Claude Code dans Slack](https://code.claude.com/docs/fr/slack.md): Déléguez les tâches de codage directement depuis votre espace de travail Slack
+- [Claude Code dans Slack](https://code.claude.com/docs/fr/slack.md): Déléguez les tâches de codage directement depuis votre espace de travail Slack. Anthropic retire cette version antérieure pour les espaces de travail Team et Enterprise au profit de Claude Tag ; elle reste le chemin de configuration pour les plans Pro et Max.
 
 ##### Claude Code sur le web
 
 - [Démarrer avec Claude Code sur le web](https://code.claude.com/docs/fr/web-quickstart.md): Exécutez Claude Code dans le cloud depuis votre navigateur ou téléphone. Connectez un référentiel GitHub, soumettez une tâche et examinez la PR sans configuration locale.
-- [Utiliser Claude Code sur le web](https://code.claude.com/docs/fr/claude-code-on-the-web.md): Configurez les environnements cloud, les scripts de configuration, l'accès réseau et Docker dans le sandbox d'Anthropic. Déplacez les sessions entre le web et le terminal avec `--cloud` et `--teleport`.
-- [Automatiser le travail avec les routines](https://code.claude.com/docs/fr/routines.md): Mettez Claude Code en pilotage automatique. Définissez des routines qui s'exécutent selon un calendrier, se déclenchent sur des appels API, ou réagissent aux événements GitHub à partir de l'infrastructure cloud gérée par Anthropic.
+- [Utiliser Claude Code sur le web](https://code.claude.com/docs/fr/claude-code-on-the-web.md): Déplacez les sessions entre le web et le terminal avec `--cloud` et `--teleport`, gérez et partagez les sessions, et corrigez automatiquement les demandes de tirage depuis le cloud.
+- [Automatiser le travail avec les routines](https://code.claude.com/docs/fr/routines.md): Mettez Claude Code en pilotage automatique. Définissez des routines qui s'exécutent selon un calendrier, se déclenchent sur des appels API, ou réagissent aux événements GitHub à partir de l'infrastructure cloud.
 - [Trouver des bugs avec ultrareview](https://code.claude.com/docs/fr/ultrareview.md): Exécutez une révision de code approfondie et multi-agents dans le cloud avec /code-review ultra pour trouver et vérifier les bugs avant de fusionner.
 
 ##### Claude Code sur ordinateur
@@ -58,7 +58,7 @@
 
 - [Détecter les problèmes de sécurité au fur et à mesure que Claude écrit du code](https://code.claude.com/docs/fr/security-guidance.md): Installez le plugin security-guidance pour que Claude examine ses propres modifications de code à la recherche de vulnérabilités et les corrige dans la même session.
 - [Révision de code](https://code.claude.com/docs/fr/code-review.md): Configurez des révisions de PR automatisées qui détectent les erreurs logiques, les vulnérabilités de sécurité et les régressions en utilisant l'analyse multi-agents de votre base de code complète
-- [Claude Code GitHub Actions](https://code.claude.com/docs/fr/github-actions.md): Découvrez comment intégrer Claude Code dans votre flux de travail de développement avec Claude Code GitHub Actions
+- [Claude Code GitHub Actions](https://code.claude.com/docs/fr/github-actions.md): Exécutez Claude Code dans les workflows GitHub Actions pour répondre aux mentions @claude, automatiser les tâches et transformer les issues en pull requests
 - [Claude Code avec GitHub Enterprise Server](https://code.claude.com/docs/fr/github-enterprise-server.md): Connectez Claude Code à votre instance GitHub Enterprise Server auto-hébergée pour les sessions web, la révision de code et les marketplaces de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/fr/gitlab-ci-cd.md): Découvrez comment intégrer Claude Code dans votre flux de travail de développement avec GitLab CI/CD
 
@@ -89,14 +89,14 @@
 
 #### Artefacts
 
-- [Partager la sortie de session en tant qu'artefacts](https://code.claude.com/docs/fr/artifacts.md): Les artefacts transforment le travail de Claude Code en pages interactives en direct sur claude.ai que vous pouvez garder privées, partager avec votre organisation ou publier via un lien public.
+- [Partager la sortie de session en tant qu'artefacts](https://code.claude.com/docs/fr/artifacts.md): Les artefacts transforment le travail de Claude Code en pages en direct et interactives sur claude.ai que vous pouvez garder privées, partager avec votre organisation ou publier via un lien public.
 
 #### Automatisation
 
 - [Automatiser les actions avec les hooks](https://code.claude.com/docs/fr/hooks-guide.md): Exécutez automatiquement des commandes shell lorsque Claude Code modifie des fichiers, termine des tâches ou a besoin d'une entrée. Formatez le code, envoyez des notifications, validez les commandes et appliquez les règles du projet.
 - [Envoyer des événements dans une session active avec les canaux](https://code.claude.com/docs/fr/channels.md): Utilisez les canaux pour envoyer des messages, des alertes et des webhooks dans votre session Claude Code à partir d'un serveur MCP. Transférez les résultats CI, les messages de chat et les événements de surveillance pour que Claude puisse réagir en votre absence.
 - [Exécuter des prompts selon un calendrier](https://code.claude.com/docs/fr/scheduled-tasks.md): Utilisez /loop et les outils de planification cron pour exécuter des prompts de manière répétée, interroger l'état ou définir des rappels ponctuels dans une session Claude Code.
-- [Garder Claude orienté vers un objectif](https://code.claude.com/docs/fr/goal.md): Définissez une condition d'achèvement avec /goal et Claude continue de travailler sur plusieurs tours jusqu'à ce que la condition soit satisfaite.
+- [Garder Claude orienté vers un objectif](https://code.claude.com/docs/fr/goal.md): Définissez une condition d'achèvement avec /goal et Claude continue de travailler jusqu'à ce qu'elle soit satisfaite, qu'un modèle la juge impossible, ou qu'une erreur que vous devez corriger efface l'objectif.
 - [Exécuter Claude Code par programmation](https://code.claude.com/docs/fr/headless.md): Utilisez l'Agent SDK pour exécuter Claude Code par programmation depuis la CLI, Python ou TypeScript.
 - [Lancer des sessions à partir de liens](https://code.claude.com/docs/fr/deep-links.md): Ouvrir une session de terminal Claude Code à partir d'une URL. Intégrez des liens `claude-cli://` dans les runbooks, les alertes et les tableaux de bord pour qu'un clic ouvre Claude Code dans le bon dépôt avec la bonne invite.
 
@@ -131,7 +131,7 @@
 - [Claude Code sur la Plateforme Agent de Google Cloud](https://code.claude.com/docs/fr/google-vertex-ai.md): Découvrez comment configurer Claude Code via la Plateforme Agent de Google Cloud, anciennement Vertex AI, y compris la configuration, la configuration IAM et la résolution des problèmes.
 - [Claude Code sur Microsoft Foundry](https://code.claude.com/docs/fr/microsoft-foundry.md): Découvrez comment configurer Claude Code via Microsoft Foundry, y compris la configuration, les paramètres et la résolution des problèmes.
 - [Configuration réseau d'entreprise](https://code.claude.com/docs/fr/network-config.md): Configurez Claude Code pour les environnements d'entreprise avec des serveurs proxy, des autorités de certification (CA) personnalisées et l'authentification mutuelle Transport Layer Security (mTLS).
-- [Exécuter Claude Code via un lanceur d'entreprise](https://code.claude.com/docs/fr/corporate-launcher.md): Acheminez les processus que Claude Code démarre à partir de son propre binaire, y compris le service d'arrière-plan et chaque session de vue agent, via un lanceur obligatoire avec CLAUDE_CODE_PROCESS_WRAPPER.
+- [Exécuter Claude Code via un lanceur d'entreprise](https://code.claude.com/docs/fr/corporate-launcher.md): Acheminez les processus que Claude Code démarre à partir de son propre binaire, y compris le service d'arrière-plan et chaque session de vue agent, via un lanceur obligatoire avec CLAUDE_CODE_PROCESS_WRAPPER ou le paramètre processWrapper.
 - [Conteneurs de développement](https://code.claude.com/docs/fr/devcontainer.md): Exécutez Claude Code dans un conteneur de développement pour des environnements cohérents et isolés dans toute votre équipe.
 
 #### Passerelles
@@ -151,7 +151,7 @@
 - [Autres passerelles LLM](https://code.claude.com/docs/fr/llm-gateway.md): Acheminez Claude Code via une passerelle LLM que votre organisation exécute déjà. Couvre la connexion de Claude Code à une passerelle, le déploiement d'une passerelle pour votre organisation et ce que Claude Code envoie à une passerelle.
 - [Connecter Claude Code à une passerelle LLM](https://code.claude.com/docs/fr/llm-gateway-connect.md): Pointez Claude Code vers la passerelle LLM de votre organisation. Vérifiez si votre administrateur l'a déjà configurée, ou définissez vous-même l'URL de base et les identifiants, puis vérifiez la connexion et corrigez les erreurs de passerelle.
 - [Déployer une passerelle LLM pour votre organisation](https://code.claude.com/docs/fr/llm-gateway-rollout.md): Déployez un produit de passerelle pour Claude Code : configurez-le pour transférer ce que Claude Code envoie, émettez des identifiants de développeur, distribuez la configuration via les paramètres gérés, et vérifiez le déploiement.
-- [Référence du protocole de passerelle](https://code.claude.com/docs/fr/llm-gateway-protocol.md): Le contrat API entre Claude Code et une passerelle LLM : points de terminaison, en-têtes et champs de corps à transmettre, dégradation des fonctionnalités lorsque les champs sont supprimés, en-têtes d'attribution pour le suivi des coûts et découverte des modèles.
+- [Guide de compatibilité de la passerelle Claude Code](https://code.claude.com/docs/fr/llm-gateway-protocol.md): Maintenir une passerelle LLM compatible avec Claude Code : les points de terminaison qu'elle appelle, les en-têtes et champs de corps à transmettre, et ce qui se casse lorsqu'ils sont supprimés.
 
 #### Utilisation et coûts
 
@@ -181,21 +181,21 @@
 
 #### Paramètres et autorisations
 
-- [Paramètres Claude Code](https://code.claude.com/docs/fr/settings.md): Configurez Claude Code avec des paramètres globaux et au niveau du projet, ainsi que des variables d'environnement.
+- [Fichiers de paramètres et précédence](https://code.claude.com/docs/fr/settings.md): Modifiez les paramètres Claude Code, choisissez la portée à laquelle appartient une clé, vérifiez la modification, et apprenez quelle valeur Claude Code utilise quand une clé est définie à plusieurs endroits.
 - [Configurer les autorisations](https://code.claude.com/docs/fr/permissions.md): Contrôlez ce que Claude Code peut accéder et faire avec des règles d'autorisation granulaires, des modes et des politiques gérées.
 - [Choisir un environnement sandbox](https://code.claude.com/docs/fr/sandbox-environments.md): Comparez les options de sandbox Claude Code : l'outil Bash sandboxé intégré, le runtime sandbox, les dev containers, Docker et les machines virtuelles. Choisissez l'isolation appropriée pour votre modèle de menace.
 - [Configurer l'outil Bash en sandbox](https://code.claude.com/docs/fr/sandboxing.md): Découvrez comment l'outil Bash en sandbox de Claude Code fournit une isolation du système de fichiers et du réseau pour une exécution d'agent plus sûre et plus autonome.
 
 #### Modèle et réponses
 
-- [Configuration du modèle](https://code.claude.com/docs/fr/model-config.md): Découvrez la configuration du modèle Claude Code, y compris les alias de modèle comme `opusplan`
+- [Configuration du modèle](https://code.claude.com/docs/fr/model-config.md): Configurez le modèle utilisé par Claude Code, les niveaux d'effort, le contexte étendu et la fenêtre d'auto-compaction
 - [Accélérez les réponses avec le mode rapide](https://code.claude.com/docs/fr/fast-mode.md): Obtenez des réponses Opus plus rapides dans Claude Code en activant le mode rapide.
 - [Escalader les décisions difficiles avec l'outil advisor](https://code.claude.com/docs/fr/advisor.md): Associez votre modèle principal à un modèle advisor plus puissant que Claude consulte aux moments clés pendant une tâche.
 - [Styles de sortie](https://code.claude.com/docs/fr/output-styles.md): Adaptez Claude Code pour des usages au-delà de l'ingénierie logicielle
 
 #### Interface
 
-- [Configurez votre terminal pour Claude Code](https://code.claude.com/docs/fr/terminal-config.md): Corrigez Maj+Entrée pour les sauts de ligne, recevez une notification sonore du terminal lorsque Claude termine, configurez tmux, adaptez le thème de couleur et activez le mode Vim dans l'interface CLI de Claude Code.
+- [Configurez votre terminal pour Claude Code](https://code.claude.com/docs/fr/terminal-config.md): Corrigez Maj+Entrée pour les sauts de ligne, recevez une alerte sonore du terminal quand Claude a terminé, configurez tmux, adaptez le thème de couleur et activez le mode Vim dans l'interface de ligne de commande Claude Code.
 - [Rendu en plein écran](https://code.claude.com/docs/fr/fullscreen.md): Activez un mode de rendu plus fluide et sans scintillement avec support de la souris et une utilisation mémoire stable dans les longues conversations.
 - [Utiliser Claude Code avec un lecteur d'écran](https://code.claude.com/docs/fr/accessibility.md): Configurez Claude Code pour les lecteurs d'écran tels que VoiceOver et NVDA, ainsi que les paramètres pour les loupes d'écran, le mouvement réduit et les thèmes adaptés aux daltoniens.
 - [Dictée vocale](https://code.claude.com/docs/fr/voice-dictation.md): Parlez vos invites dans l'interface de ligne de commande Claude Code avec la dictée vocale en maintenant ou en appuyant.
@@ -207,13 +207,13 @@
 #### Référence
 
 - [Référence CLI](https://code.claude.com/docs/fr/cli-reference.md): Référence complète pour l'interface de ligne de commande Claude Code, incluant les commandes et les drapeaux.
-- [Commandes](https://code.claude.com/docs/fr/commands.md): Référence complète des commandes disponibles dans Claude Code, y compris les commandes intégrées et les skills fournis.
+- [Commandes](https://code.claude.com/docs/fr/commands.md): Référence complète des commandes disponibles dans Claude Code, y compris les commandes intégrées et les compétences groupées.
 - [Variables d'environnement](https://code.claude.com/docs/fr/env-vars.md): Référence pour les variables d'environnement qui contrôlent le comportement de Claude Code.
 - [Référence des outils](https://code.claude.com/docs/fr/tools-reference.md): Référence complète des outils que Claude Code peut utiliser, y compris les exigences de permission et le comportement par outil.
 - [Mode interactif](https://code.claude.com/docs/fr/interactive-mode.md): Référence complète des raccourcis clavier, modes d'entrée et fonctionnalités interactives dans les sessions Claude Code.
 - [Checkpointing](https://code.claude.com/docs/fr/checkpointing.md): Suivez, rembobinez et résumez les modifications et la conversation de Claude pour gérer l'état de la session.
 - [Référence des hooks](https://code.claude.com/docs/fr/hooks.md): Référence pour les événements de hook Claude Code, le schéma de configuration, les formats d'entrée/sortie JSON, les codes de sortie, les hooks asynchrones, les hooks HTTP, les hooks de prompt et les hooks d'outils MCP.
-- [Référence des plugins](https://code.claude.com/docs/fr/plugins-reference.md): Référence technique complète du système de plugins Claude Code, incluant les schémas, les commandes CLI et les spécifications des composants.
+- [Référence des plugins](https://code.claude.com/docs/fr/plugins-reference.md): Référence technique complète pour le système de plugins Claude Code, incluant les schémas, les commandes CLI et les spécifications des composants.
 - [Référence des canaux](https://code.claude.com/docs/fr/channels-reference.md): Créez un serveur MCP qui envoie des webhooks, des alertes et des messages de chat dans une session Claude Code. Référence du contrat de canal : déclaration de capacité, événements de notification, outils de réponse, contrôle de l'expéditeur et relais de permission.
 
 #### Glossaire
@@ -251,7 +251,7 @@
 #### Personnaliser le comportement
 
 - [Modification des invites système](https://code.claude.com/docs/fr/agent-sdk/modifying-system-prompts.md): Choisissez entre le préréglage `claude_code` et une invite système personnalisée, et personnalisez le comportement avec CLAUDE.md, les styles de sortie, append, ou une invite entièrement personnalisée.
-- [Agent Skills dans le SDK](https://code.claude.com/docs/fr/agent-sdk/skills.md): Étendez Claude avec des capacités spécialisées en utilisant Agent Skills dans le Claude Agent SDK
+- [Étendre les agents avec des skills](https://code.claude.com/docs/fr/agent-sdk/skills.md): Contrôlez les skills que Claude peut invoquer dans les sessions du Claude Agent SDK, distribuez les commandes par nom et créez des skills que vos sessions découvrent
 - [Plugins dans le SDK](https://code.claude.com/docs/fr/agent-sdk/plugins.md): Chargez des plugins personnalisés pour étendre Claude Code avec des skills, des agents, des hooks et des serveurs MCP via le SDK Agent
 
 #### Contrôle et observabilité
@@ -261,11 +261,11 @@
 - [Rembobiner les modifications de fichiers avec les points de contrôle](https://code.claude.com/docs/fr/agent-sdk/file-checkpointing.md): Suivre les modifications de fichiers pendant les sessions d'agent et restaurer les fichiers à n'importe quel état antérieur
 - [Suivre les coûts et l'utilisation](https://code.claude.com/docs/fr/agent-sdk/cost-tracking.md): Découvrez comment suivre l'utilisation des tokens, estimer les coûts et configurer la mise en cache des invites avec le Claude Agent SDK.
 - [Observabilité avec OpenTelemetry](https://code.claude.com/docs/fr/agent-sdk/observability.md): Exportez les traces, les métriques et les événements du SDK Agent vers votre backend d'observabilité en utilisant OpenTelemetry.
-- [Listes de tâches](https://code.claude.com/docs/fr/agent-sdk/todo-tracking.md): Suivre et afficher les tâches à l'aide du SDK Claude Agent pour une gestion organisée des tâches
+- [Suivre les tâches](https://code.claude.com/docs/fr/agent-sdk/todo-tracking.md): Suivre les tâches dans les sessions du SDK Agent et afficher la progression de Claude dans votre application à partir d'appels d'outils structurés
 
 #### Déploiement
 
-- [Héberger l'Agent SDK](https://code.claude.com/docs/fr/agent-sdk/hosting.md): Déployer l'Agent SDK en production : architecture de sous-processus, persistance des sessions, mise à l'échelle, observabilité et isolation multi-locataire pour Docker, Kubernetes et fournisseurs de sandbox.
+- [Héberger l'Agent SDK](https://code.claude.com/docs/fr/agent-sdk/hosting.md): Déployez l'Agent SDK en production : architecture de sous-processus, persistance des sessions, mise à l'échelle, observabilité et isolation multi-locataire pour Docker, Kubernetes et fournisseurs de sandbox.
 - [Déployer des agents IA de manière sécurisée](https://code.claude.com/docs/fr/agent-sdk/secure-deployment.md): Un guide pour sécuriser les déploiements de Claude Code et du SDK Agent avec l'isolation, la gestion des identifiants et les contrôles réseau
 
 #### Références SDK

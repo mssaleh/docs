@@ -37,13 +37,13 @@
 - [Claude가 CLI에서 컴퓨터를 사용하도록 설정](https://code.claude.com/docs/ko/computer-use.md): Claude Code CLI에서 컴퓨터 사용을 활성화하여 Claude가 macOS에서 앱을 열고, 클릭하고, 입력하고, 화면을 볼 수 있도록 합니다. 터미널을 떠나지 않고 네이티브 앱을 테스트하고, 시각적 문제를 디버깅하고, GUI 전용 도구를 자동화합니다.
 - [VS Code에서 Claude Code 사용하기](https://code.claude.com/docs/ko/vs-code.md): VS Code용 Claude Code 확장 프로그램을 설치하고 구성합니다. 인라인 diff, @-멘션, 계획 검토 및 키보드 단축키를 통해 AI 코딩 지원을 받습니다.
 - [JetBrains IDEs](https://code.claude.com/docs/ko/jetbrains.md): Claude Code를 IntelliJ, PyCharm, WebStorm 등 JetBrains IDE와 함께 사용합니다
-- [Slack의 Claude Code](https://code.claude.com/docs/ko/slack.md): Slack 워크스페이스에서 직접 코딩 작업 위임
+- [Slack의 Claude Code](https://code.claude.com/docs/ko/slack.md): Slack 워크스페이스에서 직접 코딩 작업을 위임합니다. Anthropic은 Team 및 Enterprise 워크스페이스를 위해 이 이전 버전을 Claude Tag로 대체하고 있으며, Pro 및 Max 플랜에서는 이것이 설정 경로로 유지됩니다.
 
 ##### 웹에서 Claude Code 사용하기
 
 - [웹에서 Claude Code 시작하기](https://code.claude.com/docs/ko/web-quickstart.md): 브라우저나 휴대폰에서 클라우드에서 Claude Code를 실행합니다. GitHub 저장소를 연결하고, 작업을 제출하고, 로컬 설정 없이 PR을 검토합니다.
-- [웹에서 Claude Code 사용하기](https://code.claude.com/docs/ko/claude-code-on-the-web.md): 클라우드 환경, 설정 스크립트, 네트워크 액세스 및 Docker를 Anthropic의 샌드박스에서 구성합니다. `--cloud` 및 `--teleport`를 사용하여 웹과 터미널 간에 세션을 이동합니다.
-- [루틴으로 작업 자동화하기](https://code.claude.com/docs/ko/routines.md): Claude Code를 자동 조종 장치에 올려놓으세요. Anthropic 관리 클라우드 인프라에서 일정에 따라 실행되거나 API 호출로 트리거되거나 GitHub 이벤트에 반응하는 루틴을 정의하세요.
+- [웹에서 Claude Code 사용하기](https://code.claude.com/docs/ko/claude-code-on-the-web.md): 웹과 터미널 간에 `--cloud` 및 `--teleport`를 사용하여 세션을 이동하고, 세션을 관리 및 공유하며, 클라우드에서 pull request를 자동 수정합니다.
+- [루틴으로 작업 자동화하기](https://code.claude.com/docs/ko/routines.md): Claude Code를 자동 조종 장치에 올려놓으세요. 클라우드 인프라에서 일정에 따라 실행되거나 API 호출로 트리거되거나 GitHub 이벤트에 반응하는 루틴을 정의하세요.
 - [ultrareview로 버그 찾기](https://code.claude.com/docs/ko/ultrareview.md): /code-review ultra를 사용하여 클라우드에서 심층적인 다중 에이전트 코드 리뷰를 실행하여 병합 전에 버그를 찾고 검증합니다.
 
 ##### Claude Code 데스크톱
@@ -58,7 +58,7 @@
 
 - [Claude가 코드를 작성할 때 보안 문제 포착](https://code.claude.com/docs/ko/security-guidance.md): security-guidance 플러그인을 설치하여 Claude가 자신의 코드 변경 사항을 취약점에 대해 검토하고 동일한 세션에서 수정하도록 합니다.
 - [Code Review](https://code.claude.com/docs/ko/code-review.md): 다중 에이전트 분석을 통해 전체 코드베이스를 검토하여 논리 오류, 보안 취약점 및 회귀를 감지하는 자동화된 PR 검토를 설정합니다
-- [Claude Code GitHub Actions](https://code.claude.com/docs/ko/github-actions.md): Claude Code를 GitHub 워크플로우에 통합하는 방법에 대해 알아봅니다
+- [Claude Code GitHub Actions](https://code.claude.com/docs/ko/github-actions.md): @claude 멘션에 응답하고, 작업을 자동화하고, 이슈를 풀 리퀘스트로 변환하기 위해 GitHub Actions 워크플로우에서 Claude Code를 실행합니다
 - [GitHub Enterprise Server와 Claude Code](https://code.claude.com/docs/ko/github-enterprise-server.md): 자체 호스팅되는 GitHub Enterprise Server 인스턴스에 Claude Code를 연결하여 웹 세션, 코드 리뷰 및 플러그인 마켓플레이스를 사용합니다.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/ko/gitlab-ci-cd.md): Claude Code를 GitLab CI/CD와 함께 개발 워크플로우에 통합하는 방법을 알아봅니다
 
@@ -80,7 +80,7 @@
 
 #### Skills
 
-- [Claude를 skills로 확장하기](https://code.claude.com/docs/ko/skills.md): Claude Code에서 skills를 생성, 관리, 공유하여 Claude의 기능을 확장합니다. 사용자 정의 명령어와 번들 skills를 포함합니다.
+- [Claude를 skills로 확장하기](https://code.claude.com/docs/ko/skills.md): Claude Code에서 skills를 생성, 관리 및 공유하여 Claude의 기능을 확장합니다. 사용자 정의 명령어 및 번들 skills를 포함합니다.
 
 #### 플러그인
 
@@ -89,14 +89,14 @@
 
 #### 아티팩트
 
-- [아티팩트로 세션 출력 공유](https://code.claude.com/docs/ko/artifacts.md): 아티팩트는 Claude Code의 작업을 claude.ai의 비공개 URL에서 라이브 인터랙티브 페이지로 변환하며, 비공개로 유지하거나 조직과 공유하거나 공개 링크로 게시할 수 있습니다.
+- [세션 출력을 아티팩트로 공유하기](https://code.claude.com/docs/ko/artifacts.md): 아티팩트는 Claude Code의 작업을 claude.ai의 라이브 인터랙티브 페이지로 변환하여 비공개로 유지하거나, 조직과 공유하거나, 공개 링크로 게시할 수 있습니다.
 
 #### 자동화
 
 - [hooks를 사용하여 작업 자동화](https://code.claude.com/docs/ko/hooks-guide.md): Claude Code가 파일을 편집하거나 작업을 완료하거나 입력이 필요할 때 자동으로 셸 명령을 실행합니다. 코드 형식 지정, 알림 전송, 명령 검증 및 프로젝트 규칙 적용합니다.
 - [채널을 사용하여 실행 중인 세션으로 이벤트 푸시하기](https://code.claude.com/docs/ko/channels.md): 채널을 사용하여 MCP 서버에서 실행 중인 Claude Code 세션으로 메시지, 알림 및 웹훅을 푸시합니다. CI 결과, 채팅 메시지 및 모니터링 이벤트를 전달하여 Claude가 자리를 비웠을 때 반응할 수 있도록 합니다.
 - [일정에 따라 프롬프트 실행하기](https://code.claude.com/docs/ko/scheduled-tasks.md): /loop와 cron 스케줄링 도구를 사용하여 Claude Code 세션 내에서 프롬프트를 반복 실행하거나, 상태를 폴링하거나, 일회성 알림을 설정합니다.
-- [Claude를 목표를 향해 계속 작동하게 하기](https://code.claude.com/docs/ko/goal.md): /goal로 완료 조건을 설정하면 Claude가 조건이 충족될 때까지 여러 턴에 걸쳐 계속 작동합니다.
+- [Claude를 목표를 향해 계속 작동하게 하기](https://code.claude.com/docs/ko/goal.md): /goal로 완료 조건을 설정하면 Claude가 조건이 충족될 때까지 계속 작동하며, 모델이 불가능하다고 판단하거나 수정해야 할 오류가 발생하면 목표가 지워집니다.
 - [Claude Code를 프로그래밍 방식으로 실행하기](https://code.claude.com/docs/ko/headless.md): Agent SDK를 사용하여 CLI, Python 또는 TypeScript에서 Claude Code를 프로그래밍 방식으로 실행합니다.
 - [링크에서 세션 시작하기](https://code.claude.com/docs/ko/deep-links.md): URL에서 Claude Code 터미널 세션을 엽니다. 런북, 알림 및 대시보드에 `claude-cli://` 링크를 포함하여 클릭하면 Claude Code가 올바른 저장소에서 올바른 프롬프트와 함께 열립니다.
 
@@ -118,8 +118,8 @@
 - [조직을 위한 Claude Code 설정](https://code.claude.com/docs/ko/admin-setup.md): Claude Code를 배포하는 관리자를 위한 의사결정 맵으로, API 제공자, 관리 설정, 정책 시행, 사용량 모니터링 및 데이터 처리를 다룹니다.
 - [고급 설정](https://code.claude.com/docs/ko/setup.md): Claude Code의 시스템 요구사항, 플랫폼별 설치, 버전 관리 및 제거.
 - [인증](https://code.claude.com/docs/ko/authentication.md): Claude Code에 로그인하고 개인, 팀, 조직을 위한 인증을 구성합니다.
-- [서버 관리 설정 구성](https://code.claude.com/docs/ko/server-managed-settings.md): 기기 관리 인프라 없이 Claude.ai의 웹 기반 인터페이스를 통해 조직을 위해 Claude Code를 중앙에서 구성합니다.
-- [조직의 MCP 서버 액세스 제어](https://code.claude.com/docs/ko/managed-mcp.md): 관리형 구성 파일, 허용 목록 및 거부 목록을 사용하여 사용자가 추가하거나 연결할 수 있는 MCP 서버를 제한합니다.
+- [서버 관리 설정 구성](https://code.claude.com/docs/ko/server-managed-settings.md): 기기 관리 인프라 없이 서버 전달 설정을 통해 조직을 위해 Claude Code를 중앙에서 구성합니다.
+- [조직의 MCP 서버 접근 제어](https://code.claude.com/docs/ko/managed-mcp.md): 관리형 구성 파일, 관리형 설정, 허용 목록 및 거부 목록을 사용하여 사용자가 추가하거나 연결할 수 있는 MCP 서버를 제한하거나 모든 사용자에게 서버를 제공합니다.
 - [자동 모드 구성](https://code.claude.com/docs/ko/auto-mode-config.md): 자동 모드 분류기에 조직이 신뢰하는 저장소, 버킷 및 도메인을 알려줍니다. 환경 컨텍스트를 설정하고, 기본 차단 및 허용 규칙을 재정의하며, 자동 모드 CLI 하위 명령으로 유효한 구성을 검사합니다.
 
 #### 배포
@@ -131,7 +131,7 @@
 - [Google Cloud의 Agent Platform에서 Claude Code 사용하기](https://code.claude.com/docs/ko/google-vertex-ai.md): Google Cloud의 Agent Platform(이전 Vertex AI)을 통해 Claude Code를 구성하는 방법을 알아봅니다. 설정, IAM 구성 및 문제 해결을 포함합니다.
 - [Microsoft Foundry의 Claude Code](https://code.claude.com/docs/ko/microsoft-foundry.md): 설정, 구성 및 문제 해결을 포함하여 Microsoft Foundry를 통해 Claude Code를 구성하는 방법을 알아봅니다.
 - [엔터프라이즈 네트워크 구성](https://code.claude.com/docs/ko/network-config.md): 프록시 서버, 사용자 정의 인증 기관(CA), 상호 전송 계층 보안(mTLS) 인증을 통해 엔터프라이즈 환경에서 Claude Code를 구성합니다.
-- [기업 런처 뒤에서 Claude Code 실행](https://code.claude.com/docs/ko/corporate-launcher.md): CLAUDE_CODE_PROCESS_WRAPPER를 사용하여 Claude Code가 자체 바이너리에서 시작하는 프로세스(백그라운드 서비스 및 모든 에이전트 뷰 세션 포함)를 필수 런처를 통해 라우팅합니다.
+- [기업 런처 뒤에서 Claude Code 실행](https://code.claude.com/docs/ko/corporate-launcher.md): CLAUDE_CODE_PROCESS_WRAPPER 또는 processWrapper 설정을 사용하여 Claude Code가 자체 바이너리에서 시작하는 프로세스(백그라운드 서비스 및 모든 에이전트 뷰 세션 포함)를 필수 런처를 통해 라우팅합니다.
 - [개발 컨테이너](https://code.claude.com/docs/ko/devcontainer.md): 팀 전체에서 일관되고 격리된 환경을 위해 Claude Code를 개발 컨테이너 내에서 실행합니다.
 
 #### 게이트웨이
@@ -151,7 +151,7 @@
 - [다른 LLM gateway](https://code.claude.com/docs/ko/llm-gateway.md): 조직이 이미 실행 중인 LLM gateway를 통해 Claude Code를 라우팅합니다. Claude Code를 gateway에 연결하고, 조직을 위해 gateway를 배포하고, Claude Code가 gateway에 전송하는 내용을 다룹니다.
 - [Claude Code를 LLM 게이트웨이에 연결](https://code.claude.com/docs/ko/llm-gateway-connect.md): 조직의 LLM 게이트웨이에 Claude Code를 연결합니다. 관리자가 이미 구성했는지 확인하거나, 기본 URL과 자격 증명을 직접 설정한 후 연결을 확인하고 게이트웨이 오류를 해결합니다.
 - [조직을 위한 LLM 게이트웨이 배포](https://code.claude.com/docs/ko/llm-gateway-rollout.md): Claude Code용 게이트웨이 제품 배포: Claude Code가 전송하는 내용을 전달하도록 구성하고, 개발자 자격증명을 발급하며, 관리되는 설정을 통해 구성을 배포하고, 롤아웃을 확인합니다.
-- [게이트웨이 프로토콜 참조](https://code.claude.com/docs/ko/llm-gateway-protocol.md): Claude Code와 LLM 게이트웨이 간의 API 계약: 엔드포인트, 전달할 헤더 및 본문 필드, 필드가 제거될 때의 기능 저하, 비용 추적을 위한 속성 헤더, 모델 검색.
+- [Claude Code 게이트웨이 호환성 가이드](https://code.claude.com/docs/ko/llm-gateway-protocol.md): Claude Code와 호환되는 LLM 게이트웨이 유지: 호출하는 엔드포인트, 전달할 헤더 및 본문 필드, 그리고 제거될 때 손상되는 기능.
 
 #### 사용량 및 비용
 
@@ -181,21 +181,21 @@
 
 #### 설정 및 권한
 
-- [Claude Code 설정](https://code.claude.com/docs/ko/settings.md): 전역 및 프로젝트 수준 설정과 환경 변수로 Claude Code를 구성합니다.
+- [설정 파일 및 우선순위](https://code.claude.com/docs/ko/settings.md): Claude Code 설정을 변경하고, 키가 속할 범위를 선택하고, 변경을 확인하고, 키가 여러 위치에 설정되어 있을 때 Claude Code가 사용하는 값을 알아봅니다.
 - [권한 구성](https://code.claude.com/docs/ko/permissions.md): 세분화된 권한 규칙, 모드 및 관리형 정책을 통해 Claude Code가 액세스하고 수행할 수 있는 작업을 제어합니다.
 - [샌드박스 환경 선택](https://code.claude.com/docs/ko/sandbox-environments.md): Claude Code 샌드박스 옵션 비교: 기본 제공 샌드박스 Bash 도구, 샌드박스 런타임, 개발 컨테이너, Docker, VM. 위협 모델에 맞는 적절한 격리를 선택합니다.
 - [샌드박싱된 Bash 도구 구성](https://code.claude.com/docs/ko/sandboxing.md): Claude Code의 샌드박싱된 Bash 도구가 파일시스템 및 네트워크 격리를 제공하여 더 안전하고 자율적인 에이전트 실행을 가능하게 하는 방법을 알아봅니다.
 
 #### 모델 및 응답
 
-- [모델 구성](https://code.claude.com/docs/ko/model-config.md): Claude Code 모델 구성에 대해 알아보기, opusplan과 같은 모델 별칭 포함
+- [모델 구성](https://code.claude.com/docs/ko/model-config.md): Claude Code가 사용하는 모델, 노력 수준, 확장된 컨텍스트 및 자동 압축 윈도우를 구성합니다
 - [빠른 모드로 응답 속도 향상](https://code.claude.com/docs/ko/fast-mode.md): Claude Code에서 빠른 모드를 전환하여 더 빠른 Opus 응답을 받습니다.
 - [어려운 결정을 조언자 도구로 에스컬레이션하기](https://code.claude.com/docs/ko/advisor.md): 주 모델을 더 강력한 조언자 모델과 쌍으로 만들어 Claude가 작업 중 핵심 순간에 조언자를 참고하도록 합니다.
 - [출력 스타일](https://code.claude.com/docs/ko/output-styles.md): 소프트웨어 엔지니어링 이상의 용도로 Claude Code 적응시키기
 
 #### 인터페이스
 
-- [Claude Code를 위한 터미널 구성](https://code.claude.com/docs/ko/terminal-config.md): Shift+Enter로 줄 바꿈 수정, Claude 완료 시 터미널 벨 설정, tmux 구성, 색상 테마 일치, Claude Code CLI에서 Vim 모드 활성화합니다.
+- [Claude Code를 위한 터미널 구성](https://code.claude.com/docs/ko/terminal-config.md): Shift+Enter를 개행으로 수정하고, Claude가 완료되면 터미널 벨을 받으며, tmux를 구성하고, 색상 테마를 일치시키고, Claude Code CLI에서 Vim 모드를 활성화합니다.
 - [전체 화면 렌더링](https://code.claude.com/docs/ko/fullscreen.md): 마우스 지원과 안정적인 메모리 사용으로 더 부드럽고 깜빡임 없는 렌더링 모드를 활성화합니다.
 - [스크린 리더로 Claude Code 사용하기](https://code.claude.com/docs/ko/accessibility.md): VoiceOver 및 NVDA와 같은 스크린 리더, 스크린 확대기, 감소된 모션, 색맹 친화적 테마에 대한 Claude Code 설정하기.
 - [음성 받아쓰기](https://code.claude.com/docs/ko/voice-dictation.md): Claude Code CLI에서 누르고 있기 또는 탭하기 음성 받아쓰기로 프롬프트를 말씀하세요.
@@ -207,13 +207,13 @@
 #### 참고
 
 - [CLI 참조](https://code.claude.com/docs/ko/cli-reference.md): Claude Code 명령줄 인터페이스의 완전한 참조로, 명령어와 플래그를 포함합니다.
-- [명령어](https://code.claude.com/docs/ko/commands.md): Claude Code에서 사용 가능한 명령어의 완전한 참조입니다. 기본 제공 명령어 및 번들 skills를 포함합니다.
+- [명령어](https://code.claude.com/docs/ko/commands.md): Claude Code에서 사용 가능한 명령어의 완전한 참조 자료로, 기본 제공 명령어 및 번들 스킬을 포함합니다.
 - [환경 변수](https://code.claude.com/docs/ko/env-vars.md): Claude Code 동작을 제어하는 환경 변수에 대한 참조입니다.
-- [도구 참조](https://code.claude.com/docs/ko/tools-reference.md): Claude Code가 사용할 수 있는 도구의 완전한 참조 자료이며, 권한 요구사항 및 도구별 동작을 포함합니다.
+- [도구 참조](https://code.claude.com/docs/ko/tools-reference.md): Claude Code가 사용할 수 있는 도구의 완전한 참조로, 권한 요구사항 및 도구별 동작을 포함합니다.
 - [대화형 모드](https://code.claude.com/docs/ko/interactive-mode.md): Claude Code 세션의 키보드 단축키, 입력 모드 및 대화형 기능에 대한 완전한 참조입니다.
 - [Checkpointing](https://code.claude.com/docs/ko/checkpointing.md): Claude의 편집 및 대화를 추적, 되돌리기 및 요약하여 세션 상태를 관리합니다.
 - [Hooks 참조](https://code.claude.com/docs/ko/hooks.md): Claude Code hook 이벤트, 구성 스키마, JSON 입출력 형식, 종료 코드, 비동기 hook, HTTP hook, 프롬프트 hook, MCP 도구 hook에 대한 참조입니다.
-- [플러그인 참조](https://code.claude.com/docs/ko/plugins-reference.md): Claude Code 플러그인 시스템의 완전한 기술 참조, 스키마, CLI 명령어 및 컴포넌트 사양 포함.
+- [플러그인 참조](https://code.claude.com/docs/ko/plugins-reference.md): 스키마, CLI 명령어, 컴포넌트 사양을 포함한 Claude Code 플러그인 시스템의 완전한 기술 참조입니다.
 - [채널 참조](https://code.claude.com/docs/ko/channels-reference.md): 웹훅, 알림, 채팅 메시지를 Claude Code 세션으로 푸시하는 MCP 서버를 구축합니다. 채널 계약 참조: 기능 선언, 알림 이벤트, 회신 도구, 발신자 게이팅, 권한 릴레이.
 
 #### 용어집
@@ -246,12 +246,12 @@
 - [Claude에 사용자 정의 도구 제공](https://code.claude.com/docs/ko/agent-sdk/custom-tools.md): Claude Agent SDK의 인프로세스 MCP 서버로 사용자 정의 도구를 정의하여 Claude가 함수를 호출하고, API를 사용하며, 도메인별 작업을 수행할 수 있도록 합니다.
 - [외부 도구와 MCP로 연결하기](https://code.claude.com/docs/ko/agent-sdk/mcp.md): MCP 서버를 구성하여 에이전트를 외부 도구로 확장합니다. 전송 유형, 대규모 도구 세트를 위한 도구 검색, 인증 및 오류 처리를 다룹니다.
 - [많은 도구로 확장하기 - 도구 검색](https://code.claude.com/docs/ko/agent-sdk/tool-search.md): 수백 개 또는 수천 개의 도구로 에이전트를 확장하고, 필요한 것만 동적으로 발견하여 로드합니다.
-- [SDK의 서브에이전트](https://code.claude.com/docs/ko/agent-sdk/subagents.md): 서브에이전트를 정의하고 호출하여 컨텍스트를 격리하고, 작업을 병렬로 실행하며, Claude Agent SDK 애플리케이션에서 특화된 지침을 적용합니다.
+- [SDK의 서브에이전트](https://code.claude.com/docs/ko/agent-sdk/subagents.md): Claude Agent SDK 애플리케이션에서 서브에이전트를 정의하고 호출하여 컨텍스트를 격리하고, 작업을 병렬로 실행하며, 메인 에이전트의 프롬프트에 추가하지 않고 특화된 지시사항을 적용합니다.
 
 #### 동작 사용자 정의
 
 - [시스템 프롬프트 수정](https://code.claude.com/docs/ko/agent-sdk/modifying-system-prompts.md): `claude_code` 프리셋과 사용자 정의 시스템 프롬프트 중에서 선택하고, CLAUDE.md, 출력 스타일, append, 또는 완전히 사용자 정의된 프롬프트로 동작을 사용자 정의합니다.
-- [SDK의 Agent Skills](https://code.claude.com/docs/ko/agent-sdk/skills.md): Claude Agent SDK를 사용하여 전문화된 기능으로 Claude를 확장하기
+- [Skills로 에이전트 확장하기](https://code.claude.com/docs/ko/agent-sdk/skills.md): Claude Agent SDK 세션에서 Claude가 호출할 수 있는 Skills를 제어하고, 이름으로 명령을 전달하며, 세션이 발견하는 Skills를 작성합니다
 - [SDK의 플러그인](https://code.claude.com/docs/ko/agent-sdk/plugins.md): Agent SDK를 통해 스킬, 에이전트, 훅 및 MCP 서버를 추가하여 Claude Code를 확장하는 사용자 정의 플러그인 로드
 
 #### 제어 및 관찰성
@@ -261,11 +261,11 @@
 - [체크포인팅으로 파일 변경 사항 되돌리기](https://code.claude.com/docs/ko/agent-sdk/file-checkpointing.md): 에이전트 세션 중 파일 변경 사항을 추적하고 파일을 이전의 모든 상태로 복원합니다
 - [비용 및 사용량 추적](https://code.claude.com/docs/ko/agent-sdk/cost-tracking.md): Claude Agent SDK를 사용하여 토큰 사용량을 추적하고, 비용을 예측하며, 프롬프트 캐싱을 구성하는 방법을 알아봅니다.
 - [OpenTelemetry를 통한 관찰성](https://code.claude.com/docs/ko/agent-sdk/observability.md): Agent SDK에서 OpenTelemetry를 사용하여 추적, 메트릭 및 이벤트를 관찰성 백엔드로 내보냅니다.
-- [할일 목록](https://code.claude.com/docs/ko/agent-sdk/todo-tracking.md): Claude Agent SDK를 사용하여 할일을 추적하고 표시하여 체계적인 작업 관리를 수행합니다
+- [할일 추적](https://code.claude.com/docs/ko/agent-sdk/todo-tracking.md): Agent SDK 세션에서 할일을 추적하고 구조화된 도구 호출에서 Claude의 진행 상황을 애플리케이션에 렌더링합니다
 
 #### 배포
 
-- [Agent SDK 호스팅](https://code.claude.com/docs/ko/agent-sdk/hosting.md): 프로덕션 환경에서 Agent SDK 배포: 서브프로세스 아키텍처, 세션 지속성, 확장성, 관찰성, Docker, Kubernetes 및 샌드박스 제공자를 위한 멀티테넌트 격리.
+- [Agent SDK 호스팅](https://code.claude.com/docs/ko/agent-sdk/hosting.md): 프로덕션에서 Agent SDK 배포: 서브프로세스 아키텍처, 세션 지속성, 확장성, 관찰성, Docker, Kubernetes 및 샌드박스 제공자를 위한 멀티테넌트 격리.
 - [AI 에이전트 안전하게 배포하기](https://code.claude.com/docs/ko/agent-sdk/secure-deployment.md): 격리, 자격증명 관리, 네트워크 제어를 통해 Claude Code 및 Agent SDK 배포를 보호하는 가이드
 
 #### SDK 참고자료
