@@ -23,7 +23,7 @@
 #### 使用 Claude Code
 
 - [Claude 如何記住您的專案](https://code.claude.com/docs/zh-TW/memory.md): 使用 CLAUDE.md 檔案為 Claude 提供持久指令，並讓 Claude 透過自動記憶自動累積學習。
-- [選擇權限模式](https://code.claude.com/docs/zh-TW/permission-modes.md): 控制 Claude 在編輯檔案或執行命令前是否詢問。在 CLI 中使用 Shift+Tab 循環切換模式，或在 VS Code、Desktop 和 claude.ai 中使用模式選擇器。
+- [選擇權限模式](https://code.claude.com/docs/zh-TW/permission-modes.md): 控制 Claude 在採取動作前是否詢問。在 CLI 中使用 Shift+Tab、在 VS Code 中使用模式指示器，或在 Desktop 中使用模式選擇器來切換權限模式。
 - [管理 sessions](https://code.claude.com/docs/zh-TW/sessions.md): 命名、恢復、分支和在 Claude Code 對話之間切換。涵蓋 `--continue`、`--resume`、`--from-pr`、`/resume` 選擇器、session 命名、匯出文字記錄，以及文字記錄的儲存位置。
 - [常見工作流程](https://code.claude.com/docs/zh-TW/common-workflows.md): 使用 Claude Code 探索程式碼庫、修復錯誤、重構、測試和其他日常任務的逐步指南。
 - [提示詞庫](https://code.claude.com/docs/zh-TW/prompt-library.md): 複製貼上提示詞供 Claude Code 使用，按任務和角色標記。
