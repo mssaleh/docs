@@ -18,12 +18,11 @@
 - [Расширение Claude Code](https://code.claude.com/docs/ru/features-overview.md): Узнайте, когда использовать CLAUDE.md, Skills, subagents, hooks, MCP и plugins.
 - [Изучите директорию .claude](https://code.claude.com/docs/ru/claude-directory.md): Где Claude Code читает CLAUDE.md, settings.json, hooks, skills, commands, subagents, workflows, rules и auto memory. Изучите директорию .claude в вашем проекте и ~/.claude в вашей домашней директории.
 - [Изучите контекстное окно](https://code.claude.com/docs/ru/context-window.md): Интерактивная симуляция того, как контекстное окно Claude Code заполняется во время сеанса. Посмотрите, что загружается автоматически, какую стоимость имеет каждое чтение файла и когда срабатывают правила и hooks.
-- [Как Claude Code использует prompt caching](https://code.claude.com/docs/ru/prompt-caching.md): Claude Code управляет prompt caching автоматически. Узнайте, почему переключение модели вызывает медленный ход без кэша, какова стоимость `/compact`, почему изменения CLAUDE.md не применяются в середине сеанса и как проверить коэффициент попаданий в кэш.
+- [Как Claude Code использует prompt caching](https://code.claude.com/docs/ru/prompt-caching.md): Claude Code управляет prompt caching автоматически. Узнайте, почему переключение модели вызывает медленный ход без кэша, что стоит `/compact`, почему изменения CLAUDE.md не применяются во время сеанса и как проверить коэффициент попадания в кэш.
 
 #### Использовать Claude Code
 
 - [Как Claude запоминает ваш проект](https://code.claude.com/docs/ru/memory.md): Дайте Claude постоянные инструкции с помощью файлов CLAUDE.md и позвольте Claude автоматически накапливать знания с помощью auto memory.
-- [Выберите режим разрешений](https://code.claude.com/docs/ru/permission-modes.md): Контролируйте, будет ли Claude просить разрешение перед редактированием файлов или выполнением команд. Переключайте режимы с помощью Shift+Tab в CLI, индикатора режима в VS Code или селектора режима в Desktop.
 - [Управление сеансами](https://code.claude.com/docs/ru/sessions.md): Назовите, возобновите, создавайте ветви и переключайтесь между диалогами Claude Code. Охватывает `--continue`, `--resume`, `--from-pr`, средство выбора `/resume`, именование сеансов, экспорт стенограмм и место хранения стенограмм.
 - [Распространённые рабочие процессы](https://code.claude.com/docs/ru/common-workflows.md): Пошаговые руководства по изучению кодовых баз, исправлению ошибок, рефакторингу, тестированию и другим повседневным задачам с Claude Code.
 - [Библиотека промптов](https://code.claude.com/docs/ru/prompt-library.md): Копируйте и вставляйте промпты для Claude Code, отсортированные по задачам и ролям.
@@ -33,11 +32,13 @@
 
 - [Платформы и интеграции](https://code.claude.com/docs/ru/platforms.md): Выберите, где запустить Claude Code и что к нему подключить. Сравните CLI, Desktop, VS Code, JetBrains, веб, мобильные приложения и интеграции, такие как Chrome, Slack и CI/CD.
 - [Продолжайте локальные сеансы с любого устройства с помощью Remote Control](https://code.claude.com/docs/ru/remote-control.md): Продолжайте локальный сеанс Claude Code со своего телефона, планшета или любого браузера, используя Remote Control. Работает с claude.ai/code и мобильным приложением Claude.
+- [Claude Code на мобильном устройстве](https://code.claude.com/docs/ru/mobile.md): Запускайте, отслеживайте и управляйте задачами Claude Code со своего телефона с помощью приложения Claude для iOS и Android.
 - [Использование Claude Code с Chrome](https://code.claude.com/docs/ru/chrome.md): Подключите Claude Code к браузеру Chrome для тестирования веб-приложений, отладки с помощью логов консоли, автоматизации заполнения форм и извлечения данных со страниц.
 - [Позвольте Claude использовать ваш компьютер из CLI](https://code.claude.com/docs/ru/computer-use.md): Включите computer use в Claude Code CLI, чтобы Claude мог открывать приложения, кликать, печатать и видеть ваш экран на macOS. Тестируйте нативные приложения, отлаживайте визуальные проблемы и автоматизируйте инструменты только с GUI без необходимости покидать терминал.
 - [Использование Claude Code в VS Code](https://code.claude.com/docs/ru/vs-code.md): Установите и настройте расширение Claude Code для VS Code. Получите помощь AI при кодировании с встроенными diff, @-упоминаниями, проверкой плана и сочетаниями клавиш.
 - [JetBrains IDEs](https://code.claude.com/docs/ru/jetbrains.md): Используйте Claude Code с JetBrains IDEs, включая IntelliJ, PyCharm, WebStorm и другие
 - [Claude Code в Slack](https://code.claude.com/docs/ru/slack.md): Делегируйте задачи кодирования прямо из вашего рабочего пространства Slack. Anthropic снимает с производства эту более раннюю версию для рабочих пространств Team и Enterprise в пользу Claude Tag; она остается путем настройки для планов Pro и Max.
+- [Claude Tag](https://code.claude.com/docs/ru/claude-tag.md): Интегрируйте Claude в каналы Slack вашей команды с помощью Claude Tag и найдите документацию по его настройке и использованию на claude.com.
 
 ##### Claude Code в веб-браузере
 
@@ -53,12 +54,15 @@
 - [Claude Desktop на Linux (бета)](https://code.claude.com/docs/ru/desktop-linux.md): Установка и обновление приложения Claude Desktop на Ubuntu и Debian
 - [Claude Code Desktop в WSL](https://code.claude.com/docs/ru/desktop-wsl.md): Запуск сеансов Code внутри дистрибутива WSL 2 на Windows
 - [Планирование повторяющихся задач в Claude Code Desktop](https://code.claude.com/docs/ru/desktop-scheduled-tasks.md): Настройте запланированные задачи в Claude Code Desktop для автоматического запуска Claude на регулярной основе для ежедневных проверок кода, аудитов зависимостей или утренних брифингов.
+- [Тестирование iOS приложений в симуляторе](https://code.claude.com/docs/ru/desktop-ios-simulator.md): Claude Code Desktop открывает ваше приложение в панели iOS Simulator при сборке, запуске или проверке, с отдельным симулятором для каждой сессии.
 
 ##### Проверка кода и CI/CD
 
 - [Выявляйте проблемы безопасности по мере написания кода Claude](https://code.claude.com/docs/ru/security-guidance.md): Установите плагин security-guidance, чтобы Claude проверял собственные изменения кода на уязвимости и исправлял их в одном сеансе.
+- [Сканируйте вашу кодовую базу на уязвимости](https://code.claude.com/docs/ru/claude-security.md): Установите Claude Security plugin для сканирования вашей кодовой базы на уязвимости в сеансе Claude Code и преобразуйте результаты в патчи, которые вы проверяете и применяете.
 - [Code Review](https://code.claude.com/docs/ru/code-review.md): Настройте автоматизированные проверки PR, которые выявляют логические ошибки, уязвимости безопасности и регрессии с помощью многоагентного анализа всей вашей кодовой базы
 - [Claude Code GitHub Actions](https://code.claude.com/docs/ru/github-actions.md): Запускайте Claude Code в рабочих процессах GitHub Actions для ответа на упоминания @claude, автоматизации задач и преобразования issues в pull requests
+- [Использование Claude Code GitHub Actions с облачными провайдерами](https://code.claude.com/docs/ru/github-actions-cloud-providers.md): Запускайте Claude Code GitHub Actions через Amazon Bedrock, Google Cloud's Agent Platform или Microsoft Foundry вместо Claude API
 - [Claude Code с GitHub Enterprise Server](https://code.claude.com/docs/ru/github-enterprise-server.md): Подключите Claude Code к вашему самостоятельно размещённому экземпляру GitHub Enterprise Server для веб-сессий, проверки кода и маркетплейсов плагинов.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/ru/gitlab-ci-cd.md): Узнайте об интеграции Claude Code в ваш рабочий процесс разработки с GitLab CI/CD
 
@@ -70,6 +74,7 @@
 - [Создание пользовательских subagents](https://code.claude.com/docs/ru/sub-agents.md): Создавайте и используйте специализированные AI subagents в Claude Code для рабочих процессов, ориентированных на конкретные задачи, и улучшенного управления контекстом.
 - [Управление несколькими агентами с помощью agent view](https://code.claude.com/docs/ru/agent-view.md): Отправляйте и управляйте множеством сеансов Claude Code с одного экрана. Agent view показывает, что делает каждый сеанс и какие из них требуют вашего ввода.
 - [Координируйте команды сеансов Claude Code](https://code.claude.com/docs/ru/agent-teams.md): Координируйте несколько экземпляров Claude Code, работающих вместе как команда, с общими задачами, обменом сообщениями между агентами и централизованным управлением.
+- [Отправляйте сообщения другим сеансам Claude Code](https://code.claude.com/docs/ru/cross-session-messaging.md): Позвольте Claude перечислить и отправить сообщения другим вашим сеансам Claude Code на этом компьютере, а также достичь ваши сеансы на других компьютерах или в веб-версии.
 - [Оркестрируйте множество подагентов с помощью динамических workflows](https://code.claude.com/docs/ru/workflows.md): Dynamic workflows оркестрируют множество подагентов из скрипта, который пишет Claude, и вы можете его переиспользовать. Используйте их для аудитов кодовой базы, крупных миграций и перекрёстной проверки исследований.
 - [Запуск параллельных сеансов с worktrees](https://code.claude.com/docs/ru/worktrees.md): Изолируйте параллельные сеансы Claude Code в отдельных git worktrees, чтобы изменения не конфликтовали. Охватывает флаг `--worktree`, изоляцию subagent, `.worktreeinclude`, очистку и hooks для не-git VCS.
 
@@ -80,12 +85,13 @@
 
 #### Навыки
 
-- [Расширьте Claude с помощью skills](https://code.claude.com/docs/ru/skills.md): Создавайте, управляйте и делитесь skills для расширения возможностей Claude в Claude Code. Включает пользовательские команды и встроенные skills.
+- [Расширение Claude с помощью skills](https://code.claude.com/docs/ru/skills.md): Создавайте, управляйте и делитесь skills для расширения возможностей Claude в Claude Code. Включает пользовательские команды и встроенные skills.
 
 #### Плагины
 
 - [Откройте и установите готовые плагины через маркетплейсы](https://code.claude.com/docs/ru/discover-plugins.md): Найдите и установите плагины из маркетплейсов, чтобы расширить Claude Code новыми skills, agents и возможностями.
 - [Создание plugins](https://code.claude.com/docs/ru/plugins.md): Создавайте пользовательские plugins для расширения Claude Code с помощью skills, agents, hooks и MCP servers.
+- [Тестирование plugins с помощью evals](https://code.claude.com/docs/ru/plugin-evals.md): Напишите eval-кейсы для вашего Claude Code plugin, запустите их с помощью claude plugin eval, оцените результаты, сравните с базовым вариантом без plugin и установите ограничение CI на основе оценки.
 
 #### Артефакты
 
@@ -118,6 +124,7 @@
 - [Настройка Claude Code для вашей организации](https://code.claude.com/docs/ru/admin-setup.md): Карта решений для администраторов, развертывающих Claude Code, охватывающая поставщиков API, управляемые параметры, принудительное применение политики, мониторинг использования и обработку данных.
 - [Расширенная настройка](https://code.claude.com/docs/ru/setup.md): Системные требования, установка для конкретной платформы, управление версиями и удаление Claude Code.
 - [Аутентификация](https://code.claude.com/docs/ru/authentication.md): Войдите в Claude Code и настройте аутентификацию для отдельных пользователей, команд и организаций.
+- [Развертывание управляемых параметров](https://code.claude.com/docs/ru/managed-settings.md): Развертывайте управляемые параметры на машину каждого разработчика: механизмы доставки для каждой ОС, как Claude Code объединяет управляемые источники и как проверить применение политики.
 - [Настройка параметров, управляемых сервером](https://code.claude.com/docs/ru/server-managed-settings.md): Централизованно настраивайте Claude Code для вашей организации через параметры, доставляемые сервером, без необходимости инфраструктуры управления устройствами.
 - [Контролируйте доступ к серверам MCP для вашей организации](https://code.claude.com/docs/ru/managed-mcp.md): Ограничьте, какие серверы MCP пользователи могут добавлять или подключать, или предоставьте серверы каждому пользователю с помощью управляемых файлов конфигурации, управляемых параметров, списков разрешений и списков запретов.
 - [Настройка режима auto](https://code.claude.com/docs/ru/auto-mode-config.md): Сообщите классификатору режима auto, какие репозитории, бакеты и домены доверяет ваша организация. Установите контекст окружения, переопределите правила блокировки и разрешения по умолчанию и проверьте вашу эффективную конфигурацию с помощью подкоманд CLI auto-mode.
@@ -144,6 +151,7 @@
 - [Конфигурация Claude apps gateway](https://code.claude.com/docs/ru/claude-apps-gateway-config.md): Справочник по каждому параметру gateway.yaml: listener и TLS, OIDC, session, хранилище Postgres, upstreams Amazon Bedrock, Claude Platform на AWS, Agent Platform Google Cloud и Microsoft Foundry, маршрутизация моделей, управляемые политики и телеметрия.
 - [Лимиты расходов Claude apps gateway](https://code.claude.com/docs/ru/claude-apps-gateway-spend-limits.md): Ограничьте расходы каждого разработчика через Claude apps gateway по дням, неделям или месяцам. Установите лимиты с помощью Admin API, и шлюз будет их соблюдать в реальном времени при каждом запросе.
 - [Развертывание и эксплуатация шлюза Claude apps](https://code.claude.com/docs/ru/claude-apps-gateway-deploy.md): Зарегистрируйте шлюз в вашем поставщике идентификации, создайте контейнер, разверните на Kubernetes или Cloud Run и управляйте им: проверки здоровья, ротация секретов, обновления и безопасность.
+- [Развёртывание Claude apps gateway на AWS](https://code.claude.com/docs/ru/claude-apps-gateway-on-aws.md): Практический пример запуска Claude apps gateway на AWS: ECS Fargate или EKS, Amazon RDS для PostgreSQL, AWS Secrets Manager и аутентификация на основе IAM-роли к Amazon Bedrock.
 - [Развертывание Claude apps gateway на Google Cloud](https://code.claude.com/docs/ru/claude-apps-gateway-on-gcp.md): Практический пример запуска Claude apps gateway на Google Cloud: Cloud Run или GKE, Cloud SQL для PostgreSQL, Secret Manager и аутентификация через сервисный аккаунт для Agent Platform Google Cloud.
 
 ##### Другие шлюзы
@@ -151,7 +159,7 @@
 - [Другие LLM gateways](https://code.claude.com/docs/ru/llm-gateway.md): Маршрутизируйте Claude Code через LLM gateway, который уже запускает ваша организация. Охватывает подключение Claude Code к шлюзу, развертывание шлюза для вашей организации и то, что Claude Code отправляет на шлюз.
 - [Подключение Claude Code к шлюзу LLM](https://code.claude.com/docs/ru/llm-gateway-connect.md): Направьте Claude Code на шлюз LLM вашей организации. Проверьте, уже ли администратор его настроил, или установите базовый URL и учетные данные самостоятельно, затем проверьте соединение и исправьте ошибки шлюза.
 - [Развертывание LLM-шлюза для вашей организации](https://code.claude.com/docs/ru/llm-gateway-rollout.md): Разверните продукт шлюза для Claude Code: настройте его для перенаправления того, что отправляет Claude Code, выдайте учетные данные разработчика, распределите конфигурацию через управляемые параметры и проверьте развертывание.
-- [Справочник протокола Gateway](https://code.claude.com/docs/ru/llm-gateway-protocol.md): Контракт API между Claude Code и LLM gateway: конечные точки, заголовки и поля тела для пересылки, деградация функций при удалении полей, заголовки атрибуции для отслеживания затрат и обнаружение моделей.
+- [Справочник совместимости Claude Code gateway](https://code.claude.com/docs/ru/llm-gateway-protocol.md): Поддерживайте LLM gateway совместимым с Claude Code: конечные точки, которые он вызывает, заголовки и поля тела для пересылки, и что ломается при их удалении.
 
 #### Использование и затраты
 
@@ -179,12 +187,32 @@
 
 ### Конфигурация
 
-#### Параметры и разрешения
+#### Параметры
 
-- [Параметры Claude Code](https://code.claude.com/docs/ru/settings.md): Настройте Claude Code с помощью глобальных и проектных параметров, а также переменных окружения.
+- [Файлы параметров и приоритет](https://code.claude.com/docs/ru/settings.md): Измените параметры Claude Code, выберите область, к которой принадлежит ключ, проверьте изменение и узнайте, какое значение Claude Code использует, когда ключ установлен в нескольких местах.
+- [Все параметры](https://code.claude.com/docs/ru/settings-reference.md): Полный справочник по каждому ключу settings.json в Claude Code: где находится каждый ключ, его тип и значение по умолчанию, а также готовый к использованию пример и индекс всех ключей.
+- [Примеры файлов settings](https://code.claude.com/docs/ru/settings-example.md): Реалистичные файлы settings.json для разработчика, команды и организации: скопируйте один, оставьте нужные вам ключи и измените значения.
+
+#### Разрешения и sandboxing
+
 - [Настройка разрешений](https://code.claude.com/docs/ru/permissions.md): Контролируйте, что Claude Code может использовать и делать, с помощью детальных правил разрешений, режимов и управляемых политик.
-- [Выберите среду sandbox](https://code.claude.com/docs/ru/sandbox-environments.md): Сравните варианты sandbox для Claude Code: встроенный инструмент Bash в песочнице, среда выполнения sandbox, контейнеры разработки, Docker и виртуальные машины. Выберите правильную изоляцию для вашей модели угроз.
+- [Выберите режим разрешений](https://code.claude.com/docs/ru/permission-modes.md): Контролируйте, будет ли Claude просить разрешение перед редактированием файлов или выполнением команд. Переключайте режимы с помощью Shift+Tab в CLI, индикатора режима в VS Code или селектора режима в Desktop.
 - [Настройка изолированного инструмента Bash](https://code.claude.com/docs/ru/sandboxing.md): Узнайте, как изолированный инструмент Bash в Claude Code обеспечивает изоляцию файловой системы и сети для более безопасного и автономного выполнения агента.
+- [Выберите среду sandbox](https://code.claude.com/docs/ru/sandbox-environments.md): Сравните варианты sandbox для Claude Code: встроенный инструмент Bash в песочнице, среда выполнения sandbox, контейнеры разработки, Docker и виртуальные машины. Выберите правильную изоляцию для вашей модели угроз.
+
+#### Окружения
+
+- [Настройка облачных сред](https://code.claude.com/docs/ru/cloud-environments.md): Настройте облачные среды для облачных сеансов Claude Code: уровни доступа в сети, переменные окружения, скрипты настройки и кэширование среды.
+
+##### Самостоятельно размещаемые окружения
+
+- [Самостоятельно размещаемые окружения](https://code.claude.com/docs/ru/self-hosted-environments.md): Запускайте сеансы Claude Code в облаке на инфраструктуре, которой вы управляете: настройте самостоятельно размещаемое окружение, разверните runners и маршрутизируйте сеансы на собственные вычислительные ресурсы.
+- [Быстрый старт для самостоятельно размещаемых окружений](https://code.claude.com/docs/ru/self-hosted-environments-quickstart.md): Настройте своё первое самостоятельно размещаемое окружение: установите Claude Code, создайте окружение, запустите runner и маршрутизируйте сеанс на него.
+- [Развертывание самостоятельно размещаемых окружений в production](https://code.claude.com/docs/ru/self-hosted-environments-deploy.md): Запуск самостоятельно размещаемых runners в production: усиление безопасности, контроль сетевого исходящего трафика, учетные данные git, рецепты Kubernetes и Compose, а также устранение неполадок.
+- [Настройка сеансов в самостоятельно размещаемых окружениях](https://code.claude.com/docs/ru/self-hosted-environments-configuration.md): Настройте сеансы самостоятельно размещаемого окружения с помощью скриптов-оболочек для учетных данных для каждого сеанса, хуков жизненного цикла и порождения средств выполнения по требованию.
+- [Тестирование самостоятельно размещённых сред от начала до конца](https://code.claude.com/docs/ru/self-hosted-environments-testing.md): Проверьте образ самостоятельно размещённого runner из CI: отправьте сеанс через CLI, прочитайте ответы Claude через hook Stop и напишите скрипт для полного цикла.
+- [Справочник самостоятельно размещаемых окружений](https://code.claude.com/docs/ru/self-hosted-environments-reference.md): Полный справочник по самостоятельно размещаемому runner и orchestrator: флаги CLI, переменные окружения и метрики Prometheus.
+- [Проверка идентификации сеанса в самостоятельно размещаемых окружениях](https://code.claude.com/docs/ru/self-hosted-environments-identity.md): Проверьте JWT CLAUDE_CODE_SESSION_ACCESS_TOKEN, чтобы сервисы в вашей сети могли доверять запросам от сеансов в вашем самостоятельно размещаемом окружении.
 
 #### Модель и ответы
 
@@ -226,6 +254,12 @@
 
 - [Обзор Agent SDK](https://code.claude.com/docs/ru/agent-sdk/overview.md): Создавайте производственные AI-агентов с Claude Code как библиотеку
 - [Быстрый старт](https://code.claude.com/docs/ru/agent-sdk/quickstart.md): Начните работу с Python или TypeScript Agent SDK для создания AI-агентов, которые работают автономно
+- [Миграция на Claude Agent SDK](https://code.claude.com/docs/ru/agent-sdk/migration-guide.md): Руководство по миграции Claude Code TypeScript и Python SDK на Claude Agent SDK
+- [Устранение неполадок Agent SDK](https://code.claude.com/docs/ru/agent-sdk/troubleshooting.md): Исправьте ошибки Agent SDK по точному сообщению об ошибке, с указанием причины и способа исправления для каждой ошибки в TypeScript и Python SDK.
+
+#### Создание агентов
+
+- [Примеры](https://code.claude.com/docs/ru/agent-sdk/examples.md): Найдите полный, готовый к запуску проект Agent SDK или пошаговый рецепт из Claude Cookbook, который соответствует тому, что вы хотите создать.
 
 #### Основные концепции
 
@@ -273,13 +307,17 @@
 - [Справочник Agent SDK - TypeScript](https://code.claude.com/docs/ru/agent-sdk/typescript.md): Полный справочник API для TypeScript Agent SDK, включая все функции, типы и интерфейсы.
 - [TypeScript SDK V2 session API (removed)](https://code.claude.com/docs/ru/agent-sdk/typescript-v2-preview.md): Справочник по удалённому V2 TypeScript Agent SDK session API с паттернами отправки/потока на основе сессий для многооборотных разговоров.
 - [Справочник Agent SDK - Python](https://code.claude.com/docs/ru/agent-sdk/python.md): Полный справочник API для Python Agent SDK, включая все функции, типы и классы.
-- [Миграция на Claude Agent SDK](https://code.claude.com/docs/ru/agent-sdk/migration-guide.md): Руководство по миграции Claude Code TypeScript и Python SDK на Claude Agent SDK
 
 ### Что нового
 
 #### Что нового
 
 - [Что нового](https://code.claude.com/docs/ru/whats-new/index.md): Еженедельный дайджест заметных функций Claude Code с примерами кода, демонстрациями и контекстом о том, почему они важны.
+- [Неделя 34 · 17–21 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w34.md): Создавайте редактируемые UI-макеты с помощью навыка /design, установите стиль вывода Concise и запустите сеанс Claude Code на своей машине со своего телефона.
+- [Неделя 33 · 10–14 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w33.md): Claude Code Desktop автоматически продолжает работу после сброса лимита использования, режим fork включается по умолчанию, а запросы на слияние GitLab и маркетплейсы присоединяются к GitHub.
+- [Неделя 32 · 3–7 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w32.md): Сеансы Claude Code обмениваются сообщениями друг с другом, самостоятельно размещённые окружения запускают облачные сеансы на вашей инфраструктуре, и режим auto становится режимом разрешений по умолчанию.
+- [Неделя 30 · 20–24 июля 2026](https://code.claude.com/docs/ru/whats-new/2026-w30.md): Opus 5 становится моделью Opus по умолчанию, Claude Code Desktop добавляет панель iOS Simulator, а плагин Claude Security сканирует ваш код на уязвимости.
+- [Неделя 29 · 13–17 июля 2026](https://code.claude.com/docs/ru/whats-new/2026-w29.md): Подтягивайте живые данные в опубликованные артефакты через MCP коннекторы и используйте Claude Code с программой чтения с экрана в новом режиме чтения с экрана.
 - [Неделя 28 · 6–10 июля 2026 г.](https://code.claude.com/docs/ru/whats-new/2026-w28.md): Просматривайте внешние сайты из встроенного браузера приложения Desktop, запустите полную проверку настройки с помощью /doctor и получите защиту транскриптов в автоматическом режиме и обновления представления агента.
 - [Неделя 27 · 29 июня – 3 июля 2026](https://code.claude.com/docs/ru/whats-new/2026-w27.md): Claude Sonnet 5 становится моделью по умолчанию, Claude в Chrome достигает общей доступности, подагенты работают в фоновом режиме по умолчанию, Claude Desktop появляется на Linux в бета-версии, и /radio настраивается на Claude FM.
 - [Неделя 26 · 22–26 июня 2026](https://code.claude.com/docs/ru/whats-new/2026-w26.md): Аутентифицируйте MCP серверы из вашей оболочки с помощью claude mcp login, получайте ответ на вывод команды режима shell с префиксом !, и возобновляйте беседу перед /clear с помощью /rewind.

@@ -1,8 +1,8 @@
 # Next.js Documentation
 
-> Reference and guides for Next.js 16.3.4 — the React framework for building full-stack web applications. Sections cover Getting Started, App Router, Architecture, and Community Resources.
+> Reference and guides for Next.js 16.3.5 — the React framework for building full-stack web applications. Sections cover Getting Started, App Router, Architecture, and Community Resources.
 
-@doc-version: 16.3.4
+@doc-version: 16.3.5
 @doc-version-notes: Some features may have extended or refined behavior in minor or patch releases
 
 
@@ -24,8 +24,8 @@ Learn how to create full-stack web applications with the Next.js App Router.
 - [Image Optimization](https://nextjs.org/docs/app/getting-started/images.md): Learn how to optimize images in Next.js
 - [Font Optimization](https://nextjs.org/docs/app/getting-started/fonts.md): Learn how to optimize fonts in Next.js
 - [Metadata and OG images](https://nextjs.org/docs/app/getting-started/metadata-and-og-images.md): Learn how to add metadata to your pages and create dynamic OG images.
-- [Route Handlers](https://nextjs.org/docs/app/getting-started/route-handlers.md): Learn how to use Route Handlers
-- [Proxy](https://nextjs.org/docs/app/getting-started/proxy.md): Learn how to use Proxy
+- [Route Handlers](https://nextjs.org/docs/app/getting-started/route-handlers.md): Create custom request handlers with Next.js Route Handlers using the Web Request and Response APIs.
+- [Proxy](https://nextjs.org/docs/app/getting-started/proxy.md): Use Next.js Proxy to rewrite, redirect, modify headers, or respond directly before a request completes.
 - [Deploying](https://nextjs.org/docs/app/getting-started/deploying.md): Learn how to deploy your Next.js application.
 - [Upgrading](https://nextjs.org/docs/app/getting-started/upgrading.md): Learn how to upgrade your Next.js application to the latest version or canary.
 
@@ -254,6 +254,8 @@ Next.js API Reference for the App Router.
     - [serverActions](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions.md): Configure Server Actions behavior in your Next.js application.
     - [serverComponentsHmrCache](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverComponentsHmrCache.md): Configure whether fetch responses in Server Components are cached across HMR refresh requests.
     - [serverExternalPackages](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverExternalPackages.md): Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.
+    - [skipProxyUrlNormalize](https://nextjs.org/docs/app/api-reference/config/next-config-js/skipProxyUrlNormalize.md): Let Proxy see the original request instead of Next.js's normalized version. Formerly skipMiddlewareUrlNormalize.
+    - [skipTrailingSlashRedirect](https://nextjs.org/docs/app/api-reference/config/next-config-js/skipTrailingSlashRedirect.md): Disable the automatic trailing slash redirects so you can handle trailing slashes yourself in Proxy.
     - [staleTimes](https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes.md): Learn how to override the invalidation time of the client cache.
     - [staticGeneration*](https://nextjs.org/docs/app/api-reference/config/next-config-js/staticGeneration.md): Learn how to configure static generation in your Next.js application.
     - [supportsImmutableAssets](https://nextjs.org/docs/app/api-reference/config/next-config-js/supportsImmutableAssets.md): Configure support for immutable static assets

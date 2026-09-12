@@ -3,8 +3,8 @@ title: proxy.js
 description: API reference for the proxy.js file.
 url: "https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
 docs_index: /docs/llms.txt
-version: 16.3.4
-lastUpdated: 2026-08-25
+version: 16.3.5
+lastUpdated: 2026-09-07
 prerequisites:
   - "API Reference: /docs/app/api-reference"
   - "File-system conventions: /docs/app/api-reference/file-conventions"
@@ -250,7 +250,7 @@ Proxy defaults to using the Node.js runtime. The [`runtime`](/docs/app/api-refer
 
 ## Advanced Proxy flags
 
-In `v13.1` of Next.js two additional flags were introduced for proxy, `skipProxyUrlNormalize` (formerly `skipMiddlewareUrlNormalize`) and `skipTrailingSlashRedirect` to handle advanced use cases.
+In `v13.1` of Next.js two additional flags were introduced for proxy, [`skipProxyUrlNormalize`](/docs/app/api-reference/config/next-config-js/skipProxyUrlNormalize) (formerly `skipMiddlewareUrlNormalize`) and [`skipTrailingSlashRedirect`](/docs/app/api-reference/config/next-config-js/skipTrailingSlashRedirect) to handle advanced use cases.
 
 `skipTrailingSlashRedirect` disables Next.js redirects for adding or removing trailing slashes. This allows custom handling inside proxy to maintain the trailing slash for some paths but not others, which can make incremental migrations easier.
 
@@ -471,7 +471,7 @@ When you use `NextResponse.rewrite()`, Next.js automatically propagates the requ
 
 If you implement custom rewrite logic with `fetch()` instead of `NextResponse.rewrite()`, you can run into missing RSC headers unless you forward them manually.
 
-For custom `fetch` rewrite setups, you can also enable `skipProxyUrlNormalize` in `next.config.js` so your rewrite logic can receive the necessary URL shape and RSC headers from the provided request object:
+For custom `fetch` rewrite setups, you can also enable [`skipProxyUrlNormalize`](/docs/app/api-reference/config/next-config-js/skipProxyUrlNormalize) in `next.config.js` so your rewrite logic can receive the necessary URL shape and RSC headers from the provided request object:
 
 ```js filename="next.config.js"
 module.exports = {

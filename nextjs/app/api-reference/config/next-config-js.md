@@ -3,7 +3,7 @@ title: next.config.js
 description: Learn how to configure your application with next.config.js.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js"
 docs_index: /docs/llms.txt
-version: 16.3.4
+version: 16.3.5
 lastUpdated: 2025-11-04
 prerequisites:
   - "API Reference: /docs/app/api-reference"
@@ -250,6 +250,10 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
   - Configure whether fetch responses in Server Components are cached across HMR refresh requests.
 - [serverExternalPackages](/docs/app/api-reference/config/next-config-js/serverExternalPackages)
   - Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.
+- [skipProxyUrlNormalize](/docs/app/api-reference/config/next-config-js/skipProxyUrlNormalize)
+  - Let Proxy see the original request instead of Next.js's normalized version. Formerly skipMiddlewareUrlNormalize.
+- [skipTrailingSlashRedirect](/docs/app/api-reference/config/next-config-js/skipTrailingSlashRedirect)
+  - Disable the automatic trailing slash redirects so you can handle trailing slashes yourself in Proxy.
 - [staleTimes](/docs/app/api-reference/config/next-config-js/staleTimes)
   - Learn how to override the invalidation time of the client cache.
 - [staticGeneration*](/docs/app/api-reference/config/next-config-js/staticGeneration)

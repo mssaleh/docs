@@ -20,10 +20,9 @@
 - [コンテキストウィンドウを探索する](https://code.claude.com/docs/ja/context-window.md): Claude Code のコンテキストウィンドウがセッション中にどのように満たされるかのインタラクティブなシミュレーション。自動的に読み込まれるもの、各ファイル読み込みのコスト、ルールとフックが発火するタイミングを確認できます。
 - [Claude Code がプロンプトキャッシングを使用する方法](https://code.claude.com/docs/ja/prompt-caching.md): Claude Code はプロンプトキャッシングを自動的に管理します。モデル切り替えがキャッシュなしの遅いターンをトリガーする理由、`/compact` のコスト、CLAUDE.md の編集がセッション中に適用されない理由、キャッシュヒット率を確認する方法を確認してください。
 
-#### Claude Code を使用
+#### Claude Code を使用する
 
 - [Claude があなたのプロジェクトを記憶する方法](https://code.claude.com/docs/ja/memory.md): CLAUDE.md ファイルで Claude に永続的な指示を与え、自動メモリで Claude が自動的に学習を蓄積できるようにします。
-- [権限モードを選択する](https://code.claude.com/docs/ja/permission-modes.md): Claude がアクションを実行する前に確認するかどうかを制御します。CLI で Shift+Tab でモードを切り替えるか、VS Code のモード指示器、Desktop のモードセレクター、または Web のモードドロップダウンを使用します。
 - [セッションの管理](https://code.claude.com/docs/ja/sessions.md): Claude Code の会話に名前を付け、再開し、分岐し、切り替えます。`--continue`、`--resume`、`--from-pr`、`/resume` ピッカー、セッション命名、トランスクリプトのエクスポート、およびトランスクリプトの保存場所について説明します。
 - [一般的なワークフロー](https://code.claude.com/docs/ja/common-workflows.md): Claude Code を使用してコードベースの探索、バグ修正、リファクタリング、テスト、その他の日常的なタスクを実行するためのステップバイステップガイド。
 - [プロンプトライブラリ](https://code.claude.com/docs/ja/prompt-library.md): Claude Code 用のコピー＆ペーストプロンプト。タスクと役割でタグ付けされています。
@@ -33,11 +32,13 @@
 
 - [プラットフォームと統合](https://code.claude.com/docs/ja/platforms.md): Claude Code を実行する場所を選択し、何に接続するかを決定します。CLI、Desktop、VS Code、JetBrains、Web、モバイル、および Chrome、Slack、CI/CD などの統合を比較します。
 - [任意のデバイスからローカルセッションを続行する Remote Control](https://code.claude.com/docs/ja/remote-control.md): Remote Control を使用して、電話、タブレット、または任意のブラウザから Claude Code のローカルセッションを続行します。claude.ai/code と Claude モバイルアプリで動作します。
+- [モバイルの Claude Code](https://code.claude.com/docs/ja/mobile.md): Claude アプリ for iOS と Android を使用して、携帯電話から Claude Code タスクを開始、監視、操作します。
 - [Chrome で Claude Code を使用する](https://code.claude.com/docs/ja/chrome.md): Claude Code を Chrome ブラウザに接続して、Web アプリをテストし、コンソールログでデバッグし、フォーム入力を自動化し、Web ページからデータを抽出します。
 - [Claude に CLI からコンピュータを使用させる](https://code.claude.com/docs/ja/computer-use.md): Claude Code CLI でコンピュータ使用を有効にして、Claude がアプリを開いたり、クリックしたり、入力したり、macOS でスクリーンを表示したりできるようにします。ネイティブアプリをテストし、ビジュアルの問題をデバッグし、ターミナルを離れることなく GUI のみのツールを自動化します。
 - [VS Code で Claude Code を使用する](https://code.claude.com/docs/ja/vs-code.md): Claude Code 拡張機能を VS Code にインストールして設定します。インラインの差分表示、@-メンション、プラン確認、キーボードショートカットを使用した AI コーディング支援を取得します。
 - [JetBrains IDEs](https://code.claude.com/docs/ja/jetbrains.md): Claude Code を IntelliJ、PyCharm、WebStorm など JetBrains IDEs で使用する
 - [Slack での Claude Code](https://code.claude.com/docs/ja/slack.md): Slack ワークスペースから直接コーディングタスクを委任する。Anthropic は Team および Enterprise ワークスペース向けにこの以前のバージョンを Claude Tag に置き換えています。Pro および Max プランではセットアップパスのままです。
+- [Claude Tag](https://code.claude.com/docs/ja/claude-tag.md): Claude Tag を使用して Claude をチームの Slack チャネルに導入し、claude.com で設定と使用方法のドキュメントを確認できます。
 
 ##### Claude Code（ウェブ版）
 
@@ -53,12 +54,15 @@
 - [Claude Desktop on Linux (beta)](https://code.claude.com/docs/ja/desktop-linux.md): Ubuntu と Debian に Claude デスクトップアプリをインストールおよび更新する
 - [Claude Code Desktop in WSL](https://code.claude.com/docs/ja/desktop-wsl.md): WSL 2 ディストリビューション内で Code セッションを実行する
 - [Claude Code Desktop でスケジュール設定されたタスクを実行する](https://code.claude.com/docs/ja/desktop-scheduled-tasks.md): Claude Code Desktop でスケジュール設定されたタスクを設定して、毎日のコードレビュー、依存関係の監査、または朝のブリーフィングなど、定期的に Claude を自動的に実行します。
+- [iOS シミュレータでアプリをテストする](https://code.claude.com/docs/ja/desktop-ios-simulator.md): Claude Code Desktop は、Claude がアプリをビルド、実行、またはチェックするときに、iOS シミュレータペインでアプリを開きます。各セッションに対して個別のシミュレータが用意されます。
 
 ##### コードレビュー & CI/CD
 
 - [Claude がコードを書く際のセキュリティ問題をキャッチする](https://code.claude.com/docs/ja/security-guidance.md): security-guidance プラグインをインストールして、Claude が自身のコード変更の脆弱性をレビューし、同じセッション内で修正するようにします。
+- [コードベースの脆弱性をスキャンする](https://code.claude.com/docs/ja/claude-security.md): Claude Security プラグインをインストールして、Claude Code セッション内でコードベースの脆弱性をスキャンし、検出結果をレビューして適用できるパッチに変換します。
 - [Code Review](https://code.claude.com/docs/ja/code-review.md): マルチエージェント分析を使用してコードベース全体を検査し、ロジックエラー、セキュリティ脆弱性、リグレッションを検出する自動化された PR レビューを設定します
 - [Claude Code GitHub Actions](https://code.claude.com/docs/ja/github-actions.md): @claude メンションに応答し、タスクを自動化し、イシューをプルリクエストに変換するために GitHub Actions ワークフロー内で Claude Code を実行します
+- [Claude Code GitHub Actions をクラウドプロバイダーで使用する](https://code.claude.com/docs/ja/github-actions-cloud-providers.md): Claude Code GitHub Actions を Claude API の代わりに Amazon Bedrock、Google Cloud の Agent Platform、または Microsoft Foundry を通じて実行する
 - [Claude Code と GitHub Enterprise Server](https://code.claude.com/docs/ja/github-enterprise-server.md): Claude Code を自社ホストの GitHub Enterprise Server インスタンスに接続して、Web セッション、コードレビュー、プラグインマーケットプレイスを利用できます。
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/ja/gitlab-ci-cd.md): Claude Code を GitLab CI/CD で開発ワークフローに統合する方法を学びます
 
@@ -86,6 +90,7 @@
 
 - [マーケットプレイスから事前構築されたプラグインを発見してインストールする](https://code.claude.com/docs/ja/discover-plugins.md): マーケットプレイスからプラグインを検索してインストールし、Claude Code を新しいスキル、エージェント、機能で拡張します。
 - [プラグインを作成する](https://code.claude.com/docs/ja/plugins.md): スキル、エージェント、フック、MCP サーバーで Claude Code を拡張するカスタムプラグインを作成します。
+- [evals でプラグインをテストする](https://code.claude.com/docs/ja/plugin-evals.md): Claude Code プラグイン用の eval ケースを作成し、claude plugin eval で実行し、結果をグレード化し、プラグインなしのベースラインと比較し、CI でスコアをゲートする。
 
 #### Artifacts
 
@@ -118,7 +123,8 @@
 - [組織向けに Claude Code をセットアップする](https://code.claude.com/docs/ja/admin-setup.md): Claude Code を展開する管理者向けの決定マップ。API プロバイダー、マネージド設定、ポリシー実行、使用状況監視、データ処理をカバーしています。
 - [高度なセットアップ](https://code.claude.com/docs/ja/setup.md): Claude Code のシステム要件、プラットフォーム固有のインストール、バージョン管理、およびアンインストール。
 - [認証](https://code.claude.com/docs/ja/authentication.md): Claude Code にログインし、個人、チーム、組織向けの認証を設定します。
-- [サーバー管理設定を構成する](https://code.claude.com/docs/ja/server-managed-settings.md): デバイス管理インフラストラクチャを必要とせずに、Claude.ai 上のウェブベースインターフェースを通じて、組織全体で Claude Code を一元的に構成します。
+- [マネージド設定をデプロイする](https://code.claude.com/docs/ja/managed-settings.md): すべての開発者のマシンにマネージド設定をデプロイします。OS ごとの配信メカニズム、Claude Code がマネージドソースを組み合わせる方法、および強制の検証方法について説明します。
+- [サーバー管理設定を構成する](https://code.claude.com/docs/ja/server-managed-settings.md): デバイス管理インフラストラクチャを必要とせずに、サーバー配信設定を通じて組織全体で Claude Code を一元的に構成します。
 - [組織の MCP サーバーアクセスを制御する](https://code.claude.com/docs/ja/managed-mcp.md): 管理対象設定ファイル、管理対象設定、許可リスト、拒否リストを使用して、ユーザーが追加または接続できる MCP サーバーを制限するか、すべてのユーザーにサーバーを提供します。
 - [オートモードの設定](https://code.claude.com/docs/ja/auto-mode-config.md): オートモード分類器に、組織が信頼するリポジトリ、バケット、ドメインを指定します。環境コンテキストを設定し、デフォルトのブロックおよび許可ルールをオーバーライドし、オートモード CLI サブコマンドで有効な設定を検査します。
 
@@ -144,6 +150,7 @@
 - [Claude apps gateway 設定](https://code.claude.com/docs/ja/claude-apps-gateway-config.md): gateway.yaml のすべてのオプションのリファレンス：リスナーと TLS、OIDC、セッション、Postgres ストア、Amazon Bedrock、Claude Platform on AWS、Google Cloud の Agent Platform、Microsoft Foundry アップストリーム、モデルルーティング、マネージドポリシー、テレメトリー。
 - [Claude apps gateway の支出制限](https://code.claude.com/docs/ja/claude-apps-gateway-spend-limits.md): Claude apps gateway を通じて各開発者の支出を日単位、週単位、または月単位で制限します。Admin API で制限を設定すると、gateway はすべてのリクエストでそれらを実行します。
 - [Claude apps gateway のデプロイと運用](https://code.claude.com/docs/ja/claude-apps-gateway-deploy.md): IdP にゲートウェイを登録し、コンテナをビルドして Kubernetes または Cloud Run にデプロイし、ヘルスチェック、シークレットローテーション、アップグレード、セキュリティを運用します。
+- [AWS に Claude apps gateway をデプロイする](https://code.claude.com/docs/ja/claude-apps-gateway-on-aws.md): AWS で Claude apps gateway を実行する実装例：ECS Fargate または EKS、Amazon RDS for PostgreSQL、AWS Secrets Manager、および Amazon Bedrock への IAM ロール認証。
 - [Google Cloud に Claude apps gateway をデプロイする](https://code.claude.com/docs/ja/claude-apps-gateway-on-gcp.md): Google Cloud で Claude apps gateway を実行する実装例：Cloud Run または GKE、Cloud SQL for PostgreSQL、Secret Manager、および Agent Platform への service account 認証。
 
 ##### その他のゲートウェイ
@@ -179,12 +186,32 @@
 
 ### 設定
 
-#### 設定と権限
+#### 設定
 
 - [設定ファイルと優先順位](https://code.claude.com/docs/ja/settings.md): Claude Code の設定を変更し、キーが属するスコープを選択し、変更を確認し、複数の場所でキーが設定されている場合に Claude Code が使用する値を学びます。
+- [すべての設定](https://code.claude.com/docs/ja/settings-reference.md): Claude Code の settings.json キーの完全なリファレンス：各キーの場所、型とデフォルト値、貼り付け可能な例、およびすべてのキーのインデックス。
+- [設定ファイルの例](https://code.claude.com/docs/ja/settings-example.md): 開発者、チーム、組織向けの現実的な settings.json ファイル：1 つをコピーして、必要なキーを保持し、値を変更してください。
+
+#### 権限とサンドボックス
+
 - [権限を設定する](https://code.claude.com/docs/ja/permissions.md): きめ細かい権限ルール、モード、管理ポリシーを使用して、Claude Code がアクセスして実行できる内容を制御します。
-- [サンドボックス環境を選択する](https://code.claude.com/docs/ja/sandbox-environments.md): Claude Code のサンドボックスオプションを比較します。組み込みのサンドボックス化された Bash ツール、サンドボックスランタイム、dev コンテナ、Docker、VM があります。脅威モデルに適した分離を選択してください。
+- [権限モードを選択する](https://code.claude.com/docs/ja/permission-modes.md): Claude がアクションを実行する前に確認するかどうかを制御します。CLI で Shift+Tab でモードを切り替えるか、VS Code のモード指示器、Desktop のモードセレクター、または Web のモードドロップダウンを使用します。
 - [サンドボックス化された Bash ツールを設定する](https://code.claude.com/docs/ja/sandboxing.md): Claude Code のサンドボックス化された Bash ツールがファイルシステムとネットワークの分離を提供し、より安全で自律的なエージェント実行を実現する方法について学びます。
+- [サンドボックス環境を選択する](https://code.claude.com/docs/ja/sandbox-environments.md): Claude Code のサンドボックスオプションを比較します。組み込みのサンドボックス化された Bash ツール、サンドボックスランタイム、dev コンテナ、Docker、VM があります。脅威モデルに適した分離を選択してください。
+
+#### 環境
+
+- [クラウド環境を設定する](https://code.claude.com/docs/ja/cloud-environments.md): Claude Code クラウドセッション用のクラウド環境を設定します。ネットワークアクセスレベル、環境変数、セットアップスクリプト、環境キャッシュを構成できます。
+
+##### セルフホスト環境
+
+- [自己ホスト環境](https://code.claude.com/docs/ja/self-hosted-environments.md): 自分たちが管理するインフラストラクチャで Claude Code クラウドセッションを実行します。自己ホスト環境をセットアップし、ランナーをデプロイし、セッションを自分たちのコンピュートにルーティングします。
+- [セルフホストされた環境のクイックスタート](https://code.claude.com/docs/ja/self-hosted-environments-quickstart.md): セルフホストされた環境を初めてセットアップします。Claude Code をインストールし、環境を作成し、ランナーを起動し、セッションをルーティングします。
+- [本番環境へのセルフホスト環境のデプロイ](https://code.claude.com/docs/ja/self-hosted-environments-deploy.md): 本番環境でセルフホストランナーを実行する：セキュリティ強化、ネットワーク出力制御、git 認証情報、Kubernetes と Compose レシピ、トラブルシューティング。
+- [セルフホストされた環境でセッションをカスタマイズする](https://code.claude.com/docs/ja/self-hosted-environments-configuration.md): ラッパースクリプト、ライフサイクルフック、オンデマンドランナースポーニングを使用して、セルフホストされた環境セッションをセッションごとの認証情報、ライフサイクルフック、オンデマンドランナースポーニングでカスタマイズします。
+- [自己ホスト環境をエンドツーエンドでテストする](https://code.claude.com/docs/ja/self-hosted-environments-testing.md): CI から自己ホスト実行イメージを検証します。CLI でセッションをディスパッチし、Stop フックを通じて Claude の返信を読み取り、完全なループをスクリプト化します。
+- [セルフホスト環境リファレンス](https://code.claude.com/docs/ja/self-hosted-environments-reference.md): セルフホストランナーとオーケストレーターの完全なリファレンス：CLI フラグ、環境変数、Prometheus メトリクス。
+- [自己ホスト環境でセッション ID を検証する](https://code.claude.com/docs/ja/self-hosted-environments-identity.md): CLAUDE_CODE_SESSION_ACCESS_TOKEN JWT を検証して、自己ホスト環境内のセッションからのリクエストをネットワーク上のサービスが信頼できるようにします。
 
 #### モデルと応答
 
@@ -226,6 +253,12 @@
 
 - [Agent SDK の概要](https://code.claude.com/docs/ja/agent-sdk/overview.md): Claude Code をライブラリとして使用して、本番環境対応の AI エージェントを構築します
 - [クイックスタート](https://code.claude.com/docs/ja/agent-sdk/quickstart.md): Python または TypeScript Agent SDK を使用して、自律的に動作する AI エージェントを構築する方法を学びます
+- [Claude Agent SDK への移行](https://code.claude.com/docs/ja/agent-sdk/migration-guide.md): Claude Code TypeScript および Python SDK を Claude Agent SDK に移行するためのガイド
+- [Agent SDK のトラブルシューティング](https://code.claude.com/docs/ja/agent-sdk/troubleshooting.md): Agent SDK エラーを表示されたメッセージで修正します。TypeScript と Python SDK の各エラーについて、原因と対処方法を説明します。
+
+#### エージェントを構築
+
+- [例](https://code.claude.com/docs/ja/agent-sdk/examples.md): 構築したいものに合致する完全で実行可能な Agent SDK プロジェクト、または Claude Cookbook のガイド付きレシピを見つけてください。
 
 #### コアコンセプト
 
@@ -241,7 +274,7 @@
 - [リアルタイムでレスポンスをストリーミングする](https://code.claude.com/docs/ja/agent-sdk/streaming-output.md): テキストとツール呼び出しがストリーミングされるときに、Agent SDK からリアルタイムレスポンスを取得します
 - [エージェントから構造化された出力を取得する](https://code.claude.com/docs/ja/agent-sdk/structured-outputs.md): JSON Schema、Zod、または Pydantic を使用して、エージェントワークフローから検証済みの JSON を返します。マルチターンツール使用後に型安全で構造化されたデータを取得します。
 
-#### ツールで拡張
+#### ツールで拡張する
 
 - [Claude にカスタムツールを提供する](https://code.claude.com/docs/ja/agent-sdk/custom-tools.md): Claude Agent SDK のインプロセス MCP サーバーでカスタムツールを定義し、Claude が関数を呼び出し、API にアクセスし、ドメイン固有の操作を実行できるようにします。
 - [MCP を使用して外部ツールに接続する](https://code.claude.com/docs/ja/agent-sdk/mcp.md): MCP サーバーを設定してエージェントを外部ツールで拡張します。トランスポートタイプ、大規模なツールセット向けのツール検索、認証、エラーハンドリングについて説明します。
@@ -273,13 +306,17 @@
 - [Agent SDK リファレンス - TypeScript](https://code.claude.com/docs/ja/agent-sdk/typescript.md): TypeScript Agent SDK の完全な API リファレンス。すべての関数、型、インターフェースを含みます。
 - [TypeScript SDK V2 セッション API（削除済み）](https://code.claude.com/docs/ja/agent-sdk/typescript-v2-preview.md): マルチターン会話向けのセッションベースの send/stream パターンを備えた、削除済みの V2 TypeScript Agent SDK セッション API のリファレンス。
 - [Agent SDK リファレンス - Python](https://code.claude.com/docs/ja/agent-sdk/python.md): Python Agent SDK の完全な API リファレンス。すべての関数、型、クラスを含みます。
-- [Claude Agent SDK への移行](https://code.claude.com/docs/ja/agent-sdk/migration-guide.md): Claude Code TypeScript および Python SDK を Claude Agent SDK に移行するためのガイド
 
 ### 新機能
 
-#### 新着情報
+#### 新機能
 
 - [新機能](https://code.claude.com/docs/ja/whats-new/index.md): Claude Code の注目すべき機能を毎週紹介するダイジェスト。コードスニペット、デモ、およびそれらが重要である理由についての説明が含まれています。
+- [Week 34 · 8月17～21日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w34.md): /design スキルでドラフト可能な UI アートボードを作成し、Concise 出力スタイルを設定し、スマートフォンからマシン上で Claude Code セッションを開始します。
+- [第 33 週・8 月 10～14 日、2026 年](https://code.claude.com/docs/ja/whats-new/2026-w33.md): Claude Code Desktop は使用制限がリセットされた後に自動継続し、フォークモードがデフォルトで有効になり、GitLab マージリクエストとマーケットプレイスが GitHub に参加します。
+- [Week 32 · 8月3日～7日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w32.md): Claude Code セッションが相互にメッセージを送信でき、自己ホスト環境がクラウドセッションをお客様のインフラストラクチャで実行でき、自動モードがデフォルトの権限モードになります。
+- [Week 30 · 7月20～24日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w30.md): Opus 5 が Opus のデフォルトモデルになり、Claude Code Desktop に iOS Simulator ペインが追加され、Claude Security プラグインがコードの脆弱性をスキャンします。
+- [第 29 週・2026 年 7 月 13～17 日](https://code.claude.com/docs/ja/whats-new/2026-w29.md): MCP コネクタを通じてライブデータを公開アーティファクトに取り込み、新しいスクリーンリーダーモードで Claude Code をスクリーンリーダーと共に使用します。
 - [Week 28 · 7月6日～10日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w28.md): Desktop アプリの組み込みブラウザから外部サイトを閲覧し、/doctor で完全なセットアップチェックアップを実行し、オートモードのトランスクリプト保護とエージェントビューのアップグレードを取得します。
 - [Week 27 · 6月29日～7月3日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w27.md): Claude Sonnet 5 がデフォルトモデルになり、Claude in Chrome が一般提供開始、サブエージェントがデフォルトでバックグラウンド実行、Claude Desktop が Linux でベータ版提供開始、/radio が Claude FM にチューニングします。
 - [Week 26 · 2026 年 6 月 22 日～26 日](https://code.claude.com/docs/ja/whats-new/2026-w26.md): シェルから claude mcp login で MCP サーバーを認証し、! プレフィックスでシェルモードコマンド出力に応答を取得し、/clear の前の会話を /rewind で再開します。

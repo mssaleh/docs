@@ -1,10 +1,10 @@
 ---
 title: Route Handlers
-description: Learn how to use Route Handlers
+description: Create custom request handlers with Next.js Route Handlers using the Web Request and Response APIs.
 url: "https://nextjs.org/docs/app/getting-started/route-handlers"
 docs_index: /docs/llms.txt
-version: 16.3.4
-lastUpdated: 2026-03-03
+version: 16.3.5
+lastUpdated: 2026-09-07
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

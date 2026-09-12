@@ -1,10 +1,10 @@
 ---
 title: Proxy
-description: Learn how to use Proxy
+description: Use Next.js Proxy to rewrite, redirect, modify headers, or respond directly before a request completes.
 url: "https://nextjs.org/docs/app/getting-started/proxy"
 docs_index: /docs/llms.txt
-version: 16.3.4
-lastUpdated: 2025-12-20
+version: 16.3.5
+lastUpdated: 2026-09-07
 prerequisites:
   - "Getting Started: /docs/app/getting-started"
 related:

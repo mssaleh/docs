@@ -3,8 +3,8 @@ title: How to set up your Next.js project for AI coding agents
 description: Learn how to configure your Next.js project so AI coding agents use up-to-date documentation instead of outdated training data.
 url: "https://nextjs.org/docs/app/guides/ai-agents"
 docs_index: /docs/llms.txt
-version: 16.3.4
-lastUpdated: 2026-08-25
+version: 16.3.5
+lastUpdated: 2026-09-07
 prerequisites:
   - "Guides: /docs/app/guides"
 related:
@@ -227,11 +227,11 @@ Make the navigation from /settings to /dashboard instant using the next-cache-co
 
 The [`next-partial-prefetching-adoption`](https://www.skills.sh/vercel/next.js/next-partial-prefetching-adoption) Skill moves an app onto [Partial Prefetching](/docs/app/guides/adopting-partial-prefetching), where links share one App Shell:
 
-1. Audits the existing `<Link prefetch={true}>` calls with you.
-2. Turns the flag on and resolves the insights it surfaces.
-3. Marks the routes whose URL data might be worth prefetching later.
+1. Audits existing `<Link prefetch={true}>` navigations and identifies the prefetched UI to preserve.
+2. Captures that UI in passing [`instant()`](/docs/app/guides/instant-navigation#prevent-regressions-with-e2e-tests) tests before enabling Partial Prefetching, then migrates each destination until the same tests pass unchanged.
+3. Enables the flag, resolves the URL-data insights it surfaces, and marks optional per-link prefetching candidates for later.
 
-It needs [Cache Components](/docs/app/getting-started/caching) already adopted.
+It needs [Cache Components](/docs/app/getting-started/caching) already adopted and a production-like build it can run for prefetch verification.
 
 ```bash filename="Terminal"
 npx skills add vercel/next.js --skill next-partial-prefetching-adoption
