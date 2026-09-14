@@ -1,3 +1,8 @@
+---
+title: Messages
+url: https://platform.claude.com/docs/en/api/beta/messages
+---
+
 # Messages
 
 ## Create a Message
@@ -18,7 +23,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66,6 +71,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -111,6 +118,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+- `"anthropic-workspace-id": optional string`
 
 ### Body parameters
 
@@ -185,11 +194,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaTextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -216,6 +225,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaCitationCharLocationParam object`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -232,9 +243,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -252,9 +263,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -282,9 +293,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -294,13 +305,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -332,13 +343,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
           - `BetaBase64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -354,8 +367,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource object`
 
             - `type: "url"`
@@ -364,11 +375,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaFileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -388,9 +397,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaRequestDocumentBlock object`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
           - `BetaBase64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -398,17 +411,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of BetaContentBlockSourceContent`
 
@@ -420,8 +433,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                 - `BetaImageBlockParam object`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource object`
 
             - `type: "url"`
@@ -430,11 +441,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaFileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -454,13 +463,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaSearchResultBlockParam object`
 
+        - `type: "search_result"`
+
         - `content: array of BetaTextBlockParam`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -472,8 +483,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -481,6 +490,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         - `citations: optional BetaCitationsConfigParam`
 
       - `BetaThinkingBlockParam object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -492,17 +503,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `BetaRedactedThinkingBlockParam object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `BetaToolUseBlockParam object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -514,15 +525,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           maxLength: 200, minLength: 1
 
-        - `type: "tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -534,19 +541,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120 object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string or null`
 
@@ -556,11 +563,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaToolResultBlockParam object`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -584,11 +591,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -603,6 +610,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -632,8 +641,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
@@ -654,25 +661,25 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BetaBrowserStateChangeDownloadStarted object`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -687,13 +694,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -717,13 +724,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -746,6 +753,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlockParam object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -771,15 +780,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -793,21 +798,25 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaWebSearchToolResultBlockParam object`
 
+        - `type: "web_search_tool_result"`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age: optional string or null`
 
           - `BetaWebSearchToolRequestError object`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -823,21 +832,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -851,9 +854,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaWebFetchToolResultBlockParam object`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
           - `BetaWebFetchToolResultErrorBlockParam object`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -875,13 +882,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `BetaWebFetchBlockParam object`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: "web_fetch_result"`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: string`
 
@@ -895,15 +902,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -917,9 +920,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaAdvisorToolResultBlockParam object`
 
+        - `type: "advisor_tool_result"`
+
         - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
           - `BetaAdvisorToolResultErrorParam object`
+
+            - `type: "advisor_tool_result_error"`
 
             - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -937,23 +944,21 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
           - `BetaAdvisorResultBlockParam object`
 
-            - `text: string`
-
             - `type: "advisor_result"`
+
+            - `text: string`
 
             - `stop_reason: optional string or null`
 
           - `BetaAdvisorRedactedResultBlockParam object`
 
+            - `type: "advisor_redacted_result"`
+
             - `encrypted_content: string`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: "advisor_redacted_result"`
 
             - `stop_reason: optional string or null`
 
@@ -961,19 +966,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaCodeExecutionToolResultBlockParam object`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
-
           - `BetaCodeExecutionToolResultErrorParam object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -985,15 +990,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `BetaCodeExecutionResultBlockParam object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -1001,17 +1006,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `BetaEncryptedCodeExecutionResultBlockParam object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -1019,13 +1024,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1033,9 +1034,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaBashCodeExecutionToolResultBlockParam object`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
 
           - `BetaBashCodeExecutionToolResultErrorParam object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1049,15 +1054,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BetaBashCodeExecutionResultBlockParam object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -1065,13 +1070,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1079,9 +1080,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1095,11 +1100,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -1111,8 +1116,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines: optional number or null`
 
             - `start_line: optional number or null`
@@ -1121,9 +1124,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -1143,17 +1146,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaToolSearchToolResultBlockParam object`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
           - `BetaToolSearchToolResultErrorParam object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -1165,37 +1170,35 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaToolSearchToolSearchResultBlockParam object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of BetaToolReferenceBlockParam`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaMCPToolUseBlockParam object`
+
+        - `type: "mcp_tool_use"`
 
         - `id: string`
 
@@ -1209,19 +1212,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaRequestMCPToolResultBlockParam object`
 
+        - `type: "mcp_tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "mcp_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1233,11 +1234,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1252,9 +1253,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1292,12 +1293,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_addition"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -1306,32 +1304,30 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: "tool_reference"`
+
             - `name: string`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: "tool_reference"`
 
           - `BetaToolChangeMCPToolReference object`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: "mcp_tool_reference"`
+
             - `name: string`
 
             - `server_name: string`
-
-            - `type: "mcp_tool_reference"`
 
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: string`
-
             - `type: "mcp_toolset_reference"`
 
-        - `type: "tool_addition"`
+            - `server_name: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1345,12 +1341,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_removal"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -1367,8 +1360,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: "tool_removal"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -1389,6 +1380,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: "fallback"`
 
         - `from: BetaFallbackInfoParam`
 
@@ -1480,8 +1473,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           Identifies one hop of a fallback transition.
 
-        - `type: "fallback"`
-
         - `trigger: optional unknown`
 
           The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1552,12 +1543,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       maxItems: 20
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" or "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1565,6 +1550,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: optional string`
 
@@ -1776,25 +1767,25 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+        - `type: "json_schema"`
+
         - `schema: map[unknown]`
 
           The JSON schema of the format
 
-        - `type: "json_schema"`
-
       - `task_budget: optional BetaTokenTaskBudget or null`
 
         User-configurable total token budget across contexts.
+
+        - `type: "tokens"`
+
+          The budget type. Currently only 'tokens' is supported.
 
         - `total: number`
 
           Total token budget across all contexts in the session.
 
           minimum: 1024
-
-        - `type: "tokens"`
-
-          The budget type. Currently only 'tokens' is supported.
 
         - `remaining: optional number or null`
 
@@ -1814,6 +1805,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaThinkingConfigEnabled object`
 
+        - `type: "enabled"`
+
         - `budget_tokens: number`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1823,8 +1816,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
           minimum: 1024
-
-        - `type: "enabled"`
 
         - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -1890,9 +1881,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   maxItems: 20
 
-  - `name: string`
-
   - `type: "url"`
+
+  - `name: string`
 
   - `url: string`
 
@@ -1962,11 +1953,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `array of BetaTextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -2020,11 +2011,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use: optional boolean`
 
@@ -2104,6 +2095,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaTool object`
 
+    - `type: optional "custom" or null`
+
     - `input_schema: object`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -2158,17 +2151,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: optional "custom" or null`
-
   - `BetaToolBash20241022 object`
+
+    - `type: "bash_20241022"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2196,13 +2187,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolBash20250124 object`
 
+    - `type: "bash_20250124"`
+
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2230,13 +2221,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaCodeExecutionTool20250522 object`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2262,13 +2253,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaCodeExecutionTool20250825 object`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2296,13 +2287,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2330,13 +2321,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2381,6 +2372,18 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaBrowserTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -2718,18 +2721,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaBrowserTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaBrowserWaitConfig or null`
 
         `wait`'s config overrides.
@@ -2756,6 +2747,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolComputerUse20241022 object`
 
+    - `type: "computer_20241022"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -2773,8 +2766,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2808,13 +2799,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaMemoryTool20250818 object`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2842,6 +2833,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolComputerUse20250124 object`
 
+    - `type: "computer_20250124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -2859,8 +2852,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2894,13 +2885,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolTextEditor20241022 object`
 
+    - `type: "text_editor_20241022"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2928,6 +2919,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolComputerUse20251124 object`
 
+    - `type: "computer_20251124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -2945,8 +2938,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20251124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3007,6 +2998,18 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaComputerTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
@@ -3176,18 +3179,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaComputerTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaComputerWaitConfig or null`
 
         `wait`'s config overrides.
@@ -3214,13 +3205,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolTextEditor20250124 object`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3248,13 +3239,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolTextEditor20250429 object`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3282,13 +3273,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolTextEditor20250728 object`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3322,13 +3313,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebSearchTool20250305 object`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3398,13 +3389,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebFetchTool20250910 object`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3454,13 +3445,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebSearchTool20260209 object`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3504,13 +3495,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebFetchTool20260209 object`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3562,13 +3553,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3622,13 +3613,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebSearchTool20260318 object`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3680,13 +3671,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaWebFetchTool20260318 object`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3748,6 +3739,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaAdvisorTool20260301 object`
 
+    - `type: "advisor_20260301"`
+
     - `model: Model`
 
       The model that will complete your prompt.
@@ -3759,8 +3752,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "advisor_20260301"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3802,17 +3793,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolSearchToolBm25_20251119 object`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3838,17 +3829,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaToolSearchToolRegex20251119 object`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -3879,13 +3870,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: "mcp_toolset"`
+
     - `mcp_server_name: string`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: "mcp_toolset"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -3955,6 +3946,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
 - `BetaMessage object`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -3979,12 +3978,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" or "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -3992,6 +3985,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -4030,6 +4029,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `BetaTextBlock object`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: array of BetaTextCitation or null`
 
         Citations supporting the text block.
@@ -4037,6 +4040,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation object`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -4054,11 +4061,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation object`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -4076,11 +4083,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation object`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -4108,11 +4115,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation object`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -4122,13 +4129,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation object`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -4160,19 +4167,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock object`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -4186,11 +4189,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock object`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -4200,11 +4203,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -4216,13 +4219,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         minLength: 1
 
-      - `type: "tool_use"`
-
-        default: tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -4234,19 +4231,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120 object`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name: optional string or null`
 
@@ -4255,6 +4252,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock object`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -4280,13 +4281,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -4300,9 +4295,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `BetaWebSearchToolResultBlock object`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError object`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -4318,11 +4321,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `array of BetaWebSearchResultBlock`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -4330,23 +4333,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -4360,9 +4353,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `BetaWebFetchToolResultBlock object`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock object`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -4384,13 +4385,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock object`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig or null`
 
@@ -4404,37 +4411,29 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `BetaBase64PDFSource object`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource object`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string or null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string or null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -4444,13 +4443,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -4464,9 +4457,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `BetaAdvisorToolResultBlock object`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError object`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -4484,11 +4485,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock object`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string or null`
 
@@ -4496,11 +4497,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock object`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -4510,25 +4511,23 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock object`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
-        Code execution result with encrypted stdout for PFC + web_search results.
-
         - `BetaCodeExecutionToolResultError object`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -4540,19 +4539,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock object`
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -4560,21 +4559,21 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock object`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -4582,23 +4581,23 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock object`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError object`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -4612,19 +4611,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock object`
 
-          - `content: array of BetaBashCodeExecutionOutputBlock`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: array of BetaBashCodeExecutionOutputBlock`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -4632,23 +4631,23 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError object`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -4664,11 +4663,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `error_message: string or null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -4686,19 +4685,19 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `total_lines: number or null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: array of string or null`
 
@@ -4710,23 +4709,23 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `old_start: number or null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock object`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError object`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -4740,35 +4739,31 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `error_message: string or null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock object`
-
-          - `tool_references: array of BetaToolReferenceBlock`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: array of BetaToolReferenceBlock`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock object`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -4784,17 +4779,21 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock object`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string or array of BetaTextBlock`
 
         - `string`
 
         - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: array of BetaTextCitation or null`
 
@@ -4804,11 +4803,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -4818,19 +4813,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock object`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock object`
 
@@ -4840,6 +4831,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string or null`
 
         Summary of compacted content, or null if compaction failed
@@ -4847,10 +4842,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `encrypted_content: string or null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock object`
 
@@ -4865,6 +4856,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -4960,6 +4955,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
           The policy category that triggered a refusal.
@@ -4984,14 +4983,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `context_management: BetaContextManagementResponse or null`
 
     Context management response.
@@ -5003,6 +4994,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse object`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -5016,13 +5013,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse object`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse object`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -5036,12 +5033,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           minimum: 0
 
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
-
   - `diagnostics: BetaDiagnostics or null`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -5053,43 +5044,43 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `BetaCacheMissModelChanged object`
 
-        - `cache_missed_input_tokens: number`
-
-          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
         - `type: "model_changed"`
 
           default: model_changed
 
-      - `BetaCacheMissSystemChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissSystemChanged object`
 
         - `type: "system_changed"`
 
           default: system_changed
 
-      - `BetaCacheMissToolsChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissToolsChanged object`
 
         - `type: "tools_changed"`
 
           default: tools_changed
 
-      - `BetaCacheMissMessagesChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+      - `BetaCacheMissMessagesChanged object`
+
         - `type: "messages_changed"`
 
           default: messages_changed
+
+        - `cache_missed_input_tokens: number`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -5120,6 +5111,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   - `stop_details: BetaRefusalStopDetails or null`
 
     Structured information about a refusal.
+
+    - `type: "refusal"`
+
+      default: refusal
 
     - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -5200,10 +5195,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: BetaStopReason or null`
 
     The reason that we stopped.
@@ -5241,14 +5232,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: BetaUsage`
 
@@ -5316,6 +5299,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
             Why the reprice was not applied.
@@ -5346,10 +5333,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem: optional array of string or null`
 
@@ -5388,6 +5371,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         Token usage for a sampling iteration.
 
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
+
         - `cache_creation: BetaCacheCreation or null`
 
           Breakdown of cached tokens by TTL
@@ -5422,43 +5411,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage object`
 
         Token usage for a compaction iteration.
-
-        - `cache_creation: BetaCacheCreation or null`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: number`
-
-          The number of input tokens used to create the cache entry.
-
-          default: 0, minimum: 0
-
-        - `cache_read_input_tokens: number`
-
-          The number of input tokens read from the cache.
-
-          default: 0, minimum: 0
-
-        - `input_tokens: number`
-
-          The number of input tokens which were used.
-
-          minimum: 0
-
-        - `output_tokens: number`
-
-          The number of output tokens which were used.
-
-          minimum: 0
 
         - `type: "compaction"`
 
@@ -5466,9 +5421,43 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           default: compaction
 
+        - `cache_creation: BetaCacheCreation or null`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+          default: 0, minimum: 0
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+          default: 0, minimum: 0
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
       - `BetaAdvisorMessageIterationUsage object`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation or null`
 
@@ -5503,12 +5492,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage object`
 
@@ -5519,6 +5502,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation or null`
 
           Breakdown of cached tokens by TTL
@@ -5552,12 +5541,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -5639,6 +5622,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5669,23 +5658,21 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"end_user_binding_mismatch"`
 
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
-
 - `BetaRawMessageStreamEvent = BetaRawMessageStartEvent or BetaRawMessageDeltaEvent or BetaRawMessageStopEvent or 3 more`
 
   - `BetaRawMessageStartEvent object`
-
-    - `message: BetaMessage`
 
     - `type: "message_start"`
 
       default: message_start
 
+    - `message: BetaMessage`
+
   - `BetaRawMessageDeltaEvent object`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `context_management: BetaContextManagementResponse or null`
 
@@ -5704,10 +5691,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `stop_reason: BetaStopReason or null`
 
       - `stop_sequence: string or null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -5790,6 +5773,12 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5812,12 +5801,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
   - `BetaRawMessageStopEvent object`
 
     - `type: "message_stop"`
@@ -5826,9 +5809,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `BetaRawContentBlockStartEvent object`
 
-    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
+    - `type: "content_block_start"`
 
-      Response model for a file uploaded to the container.
+      default: content_block_start
+
+    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
       - `BetaTextBlock object`
 
@@ -5886,31 +5871,35 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `BetaRawContentBlockDeltaEvent object`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: BetaRawContentBlockDelta`
 
       - `BetaTextDelta object`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `BetaInputJSONDelta object`
+        - `text: string`
 
-        - `partial_json: string`
+      - `BetaInputJSONDelta object`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `BetaCitationsDelta object`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
@@ -5924,11 +5913,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `BetaCitationSearchResultLocation object`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `BetaThinkingDelta object`
+
+        - `type: "thinking_delta"`
+
+          default: thinking_delta
 
         - `estimated_tokens: number or null`
 
@@ -5938,21 +5927,21 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: "thinking_delta"`
-
-          default: thinking_delta
-
       - `BetaSignatureDelta object`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
       - `BetaCompactionContentBlockDelta object`
+
+        - `type: "compaction_delta"`
+
+          default: compaction_delta
 
         - `content: string or null`
 
@@ -5960,23 +5949,15 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: "compaction_delta"`
-
-          default: compaction_delta
-
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `BetaRawContentBlockStopEvent object`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
+
+    - `index: number`
 
 ### Example
 
@@ -6154,7 +6135,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -6202,6 +6183,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -6247,6 +6230,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+- `"anthropic-workspace-id": optional string`
 
 ### Body parameters
 
@@ -6309,11 +6294,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaTextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6340,6 +6325,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `BetaCitationCharLocationParam object`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -6356,9 +6343,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -6376,9 +6363,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -6406,9 +6393,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -6418,13 +6405,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -6456,13 +6443,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
           - `BetaBase64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -6478,8 +6467,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource object`
 
             - `type: "url"`
@@ -6488,11 +6475,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `BetaFileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6512,9 +6497,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaRequestDocumentBlock object`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
           - `BetaBase64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -6522,17 +6511,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of BetaContentBlockSourceContent`
 
@@ -6544,8 +6533,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                 - `BetaImageBlockParam object`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource object`
 
             - `type: "url"`
@@ -6554,11 +6541,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `BetaFileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6578,13 +6563,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaSearchResultBlockParam object`
 
+        - `type: "search_result"`
+
         - `content: array of BetaTextBlockParam`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6596,8 +6583,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -6605,6 +6590,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         - `citations: optional BetaCitationsConfigParam`
 
       - `BetaThinkingBlockParam object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -6616,17 +6603,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `BetaRedactedThinkingBlockParam object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `BetaToolUseBlockParam object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -6638,15 +6625,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           maxLength: 200, minLength: 1
 
-        - `type: "tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -6658,19 +6641,19 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120 object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string or null`
 
@@ -6680,11 +6663,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaToolResultBlockParam object`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6708,11 +6691,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -6727,6 +6710,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -6756,8 +6741,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
@@ -6778,25 +6761,25 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BetaBrowserStateChangeDownloadStarted object`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -6811,13 +6794,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -6841,13 +6824,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -6870,6 +6853,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlockParam object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -6895,15 +6880,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -6917,21 +6898,25 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaWebSearchToolResultBlockParam object`
 
+        - `type: "web_search_tool_result"`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age: optional string or null`
 
           - `BetaWebSearchToolRequestError object`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -6947,21 +6932,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -6975,9 +6954,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaWebFetchToolResultBlockParam object`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
           - `BetaWebFetchToolResultErrorBlockParam object`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -6999,13 +6982,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `BetaWebFetchBlockParam object`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: "web_fetch_result"`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: string`
 
@@ -7019,15 +7002,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -7041,9 +7020,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaAdvisorToolResultBlockParam object`
 
+        - `type: "advisor_tool_result"`
+
         - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
           - `BetaAdvisorToolResultErrorParam object`
+
+            - `type: "advisor_tool_result_error"`
 
             - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -7061,23 +7044,21 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
           - `BetaAdvisorResultBlockParam object`
 
-            - `text: string`
-
             - `type: "advisor_result"`
+
+            - `text: string`
 
             - `stop_reason: optional string or null`
 
           - `BetaAdvisorRedactedResultBlockParam object`
 
+            - `type: "advisor_redacted_result"`
+
             - `encrypted_content: string`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: "advisor_redacted_result"`
 
             - `stop_reason: optional string or null`
 
@@ -7085,19 +7066,19 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaCodeExecutionToolResultBlockParam object`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
-
           - `BetaCodeExecutionToolResultErrorParam object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -7109,15 +7090,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `BetaCodeExecutionResultBlockParam object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -7125,17 +7106,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `BetaEncryptedCodeExecutionResultBlockParam object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -7143,13 +7124,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7157,9 +7134,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaBashCodeExecutionToolResultBlockParam object`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
 
           - `BetaBashCodeExecutionToolResultErrorParam object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -7173,15 +7154,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BetaBashCodeExecutionResultBlockParam object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -7189,13 +7170,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7203,9 +7180,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -7219,11 +7200,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -7235,8 +7216,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines: optional number or null`
 
             - `start_line: optional number or null`
@@ -7245,9 +7224,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -7267,17 +7246,19 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaToolSearchToolResultBlockParam object`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
           - `BetaToolSearchToolResultErrorParam object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -7289,37 +7270,35 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaToolSearchToolSearchResultBlockParam object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of BetaToolReferenceBlockParam`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaMCPToolUseBlockParam object`
+
+        - `type: "mcp_tool_use"`
 
         - `id: string`
 
@@ -7333,19 +7312,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaRequestMCPToolResultBlockParam object`
 
+        - `type: "mcp_tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "mcp_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7357,11 +7334,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7376,9 +7353,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7416,12 +7393,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_addition"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -7430,32 +7404,30 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: "tool_reference"`
+
             - `name: string`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: "tool_reference"`
 
           - `BetaToolChangeMCPToolReference object`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: "mcp_tool_reference"`
+
             - `name: string`
 
             - `server_name: string`
-
-            - `type: "mcp_tool_reference"`
 
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: string`
-
             - `type: "mcp_toolset_reference"`
 
-        - `type: "tool_addition"`
+            - `server_name: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7469,12 +7441,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_removal"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -7491,8 +7460,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: "tool_removal"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7513,6 +7480,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: "fallback"`
 
         - `from: BetaFallbackInfoParam`
 
@@ -7603,8 +7572,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
         - `to: BetaFallbackInfoParam`
 
           Identifies one hop of a fallback transition.
-
-        - `type: "fallback"`
 
         - `trigger: optional unknown`
 
@@ -7772,9 +7739,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   maxItems: 20
 
-  - `name: string`
-
   - `type: "url"`
+
+  - `name: string`
 
   - `url: string`
 
@@ -7808,25 +7775,25 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+    - `type: "json_schema"`
+
     - `schema: map[unknown]`
 
       The JSON schema of the format
 
-    - `type: "json_schema"`
-
   - `task_budget: optional BetaTokenTaskBudget or null`
 
     User-configurable total token budget across contexts.
+
+    - `type: "tokens"`
+
+      The budget type. Currently only 'tokens' is supported.
 
     - `total: number`
 
       Total token budget across all contexts in the session.
 
       minimum: 1024
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
 
     - `remaining: optional number or null`
 
@@ -7852,11 +7819,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `array of BetaTextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -7874,6 +7841,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaThinkingConfigEnabled object`
 
+    - `type: "enabled"`
+
     - `budget_tokens: number`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -7883,8 +7852,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
       minimum: 1024
-
-    - `type: "enabled"`
 
     - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -7970,11 +7937,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use: optional boolean`
 
@@ -8054,6 +8021,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaTool object`
 
+    - `type: optional "custom" or null`
+
     - `input_schema: object`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -8108,17 +8077,15 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: optional "custom" or null`
-
   - `BetaToolBash20241022 object`
+
+    - `type: "bash_20241022"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8146,13 +8113,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolBash20250124 object`
 
+    - `type: "bash_20250124"`
+
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8180,13 +8147,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaCodeExecutionTool20250522 object`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8212,13 +8179,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaCodeExecutionTool20250825 object`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8246,13 +8213,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8280,13 +8247,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8331,6 +8298,18 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaBrowserTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -8668,18 +8647,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaBrowserTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaBrowserWaitConfig or null`
 
         `wait`'s config overrides.
@@ -8706,6 +8673,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolComputerUse20241022 object`
 
+    - `type: "computer_20241022"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -8723,8 +8692,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8758,13 +8725,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaMemoryTool20250818 object`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8792,6 +8759,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolComputerUse20250124 object`
 
+    - `type: "computer_20250124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -8809,8 +8778,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8844,13 +8811,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolTextEditor20241022 object`
 
+    - `type: "text_editor_20241022"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8878,6 +8845,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolComputerUse20251124 object`
 
+    - `type: "computer_20251124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -8895,8 +8864,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20251124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -8957,6 +8924,18 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaComputerTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
@@ -9126,18 +9105,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaComputerTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaComputerWaitConfig or null`
 
         `wait`'s config overrides.
@@ -9164,13 +9131,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolTextEditor20250124 object`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9198,13 +9165,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolTextEditor20250429 object`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9232,13 +9199,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolTextEditor20250728 object`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9272,13 +9239,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebSearchTool20250305 object`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9348,13 +9315,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebFetchTool20250910 object`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9404,13 +9371,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebSearchTool20260209 object`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9454,13 +9421,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebFetchTool20260209 object`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9512,13 +9479,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9572,13 +9539,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebSearchTool20260318 object`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9630,13 +9597,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaWebFetchTool20260318 object`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9698,6 +9665,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaAdvisorTool20260301 object`
 
+    - `type: "advisor_20260301"`
+
     - `model: Model`
 
       The model that will complete your prompt.
@@ -9709,8 +9678,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "advisor_20260301"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9752,17 +9719,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolSearchToolBm25_20251119 object`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9788,17 +9755,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `BetaToolSearchToolRegex20251119 object`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -9829,13 +9796,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: "mcp_toolset"`
+
     - `mcp_server_name: string`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: "mcp_toolset"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -9941,6 +9908,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 - `BetaAdvisorMessageIterationUsage object`
 
   Token usage for an advisor sub-inference iteration.
+
+  - `type: "advisor_message"`
+
+    Usage for an advisor sub-inference iteration
+
+    default: advisor_message
 
   - `cache_creation: BetaCacheCreation or null`
 
@@ -10064,15 +10037,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "advisor_message"`
-
-    Usage for an advisor sub-inference iteration
-
-    default: advisor_message
-
 ### Beta Advisor Redacted Result Block
 
 - `BetaAdvisorRedactedResultBlock object`
+
+  - `type: "advisor_redacted_result"`
+
+    default: advisor_redacted_result
 
   - `encrypted_content: string`
 
@@ -10082,19 +10053,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-  - `type: "advisor_redacted_result"`
-
-    default: advisor_redacted_result
-
 ### Beta Advisor Redacted Result Block Param
 
 - `BetaAdvisorRedactedResultBlockParam object`
 
+  - `type: "advisor_redacted_result"`
+
   - `encrypted_content: string`
 
     Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-  - `type: "advisor_redacted_result"`
 
   - `stop_reason: optional string or null`
 
@@ -10102,29 +10069,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaAdvisorResultBlock object`
 
+  - `type: "advisor_result"`
+
+    default: advisor_result
+
   - `stop_reason: string or null`
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: string`
 
-  - `type: "advisor_result"`
-
-    default: advisor_result
-
 ### Beta Advisor Result Block Param
 
 - `BetaAdvisorResultBlockParam object`
 
-  - `text: string`
-
   - `type: "advisor_result"`
+
+  - `text: string`
 
   - `stop_reason: optional string or null`
 
 ### Beta Advisor Tool 20260301
 
 - `BetaAdvisorTool20260301 object`
+
+  - `type: "advisor_20260301"`
 
   - `model: Model`
 
@@ -10214,8 +10183,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `type: "advisor_20260301"`
-
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
@@ -10275,9 +10242,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaAdvisorToolResultBlock object`
 
+  - `type: "advisor_tool_result"`
+
+    default: advisor_tool_result
+
   - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
     - `BetaAdvisorToolResultError object`
+
+      - `type: "advisor_tool_result_error"`
+
+        default: advisor_tool_result_error
 
       - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -10295,11 +10270,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"model_not_found"`
 
-      - `type: "advisor_tool_result_error"`
-
-        default: advisor_tool_result_error
-
     - `BetaAdvisorResultBlock object`
+
+      - `type: "advisor_result"`
+
+        default: advisor_result
 
       - `stop_reason: string or null`
 
@@ -10307,11 +10282,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `text: string`
 
-      - `type: "advisor_result"`
-
-        default: advisor_result
-
     - `BetaAdvisorRedactedResultBlock object`
+
+      - `type: "advisor_redacted_result"`
+
+        default: advisor_redacted_result
 
       - `encrypted_content: string`
 
@@ -10321,25 +10296,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-      - `type: "advisor_redacted_result"`
-
-        default: advisor_redacted_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "advisor_tool_result"`
-
-    default: advisor_tool_result
 
 ### Beta Advisor Tool Result Block Param
 
 - `BetaAdvisorToolResultBlockParam object`
 
+  - `type: "advisor_tool_result"`
+
   - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
     - `BetaAdvisorToolResultErrorParam object`
+
+      - `type: "advisor_tool_result_error"`
 
       - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -10357,31 +10328,27 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"model_not_found"`
 
-      - `type: "advisor_tool_result_error"`
-
     - `BetaAdvisorResultBlockParam object`
 
-      - `text: string`
-
       - `type: "advisor_result"`
+
+      - `text: string`
 
       - `stop_reason: optional string or null`
 
     - `BetaAdvisorRedactedResultBlockParam object`
 
+      - `type: "advisor_redacted_result"`
+
       - `encrypted_content: string`
 
         Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-      - `type: "advisor_redacted_result"`
 
       - `stop_reason: optional string or null`
 
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "advisor_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -10408,6 +10375,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaAdvisorToolResultError object`
 
+  - `type: "advisor_tool_result_error"`
+
+    default: advisor_tool_result_error
+
   - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
     - `"max_uses_exceeded"`
@@ -10423,15 +10394,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
     - `"model_not_found"`
-
-  - `type: "advisor_tool_result_error"`
-
-    default: advisor_tool_result_error
 
 ### Beta Advisor Tool Result Error Param
 
 - `BetaAdvisorToolResultErrorParam object`
 
+  - `type: "advisor_tool_result_error"`
+
   - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
     - `"max_uses_exceeded"`
@@ -10447,8 +10416,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
     - `"model_not_found"`
-
-  - `type: "advisor_tool_result_error"`
 
 ### Beta All Thinking Turns
 
@@ -10459,6 +10426,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Base64 Image Source
 
 - `BetaBase64ImageSource object`
+
+  - `type: "base64"`
 
   - `data: string`
 
@@ -10474,11 +10443,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"image/webp"`
 
-  - `type: "base64"`
-
 ### Beta Base64 PDF Source
 
 - `BetaBase64PDFSource object`
+
+  - `type: "base64"`
 
   - `data: string`
 
@@ -10486,57 +10455,57 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `media_type: "application/pdf"`
 
-  - `type: "base64"`
-
 ### Beta Bash Code Execution Output Block
 
 - `BetaBashCodeExecutionOutputBlock object`
-
-  - `file_id: string`
 
   - `type: "bash_code_execution_output"`
 
     default: bash_code_execution_output
 
+  - `file_id: string`
+
 ### Beta Bash Code Execution Output Block Param
 
 - `BetaBashCodeExecutionOutputBlockParam object`
 
-  - `file_id: string`
-
   - `type: "bash_code_execution_output"`
+
+  - `file_id: string`
 
 ### Beta Bash Code Execution Result Block
 
 - `BetaBashCodeExecutionResultBlock object`
 
-  - `content: array of BetaBashCodeExecutionOutputBlock`
+  - `type: "bash_code_execution_result"`
 
-    - `file_id: string`
+    default: bash_code_execution_result
+
+  - `content: array of BetaBashCodeExecutionOutputBlock`
 
     - `type: "bash_code_execution_output"`
 
       default: bash_code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "bash_code_execution_result"`
-
-    default: bash_code_execution_result
 
 ### Beta Bash Code Execution Result Block Param
 
 - `BetaBashCodeExecutionResultBlockParam object`
 
+  - `type: "bash_code_execution_result"`
+
   - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-    - `file_id: string`
-
     - `type: "bash_code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -10544,67 +10513,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `stdout: string`
 
-  - `type: "bash_code_execution_result"`
-
 ### Beta Bash Code Execution Tool Result Block
 
 - `BetaBashCodeExecutionToolResultBlock object`
-
-  - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
-
-    - `BetaBashCodeExecutionToolResultError object`
-
-      - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
-
-        - `"invalid_tool_input"`
-
-        - `"unavailable"`
-
-        - `"too_many_requests"`
-
-        - `"execution_time_exceeded"`
-
-        - `"output_file_too_large"`
-
-      - `type: "bash_code_execution_tool_result_error"`
-
-        default: bash_code_execution_tool_result_error
-
-    - `BetaBashCodeExecutionResultBlock object`
-
-      - `content: array of BetaBashCodeExecutionOutputBlock`
-
-        - `file_id: string`
-
-        - `type: "bash_code_execution_output"`
-
-          default: bash_code_execution_output
-
-      - `return_code: number`
-
-      - `stderr: string`
-
-      - `stdout: string`
-
-      - `type: "bash_code_execution_result"`
-
-        default: bash_code_execution_result
-
-  - `tool_use_id: string`
-
-    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `type: "bash_code_execution_tool_result"`
 
     default: bash_code_execution_tool_result
 
-### Beta Bash Code Execution Tool Result Block Param
+  - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
-- `BetaBashCodeExecutionToolResultBlockParam object`
+    - `BetaBashCodeExecutionToolResultError object`
 
-  - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
+      - `type: "bash_code_execution_tool_result_error"`
 
-    - `BetaBashCodeExecutionToolResultErrorParam object`
+        default: bash_code_execution_tool_result_error
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -10618,15 +10541,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"output_file_too_large"`
 
-      - `type: "bash_code_execution_tool_result_error"`
+    - `BetaBashCodeExecutionResultBlock object`
 
-    - `BetaBashCodeExecutionResultBlockParam object`
+      - `type: "bash_code_execution_result"`
 
-      - `content: array of BetaBashCodeExecutionOutputBlockParam`
+        default: bash_code_execution_result
 
-        - `file_id: string`
+      - `content: array of BetaBashCodeExecutionOutputBlock`
 
         - `type: "bash_code_execution_output"`
+
+          default: bash_code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -10634,13 +10561,53 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `stdout: string`
 
-      - `type: "bash_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
+### Beta Bash Code Execution Tool Result Block Param
+
+- `BetaBashCodeExecutionToolResultBlockParam object`
+
   - `type: "bash_code_execution_tool_result"`
+
+  - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
+
+    - `BetaBashCodeExecutionToolResultErrorParam object`
+
+      - `type: "bash_code_execution_tool_result_error"`
+
+      - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+        - `"invalid_tool_input"`
+
+        - `"unavailable"`
+
+        - `"too_many_requests"`
+
+        - `"execution_time_exceeded"`
+
+        - `"output_file_too_large"`
+
+    - `BetaBashCodeExecutionResultBlockParam object`
+
+      - `type: "bash_code_execution_result"`
+
+      - `content: array of BetaBashCodeExecutionOutputBlockParam`
+
+        - `type: "bash_code_execution_output"`
+
+        - `file_id: string`
+
+      - `return_code: number`
+
+      - `stderr: string`
+
+      - `stdout: string`
+
+  - `tool_use_id: string`
+
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -10667,6 +10634,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaBashCodeExecutionToolResultError object`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
+    default: bash_code_execution_tool_result_error
+
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
     - `"invalid_tool_input"`
@@ -10678,15 +10649,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
-
-    default: bash_code_execution_tool_result_error
 
 ### Beta Bash Code Execution Tool Result Error Param
 
 - `BetaBashCodeExecutionToolResultErrorParam object`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
     - `"invalid_tool_input"`
@@ -10698,8 +10667,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
 
 ### Beta Browser Close Tab Config
 
@@ -11077,6 +11044,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   browser toolset member `tool_use`. The server renders the
   model-visible text from it; the model never sees the raw fields.
 
+  - `type: "browser_state"`
+
   - `tabs: array of BetaBrowserStateTabEntry`
 
     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
@@ -11104,8 +11073,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `active: optional boolean`
 
       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
-
-  - `type: "browser_state"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -11144,25 +11111,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       during a failed call gets no deferred `tab_opened`; it simply appears
       in the next result's `tabs` inventory.
 
+      - `type: "tab_opened"`
+
       - `tab_id: string`
 
         The `tab_id` of the opened tab, present in `tabs`.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `type: "tab_opened"`
-
     - `BetaBrowserStateChangeDownloadStarted object`
 
       A file download that started during this call.
+
+      - `type: "download_started"`
 
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_started"`
 
       - `url: string`
 
@@ -11177,13 +11144,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       `download_started`, when the download finished during the call that
       started it (at most one state change per `download_id` per result).
 
+      - `type: "download_completed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_completed"`
 
       - `url: string`
 
@@ -11207,13 +11174,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       A file download that failed — or was cancelled — during this call.
 
+      - `type: "download_failed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_failed"`
 
       - `url: string`
 
@@ -11231,14 +11198,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaBrowserStateChange = BetaBrowserStateChangeTabOpened or BetaBrowserStateChangeDownloadStarted or BetaBrowserStateChangeDownloadCompleted or BetaBrowserStateChangeDownloadFailed`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `BetaBrowserStateChangeTabOpened object`
 
     A tab this call's execution opened that remains open at its end —
@@ -11249,25 +11208,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     during a failed call gets no deferred `tab_opened`; it simply appears
     in the next result's `tabs` inventory.
 
+    - `type: "tab_opened"`
+
     - `tab_id: string`
 
       The `tab_id` of the opened tab, present in `tabs`.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type: "tab_opened"`
-
   - `BetaBrowserStateChangeDownloadStarted object`
 
     A file download that started during this call.
+
+    - `type: "download_started"`
 
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_started"`
 
     - `url: string`
 
@@ -11282,13 +11241,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     `download_started`, when the download finished during the call that
     started it (at most one state change per `download_id` per result).
 
+    - `type: "download_completed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_completed"`
 
     - `url: string`
 
@@ -11312,13 +11271,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     A file download that failed — or was cancelled — during this call.
 
+    - `type: "download_failed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_failed"`
 
     - `url: string`
 
@@ -11341,13 +11300,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   `download_started`, when the download finished during the call that
   started it (at most one state change per `download_id` per result).
 
+  - `type: "download_completed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_completed"`
 
   - `url: string`
 
@@ -11373,13 +11332,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   A file download that failed — or was cancelled — during this call.
 
+  - `type: "download_failed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_failed"`
 
   - `url: string`
 
@@ -11399,13 +11358,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   A file download that started during this call.
 
+  - `type: "download_started"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_started"`
 
   - `url: string`
 
@@ -11425,13 +11384,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   during a failed call gets no deferred `tab_opened`; it simply appears
   in the next result's `tabs` inventory.
 
+  - `type: "tab_opened"`
+
   - `tab_id: string`
 
     The `tab_id` of the opened tab, present in `tabs`.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "tab_opened"`
 
 ### Beta Browser State Tab Entry
 
@@ -11522,6 +11481,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     accepted key, and a member's defaults apply wherever its key is
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
+
+    - `type: optional BetaBrowserTypeConfig or null`
+
+      `type`'s config overrides.
+
+      - `defer_loading: optional boolean or null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled: optional boolean or null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -11859,18 +11830,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type: optional BetaBrowserTypeConfig or null`
-
-      `type`'s config overrides.
-
-      - `defer_loading: optional boolean or null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled: optional boolean or null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait: optional BetaBrowserWaitConfig or null`
 
       `wait`'s config overrides.
@@ -11905,6 +11864,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type: optional BetaBrowserTypeConfig or null`
+
+    `type`'s config overrides.
+
+    - `defer_loading: optional boolean or null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled: optional boolean or null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -12242,18 +12213,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type: optional BetaBrowserTypeConfig or null`
-
-    `type`'s config overrides.
-
-    - `defer_loading: optional boolean or null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled: optional boolean or null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait: optional BetaBrowserWaitConfig or null`
 
     `wait`'s config overrides.
@@ -12375,25 +12334,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCacheMissMessagesChanged object`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "messages_changed"`
 
     default: messages_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Model Changed
 
 - `BetaCacheMissModelChanged object`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "model_changed"`
 
     default: model_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Previous Message Not Found
 
@@ -12407,25 +12366,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCacheMissSystemChanged object`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "system_changed"`
 
     default: system_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Tools Changed
 
 - `BetaCacheMissToolsChanged object`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "tools_changed"`
 
     default: tools_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Unavailable
 
@@ -12439,6 +12398,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCitationCharLocation object`
 
+  - `type: "char_location"`
+
+    default: char_location
+
   - `cited_text: string`
 
   - `document_index: number`
@@ -12455,13 +12418,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "char_location"`
-
-    default: char_location
-
 ### Beta Citation Char Location Param
 
 - `BetaCitationCharLocationParam object`
+
+  - `type: "char_location"`
 
   - `cited_text: string`
 
@@ -12478,8 +12439,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `start_char_index: number`
 
     minimum: 0
-
-  - `type: "char_location"`
 
 ### Beta Citation Config
 
@@ -12493,6 +12452,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCitationContentBlockLocation object`
 
+  - `type: "content_block_location"`
+
+    default: content_block_location
+
   - `cited_text: string`
 
     The full text of the cited block range, concatenated.
@@ -12518,15 +12481,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     0-based index of the first cited block in the source's `content` array.
 
     minimum: 0
-
-  - `type: "content_block_location"`
-
-    default: content_block_location
 
 ### Beta Citation Content Block Location Param
 
 - `BetaCitationContentBlockLocationParam object`
 
+  - `type: "content_block_location"`
+
   - `cited_text: string`
 
     The full text of the cited block range, concatenated.
@@ -12553,11 +12514,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "content_block_location"`
-
 ### Beta Citation Page Location
 
 - `BetaCitationPageLocation object`
+
+  - `type: "page_location"`
+
+    default: page_location
 
   - `cited_text: string`
 
@@ -12575,13 +12538,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 1
 
-  - `type: "page_location"`
-
-    default: page_location
-
 ### Beta Citation Page Location Param
 
 - `BetaCitationPageLocationParam object`
+
+  - `type: "page_location"`
 
   - `cited_text: string`
 
@@ -12599,49 +12560,49 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 1
 
-  - `type: "page_location"`
-
 ### Beta Citation Search Result Location
 
 - `BetaCitationSearchResultLocation object`
-
-  - `cited_text: string`
-
-    The full text of the cited block range, concatenated.
-
-    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-  - `end_block_index: number`
-
-    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-  - `search_result_index: number`
-
-    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-    minimum: 0
-
-  - `source: string`
-
-  - `start_block_index: number`
-
-    0-based index of the first cited block in the source's `content` array.
-
-    minimum: 0
-
-  - `title: string or null`
 
   - `type: "search_result_location"`
 
     default: search_result_location
 
+  - `cited_text: string`
+
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+  - `end_block_index: number`
+
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+  - `search_result_index: number`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
+
+    minimum: 0
+
+  - `source: string`
+
+  - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
+
+    minimum: 0
+
+  - `title: string or null`
+
 ### Beta Citation Search Result Location Param
 
 - `BetaCitationSearchResultLocationParam object`
+
+  - `type: "search_result_location"`
 
   - `cited_text: string`
 
@@ -12673,11 +12634,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `title: string or null`
 
-  - `type: "search_result_location"`
-
 ### Beta Citation Web Search Result Location Param
 
 - `BetaCitationWebSearchResultLocationParam object`
+
+  - `type: "web_search_result_location"`
 
   - `cited_text: string`
 
@@ -12686,8 +12647,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `title: string or null`
 
     maxLength: 512, minLength: 1
-
-  - `type: "web_search_result_location"`
 
   - `url: string`
 
@@ -12703,9 +12662,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCitationsDelta object`
 
+  - `type: "citations_delta"`
+
+    default: citations_delta
+
   - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
     - `BetaCitationCharLocation object`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -12723,11 +12690,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `BetaCitationPageLocation object`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -12745,11 +12712,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `BetaCitationContentBlockLocation object`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -12777,11 +12744,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `BetaCitationsWebSearchResultLocation object`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -12791,13 +12758,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `BetaCitationSearchResultLocation object`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -12829,17 +12796,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `title: string or null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
-  - `type: "citations_delta"`
-
-    default: citations_delta
-
 ### Beta Citations Web Search Result Location
 
 - `BetaCitationsWebSearchResultLocation object`
+
+  - `type: "web_search_result_location"`
+
+    default: web_search_result_location
 
   - `cited_text: string`
 
@@ -12848,10 +12811,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `title: string or null`
 
     maxLength: 512
-
-  - `type: "web_search_result_location"`
-
-    default: web_search_result_location
 
   - `url: string`
 
@@ -12883,6 +12842,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaClearThinking20251015EditResponse object`
 
+  - `type: "clear_thinking_20251015"`
+
+    The type of context management edit applied.
+
+    default: clear_thinking_20251015
+
   - `cleared_input_tokens: number`
 
     Number of input tokens cleared by this edit.
@@ -12894,12 +12859,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Number of thinking turns that were cleared.
 
     minimum: 0
-
-  - `type: "clear_thinking_20251015"`
-
-    The type of context management edit applied.
-
-    default: clear_thinking_20251015
 
 ### Beta Clear Tool Uses 20250919 Edit
 
@@ -12963,6 +12922,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaClearToolUses20250919EditResponse object`
 
+  - `type: "clear_tool_uses_20250919"`
+
+    The type of context management edit applied.
+
+    default: clear_tool_uses_20250919
+
   - `cleared_input_tokens: number`
 
     Number of input tokens cleared by this edit.
@@ -12975,61 +12940,57 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "clear_tool_uses_20250919"`
-
-    The type of context management edit applied.
-
-    default: clear_tool_uses_20250919
-
 ### Beta Code Execution Output Block
 
 - `BetaCodeExecutionOutputBlock object`
-
-  - `file_id: string`
 
   - `type: "code_execution_output"`
 
     default: code_execution_output
 
+  - `file_id: string`
+
 ### Beta Code Execution Output Block Param
 
 - `BetaCodeExecutionOutputBlockParam object`
 
-  - `file_id: string`
-
   - `type: "code_execution_output"`
+
+  - `file_id: string`
 
 ### Beta Code Execution Result Block
 
 - `BetaCodeExecutionResultBlock object`
 
-  - `content: array of BetaCodeExecutionOutputBlock`
+  - `type: "code_execution_result"`
 
-    - `file_id: string`
+    default: code_execution_result
+
+  - `content: array of BetaCodeExecutionOutputBlock`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "code_execution_result"`
-
-    default: code_execution_result
 
 ### Beta Code Execution Result Block Param
 
 - `BetaCodeExecutionResultBlockParam object`
 
+  - `type: "code_execution_result"`
+
   - `content: array of BetaCodeExecutionOutputBlockParam`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -13037,19 +12998,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `stdout: string`
 
-  - `type: "code_execution_result"`
-
 ### Beta Code Execution Tool 20250522
 
 - `BetaCodeExecutionTool20250522 object`
+
+  - `type: "code_execution_20250522"`
 
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250522"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -13094,13 +13053,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCodeExecutionTool20250825 object`
 
+  - `type: "code_execution_20250825"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250825"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -13147,13 +13106,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+  - `type: "code_execution_20260120"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260120"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -13200,13 +13159,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution tool with REPL state persistence.
 
+  - `type: "code_execution_20260521"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260521"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -13251,11 +13210,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCodeExecutionToolResultBlock object`
 
+  - `type: "code_execution_tool_result"`
+
+    default: code_execution_tool_result
+
   - `content: BetaCodeExecutionToolResultBlockContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `BetaCodeExecutionToolResultError object`
+
+      - `type: "code_execution_tool_result_error"`
+
+        default: code_execution_tool_result_error
 
       - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13267,19 +13232,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
-        default: code_execution_tool_result_error
-
     - `BetaCodeExecutionResultBlock object`
 
-      - `content: array of BetaCodeExecutionOutputBlock`
+      - `type: "code_execution_result"`
 
-        - `file_id: string`
+        default: code_execution_result
+
+      - `content: array of BetaCodeExecutionOutputBlock`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -13287,21 +13252,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
-        default: code_execution_result
-
     - `BetaEncryptedCodeExecutionResultBlock object`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
-      - `content: array of BetaCodeExecutionOutputBlock`
+      - `type: "encrypted_code_execution_result"`
 
-        - `file_id: string`
+        default: encrypted_code_execution_result
+
+      - `content: array of BetaCodeExecutionOutputBlock`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -13309,25 +13274,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
-        default: encrypted_code_execution_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
-
-    default: code_execution_tool_result
 
 ### Beta Code Execution Tool Result Block Content
 
 - `BetaCodeExecutionToolResultBlockContent = BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `BetaCodeExecutionToolResultError object`
+
+    - `type: "code_execution_tool_result_error"`
+
+      default: code_execution_tool_result_error
 
     - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13339,19 +13298,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
-      default: code_execution_tool_result_error
-
   - `BetaCodeExecutionResultBlock object`
 
-    - `content: array of BetaCodeExecutionOutputBlock`
+    - `type: "code_execution_result"`
 
-      - `file_id: string`
+      default: code_execution_result
+
+    - `content: array of BetaCodeExecutionOutputBlock`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -13359,21 +13318,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
-      default: code_execution_result
-
   - `BetaEncryptedCodeExecutionResultBlock object`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
-    - `content: array of BetaCodeExecutionOutputBlock`
+    - `type: "encrypted_code_execution_result"`
 
-      - `file_id: string`
+      default: encrypted_code_execution_result
+
+    - `content: array of BetaCodeExecutionOutputBlock`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -13381,19 +13340,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
-      default: encrypted_code_execution_result
-
 ### Beta Code Execution Tool Result Block Param
 
 - `BetaCodeExecutionToolResultBlockParam object`
 
+  - `type: "code_execution_tool_result"`
+
   - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `BetaCodeExecutionToolResultErrorParam object`
+
+      - `type: "code_execution_tool_result_error"`
 
       - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13405,15 +13362,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
     - `BetaCodeExecutionResultBlockParam object`
+
+      - `type: "code_execution_result"`
 
       - `content: array of BetaCodeExecutionOutputBlockParam`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -13421,17 +13378,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
     - `BetaEncryptedCodeExecutionResultBlockParam object`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
+      - `type: "encrypted_code_execution_result"`
+
       - `content: array of BetaCodeExecutionOutputBlockParam`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -13439,13 +13396,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -13472,9 +13425,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCodeExecutionToolResultBlockParamContent = BetaCodeExecutionToolResultErrorParam or BetaCodeExecutionResultBlockParam or BetaEncryptedCodeExecutionResultBlockParam`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `BetaCodeExecutionToolResultErrorParam object`
+
+    - `type: "code_execution_tool_result_error"`
 
     - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13486,15 +13439,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
   - `BetaCodeExecutionResultBlockParam object`
+
+    - `type: "code_execution_result"`
 
     - `content: array of BetaCodeExecutionOutputBlockParam`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -13502,17 +13455,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
   - `BetaEncryptedCodeExecutionResultBlockParam object`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
+    - `type: "encrypted_code_execution_result"`
+
     - `content: array of BetaCodeExecutionOutputBlockParam`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -13520,11 +13473,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
 ### Beta Code Execution Tool Result Error
 
 - `BetaCodeExecutionToolResultError object`
+
+  - `type: "code_execution_tool_result_error"`
+
+    default: code_execution_tool_result_error
 
   - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13535,10 +13490,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
-
-    default: code_execution_tool_result_error
 
 ### Beta Code Execution Tool Result Error Code
 
@@ -13556,6 +13507,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCodeExecutionToolResultErrorParam object`
 
+  - `type: "code_execution_tool_result_error"`
+
   - `error_code: BetaCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -13565,8 +13518,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
 
 ### Beta Compact 20260112 Edit
 
@@ -13604,6 +13555,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   summary (e.g., malformed output from the model). Clients may round-trip
   compaction blocks with null content; the server treats them as no-ops.
 
+  - `type: "compaction"`
+
+    default: compaction
+
   - `content: string or null`
 
     Summary of compacted content, or null if compaction failed
@@ -13611,10 +13566,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `encrypted_content: string or null`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
-
-  - `type: "compaction"`
-
-    default: compaction
 
 ### Beta Compaction Block Param
 
@@ -13663,21 +13614,27 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaCompactionContentBlockDelta object`
 
+  - `type: "compaction_delta"`
+
+    default: compaction_delta
+
   - `content: string or null`
 
   - `encrypted_content: string or null`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `type: "compaction_delta"`
-
-    default: compaction_delta
-
 ### Beta Compaction Iteration Usage
 
 - `BetaCompactionIterationUsage object`
 
   Token usage for a compaction iteration.
+
+  - `type: "compaction"`
+
+    Usage for a compaction iteration
+
+    default: compaction
 
   - `cache_creation: BetaCacheCreation or null`
 
@@ -13718,12 +13675,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The number of output tokens which were used.
 
     minimum: 0
-
-  - `type: "compaction"`
-
-    Usage for a compaction iteration
-
-    default: compaction
 
 ### Beta Computer Cursor Position Config
 
@@ -13952,6 +13903,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
 
+    - `type: optional BetaComputerTypeConfig or null`
+
+      `type`'s config overrides.
+
+      - `defer_loading: optional boolean or null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled: optional boolean or null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
       `cursor_position`'s config overrides.
@@ -14120,18 +14083,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type: optional BetaComputerTypeConfig or null`
-
-      `type`'s config overrides.
-
-      - `defer_loading: optional boolean or null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled: optional boolean or null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait: optional BetaComputerWaitConfig or null`
 
       `wait`'s config overrides.
@@ -14166,6 +14117,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type: optional BetaComputerTypeConfig or null`
+
+    `type`'s config overrides.
+
+    - `defer_loading: optional boolean or null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled: optional boolean or null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
@@ -14335,18 +14298,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type: optional BetaComputerTypeConfig or null`
-
-    `type`'s config overrides.
-
-    - `defer_loading: optional boolean or null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled: optional boolean or null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait: optional BetaComputerWaitConfig or null`
 
     `wait`'s config overrides.
@@ -14447,12 +14398,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Skills loaded in the container
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" or "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14460,6 +14405,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version: string`
 
@@ -14483,12 +14434,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     maxItems: 20
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" or "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14496,6 +14441,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version: optional string`
 
@@ -14509,12 +14460,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   A skill that was loaded in a container (response model).
 
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
-
   - `type: "anthropic" or "custom"`
 
     Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14522,6 +14467,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version: string`
 
@@ -14535,11 +14486,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Response model for a file uploaded to the container.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
 
     default: container_upload
+
+  - `file_id: string`
 
 ### Beta Container Upload Block Param
 
@@ -14548,9 +14499,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
+
+  - `file_id: string`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -14577,9 +14528,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaContentBlock = BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
-  Response model for a file uploaded to the container.
-
   - `BetaTextBlock object`
+
+    - `type: "text"`
+
+      default: text
 
     - `citations: array of BetaTextCitation or null`
 
@@ -14588,6 +14541,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
       - `BetaCitationCharLocation object`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -14605,11 +14562,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `BetaCitationPageLocation object`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -14627,11 +14584,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `BetaCitationContentBlockLocation object`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -14659,11 +14616,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `BetaCitationsWebSearchResultLocation object`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -14673,13 +14630,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `BetaCitationSearchResultLocation object`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -14711,19 +14668,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string or null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
     - `text: string`
 
-      maxLength: 5000000, minLength: 0
-
-    - `type: "text"`
-
-      default: text
+      minLength: 0
 
   - `BetaThinkingBlock object`
+
+    - `type: "thinking"`
+
+      default: thinking
 
     - `signature: string`
 
@@ -14737,11 +14690,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The text of Claude's thinking process for this block.
 
-    - `type: "thinking"`
-
-      default: thinking
-
   - `BetaRedactedThinkingBlock object`
+
+    - `type: "redacted_thinking"`
+
+      default: redacted_thinking
 
     - `data: string`
 
@@ -14751,11 +14704,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-    - `type: "redacted_thinking"`
-
-      default: redacted_thinking
-
   - `BetaToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
 
     - `id: string`
 
@@ -14767,13 +14720,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minLength: 1
 
-    - `type: "tool_use"`
-
-      default: tool_use
-
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -14785,19 +14732,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `BetaServerToolCaller20260120 object`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `toolset_name: optional string or null`
 
@@ -14806,6 +14753,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
   - `BetaServerToolUseBlock object`
+
+    - `type: "server_tool_use"`
+
+      default: server_tool_use
 
     - `id: string`
 
@@ -14831,13 +14782,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
-      default: server_tool_use
-
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -14851,9 +14796,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebSearchToolResultBlock object`
 
+    - `type: "web_search_tool_result"`
+
+      default: web_search_tool_result
+
     - `content: BetaWebSearchToolResultBlockContent`
 
       - `BetaWebSearchToolResultError object`
+
+        - `type: "web_search_tool_result_error"`
+
+          default: web_search_tool_result_error
 
         - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -14869,11 +14822,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
-          default: web_search_tool_result_error
-
       - `array of BetaWebSearchResultBlock`
+
+        - `type: "web_search_result"`
+
+          default: web_search_result
 
         - `encrypted_content: string`
 
@@ -14881,23 +14834,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string`
 
-        - `type: "web_search_result"`
-
-          default: web_search_result
-
         - `url: string`
 
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "web_search_tool_result"`
-
-      default: web_search_tool_result
-
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -14911,9 +14854,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebFetchToolResultBlock object`
 
+    - `type: "web_fetch_tool_result"`
+
+      default: web_fetch_tool_result
+
     - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
       - `BetaWebFetchToolResultErrorBlock object`
+
+        - `type: "web_fetch_tool_result_error"`
+
+          default: web_fetch_tool_result_error
 
         - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -14935,13 +14886,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
-
-          default: web_fetch_tool_result_error
+          - `"content_too_large"`
 
       - `BetaWebFetchBlock object`
 
+        - `type: "web_fetch_result"`
+
+          default: web_fetch_result
+
         - `content: BetaDocumentBlock`
+
+          - `type: "document"`
+
+            default: document
 
           - `citations: BetaCitationConfig or null`
 
@@ -14955,37 +14912,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `BetaBase64PDFSource object`
 
+              - `type: "base64"`
+
               - `data: string`
 
                 format: byte
 
               - `media_type: "application/pdf"`
 
-              - `type: "base64"`
-
             - `BetaPlainTextSource object`
+
+              - `type: "text"`
 
               - `data: string`
 
               - `media_type: "text/plain"`
 
-              - `type: "text"`
-
           - `title: string or null`
 
             The title of the document
 
-          - `type: "document"`
-
-            default: document
-
         - `retrieved_at: string or null`
 
           ISO 8601 timestamp when the content was retrieved
-
-        - `type: "web_fetch_result"`
-
-          default: web_fetch_result
 
         - `url: string`
 
@@ -14995,13 +14944,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "web_fetch_tool_result"`
-
-      default: web_fetch_tool_result
-
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -15015,9 +14958,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaAdvisorToolResultBlock object`
 
+    - `type: "advisor_tool_result"`
+
+      default: advisor_tool_result
+
     - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
       - `BetaAdvisorToolResultError object`
+
+        - `type: "advisor_tool_result_error"`
+
+          default: advisor_tool_result_error
 
         - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -15035,11 +14986,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"model_not_found"`
 
-        - `type: "advisor_tool_result_error"`
-
-          default: advisor_tool_result_error
-
       - `BetaAdvisorResultBlock object`
+
+        - `type: "advisor_result"`
+
+          default: advisor_result
 
         - `stop_reason: string or null`
 
@@ -15047,11 +14998,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `text: string`
 
-        - `type: "advisor_result"`
-
-          default: advisor_result
-
       - `BetaAdvisorRedactedResultBlock object`
+
+        - `type: "advisor_redacted_result"`
+
+          default: advisor_redacted_result
 
         - `encrypted_content: string`
 
@@ -15061,25 +15012,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-        - `type: "advisor_redacted_result"`
-
-          default: advisor_redacted_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "advisor_tool_result"`
-
-      default: advisor_tool_result
-
   - `BetaCodeExecutionToolResultBlock object`
+
+    - `type: "code_execution_tool_result"`
+
+      default: code_execution_tool_result
 
     - `content: BetaCodeExecutionToolResultBlockContent`
 
-      Code execution result with encrypted stdout for PFC + web_search results.
-
       - `BetaCodeExecutionToolResultError object`
+
+        - `type: "code_execution_tool_result_error"`
+
+          default: code_execution_tool_result_error
 
         - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -15091,19 +15040,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
-          default: code_execution_tool_result_error
-
       - `BetaCodeExecutionResultBlock object`
 
-        - `content: array of BetaCodeExecutionOutputBlock`
+        - `type: "code_execution_result"`
 
-          - `file_id: string`
+          default: code_execution_result
+
+        - `content: array of BetaCodeExecutionOutputBlock`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -15111,21 +15060,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
-          default: code_execution_result
-
       - `BetaEncryptedCodeExecutionResultBlock object`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `content: array of BetaCodeExecutionOutputBlock`
+        - `type: "encrypted_code_execution_result"`
 
-          - `file_id: string`
+          default: encrypted_code_execution_result
+
+        - `content: array of BetaCodeExecutionOutputBlock`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -15133,23 +15082,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
-          default: encrypted_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "code_execution_tool_result"`
-
-      default: code_execution_tool_result
-
   - `BetaBashCodeExecutionToolResultBlock object`
+
+    - `type: "bash_code_execution_tool_result"`
+
+      default: bash_code_execution_tool_result
 
     - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
       - `BetaBashCodeExecutionToolResultError object`
+
+        - `type: "bash_code_execution_tool_result_error"`
+
+          default: bash_code_execution_tool_result_error
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -15163,19 +15112,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
-          default: bash_code_execution_tool_result_error
-
       - `BetaBashCodeExecutionResultBlock object`
 
-        - `content: array of BetaBashCodeExecutionOutputBlock`
+        - `type: "bash_code_execution_result"`
 
-          - `file_id: string`
+          default: bash_code_execution_result
+
+        - `content: array of BetaBashCodeExecutionOutputBlock`
 
           - `type: "bash_code_execution_output"`
 
             default: bash_code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -15183,23 +15132,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
-          default: bash_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "bash_code_execution_tool_result"`
-
-      default: bash_code_execution_tool_result
-
   - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+    - `type: "text_editor_code_execution_tool_result"`
+
+      default: text_editor_code_execution_tool_result
 
     - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
       - `BetaTextEditorCodeExecutionToolResultError object`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
+
+          default: text_editor_code_execution_tool_result_error
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -15215,11 +15164,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `error_message: string or null`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
-          default: text_editor_code_execution_tool_result_error
-
       - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+        - `type: "text_editor_code_execution_view_result"`
+
+          default: text_editor_code_execution_view_result
 
         - `content: string`
 
@@ -15237,19 +15186,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `total_lines: number or null`
 
-        - `type: "text_editor_code_execution_view_result"`
-
-          default: text_editor_code_execution_view_result
-
       - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-        - `is_file_update: boolean`
 
         - `type: "text_editor_code_execution_create_result"`
 
           default: text_editor_code_execution_create_result
 
+        - `is_file_update: boolean`
+
       - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+        - `type: "text_editor_code_execution_str_replace_result"`
+
+          default: text_editor_code_execution_str_replace_result
 
         - `lines: array of string or null`
 
@@ -15261,23 +15210,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `old_start: number or null`
 
-        - `type: "text_editor_code_execution_str_replace_result"`
-
-          default: text_editor_code_execution_str_replace_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
-      default: text_editor_code_execution_tool_result
-
   - `BetaToolSearchToolResultBlock object`
+
+    - `type: "tool_search_tool_result"`
+
+      default: tool_search_tool_result
 
     - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
       - `BetaToolSearchToolResultError object`
+
+        - `type: "tool_search_tool_result_error"`
+
+          default: tool_search_tool_result_error
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -15291,35 +15240,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `error_message: string or null`
 
-        - `type: "tool_search_tool_result_error"`
-
-          default: tool_search_tool_result_error
-
       - `BetaToolSearchToolSearchResultBlock object`
-
-        - `tool_references: array of BetaToolReferenceBlock`
-
-          - `tool_name: string`
-
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
-
-            default: tool_reference
 
         - `type: "tool_search_tool_search_result"`
 
           default: tool_search_tool_search_result
 
+        - `tool_references: array of BetaToolReferenceBlock`
+
+          - `type: "tool_reference"`
+
+            default: tool_reference
+
+          - `tool_name: string`
+
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "tool_search_tool_result"`
-
-      default: tool_search_tool_result
-
   - `BetaMCPToolUseBlock object`
+
+    - `type: "mcp_tool_use"`
+
+      default: mcp_tool_use
 
     - `id: string`
 
@@ -15335,17 +15280,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The name of the MCP server
 
-    - `type: "mcp_tool_use"`
-
-      default: mcp_tool_use
-
   - `BetaMCPToolResultBlock object`
+
+    - `type: "mcp_tool_result"`
+
+      default: mcp_tool_result
 
     - `content: string or array of BetaTextBlock`
 
       - `string`
 
       - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+        - `type: "text"`
+
+          default: text
 
         - `citations: array of BetaTextCitation or null`
 
@@ -15355,11 +15304,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
-
-          default: text
+          minLength: 0
 
     - `is_error: boolean`
 
@@ -15369,19 +15314,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type: "mcp_tool_result"`
-
-      default: mcp_tool_result
-
   - `BetaContainerUploadBlock object`
 
     Response model for a file uploaded to the container.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
 
       default: container_upload
+
+    - `file_id: string`
 
   - `BetaCompactionBlock object`
 
@@ -15391,6 +15332,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     summary (e.g., malformed output from the model). Clients may round-trip
     compaction blocks with null content; the server treats them as no-ops.
 
+    - `type: "compaction"`
+
+      default: compaction
+
     - `content: string or null`
 
       Summary of compacted content, or null if compaction failed
@@ -15398,10 +15343,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `encrypted_content: string or null`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
-
-    - `type: "compaction"`
-
-      default: compaction
 
   - `BetaFallbackBlock object`
 
@@ -15416,6 +15357,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The block is treated like a server-tool content block for streaming: it
     arrives via the standard `content_block_start` / `content_block_stop`
     pair and carries no deltas.
+
+    - `type: "fallback"`
+
+      default: fallback
 
     - `from: BetaFallbackInfo`
 
@@ -15511,6 +15456,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       What caused the `from` model to hand over at this hop.
 
+      - `type: "refusal"`
+
+        default: refusal
+
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
         The policy category that triggered a refusal.
@@ -15535,27 +15484,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-      - `type: "refusal"`
-
-        default: refusal
-
-    - `type: "fallback"`
-
-      default: fallback
-
 ### Beta Content Block Param
 
 - `BetaContentBlockParam = BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 20 more`
 
-  Regular text content.
-
   - `BetaTextBlockParam object`
+
+    - `type: "text"`
 
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15582,6 +15521,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaCitationCharLocationParam object`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -15598,9 +15539,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam object`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -15618,9 +15559,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam object`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -15648,9 +15589,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam object`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -15660,13 +15601,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam object`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -15698,13 +15639,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string or null`
 
-        - `type: "search_result_location"`
-
   - `BetaImageBlockParam object`
+
+    - `type: "image"`
 
     - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
       - `BetaBase64ImageSource object`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -15720,8 +15663,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `BetaURLImageSource object`
 
         - `type: "url"`
@@ -15730,11 +15671,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaFileImageSource object`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15754,9 +15693,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaRequestDocumentBlock object`
 
+    - `type: "document"`
+
     - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
       - `BetaBase64PDFSource object`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -15764,17 +15707,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource object`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `BetaContentBlockSource object`
+
+        - `type: "content"`
 
         - `content: string or array of BetaContentBlockSourceContent`
 
@@ -15786,8 +15729,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `BetaImageBlockParam object`
 
-        - `type: "content"`
-
       - `BetaURLPDFSource object`
 
         - `type: "url"`
@@ -15796,11 +15737,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaFileDocumentSource object`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15820,13 +15759,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaSearchResultBlockParam object`
 
+    - `type: "search_result"`
+
     - `content: array of BetaTextBlockParam`
+
+      - `type: "text"`
 
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15838,8 +15779,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `title: string`
 
-    - `type: "search_result"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
@@ -15847,6 +15786,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `citations: optional BetaCitationsConfigParam`
 
   - `BetaThinkingBlockParam object`
+
+    - `type: "thinking"`
 
     - `signature: string`
 
@@ -15858,17 +15799,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The `thinking` text of this block as returned by the API.
 
-    - `type: "thinking"`
-
   - `BetaRedactedThinkingBlockParam object`
+
+    - `type: "redacted_thinking"`
 
     - `data: string`
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-    - `type: "redacted_thinking"`
-
   - `BetaToolUseBlockParam object`
+
+    - `type: "tool_use"`
 
     - `id: string`
 
@@ -15880,15 +15821,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       maxLength: 200, minLength: 1
 
-    - `type: "tool_use"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -15900,19 +15837,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `BetaServerToolCaller20260120 object`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `toolset_name: optional string or null`
 
@@ -15922,11 +15859,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolResultBlockParam object`
 
+    - `type: "tool_result"`
+
     - `tool_use_id: string`
 
       pattern: ^[a-zA-Z0-9_-]+$
-
-    - `type: "tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15950,11 +15887,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Tool reference block that can be included in tool_result content.
 
+          - `type: "tool_reference"`
+
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
 
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -15969,6 +15906,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           At most one per `tool_result`, only on a non-error result answering a
           browser toolset member `tool_use`. The server renders the
           model-visible text from it; the model never sees the raw fields.
+
+          - `type: "browser_state"`
 
           - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -15998,8 +15937,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-          - `type: "browser_state"`
-
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
             Create a cache control breakpoint at this content block.
@@ -16020,25 +15957,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               during a failed call gets no deferred `tab_opened`; it simply appears
               in the next result's `tabs` inventory.
 
+              - `type: "tab_opened"`
+
               - `tab_id: string`
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `type: "tab_opened"`
-
             - `BetaBrowserStateChangeDownloadStarted object`
 
               A file download that started during this call.
+
+              - `type: "download_started"`
 
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_started"`
 
               - `url: string`
 
@@ -16053,13 +15990,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               `download_started`, when the download finished during the call that
               started it (at most one state change per `download_id` per result).
 
+              - `type: "download_completed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_completed"`
 
               - `url: string`
 
@@ -16083,13 +16020,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               A file download that failed — or was cancelled — during this call.
 
+              - `type: "download_failed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_failed"`
 
               - `url: string`
 
@@ -16112,6 +16049,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
   - `BetaServerToolUseBlockParam object`
+
+    - `type: "server_tool_use"`
 
     - `id: string`
 
@@ -16137,15 +16076,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -16159,21 +16094,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebSearchToolResultBlockParam object`
 
+    - `type: "web_search_tool_result"`
+
     - `content: BetaWebSearchToolResultBlockParamContent`
 
       - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+        - `type: "web_search_result"`
+
         - `encrypted_content: string`
 
         - `title: string`
-
-        - `type: "web_search_result"`
 
         - `url: string`
 
         - `page_age: optional string or null`
 
       - `BetaWebSearchToolRequestError object`
+
+        - `type: "web_search_tool_result_error"`
 
         - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -16189,21 +16128,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_search_tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -16217,9 +16150,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebFetchToolResultBlockParam object`
 
+    - `type: "web_fetch_tool_result"`
+
     - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
       - `BetaWebFetchToolResultErrorBlockParam object`
+
+        - `type: "web_fetch_tool_result_error"`
 
         - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -16241,13 +16178,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
+          - `"content_too_large"`
 
       - `BetaWebFetchBlockParam object`
 
-        - `content: BetaRequestDocumentBlock`
-
         - `type: "web_fetch_result"`
+
+        - `content: BetaRequestDocumentBlock`
 
         - `url: string`
 
@@ -16261,15 +16198,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "web_fetch_tool_result"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
     - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `BetaDirectCaller object`
 
@@ -16283,9 +16216,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaAdvisorToolResultBlockParam object`
 
+    - `type: "advisor_tool_result"`
+
     - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
       - `BetaAdvisorToolResultErrorParam object`
+
+        - `type: "advisor_tool_result_error"`
 
         - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -16303,23 +16240,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"model_not_found"`
 
-        - `type: "advisor_tool_result_error"`
-
       - `BetaAdvisorResultBlockParam object`
 
-        - `text: string`
-
         - `type: "advisor_result"`
+
+        - `text: string`
 
         - `stop_reason: optional string or null`
 
       - `BetaAdvisorRedactedResultBlockParam object`
 
+        - `type: "advisor_redacted_result"`
+
         - `encrypted_content: string`
 
           Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-        - `type: "advisor_redacted_result"`
 
         - `stop_reason: optional string or null`
 
@@ -16327,19 +16262,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "advisor_tool_result"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaCodeExecutionToolResultBlockParam object`
 
+    - `type: "code_execution_tool_result"`
+
     - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-      Code execution result with encrypted stdout for PFC + web_search results.
-
       - `BetaCodeExecutionToolResultErrorParam object`
+
+        - `type: "code_execution_tool_result_error"`
 
         - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -16351,15 +16286,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
       - `BetaCodeExecutionResultBlockParam object`
+
+        - `type: "code_execution_result"`
 
         - `content: array of BetaCodeExecutionOutputBlockParam`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -16367,17 +16302,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
       - `BetaEncryptedCodeExecutionResultBlockParam object`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
+        - `type: "encrypted_code_execution_result"`
+
         - `content: array of BetaCodeExecutionOutputBlockParam`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -16385,13 +16320,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "code_execution_tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16399,9 +16330,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaBashCodeExecutionToolResultBlockParam object`
 
+    - `type: "bash_code_execution_tool_result"`
+
     - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
 
       - `BetaBashCodeExecutionToolResultErrorParam object`
+
+        - `type: "bash_code_execution_tool_result_error"`
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -16415,15 +16350,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
       - `BetaBashCodeExecutionResultBlockParam object`
+
+        - `type: "bash_code_execution_result"`
 
         - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-          - `file_id: string`
-
           - `type: "bash_code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -16431,13 +16366,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "bash_code_execution_tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16445,9 +16376,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+    - `type: "text_editor_code_execution_tool_result"`
+
     - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
       - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -16461,11 +16396,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"file_not_found"`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
         - `error_message: optional string or null`
 
       - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+        - `type: "text_editor_code_execution_view_result"`
 
         - `content: string`
 
@@ -16477,8 +16412,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"pdf"`
 
-        - `type: "text_editor_code_execution_view_result"`
-
         - `num_lines: optional number or null`
 
         - `start_line: optional number or null`
@@ -16487,9 +16420,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-        - `is_file_update: boolean`
-
         - `type: "text_editor_code_execution_create_result"`
+
+        - `is_file_update: boolean`
 
       - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -16509,17 +16442,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaToolSearchToolResultBlockParam object`
 
+    - `type: "tool_search_tool_result"`
+
     - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
       - `BetaToolSearchToolResultErrorParam object`
+
+        - `type: "tool_search_tool_result_error"`
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -16531,37 +16466,35 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"execution_time_exceeded"`
 
-        - `type: "tool_search_tool_result_error"`
-
         - `error_message: optional string or null`
 
       - `BetaToolSearchToolSearchResultBlockParam object`
 
+        - `type: "tool_search_tool_search_result"`
+
         - `tool_references: array of BetaToolReferenceBlockParam`
+
+          - `type: "tool_reference"`
 
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-          - `type: "tool_reference"`
-
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
             Create a cache control breakpoint at this content block.
 
-        - `type: "tool_search_tool_search_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "tool_search_tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaMCPToolUseBlockParam object`
+
+    - `type: "mcp_tool_use"`
 
     - `id: string`
 
@@ -16575,19 +16508,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The name of the MCP server
 
-    - `type: "mcp_tool_use"`
-
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaRequestMCPToolResultBlockParam object`
 
+    - `type: "mcp_tool_result"`
+
     - `tool_use_id: string`
 
       pattern: ^[a-zA-Z0-9_-]+$
-
-    - `type: "mcp_tool_result"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16599,11 +16530,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16618,9 +16549,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
+
+    - `file_id: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16658,12 +16589,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     `tools`; it is offered to the model from this point in the
     conversation onward.
 
-    - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+    - `type: "tool_addition"`
 
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
+    - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
       - `BetaToolChangeToolReference object`
 
@@ -16672,32 +16600,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         server assigns to MCP-resolved tools — use `mcp_tool_reference` or
         `mcp_toolset_reference` for those.
 
+        - `type: "tool_reference"`
+
         - `name: string`
 
           pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-        - `type: "tool_reference"`
 
       - `BetaToolChangeMCPToolReference object`
 
         Reference to a single MCP tool by its server and remote name — the
         same `server_name`/`name` pair `mcp_tool_use` carries.
 
+        - `type: "mcp_tool_reference"`
+
         - `name: string`
 
         - `server_name: string`
-
-        - `type: "mcp_tool_reference"`
 
       - `BetaToolChangeMCPToolsetReference object`
 
         Reference to every tool in the named MCP server's toolset.
 
-        - `server_name: string`
-
         - `type: "mcp_toolset_reference"`
 
-    - `type: "tool_addition"`
+        - `server_name: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16711,12 +16637,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     `tools`; it is no longer offered to the model from this point in the
     conversation onward.
 
-    - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+    - `type: "tool_removal"`
 
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
+    - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
       - `BetaToolChangeToolReference object`
 
@@ -16733,8 +16656,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `BetaToolChangeMCPToolsetReference object`
 
         Reference to every tool in the named MCP server's toolset.
-
-    - `type: "tool_removal"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16755,6 +16676,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     request is rejected), and moving it into the middle of a single run is
     likewise rejected; between non-thinking blocks the block's placement has
     no validation effect.
+
+    - `type: "fallback"`
 
     - `from: BetaFallbackInfoParam`
 
@@ -16846,8 +16769,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Identifies one hop of a fallback transition.
 
-    - `type: "fallback"`
-
     - `trigger: optional unknown`
 
       The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -16855,6 +16776,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Content Block Source
 
 - `BetaContentBlockSource object`
+
+  - `type: "content"`
 
   - `content: string or array of BetaContentBlockSourceContent`
 
@@ -16864,11 +16787,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -16895,6 +16818,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaCitationCharLocationParam object`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -16911,9 +16836,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -16931,9 +16856,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -16961,9 +16886,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -16973,13 +16898,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -17011,13 +16936,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
           - `BetaBase64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -17033,8 +16960,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource object`
 
             - `type: "url"`
@@ -17043,11 +16968,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -17065,19 +16988,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"error"`
 
-  - `type: "content"`
-
 ### Beta Content Block Source Content
 
 - `BetaContentBlockSourceContent = BetaTextBlockParam or BetaImageBlockParam`
 
   - `BetaTextBlockParam object`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -17104,6 +17025,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaCitationCharLocationParam object`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -17120,9 +17043,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam object`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -17140,9 +17063,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam object`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -17170,9 +17093,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam object`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -17182,13 +17105,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam object`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -17220,13 +17143,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string or null`
 
-        - `type: "search_result_location"`
-
   - `BetaImageBlockParam object`
+
+    - `type: "image"`
 
     - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
       - `BetaBase64ImageSource object`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -17242,8 +17167,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `BetaURLImageSource object`
 
         - `type: "url"`
@@ -17252,11 +17175,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaFileImageSource object`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -17390,6 +17311,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaClearToolUses20250919EditResponse object`
 
+      - `type: "clear_tool_uses_20250919"`
+
+        The type of context management edit applied.
+
+        default: clear_tool_uses_20250919
+
       - `cleared_input_tokens: number`
 
         Number of input tokens cleared by this edit.
@@ -17402,13 +17329,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "clear_tool_uses_20250919"`
+    - `BetaClearThinking20251015EditResponse object`
+
+      - `type: "clear_thinking_20251015"`
 
         The type of context management edit applied.
 
-        default: clear_tool_uses_20250919
-
-    - `BetaClearThinking20251015EditResponse object`
+        default: clear_thinking_20251015
 
       - `cleared_input_tokens: number`
 
@@ -17421,12 +17348,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Number of thinking turns that were cleared.
 
         minimum: 0
-
-      - `type: "clear_thinking_20251015"`
-
-        The type of context management edit applied.
-
-        default: clear_thinking_20251015
 
 ### Beta Count Tokens Context Management Response
 
@@ -17449,43 +17370,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaCacheMissModelChanged object`
 
-      - `cache_missed_input_tokens: number`
-
-        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
       - `type: "model_changed"`
 
         default: model_changed
 
-    - `BetaCacheMissSystemChanged object`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `BetaCacheMissSystemChanged object`
 
       - `type: "system_changed"`
 
         default: system_changed
 
-    - `BetaCacheMissToolsChanged object`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `BetaCacheMissToolsChanged object`
 
       - `type: "tools_changed"`
 
         default: tools_changed
 
-    - `BetaCacheMissMessagesChanged object`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+    - `BetaCacheMissMessagesChanged object`
+
       - `type: "messages_changed"`
 
         default: messages_changed
+
+      - `cache_missed_input_tokens: number`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
     - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -17524,6 +17445,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaDocumentBlock object`
 
+  - `type: "document"`
+
+    default: document
+
   - `citations: BetaCitationConfig or null`
 
     Citation configuration for the document
@@ -17536,29 +17461,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaBase64PDFSource object`
 
+      - `type: "base64"`
+
       - `data: string`
 
         format: byte
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `BetaPlainTextSource object`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
 
-      - `type: "text"`
-
   - `title: string or null`
 
     The title of the document
-
-  - `type: "document"`
-
-    default: document
 
 ### Beta Encrypted Code Execution Result Block
 
@@ -17566,23 +17487,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
-  - `content: array of BetaCodeExecutionOutputBlock`
+  - `type: "encrypted_code_execution_result"`
 
-    - `file_id: string`
+    default: encrypted_code_execution_result
+
+  - `content: array of BetaCodeExecutionOutputBlock`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
   - `return_code: number`
 
   - `stderr: string`
-
-  - `type: "encrypted_code_execution_result"`
-
-    default: encrypted_code_execution_result
 
 ### Beta Encrypted Code Execution Result Block Param
 
@@ -17590,19 +17511,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
+  - `type: "encrypted_code_execution_result"`
+
   - `content: array of BetaCodeExecutionOutputBlockParam`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
   - `return_code: number`
 
   - `stderr: string`
-
-  - `type: "encrypted_code_execution_result"`
 
 ### Beta Fallback Block
 
@@ -17619,6 +17540,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   The block is treated like a server-tool content block for streaming: it
   arrives via the standard `content_block_start` / `content_block_stop`
   pair and carries no deltas.
+
+  - `type: "fallback"`
+
+    default: fallback
 
   - `from: BetaFallbackInfo`
 
@@ -17714,6 +17639,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     What caused the `from` model to hand over at this hop.
 
+    - `type: "refusal"`
+
+      default: refusal
+
     - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
       The policy category that triggered a refusal.
@@ -17738,14 +17667,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-    - `type: "refusal"`
-
-      default: refusal
-
-  - `type: "fallback"`
-
-    default: fallback
-
 ### Beta Fallback Block Param
 
 - `BetaFallbackBlockParam object`
@@ -17763,6 +17684,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   request is rejected), and moving it into the middle of a single run is
   likewise rejected; between non-thinking blocks the block's placement has
   no validation effect.
+
+  - `type: "fallback"`
 
   - `from: BetaFallbackInfoParam`
 
@@ -17854,8 +17777,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Identifies one hop of a fallback transition.
 
-  - `type: "fallback"`
-
   - `trigger: optional unknown`
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -17865,6 +17786,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 - `BetaFallbackCreditNotApplied object`
 
   No reprice was applied; `reason` says why.
+
+  - `type: "not_applied"`
+
+    default: not_applied
 
   - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
@@ -17896,10 +17821,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"wrong_platform"`
 
     - `"wrong_workspace"`
-
-  - `type: "not_applied"`
-
-    default: not_applied
 
   - `remove_to_redeem: optional array of string or null`
 
@@ -17977,6 +17898,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       No reprice was applied; `reason` says why.
 
+      - `type: "not_applied"`
+
+        default: not_applied
+
       - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
         Why the reprice was not applied.
@@ -18007,10 +17932,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `"wrong_platform"`
 
         - `"wrong_workspace"`
-
-      - `type: "not_applied"`
-
-        default: not_applied
 
       - `remove_to_redeem: optional array of string or null`
 
@@ -18210,6 +18131,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   a fallback model served the response is signalled by the presence of this
   entry in `usage.iterations`.
 
+  - `type: "fallback_message"`
+
+    Usage for the fallback-model attempt that served the response
+
+    default: fallback_message
+
   - `cache_creation: BetaCacheCreation or null`
 
     Breakdown of cached tokens by TTL
@@ -18332,12 +18259,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "fallback_message"`
-
-    Usage for the fallback-model attempt that served the response
-
-    default: fallback_message
-
 ### Beta Fallback Param
 
 - `BetaFallbackParam object`
@@ -18453,25 +18374,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+      - `type: "json_schema"`
+
       - `schema: map[unknown]`
 
         The JSON schema of the format
 
-      - `type: "json_schema"`
-
     - `task_budget: optional BetaTokenTaskBudget or null`
 
       User-configurable total token budget across contexts.
+
+      - `type: "tokens"`
+
+        The budget type. Currently only 'tokens' is supported.
 
       - `total: number`
 
         Total token budget across all contexts in the session.
 
         minimum: 1024
-
-      - `type: "tokens"`
-
-        The budget type. Currently only 'tokens' is supported.
 
       - `remaining: optional number or null`
 
@@ -18491,6 +18412,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaThinkingConfigEnabled object`
 
+      - `type: "enabled"`
+
       - `budget_tokens: number`
 
         Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -18500,8 +18423,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
         minimum: 1024
-
-      - `type: "enabled"`
 
       - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -18561,6 +18482,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   The `from` model declined for policy reasons.
 
+  - `type: "refusal"`
+
+    default: refusal
+
   - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
     The policy category that triggered a refusal.
@@ -18584,10 +18509,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"general_harms"`
 
       The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
-
-  - `type: "refusal"`
-
-    default: refusal
 
 ### Beta Fallbacks Param
 
@@ -18701,25 +18622,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+        - `type: "json_schema"`
+
         - `schema: map[unknown]`
 
           The JSON schema of the format
 
-        - `type: "json_schema"`
-
       - `task_budget: optional BetaTokenTaskBudget or null`
 
         User-configurable total token budget across contexts.
+
+        - `type: "tokens"`
+
+          The budget type. Currently only 'tokens' is supported.
 
         - `total: number`
 
           Total token budget across all contexts in the session.
 
           minimum: 1024
-
-        - `type: "tokens"`
-
-          The budget type. Currently only 'tokens' is supported.
 
         - `remaining: optional number or null`
 
@@ -18739,6 +18660,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaThinkingConfigEnabled object`
 
+        - `type: "enabled"`
+
         - `budget_tokens: number`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -18748,8 +18671,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
           minimum: 1024
-
-        - `type: "enabled"`
 
         - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -18809,25 +18730,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaFileDocumentSource object`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### Beta File Image Source
 
 - `BetaFileImageSource object`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### Beta Image Block Param
 
 - `BetaImageBlockParam object`
 
+  - `type: "image"`
+
   - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
     - `BetaBase64ImageSource object`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -18843,8 +18768,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"image/webp"`
 
-      - `type: "base64"`
-
     - `BetaURLImageSource object`
 
       - `type: "url"`
@@ -18853,11 +18776,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaFileImageSource object`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "image"`
+      - `file_id: string`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -18910,11 +18831,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaInputJSONDelta object`
 
-  - `partial_json: string`
-
   - `type: "input_json_delta"`
 
     default: input_json_delta
+
+  - `partial_json: string`
 
 ### Beta Input Tokens Clear At Least
 
@@ -18953,6 +18874,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `BetaMessageIterationUsage object`
 
     Token usage for a sampling iteration.
+
+    - `type: "message"`
+
+      Usage for a sampling iteration
+
+      default: message
 
     - `cache_creation: BetaCacheCreation or null`
 
@@ -19076,15 +19003,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "message"`
-
-      Usage for a sampling iteration
-
-      default: message
-
   - `BetaCompactionIterationUsage object`
 
     Token usage for a compaction iteration.
+
+    - `type: "compaction"`
+
+      Usage for a compaction iteration
+
+      default: compaction
 
     - `cache_creation: BetaCacheCreation or null`
 
@@ -19114,15 +19041,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "compaction"`
-
-      Usage for a compaction iteration
-
-      default: compaction
-
   - `BetaAdvisorMessageIterationUsage object`
 
     Token usage for an advisor sub-inference iteration.
+
+    - `type: "advisor_message"`
+
+      Usage for an advisor sub-inference iteration
+
+      default: advisor_message
 
     - `cache_creation: BetaCacheCreation or null`
 
@@ -19157,12 +19084,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The number of output tokens which were used.
 
       minimum: 0
-
-    - `type: "advisor_message"`
-
-      Usage for an advisor sub-inference iteration
-
-      default: advisor_message
 
   - `BetaFallbackMessageIterationUsage object`
 
@@ -19173,6 +19094,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     a fallback model served the response is signalled by the presence of this
     entry in `usage.iterations`.
 
+    - `type: "fallback_message"`
+
+      Usage for the fallback-model attempt that served the response
+
+      default: fallback_message
+
     - `cache_creation: BetaCacheCreation or null`
 
       Breakdown of cached tokens by TTL
@@ -19207,21 +19134,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "fallback_message"`
-
-      Usage for the fallback-model attempt that served the response
-
-      default: fallback_message
-
 ### Beta JSON Output Format
 
 - `BetaJSONOutputFormat object`
 
+  - `type: "json_schema"`
+
   - `schema: map[unknown]`
 
     The JSON schema of the format
-
-  - `type: "json_schema"`
 
 ### Beta MCP Tool Config
 
@@ -19247,11 +19168,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaMCPToolResultBlock object`
 
+  - `type: "mcp_tool_result"`
+
+    default: mcp_tool_result
+
   - `content: string or array of BetaTextBlock`
 
     - `string`
 
     - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+      - `type: "text"`
+
+        default: text
 
       - `citations: array of BetaTextCitation or null`
 
@@ -19260,6 +19189,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation object`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -19277,11 +19210,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation object`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -19299,11 +19232,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation object`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -19331,11 +19264,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation object`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -19345,13 +19278,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation object`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -19383,17 +19316,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
   - `is_error: boolean`
 
@@ -19403,13 +19328,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type: "mcp_tool_result"`
-
-    default: mcp_tool_result
-
 ### Beta MCP Tool Use Block
 
 - `BetaMCPToolUseBlock object`
+
+  - `type: "mcp_tool_use"`
+
+    default: mcp_tool_use
 
   - `id: string`
 
@@ -19425,13 +19350,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The name of the MCP server
 
-  - `type: "mcp_tool_use"`
-
-    default: mcp_tool_use
-
 ### Beta MCP Tool Use Block Param
 
 - `BetaMCPToolUseBlockParam object`
+
+  - `type: "mcp_tool_use"`
 
   - `id: string`
 
@@ -19444,8 +19367,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `server_name: string`
 
     The name of the MCP server
-
-  - `type: "mcp_tool_use"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -19477,13 +19398,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   Allows configuring enabled status and defer_loading for all tools
   from an MCP server, with optional per-tool overrides.
 
+  - `type: "mcp_toolset"`
+
   - `mcp_server_name: string`
 
     Name of the MCP server to configure tools for
 
     maxLength: 255, minLength: 1
-
-  - `type: "mcp_toolset"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -19526,13 +19447,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaMemoryTool20250818 object`
 
+  - `type: "memory_20250818"`
+
   - `name: "memory"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "memory_20250818"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -19803,6 +19724,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaMessage object`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -19827,12 +19756,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" or "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -19840,6 +19763,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -19878,6 +19807,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaTextBlock object`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: array of BetaTextCitation or null`
 
         Citations supporting the text block.
@@ -19885,6 +19818,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation object`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -19902,11 +19839,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation object`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -19924,11 +19861,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation object`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -19956,11 +19893,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation object`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -19970,13 +19907,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation object`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -20008,19 +19945,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock object`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -20034,11 +19967,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock object`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -20048,11 +19981,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -20064,13 +19997,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minLength: 1
 
-      - `type: "tool_use"`
-
-        default: tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -20082,19 +20009,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120 object`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name: optional string or null`
 
@@ -20103,6 +20030,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock object`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -20128,13 +20059,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -20148,9 +20073,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaWebSearchToolResultBlock object`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError object`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -20166,11 +20099,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `array of BetaWebSearchResultBlock`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -20178,23 +20111,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -20208,9 +20131,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaWebFetchToolResultBlock object`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock object`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -20232,13 +20163,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock object`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig or null`
 
@@ -20252,37 +20189,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `BetaBase64PDFSource object`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource object`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string or null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string or null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -20292,13 +20221,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -20312,9 +20235,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaAdvisorToolResultBlock object`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError object`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -20332,11 +20263,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock object`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string or null`
 
@@ -20344,11 +20275,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock object`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -20358,25 +20289,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock object`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
-        Code execution result with encrypted stdout for PFC + web_search results.
-
         - `BetaCodeExecutionToolResultError object`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -20388,19 +20317,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock object`
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -20408,21 +20337,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock object`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -20430,23 +20359,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock object`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError object`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -20460,19 +20389,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock object`
 
-          - `content: array of BetaBashCodeExecutionOutputBlock`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: array of BetaBashCodeExecutionOutputBlock`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -20480,23 +20409,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError object`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -20512,11 +20441,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `error_message: string or null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -20534,19 +20463,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `total_lines: number or null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: array of string or null`
 
@@ -20558,23 +20487,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `old_start: number or null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock object`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError object`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -20588,35 +20517,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `error_message: string or null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock object`
-
-          - `tool_references: array of BetaToolReferenceBlock`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: array of BetaToolReferenceBlock`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock object`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -20632,17 +20557,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock object`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string or array of BetaTextBlock`
 
         - `string`
 
         - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: array of BetaTextCitation or null`
 
@@ -20652,11 +20581,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -20666,19 +20591,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock object`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock object`
 
@@ -20688,6 +20609,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string or null`
 
         Summary of compacted content, or null if compaction failed
@@ -20695,10 +20620,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `encrypted_content: string or null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock object`
 
@@ -20713,6 +20634,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -20808,6 +20733,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
           The policy category that triggered a refusal.
@@ -20832,14 +20761,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `context_management: BetaContextManagementResponse or null`
 
     Context management response.
@@ -20851,6 +20772,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse object`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -20864,13 +20791,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse object`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse object`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -20884,12 +20811,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
-
   - `diagnostics: BetaDiagnostics or null`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -20901,43 +20822,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaCacheMissModelChanged object`
 
-        - `cache_missed_input_tokens: number`
-
-          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
         - `type: "model_changed"`
 
           default: model_changed
 
-      - `BetaCacheMissSystemChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissSystemChanged object`
 
         - `type: "system_changed"`
 
           default: system_changed
 
-      - `BetaCacheMissToolsChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissToolsChanged object`
 
         - `type: "tools_changed"`
 
           default: tools_changed
 
-      - `BetaCacheMissMessagesChanged object`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+      - `BetaCacheMissMessagesChanged object`
+
         - `type: "messages_changed"`
 
           default: messages_changed
+
+        - `cache_missed_input_tokens: number`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -20968,6 +20889,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `stop_details: BetaRefusalStopDetails or null`
 
     Structured information about a refusal.
+
+    - `type: "refusal"`
+
+      default: refusal
 
     - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -21048,10 +20973,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: BetaStopReason or null`
 
     The reason that we stopped.
@@ -21089,14 +21010,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: BetaUsage`
 
@@ -21164,6 +21077,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
             Why the reprice was not applied.
@@ -21194,10 +21111,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem: optional array of string or null`
 
@@ -21236,6 +21149,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Token usage for a sampling iteration.
 
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
+
         - `cache_creation: BetaCacheCreation or null`
 
           Breakdown of cached tokens by TTL
@@ -21270,43 +21189,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage object`
 
         Token usage for a compaction iteration.
-
-        - `cache_creation: BetaCacheCreation or null`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: number`
-
-          The number of input tokens used to create the cache entry.
-
-          default: 0, minimum: 0
-
-        - `cache_read_input_tokens: number`
-
-          The number of input tokens read from the cache.
-
-          default: 0, minimum: 0
-
-        - `input_tokens: number`
-
-          The number of input tokens which were used.
-
-          minimum: 0
-
-        - `output_tokens: number`
-
-          The number of output tokens which were used.
-
-          minimum: 0
 
         - `type: "compaction"`
 
@@ -21314,9 +21199,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           default: compaction
 
+        - `cache_creation: BetaCacheCreation or null`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+          default: 0, minimum: 0
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+          default: 0, minimum: 0
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
       - `BetaAdvisorMessageIterationUsage object`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation or null`
 
@@ -21351,12 +21270,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage object`
 
@@ -21367,6 +21280,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation or null`
 
           Breakdown of cached tokens by TTL
@@ -21400,12 +21319,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -21487,6 +21400,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -21516,12 +21435,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"organization_binding_mismatch"`
 
       - `"end_user_binding_mismatch"`
-
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
 
 ### Beta Message Delta Usage
 
@@ -21565,6 +21478,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         No reprice was applied; `reason` says why.
 
+        - `type: "not_applied"`
+
+          default: not_applied
+
         - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
           Why the reprice was not applied.
@@ -21595,10 +21512,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `"wrong_platform"`
 
           - `"wrong_workspace"`
-
-        - `type: "not_applied"`
-
-          default: not_applied
 
         - `remove_to_redeem: optional array of string or null`
 
@@ -21632,6 +21545,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `BetaMessageIterationUsage object`
 
       Token usage for a sampling iteration.
+
+      - `type: "message"`
+
+        Usage for a sampling iteration
+
+        default: message
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -21755,15 +21674,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "message"`
-
-        Usage for a sampling iteration
-
-        default: message
-
     - `BetaCompactionIterationUsage object`
 
       Token usage for a compaction iteration.
+
+      - `type: "compaction"`
+
+        Usage for a compaction iteration
+
+        default: compaction
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -21793,15 +21712,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "compaction"`
-
-        Usage for a compaction iteration
-
-        default: compaction
-
     - `BetaAdvisorMessageIterationUsage object`
 
       Token usage for an advisor sub-inference iteration.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        default: advisor_message
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -21836,12 +21755,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "advisor_message"`
-
-        Usage for an advisor sub-inference iteration
-
-        default: advisor_message
 
     - `BetaFallbackMessageIterationUsage object`
 
@@ -21852,6 +21765,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       a fallback model served the response is signalled by the presence of this
       entry in `usage.iterations`.
 
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
+
+        default: fallback_message
+
       - `cache_creation: BetaCacheCreation or null`
 
         Breakdown of cached tokens by TTL
@@ -21885,12 +21804,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "fallback_message"`
-
-        Usage for the fallback-model attempt that served the response
-
-        default: fallback_message
 
   - `output_tokens: number`
 
@@ -21939,6 +21852,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 - `BetaMessageIterationUsage object`
 
   Token usage for a sampling iteration.
+
+  - `type: "message"`
+
+    Usage for a sampling iteration
+
+    default: message
 
   - `cache_creation: BetaCacheCreation or null`
 
@@ -22062,12 +21981,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minimum: 0
 
-  - `type: "message"`
-
-    Usage for a sampling iteration
-
-    default: message
-
 ### Beta Message Param
 
 - `BetaMessageParam object`
@@ -22080,11 +21993,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22111,6 +22024,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaCitationCharLocationParam object`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -22127,9 +22042,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -22147,9 +22062,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -22177,9 +22092,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -22189,13 +22104,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -22227,13 +22142,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
           - `BetaBase64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -22249,8 +22166,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource object`
 
             - `type: "url"`
@@ -22259,11 +22174,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22283,9 +22196,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaRequestDocumentBlock object`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
           - `BetaBase64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -22293,17 +22210,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of BetaContentBlockSourceContent`
 
@@ -22315,8 +22232,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaImageBlockParam object`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource object`
 
             - `type: "url"`
@@ -22325,11 +22240,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22349,13 +22262,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaSearchResultBlockParam object`
 
+        - `type: "search_result"`
+
         - `content: array of BetaTextBlockParam`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22367,8 +22282,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -22376,6 +22289,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `citations: optional BetaCitationsConfigParam`
 
       - `BetaThinkingBlockParam object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -22387,17 +22302,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `BetaRedactedThinkingBlockParam object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `BetaToolUseBlockParam object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -22409,15 +22324,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 200, minLength: 1
 
-        - `type: "tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -22429,19 +22340,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120 object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string or null`
 
@@ -22451,11 +22362,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaToolResultBlockParam object`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22479,11 +22390,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22498,6 +22409,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -22527,8 +22440,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
@@ -22549,25 +22460,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BetaBrowserStateChangeDownloadStarted object`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -22582,13 +22493,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -22612,13 +22523,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -22641,6 +22552,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlockParam object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -22666,15 +22579,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -22688,21 +22597,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaWebSearchToolResultBlockParam object`
 
+        - `type: "web_search_tool_result"`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age: optional string or null`
 
           - `BetaWebSearchToolRequestError object`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -22718,21 +22631,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -22746,9 +22653,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaWebFetchToolResultBlockParam object`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
           - `BetaWebFetchToolResultErrorBlockParam object`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -22770,13 +22681,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `BetaWebFetchBlockParam object`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: "web_fetch_result"`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: string`
 
@@ -22790,15 +22701,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -22812,9 +22719,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaAdvisorToolResultBlockParam object`
 
+        - `type: "advisor_tool_result"`
+
         - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
           - `BetaAdvisorToolResultErrorParam object`
+
+            - `type: "advisor_tool_result_error"`
 
             - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -22832,23 +22743,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
           - `BetaAdvisorResultBlockParam object`
 
-            - `text: string`
-
             - `type: "advisor_result"`
+
+            - `text: string`
 
             - `stop_reason: optional string or null`
 
           - `BetaAdvisorRedactedResultBlockParam object`
 
+            - `type: "advisor_redacted_result"`
+
             - `encrypted_content: string`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: "advisor_redacted_result"`
 
             - `stop_reason: optional string or null`
 
@@ -22856,19 +22765,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaCodeExecutionToolResultBlockParam object`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
-
           - `BetaCodeExecutionToolResultErrorParam object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -22880,15 +22789,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `BetaCodeExecutionResultBlockParam object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -22896,17 +22805,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `BetaEncryptedCodeExecutionResultBlockParam object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of BetaCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -22914,13 +22823,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22928,9 +22833,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaBashCodeExecutionToolResultBlockParam object`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
 
           - `BetaBashCodeExecutionToolResultErrorParam object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -22944,15 +22853,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BetaBashCodeExecutionResultBlockParam object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -22960,13 +22869,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -22974,9 +22879,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -22990,11 +22899,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -23006,8 +22915,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines: optional number or null`
 
             - `start_line: optional number or null`
@@ -23016,9 +22923,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -23038,17 +22945,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaToolSearchToolResultBlockParam object`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
           - `BetaToolSearchToolResultErrorParam object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -23060,37 +22969,35 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `BetaToolSearchToolSearchResultBlockParam object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of BetaToolReferenceBlockParam`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaMCPToolUseBlockParam object`
+
+        - `type: "mcp_tool_use"`
 
         - `id: string`
 
@@ -23104,19 +23011,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaRequestMCPToolResultBlockParam object`
 
+        - `type: "mcp_tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "mcp_tool_result"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -23128,11 +23033,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -23147,9 +23052,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -23187,12 +23092,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_addition"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -23201,32 +23103,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: "tool_reference"`
+
             - `name: string`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: "tool_reference"`
 
           - `BetaToolChangeMCPToolReference object`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: "mcp_tool_reference"`
+
             - `name: string`
 
             - `server_name: string`
-
-            - `type: "mcp_tool_reference"`
 
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: string`
-
             - `type: "mcp_toolset_reference"`
 
-        - `type: "tool_addition"`
+            - `server_name: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -23240,12 +23140,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
-        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+        - `type: "tool_removal"`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
+        - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
           - `BetaToolChangeToolReference object`
 
@@ -23262,8 +23159,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `BetaToolChangeMCPToolsetReference object`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: "tool_removal"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -23284,6 +23179,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: "fallback"`
 
         - `from: BetaFallbackInfoParam`
 
@@ -23374,8 +23271,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `to: BetaFallbackInfoParam`
 
           Identifies one hop of a fallback transition.
-
-        - `type: "fallback"`
 
         - `trigger: optional unknown`
 
@@ -23469,25 +23364,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+    - `type: "json_schema"`
+
     - `schema: map[unknown]`
 
       The JSON schema of the format
 
-    - `type: "json_schema"`
-
   - `task_budget: optional BetaTokenTaskBudget or null`
 
     User-configurable total token budget across contexts.
+
+    - `type: "tokens"`
+
+      The budget type. Currently only 'tokens' is supported.
 
     - `total: number`
 
       Total token budget across all contexts in the session.
 
       minimum: 1024
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
 
     - `remaining: optional number or null`
 
@@ -23516,11 +23411,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaPlainTextSource object`
 
+  - `type: "text"`
+
   - `data: string`
 
   - `media_type: "text/plain"`
-
-  - `type: "text"`
 
 ### Beta Raw Content Block Delta
 
@@ -23528,25 +23423,33 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaTextDelta object`
 
-    - `text: string`
-
     - `type: "text_delta"`
 
       default: text_delta
 
-  - `BetaInputJSONDelta object`
+    - `text: string`
 
-    - `partial_json: string`
+  - `BetaInputJSONDelta object`
 
     - `type: "input_json_delta"`
 
       default: input_json_delta
 
+    - `partial_json: string`
+
   - `BetaCitationsDelta object`
+
+    - `type: "citations_delta"`
+
+      default: citations_delta
 
     - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
       - `BetaCitationCharLocation object`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -23564,11 +23467,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `BetaCitationPageLocation object`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -23586,11 +23489,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `BetaCitationContentBlockLocation object`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -23618,11 +23521,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `BetaCitationsWebSearchResultLocation object`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -23632,13 +23535,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `BetaCitationSearchResultLocation object`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -23670,15 +23573,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string or null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
-    - `type: "citations_delta"`
-
-      default: citations_delta
-
   - `BetaThinkingDelta object`
+
+    - `type: "thinking_delta"`
+
+      default: thinking_delta
 
     - `estimated_tokens: number or null`
 
@@ -23688,21 +23587,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `type: "thinking_delta"`
-
-      default: thinking_delta
-
   - `BetaSignatureDelta object`
-
-    - `signature: string`
-
-      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
     - `type: "signature_delta"`
 
       default: signature_delta
 
+    - `signature: string`
+
+      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
   - `BetaCompactionContentBlockDelta object`
+
+    - `type: "compaction_delta"`
+
+      default: compaction_delta
 
     - `content: string or null`
 
@@ -23710,37 +23609,45 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type: "compaction_delta"`
-
-      default: compaction_delta
-
 ### Beta Raw Content Block Delta Event
 
 - `BetaRawContentBlockDeltaEvent object`
+
+  - `type: "content_block_delta"`
+
+    default: content_block_delta
 
   - `delta: BetaRawContentBlockDelta`
 
     - `BetaTextDelta object`
 
-      - `text: string`
-
       - `type: "text_delta"`
 
         default: text_delta
 
-    - `BetaInputJSONDelta object`
+      - `text: string`
 
-      - `partial_json: string`
+    - `BetaInputJSONDelta object`
 
       - `type: "input_json_delta"`
 
         default: input_json_delta
 
+      - `partial_json: string`
+
     - `BetaCitationsDelta object`
+
+      - `type: "citations_delta"`
+
+        default: citations_delta
 
       - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
         - `BetaCitationCharLocation object`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -23758,11 +23665,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation object`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -23780,11 +23687,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation object`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -23812,11 +23719,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation object`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -23826,13 +23733,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation object`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -23864,15 +23771,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
-      - `type: "citations_delta"`
-
-        default: citations_delta
-
     - `BetaThinkingDelta object`
+
+      - `type: "thinking_delta"`
+
+        default: thinking_delta
 
       - `estimated_tokens: number or null`
 
@@ -23882,21 +23785,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type: "thinking_delta"`
-
-        default: thinking_delta
-
     - `BetaSignatureDelta object`
-
-      - `signature: string`
-
-        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
       - `type: "signature_delta"`
 
         default: signature_delta
 
+      - `signature: string`
+
+        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
     - `BetaCompactionContentBlockDelta object`
+
+      - `type: "compaction_delta"`
+
+        default: compaction_delta
 
       - `content: string or null`
 
@@ -23904,25 +23807,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type: "compaction_delta"`
-
-        default: compaction_delta
-
   - `index: number`
-
-  - `type: "content_block_delta"`
-
-    default: content_block_delta
 
 ### Beta Raw Content Block Start Event
 
 - `BetaRawContentBlockStartEvent object`
 
+  - `type: "content_block_start"`
+
+    default: content_block_start
+
   - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
-    Response model for a file uploaded to the container.
-
     - `BetaTextBlock object`
+
+      - `type: "text"`
+
+        default: text
 
       - `citations: array of BetaTextCitation or null`
 
@@ -23931,6 +23832,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation object`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -23948,11 +23853,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation object`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -23970,11 +23875,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation object`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -24002,11 +23907,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation object`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -24016,13 +23921,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation object`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -24054,19 +23959,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock object`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -24080,11 +23981,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock object`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -24094,11 +23995,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -24110,13 +24011,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minLength: 1
 
-      - `type: "tool_use"`
-
-        default: tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -24128,19 +24023,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120 object`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name: optional string or null`
 
@@ -24149,6 +24044,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock object`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -24174,13 +24073,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -24194,9 +24087,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaWebSearchToolResultBlock object`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError object`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -24212,11 +24113,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `array of BetaWebSearchResultBlock`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -24224,23 +24125,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -24254,9 +24145,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaWebFetchToolResultBlock object`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock object`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -24278,13 +24177,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock object`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig or null`
 
@@ -24298,37 +24203,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `BetaBase64PDFSource object`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource object`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string or null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string or null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -24338,13 +24235,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller object`
 
@@ -24358,9 +24249,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaAdvisorToolResultBlock object`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError object`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -24378,11 +24277,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock object`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string or null`
 
@@ -24390,11 +24289,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock object`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -24404,25 +24303,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock object`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
-        Code execution result with encrypted stdout for PFC + web_search results.
-
         - `BetaCodeExecutionToolResultError object`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -24434,19 +24331,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock object`
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -24454,21 +24351,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock object`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: array of BetaCodeExecutionOutputBlock`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: array of BetaCodeExecutionOutputBlock`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -24476,23 +24373,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock object`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError object`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -24506,19 +24403,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock object`
 
-          - `content: array of BetaBashCodeExecutionOutputBlock`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: array of BetaBashCodeExecutionOutputBlock`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -24526,23 +24423,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError object`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -24558,11 +24455,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `error_message: string or null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -24580,19 +24477,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `total_lines: number or null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: array of string or null`
 
@@ -24604,23 +24501,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `old_start: number or null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock object`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError object`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -24634,35 +24531,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `error_message: string or null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock object`
-
-          - `tool_references: array of BetaToolReferenceBlock`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: array of BetaToolReferenceBlock`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock object`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -24678,17 +24571,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock object`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string or array of BetaTextBlock`
 
         - `string`
 
         - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: array of BetaTextCitation or null`
 
@@ -24698,11 +24595,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -24712,19 +24605,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock object`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock object`
 
@@ -24734,6 +24623,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string or null`
 
         Summary of compacted content, or null if compaction failed
@@ -24741,10 +24634,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `encrypted_content: string or null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock object`
 
@@ -24759,6 +24648,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -24854,6 +24747,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
           The policy category that triggered a refusal.
@@ -24878,33 +24775,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `index: number`
-
-  - `type: "content_block_start"`
-
-    default: content_block_start
 
 ### Beta Raw Content Block Stop Event
 
 - `BetaRawContentBlockStopEvent object`
 
-  - `index: number`
-
   - `type: "content_block_stop"`
 
     default: content_block_stop
 
+  - `index: number`
+
 ### Beta Raw Message Delta Event
 
 - `BetaRawMessageDeltaEvent object`
+
+  - `type: "message_delta"`
+
+    default: message_delta
 
   - `context_management: BetaContextManagementResponse or null`
 
@@ -24915,6 +24804,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse object`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -24928,13 +24823,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse object`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse object`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -24947,12 +24842,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           Number of thinking turns that were cleared.
 
           minimum: 0
-
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
 
   - `delta: object`
 
@@ -24974,12 +24863,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" or "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -24987,6 +24870,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -24997,6 +24886,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `stop_details: BetaRefusalStopDetails or null`
 
       Structured information about a refusal.
+
+      - `type: "refusal"`
+
+        default: refusal
 
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -25077,10 +24970,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: BetaStopReason or null`
 
       - `"end_turn"`
@@ -25100,10 +24989,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"model_context_window_exceeded"`
 
     - `stop_sequence: string or null`
-
-  - `type: "message_delta"`
-
-    default: message_delta
 
   - `usage: BetaMessageDeltaUsage`
 
@@ -25155,6 +25040,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
             Why the reprice was not applied.
@@ -25185,10 +25074,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem: optional array of string or null`
 
@@ -25222,6 +25107,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `BetaMessageIterationUsage object`
 
         Token usage for a sampling iteration.
+
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
 
         - `cache_creation: BetaCacheCreation or null`
 
@@ -25345,15 +25236,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage object`
 
         Token usage for a compaction iteration.
+
+        - `type: "compaction"`
+
+          Usage for a compaction iteration
+
+          default: compaction
 
         - `cache_creation: BetaCacheCreation or null`
 
@@ -25383,15 +25274,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "compaction"`
-
-          Usage for a compaction iteration
-
-          default: compaction
-
       - `BetaAdvisorMessageIterationUsage object`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation or null`
 
@@ -25426,12 +25317,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage object`
 
@@ -25442,6 +25327,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation or null`
 
           Breakdown of cached tokens by TTL
@@ -25475,12 +25366,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -25542,6 +25427,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -25572,17 +25463,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"end_user_binding_mismatch"`
 
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
-
 ### Beta Raw Message Start Event
 
 - `BetaRawMessageStartEvent object`
 
+  - `type: "message_start"`
+
+    default: message_start
+
   - `message: BetaMessage`
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
+
+      default: message
 
     - `id: string`
 
@@ -25608,12 +25505,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" or "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -25621,6 +25512,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -25659,6 +25556,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextBlock object`
 
+        - `type: "text"`
+
+          default: text
+
         - `citations: array of BetaTextCitation or null`
 
           Citations supporting the text block.
@@ -25666,6 +25567,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `BetaCitationCharLocation object`
+
+            - `type: "char_location"`
+
+              default: char_location
 
             - `cited_text: string`
 
@@ -25683,11 +25588,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "char_location"`
-
-              default: char_location
-
           - `BetaCitationPageLocation object`
+
+            - `type: "page_location"`
+
+              default: page_location
 
             - `cited_text: string`
 
@@ -25705,11 +25610,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 1
 
-            - `type: "page_location"`
-
-              default: page_location
-
           - `BetaCitationContentBlockLocation object`
+
+            - `type: "content_block_location"`
+
+              default: content_block_location
 
             - `cited_text: string`
 
@@ -25737,11 +25642,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
-              default: content_block_location
-
           - `BetaCitationsWebSearchResultLocation object`
+
+            - `type: "web_search_result_location"`
+
+              default: web_search_result_location
 
             - `cited_text: string`
 
@@ -25751,13 +25656,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
-              default: web_search_result_location
-
             - `url: string`
 
           - `BetaCitationSearchResultLocation object`
+
+            - `type: "search_result_location"`
+
+              default: search_result_location
 
             - `cited_text: string`
 
@@ -25789,19 +25694,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
-              default: search_result_location
-
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
-
-          default: text
+          minLength: 0
 
       - `BetaThinkingBlock object`
+
+        - `type: "thinking"`
+
+          default: thinking
 
         - `signature: string`
 
@@ -25815,11 +25716,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
-          default: thinking
-
       - `BetaRedactedThinkingBlock object`
+
+        - `type: "redacted_thinking"`
+
+          default: redacted_thinking
 
         - `data: string`
 
@@ -25829,11 +25730,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
-          default: redacted_thinking
-
       - `BetaToolUseBlock object`
+
+        - `type: "tool_use"`
+
+          default: tool_use
 
         - `id: string`
 
@@ -25845,13 +25746,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minLength: 1
 
-        - `type: "tool_use"`
-
-          default: tool_use
-
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -25863,19 +25758,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120 object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string or null`
 
@@ -25884,6 +25779,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlock object`
+
+        - `type: "server_tool_use"`
+
+          default: server_tool_use
 
         - `id: string`
 
@@ -25909,13 +25808,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
-          default: server_tool_use
-
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -25929,9 +25822,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaWebSearchToolResultBlock object`
 
+        - `type: "web_search_tool_result"`
+
+          default: web_search_tool_result
+
         - `content: BetaWebSearchToolResultBlockContent`
 
           - `BetaWebSearchToolResultError object`
+
+            - `type: "web_search_tool_result_error"`
+
+              default: web_search_tool_result_error
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -25947,11 +25848,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
-              default: web_search_tool_result_error
-
           - `array of BetaWebSearchResultBlock`
+
+            - `type: "web_search_result"`
+
+              default: web_search_result
 
             - `encrypted_content: string`
 
@@ -25959,23 +25860,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `title: string`
 
-            - `type: "web_search_result"`
-
-              default: web_search_result
-
             - `url: string`
 
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_search_tool_result"`
-
-          default: web_search_tool_result
-
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -25989,9 +25880,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaWebFetchToolResultBlock object`
 
+        - `type: "web_fetch_tool_result"`
+
+          default: web_fetch_tool_result
+
         - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
           - `BetaWebFetchToolResultErrorBlock object`
+
+            - `type: "web_fetch_tool_result_error"`
+
+              default: web_fetch_tool_result_error
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -26013,13 +25912,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
-
-              default: web_fetch_tool_result_error
+              - `"content_too_large"`
 
           - `BetaWebFetchBlock object`
 
+            - `type: "web_fetch_result"`
+
+              default: web_fetch_result
+
             - `content: BetaDocumentBlock`
+
+              - `type: "document"`
+
+                default: document
 
               - `citations: BetaCitationConfig or null`
 
@@ -26033,37 +25938,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaBase64PDFSource object`
 
+                  - `type: "base64"`
+
                   - `data: string`
 
                     format: byte
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `BetaPlainTextSource object`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
               - `title: string or null`
 
                 The title of the document
 
-              - `type: "document"`
-
-                default: document
-
             - `retrieved_at: string or null`
 
               ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
-
-              default: web_fetch_result
 
             - `url: string`
 
@@ -26073,13 +25970,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
-          default: web_fetch_tool_result
-
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -26093,9 +25984,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaAdvisorToolResultBlock object`
 
+        - `type: "advisor_tool_result"`
+
+          default: advisor_tool_result
+
         - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
           - `BetaAdvisorToolResultError object`
+
+            - `type: "advisor_tool_result_error"`
+
+              default: advisor_tool_result_error
 
             - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -26113,11 +26012,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
-              default: advisor_tool_result_error
-
           - `BetaAdvisorResultBlock object`
+
+            - `type: "advisor_result"`
+
+              default: advisor_result
 
             - `stop_reason: string or null`
 
@@ -26125,11 +26024,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `text: string`
 
-            - `type: "advisor_result"`
-
-              default: advisor_result
-
           - `BetaAdvisorRedactedResultBlock object`
+
+            - `type: "advisor_redacted_result"`
+
+              default: advisor_redacted_result
 
             - `encrypted_content: string`
 
@@ -26139,25 +26038,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-            - `type: "advisor_redacted_result"`
-
-              default: advisor_redacted_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
-          default: advisor_tool_result
-
       - `BetaCodeExecutionToolResultBlock object`
+
+        - `type: "code_execution_tool_result"`
+
+          default: code_execution_tool_result
 
         - `content: BetaCodeExecutionToolResultBlockContent`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
-
           - `BetaCodeExecutionToolResultError object`
+
+            - `type: "code_execution_tool_result_error"`
+
+              default: code_execution_tool_result_error
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -26169,19 +26066,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
-              default: code_execution_tool_result_error
-
           - `BetaCodeExecutionResultBlock object`
 
-            - `content: array of BetaCodeExecutionOutputBlock`
+            - `type: "code_execution_result"`
 
-              - `file_id: string`
+              default: code_execution_result
+
+            - `content: array of BetaCodeExecutionOutputBlock`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -26189,21 +26086,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
-              default: code_execution_result
-
           - `BetaEncryptedCodeExecutionResultBlock object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
-            - `content: array of BetaCodeExecutionOutputBlock`
+            - `type: "encrypted_code_execution_result"`
 
-              - `file_id: string`
+              default: encrypted_code_execution_result
+
+            - `content: array of BetaCodeExecutionOutputBlock`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -26211,23 +26108,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
-              default: encrypted_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
-          default: code_execution_tool_result
-
       - `BetaBashCodeExecutionToolResultBlock object`
+
+        - `type: "bash_code_execution_tool_result"`
+
+          default: bash_code_execution_tool_result
 
         - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
           - `BetaBashCodeExecutionToolResultError object`
+
+            - `type: "bash_code_execution_tool_result_error"`
+
+              default: bash_code_execution_tool_result_error
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -26241,19 +26138,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
-              default: bash_code_execution_tool_result_error
-
           - `BetaBashCodeExecutionResultBlock object`
 
-            - `content: array of BetaBashCodeExecutionOutputBlock`
+            - `type: "bash_code_execution_result"`
 
-              - `file_id: string`
+              default: bash_code_execution_result
+
+            - `content: array of BetaBashCodeExecutionOutputBlock`
 
               - `type: "bash_code_execution_output"`
 
                 default: bash_code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -26261,23 +26158,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
-              default: bash_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
-          default: bash_code_execution_tool_result
-
       - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+        - `type: "text_editor_code_execution_tool_result"`
+
+          default: text_editor_code_execution_tool_result
 
         - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `BetaTextEditorCodeExecutionToolResultError object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
+
+              default: text_editor_code_execution_tool_result_error
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -26293,11 +26190,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `error_message: string or null`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
-              default: text_editor_code_execution_tool_result_error
-
           - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+            - `type: "text_editor_code_execution_view_result"`
+
+              default: text_editor_code_execution_view_result
 
             - `content: string`
 
@@ -26315,19 +26212,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `total_lines: number or null`
 
-            - `type: "text_editor_code_execution_view_result"`
-
-              default: text_editor_code_execution_view_result
-
           - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-            - `is_file_update: boolean`
 
             - `type: "text_editor_code_execution_create_result"`
 
               default: text_editor_code_execution_create_result
 
+            - `is_file_update: boolean`
+
           - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
+
+              default: text_editor_code_execution_str_replace_result
 
             - `lines: array of string or null`
 
@@ -26339,23 +26236,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `old_start: number or null`
 
-            - `type: "text_editor_code_execution_str_replace_result"`
-
-              default: text_editor_code_execution_str_replace_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
-          default: text_editor_code_execution_tool_result
-
       - `BetaToolSearchToolResultBlock object`
+
+        - `type: "tool_search_tool_result"`
+
+          default: tool_search_tool_result
 
         - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
           - `BetaToolSearchToolResultError object`
+
+            - `type: "tool_search_tool_result_error"`
+
+              default: tool_search_tool_result_error
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -26369,35 +26266,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `error_message: string or null`
 
-            - `type: "tool_search_tool_result_error"`
-
-              default: tool_search_tool_result_error
-
           - `BetaToolSearchToolSearchResultBlock object`
-
-            - `tool_references: array of BetaToolReferenceBlock`
-
-              - `tool_name: string`
-
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
-
-                default: tool_reference
 
             - `type: "tool_search_tool_search_result"`
 
               default: tool_search_tool_search_result
 
+            - `tool_references: array of BetaToolReferenceBlock`
+
+              - `type: "tool_reference"`
+
+                default: tool_reference
+
+              - `tool_name: string`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "tool_search_tool_result"`
-
-          default: tool_search_tool_result
-
       - `BetaMCPToolUseBlock object`
+
+        - `type: "mcp_tool_use"`
+
+          default: mcp_tool_use
 
         - `id: string`
 
@@ -26413,17 +26306,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
-          default: mcp_tool_use
-
       - `BetaMCPToolResultBlock object`
+
+        - `type: "mcp_tool_result"`
+
+          default: mcp_tool_result
 
         - `content: string or array of BetaTextBlock`
 
           - `string`
 
           - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+            - `type: "text"`
+
+              default: text
 
             - `citations: array of BetaTextCitation or null`
 
@@ -26433,11 +26330,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
         - `is_error: boolean`
 
@@ -26447,19 +26340,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type: "mcp_tool_result"`
-
-          default: mcp_tool_result
-
       - `BetaContainerUploadBlock object`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
 
           default: container_upload
+
+        - `file_id: string`
 
       - `BetaCompactionBlock object`
 
@@ -26469,6 +26358,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
+        - `type: "compaction"`
+
+          default: compaction
+
         - `content: string or null`
 
           Summary of compacted content, or null if compaction failed
@@ -26476,10 +26369,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `encrypted_content: string or null`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
-
-        - `type: "compaction"`
-
-          default: compaction
 
       - `BetaFallbackBlock object`
 
@@ -26494,6 +26383,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The block is treated like a server-tool content block for streaming: it
         arrives via the standard `content_block_start` / `content_block_stop`
         pair and carries no deltas.
+
+        - `type: "fallback"`
+
+          default: fallback
 
         - `from: BetaFallbackInfo`
 
@@ -26589,6 +26482,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           What caused the `from` model to hand over at this hop.
 
+          - `type: "refusal"`
+
+            default: refusal
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
             The policy category that triggered a refusal.
@@ -26613,14 +26510,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-          - `type: "refusal"`
-
-            default: refusal
-
-        - `type: "fallback"`
-
-          default: fallback
-
     - `context_management: BetaContextManagementResponse or null`
 
       Context management response.
@@ -26632,6 +26521,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         List of context management edits that were applied.
 
         - `BetaClearToolUses20250919EditResponse object`
+
+          - `type: "clear_tool_uses_20250919"`
+
+            The type of context management edit applied.
+
+            default: clear_tool_uses_20250919
 
           - `cleared_input_tokens: number`
 
@@ -26645,13 +26540,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "clear_tool_uses_20250919"`
+        - `BetaClearThinking20251015EditResponse object`
+
+          - `type: "clear_thinking_20251015"`
 
             The type of context management edit applied.
 
-            default: clear_tool_uses_20250919
-
-        - `BetaClearThinking20251015EditResponse object`
+            default: clear_thinking_20251015
 
           - `cleared_input_tokens: number`
 
@@ -26665,12 +26560,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "clear_thinking_20251015"`
-
-            The type of context management edit applied.
-
-            default: clear_thinking_20251015
-
     - `diagnostics: BetaDiagnostics or null`
 
       Response envelope for request-level diagnostics. Present (possibly
@@ -26682,43 +26571,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `BetaCacheMissModelChanged object`
 
-          - `cache_missed_input_tokens: number`
-
-            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
           - `type: "model_changed"`
 
             default: model_changed
 
-        - `BetaCacheMissSystemChanged object`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `BetaCacheMissSystemChanged object`
 
           - `type: "system_changed"`
 
             default: system_changed
 
-        - `BetaCacheMissToolsChanged object`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `BetaCacheMissToolsChanged object`
 
           - `type: "tools_changed"`
 
             default: tools_changed
 
-        - `BetaCacheMissMessagesChanged object`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+        - `BetaCacheMissMessagesChanged object`
+
           - `type: "messages_changed"`
 
             default: messages_changed
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -26749,6 +26638,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `stop_details: BetaRefusalStopDetails or null`
 
       Structured information about a refusal.
+
+      - `type: "refusal"`
+
+        default: refusal
 
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -26829,10 +26722,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: BetaStopReason or null`
 
       The reason that we stopped.
@@ -26870,14 +26759,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Which custom stop sequence was generated, if any.
 
       This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: "message"`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
-
-      default: message
 
     - `usage: BetaUsage`
 
@@ -26945,6 +26826,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             No reprice was applied; `reason` says why.
 
+            - `type: "not_applied"`
+
+              default: not_applied
+
             - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
               Why the reprice was not applied.
@@ -26975,10 +26860,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               - `"wrong_platform"`
 
               - `"wrong_workspace"`
-
-            - `type: "not_applied"`
-
-              default: not_applied
 
             - `remove_to_redeem: optional array of string or null`
 
@@ -27017,6 +26898,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Token usage for a sampling iteration.
 
+          - `type: "message"`
+
+            Usage for a sampling iteration
+
+            default: message
+
           - `cache_creation: BetaCacheCreation or null`
 
             Breakdown of cached tokens by TTL
@@ -27051,43 +26938,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "message"`
-
-            Usage for a sampling iteration
-
-            default: message
-
         - `BetaCompactionIterationUsage object`
 
           Token usage for a compaction iteration.
-
-          - `cache_creation: BetaCacheCreation or null`
-
-            Breakdown of cached tokens by TTL
-
-          - `cache_creation_input_tokens: number`
-
-            The number of input tokens used to create the cache entry.
-
-            default: 0, minimum: 0
-
-          - `cache_read_input_tokens: number`
-
-            The number of input tokens read from the cache.
-
-            default: 0, minimum: 0
-
-          - `input_tokens: number`
-
-            The number of input tokens which were used.
-
-            minimum: 0
-
-          - `output_tokens: number`
-
-            The number of output tokens which were used.
-
-            minimum: 0
 
           - `type: "compaction"`
 
@@ -27095,9 +26948,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             default: compaction
 
+          - `cache_creation: BetaCacheCreation or null`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
         - `BetaAdvisorMessageIterationUsage object`
 
           Token usage for an advisor sub-inference iteration.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
+
+            default: advisor_message
 
           - `cache_creation: BetaCacheCreation or null`
 
@@ -27132,12 +27019,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "advisor_message"`
-
-            Usage for an advisor sub-inference iteration
-
-            default: advisor_message
 
         - `BetaFallbackMessageIterationUsage object`
 
@@ -27148,6 +27029,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           a fallback model served the response is signalled by the presence of this
           entry in `usage.iterations`.
 
+          - `type: "fallback_message"`
+
+            Usage for the fallback-model attempt that served the response
+
+            default: fallback_message
+
           - `cache_creation: BetaCacheCreation or null`
 
             Breakdown of cached tokens by TTL
@@ -27181,12 +27068,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "fallback_message"`
-
-            Usage for the fallback-model attempt that served the response
-
-            default: fallback_message
 
       - `output_tokens: number`
 
@@ -27268,6 +27149,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -27298,16 +27185,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"end_user_binding_mismatch"`
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
-  - `type: "message_start"`
-
-    default: message_start
-
 ### Beta Raw Message Stop Event
 
 - `BetaRawMessageStopEvent object`
@@ -27322,7 +27199,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaRawMessageStartEvent object`
 
+    - `type: "message_start"`
+
+      default: message_start
+
     - `message: BetaMessage`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
+
+        default: message
 
       - `id: string`
 
@@ -27348,12 +27237,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Skills loaded in the container
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" or "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -27361,6 +27244,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: string`
 
@@ -27399,6 +27288,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `BetaTextBlock object`
 
+          - `type: "text"`
+
+            default: text
+
           - `citations: array of BetaTextCitation or null`
 
             Citations supporting the text block.
@@ -27406,6 +27299,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
             - `BetaCitationCharLocation object`
+
+              - `type: "char_location"`
+
+                default: char_location
 
               - `cited_text: string`
 
@@ -27423,11 +27320,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 minimum: 0
 
-              - `type: "char_location"`
-
-                default: char_location
-
             - `BetaCitationPageLocation object`
+
+              - `type: "page_location"`
+
+                default: page_location
 
               - `cited_text: string`
 
@@ -27445,11 +27342,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 minimum: 1
 
-              - `type: "page_location"`
-
-                default: page_location
-
             - `BetaCitationContentBlockLocation object`
+
+              - `type: "content_block_location"`
+
+                default: content_block_location
 
               - `cited_text: string`
 
@@ -27477,11 +27374,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
-                default: content_block_location
-
             - `BetaCitationsWebSearchResultLocation object`
+
+              - `type: "web_search_result_location"`
+
+                default: web_search_result_location
 
               - `cited_text: string`
 
@@ -27491,13 +27388,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 maxLength: 512
 
-              - `type: "web_search_result_location"`
-
-                default: web_search_result_location
-
               - `url: string`
 
             - `BetaCitationSearchResultLocation object`
+
+              - `type: "search_result_location"`
+
+                default: search_result_location
 
               - `cited_text: string`
 
@@ -27529,19 +27426,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `title: string or null`
 
-              - `type: "search_result_location"`
-
-                default: search_result_location
-
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
         - `BetaThinkingBlock object`
+
+          - `type: "thinking"`
+
+            default: thinking
 
           - `signature: string`
 
@@ -27555,11 +27448,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The text of Claude's thinking process for this block.
 
-          - `type: "thinking"`
-
-            default: thinking
-
         - `BetaRedactedThinkingBlock object`
+
+          - `type: "redacted_thinking"`
+
+            default: redacted_thinking
 
           - `data: string`
 
@@ -27569,11 +27462,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-          - `type: "redacted_thinking"`
-
-            default: redacted_thinking
-
         - `BetaToolUseBlock object`
+
+          - `type: "tool_use"`
+
+            default: tool_use
 
           - `id: string`
 
@@ -27585,13 +27478,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minLength: 1
 
-          - `type: "tool_use"`
-
-            default: tool_use
-
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller object`
 
@@ -27603,19 +27490,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `BetaServerToolCaller20260120 object`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `toolset_name: optional string or null`
 
@@ -27624,6 +27511,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `BetaServerToolUseBlock object`
+
+          - `type: "server_tool_use"`
+
+            default: server_tool_use
 
           - `id: string`
 
@@ -27649,13 +27540,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
-            default: server_tool_use
-
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller object`
 
@@ -27669,9 +27554,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `BetaWebSearchToolResultBlock object`
 
+          - `type: "web_search_tool_result"`
+
+            default: web_search_tool_result
+
           - `content: BetaWebSearchToolResultBlockContent`
 
             - `BetaWebSearchToolResultError object`
+
+              - `type: "web_search_tool_result_error"`
+
+                default: web_search_tool_result_error
 
               - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -27687,11 +27580,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
-                default: web_search_tool_result_error
-
             - `array of BetaWebSearchResultBlock`
+
+              - `type: "web_search_result"`
+
+                default: web_search_result
 
               - `encrypted_content: string`
 
@@ -27699,23 +27592,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `title: string`
 
-              - `type: "web_search_result"`
-
-                default: web_search_result
-
               - `url: string`
 
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_search_tool_result"`
-
-            default: web_search_tool_result
-
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller object`
 
@@ -27729,9 +27612,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `BetaWebFetchToolResultBlock object`
 
+          - `type: "web_fetch_tool_result"`
+
+            default: web_fetch_tool_result
+
           - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
             - `BetaWebFetchToolResultErrorBlock object`
+
+              - `type: "web_fetch_tool_result_error"`
+
+                default: web_fetch_tool_result_error
 
               - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -27753,13 +27644,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
-
-                default: web_fetch_tool_result_error
+                - `"content_too_large"`
 
             - `BetaWebFetchBlock object`
 
+              - `type: "web_fetch_result"`
+
+                default: web_fetch_result
+
               - `content: BetaDocumentBlock`
+
+                - `type: "document"`
+
+                  default: document
 
                 - `citations: BetaCitationConfig or null`
 
@@ -27773,37 +27670,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `BetaBase64PDFSource object`
 
+                    - `type: "base64"`
+
                     - `data: string`
 
                       format: byte
 
                     - `media_type: "application/pdf"`
 
-                    - `type: "base64"`
-
                   - `BetaPlainTextSource object`
+
+                    - `type: "text"`
 
                     - `data: string`
 
                     - `media_type: "text/plain"`
 
-                    - `type: "text"`
-
                 - `title: string or null`
 
                   The title of the document
 
-                - `type: "document"`
-
-                  default: document
-
               - `retrieved_at: string or null`
 
                 ISO 8601 timestamp when the content was retrieved
-
-              - `type: "web_fetch_result"`
-
-                default: web_fetch_result
 
               - `url: string`
 
@@ -27813,13 +27702,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_fetch_tool_result"`
-
-            default: web_fetch_tool_result
-
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller object`
 
@@ -27833,9 +27716,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `BetaAdvisorToolResultBlock object`
 
+          - `type: "advisor_tool_result"`
+
+            default: advisor_tool_result
+
           - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
             - `BetaAdvisorToolResultError object`
+
+              - `type: "advisor_tool_result_error"`
+
+                default: advisor_tool_result_error
 
               - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -27853,11 +27744,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"model_not_found"`
 
-              - `type: "advisor_tool_result_error"`
-
-                default: advisor_tool_result_error
-
             - `BetaAdvisorResultBlock object`
+
+              - `type: "advisor_result"`
+
+                default: advisor_result
 
               - `stop_reason: string or null`
 
@@ -27865,11 +27756,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `text: string`
 
-              - `type: "advisor_result"`
-
-                default: advisor_result
-
             - `BetaAdvisorRedactedResultBlock object`
+
+              - `type: "advisor_redacted_result"`
+
+                default: advisor_redacted_result
 
               - `encrypted_content: string`
 
@@ -27879,25 +27770,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-              - `type: "advisor_redacted_result"`
-
-                default: advisor_redacted_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "advisor_tool_result"`
-
-            default: advisor_tool_result
-
         - `BetaCodeExecutionToolResultBlock object`
+
+          - `type: "code_execution_tool_result"`
+
+            default: code_execution_tool_result
 
           - `content: BetaCodeExecutionToolResultBlockContent`
 
-            Code execution result with encrypted stdout for PFC + web_search results.
-
             - `BetaCodeExecutionToolResultError object`
+
+              - `type: "code_execution_tool_result_error"`
+
+                default: code_execution_tool_result_error
 
               - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -27909,19 +27798,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
-                default: code_execution_tool_result_error
-
             - `BetaCodeExecutionResultBlock object`
 
-              - `content: array of BetaCodeExecutionOutputBlock`
+              - `type: "code_execution_result"`
 
-                - `file_id: string`
+                default: code_execution_result
+
+              - `content: array of BetaCodeExecutionOutputBlock`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -27929,21 +27818,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
-                default: code_execution_result
-
             - `BetaEncryptedCodeExecutionResultBlock object`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `content: array of BetaCodeExecutionOutputBlock`
+              - `type: "encrypted_code_execution_result"`
 
-                - `file_id: string`
+                default: encrypted_code_execution_result
+
+              - `content: array of BetaCodeExecutionOutputBlock`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -27951,23 +27840,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
-                default: encrypted_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "code_execution_tool_result"`
-
-            default: code_execution_tool_result
-
         - `BetaBashCodeExecutionToolResultBlock object`
+
+          - `type: "bash_code_execution_tool_result"`
+
+            default: bash_code_execution_tool_result
 
           - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
             - `BetaBashCodeExecutionToolResultError object`
+
+              - `type: "bash_code_execution_tool_result_error"`
+
+                default: bash_code_execution_tool_result_error
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -27981,19 +27870,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
-                default: bash_code_execution_tool_result_error
-
             - `BetaBashCodeExecutionResultBlock object`
 
-              - `content: array of BetaBashCodeExecutionOutputBlock`
+              - `type: "bash_code_execution_result"`
 
-                - `file_id: string`
+                default: bash_code_execution_result
+
+              - `content: array of BetaBashCodeExecutionOutputBlock`
 
                 - `type: "bash_code_execution_output"`
 
                   default: bash_code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -28001,23 +27890,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
-                default: bash_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "bash_code_execution_tool_result"`
-
-            default: bash_code_execution_tool_result
-
         - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+          - `type: "text_editor_code_execution_tool_result"`
+
+            default: text_editor_code_execution_tool_result
 
           - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
             - `BetaTextEditorCodeExecutionToolResultError object`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
+
+                default: text_editor_code_execution_tool_result_error
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -28033,11 +27922,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `error_message: string or null`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
-                default: text_editor_code_execution_tool_result_error
-
             - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+              - `type: "text_editor_code_execution_view_result"`
+
+                default: text_editor_code_execution_view_result
 
               - `content: string`
 
@@ -28055,19 +27944,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `total_lines: number or null`
 
-              - `type: "text_editor_code_execution_view_result"`
-
-                default: text_editor_code_execution_view_result
-
             - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-              - `is_file_update: boolean`
 
               - `type: "text_editor_code_execution_create_result"`
 
                 default: text_editor_code_execution_create_result
 
+              - `is_file_update: boolean`
+
             - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
+
+                default: text_editor_code_execution_str_replace_result
 
               - `lines: array of string or null`
 
@@ -28079,23 +27968,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `old_start: number or null`
 
-              - `type: "text_editor_code_execution_str_replace_result"`
-
-                default: text_editor_code_execution_str_replace_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
-            default: text_editor_code_execution_tool_result
-
         - `BetaToolSearchToolResultBlock object`
+
+          - `type: "tool_search_tool_result"`
+
+            default: tool_search_tool_result
 
           - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
             - `BetaToolSearchToolResultError object`
+
+              - `type: "tool_search_tool_result_error"`
+
+                default: tool_search_tool_result_error
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -28109,35 +27998,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `error_message: string or null`
 
-              - `type: "tool_search_tool_result_error"`
-
-                default: tool_search_tool_result_error
-
             - `BetaToolSearchToolSearchResultBlock object`
-
-              - `tool_references: array of BetaToolReferenceBlock`
-
-                - `tool_name: string`
-
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `type: "tool_reference"`
-
-                  default: tool_reference
 
               - `type: "tool_search_tool_search_result"`
 
                 default: tool_search_tool_search_result
 
+              - `tool_references: array of BetaToolReferenceBlock`
+
+                - `type: "tool_reference"`
+
+                  default: tool_reference
+
+                - `tool_name: string`
+
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "tool_search_tool_result"`
-
-            default: tool_search_tool_result
-
         - `BetaMCPToolUseBlock object`
+
+          - `type: "mcp_tool_use"`
+
+            default: mcp_tool_use
 
           - `id: string`
 
@@ -28153,17 +28038,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The name of the MCP server
 
-          - `type: "mcp_tool_use"`
-
-            default: mcp_tool_use
-
         - `BetaMCPToolResultBlock object`
+
+          - `type: "mcp_tool_result"`
+
+            default: mcp_tool_result
 
           - `content: string or array of BetaTextBlock`
 
             - `string`
 
             - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+              - `type: "text"`
+
+                default: text
 
               - `citations: array of BetaTextCitation or null`
 
@@ -28173,11 +28062,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `text: string`
 
-                maxLength: 5000000, minLength: 0
-
-              - `type: "text"`
-
-                default: text
+                minLength: 0
 
           - `is_error: boolean`
 
@@ -28187,19 +28072,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type: "mcp_tool_result"`
-
-            default: mcp_tool_result
-
         - `BetaContainerUploadBlock object`
 
           Response model for a file uploaded to the container.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
 
             default: container_upload
+
+          - `file_id: string`
 
         - `BetaCompactionBlock object`
 
@@ -28209,6 +28090,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           summary (e.g., malformed output from the model). Clients may round-trip
           compaction blocks with null content; the server treats them as no-ops.
 
+          - `type: "compaction"`
+
+            default: compaction
+
           - `content: string or null`
 
             Summary of compacted content, or null if compaction failed
@@ -28216,10 +28101,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `encrypted_content: string or null`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
-
-          - `type: "compaction"`
-
-            default: compaction
 
         - `BetaFallbackBlock object`
 
@@ -28234,6 +28115,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The block is treated like a server-tool content block for streaming: it
           arrives via the standard `content_block_start` / `content_block_stop`
           pair and carries no deltas.
+
+          - `type: "fallback"`
+
+            default: fallback
 
           - `from: BetaFallbackInfo`
 
@@ -28329,6 +28214,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             What caused the `from` model to hand over at this hop.
 
+            - `type: "refusal"`
+
+              default: refusal
+
             - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
               The policy category that triggered a refusal.
@@ -28353,14 +28242,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-            - `type: "refusal"`
-
-              default: refusal
-
-          - `type: "fallback"`
-
-            default: fallback
-
       - `context_management: BetaContextManagementResponse or null`
 
         Context management response.
@@ -28372,6 +28253,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           List of context management edits that were applied.
 
           - `BetaClearToolUses20250919EditResponse object`
+
+            - `type: "clear_tool_uses_20250919"`
+
+              The type of context management edit applied.
+
+              default: clear_tool_uses_20250919
 
             - `cleared_input_tokens: number`
 
@@ -28385,13 +28272,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "clear_tool_uses_20250919"`
+          - `BetaClearThinking20251015EditResponse object`
+
+            - `type: "clear_thinking_20251015"`
 
               The type of context management edit applied.
 
-              default: clear_tool_uses_20250919
-
-          - `BetaClearThinking20251015EditResponse object`
+              default: clear_thinking_20251015
 
             - `cleared_input_tokens: number`
 
@@ -28405,12 +28292,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "clear_thinking_20251015"`
-
-              The type of context management edit applied.
-
-              default: clear_thinking_20251015
-
       - `diagnostics: BetaDiagnostics or null`
 
         Response envelope for request-level diagnostics. Present (possibly
@@ -28422,43 +28303,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaCacheMissModelChanged object`
 
-            - `cache_missed_input_tokens: number`
-
-              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
             - `type: "model_changed"`
 
               default: model_changed
 
-          - `BetaCacheMissSystemChanged object`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `BetaCacheMissSystemChanged object`
 
             - `type: "system_changed"`
 
               default: system_changed
 
-          - `BetaCacheMissToolsChanged object`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `BetaCacheMissToolsChanged object`
 
             - `type: "tools_changed"`
 
               default: tools_changed
 
-          - `BetaCacheMissMessagesChanged object`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+          - `BetaCacheMissMessagesChanged object`
+
             - `type: "messages_changed"`
 
               default: messages_changed
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -28489,6 +28370,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `stop_details: BetaRefusalStopDetails or null`
 
         Structured information about a refusal.
+
+        - `type: "refusal"`
+
+          default: refusal
 
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -28569,10 +28454,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-        - `type: "refusal"`
-
-          default: refusal
-
       - `stop_reason: BetaStopReason or null`
 
         The reason that we stopped.
@@ -28610,14 +28491,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Which custom stop sequence was generated, if any.
 
         This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
-
-        default: message
 
       - `usage: BetaUsage`
 
@@ -28685,6 +28558,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               No reprice was applied; `reason` says why.
 
+              - `type: "not_applied"`
+
+                default: not_applied
+
               - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                 Why the reprice was not applied.
@@ -28715,10 +28592,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 - `"wrong_platform"`
 
                 - `"wrong_workspace"`
-
-              - `type: "not_applied"`
-
-                default: not_applied
 
               - `remove_to_redeem: optional array of string or null`
 
@@ -28757,6 +28630,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Token usage for a sampling iteration.
 
+            - `type: "message"`
+
+              Usage for a sampling iteration
+
+              default: message
+
             - `cache_creation: BetaCacheCreation or null`
 
               Breakdown of cached tokens by TTL
@@ -28791,43 +28670,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "message"`
-
-              Usage for a sampling iteration
-
-              default: message
-
           - `BetaCompactionIterationUsage object`
 
             Token usage for a compaction iteration.
-
-            - `cache_creation: BetaCacheCreation or null`
-
-              Breakdown of cached tokens by TTL
-
-            - `cache_creation_input_tokens: number`
-
-              The number of input tokens used to create the cache entry.
-
-              default: 0, minimum: 0
-
-            - `cache_read_input_tokens: number`
-
-              The number of input tokens read from the cache.
-
-              default: 0, minimum: 0
-
-            - `input_tokens: number`
-
-              The number of input tokens which were used.
-
-              minimum: 0
-
-            - `output_tokens: number`
-
-              The number of output tokens which were used.
-
-              minimum: 0
 
             - `type: "compaction"`
 
@@ -28835,9 +28680,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               default: compaction
 
+            - `cache_creation: BetaCacheCreation or null`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
           - `BetaAdvisorMessageIterationUsage object`
 
             Token usage for an advisor sub-inference iteration.
+
+            - `type: "advisor_message"`
+
+              Usage for an advisor sub-inference iteration
+
+              default: advisor_message
 
             - `cache_creation: BetaCacheCreation or null`
 
@@ -28872,12 +28751,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "advisor_message"`
-
-              Usage for an advisor sub-inference iteration
-
-              default: advisor_message
 
           - `BetaFallbackMessageIterationUsage object`
 
@@ -28888,6 +28761,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             a fallback model served the response is signalled by the presence of this
             entry in `usage.iterations`.
 
+            - `type: "fallback_message"`
+
+              Usage for the fallback-model attempt that served the response
+
+              default: fallback_message
+
             - `cache_creation: BetaCacheCreation or null`
 
               Breakdown of cached tokens by TTL
@@ -28921,12 +28800,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "fallback_message"`
-
-              Usage for the fallback-model attempt that served the response
-
-              default: fallback_message
 
         - `output_tokens: number`
 
@@ -29008,6 +28881,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         fallback happened mid-stream, in which case it holds the serving model's
         entries and replaces the one in `message_start`.
 
+        - `type: "thinking_dropped"`
+
+          Always `thinking_dropped` for this entry type.
+
+          default: thinking_dropped
+
         - `path: string`
 
           Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -29038,17 +28917,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"end_user_binding_mismatch"`
 
-        - `type: "thinking_dropped"`
-
-          Always `thinking_dropped` for this entry type.
-
-          default: thinking_dropped
-
-    - `type: "message_start"`
-
-      default: message_start
-
   - `BetaRawMessageDeltaEvent object`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `context_management: BetaContextManagementResponse or null`
 
@@ -29067,10 +28940,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `stop_reason: BetaStopReason or null`
 
       - `stop_sequence: string or null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -29153,6 +29022,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -29175,12 +29050,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
   - `BetaRawMessageStopEvent object`
 
     - `type: "message_stop"`
@@ -29189,9 +29058,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaRawContentBlockStartEvent object`
 
-    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
+    - `type: "content_block_start"`
 
-      Response model for a file uploaded to the container.
+      default: content_block_start
+
+    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
       - `BetaTextBlock object`
 
@@ -29249,31 +29120,35 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `BetaRawContentBlockDeltaEvent object`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: BetaRawContentBlockDelta`
 
       - `BetaTextDelta object`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `BetaInputJSONDelta object`
+        - `text: string`
 
-        - `partial_json: string`
+      - `BetaInputJSONDelta object`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `BetaCitationsDelta object`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
@@ -29287,11 +29162,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaCitationSearchResultLocation object`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `BetaThinkingDelta object`
+
+        - `type: "thinking_delta"`
+
+          default: thinking_delta
 
         - `estimated_tokens: number or null`
 
@@ -29301,21 +29176,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: "thinking_delta"`
-
-          default: thinking_delta
-
       - `BetaSignatureDelta object`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
       - `BetaCompactionContentBlockDelta object`
+
+        - `type: "compaction_delta"`
+
+          default: compaction_delta
 
         - `content: string or null`
 
@@ -29323,27 +29198,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: "compaction_delta"`
-
-          default: compaction_delta
-
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `BetaRawContentBlockStopEvent object`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
 
+    - `index: number`
+
 ### Beta Redacted Thinking Block
 
 - `BetaRedactedThinkingBlock object`
+
+  - `type: "redacted_thinking"`
+
+    default: redacted_thinking
 
   - `data: string`
 
@@ -29353,25 +29224,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-  - `type: "redacted_thinking"`
-
-    default: redacted_thinking
-
 ### Beta Redacted Thinking Block Param
 
 - `BetaRedactedThinkingBlockParam object`
 
+  - `type: "redacted_thinking"`
+
   - `data: string`
 
     The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
-
-  - `type: "redacted_thinking"`
 
 ### Beta Refusal Stop Details
 
 - `BetaRefusalStopDetails object`
 
   Structured information about a refusal.
+
+  - `type: "refusal"`
+
+    default: refusal
 
   - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -29452,17 +29323,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-  - `type: "refusal"`
-
-    default: refusal
-
 ### Beta Request Document Block
 
 - `BetaRequestDocumentBlock object`
 
+  - `type: "document"`
+
   - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
     - `BetaBase64PDFSource object`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -29470,17 +29341,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `BetaPlainTextSource object`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
 
-      - `type: "text"`
-
     - `BetaContentBlockSource object`
+
+      - `type: "content"`
 
       - `content: string or array of BetaContentBlockSourceContent`
 
@@ -29490,11 +29361,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaTextBlockParam object`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -29521,6 +29392,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `BetaCitationCharLocationParam object`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -29537,9 +29410,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `BetaCitationPageLocationParam object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -29557,9 +29430,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `BetaCitationContentBlockLocationParam object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -29587,9 +29460,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `BetaCitationWebSearchResultLocationParam object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -29599,13 +29472,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `BetaCitationSearchResultLocationParam object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -29637,13 +29510,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `title: string or null`
 
-                - `type: "search_result_location"`
-
           - `BetaImageBlockParam object`
+
+            - `type: "image"`
 
             - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
               - `BetaBase64ImageSource object`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -29659,8 +29534,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `BetaURLImageSource object`
 
                 - `type: "url"`
@@ -29669,11 +29542,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `BetaFileImageSource object`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -29691,8 +29562,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"error"`
 
-      - `type: "content"`
-
     - `BetaURLPDFSource object`
 
       - `type: "url"`
@@ -29701,11 +29570,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaFileDocumentSource object`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "document"`
+      - `file_id: string`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -29735,9 +29602,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaRequestMCPServerURLDefinition object`
 
-  - `name: string`
-
   - `type: "url"`
+
+  - `name: string`
 
   - `url: string`
 
@@ -29753,11 +29620,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaRequestMCPToolResultBlockParam object`
 
+  - `type: "mcp_tool_result"`
+
   - `tool_use_id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
-
-  - `type: "mcp_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -29786,11 +29653,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+      - `type: "text"`
+
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -29799,6 +29666,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `citations: optional array of BetaTextCitationParam or null`
 
         - `BetaCitationCharLocationParam object`
+
+          - `type: "char_location"`
 
           - `cited_text: string`
 
@@ -29816,9 +29685,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "char_location"`
-
         - `BetaCitationPageLocationParam object`
+
+          - `type: "page_location"`
 
           - `cited_text: string`
 
@@ -29836,9 +29705,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 1
 
-          - `type: "page_location"`
-
         - `BetaCitationContentBlockLocationParam object`
+
+          - `type: "content_block_location"`
 
           - `cited_text: string`
 
@@ -29866,9 +29735,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
         - `BetaCitationWebSearchResultLocationParam object`
+
+          - `type: "web_search_result_location"`
 
           - `cited_text: string`
 
@@ -29878,13 +29747,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             maxLength: 512, minLength: 1
 
-          - `type: "web_search_result_location"`
-
           - `url: string`
 
             minLength: 1
 
         - `BetaCitationSearchResultLocationParam object`
+
+          - `type: "search_result_location"`
 
           - `cited_text: string`
 
@@ -29916,8 +29785,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `title: string or null`
 
-          - `type: "search_result_location"`
-
   - `is_error: optional boolean`
 
 ### Beta Request Tool Addition Block
@@ -29930,12 +29797,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   `tools`; it is offered to the model from this point in the
   conversation onward.
 
-  - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+  - `type: "tool_addition"`
 
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
+  - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
     - `BetaToolChangeToolReference object`
 
@@ -29944,32 +29808,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
 
+      - `type: "tool_reference"`
+
       - `name: string`
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-      - `type: "tool_reference"`
 
     - `BetaToolChangeMCPToolReference object`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
+      - `type: "mcp_tool_reference"`
+
       - `name: string`
 
       - `server_name: string`
-
-      - `type: "mcp_tool_reference"`
 
     - `BetaToolChangeMCPToolsetReference object`
 
       Reference to every tool in the named MCP server's toolset.
 
-      - `server_name: string`
-
       - `type: "mcp_toolset_reference"`
 
-  - `type: "tool_addition"`
+      - `server_name: string`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30002,12 +29864,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   `tools`; it is no longer offered to the model from this point in the
   conversation onward.
 
-  - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+  - `type: "tool_removal"`
 
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
+  - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
     - `BetaToolChangeToolReference object`
 
@@ -30016,32 +29875,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
 
+      - `type: "tool_reference"`
+
       - `name: string`
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-      - `type: "tool_reference"`
 
     - `BetaToolChangeMCPToolReference object`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
+      - `type: "mcp_tool_reference"`
+
       - `name: string`
 
       - `server_name: string`
-
-      - `type: "mcp_tool_reference"`
 
     - `BetaToolChangeMCPToolsetReference object`
 
       Reference to every tool in the named MCP server's toolset.
 
-      - `server_name: string`
-
       - `type: "mcp_toolset_reference"`
 
-  - `type: "tool_removal"`
+      - `server_name: string`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30068,13 +29925,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaSearchResultBlockParam object`
 
+  - `type: "search_result"`
+
   - `content: array of BetaTextBlockParam`
+
+    - `type: "text"`
 
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30101,6 +29960,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaCitationCharLocationParam object`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -30117,9 +29978,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam object`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -30137,9 +29998,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam object`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -30167,9 +30028,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam object`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -30179,13 +30040,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam object`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -30217,13 +30078,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string or null`
 
-        - `type: "search_result_location"`
-
   - `source: string`
 
   - `title: string`
-
-  - `type: "search_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30239,21 +30096,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Tool invocation generated by a server-side tool.
 
+  - `type: "code_execution_20250825"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20250825"`
 
 ### Beta Server Tool Caller 20260120
 
 - `BetaServerToolCaller20260120 object`
 
+  - `type: "code_execution_20260120"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20260120"`
 
 ### Beta Server Tool Usage
 
@@ -30275,6 +30132,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaServerToolUseBlock object`
 
+  - `type: "server_tool_use"`
+
+    default: server_tool_use
+
   - `id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -30299,13 +30160,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"tool_search_tool_bm25"`
 
-  - `type: "server_tool_use"`
-
-    default: server_tool_use
-
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `BetaDirectCaller object`
 
@@ -30317,23 +30172,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Server Tool Use Block Param
 
 - `BetaServerToolUseBlockParam object`
+
+  - `type: "server_tool_use"`
 
   - `id: string`
 
@@ -30358,8 +30215,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"tool_search_tool_regex"`
 
     - `"tool_search_tool_bm25"`
-
-  - `type: "server_tool_use"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30384,8 +30239,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `BetaDirectCaller object`
 
       Tool invocation directly from the model.
@@ -30396,43 +30249,37 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Signature Delta
 
 - `BetaSignatureDelta object`
 
-  - `signature: string`
-
-    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
-
   - `type: "signature_delta"`
 
     default: signature_delta
+
+  - `signature: string`
+
+    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
 ### Beta Skill Params
 
 - `BetaSkillParams object`
 
   Specification for a skill to be loaded in a container (request model).
-
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
 
   - `type: "anthropic" or "custom"`
 
@@ -30441,6 +30288,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version: optional string`
 
@@ -30496,6 +30349,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaTextBlock object`
 
+  - `type: "text"`
+
+    default: text
+
   - `citations: array of BetaTextCitation or null`
 
     Citations supporting the text block.
@@ -30503,6 +30360,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
     - `BetaCitationCharLocation object`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -30520,11 +30381,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `BetaCitationPageLocation object`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -30542,11 +30403,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `BetaCitationContentBlockLocation object`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -30574,11 +30435,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `BetaCitationsWebSearchResultLocation object`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -30588,13 +30449,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `BetaCitationSearchResultLocation object`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -30626,27 +30487,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `title: string or null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
   - `text: string`
 
-    maxLength: 5000000, minLength: 0
-
-  - `type: "text"`
-
-    default: text
+    minLength: 0
 
 ### Beta Text Block Param
 
 - `BetaTextBlockParam object`
 
+  - `type: "text"`
+
   - `text: string`
 
     minLength: 1
-
-  - `type: "text"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -30673,6 +30526,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaCitationCharLocationParam object`
 
+      - `type: "char_location"`
+
       - `cited_text: string`
 
       - `document_index: number`
@@ -30689,9 +30544,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "char_location"`
-
     - `BetaCitationPageLocationParam object`
+
+      - `type: "page_location"`
 
       - `cited_text: string`
 
@@ -30709,9 +30564,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 1
 
-      - `type: "page_location"`
-
     - `BetaCitationContentBlockLocationParam object`
+
+      - `type: "content_block_location"`
 
       - `cited_text: string`
 
@@ -30739,9 +30594,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
     - `BetaCitationWebSearchResultLocationParam object`
+
+      - `type: "web_search_result_location"`
 
       - `cited_text: string`
 
@@ -30751,13 +30606,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         maxLength: 512, minLength: 1
 
-      - `type: "web_search_result_location"`
-
       - `url: string`
 
         minLength: 1
 
     - `BetaCitationSearchResultLocationParam object`
+
+      - `type: "search_result_location"`
 
       - `cited_text: string`
 
@@ -30789,13 +30644,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `title: string or null`
 
-      - `type: "search_result_location"`
-
 ### Beta Text Citation
 
 - `BetaTextCitation = BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
   - `BetaCitationCharLocation object`
+
+    - `type: "char_location"`
+
+      default: char_location
 
     - `cited_text: string`
 
@@ -30813,11 +30670,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "char_location"`
-
-      default: char_location
-
   - `BetaCitationPageLocation object`
+
+    - `type: "page_location"`
+
+      default: page_location
 
     - `cited_text: string`
 
@@ -30835,11 +30692,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 1
 
-    - `type: "page_location"`
-
-      default: page_location
-
   - `BetaCitationContentBlockLocation object`
+
+    - `type: "content_block_location"`
+
+      default: content_block_location
 
     - `cited_text: string`
 
@@ -30867,11 +30724,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
-      default: content_block_location
-
   - `BetaCitationsWebSearchResultLocation object`
+
+    - `type: "web_search_result_location"`
+
+      default: web_search_result_location
 
     - `cited_text: string`
 
@@ -30881,13 +30738,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       maxLength: 512
 
-    - `type: "web_search_result_location"`
-
-      default: web_search_result_location
-
     - `url: string`
 
   - `BetaCitationSearchResultLocation object`
+
+    - `type: "search_result_location"`
+
+      default: search_result_location
 
     - `cited_text: string`
 
@@ -30919,15 +30776,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `title: string or null`
 
-    - `type: "search_result_location"`
-
-      default: search_result_location
-
 ### Beta Text Citation Param
 
 - `BetaTextCitationParam = BetaCitationCharLocationParam or BetaCitationPageLocationParam or BetaCitationContentBlockLocationParam or 2 more`
 
   - `BetaCitationCharLocationParam object`
+
+    - `type: "char_location"`
 
     - `cited_text: string`
 
@@ -30945,9 +30800,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "char_location"`
-
   - `BetaCitationPageLocationParam object`
+
+    - `type: "page_location"`
 
     - `cited_text: string`
 
@@ -30965,9 +30820,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 1
 
-    - `type: "page_location"`
-
   - `BetaCitationContentBlockLocationParam object`
+
+    - `type: "content_block_location"`
 
     - `cited_text: string`
 
@@ -30995,9 +30850,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
   - `BetaCitationWebSearchResultLocationParam object`
+
+    - `type: "web_search_result_location"`
 
     - `cited_text: string`
 
@@ -31007,13 +30862,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       maxLength: 512, minLength: 1
 
-    - `type: "web_search_result_location"`
-
     - `url: string`
 
       minLength: 1
 
   - `BetaCitationSearchResultLocationParam object`
+
+    - `type: "search_result_location"`
 
     - `cited_text: string`
 
@@ -31045,39 +30900,41 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `title: string or null`
 
-    - `type: "search_result_location"`
-
 ### Beta Text Delta
 
 - `BetaTextDelta object`
-
-  - `text: string`
 
   - `type: "text_delta"`
 
     default: text_delta
 
+  - `text: string`
+
 ### Beta Text Editor Code Execution Create Result Block
 
 - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-  - `is_file_update: boolean`
 
   - `type: "text_editor_code_execution_create_result"`
 
     default: text_editor_code_execution_create_result
 
+  - `is_file_update: boolean`
+
 ### Beta Text Editor Code Execution Create Result Block Param
 
 - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-  - `is_file_update: boolean`
-
   - `type: "text_editor_code_execution_create_result"`
+
+  - `is_file_update: boolean`
 
 ### Beta Text Editor Code Execution Str Replace Result Block
 
 - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+  - `type: "text_editor_code_execution_str_replace_result"`
+
+    default: text_editor_code_execution_str_replace_result
 
   - `lines: array of string or null`
 
@@ -31088,10 +30945,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `old_lines: number or null`
 
   - `old_start: number or null`
-
-  - `type: "text_editor_code_execution_str_replace_result"`
-
-    default: text_editor_code_execution_str_replace_result
 
 ### Beta Text Editor Code Execution Str Replace Result Block Param
 
@@ -31113,9 +30966,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaTextEditorCodeExecutionToolResultBlock object`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
+    default: text_editor_code_execution_tool_result
+
   - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
     - `BetaTextEditorCodeExecutionToolResultError object`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
+
+        default: text_editor_code_execution_tool_result_error
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -31131,11 +30992,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `error_message: string or null`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
-        default: text_editor_code_execution_tool_result_error
-
     - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+      - `type: "text_editor_code_execution_view_result"`
+
+        default: text_editor_code_execution_view_result
 
       - `content: string`
 
@@ -31153,19 +31014,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `total_lines: number or null`
 
-      - `type: "text_editor_code_execution_view_result"`
-
-        default: text_editor_code_execution_view_result
-
     - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-      - `is_file_update: boolean`
 
       - `type: "text_editor_code_execution_create_result"`
 
         default: text_editor_code_execution_create_result
 
+      - `is_file_update: boolean`
+
     - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+      - `type: "text_editor_code_execution_str_replace_result"`
+
+        default: text_editor_code_execution_str_replace_result
 
       - `lines: array of string or null`
 
@@ -31177,25 +31038,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `old_start: number or null`
 
-      - `type: "text_editor_code_execution_str_replace_result"`
-
-        default: text_editor_code_execution_str_replace_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
-
-    default: text_editor_code_execution_tool_result
 
 ### Beta Text Editor Code Execution Tool Result Block Param
 
 - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
   - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
     - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -31209,11 +31066,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"file_not_found"`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
       - `error_message: optional string or null`
 
     - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+      - `type: "text_editor_code_execution_view_result"`
 
       - `content: string`
 
@@ -31225,8 +31082,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"pdf"`
 
-      - `type: "text_editor_code_execution_view_result"`
-
       - `num_lines: optional number or null`
 
       - `start_line: optional number or null`
@@ -31235,9 +31090,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-      - `is_file_update: boolean`
-
       - `type: "text_editor_code_execution_create_result"`
+
+      - `is_file_update: boolean`
 
     - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -31256,8 +31111,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -31284,6 +31137,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaTextEditorCodeExecutionToolResultError object`
 
+  - `type: "text_editor_code_execution_tool_result_error"`
+
+    default: text_editor_code_execution_tool_result_error
+
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
     - `"invalid_tool_input"`
@@ -31298,13 +31155,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `error_message: string or null`
 
-  - `type: "text_editor_code_execution_tool_result_error"`
-
-    default: text_editor_code_execution_tool_result_error
-
 ### Beta Text Editor Code Execution Tool Result Error Param
 
 - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+  - `type: "text_editor_code_execution_tool_result_error"`
 
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -31318,13 +31173,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"file_not_found"`
 
-  - `type: "text_editor_code_execution_tool_result_error"`
-
   - `error_message: optional string or null`
 
 ### Beta Text Editor Code Execution View Result Block
 
 - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+  - `type: "text_editor_code_execution_view_result"`
+
+    default: text_editor_code_execution_view_result
 
   - `content: string`
 
@@ -31342,13 +31199,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `total_lines: number or null`
 
-  - `type: "text_editor_code_execution_view_result"`
-
-    default: text_editor_code_execution_view_result
-
 ### Beta Text Editor Code Execution View Result Block Param
 
 - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+  - `type: "text_editor_code_execution_view_result"`
 
   - `content: string`
 
@@ -31360,8 +31215,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"pdf"`
 
-  - `type: "text_editor_code_execution_view_result"`
-
   - `num_lines: optional number or null`
 
   - `start_line: optional number or null`
@@ -31371,6 +31224,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Thinking Block
 
 - `BetaThinkingBlock object`
+
+  - `type: "thinking"`
+
+    default: thinking
 
   - `signature: string`
 
@@ -31383,10 +31240,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `thinking: string`
 
     The text of Claude's thinking process for this block.
-
-  - `type: "thinking"`
-
-    default: thinking
 
 ### Beta Thinking Block Binding
 
@@ -31412,6 +31265,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaThinkingBlockParam object`
 
+  - `type: "thinking"`
+
   - `signature: string`
 
     The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
@@ -31421,8 +31276,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `thinking: string`
 
     The `thinking` text of this block as returned by the API.
-
-  - `type: "thinking"`
 
 ### Beta Thinking Config Adaptive
 
@@ -31468,6 +31321,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaThinkingConfigEnabled object`
 
+  - `type: "enabled"`
+
   - `budget_tokens: number`
 
     Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -31477,8 +31332,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
     minimum: 1024
-
-  - `type: "enabled"`
 
   - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -31520,6 +31373,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaThinkingConfigEnabled object`
 
+    - `type: "enabled"`
+
     - `budget_tokens: number`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -31529,8 +31384,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
       minimum: 1024
-
-    - `type: "enabled"`
 
     - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -31588,6 +31441,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaThinkingDelta object`
 
+  - `type: "thinking_delta"`
+
+    default: thinking_delta
+
   - `estimated_tokens: number or null`
 
     Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
@@ -31596,13 +31453,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `type: "thinking_delta"`
-
-    default: thinking_delta
-
 ### Beta Thinking Dropped Input Transformation
 
 - `BetaThinkingDroppedInputTransformation object`
+
+  - `type: "thinking_dropped"`
+
+    Always `thinking_dropped` for this entry type.
+
+    default: thinking_dropped
 
   - `path: string`
 
@@ -31634,12 +31493,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"end_user_binding_mismatch"`
 
-  - `type: "thinking_dropped"`
-
-    Always `thinking_dropped` for this entry type.
-
-    default: thinking_dropped
-
 ### Beta Thinking Prefix Mismatch Behavior
 
 - `BetaThinkingPrefixMismatchBehavior = "error" or "drop_block"`
@@ -31670,15 +31523,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   User-configurable total token budget across contexts.
 
+  - `type: "tokens"`
+
+    The budget type. Currently only 'tokens' is supported.
+
   - `total: number`
 
     Total token budget across all contexts in the session.
 
     minimum: 1024
-
-  - `type: "tokens"`
-
-    The budget type. Currently only 'tokens' is supported.
 
   - `remaining: optional number or null`
 
@@ -31689,6 +31542,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Tool
 
 - `BetaTool object`
+
+  - `type: optional "custom" or null`
 
   - `input_schema: object`
 
@@ -31761,19 +31616,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     When true, guarantees schema validation on tool names and inputs
 
-  - `type: optional "custom" or null`
-
 ### Beta Tool Bash 20241022
 
 - `BetaToolBash20241022 object`
+
+  - `type: "bash_20241022"`
 
   - `name: "bash"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "bash_20241022"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -31820,13 +31673,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolBash20250124 object`
 
+  - `type: "bash_20250124"`
+
   - `name: "bash"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "bash_20250124"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -31876,11 +31729,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   Reference to a single MCP tool by its server and remote name — the
   same `server_name`/`name` pair `mcp_tool_use` carries.
 
+  - `type: "mcp_tool_reference"`
+
   - `name: string`
 
   - `server_name: string`
-
-  - `type: "mcp_tool_reference"`
 
 ### Beta Tool Change MCP Toolset Reference
 
@@ -31888,9 +31741,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Reference to every tool in the named MCP server's toolset.
 
-  - `server_name: string`
-
   - `type: "mcp_toolset_reference"`
+
+  - `server_name: string`
 
 ### Beta Tool Change Tool Reference
 
@@ -31901,11 +31754,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
   `mcp_toolset_reference` for those.
 
+  - `type: "tool_reference"`
+
   - `name: string`
 
     pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-  - `type: "tool_reference"`
 
 ### Beta Tool Choice
 
@@ -31941,11 +31794,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use: optional boolean`
 
@@ -32001,11 +31854,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   The model will use the specified tool with `tool_choice.name`.
 
+  - `type: "tool"`
+
   - `name: string`
 
     The name of the tool to use.
-
-  - `type: "tool"`
 
   - `disable_parallel_tool_use: optional boolean`
 
@@ -32016,6 +31869,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Tool Computer Use 20241022
 
 - `BetaToolComputerUse20241022 object`
+
+  - `type: "computer_20241022"`
 
   - `display_height_px: number`
 
@@ -32034,8 +31889,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20241022"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -32088,6 +31941,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolComputerUse20250124 object`
 
+  - `type: "computer_20250124"`
+
   - `display_height_px: number`
 
     The height of the display in pixels.
@@ -32105,8 +31960,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20250124"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -32159,6 +32012,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolComputerUse20251124 object`
 
+  - `type: "computer_20251124"`
+
   - `display_height_px: number`
 
     The height of the display in pixels.
@@ -32176,8 +32031,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20251124"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -32234,13 +32087,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolReferenceBlock object`
 
-  - `tool_name: string`
-
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
   - `type: "tool_reference"`
 
     default: tool_reference
+
+  - `tool_name: string`
+
+    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Beta Tool Reference Block Param
 
@@ -32248,11 +32101,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Tool reference block that can be included in tool_result content.
 
+  - `type: "tool_reference"`
+
   - `tool_name: string`
 
     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-  - `type: "tool_reference"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32279,11 +32132,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolResultBlockParam object`
 
+  - `type: "tool_result"`
+
   - `tool_use_id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
-
-  - `type: "tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32314,11 +32167,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaTextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32327,6 +32180,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `citations: optional array of BetaTextCitationParam or null`
 
           - `BetaCitationCharLocationParam object`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -32344,9 +32199,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -32364,9 +32219,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -32394,9 +32249,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -32406,13 +32261,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -32444,13 +32299,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
           - `BetaBase64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -32466,8 +32323,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource object`
 
             - `type: "url"`
@@ -32476,11 +32331,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32500,13 +32353,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaSearchResultBlockParam object`
 
+        - `type: "search_result"`
+
         - `content: array of BetaTextBlockParam`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32518,8 +32373,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -32530,9 +32383,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaRequestDocumentBlock object`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
           - `BetaBase64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -32540,17 +32397,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of BetaContentBlockSourceContent`
 
@@ -32562,8 +32419,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaImageBlockParam object`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource object`
 
             - `type: "url"`
@@ -32572,11 +32427,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32596,11 +32449,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool reference block that can be included in tool_result content.
 
+        - `type: "tool_reference"`
+
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32615,6 +32468,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         At most one per `tool_result`, only on a non-error result answering a
         browser toolset member `tool_use`. The server renders the
         model-visible text from it; the model never sees the raw fields.
+
+        - `type: "browser_state"`
 
         - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -32644,8 +32499,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-        - `type: "browser_state"`
-
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -32666,25 +32519,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             during a failed call gets no deferred `tab_opened`; it simply appears
             in the next result's `tabs` inventory.
 
+            - `type: "tab_opened"`
+
             - `tab_id: string`
 
               The `tab_id` of the opened tab, present in `tabs`.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type: "tab_opened"`
-
           - `BetaBrowserStateChangeDownloadStarted object`
 
             A file download that started during this call.
+
+            - `type: "download_started"`
 
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_started"`
 
             - `url: string`
 
@@ -32699,13 +32552,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             `download_started`, when the download finished during the call that
             started it (at most one state change per `download_id` per result).
 
+            - `type: "download_completed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_completed"`
 
             - `url: string`
 
@@ -32729,13 +32582,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             A file download that failed — or was cancelled — during this call.
 
+            - `type: "download_failed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_failed"`
 
             - `url: string`
 
@@ -32761,17 +32614,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolSearchToolBm25_20251119 object`
 
-  - `name: "tool_search_tool_bm25"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
     - `"tool_search_tool_bm25_20251119"`
 
     - `"tool_search_tool_bm25"`
+
+  - `name: "tool_search_tool_bm25"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -32816,17 +32669,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolSearchToolRegex20251119 object`
 
-  - `name: "tool_search_tool_regex"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
     - `"tool_search_tool_regex_20251119"`
 
     - `"tool_search_tool_regex"`
+
+  - `name: "tool_search_tool_regex"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -32871,9 +32724,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolSearchToolResultBlock object`
 
+  - `type: "tool_search_tool_result"`
+
+    default: tool_search_tool_result
+
   - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
     - `BetaToolSearchToolResultError object`
+
+      - `type: "tool_search_tool_result_error"`
+
+        default: tool_search_tool_result_error
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -32887,41 +32748,37 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `error_message: string or null`
 
-      - `type: "tool_search_tool_result_error"`
-
-        default: tool_search_tool_result_error
-
     - `BetaToolSearchToolSearchResultBlock object`
-
-      - `tool_references: array of BetaToolReferenceBlock`
-
-        - `tool_name: string`
-
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
-
-          default: tool_reference
 
       - `type: "tool_search_tool_search_result"`
 
         default: tool_search_tool_search_result
 
+      - `tool_references: array of BetaToolReferenceBlock`
+
+        - `type: "tool_reference"`
+
+          default: tool_reference
+
+        - `tool_name: string`
+
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
-
-    default: tool_search_tool_result
 
 ### Beta Tool Search Tool Result Block Param
 
 - `BetaToolSearchToolResultBlockParam object`
 
+  - `type: "tool_search_tool_result"`
+
   - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
     - `BetaToolSearchToolResultErrorParam object`
+
+      - `type: "tool_search_tool_result_error"`
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -32933,19 +32790,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"execution_time_exceeded"`
 
-      - `type: "tool_search_tool_result_error"`
-
       - `error_message: optional string or null`
 
     - `BetaToolSearchToolSearchResultBlockParam object`
 
+      - `type: "tool_search_tool_search_result"`
+
       - `tool_references: array of BetaToolReferenceBlockParam`
+
+        - `type: "tool_reference"`
 
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32968,13 +32825,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"1h"`
 
-      - `type: "tool_search_tool_search_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -32983,6 +32836,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Beta Tool Search Tool Result Error
 
 - `BetaToolSearchToolResultError object`
+
+  - `type: "tool_search_tool_result_error"`
+
+    default: tool_search_tool_result_error
 
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -32996,13 +32853,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `error_message: string or null`
 
-  - `type: "tool_search_tool_result_error"`
-
-    default: tool_search_tool_result_error
-
 ### Beta Tool Search Tool Result Error Param
 
 - `BetaToolSearchToolResultErrorParam object`
+
+  - `type: "tool_search_tool_result_error"`
 
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -33014,39 +32869,39 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"execution_time_exceeded"`
 
-  - `type: "tool_search_tool_result_error"`
-
   - `error_message: optional string or null`
 
 ### Beta Tool Search Tool Search Result Block
 
 - `BetaToolSearchToolSearchResultBlock object`
 
+  - `type: "tool_search_tool_search_result"`
+
+    default: tool_search_tool_search_result
+
   - `tool_references: array of BetaToolReferenceBlock`
-
-    - `tool_name: string`
-
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `type: "tool_reference"`
 
       default: tool_reference
 
-  - `type: "tool_search_tool_search_result"`
+    - `tool_name: string`
 
-    default: tool_search_tool_search_result
+      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Beta Tool Search Tool Search Result Block Param
 
 - `BetaToolSearchToolSearchResultBlockParam object`
 
+  - `type: "tool_search_tool_search_result"`
+
   - `tool_references: array of BetaToolReferenceBlockParam`
+
+    - `type: "tool_reference"`
 
     - `tool_name: string`
 
       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-    - `type: "tool_reference"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -33069,19 +32924,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"1h"`
 
-  - `type: "tool_search_tool_search_result"`
-
 ### Beta Tool Text Editor 20241022
 
 - `BetaToolTextEditor20241022 object`
+
+  - `type: "text_editor_20241022"`
 
   - `name: "str_replace_editor"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20241022"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33128,13 +32981,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolTextEditor20250124 object`
 
+  - `type: "text_editor_20250124"`
+
   - `name: "str_replace_editor"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250124"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33181,13 +33034,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolTextEditor20250429 object`
 
+  - `type: "text_editor_20250429"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250429"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33234,13 +33087,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolTextEditor20250728 object`
 
+  - `type: "text_editor_20250728"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250728"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33293,9 +33146,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolUnion = BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 25 more`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `BetaTool object`
+
+    - `type: optional "custom" or null`
 
     - `input_schema: object`
 
@@ -33368,17 +33221,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: optional "custom" or null`
-
   - `BetaToolBash20241022 object`
+
+    - `type: "bash_20241022"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33406,13 +33257,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolBash20250124 object`
 
+    - `type: "bash_20250124"`
+
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33440,13 +33291,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaCodeExecutionTool20250522 object`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33472,13 +33323,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaCodeExecutionTool20250825 object`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33506,13 +33357,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33540,13 +33391,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -33591,6 +33442,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaBrowserTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -33928,18 +33791,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaBrowserTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaBrowserWaitConfig or null`
 
         `wait`'s config overrides.
@@ -33966,6 +33817,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolComputerUse20241022 object`
 
+    - `type: "computer_20241022"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -33983,8 +33836,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34018,13 +33869,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaMemoryTool20250818 object`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34052,6 +33903,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolComputerUse20250124 object`
 
+    - `type: "computer_20250124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -34069,8 +33922,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34104,13 +33955,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolTextEditor20241022 object`
 
+    - `type: "text_editor_20241022"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20241022"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34138,6 +33989,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolComputerUse20251124 object`
 
+    - `type: "computer_20251124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -34155,8 +34008,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20251124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34217,6 +34068,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BetaComputerTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
@@ -34386,18 +34249,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BetaComputerTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BetaComputerWaitConfig or null`
 
         `wait`'s config overrides.
@@ -34424,13 +34275,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolTextEditor20250124 object`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34458,13 +34309,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolTextEditor20250429 object`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34492,13 +34343,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolTextEditor20250728 object`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34532,13 +34383,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebSearchTool20250305 object`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34608,13 +34459,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebFetchTool20250910 object`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34666,13 +34517,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebSearchTool20260209 object`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34716,13 +34567,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebFetchTool20260209 object`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34774,13 +34625,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34834,13 +34685,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebSearchTool20260318 object`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34892,13 +34743,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaWebFetchTool20260318 object`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -34959,6 +34810,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
   - `BetaAdvisorTool20260301 object`
+
+    - `type: "advisor_20260301"`
 
     - `model: Model`
 
@@ -35048,8 +34901,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `type: "advisor_20260301"`
-
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
@@ -35090,17 +34941,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolSearchToolBm25_20251119 object`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -35126,17 +34977,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaToolSearchToolRegex20251119 object`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -35167,13 +35018,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: "mcp_toolset"`
+
     - `mcp_server_name: string`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: "mcp_toolset"`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -35199,6 +35050,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolUseBlock object`
 
+  - `type: "tool_use"`
+
+    default: tool_use
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -35209,13 +35064,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     minLength: 1
 
-  - `type: "tool_use"`
-
-    default: tool_use
-
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `BetaDirectCaller object`
 
@@ -35227,19 +35076,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `toolset_name: optional string or null`
 
@@ -35251,6 +35100,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaToolUseBlockParam object`
 
+  - `type: "tool_use"`
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -35260,8 +35111,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `name: string`
 
     maxLength: 200, minLength: 1
-
-  - `type: "tool_use"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -35286,8 +35135,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `BetaDirectCaller object`
 
       Tool invocation directly from the model.
@@ -35298,19 +35145,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `toolset_name: optional string or null`
 
@@ -35412,6 +35259,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         No reprice was applied; `reason` says why.
 
+        - `type: "not_applied"`
+
+          default: not_applied
+
         - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
           Why the reprice was not applied.
@@ -35442,10 +35293,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `"wrong_platform"`
 
           - `"wrong_workspace"`
-
-        - `type: "not_applied"`
-
-          default: not_applied
 
         - `remove_to_redeem: optional array of string or null`
 
@@ -35483,6 +35330,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `BetaMessageIterationUsage object`
 
       Token usage for a sampling iteration.
+
+      - `type: "message"`
+
+        Usage for a sampling iteration
+
+        default: message
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -35594,15 +35447,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "message"`
-
-        Usage for a sampling iteration
-
-        default: message
-
     - `BetaCompactionIterationUsage object`
 
       Token usage for a compaction iteration.
+
+      - `type: "compaction"`
+
+        Usage for a compaction iteration
+
+        default: compaction
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -35632,15 +35485,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         minimum: 0
 
-      - `type: "compaction"`
-
-        Usage for a compaction iteration
-
-        default: compaction
-
     - `BetaAdvisorMessageIterationUsage object`
 
       Token usage for an advisor sub-inference iteration.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        default: advisor_message
 
       - `cache_creation: BetaCacheCreation or null`
 
@@ -35675,12 +35528,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "advisor_message"`
-
-        Usage for an advisor sub-inference iteration
-
-        default: advisor_message
 
     - `BetaFallbackMessageIterationUsage object`
 
@@ -35691,6 +35538,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       a fallback model served the response is signalled by the presence of this
       entry in `usage.iterations`.
 
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
+
+        default: fallback_message
+
       - `cache_creation: BetaCacheCreation or null`
 
         Breakdown of cached tokens by TTL
@@ -35724,12 +35577,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "fallback_message"`
-
-        Usage for the fallback-model attempt that served the response
-
-        default: fallback_message
 
   - `output_tokens: number`
 
@@ -35827,7 +35674,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchBlock object`
 
+  - `type: "web_fetch_result"`
+
+    default: web_fetch_result
+
   - `content: BetaDocumentBlock`
+
+    - `type: "document"`
+
+      default: document
 
     - `citations: BetaCitationConfig or null`
 
@@ -35841,37 +35696,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaBase64PDFSource object`
 
+        - `type: "base64"`
+
         - `data: string`
 
           format: byte
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource object`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
     - `title: string or null`
 
       The title of the document
 
-    - `type: "document"`
-
-      default: document
-
   - `retrieved_at: string or null`
 
     ISO 8601 timestamp when the content was retrieved
-
-  - `type: "web_fetch_result"`
-
-    default: web_fetch_result
 
   - `url: string`
 
@@ -35881,11 +35728,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchBlockParam object`
 
+  - `type: "web_fetch_result"`
+
   - `content: BetaRequestDocumentBlock`
+
+    - `type: "document"`
 
     - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
       - `BetaBase64PDFSource object`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -35893,17 +35746,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource object`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `BetaContentBlockSource object`
+
+        - `type: "content"`
 
         - `content: string or array of BetaContentBlockSourceContent`
 
@@ -35913,11 +35766,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `BetaTextBlockParam object`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -35944,6 +35797,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaCitationCharLocationParam object`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -35960,9 +35815,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `BetaCitationPageLocationParam object`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -35980,9 +35835,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `BetaCitationContentBlockLocationParam object`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -36010,9 +35865,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `BetaCitationWebSearchResultLocationParam object`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -36022,13 +35877,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `BetaCitationSearchResultLocationParam object`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -36060,13 +35915,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `title: string or null`
 
-                  - `type: "search_result_location"`
-
             - `BetaImageBlockParam object`
+
+              - `type: "image"`
 
               - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
                 - `BetaBase64ImageSource object`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -36082,8 +35939,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `BetaURLImageSource object`
 
                   - `type: "url"`
@@ -36092,11 +35947,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaFileImageSource object`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -36114,8 +35967,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"error"`
 
-        - `type: "content"`
-
       - `BetaURLPDFSource object`
 
         - `type: "url"`
@@ -36124,11 +35975,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `BetaFileDocumentSource object`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -36146,8 +35995,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       maxLength: 500, minLength: 1
 
-  - `type: "web_fetch_result"`
-
   - `url: string`
 
     Fetched content URL
@@ -36160,13 +36007,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchTool20250910 object`
 
+  - `type: "web_fetch_20250910"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20250910"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -36237,13 +36084,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchTool20260209 object`
 
+  - `type: "web_fetch_20260209"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260209"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -36316,13 +36163,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
+  - `type: "web_fetch_20260309"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260309"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -36397,13 +36244,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchTool20260318 object`
 
+  - `type: "web_fetch_20260318"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260318"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -36486,9 +36333,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebFetchToolResultBlock object`
 
+  - `type: "web_fetch_tool_result"`
+
+    default: web_fetch_tool_result
+
   - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
     - `BetaWebFetchToolResultErrorBlock object`
+
+      - `type: "web_fetch_tool_result_error"`
+
+        default: web_fetch_tool_result_error
 
       - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -36510,13 +36365,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
-
-        default: web_fetch_tool_result_error
+        - `"content_too_large"`
 
     - `BetaWebFetchBlock object`
 
+      - `type: "web_fetch_result"`
+
+        default: web_fetch_result
+
       - `content: BetaDocumentBlock`
+
+        - `type: "document"`
+
+          default: document
 
         - `citations: BetaCitationConfig or null`
 
@@ -36530,37 +36391,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaBase64PDFSource object`
 
+            - `type: "base64"`
+
             - `data: string`
 
               format: byte
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
         - `title: string or null`
 
           The title of the document
 
-        - `type: "document"`
-
-          default: document
-
       - `retrieved_at: string or null`
 
         ISO 8601 timestamp when the content was retrieved
-
-      - `type: "web_fetch_result"`
-
-        default: web_fetch_result
 
       - `url: string`
 
@@ -36570,13 +36423,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type: "web_fetch_tool_result"`
-
-    default: web_fetch_tool_result
-
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `BetaDirectCaller object`
 
@@ -36588,27 +36435,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Fetch Tool Result Block Param
 
 - `BetaWebFetchToolResultBlockParam object`
 
+  - `type: "web_fetch_tool_result"`
+
   - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
     - `BetaWebFetchToolResultErrorBlockParam object`
+
+      - `type: "web_fetch_tool_result_error"`
 
       - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -36630,15 +36481,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
+        - `"content_too_large"`
 
     - `BetaWebFetchBlockParam object`
 
+      - `type: "web_fetch_result"`
+
       - `content: BetaRequestDocumentBlock`
+
+        - `type: "document"`
 
         - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
           - `BetaBase64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -36646,17 +36503,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of BetaContentBlockSourceContent`
 
@@ -36666,11 +36523,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `BetaTextBlockParam object`
 
+                  - `type: "text"`
+
                   - `text: string`
 
                     minLength: 1
-
-                  - `type: "text"`
 
                   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -36697,6 +36554,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `BetaCitationCharLocationParam object`
 
+                      - `type: "char_location"`
+
                       - `cited_text: string`
 
                       - `document_index: number`
@@ -36713,9 +36572,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         minimum: 0
 
-                      - `type: "char_location"`
-
                     - `BetaCitationPageLocationParam object`
+
+                      - `type: "page_location"`
 
                       - `cited_text: string`
 
@@ -36733,9 +36592,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         minimum: 1
 
-                      - `type: "page_location"`
-
                     - `BetaCitationContentBlockLocationParam object`
+
+                      - `type: "content_block_location"`
 
                       - `cited_text: string`
 
@@ -36763,9 +36622,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         minimum: 0
 
-                      - `type: "content_block_location"`
-
                     - `BetaCitationWebSearchResultLocationParam object`
+
+                      - `type: "web_search_result_location"`
 
                       - `cited_text: string`
 
@@ -36775,13 +36634,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         maxLength: 512, minLength: 1
 
-                      - `type: "web_search_result_location"`
-
                       - `url: string`
 
                         minLength: 1
 
                     - `BetaCitationSearchResultLocationParam object`
+
+                      - `type: "search_result_location"`
 
                       - `cited_text: string`
 
@@ -36813,13 +36672,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `title: string or null`
 
-                      - `type: "search_result_location"`
-
                 - `BetaImageBlockParam object`
+
+                  - `type: "image"`
 
                   - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
                     - `BetaBase64ImageSource object`
+
+                      - `type: "base64"`
 
                       - `data: string`
 
@@ -36835,8 +36696,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"image/webp"`
 
-                      - `type: "base64"`
-
                     - `BetaURLImageSource object`
 
                       - `type: "url"`
@@ -36845,11 +36704,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `BetaFileImageSource object`
 
-                      - `file_id: string`
-
                       - `type: "file"`
 
-                  - `type: "image"`
+                      - `file_id: string`
 
                   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -36867,8 +36724,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `"error"`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource object`
 
             - `type: "url"`
@@ -36877,11 +36732,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `BetaFileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -36899,8 +36752,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           maxLength: 500, minLength: 1
 
-      - `type: "web_fetch_result"`
-
       - `url: string`
 
         Fetched content URL
@@ -36913,15 +36764,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type: "web_fetch_tool_result"`
-
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
     Create a cache control breakpoint at this content block.
 
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `BetaDirectCaller object`
 
@@ -36933,24 +36780,28 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Fetch Tool Result Error Block
 
 - `BetaWebFetchToolResultErrorBlock object`
 
+  - `type: "web_fetch_tool_result_error"`
+
+    default: web_fetch_tool_result_error
+
   - `error_code: BetaWebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -36971,14 +36822,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
-
-    default: web_fetch_tool_result_error
+    - `"content_too_large"`
 
 ### Beta Web Fetch Tool Result Error Block Param
 
 - `BetaWebFetchToolResultErrorBlockParam object`
 
+  - `type: "web_fetch_tool_result_error"`
+
   - `error_code: BetaWebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -36999,11 +36850,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
+    - `"content_too_large"`
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
   - `"invalid_tool_input"`
 
@@ -37023,9 +36874,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `"unavailable"`
 
+  - `"content_too_large"`
+
 ### Beta Web Search Result Block
 
 - `BetaWebSearchResultBlock object`
+
+  - `type: "web_search_result"`
+
+    default: web_search_result
 
   - `encrypted_content: string`
 
@@ -37033,21 +36890,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `title: string`
 
-  - `type: "web_search_result"`
-
-    default: web_search_result
-
   - `url: string`
 
 ### Beta Web Search Result Block Param
 
 - `BetaWebSearchResultBlockParam object`
 
+  - `type: "web_search_result"`
+
   - `encrypted_content: string`
 
   - `title: string`
-
-  - `type: "web_search_result"`
 
   - `url: string`
 
@@ -37057,13 +36910,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebSearchTool20250305 object`
 
+  - `type: "web_search_20250305"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20250305"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -37152,13 +37005,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebSearchTool20260209 object`
 
+  - `type: "web_search_20260209"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260209"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -37247,13 +37100,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebSearchTool20260318 object`
 
+  - `type: "web_search_20260318"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260318"`
 
   - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -37350,6 +37203,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaWebSearchToolRequestError object`
 
+  - `type: "web_search_tool_result_error"`
+
   - `error_code: BetaWebSearchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -37364,15 +37219,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"request_too_large"`
 
-  - `type: "web_search_tool_result_error"`
-
 ### Beta Web Search Tool Result Block
 
 - `BetaWebSearchToolResultBlock object`
 
+  - `type: "web_search_tool_result"`
+
+    default: web_search_tool_result
+
   - `content: BetaWebSearchToolResultBlockContent`
 
     - `BetaWebSearchToolResultError object`
+
+      - `type: "web_search_tool_result_error"`
+
+        default: web_search_tool_result_error
 
       - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37388,11 +37249,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
-        default: web_search_tool_result_error
-
     - `array of BetaWebSearchResultBlock`
+
+      - `type: "web_search_result"`
+
+        default: web_search_result
 
       - `encrypted_content: string`
 
@@ -37400,23 +37261,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `title: string`
 
-      - `type: "web_search_result"`
-
-        default: web_search_result
-
       - `url: string`
 
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type: "web_search_tool_result"`
-
-    default: web_search_tool_result
-
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `BetaDirectCaller object`
 
@@ -37428,25 +37279,29 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Search Tool Result Block Content
 
 - `BetaWebSearchToolResultBlockContent = BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
   - `BetaWebSearchToolResultError object`
+
+    - `type: "web_search_tool_result_error"`
+
+      default: web_search_tool_result_error
 
     - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37462,11 +37317,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
-      default: web_search_tool_result_error
-
   - `array of BetaWebSearchResultBlock`
+
+    - `type: "web_search_result"`
+
+      default: web_search_result
 
     - `encrypted_content: string`
 
@@ -37474,31 +37329,31 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `title: string`
 
-    - `type: "web_search_result"`
-
-      default: web_search_result
-
     - `url: string`
 
 ### Beta Web Search Tool Result Block Param
 
 - `BetaWebSearchToolResultBlockParam object`
 
+  - `type: "web_search_tool_result"`
+
   - `content: BetaWebSearchToolResultBlockParamContent`
 
     - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+      - `type: "web_search_result"`
+
       - `encrypted_content: string`
 
       - `title: string`
-
-      - `type: "web_search_result"`
 
       - `url: string`
 
       - `page_age: optional string or null`
 
     - `BetaWebSearchToolRequestError object`
+
+      - `type: "web_search_tool_result_error"`
 
       - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37514,13 +37369,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_search_tool_result"`
 
   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -37545,8 +37396,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `BetaDirectCaller object`
 
       Tool invocation directly from the model.
@@ -37557,19 +37406,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120 object`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Search Tool Result Block Param Content
 
@@ -37577,17 +37426,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+    - `type: "web_search_result"`
+
     - `encrypted_content: string`
 
     - `title: string`
-
-    - `type: "web_search_result"`
 
     - `url: string`
 
     - `page_age: optional string or null`
 
   - `BetaWebSearchToolRequestError object`
+
+    - `type: "web_search_tool_result_error"`
 
     - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37603,11 +37454,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
 ### Beta Web Search Tool Result Error
 
 - `BetaWebSearchToolResultError object`
+
+  - `type: "web_search_tool_result_error"`
+
+    default: web_search_tool_result_error
 
   - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37622,10 +37475,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"query_too_long"`
 
     - `"request_too_large"`
-
-  - `type: "web_search_tool_result_error"`
-
-    default: web_search_tool_result_error
 
 ### Beta Web Search Tool Result Error Code
 
@@ -37663,7 +37512,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -37711,6 +37560,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -37756,6 +37607,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+
+- `"anthropic-workspace-id": optional string`
 
 #### Body parameters
 
@@ -37850,11 +37703,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaTextBlockParam object`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -37881,6 +37734,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `BetaCitationCharLocationParam object`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -37897,9 +37752,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `BetaCitationPageLocationParam object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -37917,9 +37772,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `BetaCitationContentBlockLocationParam object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -37947,9 +37802,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `BetaCitationWebSearchResultLocationParam object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -37959,13 +37814,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `BetaCitationSearchResultLocationParam object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -37997,13 +37852,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `title: string or null`
 
-                - `type: "search_result_location"`
-
           - `BetaImageBlockParam object`
+
+            - `type: "image"`
 
             - `source: BetaBase64ImageSource or BetaURLImageSource or BetaFileImageSource`
 
               - `BetaBase64ImageSource object`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -38019,8 +37876,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `BetaURLImageSource object`
 
                 - `type: "url"`
@@ -38029,11 +37884,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `BetaFileImageSource object`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38053,9 +37906,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaRequestDocumentBlock object`
 
+            - `type: "document"`
+
             - `source: BetaBase64PDFSource or BetaPlainTextSource or BetaContentBlockSource or 2 more`
 
               - `BetaBase64PDFSource object`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -38063,17 +37920,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource object`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
               - `BetaContentBlockSource object`
+
+                - `type: "content"`
 
                 - `content: string or array of BetaContentBlockSourceContent`
 
@@ -38085,8 +37942,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                     - `BetaImageBlockParam object`
 
-                - `type: "content"`
-
               - `BetaURLPDFSource object`
 
                 - `type: "url"`
@@ -38095,11 +37950,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `BetaFileDocumentSource object`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "document"`
+                - `file_id: string`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38119,13 +37972,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaSearchResultBlockParam object`
 
+            - `type: "search_result"`
+
             - `content: array of BetaTextBlockParam`
+
+              - `type: "text"`
 
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38137,8 +37992,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `title: string`
 
-            - `type: "search_result"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
@@ -38146,6 +37999,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `citations: optional BetaCitationsConfigParam`
 
           - `BetaThinkingBlockParam object`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -38157,17 +38012,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               The `thinking` text of this block as returned by the API.
 
-            - `type: "thinking"`
-
           - `BetaRedactedThinkingBlockParam object`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
               The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type: "redacted_thinking"`
-
           - `BetaToolUseBlockParam object`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -38179,15 +38034,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               maxLength: 200, minLength: 1
 
-            - `type: "tool_use"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -38199,19 +38050,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `BetaServerToolCaller20260120 object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name: optional string or null`
 
@@ -38221,11 +38072,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaToolResultBlockParam object`
 
+            - `type: "tool_result"`
+
             - `tool_use_id: string`
 
               pattern: ^[a-zA-Z0-9_-]+$
-
-            - `type: "tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38249,11 +38100,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   Tool reference block that can be included in tool_result content.
 
+                  - `type: "tool_reference"`
+
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
 
                   - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38268,6 +38119,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                   At most one per `tool_result`, only on a non-error result answering a
                   browser toolset member `tool_use`. The server renders the
                   model-visible text from it; the model never sees the raw fields.
+
+                  - `type: "browser_state"`
 
                   - `tabs: array of BetaBrowserStateTabEntry`
 
@@ -38297,8 +38150,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                  - `type: "browser_state"`
-
                   - `cache_control: optional BetaCacheControlEphemeral or null`
 
                     Create a cache control breakpoint at this content block.
@@ -38319,25 +38170,25 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                       during a failed call gets no deferred `tab_opened`; it simply appears
                       in the next result's `tabs` inventory.
 
+                      - `type: "tab_opened"`
+
                       - `tab_id: string`
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type: "tab_opened"`
-
                     - `BetaBrowserStateChangeDownloadStarted object`
 
                       A file download that started during this call.
+
+                      - `type: "download_started"`
 
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_started"`
 
                       - `url: string`
 
@@ -38352,13 +38203,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                       `download_started`, when the download finished during the call that
                       started it (at most one state change per `download_id` per result).
 
+                      - `type: "download_completed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_completed"`
 
                       - `url: string`
 
@@ -38382,13 +38233,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                       A file download that failed — or was cancelled — during this call.
 
+                      - `type: "download_failed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_failed"`
 
                       - `url: string`
 
@@ -38411,6 +38262,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `BetaServerToolUseBlockParam object`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -38436,15 +38289,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -38458,21 +38307,25 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaWebSearchToolResultBlockParam object`
 
+            - `type: "web_search_tool_result"`
+
             - `content: BetaWebSearchToolResultBlockParamContent`
 
               - `ResultBlock = array of BetaWebSearchResultBlockParam`
 
+                - `type: "web_search_result"`
+
                 - `encrypted_content: string`
 
                 - `title: string`
-
-                - `type: "web_search_result"`
 
                 - `url: string`
 
                 - `page_age: optional string or null`
 
               - `BetaWebSearchToolRequestError object`
+
+                - `type: "web_search_tool_result_error"`
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -38488,21 +38341,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -38516,9 +38363,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaWebFetchToolResultBlockParam object`
 
+            - `type: "web_fetch_tool_result"`
+
             - `content: BetaWebFetchToolResultErrorBlockParam or BetaWebFetchBlockParam`
 
               - `BetaWebFetchToolResultErrorBlockParam object`
+
+                - `type: "web_fetch_tool_result_error"`
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -38540,13 +38391,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `BetaWebFetchBlockParam object`
 
-                - `content: BetaRequestDocumentBlock`
-
                 - `type: "web_fetch_result"`
+
+                - `content: BetaRequestDocumentBlock`
 
                 - `url: string`
 
@@ -38560,15 +38411,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_fetch_tool_result"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -38582,9 +38429,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaAdvisorToolResultBlockParam object`
 
+            - `type: "advisor_tool_result"`
+
             - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
 
               - `BetaAdvisorToolResultErrorParam object`
+
+                - `type: "advisor_tool_result_error"`
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -38602,23 +38453,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
               - `BetaAdvisorResultBlockParam object`
 
-                - `text: string`
-
                 - `type: "advisor_result"`
+
+                - `text: string`
 
                 - `stop_reason: optional string or null`
 
               - `BetaAdvisorRedactedResultBlockParam object`
 
+                - `type: "advisor_redacted_result"`
+
                 - `encrypted_content: string`
 
                   Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-                - `type: "advisor_redacted_result"`
 
                 - `stop_reason: optional string or null`
 
@@ -38626,19 +38475,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaCodeExecutionToolResultBlockParam object`
 
+            - `type: "code_execution_tool_result"`
+
             - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
-
               - `BetaCodeExecutionToolResultErrorParam object`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -38650,15 +38499,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `BetaCodeExecutionResultBlockParam object`
+
+                - `type: "code_execution_result"`
 
                 - `content: array of BetaCodeExecutionOutputBlockParam`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -38666,17 +38515,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `BetaEncryptedCodeExecutionResultBlockParam object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: array of BetaCodeExecutionOutputBlockParam`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -38684,13 +38533,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38698,9 +38543,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaBashCodeExecutionToolResultBlockParam object`
 
+            - `type: "bash_code_execution_tool_result"`
+
             - `content: BetaBashCodeExecutionToolResultErrorParam or BetaBashCodeExecutionResultBlockParam`
 
               - `BetaBashCodeExecutionToolResultErrorParam object`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -38714,15 +38563,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `BetaBashCodeExecutionResultBlockParam object`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: array of BetaBashCodeExecutionOutputBlockParam`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -38730,13 +38579,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "bash_code_execution_tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38744,9 +38589,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaTextEditorCodeExecutionToolResultBlockParam object`
 
+            - `type: "text_editor_code_execution_tool_result"`
+
             - `content: BetaTextEditorCodeExecutionToolResultErrorParam or BetaTextEditorCodeExecutionViewResultBlockParam or BetaTextEditorCodeExecutionCreateResultBlockParam or BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `BetaTextEditorCodeExecutionToolResultErrorParam object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -38760,11 +38609,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"file_not_found"`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
                 - `error_message: optional string or null`
 
               - `BetaTextEditorCodeExecutionViewResultBlockParam object`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -38776,8 +38625,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"pdf"`
 
-                - `type: "text_editor_code_execution_view_result"`
-
                 - `num_lines: optional number or null`
 
                 - `start_line: optional number or null`
@@ -38786,9 +38633,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `BetaTextEditorCodeExecutionCreateResultBlockParam object`
 
-                - `is_file_update: boolean`
-
                 - `type: "text_editor_code_execution_create_result"`
+
+                - `is_file_update: boolean`
 
               - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -38808,17 +38655,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaToolSearchToolResultBlockParam object`
 
+            - `type: "tool_search_tool_result"`
+
             - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
               - `BetaToolSearchToolResultErrorParam object`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -38830,37 +38679,35 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"execution_time_exceeded"`
 
-                - `type: "tool_search_tool_result_error"`
-
                 - `error_message: optional string or null`
 
               - `BetaToolSearchToolSearchResultBlockParam object`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: array of BetaToolReferenceBlockParam`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
                   - `cache_control: optional BetaCacheControlEphemeral or null`
 
                     Create a cache control breakpoint at this content block.
 
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaMCPToolUseBlockParam object`
+
+            - `type: "mcp_tool_use"`
 
             - `id: string`
 
@@ -38874,19 +38721,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaRequestMCPToolResultBlockParam object`
 
+            - `type: "mcp_tool_result"`
+
             - `tool_use_id: string`
 
               pattern: ^[a-zA-Z0-9_-]+$
-
-            - `type: "mcp_tool_result"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38898,11 +38743,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `BetaMCPToolResultBlockParamContent = array of BetaTextBlockParam`
 
+                - `type: "text"`
+
                 - `text: string`
 
                   minLength: 1
-
-                - `type: "text"`
 
                 - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38917,9 +38762,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             A content block that represents a file to be uploaded to the container
             Files uploaded via this block will be available in the container's input directory.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -38957,12 +38802,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             `tools`; it is offered to the model from this point in the
             conversation onward.
 
-            - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+            - `type: "tool_addition"`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
+            - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
               - `BetaToolChangeToolReference object`
 
@@ -38971,32 +38813,30 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                 `mcp_toolset_reference` for those.
 
+                - `type: "tool_reference"`
+
                 - `name: string`
 
                   pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-                - `type: "tool_reference"`
 
               - `BetaToolChangeMCPToolReference object`
 
                 Reference to a single MCP tool by its server and remote name — the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
+                - `type: "mcp_tool_reference"`
+
                 - `name: string`
 
                 - `server_name: string`
-
-                - `type: "mcp_tool_reference"`
 
               - `BetaToolChangeMCPToolsetReference object`
 
                 Reference to every tool in the named MCP server's toolset.
 
-                - `server_name: string`
-
                 - `type: "mcp_toolset_reference"`
 
-            - `type: "tool_addition"`
+                - `server_name: string`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -39010,12 +38850,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             `tools`; it is no longer offered to the model from this point in the
             conversation onward.
 
-            - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
+            - `type: "tool_removal"`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
+            - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
               - `BetaToolChangeToolReference object`
 
@@ -39032,8 +38869,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               - `BetaToolChangeMCPToolsetReference object`
 
                 Reference to every tool in the named MCP server's toolset.
-
-            - `type: "tool_removal"`
 
             - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -39054,6 +38889,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             request is rejected), and moving it into the middle of a single run is
             likewise rejected; between non-thinking blocks the block's placement has
             no validation effect.
+
+            - `type: "fallback"`
 
             - `from: BetaFallbackInfoParam`
 
@@ -39145,8 +38982,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Identifies one hop of a fallback transition.
 
-            - `type: "fallback"`
-
             - `trigger: optional unknown`
 
               The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -39217,12 +39052,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           maxItems: 20
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" or "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -39230,6 +39059,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: optional string`
 
@@ -39441,25 +39276,25 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
+            - `type: "json_schema"`
+
             - `schema: map[unknown]`
 
               The JSON schema of the format
 
-            - `type: "json_schema"`
-
           - `task_budget: optional BetaTokenTaskBudget or null`
 
             User-configurable total token budget across contexts.
+
+            - `type: "tokens"`
+
+              The budget type. Currently only 'tokens' is supported.
 
             - `total: number`
 
               Total token budget across all contexts in the session.
 
               minimum: 1024
-
-            - `type: "tokens"`
-
-              The budget type. Currently only 'tokens' is supported.
 
             - `remaining: optional number or null`
 
@@ -39479,6 +39314,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaThinkingConfigEnabled object`
 
+            - `type: "enabled"`
+
             - `budget_tokens: number`
 
               Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -39488,8 +39325,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
               minimum: 1024
-
-            - `type: "enabled"`
 
             - `block_binding: optional BetaThinkingBlockBinding or null`
 
@@ -39555,9 +39390,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       maxItems: 20
 
-      - `name: string`
-
       - `type: "url"`
+
+      - `name: string`
 
       - `url: string`
 
@@ -39627,11 +39462,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `array of BetaTextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -39685,11 +39520,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         The model will use the specified tool with `tool_choice.name`.
 
+        - `type: "tool"`
+
         - `name: string`
 
           The name of the tool to use.
-
-        - `type: "tool"`
 
         - `disable_parallel_tool_use: optional boolean`
 
@@ -39769,6 +39604,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaTool object`
 
+        - `type: optional "custom" or null`
+
         - `input_schema: object`
 
           [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -39823,17 +39660,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `type: optional "custom" or null`
-
       - `BetaToolBash20241022 object`
+
+        - `type: "bash_20241022"`
 
         - `name: "bash"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "bash_20241022"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -39861,13 +39696,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolBash20250124 object`
 
+        - `type: "bash_20250124"`
+
         - `name: "bash"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "bash_20250124"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -39895,13 +39730,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaCodeExecutionTool20250522 object`
 
+        - `type: "code_execution_20250522"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250522"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -39927,13 +39762,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaCodeExecutionTool20250825 object`
 
+        - `type: "code_execution_20250825"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250825"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -39961,13 +39796,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+        - `type: "code_execution_20260120"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260120"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -39995,13 +39830,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         Code execution tool with REPL state persistence.
 
+        - `type: "code_execution_20260521"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260521"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40046,6 +39881,18 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type: optional BetaBrowserTypeConfig or null`
+
+            `type`'s config overrides.
+
+            - `defer_loading: optional boolean or null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: optional boolean or null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `close_tab: optional BetaBrowserCloseTabConfig or null`
 
@@ -40383,18 +40230,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type: optional BetaBrowserTypeConfig or null`
-
-            `type`'s config overrides.
-
-            - `defer_loading: optional boolean or null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled: optional boolean or null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait: optional BetaBrowserWaitConfig or null`
 
             `wait`'s config overrides.
@@ -40421,6 +40256,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolComputerUse20241022 object`
 
+        - `type: "computer_20241022"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -40438,8 +40275,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20241022"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40473,13 +40308,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaMemoryTool20250818 object`
 
+        - `type: "memory_20250818"`
+
         - `name: "memory"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "memory_20250818"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40507,6 +40342,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolComputerUse20250124 object`
 
+        - `type: "computer_20250124"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -40524,8 +40361,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20250124"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40559,13 +40394,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolTextEditor20241022 object`
 
+        - `type: "text_editor_20241022"`
+
         - `name: "str_replace_editor"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20241022"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40593,6 +40428,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolComputerUse20251124 object`
 
+        - `type: "computer_20251124"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -40610,8 +40447,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20251124"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40672,6 +40507,18 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type: optional BetaComputerTypeConfig or null`
+
+            `type`'s config overrides.
+
+            - `defer_loading: optional boolean or null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: optional boolean or null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `cursor_position: optional BetaComputerCursorPositionConfig or null`
 
@@ -40841,18 +40688,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type: optional BetaComputerTypeConfig or null`
-
-            `type`'s config overrides.
-
-            - `defer_loading: optional boolean or null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled: optional boolean or null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait: optional BetaComputerWaitConfig or null`
 
             `wait`'s config overrides.
@@ -40879,13 +40714,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolTextEditor20250124 object`
 
+        - `type: "text_editor_20250124"`
+
         - `name: "str_replace_editor"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250124"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40913,13 +40748,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolTextEditor20250429 object`
 
+        - `type: "text_editor_20250429"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250429"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40947,13 +40782,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolTextEditor20250728 object`
 
+        - `type: "text_editor_20250728"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250728"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -40987,13 +40822,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebSearchTool20250305 object`
 
+        - `type: "web_search_20250305"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20250305"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41063,13 +40898,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebFetchTool20250910 object`
 
+        - `type: "web_fetch_20250910"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20250910"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41119,13 +40954,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebSearchTool20260209 object`
 
+        - `type: "web_search_20260209"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260209"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41169,13 +41004,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebFetchTool20260209 object`
 
+        - `type: "web_fetch_20260209"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260209"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41227,13 +41062,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         Web fetch tool with use_cache parameter for bypassing cached content.
 
+        - `type: "web_fetch_20260309"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260309"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41287,13 +41122,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebSearchTool20260318 object`
 
+        - `type: "web_search_20260318"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260318"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41345,13 +41180,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaWebFetchTool20260318 object`
 
+        - `type: "web_fetch_20260318"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260318"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41413,6 +41248,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaAdvisorTool20260301 object`
 
+        - `type: "advisor_20260301"`
+
         - `model: Model`
 
           The model that will complete your prompt.
@@ -41424,8 +41261,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "advisor_20260301"`
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41467,17 +41302,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolSearchToolBm25_20251119 object`
 
-        - `name: "tool_search_tool_bm25"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
           - `"tool_search_tool_bm25_20251119"`
 
           - `"tool_search_tool_bm25"`
+
+        - `name: "tool_search_tool_bm25"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41503,17 +41338,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `BetaToolSearchToolRegex20251119 object`
 
-        - `name: "tool_search_tool_regex"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
           - `"tool_search_tool_regex_20251119"`
 
           - `"tool_search_tool_regex"`
+
+        - `name: "tool_search_tool_regex"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -41544,13 +41379,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
         Allows configuring enabled status and defer_loading for all tools
         from an MCP server, with optional per-tool overrides.
 
+        - `type: "mcp_toolset"`
+
         - `mcp_server_name: string`
 
           Name of the MCP server to configure tools for
 
           maxLength: 255, minLength: 1
-
-        - `type: "mcp_toolset"`
 
         - `cache_control: optional BetaCacheControlEphemeral or null`
 
@@ -41619,6 +41454,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 #### Returns
 
 - `BetaMessageBatch object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -41717,14 +41560,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -41798,7 +41633,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -41846,6 +41681,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -41888,9 +41725,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 #### Returns
 
 - `BetaMessageBatch object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -41989,14 +41836,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -42064,7 +41903,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42112,6 +41951,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -42154,9 +41995,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 #### Returns
 
 - `data: array of BetaMessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -42255,14 +42106,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 - `first_id: string or null`
 
@@ -42339,7 +42182,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42387,6 +42230,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -42429,9 +42274,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 #### Returns
 
 - `BetaMessageBatch object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -42531,14 +42386,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
-
 #### Example
 
 ```bash
@@ -42596,7 +42443,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42644,6 +42491,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -42686,13 +42535,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 #### Returns
 
 - `BetaDeletedMessageBatch object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -42701,6 +42548,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 #### Example
 
@@ -42745,7 +42596,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42793,6 +42644,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -42835,6 +42688,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 #### Returns
 
 - `BetaMessageBatchIndividualResponse object`
@@ -42855,7 +42710,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `BetaMessageBatchSucceededResult object`
 
+      - `type: "succeeded"`
+
+        default: succeeded
+
       - `message: BetaMessage`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+          default: message
 
         - `id: string`
 
@@ -42881,12 +42748,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -42894,6 +42755,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -42932,6 +42799,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaTextBlock object`
 
+            - `type: "text"`
+
+              default: text
+
             - `citations: array of BetaTextCitation or null`
 
               Citations supporting the text block.
@@ -42939,6 +42810,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `BetaCitationCharLocation object`
+
+                - `type: "char_location"`
+
+                  default: char_location
 
                 - `cited_text: string`
 
@@ -42956,11 +42831,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 0
 
-                - `type: "char_location"`
-
-                  default: char_location
-
               - `BetaCitationPageLocation object`
+
+                - `type: "page_location"`
+
+                  default: page_location
 
                 - `cited_text: string`
 
@@ -42978,11 +42853,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 1
 
-                - `type: "page_location"`
-
-                  default: page_location
-
               - `BetaCitationContentBlockLocation object`
+
+                - `type: "content_block_location"`
+
+                  default: content_block_location
 
                 - `cited_text: string`
 
@@ -43010,11 +42885,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
-                  default: content_block_location
-
               - `BetaCitationsWebSearchResultLocation object`
+
+                - `type: "web_search_result_location"`
+
+                  default: web_search_result_location
 
                 - `cited_text: string`
 
@@ -43024,13 +42899,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
-                  default: web_search_result_location
-
                 - `url: string`
 
               - `BetaCitationSearchResultLocation object`
+
+                - `type: "search_result_location"`
+
+                  default: search_result_location
 
                 - `cited_text: string`
 
@@ -43062,19 +42937,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `title: string or null`
 
-                - `type: "search_result_location"`
-
-                  default: search_result_location
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
           - `BetaThinkingBlock object`
+
+            - `type: "thinking"`
+
+              default: thinking
 
             - `signature: string`
 
@@ -43088,11 +42959,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
-              default: thinking
-
           - `BetaRedactedThinkingBlock object`
+
+            - `type: "redacted_thinking"`
+
+              default: redacted_thinking
 
             - `data: string`
 
@@ -43102,11 +42973,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
-              default: redacted_thinking
-
           - `BetaToolUseBlock object`
+
+            - `type: "tool_use"`
+
+              default: tool_use
 
             - `id: string`
 
@@ -43118,13 +42989,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               minLength: 1
 
-            - `type: "tool_use"`
-
-              default: tool_use
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -43136,19 +43001,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `BetaServerToolCaller20260120 object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name: optional string or null`
 
@@ -43157,6 +43022,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `BetaServerToolUseBlock object`
+
+            - `type: "server_tool_use"`
+
+              default: server_tool_use
 
             - `id: string`
 
@@ -43182,13 +43051,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
-              default: server_tool_use
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -43202,9 +43065,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaWebSearchToolResultBlock object`
 
+            - `type: "web_search_tool_result"`
+
+              default: web_search_tool_result
+
             - `content: BetaWebSearchToolResultBlockContent`
 
               - `BetaWebSearchToolResultError object`
+
+                - `type: "web_search_tool_result_error"`
+
+                  default: web_search_tool_result_error
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -43220,11 +43091,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
-                  default: web_search_tool_result_error
-
               - `array of BetaWebSearchResultBlock`
+
+                - `type: "web_search_result"`
+
+                  default: web_search_result
 
                 - `encrypted_content: string`
 
@@ -43232,23 +43103,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
-                  default: web_search_result
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_search_tool_result"`
-
-              default: web_search_tool_result
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -43262,9 +43123,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaWebFetchToolResultBlock object`
 
+            - `type: "web_fetch_tool_result"`
+
+              default: web_fetch_tool_result
+
             - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
               - `BetaWebFetchToolResultErrorBlock object`
+
+                - `type: "web_fetch_tool_result_error"`
+
+                  default: web_fetch_tool_result_error
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -43286,13 +43155,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
-
-                  default: web_fetch_tool_result_error
+                  - `"content_too_large"`
 
               - `BetaWebFetchBlock object`
 
+                - `type: "web_fetch_result"`
+
+                  default: web_fetch_result
+
                 - `content: BetaDocumentBlock`
+
+                  - `type: "document"`
+
+                    default: document
 
                   - `citations: BetaCitationConfig or null`
 
@@ -43306,37 +43181,29 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                     - `BetaBase64PDFSource object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `BetaPlainTextSource object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string or null`
 
                     The title of the document
 
-                  - `type: "document"`
-
-                    default: document
-
                 - `retrieved_at: string or null`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
-
-                  default: web_fetch_result
 
                 - `url: string`
 
@@ -43346,13 +43213,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_fetch_tool_result"`
-
-              default: web_fetch_tool_result
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -43366,9 +43227,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `BetaAdvisorToolResultBlock object`
 
+            - `type: "advisor_tool_result"`
+
+              default: advisor_tool_result
+
             - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
               - `BetaAdvisorToolResultError object`
+
+                - `type: "advisor_tool_result_error"`
+
+                  default: advisor_tool_result_error
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -43386,11 +43255,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
-                  default: advisor_tool_result_error
-
               - `BetaAdvisorResultBlock object`
+
+                - `type: "advisor_result"`
+
+                  default: advisor_result
 
                 - `stop_reason: string or null`
 
@@ -43398,11 +43267,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `text: string`
 
-                - `type: "advisor_result"`
-
-                  default: advisor_result
-
               - `BetaAdvisorRedactedResultBlock object`
+
+                - `type: "advisor_redacted_result"`
+
+                  default: advisor_redacted_result
 
                 - `encrypted_content: string`
 
@@ -43412,25 +43281,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: "advisor_redacted_result"`
-
-                  default: advisor_redacted_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
-              default: advisor_tool_result
-
           - `BetaCodeExecutionToolResultBlock object`
+
+            - `type: "code_execution_tool_result"`
+
+              default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
-
               - `BetaCodeExecutionToolResultError object`
+
+                - `type: "code_execution_tool_result_error"`
+
+                  default: code_execution_tool_result_error
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -43442,19 +43309,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
-                  default: code_execution_tool_result_error
-
               - `BetaCodeExecutionResultBlock object`
 
-                - `content: array of BetaCodeExecutionOutputBlock`
+                - `type: "code_execution_result"`
 
-                  - `file_id: string`
+                  default: code_execution_result
+
+                - `content: array of BetaCodeExecutionOutputBlock`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -43462,21 +43329,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
-                  default: code_execution_result
-
               - `BetaEncryptedCodeExecutionResultBlock object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
-                - `content: array of BetaCodeExecutionOutputBlock`
+                - `type: "encrypted_code_execution_result"`
 
-                  - `file_id: string`
+                  default: encrypted_code_execution_result
+
+                - `content: array of BetaCodeExecutionOutputBlock`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -43484,23 +43351,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
-                  default: encrypted_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
-              default: code_execution_tool_result
-
           - `BetaBashCodeExecutionToolResultBlock object`
+
+            - `type: "bash_code_execution_tool_result"`
+
+              default: bash_code_execution_tool_result
 
             - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
               - `BetaBashCodeExecutionToolResultError object`
+
+                - `type: "bash_code_execution_tool_result_error"`
+
+                  default: bash_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -43514,19 +43381,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
-                  default: bash_code_execution_tool_result_error
-
               - `BetaBashCodeExecutionResultBlock object`
 
-                - `content: array of BetaBashCodeExecutionOutputBlock`
+                - `type: "bash_code_execution_result"`
 
-                  - `file_id: string`
+                  default: bash_code_execution_result
+
+                - `content: array of BetaBashCodeExecutionOutputBlock`
 
                   - `type: "bash_code_execution_output"`
 
                     default: bash_code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -43534,23 +43401,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
-                  default: bash_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
-              default: bash_code_execution_tool_result
-
           - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+            - `type: "text_editor_code_execution_tool_result"`
+
+              default: text_editor_code_execution_tool_result
 
             - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `BetaTextEditorCodeExecutionToolResultError object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
+
+                  default: text_editor_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -43566,11 +43433,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `error_message: string or null`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
-                  default: text_editor_code_execution_tool_result_error
-
               - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+                - `type: "text_editor_code_execution_view_result"`
+
+                  default: text_editor_code_execution_view_result
 
                 - `content: string`
 
@@ -43588,19 +43455,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `total_lines: number or null`
 
-                - `type: "text_editor_code_execution_view_result"`
-
-                  default: text_editor_code_execution_view_result
-
               - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
                   default: text_editor_code_execution_create_result
 
+                - `is_file_update: boolean`
+
               - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
+
+                  default: text_editor_code_execution_str_replace_result
 
                 - `lines: array of string or null`
 
@@ -43612,23 +43479,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `old_start: number or null`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
-                  default: text_editor_code_execution_str_replace_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
-              default: text_editor_code_execution_tool_result
-
           - `BetaToolSearchToolResultBlock object`
+
+            - `type: "tool_search_tool_result"`
+
+              default: tool_search_tool_result
 
             - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
               - `BetaToolSearchToolResultError object`
+
+                - `type: "tool_search_tool_result_error"`
+
+                  default: tool_search_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -43642,35 +43509,31 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `error_message: string or null`
 
-                - `type: "tool_search_tool_result_error"`
-
-                  default: tool_search_tool_result_error
-
               - `BetaToolSearchToolSearchResultBlock object`
-
-                - `tool_references: array of BetaToolReferenceBlock`
-
-                  - `tool_name: string`
-
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
-
-                    default: tool_reference
 
                 - `type: "tool_search_tool_search_result"`
 
                   default: tool_search_tool_search_result
 
+                - `tool_references: array of BetaToolReferenceBlock`
+
+                  - `type: "tool_reference"`
+
+                    default: tool_reference
+
+                  - `tool_name: string`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "tool_search_tool_result"`
-
-              default: tool_search_tool_result
-
           - `BetaMCPToolUseBlock object`
+
+            - `type: "mcp_tool_use"`
+
+              default: mcp_tool_use
 
             - `id: string`
 
@@ -43686,17 +43549,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
-              default: mcp_tool_use
-
           - `BetaMCPToolResultBlock object`
+
+            - `type: "mcp_tool_result"`
+
+              default: mcp_tool_result
 
             - `content: string or array of BetaTextBlock`
 
               - `string`
 
               - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+                - `type: "text"`
+
+                  default: text
 
                 - `citations: array of BetaTextCitation or null`
 
@@ -43706,11 +43573,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `text: string`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: "text"`
-
-                  default: text
+                  minLength: 0
 
             - `is_error: boolean`
 
@@ -43720,19 +43583,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: "mcp_tool_result"`
-
-              default: mcp_tool_result
-
           - `BetaContainerUploadBlock object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
 
               default: container_upload
+
+            - `file_id: string`
 
           - `BetaCompactionBlock object`
 
@@ -43742,6 +43601,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: "compaction"`
+
+              default: compaction
+
             - `content: string or null`
 
               Summary of compacted content, or null if compaction failed
@@ -43749,10 +43612,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `encrypted_content: string or null`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: "compaction"`
-
-              default: compaction
 
           - `BetaFallbackBlock object`
 
@@ -43767,6 +43626,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: "fallback"`
+
+              default: fallback
 
             - `from: BetaFallbackInfo`
 
@@ -43862,6 +43725,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: "refusal"`
+
+                default: refusal
+
               - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
                 The policy category that triggered a refusal.
@@ -43886,14 +43753,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: "refusal"`
-
-                default: refusal
-
-            - `type: "fallback"`
-
-              default: fallback
-
         - `context_management: BetaContextManagementResponse or null`
 
           Context management response.
@@ -43905,6 +43764,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             List of context management edits that were applied.
 
             - `BetaClearToolUses20250919EditResponse object`
+
+              - `type: "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
+
+                default: clear_tool_uses_20250919
 
               - `cleared_input_tokens: number`
 
@@ -43918,13 +43783,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 minimum: 0
 
-              - `type: "clear_tool_uses_20250919"`
+            - `BetaClearThinking20251015EditResponse object`
+
+              - `type: "clear_thinking_20251015"`
 
                 The type of context management edit applied.
 
-                default: clear_tool_uses_20250919
-
-            - `BetaClearThinking20251015EditResponse object`
+                default: clear_thinking_20251015
 
               - `cleared_input_tokens: number`
 
@@ -43938,12 +43803,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 minimum: 0
 
-              - `type: "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
-                default: clear_thinking_20251015
-
         - `diagnostics: BetaDiagnostics or null`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -43955,43 +43814,43 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `BetaCacheMissModelChanged object`
 
-              - `cache_missed_input_tokens: number`
-
-                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
               - `type: "model_changed"`
 
                 default: model_changed
 
-            - `BetaCacheMissSystemChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissSystemChanged object`
 
               - `type: "system_changed"`
 
                 default: system_changed
 
-            - `BetaCacheMissToolsChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissToolsChanged object`
 
               - `type: "tools_changed"`
 
                 default: tools_changed
 
-            - `BetaCacheMissMessagesChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+            - `BetaCacheMissMessagesChanged object`
+
               - `type: "messages_changed"`
 
                 default: messages_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -44022,6 +43881,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
         - `stop_details: BetaRefusalStopDetails or null`
 
           Structured information about a refusal.
+
+          - `type: "refusal"`
+
+            default: refusal
 
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -44102,10 +43965,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: "refusal"`
-
-            default: refusal
-
         - `stop_reason: BetaStopReason or null`
 
           The reason that we stopped.
@@ -44143,14 +44002,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
-
-          default: message
 
         - `usage: BetaUsage`
 
@@ -44218,6 +44069,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 No reprice was applied; `reason` says why.
 
+                - `type: "not_applied"`
+
+                  default: not_applied
+
                 - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                   Why the reprice was not applied.
@@ -44248,10 +44103,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                   - `"wrong_platform"`
 
                   - `"wrong_workspace"`
-
-                - `type: "not_applied"`
-
-                  default: not_applied
 
                 - `remove_to_redeem: optional array of string or null`
 
@@ -44290,6 +44141,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Token usage for a sampling iteration.
 
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
+                default: message
+
               - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
@@ -44324,43 +44181,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 minimum: 0
 
-              - `type: "message"`
-
-                Usage for a sampling iteration
-
-                default: message
-
             - `BetaCompactionIterationUsage object`
 
               Token usage for a compaction iteration.
-
-              - `cache_creation: BetaCacheCreation or null`
-
-                Breakdown of cached tokens by TTL
-
-              - `cache_creation_input_tokens: number`
-
-                The number of input tokens used to create the cache entry.
-
-                default: 0, minimum: 0
-
-              - `cache_read_input_tokens: number`
-
-                The number of input tokens read from the cache.
-
-                default: 0, minimum: 0
-
-              - `input_tokens: number`
-
-                The number of input tokens which were used.
-
-                minimum: 0
-
-              - `output_tokens: number`
-
-                The number of output tokens which were used.
-
-                minimum: 0
 
               - `type: "compaction"`
 
@@ -44368,9 +44191,43 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 default: compaction
 
+              - `cache_creation: BetaCacheCreation or null`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
             - `BetaAdvisorMessageIterationUsage object`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
+
+                default: advisor_message
 
               - `cache_creation: BetaCacheCreation or null`
 
@@ -44405,12 +44262,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
-
-                default: advisor_message
 
             - `BetaFallbackMessageIterationUsage object`
 
@@ -44421,6 +44272,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
+                default: fallback_message
+
               - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
@@ -44454,12 +44311,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
-
-                default: fallback_message
 
           - `output_tokens: number`
 
@@ -44541,6 +44392,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
+            default: thinking_dropped
+
           - `path: string`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -44571,121 +44428,111 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"end_user_binding_mismatch"`
 
-          - `type: "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-            default: thinking_dropped
-
-      - `type: "succeeded"`
-
-        default: succeeded
-
     - `BetaMessageBatchErroredResult object`
 
+      - `type: "errored"`
+
+        default: errored
+
       - `error: BetaErrorResponse`
-
-        - `error: BetaError`
-
-          - `BetaInvalidRequestError object`
-
-            - `message: string`
-
-              default: Invalid request
-
-            - `type: "invalid_request_error"`
-
-              default: invalid_request_error
-
-          - `BetaAuthenticationError object`
-
-            - `message: string`
-
-              default: Authentication error
-
-            - `type: "authentication_error"`
-
-              default: authentication_error
-
-          - `BetaBillingError object`
-
-            - `message: string`
-
-              default: Billing error
-
-            - `type: "billing_error"`
-
-              default: billing_error
-
-          - `BetaPermissionError object`
-
-            - `message: string`
-
-              default: Permission denied
-
-            - `type: "permission_error"`
-
-              default: permission_error
-
-          - `BetaNotFoundError object`
-
-            - `message: string`
-
-              default: Not found
-
-            - `type: "not_found_error"`
-
-              default: not_found_error
-
-          - `BetaRateLimitError object`
-
-            - `message: string`
-
-              default: Rate limited
-
-            - `type: "rate_limit_error"`
-
-              default: rate_limit_error
-
-          - `BetaGatewayTimeoutError object`
-
-            - `message: string`
-
-              default: Request timeout
-
-            - `type: "timeout_error"`
-
-              default: timeout_error
-
-          - `BetaAPIError object`
-
-            - `message: string`
-
-              default: Internal server error
-
-            - `type: "api_error"`
-
-              default: api_error
-
-          - `BetaOverloadedError object`
-
-            - `message: string`
-
-              default: Overloaded
-
-            - `type: "overloaded_error"`
-
-              default: overloaded_error
-
-        - `request_id: string or null`
 
         - `type: "error"`
 
           default: error
 
-      - `type: "errored"`
+        - `error: BetaError`
 
-        default: errored
+          - `BetaInvalidRequestError object`
+
+            - `type: "invalid_request_error"`
+
+              default: invalid_request_error
+
+            - `message: string`
+
+              default: Invalid request
+
+          - `BetaAuthenticationError object`
+
+            - `type: "authentication_error"`
+
+              default: authentication_error
+
+            - `message: string`
+
+              default: Authentication error
+
+          - `BetaBillingError object`
+
+            - `type: "billing_error"`
+
+              default: billing_error
+
+            - `message: string`
+
+              default: Billing error
+
+          - `BetaPermissionError object`
+
+            - `type: "permission_error"`
+
+              default: permission_error
+
+            - `message: string`
+
+              default: Permission denied
+
+          - `BetaNotFoundError object`
+
+            - `type: "not_found_error"`
+
+              default: not_found_error
+
+            - `message: string`
+
+              default: Not found
+
+          - `BetaRateLimitError object`
+
+            - `type: "rate_limit_error"`
+
+              default: rate_limit_error
+
+            - `message: string`
+
+              default: Rate limited
+
+          - `BetaGatewayTimeoutError object`
+
+            - `type: "timeout_error"`
+
+              default: timeout_error
+
+            - `message: string`
+
+              default: Request timeout
+
+          - `BetaAPIError object`
+
+            - `type: "api_error"`
+
+              default: api_error
+
+            - `message: string`
+
+              default: Internal server error
+
+          - `BetaOverloadedError object`
+
+            - `type: "overloaded_error"`
+
+              default: overloaded_error
+
+            - `message: string`
+
+              default: Overloaded
+
+        - `request_id: string or null`
 
     - `BetaMessageBatchCanceledResult object`
 
