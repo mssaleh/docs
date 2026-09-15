@@ -190,6 +190,7 @@
 #### 설정
 
 - [설정 파일 및 우선순위](https://code.claude.com/docs/ko/settings.md): Claude Code 설정을 변경하고, 키가 속할 범위를 선택하고, 변경을 확인하고, 키가 여러 위치에 설정되어 있을 때 Claude Code가 사용하는 값을 알아봅니다.
+- [모든 설정](https://code.claude.com/docs/ko/settings-reference.md): Claude Code settings.json의 모든 키에 대한 완전한 참조: 각 키의 위치, 유형 및 기본값, 붙여넣기 가능한 예제, 모든 키의 인덱스.
 - [예제 설정 파일](https://code.claude.com/docs/ko/settings-example.md): 개발자, 팀, 조직을 위한 현실적인 settings.json 파일: 하나를 복사하고 원하는 키를 유지한 후 값을 변경하세요.
 
 #### 권한 및 샌드박싱

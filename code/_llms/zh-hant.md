@@ -161,7 +161,7 @@
 - [為您的組織推出 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway-rollout.md): 為 Claude Code 部署閘道產品：配置它以轉發 Claude Code 發送的內容、發放開發者認證、透過受管設定分發配置，並驗證推出。
 - [Claude Code gateway 相容性指南](https://code.claude.com/docs/zh-TW/llm-gateway-protocol.md): 保持 LLM gateway 與 Claude Code 相容：它呼叫的端點、必須轉發的標頭和請求體欄位，以及移除它們時會破壞什麼。
 
-#### 使用量和成本
+#### 使用量與成本
 
 - [監控](https://code.claude.com/docs/zh-TW/monitoring-usage.md): 了解如何為 Claude Code 啟用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-TW/costs.md): 追蹤 token 使用情況、設定團隊支出限制，並透過上下文管理、模型選擇、延伸思考設定和預處理 hooks 來降低 Claude Code 成本。

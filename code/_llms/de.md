@@ -268,7 +268,7 @@
 - [Mit Sitzungen arbeiten](https://code.claude.com/docs/de/agent-sdk/sessions.md): Wie Sitzungen die Gesprächsverlauf des Agenten speichern, und wann Sie continue, resume und fork verwenden, um zu einem früheren Durchlauf zurückzukehren.
 - [Sitzungen in externem Speicher persistieren](https://code.claude.com/docs/de/agent-sdk/session-storage.md): Spiegeln Sie Sitzungstranskripte zu S3, Redis oder Ihrem eigenen Backend, damit andere Hosts Ihre Sitzungen fortsetzen können.
 
-#### Ein- und Ausgabe
+#### Eingabe und Ausgabe
 
 - [Streaming-Eingabe](https://code.claude.com/docs/de/agent-sdk/streaming-vs-single-mode.md): Verständnis der zwei Eingabemodi für Claude Agent SDK und wann jeder verwendet wird
 - [Genehmigungen und Benutzereingaben verarbeiten](https://code.claude.com/docs/de/agent-sdk/user-input.md): Zeigen Sie Claudes Genehmigungsanfragen und Klärungsfragen den Benutzern an und geben Sie deren Entscheidungen an das SDK zurück.

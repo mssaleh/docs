@@ -290,7 +290,7 @@
 
 #### Contrôle et observabilité
 
-- [Configurer les permissions](https://code.claude.com/docs/fr/agent-sdk/permissions.md): Contrôlez comment votre agent utilise les outils avec les modes de permission, les hooks et les règles de permission/refus déclaratives.
+- [Configurer les permissions](https://code.claude.com/docs/fr/agent-sdk/permissions.md): Contrôlez comment votre agent utilise les outils avec les modes de permission, les hooks et les règles déclaratives d'autorisation/refus.
 - [Intercepter et contrôler le comportement des agents avec des hooks](https://code.claude.com/docs/fr/agent-sdk/hooks.md): Interceptez et personnalisez le comportement des agents aux points d'exécution clés avec des hooks
 - [Rembobiner les modifications de fichiers avec les points de contrôle](https://code.claude.com/docs/fr/agent-sdk/file-checkpointing.md): Suivre les modifications de fichiers pendant les sessions d'agent et restaurer les fichiers à n'importe quel état antérieur
 - [Suivre les coûts et l'utilisation](https://code.claude.com/docs/fr/agent-sdk/cost-tracking.md): Découvrez comment suivre l'utilisation des tokens, estimer les coûts et configurer la mise en cache des invites avec le Claude Agent SDK.

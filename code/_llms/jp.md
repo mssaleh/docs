@@ -47,7 +47,7 @@
 - [ルーティンで作業を自動化する](https://code.claude.com/docs/ja/routines.md): Claude Code を自動操縦に設定します。スケジュールで実行するルーティンを定義したり、API 呼び出しでトリガーしたり、Anthropic が管理するクラウドインフラストラクチャから GitHub イベントに反応させたりできます。
 - [ultrareview でバグを見つける](https://code.claude.com/docs/ja/ultrareview.md): /code-review ultra でクラウド上で深い複数エージェント型のコードレビューを実行し、マージ前にバグを見つけて検証します。
 
-##### Claude Code（デスクトップ版）
+##### Claude Code デスクトップ版
 
 - [デスクトップアプリを始める](https://code.claude.com/docs/ja/desktop-quickstart.md): Claude Code をデスクトップにインストールして、最初のコーディングセッションを開始します
 - [Desktop application](https://code.claude.com/docs/ja/desktop.md): Claude Code Desktop をさらに活用する：Git 分離による並列セッション、ドラッグアンドドロップペインレイアウト、統合ターミナルとファイルエディタ、サイドチャット、コンピュータ使用、電話から Dispatch セッションを送信、ビジュアル diff レビュー、アプリプレビュー、PR 監視、コネクタ、エンタープライズ設定。
@@ -74,6 +74,7 @@
 - [カスタムサブエージェントの作成](https://code.claude.com/docs/ja/sub-agents.md): Claude Code でタスク固有のワークフローと改善されたコンテキスト管理のための特化した AI サブエージェントを作成して使用します。
 - [複数のエージェントをエージェントビューで管理する](https://code.claude.com/docs/ja/agent-view.md): 1 つの画面から多くの Claude Code セッションをディスパッチして管理します。エージェントビューは、すべてのセッションが何をしているか、どのセッションが入力を必要としているかを表示します。
 - [Claude Code セッションのチームを調整する](https://code.claude.com/docs/ja/agent-teams.md): 複数の Claude Code インスタンスがチームとして連携して動作するように調整し、共有タスク、エージェント間メッセージング、および一元管理を実現します。
+- [他の Claude Code セッションにメッセージを送信する](https://code.claude.com/docs/ja/cross-session-messaging.md): Claude が同じマシン上の他の Claude Code セッションをリストアップしてメッセージを送信できるようにし、他のマシンまたはウェブ上のセッションに到達します。
 - [動的ワークフローで大規模にサブエージェントをオーケストレーションする](https://code.claude.com/docs/ja/workflows.md): 動的ワークフローは、Claude が作成したスクリプトから多くのサブエージェントをオーケストレーションし、再実行できます。コードベース監査、大規模マイグレーション、相互検証研究に使用します。
 - [worktree を使用して並列セッションを実行する](https://code.claude.com/docs/ja/worktrees.md): 並列 Claude Code セッションを個別の git worktree に分離して、変更が衝突しないようにします。`--worktree` フラグ、subagent の分離、`.worktreeinclude`、クリーンアップ、および非 git VCS フックについて説明します。
 
@@ -94,7 +95,7 @@
 
 #### Artifacts
 
-- [セッション出力をアーティファクトとして共有する](https://code.claude.com/docs/ja/artifacts.md): アーティファクトは Claude Code の作業をライブでインタラクティブなページに変え、claude.ai 上で非公開に保つか、組織と共有するか、公開リンクに公開できます。
+- [セッション出力をアーティファクトとして共有する](https://code.claude.com/docs/ja/artifacts.md): Artifacts は Claude Code の成果物を claude.ai 上のライブでインタラクティブなページに変え、プライベートに保つ、組織と共有する、または公開リンクで公開することができます。
 
 #### オートメーション
 
@@ -281,7 +282,7 @@
 - [多くのツールにスケーリングするツール検索](https://code.claude.com/docs/ja/agent-sdk/tool-search.md): 必要なものだけをオンデマンドで検出して読み込むことで、エージェントを数千のツールにスケーリングします。
 - [SDK のサブエージェント](https://code.claude.com/docs/ja/agent-sdk/subagents.md): コンテキストを分離し、タスクを並列実行し、Claude Agent SDK アプリケーションで特化した指示を適用するサブエージェントを定義および呼び出します。
 
-#### 動作をカスタマイズ
+#### 動作をカスタマイズする
 
 - [システムプロンプトの変更](https://code.claude.com/docs/ja/agent-sdk/modifying-system-prompts.md): `claude_code` プリセットとカスタムシステムプロンプトの間で選択し、CLAUDE.md、出力スタイル、append、または完全にカスタムなプロンプトで動作をカスタマイズします。
 - [Agent Skills でエージェントを拡張する](https://code.claude.com/docs/ja/agent-sdk/skills.md): Claude Agent SDK セッションで Claude が呼び出せる Skills を制御し、名前でコマンドをディスパッチし、セッションが検出する Skills を作成します
@@ -289,7 +290,7 @@
 
 #### 制御と可観測性
 
-- [パーミッションの設定](https://code.claude.com/docs/ja/agent-sdk/permissions.md): パーミッションモード、フック、宣言的な許可/拒否ルールを使用して、エージェントがツールをどのように使用するかを制御します。
+- [権限の設定](https://code.claude.com/docs/ja/agent-sdk/permissions.md): 権限モード、hooks、および宣言的な許可/拒否ルールを使用して、エージェントがツールをどのように使用するかを制御します。
 - [フックを使用してエージェントの動作をインターセプトして制御する](https://code.claude.com/docs/ja/agent-sdk/hooks.md): フックを使用して、エージェント実行の重要なポイントでエージェントの動作をインターセプトしてカスタマイズします
 - [checkpointing でファイル変更を巻き戻す](https://code.claude.com/docs/ja/agent-sdk/file-checkpointing.md): エージェントセッション中のファイル変更を追跡し、ファイルを以前の任意の状態に復元します
 - [コストと使用状況を追跡する](https://code.claude.com/docs/ja/agent-sdk/cost-tracking.md): Claude Agent SDK でトークン使用状況を追跡し、コストを見積もり、プロンプトキャッシングを設定する方法を学びます。

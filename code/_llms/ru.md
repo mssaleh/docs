@@ -115,7 +115,7 @@
 - [Устранение неполадок при установке и входе](https://code.claude.com/docs/ru/troubleshoot-install.md): Исправьте ошибки command not found, PATH, разрешений, сети и аутентификации при установке или входе в Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/ru/troubleshooting.md): Исправьте высокое использование CPU или памяти, зависания, auto-compact thrashing и проблемы поиска в Claude Code, и найдите нужную страницу для других проблем.
 - [Отладка конфигурации](https://code.claude.com/docs/ru/debug-your-config.md): Диагностируйте, почему CLAUDE.md, параметры, hooks, MCP серверы или skills не вступают в силу. Используйте /context, /doctor, /hooks и /mcp, чтобы увидеть, что действительно загрузилось.
-- [Справочник по ошибкам](https://code.claude.com/docs/ru/errors.md): Найдите сообщения об ошибках runtime Claude Code, узнайте, что они означают и как их исправить.
+- [Справочник по ошибкам](https://code.claude.com/docs/ru/errors.md): Найдите сообщения об ошибках Claude Code с объяснением их значения и способов исправления.
 
 ### Администрирование
 
@@ -290,7 +290,7 @@
 
 #### Управление и наблюдаемость
 
-- [Настройка разрешений](https://code.claude.com/docs/ru/agent-sdk/permissions.md): Контролируйте использование инструментов вашим агентом с помощью режимов разрешений, hooks и декларативных правил allow/deny.
+- [Настройка разрешений](https://code.claude.com/docs/ru/agent-sdk/permissions.md): Контролируйте, как ваш агент использует инструменты, с помощью режимов разрешений, hooks и декларативных правил разрешения/запрета.
 - [Перехватывайте и контролируйте поведение агента с помощью hooks](https://code.claude.com/docs/ru/agent-sdk/hooks.md): Перехватывайте и настраивайте поведение агента в ключевых точках выполнения с помощью hooks
 - [Отмотка изменений файлов с помощью checkpointing](https://code.claude.com/docs/ru/agent-sdk/file-checkpointing.md): Отслеживайте изменения файлов во время сеансов агента и восстанавливайте файлы в любое предыдущее состояние
 - [Отслеживание затрат и использования](https://code.claude.com/docs/ru/agent-sdk/cost-tracking.md): Узнайте, как отслеживать использование токенов, оценивать затраты и настраивать кэширование подсказок с помощью Claude Agent SDK.
