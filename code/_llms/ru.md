@@ -32,6 +32,7 @@
 
 - [Платформы и интеграции](https://code.claude.com/docs/ru/platforms.md): Выберите, где запустить Claude Code и что к нему подключить. Сравните CLI, Desktop, VS Code, JetBrains, веб, мобильные приложения и интеграции, такие как Chrome, Slack и CI/CD.
 - [Продолжайте локальные сеансы с любого устройства с помощью Remote Control](https://code.claude.com/docs/ru/remote-control.md): Продолжайте локальный сеанс Claude Code со своего телефона, планшета или любого браузера, используя Remote Control. Работает с claude.ai/code и мобильным приложением Claude.
+- [Позвольте Claude координировать текущую работу с помощью Projects](https://code.claude.com/docs/ru/claude-projects.md): Предоставьте Claude набор связанной работы в одном разговоре и позвольте ему координировать параллельные облачные сеансы, которые совместно используют репозитории, инструкции и память.
 - [Claude Code на мобильном устройстве](https://code.claude.com/docs/ru/mobile.md): Запускайте, отслеживайте и управляйте задачами Claude Code со своего телефона с помощью приложения Claude для iOS и Android.
 - [Использование Claude Code с Chrome](https://code.claude.com/docs/ru/chrome.md): Подключите Claude Code к браузеру Chrome для тестирования веб-приложений, отладки с помощью логов консоли, автоматизации заполнения форм и извлечения данных со страниц.
 - [Позвольте Claude использовать ваш компьютер из CLI](https://code.claude.com/docs/ru/computer-use.md): Включите computer use в Claude Code CLI, чтобы Claude мог открывать приложения, кликать, печатать и видеть ваш экран на macOS. Тестируйте нативные приложения, отлаживайте визуальные проблемы и автоматизируйте инструменты только с GUI без необходимости покидать терминал.
@@ -40,10 +41,10 @@
 - [Claude Code в Slack](https://code.claude.com/docs/ru/slack.md): Делегируйте задачи кодирования прямо из вашего рабочего пространства Slack. Anthropic снимает с производства эту более раннюю версию для рабочих пространств Team и Enterprise в пользу Claude Tag; она остается путем настройки для планов Pro и Max.
 - [Claude Tag](https://code.claude.com/docs/ru/claude-tag.md): Интегрируйте Claude в каналы Slack вашей команды с помощью Claude Tag и найдите документацию по его настройке и использованию на claude.com.
 
-##### Claude Code в веб-браузере
+##### Claude Code в облаке
 
-- [Начало работы с Claude Code в веб-версии](https://code.claude.com/docs/ru/web-quickstart.md): Запустите Claude Code в облаке из браузера или мобильного приложения. Подключите репозиторий GitHub, отправьте задачу и просмотрите PR без локальной настройки.
-- [Использование Claude Code в веб-интерфейсе](https://code.claude.com/docs/ru/claude-code-on-the-web.md): Перемещайте сессии между веб-интерфейсом и терминалом с помощью `--cloud` и `--teleport`, управляйте и делитесь сессиями, а также автоматически исправляйте pull requests из облака.
+- [Начало работы с Claude Code в облаке](https://code.claude.com/docs/ru/web-quickstart.md): Запустите Claude Code в облаке из браузера или мобильного приложения. Подключите репозиторий GitHub, отправьте задачу и просмотрите PR без локальной настройки.
+- [Использование Claude Code в облаке](https://code.claude.com/docs/ru/claude-code-on-the-web.md): Запускайте сессии Claude Code в облаке из браузера, телефона, настольного приложения или терминала, перемещайте их с помощью --cloud и --teleport, а также автоматически исправляйте pull requests.
 - [Автоматизация работы с помощью рутин](https://code.claude.com/docs/ru/routines.md): Переведите Claude Code на автопилот. Определите рутины, которые запускаются по расписанию, срабатывают при вызовах API или реагируют на события GitHub из облачной инфраструктуры.
 - [Поиск ошибок с помощью ultrareview](https://code.claude.com/docs/ru/ultrareview.md): Запустите глубокий многоагентный анализ кода в облаке с помощью /code-review ultra, чтобы найти и проверить ошибки перед слиянием.
 
@@ -63,14 +64,14 @@
 - [Code Review](https://code.claude.com/docs/ru/code-review.md): Настройте автоматизированные проверки PR, которые выявляют логические ошибки, уязвимости безопасности и регрессии с помощью многоагентного анализа всей вашей кодовой базы
 - [Claude Code GitHub Actions](https://code.claude.com/docs/ru/github-actions.md): Запускайте Claude Code в рабочих процессах GitHub Actions для ответа на упоминания @claude, автоматизации задач и преобразования issues в pull requests
 - [Использование Claude Code GitHub Actions с облачными провайдерами](https://code.claude.com/docs/ru/github-actions-cloud-providers.md): Запускайте Claude Code GitHub Actions через Amazon Bedrock, Google Cloud's Agent Platform или Microsoft Foundry вместо Claude API
-- [Claude Code с GitHub Enterprise Server](https://code.claude.com/docs/ru/github-enterprise-server.md): Подключите Claude Code к вашему самостоятельно размещённому экземпляру GitHub Enterprise Server для веб-сессий, проверки кода и маркетплейсов плагинов.
+- [Claude Code с GitHub Enterprise Server](https://code.claude.com/docs/ru/github-enterprise-server.md): Подключите Claude Code к вашему самостоятельно размещённому экземпляру GitHub Enterprise Server для облачных сессий, проверки кода и маркетплейсов плагинов.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/ru/gitlab-ci-cd.md): Узнайте об интеграции Claude Code в ваш рабочий процесс разработки с GitLab CI/CD
 
 ### Разработка с Claude Code
 
 #### Агенты и параллельная работа
 
-- [Запуск агентов параллельно](https://code.claude.com/docs/ru/agents.md): Сравните способы, которыми Claude Code может выполнять несколько задач одновременно: подагенты, представление агентов, команды агентов и динамические рабочие процессы.
+- [Запуск агентов параллельно](https://code.claude.com/docs/ru/agents.md): Сравните способы, которыми Claude Code может выполнять несколько задач одновременно: подагенты, представление агентов, команды агентов, динамические рабочие процессы и проекты.
 - [Создание пользовательских subagents](https://code.claude.com/docs/ru/sub-agents.md): Создавайте и используйте специализированные AI subagents в Claude Code для рабочих процессов, ориентированных на конкретные задачи, и улучшенного управления контекстом.
 - [Управление несколькими агентами с помощью agent view](https://code.claude.com/docs/ru/agent-view.md): Отправляйте и управляйте множеством сеансов Claude Code с одного экрана. Agent view показывает, что делает каждый сеанс и какие из них требуют вашего ввода.
 - [Координируйте команды сеансов Claude Code](https://code.claude.com/docs/ru/agent-teams.md): Координируйте несколько экземпляров Claude Code, работающих вместе как команда, с общими задачами, обменом сообщениями между агентами и централизованным управлением.
@@ -259,6 +260,7 @@
 
 #### Создание агентов
 
+- [Настройка вашего агента](https://code.claude.com/docs/ru/agent-sdk/configuration.md): Настройте сеансы Agent SDK: составьте объект параметров, установите модель, окружение и ограничения, и найдите страницу каждого параметра функции.
 - [Примеры](https://code.claude.com/docs/ru/agent-sdk/examples.md): Найдите полный, готовый к запуску проект Agent SDK или пошаговый рецепт из Claude Cookbook, который соответствует тому, что вы хотите создать.
 
 #### Основные концепции
@@ -266,7 +268,7 @@
 - [Как работает цикл агента](https://code.claude.com/docs/ru/agent-sdk/agent-loop.md): Поймите жизненный цикл сообщений, выполнение инструментов, контекстное окно и архитектуру, которые питают ваших агентов SDK.
 - [Использование функций Claude Code в SDK](https://code.claude.com/docs/ru/agent-sdk/claude-code-features.md): Загружайте инструкции проекта, skills, hooks и другие функции Claude Code в ваши SDK-агентов.
 - [Работа с сеансами](https://code.claude.com/docs/ru/agent-sdk/sessions.md): Как сеансы сохраняют историю разговора агента, и когда использовать continue, resume и fork для возврата к предыдущему запуску.
-- [Сохранение сеансов во внешнее хранилище](https://code.claude.com/docs/ru/agent-sdk/session-storage.md): Зеркалируйте стенограммы сеансов в S3, Redis или собственный бэкенд, чтобы другие хосты могли возобновить ваши сеансы.
+- [Сохранение сеансов во внешнее хранилище](https://code.claude.com/docs/ru/agent-sdk/session-storage.md): Зеркалируйте стенограммы сеансов Agent SDK в собственное хранилище объектов, хранилище ключ-значение или базу данных, чтобы другие хосты могли возобновить ваши сеансы.
 
 #### Ввод и вывод
 
@@ -312,7 +314,10 @@
 
 #### Что нового
 
-- [Что нового](https://code.claude.com/docs/ru/whats-new/index.md): Еженедельный дайджест заметных функций Claude Code с примерами кода, демонстрациями и контекстом о том, почему они важны.
+- [Что нового](https://code.claude.com/docs/ru/whats-new/index.md): Еженедельный дайджест примечательных функций Claude Code с примерами кода, демонстрациями и контекстом о том, почему они важны.
+- [Неделя 37 · 7–11 сентября 2026](https://code.claude.com/docs/ru/whats-new/2026-w37.md): Тестируйте свои плагины с помощью claude plugin eval и выводите панели Claude Code Desktop в отдельные окна.
+- [Неделя 36 · 31 августа – 4 сентября 2026](https://code.claude.com/docs/ru/whats-new/2026-w36.md): Переключитесь на Claude Fable 5.1, запустите компьютерное управление в фоновом режиме на Desktop и смотрите правки Claude в живой панели /diff.
+- [Неделя 35 · 24–28 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w35.md): Возобновляйте сеансы терминала в приложении Claude Code Desktop, просматривайте отчеты об обратной связи, которые Claude подготавливает для вас, и начните сеанс в режиме ограничений.
 - [Неделя 34 · 17–21 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w34.md): Создавайте редактируемые UI-макеты с помощью навыка /design, установите стиль вывода Concise и запустите сеанс Claude Code на своей машине со своего телефона.
 - [Неделя 33 · 10–14 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w33.md): Claude Code Desktop автоматически продолжает работу после сброса лимита использования, режим fork включается по умолчанию, а запросы на слияние GitLab и маркетплейсы присоединяются к GitHub.
 - [Неделя 32 · 3–7 августа 2026](https://code.claude.com/docs/ru/whats-new/2026-w32.md): Сеансы Claude Code обмениваются сообщениями друг с другом, самостоятельно размещённые окружения запускают облачные сеансы на вашей инфраструктуре, и режим auto становится режимом разрешений по умолчанию.

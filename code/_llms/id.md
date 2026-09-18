@@ -32,6 +32,7 @@
 
 - [Platform dan integrasi](https://code.claude.com/docs/id/platforms.md): Pilih di mana menjalankan Claude Code dan apa yang akan dihubungkan. Bandingkan CLI, Desktop, VS Code, JetBrains, web, mobile, dan integrasi seperti Chrome, Slack, dan CI/CD.
 - [Lanjutkan sesi lokal dari perangkat apa pun dengan Remote Control](https://code.claude.com/docs/id/remote-control.md): Lanjutkan sesi Claude Code lokal dari ponsel, tablet, atau browser apa pun menggunakan Remote Control. Bekerja dengan claude.ai/code dan aplikasi Claude mobile.
+- [Biarkan Claude mengoordinasikan pekerjaan berkelanjutan dengan Projects](https://code.claude.com/docs/id/claude-projects.md): Berikan Claude sekumpulan pekerjaan terkait dalam satu percakapan dan biarkan ia mengoordinasikan sesi cloud paralel yang berbagi repositori, instruksi, dan memori.
 - [Claude Code di mobile](https://code.claude.com/docs/id/mobile.md): Mulai, pantau, dan arahkan tugas Claude Code dari ponsel Anda dengan aplikasi Claude untuk iOS dan Android.
 - [Gunakan Claude Code dengan Chrome](https://code.claude.com/docs/id/chrome.md): Hubungkan Claude Code ke browser Chrome Anda untuk menguji aplikasi web, debug dengan console logs, otomatisasi pengisian formulir, dan ekstrak data dari halaman web.
 - [Biarkan Claude menggunakan komputer Anda dari CLI](https://code.claude.com/docs/id/computer-use.md): Aktifkan computer use di Claude Code CLI sehingga Claude dapat membuka aplikasi, mengklik, mengetik, dan melihat layar Anda di macOS. Uji aplikasi native, debug masalah visual, dan otomatisasi alat GUI-only tanpa meninggalkan terminal Anda.
@@ -40,10 +41,10 @@
 - [Claude Code di Slack](https://code.claude.com/docs/id/slack.md): Delegasikan tugas coding langsung dari workspace Slack Anda. Anthropic sedang menghentikan versi awal ini untuk workspace Team dan Enterprise demi Claude Tag; versi ini tetap menjadi jalur setup pada paket Pro dan Max.
 - [Claude Tag](https://code.claude.com/docs/id/claude-tag.md): Bawa Claude ke saluran Slack tim Anda dengan Claude Tag dan temukan dokumentasi setup dan penggunaan di claude.com.
 
-##### Claude Code di web
+##### Claude Code di cloud
 
-- [Mulai dengan Claude Code di web](https://code.claude.com/docs/id/web-quickstart.md): Jalankan Claude Code di cloud dari browser atau ponsel Anda. Hubungkan repositori GitHub, kirimkan tugas, dan tinjau PR tanpa setup lokal.
-- [Gunakan Claude Code di web](https://code.claude.com/docs/id/claude-code-on-the-web.md): Pindahkan sesi antara web dan terminal dengan `--cloud` dan `--teleport`, kelola dan bagikan sesi, serta auto-fix pull request dari cloud.
+- [Mulai dengan Claude Code di cloud](https://code.claude.com/docs/id/web-quickstart.md): Jalankan Claude Code di cloud dari browser atau ponsel Anda. Hubungkan repositori GitHub, kirimkan tugas, dan tinjau PR tanpa setup lokal.
+- [Gunakan Claude Code di cloud](https://code.claude.com/docs/id/claude-code-on-the-web.md): Jalankan sesi Claude Code di cloud dari browser, ponsel, aplikasi desktop, atau terminal Anda, pindahkan dengan --cloud dan --teleport, dan auto-fix pull request.
 - [Otomatisasi pekerjaan dengan rutinitas](https://code.claude.com/docs/id/routines.md): Letakkan Claude Code pada autopilot. Tentukan rutinitas yang berjalan sesuai jadwal, dipicu oleh panggilan API, atau bereaksi terhadap peristiwa GitHub dari infrastruktur cloud.
 - [Temukan bug dengan ultrareview](https://code.claude.com/docs/id/ultrareview.md): Jalankan tinjauan kode multi-agen yang mendalam di cloud dengan /code-review ultra untuk menemukan dan memverifikasi bug sebelum Anda merge.
 
@@ -63,14 +64,14 @@
 - [Code Review](https://code.claude.com/docs/id/code-review.md): Siapkan ulasan PR otomatis yang menangkap kesalahan logika, kerentanan keamanan, dan regresi menggunakan analisis multi-agen dari seluruh basis kode Anda
 - [Claude Code GitHub Actions](https://code.claude.com/docs/id/github-actions.md): Jalankan Claude Code dalam alur kerja GitHub Actions untuk merespons penyebutan @claude, mengotomatisasi tugas, dan mengubah issue menjadi pull request
 - [Gunakan Claude Code GitHub Actions dengan penyedia cloud](https://code.claude.com/docs/id/github-actions-cloud-providers.md): Jalankan Claude Code GitHub Actions melalui Amazon Bedrock, Google Cloud's Agent Platform, atau Microsoft Foundry alih-alih Claude API
-- [Claude Code dengan GitHub Enterprise Server](https://code.claude.com/docs/id/github-enterprise-server.md): Hubungkan Claude Code ke instans GitHub Enterprise Server yang di-host sendiri untuk sesi web, tinjauan kode, dan pasar plugin.
+- [Claude Code dengan GitHub Enterprise Server](https://code.claude.com/docs/id/github-enterprise-server.md): Hubungkan Claude Code ke instans GitHub Enterprise Server yang di-host sendiri untuk sesi cloud, tinjauan kode, dan pasar plugin.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/id/gitlab-ci-cd.md): Pelajari tentang mengintegrasikan Claude Code ke dalam alur kerja pengembangan Anda dengan GitLab CI/CD
 
 ### Bangun dengan Claude Code
 
 #### Agen dan pekerjaan paralel
 
-- [Jalankan agen secara paralel](https://code.claude.com/docs/id/agents.md): Bandingkan cara Claude Code dapat menangani beberapa tugas sekaligus: subagents, agent view, agent teams, dan dynamic workflows.
+- [Jalankan agen secara paralel](https://code.claude.com/docs/id/agents.md): Bandingkan cara Claude Code dapat menangani beberapa tugas sekaligus: subagents, agent view, agent teams, dynamic workflows, dan projects.
 - [Buat subagent khusus](https://code.claude.com/docs/id/sub-agents.md): Buat dan gunakan subagent AI khusus di Claude Code untuk alur kerja khusus tugas dan manajemen konteks yang lebih baik.
 - [Kelola banyak agen dengan tampilan agen](https://code.claude.com/docs/id/agent-view.md): Kirim dan kelola banyak sesi Claude Code dari satu layar. Tampilan agen menunjukkan apa yang dilakukan setiap sesi dan mana yang membutuhkan masukan Anda.
 - [Koordinasikan tim Claude Code sessions](https://code.claude.com/docs/id/agent-teams.md): Koordinasikan beberapa instance Claude Code yang bekerja bersama sebagai tim, dengan tugas bersama, pesan antar-agent, dan manajemen terpusat.
@@ -129,7 +130,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penerapan
+#### Penyebaran
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.
@@ -208,6 +209,7 @@
 
 - [Lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments.md): Jalankan sesi cloud Claude Code pada infrastruktur yang Anda kontrol: siapkan lingkungan yang di-host sendiri, deploy runner, dan arahkan sesi ke komputasi Anda sendiri.
 - [Panduan cepat lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments-quickstart.md): Siapkan lingkungan yang di-host sendiri pertama Anda: instal Claude Code, buat lingkungan, mulai runner, dan arahkan sesi ke sana.
+- [Terapkan lingkungan yang di-host sendiri ke produksi](https://code.claude.com/docs/id/self-hosted-environments-deploy.md): Jalankan runner yang di-host sendiri dalam produksi: pengerasan keamanan, kontrol egress jaringan, kredensial git, resep Kubernetes dan Compose, serta pemecahan masalah.
 - [Sesuaikan sesi di lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments-configuration.md): Sesuaikan sesi lingkungan yang di-host sendiri dengan skrip wrapper untuk kredensial per-sesi, hook siklus hidup, dan pemijahan runner sesuai permintaan.
 - [Uji lingkungan self-hosted end to end](https://code.claude.com/docs/id/self-hosted-environments-testing.md): Verifikasi gambar runner self-hosted dari CI: dispatch sesi dengan CLI, baca balasan Claude melalui hook Stop, dan skrip loop lengkapnya.
 - [Referensi lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments-reference.md): Referensi lengkap untuk runner dan orchestrator yang di-host sendiri: flag CLI, variabel lingkungan, dan metrik Prometheus.
@@ -258,6 +260,7 @@
 
 #### Bangun agen
 
+- [Konfigurasi agen Anda](https://code.claude.com/docs/id/agent-sdk/configuration.md): Konfigurasi sesi Agent SDK: susun objek opsi, atur model, lingkungan, dan batas, serta temukan halaman opsi setiap fitur.
 - [Contoh](https://code.claude.com/docs/id/agent-sdk/examples.md): Temukan proyek Agent SDK yang lengkap dan dapat dijalankan atau resep terpandu di Claude Cookbook yang sesuai dengan apa yang ingin Anda bangun.
 
 #### Konsep Inti
@@ -265,7 +268,7 @@
 - [Cara kerja agent loop](https://code.claude.com/docs/id/agent-sdk/agent-loop.md): Pahami lifecycle pesan, eksekusi tool, context window, dan arsitektur yang menggerakkan agent SDK Anda.
 - [Gunakan fitur Claude Code di SDK](https://code.claude.com/docs/id/agent-sdk/claude-code-features.md): Muat instruksi proyek, skills, hooks, dan fitur Claude Code lainnya ke dalam agen SDK Anda.
 - [Bekerja dengan sesi](https://code.claude.com/docs/id/agent-sdk/sessions.md): Bagaimana sesi mempertahankan riwayat percakapan agen, dan kapan menggunakan continue, resume, dan fork untuk kembali ke run sebelumnya.
-- [Simpan sesi ke penyimpanan eksternal](https://code.claude.com/docs/id/agent-sdk/session-storage.md): Cerminkan transkrip sesi ke S3, Redis, atau backend Anda sendiri sehingga host apa pun dapat melanjutkannya.
+- [Simpan sesi ke penyimpanan eksternal](https://code.claude.com/docs/id/agent-sdk/session-storage.md): Cerminkan transkrip sesi Agent SDK ke object store, key-value store, atau database Anda sendiri sehingga host lain dapat melanjutkan sesi Anda.
 
 #### Input dan output
 
@@ -296,7 +299,7 @@
 - [Observability dengan OpenTelemetry](https://code.claude.com/docs/id/agent-sdk/observability.md): Ekspor traces, metrics, dan events dari Agent SDK ke backend observability Anda menggunakan OpenTelemetry.
 - [Lacak todos](https://code.claude.com/docs/id/agent-sdk/todo-tracking.md): Lacak todos dalam sesi Agent SDK dan tampilkan kemajuan Claude dalam aplikasi Anda dari panggilan alat terstruktur
 
-#### Penyebaran
+#### Penerapan
 
 - [Hosting the Agent SDK](https://code.claude.com/docs/id/agent-sdk/hosting.md): Terapkan Agent SDK dalam produksi: arsitektur subprocess, persistensi sesi, penskalaan, observabilitas, dan isolasi multi-tenant untuk Docker, Kubernetes, dan penyedia sandbox.
 - [Mengamankan penyebaran agen AI](https://code.claude.com/docs/id/agent-sdk/secure-deployment.md): Panduan untuk mengamankan penyebaran Claude Code dan Agent SDK dengan isolasi, manajemen kredensial, dan kontrol jaringan
@@ -312,6 +315,9 @@
 #### Apa yang Baru
 
 - [Apa yang baru](https://code.claude.com/docs/id/whats-new/index.md): Ringkasan mingguan fitur Claude Code yang penting, dengan cuplikan kode, demo, dan konteks tentang mengapa hal-hal ini penting.
+- [Minggu 37 · 7–11 September 2026](https://code.claude.com/docs/id/whats-new/2026-w37.md): Uji plugin Anda dengan claude plugin eval dan keluarkan panel Claude Code Desktop ke jendela terpisah mereka sendiri.
+- [Minggu 36 · 31 Agustus – 4 September 2026](https://code.claude.com/docs/id/whats-new/2026-w36.md): Beralih ke Claude Fable 5.1, biarkan computer use berjalan di latar belakang di Desktop, dan tonton edit Claude di panel /diff langsung.
+- [Minggu 35 · 24–28 Agustus 2026](https://code.claude.com/docs/id/whats-new/2026-w35.md): Lanjutkan sesi terminal di aplikasi Claude Code Desktop, tinjau laporan umpan balik yang Claude buat untuk Anda, dan mulai sesi dalam mode terbatas.
 - [Minggu 34 · 17–21 Agustus 2026](https://code.claude.com/docs/id/whats-new/2026-w34.md): Buat papan seni UI yang dapat diedit dengan skill /design, atur gaya output Concise, dan mulai sesi Claude Code di mesin Anda dari ponsel Anda.
 - [Minggu 33 · 10–14 Agustus 2026](https://code.claude.com/docs/id/whats-new/2026-w33.md): Claude Code Desktop melanjutkan secara otomatis setelah batas penggunaan direset, mode fork aktif secara default, dan permintaan penggabungan GitLab serta marketplace bergabung dengan GitHub.
 - [Minggu 32 · 3–7 Agustus, 2026](https://code.claude.com/docs/id/whats-new/2026-w32.md): Sesi Claude Code saling berkirim pesan, lingkungan yang di-host sendiri menjalankan sesi cloud di infrastruktur Anda, dan mode otomatis menjadi mode izin default.

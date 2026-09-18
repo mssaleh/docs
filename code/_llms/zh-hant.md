@@ -40,10 +40,10 @@
 - [Slack 中的 Claude Code](https://code.claude.com/docs/zh-TW/slack.md): 直接從您的 Slack 工作區委派編碼任務。Anthropic 正在為 Team 和 Enterprise 工作區停用此較早版本，改用 Claude Tag；它仍然是 Pro 和 Max 方案上的設定路徑。
 - [Claude Tag](https://code.claude.com/docs/zh-TW/claude-tag.md): 透過 Claude Tag 將 Claude 帶入您的團隊 Slack 頻道，並在 claude.com 上找到其設定和使用文件。
 
-##### Claude Code 網頁版
+##### 雲端 Claude Code
 
-- [在網頁上開始使用 Claude Code](https://code.claude.com/docs/zh-TW/web-quickstart.md): 在雲端從瀏覽器或手機執行 Claude Code。連接 GitHub 儲存庫、提交任務，並在無需本地設定的情況下檢查 PR。
-- [在網頁上使用 Claude Code](https://code.claude.com/docs/zh-TW/claude-code-on-the-web.md): 使用 `--cloud` 和 `--teleport` 在網頁和終端之間移動工作階段、管理和共享工作階段，以及從雲端自動修復拉取請求。
+- [在雲端開始使用 Claude Code](https://code.claude.com/docs/zh-TW/web-quickstart.md): 在雲端從瀏覽器或手機執行 Claude Code。連接 GitHub 儲存庫、提交任務，並在無需本地設定的情況下檢查 PR。
+- [在雲端使用 Claude Code](https://code.claude.com/docs/zh-TW/claude-code-on-the-web.md): 從您的瀏覽器、手機、桌面應用程式或終端在雲端執行 Claude Code 工作階段，使用 --cloud 和 --teleport 移動工作階段，以及自動修復拉取請求。
 - [使用例行程序自動化工作](https://code.claude.com/docs/zh-TW/routines.md): 讓 Claude Code 自動運行。定義在排程上運行、在 API 呼叫時觸發或對來自雲端基礎設施的 GitHub 事件做出反應的例行程序。
 - [使用 Ultrareview 尋找錯誤](https://code.claude.com/docs/zh-TW/ultrareview.md): 使用 /code-review ultra 在雲端執行深度多代理程式碼審查，在合併前尋找並驗證錯誤。
 
@@ -63,14 +63,14 @@
 - [Code Review](https://code.claude.com/docs/zh-TW/code-review.md): 設定自動化 PR 審查，使用多代理分析您的完整程式碼庫來捕捉邏輯錯誤、安全漏洞和迴歸
 - [Claude Code GitHub Actions](https://code.claude.com/docs/zh-TW/github-actions.md): 在 GitHub Actions 工作流程中執行 Claude Code，以回應 @claude 提及、自動化任務，並將議題轉換為 pull request
 - [使用 Claude Code GitHub Actions 搭配雲端提供者](https://code.claude.com/docs/zh-TW/github-actions-cloud-providers.md): 透過 Amazon Bedrock、Google Cloud 的 Agent Platform 或 Microsoft Foundry 執行 Claude Code GitHub Actions，而不是使用 Claude API
-- [Claude Code 與 GitHub Enterprise Server](https://code.claude.com/docs/zh-TW/github-enterprise-server.md): 將 Claude Code 連接到您自託管的 GitHub Enterprise Server 實例，以進行網頁會話、代碼審查和插件市場。
+- [Claude Code 與 GitHub Enterprise Server](https://code.claude.com/docs/zh-TW/github-enterprise-server.md): 將 Claude Code 連接到您自託管的 GitHub Enterprise Server 實例，以進行雲端會話、代碼審查和插件市場。
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/zh-TW/gitlab-ci-cd.md): 了解如何將 Claude Code 整合到您的開發工作流程中，使用 GitLab CI/CD
 
 ### 使用 Claude Code 建構
 
 #### 代理程式與平行工作
 
-- [平行執行代理](https://code.claude.com/docs/zh-TW/agents.md): 比較 Claude Code 同時執行多項任務的方式：子代理、代理檢視、代理團隊和動態工作流程。
+- [平行執行代理](https://code.claude.com/docs/zh-TW/agents.md): 比較 Claude Code 同時執行多項任務的方式：子代理、代理檢視、代理團隊、動態工作流程和專案。
 - [建立自訂 subagents](https://code.claude.com/docs/zh-TW/sub-agents.md): 在 Claude Code 中建立和使用專門的 AI subagents，用於特定任務的工作流程和改進的上下文管理。
 - [使用 Agent view 管理多個代理](https://code.claude.com/docs/zh-TW/agent-view.md): 從一個螢幕分派和管理許多 Claude Code 工作階段。Agent view 顯示每個工作階段正在做什麼，以及哪些需要您的輸入。
 - [協調 Claude Code 工作階段團隊](https://code.claude.com/docs/zh-TW/agent-teams.md): 協調多個 Claude Code 實例作為團隊一起工作，具有共享任務、代理間訊息傳遞和集中管理。
@@ -152,7 +152,7 @@
 - [Claude 應用程式閘道支出限制](https://code.claude.com/docs/zh-TW/claude-apps-gateway-spend-limits.md): 透過 Claude 應用程式閘道限制每位開發人員的每日、每週或每月支出。使用管理員 API 設定限制，閘道會在每個請求上即時執行這些限制。
 - [Claude 應用程式閘道部署和運營](https://code.claude.com/docs/zh-TW/claude-apps-gateway-deploy.md): 向您的身份提供者註冊閘道、建置容器、在 Kubernetes 或 Cloud Run 上部署，並運營它：健康檢查、祕密輪換、升級和安全性。
 - [在 AWS 上部署 Claude apps gateway](https://code.claude.com/docs/zh-TW/claude-apps-gateway-on-aws.md): 在 AWS 上執行 Claude apps gateway 的實際範例：ECS Fargate 或 EKS、Amazon RDS for PostgreSQL、AWS Secrets Manager 和 IAM 角色驗證至 Amazon Bedrock。
-- [在 Google Cloud 上部署 Claude 應用程式閘道](https://code.claude.com/docs/zh-TW/claude-apps-gateway-on-gcp.md): 在 Google Cloud 上執行 Claude 應用程式閘道的實際範例：Cloud Run 或 GKE、Cloud SQL for PostgreSQL、Secret Manager，以及對 Agent Platform 的服務帳戶驗證。
+- [在 Google Cloud 上部署 Claude 應用程式閘道](https://code.claude.com/docs/zh-TW/claude-apps-gateway-on-gcp.md): 在 Google Cloud 上執行 Claude 應用程式閘道的實際範例：Cloud Run 或 GKE、Cloud SQL for PostgreSQL、Secret Manager，以及對 Google Cloud 的 Agent Platform 的服務帳戶驗證。
 
 ##### 其他閘道
 
@@ -257,8 +257,9 @@
 - [遷移至 Claude Agent SDK](https://code.claude.com/docs/zh-TW/agent-sdk/migration-guide.md): 將 Claude Code TypeScript 和 Python SDK 遷移至 Claude Agent SDK 的指南
 - [排除 Agent SDK 的故障](https://code.claude.com/docs/zh-TW/agent-sdk/troubleshooting.md): 根據您看到的確切錯誤訊息修復 Agent SDK 錯誤，包括 TypeScript 和 Python SDK 中每個錯誤的原因和修復方法。
 
-#### 建立代理
+#### 建立代理程式
 
+- [設定您的代理](https://code.claude.com/docs/zh-TW/agent-sdk/configuration.md): 設定 Agent SDK 工作階段：組合選項物件、設定模型、環境和限制，並找到每個功能選項的頁面。
 - [範例](https://code.claude.com/docs/zh-TW/agent-sdk/examples.md): 尋找完整、可執行的 Agent SDK 專案或 Claude Cookbook 中的引導式配方，以符合您想要建置的內容。
 
 #### 核心概念
@@ -266,7 +267,7 @@
 - [代理程式迴圈如何運作](https://code.claude.com/docs/zh-TW/agent-sdk/agent-loop.md): 了解訊息生命週期、工具執行、上下文視窗和支援 SDK 代理程式的架構。
 - [在 SDK 中使用 Claude Code 功能](https://code.claude.com/docs/zh-TW/agent-sdk/claude-code-features.md): 將專案指令、skills、hooks 和其他 Claude Code 功能載入到您的 SDK 代理中。
 - [使用 sessions](https://code.claude.com/docs/zh-TW/agent-sdk/sessions.md): Sessions 如何保持代理對話歷史，以及何時使用 continue、resume 和 fork 返回到先前的運行。
-- [將工作階段持久化到外部儲存](https://code.claude.com/docs/zh-TW/agent-sdk/session-storage.md): 將工作階段文字記錄鏡像到 S3、Redis 或您自己的後端，以便其他主機可以繼續您的工作階段。
+- [將工作階段持久化到外部儲存](https://code.claude.com/docs/zh-TW/agent-sdk/session-storage.md): 將 Agent SDK 工作階段文字記錄鏡像到您自己的物件儲存、鍵值儲存或資料庫，以便其他主機可以繼續您的工作階段。
 
 #### 輸入和輸出
 
@@ -313,6 +314,9 @@
 #### 最新消息
 
 - [最新動態](https://code.claude.com/docs/zh-TW/whats-new/index.md): Claude Code 功能的每週摘要，包含程式碼片段、示範和背景說明。
+- [第 37 週 · 2026 年 9 月 7–11 日](https://code.claude.com/docs/zh-TW/whats-new/2026-w37.md): 使用 claude plugin eval 測試您的外掛程式，並將 Claude Code Desktop 窗格彈出到各自的視窗中。
+- [第 36 週 · 8 月 31 日 – 9 月 4 日，2026 年](https://code.claude.com/docs/zh-TW/whats-new/2026-w36.md): 切換至 Claude Fable 5.1，讓電腦使用在 Desktop 上於背景執行，並在即時 /diff 面板中觀看 Claude 的編輯。
+- [第 35 週 · 2026 年 8 月 24–28 日](https://code.claude.com/docs/zh-TW/whats-new/2026-w35.md): 在 Claude Code Desktop 應用程式中復原終端機工作階段、檢閱 Claude 為您起草的意見回饋報告，以及在受限模式中啟動工作階段。
 - [第 34 週 · 2026 年 8 月 17–21 日](https://code.claude.com/docs/zh-TW/whats-new/2026-w34.md): 使用 /design 技能草擬可編輯的 UI 畫板、設定簡潔輸出風格，以及從手機在您的機器上啟動 Claude Code 工作階段。
 - [第 33 週 · 2026 年 8 月 10–14 日](https://code.claude.com/docs/zh-TW/whats-new/2026-w33.md): Claude Code Desktop 在使用限制重設後自動繼續，Fork 模式預設開啟，GitLab 合併請求和市集加入 GitHub。
 - [第 32 週 · 2026 年 8 月 3–7 日](https://code.claude.com/docs/zh-TW/whats-new/2026-w32.md): Claude Code 工作階段可以互相傳送訊息、自託管環境在您的基礎設施上執行雲端工作階段，以及自動模式成為預設權限模式。

@@ -32,6 +32,7 @@
 
 - [Piattaforme e integrazioni](https://code.claude.com/docs/it/platforms.md): Scegli dove eseguire Claude Code e cosa collegare. Confronta CLI, Desktop, VS Code, JetBrains, web, mobile e integrazioni come Chrome, Slack e CI/CD.
 - [Continua le sessioni locali da qualsiasi dispositivo con Remote Control](https://code.claude.com/docs/it/remote-control.md): Continua una sessione locale di Claude Code dal tuo telefono, tablet o da qualsiasi browser utilizzando Remote Control. Funziona con claude.ai/code e l'app Claude per dispositivi mobili.
+- [Lascia che Claude coordini il lavoro in corso con Projects](https://code.claude.com/docs/it/claude-projects.md): Fornisci a Claude un corpo di lavoro correlato in una conversazione e lascia che coordini sessioni cloud parallele che condividono repository, istruzioni e memoria.
 - [Claude Code su mobile](https://code.claude.com/docs/it/mobile.md): Avvia, monitora e guida i task di Claude Code dal tuo telefono con l'app Claude per iOS e Android.
 - [Usa Claude Code con Chrome](https://code.claude.com/docs/it/chrome.md): Connetti Claude Code al tuo browser Chrome per testare app web, eseguire il debug con i log della console, automatizzare la compilazione di moduli ed estrarre dati dalle pagine web.
 - [Consenti a Claude di usare il tuo computer dalla CLI](https://code.claude.com/docs/it/computer-use.md): Abilita computer use in Claude Code CLI affinché Claude possa aprire app, fare clic, digitare e vedere il tuo schermo su macOS. Testa app native, esegui il debug di problemi visivi e automatizza strumenti solo GUI senza lasciare il tuo terminale.
@@ -40,10 +41,10 @@
 - [Claude Code in Slack](https://code.claude.com/docs/it/slack.md): Delega i compiti di codifica direttamente dal tuo workspace Slack. Anthropic sta ritirando questa versione precedente per i workspace Team ed Enterprise a favore di Claude Tag; rimane il percorso di configurazione per i piani Pro e Max.
 - [Claude Tag](https://code.claude.com/docs/it/claude-tag.md): Porta Claude nei canali Slack del tuo team con Claude Tag e trova la documentazione di configurazione e utilizzo su claude.com.
 
-##### Claude Code sul web
+##### Claude Code nel cloud
 
-- [Iniziare con Claude Code sul web](https://code.claude.com/docs/it/web-quickstart.md): Esegui Claude Code nel cloud dal tuo browser o telefono. Connetti un repository GitHub, invia un'attività e rivedi la PR senza configurazione locale.
-- [Usa Claude Code sul web](https://code.claude.com/docs/it/claude-code-on-the-web.md): Sposta le sessioni tra web e terminale con `--cloud` e `--teleport`, gestisci e condividi le sessioni, e correggi automaticamente le pull request dal cloud.
+- [Iniziare con Claude Code nel cloud](https://code.claude.com/docs/it/web-quickstart.md): Esegui Claude Code nel cloud dal tuo browser o telefono. Connetti un repository GitHub, invia un'attività e rivedi la PR senza configurazione locale.
+- [Usa Claude Code nel cloud](https://code.claude.com/docs/it/claude-code-on-the-web.md): Esegui sessioni Claude Code nel cloud dal tuo browser, telefono, app desktop o terminale, spostale con --cloud e --teleport, e correggi automaticamente le pull request.
 - [Automatizzare il lavoro con le routine](https://code.claude.com/docs/it/routines.md): Metti Claude Code in modalità automatica. Definisci routine che vengono eseguite secondo una pianificazione, attivate da chiamate API o che reagiscono agli eventi di GitHub dall'infrastruttura cloud gestita da Anthropic.
 - [Trova bug con ultrareview](https://code.claude.com/docs/it/ultrareview.md): Esegui una revisione del codice profonda e multi-agente nel cloud con /code-review ultra per trovare e verificare i bug prima di eseguire il merge.
 
@@ -63,18 +64,18 @@
 - [Code Review](https://code.claude.com/docs/it/code-review.md): Configura revisioni automatiche dei PR che rilevano errori logici, vulnerabilità di sicurezza e regressioni utilizzando l'analisi multi-agente dell'intero codebase
 - [Claude Code GitHub Actions](https://code.claude.com/docs/it/github-actions.md): Esegui Claude Code nei flussi di lavoro di GitHub Actions per rispondere alle menzioni @claude, automatizzare attività e trasformare issue in pull request
 - [Usa Claude Code GitHub Actions con i provider cloud](https://code.claude.com/docs/it/github-actions-cloud-providers.md): Esegui Claude Code GitHub Actions tramite Amazon Bedrock, Google Cloud's Agent Platform o Microsoft Foundry invece dell'API Claude
-- [Claude Code con GitHub Enterprise Server](https://code.claude.com/docs/it/github-enterprise-server.md): Connetti Claude Code alla tua istanza GitHub Enterprise Server auto-ospitata per sessioni web, revisione del codice e marketplace di plugin.
+- [Claude Code con GitHub Enterprise Server](https://code.claude.com/docs/it/github-enterprise-server.md): Connetti Claude Code alla tua istanza GitHub Enterprise Server auto-ospitata per sessioni cloud, revisione del codice e marketplace di plugin.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/it/gitlab-ci-cd.md): Scopri come integrare Claude Code nel tuo flusso di lavoro di sviluppo con GitLab CI/CD
 
-### Crea con Claude Code
+### Sviluppa con Claude Code
 
 #### Agenti e lavoro parallelo
 
-- [Eseguire agenti in parallelo](https://code.claude.com/docs/it/agents.md): Confronta i modi in cui Claude Code può affrontare più attività contemporaneamente: subagenti, visualizzazione agenti, team di agenti e flussi di lavoro dinamici.
+- [Eseguire agenti in parallelo](https://code.claude.com/docs/it/agents.md): Confronta i modi in cui Claude Code può affrontare più attività contemporaneamente: subagenti, visualizzazione agenti, team di agenti, flussi di lavoro dinamici e progetti.
 - [Creare subagent personalizzati](https://code.claude.com/docs/it/sub-agents.md): Creare e utilizzare subagent AI specializzati in Claude Code per flussi di lavoro specifici di attività e una migliore gestione del contesto.
 - [Gestire più agenti con agent view](https://code.claude.com/docs/it/agent-view.md): Invia e gestisci molte sessioni di Claude Code da una sola schermata. Agent view mostra cosa sta facendo ogni sessione e quali hanno bisogno del tuo input.
 - [Orchestrare team di sessioni Claude Code](https://code.claude.com/docs/it/agent-teams.md): Coordinare più istanze di Claude Code che lavorano insieme come un team, con attività condivise, messaggistica tra agenti e gestione centralizzata.
-- [Messaggi tra le tue altre sessioni di Claude Code](https://code.claude.com/docs/it/cross-session-messaging.md): Consenti a Claude di elencare e inviare messaggi alle tue altre sessioni di Claude Code su questa macchina, e raggiungi le tue sessioni su altre macchine o sul web.
+- [Messaggi tra le tue altre sessioni di Claude Code](https://code.claude.com/docs/it/cross-session-messaging.md): Consenti a Claude di elencare e inviare messaggi alle tue altre sessioni di Claude Code su questa macchina, e raggiungi le tue sessioni su altre macchine o nel cloud.
 - [Orchestrare subagenti su larga scala con flussi di lavoro dinamici](https://code.claude.com/docs/it/workflows.md): I flussi di lavoro dinamici orchestrano molti subagenti da uno script che Claude scrive e che puoi rieseguire. Usali per audit di codebase, migrazioni su larga scala e ricerche con verifica incrociata.
 - [Eseguire sessioni parallele con worktrees](https://code.claude.com/docs/it/worktrees.md): Isolare sessioni parallele di Claude Code in worktrees git separati in modo che i cambiamenti non si scontrino. Copre il flag `--worktree`, l'isolamento dei subagent, `.worktreeinclude`, la pulizia e gli hook VCS non-git.
 
@@ -115,7 +116,7 @@
 - [Risolvi i problemi di installazione e accesso](https://code.claude.com/docs/it/troubleshoot-install.md): Correggi gli errori di comando non trovato, PATH, permessi, rete e autenticazione durante l'installazione o l'accesso a Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/it/troubleshooting.md): Risolvi i problemi di utilizzo elevato di CPU o memoria, blocchi, thrashing auto-compact e problemi di ricerca in Claude Code, e trova la pagina giusta per altri problemi.
 - [Esegui il debug della tua configurazione](https://code.claude.com/docs/it/debug-your-config.md): Diagnostica perché CLAUDE.md, impostazioni, hooks, server MCP o skills non hanno effetto. Usa /context, /doctor, /hooks e /mcp per vedere cosa è stato effettivamente caricato.
-- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Consulta i messaggi di errore di runtime di Claude Code con il significato di ciascuno e come risolverli.
+- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Cercate i messaggi di errore di runtime di Claude Code con il significato di ciascuno e come risolverlo.
 
 ### Amministrazione
 
@@ -259,6 +260,7 @@
 
 #### Creare agenti
 
+- [Configura il tuo agente](https://code.claude.com/docs/it/agent-sdk/configuration.md): Configura le sessioni dell'Agent SDK: componi l'oggetto options, imposta il modello, l'ambiente e i limiti, e trova la pagina di ogni opzione di funzionalità.
 - [Esempi](https://code.claude.com/docs/it/agent-sdk/examples.md): Trova un progetto Agent SDK completo e eseguibile o una ricetta guidata nel Claude Cookbook che corrisponda a ciò che desideri costruire.
 
 #### Concetti fondamentali
@@ -266,7 +268,7 @@
 - [Come funziona il ciclo dell'agente](https://code.claude.com/docs/it/agent-sdk/agent-loop.md): Comprendere il ciclo di vita dei messaggi, l'esecuzione degli strumenti, la finestra di contesto e l'architettura che alimentano gli agenti SDK.
 - [Usa le funzionalità di Claude Code nell'SDK](https://code.claude.com/docs/it/agent-sdk/claude-code-features.md): Carica le istruzioni del progetto, le skills, gli hooks e altre funzionalità di Claude Code nei tuoi agenti SDK.
 - [Lavorare con le sessioni](https://code.claude.com/docs/it/agent-sdk/sessions.md): Come le sessioni mantengono la cronologia della conversazione dell'agente, e quando utilizzare continue, resume e fork per tornare a un'esecuzione precedente.
-- [Persistere le sessioni nell'archiviazione esterna](https://code.claude.com/docs/it/agent-sdk/session-storage.md): Eseguire il mirroring dei trascritti di sessione su S3, Redis o il vostro backend in modo che qualsiasi host possa riprendere le sessioni.
+- [Persistere le sessioni nell'archiviazione esterna](https://code.claude.com/docs/it/agent-sdk/session-storage.md): Eseguire il mirroring dei trascritti di sessione Agent SDK nel vostro object store, key-value store o database in modo che altri host possano riprendere le vostre sessioni.
 
 #### Input e output
 
@@ -313,6 +315,9 @@
 #### Novità
 
 - [Novità](https://code.claude.com/docs/it/whats-new/index.md): Un digest settimanale delle notevoli funzionalità di Claude Code, con frammenti di codice, demo e contesto su perché sono importanti.
+- [Settimana 37 · 7–11 settembre 2026](https://code.claude.com/docs/it/whats-new/2026-w37.md): Testate i vostri plugin con claude plugin eval e staccate i riquadri di Claude Code Desktop in finestre separate.
+- [Settimana 36 · 31 agosto – 4 settembre 2026](https://code.claude.com/docs/it/whats-new/2026-w36.md): Passa a Claude Fable 5.1, lascia che l'uso del computer funzioni in background su Desktop e guarda gli editing di Claude in un pannello /diff dal vivo.
+- [Settimana 35 · 24–28 agosto 2026](https://code.claude.com/docs/it/whats-new/2026-w35.md): Riprendere le sessioni di terminale nell'app Claude Code Desktop, esaminare i rapporti di feedback che Claude redige per voi e avviare una sessione in modalità limitata.
 - [Settimana 34 · 17–21 agosto 2026](https://code.claude.com/docs/it/whats-new/2026-w34.md): Crea artboard UI modificabili con la skill /design, imposta lo stile di output Concise e avvia una sessione Claude Code sulla tua macchina dal tuo telefono.
 - [Settimana 33 · 10–14 agosto 2026](https://code.claude.com/docs/it/whats-new/2026-w33.md): Claude Code Desktop continua automaticamente dopo il ripristino di un limite di utilizzo, la modalità fork è attivata per impostazione predefinita e le richieste di merge GitLab e i marketplace si uniscono a GitHub.
 - [Settimana 32 · 3–7 agosto 2026](https://code.claude.com/docs/it/whats-new/2026-w32.md): Le sessioni di Claude Code si messaggiano tra loro, gli ambienti self-hosted eseguono sessioni cloud sulla vostra infrastruttura, e la modalità auto diventa la modalità di autorizzazione predefinita.
@@ -326,7 +331,7 @@
 - [Settimana 23 · 1–5 giugno 2026](https://code.claude.com/docs/it/whats-new/2026-w23.md): Esegui la modalità auto su Amazon Bedrock, Google Cloud's Agent Platform e Microsoft Foundry, richiedi conferma prima di scrivere file che possono eseguire codice in modalità acceptEdits, elenca i plugin installati con /plugin list e richiedi un intervallo di versione approvato per le distribuzioni…
 - [Settimana 22 · 25–29 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w22.md): Esegui Claude Code su Claude Opus 4.8, orchestrate attività di grandi dimensioni con flussi di lavoro dinamici, rileva i problemi di sicurezza con il plugin security-guidance e utilizza la modalità veloce su Opus 4.8 a un prezzo inferiore.
 - [Settimana 21 · 18–22 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w21.md): Utilizza la modalità auto nel piano Pro e con Sonnet 4.6, visualizza quali skills, subagents e server MCP determinano i limiti del vostro piano in /usage, e rivedi i diff con il nuovo comando /code-review.
-- [Settimana 20 · 11–15 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w20.md): Gestisci ogni sessione di Claude Code da una sola schermata con la visualizzazione agente, mantieni Claude al lavoro verso un obiettivo fino a quando una condizione non si verifica, ed esegui la modalità veloce su Opus 4.7 per impostazione predefinita.
+- [Settimana 20 · 11–15 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w20.md): Gestisci ogni sessione di Claude Code da una sola schermata con la visualizzazione agente, mantieni Claude al lavoro verso un obiettivo finché non si verifica una condizione, ed esegui la modalità veloce su Opus 4.7 per impostazione predefinita.
 - [Settimana 19 · 4–8 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w19.md): Carica i plugin da archivi .zip e URL, cerca la cronologia dei comandi in tutti i progetti con Ctrl+R, crea nuovi worktrees dal HEAD locale o dal ramo predefinito remoto, e blocca le azioni in modo incondizionato con le regole di hard deny in modalità auto.
 - [Settimana 18 · 27 aprile – 1 maggio 2026](https://code.claude.com/docs/it/whats-new/2026-w18.md): Claude Code su Windows funziona senza Git Bash, claude auth login accetta un codice OAuth incollato quando il callback del browser non può raggiungere localhost, claude project purge pulisce lo stato locale per progetto, e incollare un URL di PR in /resume trova la sessione che l'ha creata.
 - [Settimana 17 · 20–24 aprile 2026](https://code.claude.com/docs/it/whats-new/2026-w17.md): /ultrareview si apre come anteprima di ricerca, riepiloghi automatici della sessione quando tornate a un terminale, temi di colore personalizzati che potete creare e distribuire nei plugin, e un Claude Code riprogettato sul web.

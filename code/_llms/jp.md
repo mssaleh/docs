@@ -32,6 +32,7 @@
 
 - [プラットフォームと統合](https://code.claude.com/docs/ja/platforms.md): Claude Code を実行する場所を選択し、何に接続するかを決定します。CLI、Desktop、VS Code、JetBrains、Web、モバイル、および Chrome、Slack、CI/CD などの統合を比較します。
 - [任意のデバイスからローカルセッションを続行する Remote Control](https://code.claude.com/docs/ja/remote-control.md): Remote Control を使用して、電話、タブレット、または任意のブラウザから Claude Code のローカルセッションを続行します。claude.ai/code と Claude モバイルアプリで動作します。
+- [Claude がプロジェクトで進行中の作業を調整する](https://code.claude.com/docs/ja/claude-projects.md): 関連する作業の本体を 1 つの会話で Claude に提供し、リポジトリ、指示、メモリを共有する並列クラウドセッションを調整させます。
 - [モバイルの Claude Code](https://code.claude.com/docs/ja/mobile.md): Claude アプリ for iOS と Android を使用して、携帯電話から Claude Code タスクを開始、監視、操作します。
 - [Chrome で Claude Code を使用する](https://code.claude.com/docs/ja/chrome.md): Claude Code を Chrome ブラウザに接続して、Web アプリをテストし、コンソールログでデバッグし、フォーム入力を自動化し、Web ページからデータを抽出します。
 - [Claude に CLI からコンピュータを使用させる](https://code.claude.com/docs/ja/computer-use.md): Claude Code CLI でコンピュータ使用を有効にして、Claude がアプリを開いたり、クリックしたり、入力したり、macOS でスクリーンを表示したりできるようにします。ネイティブアプリをテストし、ビジュアルの問題をデバッグし、ターミナルを離れることなく GUI のみのツールを自動化します。
@@ -40,10 +41,10 @@
 - [Slack での Claude Code](https://code.claude.com/docs/ja/slack.md): Slack ワークスペースから直接コーディングタスクを委任する。Anthropic は Team および Enterprise ワークスペース向けにこの以前のバージョンを Claude Tag に置き換えています。Pro および Max プランではセットアップパスのままです。
 - [Claude Tag](https://code.claude.com/docs/ja/claude-tag.md): Claude Tag を使用して Claude をチームの Slack チャネルに導入し、claude.com で設定と使用方法のドキュメントを確認できます。
 
-##### Claude Code（ウェブ版）
+##### クラウド内の Claude Code
 
-- [Claude Code をウェブで始める](https://code.claude.com/docs/ja/web-quickstart.md): ブラウザまたはスマートフォンからクラウドで Claude Code を実行します。GitHub リポジトリを接続し、タスクを送信し、ローカルセットアップなしで PR をレビューします。
-- [ウェブ上の Claude Code を使用する](https://code.claude.com/docs/ja/claude-code-on-the-web.md): Move sessions between web and terminal with `--cloud` and `--teleport`, manage and share sessions, and auto-fix pull requests from the cloud.
+- [Claude Code をクラウドで始める](https://code.claude.com/docs/ja/web-quickstart.md): ブラウザまたはスマートフォンからクラウドで Claude Code を実行します。GitHub リポジトリを接続し、タスクを送信し、ローカルセットアップなしで PR をレビューします。
+- [クラウドで Claude Code を使用する](https://code.claude.com/docs/ja/claude-code-on-the-web.md): ブラウザ、携帯電話、デスクトップアプリ、またはターミナルからクラウドで Claude Code セッションを実行し、--cloud と --teleport で移動し、プルリクエストを自動修正します。
 - [ルーティンで作業を自動化する](https://code.claude.com/docs/ja/routines.md): Claude Code を自動操縦に設定します。スケジュールで実行するルーティンを定義したり、API 呼び出しでトリガーしたり、Anthropic が管理するクラウドインフラストラクチャから GitHub イベントに反応させたりできます。
 - [ultrareview でバグを見つける](https://code.claude.com/docs/ja/ultrareview.md): /code-review ultra でクラウド上で深い複数エージェント型のコードレビューを実行し、マージ前にバグを見つけて検証します。
 
@@ -63,18 +64,18 @@
 - [Code Review](https://code.claude.com/docs/ja/code-review.md): マルチエージェント分析を使用してコードベース全体を検査し、ロジックエラー、セキュリティ脆弱性、リグレッションを検出する自動化された PR レビューを設定します
 - [Claude Code GitHub Actions](https://code.claude.com/docs/ja/github-actions.md): @claude メンションに応答し、タスクを自動化し、イシューをプルリクエストに変換するために GitHub Actions ワークフロー内で Claude Code を実行します
 - [Claude Code GitHub Actions をクラウドプロバイダーで使用する](https://code.claude.com/docs/ja/github-actions-cloud-providers.md): Claude Code GitHub Actions を Claude API の代わりに Amazon Bedrock、Google Cloud の Agent Platform、または Microsoft Foundry を通じて実行する
-- [Claude Code と GitHub Enterprise Server](https://code.claude.com/docs/ja/github-enterprise-server.md): Claude Code を自社ホストの GitHub Enterprise Server インスタンスに接続して、Web セッション、コードレビュー、プラグインマーケットプレイスを利用できます。
+- [Claude Code と GitHub Enterprise Server](https://code.claude.com/docs/ja/github-enterprise-server.md): Claude Code を自社ホストの GitHub Enterprise Server インスタンスに接続して、クラウドセッション、コードレビュー、プラグインマーケットプレイスを利用できます。
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/ja/gitlab-ci-cd.md): Claude Code を GitLab CI/CD で開発ワークフローに統合する方法を学びます
 
 ### Claude Code で構築する
 
 #### エージェントと並列処理
 
-- [エージェントを並列実行する](https://code.claude.com/docs/ja/agents.md): Claude Code が複数のタスクを同時に実行する方法を比較します。サブエージェント、エージェントビュー、エージェントチーム、および動的ワークフローについて説明します。
+- [エージェントを並列実行する](https://code.claude.com/docs/ja/agents.md): Claude Code が複数のタスクを同時に実行する 5 つの方法を比較します。サブエージェント、エージェントビュー、エージェントチーム、動的ワークフロー、およびプロジェクトについて説明します。
 - [カスタムサブエージェントの作成](https://code.claude.com/docs/ja/sub-agents.md): Claude Code でタスク固有のワークフローと改善されたコンテキスト管理のための特化した AI サブエージェントを作成して使用します。
 - [複数のエージェントをエージェントビューで管理する](https://code.claude.com/docs/ja/agent-view.md): 1 つの画面から多くの Claude Code セッションをディスパッチして管理します。エージェントビューは、すべてのセッションが何をしているか、どのセッションが入力を必要としているかを表示します。
 - [Claude Code セッションのチームを調整する](https://code.claude.com/docs/ja/agent-teams.md): 複数の Claude Code インスタンスがチームとして連携して動作するように調整し、共有タスク、エージェント間メッセージング、および一元管理を実現します。
-- [他の Claude Code セッションにメッセージを送信する](https://code.claude.com/docs/ja/cross-session-messaging.md): Claude が同じマシン上の他の Claude Code セッションをリストアップしてメッセージを送信できるようにし、他のマシンまたはウェブ上のセッションに到達します。
+- [他の Claude Code セッションにメッセージを送信する](https://code.claude.com/docs/ja/cross-session-messaging.md): Claude が同じマシン上の他の Claude Code セッションをリストアップしてメッセージを送信できるようにし、他のマシンまたはクラウド上のセッションに到達します。
 - [動的ワークフローで大規模にサブエージェントをオーケストレーションする](https://code.claude.com/docs/ja/workflows.md): 動的ワークフローは、Claude が作成したスクリプトから多くのサブエージェントをオーケストレーションし、再実行できます。コードベース監査、大規模マイグレーション、相互検証研究に使用します。
 - [worktree を使用して並列セッションを実行する](https://code.claude.com/docs/ja/worktrees.md): 並列 Claude Code セッションを個別の git worktree に分離して、変更が衝突しないようにします。`--worktree` フラグ、subagent の分離、`.worktreeinclude`、クリーンアップ、および非 git VCS フックについて説明します。
 
@@ -152,7 +153,7 @@
 - [Claude apps gateway の支出制限](https://code.claude.com/docs/ja/claude-apps-gateway-spend-limits.md): Claude apps gateway を通じて各開発者の支出を日単位、週単位、または月単位で制限します。Admin API で制限を設定すると、gateway はすべてのリクエストでそれらを実行します。
 - [Claude apps gateway のデプロイと運用](https://code.claude.com/docs/ja/claude-apps-gateway-deploy.md): IdP にゲートウェイを登録し、コンテナをビルドして Kubernetes または Cloud Run にデプロイし、ヘルスチェック、シークレットローテーション、アップグレード、セキュリティを運用します。
 - [AWS に Claude apps gateway をデプロイする](https://code.claude.com/docs/ja/claude-apps-gateway-on-aws.md): AWS で Claude apps gateway を実行する実装例：ECS Fargate または EKS、Amazon RDS for PostgreSQL、AWS Secrets Manager、および Amazon Bedrock への IAM ロール認証。
-- [Google Cloud に Claude apps gateway をデプロイする](https://code.claude.com/docs/ja/claude-apps-gateway-on-gcp.md): Google Cloud で Claude apps gateway を実行する実装例：Cloud Run または GKE、Cloud SQL for PostgreSQL、Secret Manager、および Agent Platform への service account 認証。
+- [Google Cloud に Claude apps gateway をデプロイする](https://code.claude.com/docs/ja/claude-apps-gateway-on-gcp.md): Google Cloud で Claude apps gateway を実行する実装例：Cloud Run または GKE、Cloud SQL for PostgreSQL、Secret Manager、および Google Cloud の Agent Platform への service account 認証。
 
 ##### その他のゲートウェイ
 
@@ -259,6 +260,7 @@
 
 #### エージェントを構築
 
+- [エージェントを設定する](https://code.claude.com/docs/ja/agent-sdk/configuration.md): Agent SDK セッションを設定する：options オブジェクトを構成し、モデル、環境、制限を設定し、各機能オプションのページを見つけます。
 - [例](https://code.claude.com/docs/ja/agent-sdk/examples.md): 構築したいものに合致する完全で実行可能な Agent SDK プロジェクト、または Claude Cookbook のガイド付きレシピを見つけてください。
 
 #### コアコンセプト
@@ -266,7 +268,7 @@
 - [エージェントループの仕組み](https://code.claude.com/docs/ja/agent-sdk/agent-loop.md): メッセージライフサイクル、ツール実行、コンテキストウィンドウ、および SDK エージェントを支えるアーキテクチャを理解します。
 - [SDK で Claude Code 機能を使用する](https://code.claude.com/docs/ja/agent-sdk/claude-code-features.md): プロジェクト指示、スキル、フック、その他の Claude Code 機能を SDK エージェントに読み込みます。
 - [セッションの操作](https://code.claude.com/docs/ja/agent-sdk/sessions.md): セッションがエージェント会話履歴をどのように保持するか、および以前の実行に戻るために continue、resume、fork をいつ使用するかについて説明します。
-- [セッションを外部ストレージに永続化する](https://code.claude.com/docs/ja/agent-sdk/session-storage.md): セッションのトランスクリプトを S3、Redis、または独自のバックエンドにミラーリングして、任意のホストからセッションを再開できるようにします。
+- [セッションを外部ストレージに永続化する](https://code.claude.com/docs/ja/agent-sdk/session-storage.md): Agent SDK セッションのトランスクリプトを独自のオブジェクトストア、キーバリューストア、またはデータベースにミラーリングして、他のホストがセッションを再開できるようにします。
 
 #### 入力と出力
 
@@ -313,6 +315,8 @@
 #### 新機能
 
 - [新機能](https://code.claude.com/docs/ja/whats-new/index.md): Claude Code の注目すべき機能を毎週紹介するダイジェスト。コードスニペット、デモ、およびそれらが重要である理由についての説明が含まれています。
+- [Week 36 · 8月31日～9月4日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w36.md): Claude Fable 5.1に切り替え、Desktop でコンピュータ使用をバックグラウンドで実行し、ライブ /diff パネルで Claude の編集を確認します。
+- [第 35 週・2026 年 8 月 24～28 日](https://code.claude.com/docs/ja/whats-new/2026-w35.md): Claude Code デスクトップアプリでターミナルセッションを再開し、Claude が作成したフィードバックレポートを確認し、制限モードでセッションを開始します。
 - [Week 34 · 8月17～21日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w34.md): /design スキルでドラフト可能な UI アートボードを作成し、Concise 出力スタイルを設定し、スマートフォンからマシン上で Claude Code セッションを開始します。
 - [第 33 週・8 月 10～14 日、2026 年](https://code.claude.com/docs/ja/whats-new/2026-w33.md): Claude Code Desktop は使用制限がリセットされた後に自動継続し、フォークモードがデフォルトで有効になり、GitLab マージリクエストとマーケットプレイスが GitHub に参加します。
 - [Week 32 · 8月3日～7日、2026年](https://code.claude.com/docs/ja/whats-new/2026-w32.md): Claude Code セッションが相互にメッセージを送信でき、自己ホスト環境がクラウドセッションをお客様のインフラストラクチャで実行でき、自動モードがデフォルトの権限モードになります。
