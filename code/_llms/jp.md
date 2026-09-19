@@ -41,7 +41,7 @@
 - [Slack での Claude Code](https://code.claude.com/docs/ja/slack.md): Slack ワークスペースから直接コーディングタスクを委任する。Anthropic は Team および Enterprise ワークスペース向けにこの以前のバージョンを Claude Tag に置き換えています。Pro および Max プランではセットアップパスのままです。
 - [Claude Tag](https://code.claude.com/docs/ja/claude-tag.md): Claude Tag を使用して Claude をチームの Slack チャネルに導入し、claude.com で設定と使用方法のドキュメントを確認できます。
 
-##### クラウド内の Claude Code
+##### Claude Code クラウド版
 
 - [Claude Code をクラウドで始める](https://code.claude.com/docs/ja/web-quickstart.md): ブラウザまたはスマートフォンからクラウドで Claude Code を実行します。GitHub リポジトリを接続し、タスクを送信し、ローカルセットアップなしで PR をレビューします。
 - [クラウドで Claude Code を使用する](https://code.claude.com/docs/ja/claude-code-on-the-web.md): ブラウザ、携帯電話、デスクトップアプリ、またはターミナルからクラウドで Claude Code セッションを実行し、--cloud と --teleport で移動し、プルリクエストを自動修正します。
@@ -130,7 +130,7 @@
 - [組織の MCP サーバーアクセスを制御する](https://code.claude.com/docs/ja/managed-mcp.md): 管理対象設定ファイル、管理対象設定、許可リスト、拒否リストを使用して、ユーザーが追加または接続できる MCP サーバーを制限するか、すべてのユーザーにサーバーを提供します。
 - [オートモードの設定](https://code.claude.com/docs/ja/auto-mode-config.md): オートモード分類器に、組織が信頼するリポジトリ、バケット、ドメインを指定します。環境コンテキストを設定し、デフォルトのブロックおよび許可ルールをオーバーライドし、オートモード CLI サブコマンドで有効な設定を検査します。
 
-#### デプロイメント
+#### デプロイ
 
 - [エンタープライズデプロイメント概要](https://code.claude.com/docs/ja/third-party-integrations.md): Claude Code が様々なサードパーティサービスとインフラストラクチャと統合して、エンタープライズデプロイメント要件を満たす方法について学びます。
 - [機能の利用可能性](https://code.claude.com/docs/ja/feature-availability.md): Anthropic のサブスクリプションプラン、Anthropic Console、Amazon Bedrock、Claude Platform on AWS、Google Cloud の Agent Platform、Microsoft Foundry 全体で利用可能な Claude Code 機能を比較します。
@@ -160,7 +160,7 @@
 - [その他の LLM gateway](https://code.claude.com/docs/ja/llm-gateway.md): 組織が既に実行している LLM gateway を通じて Claude Code をルーティングします。Claude Code をゲートウェイに接続する方法、組織向けのロールアウト、Claude Code がゲートウェイに送信する内容について説明します。
 - [Claude Code を LLM ゲートウェイに接続する](https://code.claude.com/docs/ja/llm-gateway-connect.md): Claude Code を組織の LLM ゲートウェイに指定します。管理者がすでに設定しているかどうかを確認するか、基本 URL と認証情報を自分で設定してから、接続を確認し、ゲートウェイエラーを修正します。
 - [組織向けの LLM ゲートウェイをロールアウトする](https://code.claude.com/docs/ja/llm-gateway-rollout.md): Claude Code 用のゲートウェイ製品をデプロイします。Claude Code が送信する内容を転送するように設定し、開発者認証情報を発行し、マネージド設定を通じて設定を配布し、ロールアウトを検証します。
-- [Claude Code ゲートウェイ互換性ガイド](https://code.claude.com/docs/ja/llm-gateway-protocol.md): Claude Code と互換性のある LLM ゲートウェイを保つ：呼び出すエンドポイント、転送すべきヘッダーとボディフィールド、削除された場合に機能しなくなる機能。
+- [Claude Code ゲートウェイ互換性ガイド](https://code.claude.com/docs/ja/llm-gateway-protocol.md): Claude Code と互換性のある LLM ゲートウェイを保つ：呼び出すエンドポイント、転送する必要があるヘッダーとボディフィールド、および削除されると機能しなくなるもの。
 
 #### 使用状況とコスト
 
@@ -263,7 +263,7 @@
 - [エージェントを設定する](https://code.claude.com/docs/ja/agent-sdk/configuration.md): Agent SDK セッションを設定する：options オブジェクトを構成し、モデル、環境、制限を設定し、各機能オプションのページを見つけます。
 - [例](https://code.claude.com/docs/ja/agent-sdk/examples.md): 構築したいものに合致する完全で実行可能な Agent SDK プロジェクト、または Claude Cookbook のガイド付きレシピを見つけてください。
 
-#### コアコンセプト
+#### コア概念
 
 - [エージェントループの仕組み](https://code.claude.com/docs/ja/agent-sdk/agent-loop.md): メッセージライフサイクル、ツール実行、コンテキストウィンドウ、および SDK エージェントを支えるアーキテクチャを理解します。
 - [SDK で Claude Code 機能を使用する](https://code.claude.com/docs/ja/agent-sdk/claude-code-features.md): プロジェクト指示、スキル、フック、その他の Claude Code 機能を SDK エージェントに読み込みます。
@@ -284,7 +284,7 @@
 - [多くのツールにスケーリングするツール検索](https://code.claude.com/docs/ja/agent-sdk/tool-search.md): 必要なものだけをオンデマンドで検出して読み込むことで、エージェントを数千のツールにスケーリングします。
 - [SDK のサブエージェント](https://code.claude.com/docs/ja/agent-sdk/subagents.md): コンテキストを分離し、タスクを並列実行し、Claude Agent SDK アプリケーションで特化した指示を適用するサブエージェントを定義および呼び出します。
 
-#### 動作をカスタマイズする
+#### 動作をカスタマイズ
 
 - [システムプロンプトの変更](https://code.claude.com/docs/ja/agent-sdk/modifying-system-prompts.md): `claude_code` プリセットとカスタムシステムプロンプトの間で選択し、CLAUDE.md、出力スタイル、append、または完全にカスタムなプロンプトで動作をカスタマイズします。
 - [Agent Skills でエージェントを拡張する](https://code.claude.com/docs/ja/agent-sdk/skills.md): Claude Agent SDK セッションで Claude が呼び出せる Skills を制御し、名前でコマンドをディスパッチし、セッションが検出する Skills を作成します

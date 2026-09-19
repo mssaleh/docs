@@ -22,7 +22,7 @@
 
 #### Usar Claude Code
 
-- [Como Claude se lembra do seu projeto](https://code.claude.com/docs/pt/memory.md): Dê a Claude instruções persistentes com arquivos CLAUDE.md e deixe Claude acumular aprendizados automaticamente com memória automática.
+- [Como Claude se lembra do seu projeto](https://code.claude.com/docs/pt/memory.md): Dê a Claude instruções persistentes com arquivos CLAUDE.md ou AGENTS.md, e deixe Claude acumular aprendizados automaticamente com memória automática.
 - [Gerenciar sessões](https://code.claude.com/docs/pt/sessions.md): Nomeie, retome, ramifique e alterne entre conversas do Claude Code. Abrange `--continue`, `--resume`, `--from-pr`, o seletor `/resume`, nomeação de sessão, exportação de transcritos e onde os transcritos são armazenados.
 - [Fluxos de trabalho comuns](https://code.claude.com/docs/pt/common-workflows.md): Guias passo a passo para explorar bases de código, corrigir bugs, refatorar, testar e outras tarefas cotidianas com Claude Code.
 - [Biblioteca de prompts](https://code.claude.com/docs/pt/prompt-library.md): Copie e cole prompts para Claude Code, marcados por tarefa e função.

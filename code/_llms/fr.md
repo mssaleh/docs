@@ -22,7 +22,7 @@
 
 #### Utiliser Claude Code
 
-- [Comment Claude se souvient de votre projet](https://code.claude.com/docs/fr/memory.md): Donnez à Claude des instructions persistantes avec les fichiers CLAUDE.md, et laissez Claude accumuler automatiquement les apprentissages avec la mémoire automatique.
+- [Comment Claude se souvient de votre projet](https://code.claude.com/docs/fr/memory.md): Donnez à Claude des instructions persistantes avec les fichiers CLAUDE.md ou AGENTS.md, et laissez Claude accumuler automatiquement les apprentissages avec la mémoire automatique.
 - [Gérer les sessions](https://code.claude.com/docs/fr/sessions.md): Nommez, reprenez, créez des branches et basculez entre les conversations Claude Code. Couvre `--continue`, `--resume`, `--from-pr`, le sélecteur `/resume`, la dénomination des sessions, l'export des transcriptions et l'emplacement des transcriptions.
 - [Flux de travail courants](https://code.claude.com/docs/fr/common-workflows.md): Guides étape par étape pour explorer les bases de code, corriger les bogues, refactoriser, tester et autres tâches quotidiennes avec Claude Code.
 - [Bibliothèque de prompts](https://code.claude.com/docs/fr/prompt-library.md): Copiez-collez des prompts pour Claude Code, étiquetés par tâche et rôle.
@@ -160,7 +160,7 @@
 - [Autres passerelles LLM](https://code.claude.com/docs/fr/llm-gateway.md): Acheminez Claude Code via une passerelle LLM que votre organisation exécute déjà. Couvre la connexion de Claude Code à une passerelle, le déploiement d'une passerelle pour votre organisation et ce que Claude Code envoie à une passerelle.
 - [Connecter Claude Code à une passerelle LLM](https://code.claude.com/docs/fr/llm-gateway-connect.md): Pointez Claude Code vers la passerelle LLM de votre organisation. Vérifiez si votre administrateur l'a déjà configurée, ou définissez vous-même l'URL de base et les identifiants, puis vérifiez la connexion et corrigez les erreurs de passerelle.
 - [Déployer une passerelle LLM pour votre organisation](https://code.claude.com/docs/fr/llm-gateway-rollout.md): Déployez un produit de passerelle pour Claude Code : configurez-le pour transférer ce que Claude Code envoie, émettez des identifiants de développeur, distribuez la configuration via les paramètres gérés, et vérifiez le déploiement.
-- [Guide de compatibilité de la passerelle Claude Code](https://code.claude.com/docs/fr/llm-gateway-protocol.md): Maintenir une passerelle LLM compatible avec Claude Code : les points de terminaison qu'elle appelle, les en-têtes et champs de corps à transmettre, et ce qui se casse lorsqu'ils sont supprimés.
+- [Guide de compatibilité de la passerelle Claude Code](https://code.claude.com/docs/fr/llm-gateway-protocol.md): Maintenez une passerelle LLM compatible avec Claude Code : les points de terminaison qu'elle appelle, les en-têtes et champs de corps à transmettre, et ce qui se casse quand ils sont supprimés.
 
 #### Utilisation et coûts
 

@@ -22,7 +22,7 @@
 
 #### 使用 Claude Code
 
-- [Claude 如何记住你的项目](https://code.claude.com/docs/zh-CN/memory.md): 使用 CLAUDE.md 文件为 Claude 提供持久指令，并让 Claude 通过自动记忆功能自动积累学习内容。
+- [Claude 如何记住您的项目](https://code.claude.com/docs/zh-CN/memory.md): 使用 CLAUDE.md 或 AGENTS.md 文件为 Claude 提供持久指令，并让 Claude 通过自动记忆自动积累学习。
 - [管理会话](https://code.claude.com/docs/zh-CN/sessions.md): 命名、恢复、分支和在 Claude Code 对话之间切换。涵盖 `--continue`、`--resume`、`--from-pr`、`/resume` 选择器、会话命名、导出文本记录和文本记录存储位置。
 - [常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows.md): 使用 Claude Code 探索代码库、修复错误、重构、测试和其他日常任务的分步指南。
 - [提示词库](https://code.claude.com/docs/zh-CN/prompt-library.md): 复制粘贴提示词到 Claude Code，按任务和角色标记。
@@ -160,7 +160,7 @@
 - [其他 LLM 网关](https://code.claude.com/docs/zh-CN/llm-gateway.md): 通过您的组织已运行的 LLM 网关路由 Claude Code。涵盖将 Claude Code 连接到网关、为您的组织部署网关以及 Claude Code 发送到网关的内容。
 - [将 Claude Code 连接到 LLM 网关](https://code.claude.com/docs/zh-CN/llm-gateway-connect.md): 将 Claude Code 指向您组织的 LLM 网关。检查您的管理员是否已配置它，或自行设置基础 URL 和凭证，然后验证连接并修复网关错误。
 - [为您的组织推出 LLM 网关](https://code.claude.com/docs/zh-CN/llm-gateway-rollout.md): 为 Claude Code 部署网关产品：配置它以转发 Claude Code 发送的内容，颁发开发者凭证，通过托管设置分发配置，并验证推出。
-- [Claude Code gateway 兼容性指南](https://code.claude.com/docs/zh-CN/llm-gateway-protocol.md): 保持 LLM gateway 与 Claude Code 兼容：它调用的端点、必须转发的请求头和请求体字段，以及删除它们时会破坏什么。
+- [Claude Code 网关兼容性指南](https://code.claude.com/docs/zh-CN/llm-gateway-protocol.md): 保持 LLM 网关与 Claude Code 兼容：它调用的端点、必须转发的标头和正文字段，以及删除它们时会破坏的功能。
 
 #### 使用情况和成本
 

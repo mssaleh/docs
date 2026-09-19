@@ -22,7 +22,7 @@
 
 #### Gunakan Claude Code
 
-- [Bagaimana Claude mengingat proyek Anda](https://code.claude.com/docs/id/memory.md): Berikan Claude instruksi persisten dengan file CLAUDE.md, dan biarkan Claude mengumpulkan pembelajaran secara otomatis dengan auto memory.
+- [Bagaimana Claude mengingat proyek Anda](https://code.claude.com/docs/id/memory.md): Berikan Claude instruksi persisten dengan file CLAUDE.md atau AGENTS.md, dan biarkan Claude mengumpulkan pembelajaran secara otomatis dengan auto memory.
 - [Kelola sesi](https://code.claude.com/docs/id/sessions.md): Beri nama, lanjutkan, cabang, dan beralih antar percakapan Claude Code. Mencakup `--continue`, `--resume`, `--from-pr`, pemilih `/resume`, penamaan sesi, ekspor transkrip, dan tempat penyimpanan transkrip.
 - [Alur kerja umum](https://code.claude.com/docs/id/common-workflows.md): Panduan langkah demi langkah untuk menjelajahi basis kode, memperbaiki bug, refactoring, pengujian, dan tugas sehari-hari lainnya dengan Claude Code.
 - [Perpustakaan prompt](https://code.claude.com/docs/id/prompt-library.md): Salin-tempel prompt untuk Claude Code, diberi tag berdasarkan tugas dan peran.
@@ -116,7 +116,7 @@
 - [Troubleshoot installation and login](https://code.claude.com/docs/id/troubleshoot-install.md): Perbaiki command not found, PATH, permission, network, dan authentication errors saat menginstal atau masuk ke Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/id/troubleshooting.md): Perbaiki penggunaan CPU atau memori yang tinggi, hang, thrashing auto-compact, dan masalah pencarian di Claude Code, dan temukan halaman yang tepat untuk masalah lainnya.
 - [Debug konfigurasi Anda](https://code.claude.com/docs/id/debug-your-config.md): Diagnosis mengapa CLAUDE.md, settings, hooks, server MCP, atau skills tidak berlaku. Gunakan /context, /doctor, /hooks, dan /mcp untuk melihat apa yang benar-benar dimuat.
-- [Referensi kesalahan](https://code.claude.com/docs/id/errors.md): Cari pesan kesalahan runtime Claude Code dengan penjelasan arti dan cara memperbaikinya.
+- [Referensi kesalahan](https://code.claude.com/docs/id/errors.md): Cari pesan kesalahan runtime Claude Code dengan arti masing-masing dan cara memperbaikinya.
 
 ### Administrasi
 
@@ -130,7 +130,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penyebaran
+#### Penerapan
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.
@@ -160,7 +160,7 @@
 - [Gateway LLM lainnya](https://code.claude.com/docs/id/llm-gateway.md): Arahkan Claude Code melalui gateway LLM yang sudah dijalankan organisasi Anda. Mencakup menghubungkan Claude Code ke gateway, meluncurkannya untuk organisasi Anda, dan apa yang Claude Code kirimkan ke gateway.
 - [Hubungkan Claude Code ke gateway LLM](https://code.claude.com/docs/id/llm-gateway-connect.md): Arahkan Claude Code ke gateway LLM organisasi Anda. Periksa apakah admin Anda sudah mengonfigurasinya, atau atur URL dasar dan kredensial sendiri, kemudian verifikasi koneksi dan perbaiki kesalahan gateway.
 - [Luncurkan gateway LLM untuk organisasi Anda](https://code.claude.com/docs/id/llm-gateway-rollout.md): Terapkan produk gateway untuk Claude Code: konfigurasikan untuk meneruskan apa yang dikirim Claude Code, keluarkan kredensial pengembang, distribusikan konfigurasi melalui pengaturan terkelola, dan verifikasi peluncuran.
-- [Panduan kompatibilitas gateway Claude Code](https://code.claude.com/docs/id/llm-gateway-protocol.md): Jaga gateway LLM tetap kompatibel dengan Claude Code: endpoint yang dipanggilnya, header dan field body yang harus diteruskan, dan apa yang rusak ketika dihapus.
+- [Panduan kompatibilitas gateway Claude Code](https://code.claude.com/docs/id/llm-gateway-protocol.md): Jaga gateway LLM tetap kompatibel dengan Claude Code: endpoint yang dipanggilnya, header dan field body yang harus diteruskan, dan apa yang rusak saat dihapus.
 
 #### Penggunaan dan biaya
 
@@ -299,7 +299,7 @@
 - [Observability dengan OpenTelemetry](https://code.claude.com/docs/id/agent-sdk/observability.md): Ekspor traces, metrics, dan events dari Agent SDK ke backend observability Anda menggunakan OpenTelemetry.
 - [Lacak todos](https://code.claude.com/docs/id/agent-sdk/todo-tracking.md): Lacak todos dalam sesi Agent SDK dan tampilkan kemajuan Claude dalam aplikasi Anda dari panggilan alat terstruktur
 
-#### Penerapan
+#### Penyebaran
 
 - [Hosting the Agent SDK](https://code.claude.com/docs/id/agent-sdk/hosting.md): Terapkan Agent SDK dalam produksi: arsitektur subprocess, persistensi sesi, penskalaan, observabilitas, dan isolasi multi-tenant untuk Docker, Kubernetes, dan penyedia sandbox.
 - [Mengamankan penyebaran agen AI](https://code.claude.com/docs/id/agent-sdk/secure-deployment.md): Panduan untuk mengamankan penyebaran Claude Code dan Agent SDK dengan isolasi, manajemen kredensial, dan kontrol jaringan

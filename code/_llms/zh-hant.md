@@ -22,7 +22,7 @@
 
 #### 使用 Claude Code
 
-- [Claude 如何記住您的專案](https://code.claude.com/docs/zh-TW/memory.md): 使用 CLAUDE.md 檔案為 Claude 提供持久指令，並讓 Claude 透過自動記憶自動累積學習。
+- [Claude 如何記住您的專案](https://code.claude.com/docs/zh-TW/memory.md): 使用 CLAUDE.md 或 AGENTS.md 檔案為 Claude 提供持久指示，並讓 Claude 透過自動記憶自動累積學習。
 - [管理 sessions](https://code.claude.com/docs/zh-TW/sessions.md): 命名、恢復、分支和在 Claude Code 對話之間切換。涵蓋 `--continue`、`--resume`、`--from-pr`、`/resume` 選擇器、session 命名、匯出文字記錄，以及文字記錄的儲存位置。
 - [常見工作流程](https://code.claude.com/docs/zh-TW/common-workflows.md): 使用 Claude Code 探索程式碼庫、修復錯誤、重構、測試和其他日常任務的逐步指南。
 - [提示詞庫](https://code.claude.com/docs/zh-TW/prompt-library.md): 複製貼上提示詞供 Claude Code 使用，按任務和角色標記。
@@ -32,6 +32,7 @@
 
 - [平台和整合](https://code.claude.com/docs/zh-TW/platforms.md): 選擇在何處執行 Claude Code 以及要連接什麼。比較 CLI、Desktop、VS Code、JetBrains、Web 和 Chrome、Slack 和 CI/CD 等整合。
 - [使用 Remote Control 從任何裝置繼續本地會話](https://code.claude.com/docs/zh-TW/remote-control.md): 使用 Remote Control 從您的手機、平板電腦或任何瀏覽器繼續本地 Claude Code 會話。適用於 claude.ai/code 和 Claude 行動應用程式。
+- [讓 Claude 使用 Projects 協調進行中的工作](https://code.claude.com/docs/zh-TW/claude-projects.md): 在一個對話中為 Claude 提供一組相關的工作，讓它協調共享儲存庫、指示和記憶的平行雲端工作階段。
 - [Claude Code 行動版](https://code.claude.com/docs/zh-TW/mobile.md): 從您的手機使用 Claude iOS 和 Android 應用程式來啟動、監控和引導 Claude Code 工作。
 - [在 Chrome 中使用 Claude Code](https://code.claude.com/docs/zh-TW/chrome.md): 將 Claude Code 連接到您的 Chrome 瀏覽器，以測試網頁應用程式、使用控制台日誌進行除錯、自動填充表單，以及從網頁中提取資料。
 - [讓 Claude 從 CLI 使用您的電腦](https://code.claude.com/docs/zh-TW/computer-use.md): 在 Claude Code CLI 中啟用 computer use，讓 Claude 可以在 macOS 上開啟應用程式、點擊、輸入和查看您的螢幕。測試原生應用程式、除錯視覺問題，以及自動化僅限 GUI 的工具，無需離開您的終端機。
@@ -159,9 +160,9 @@
 - [其他 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway.md): 透過貴組織已執行的 LLM 閘道路由 Claude Code。涵蓋將 Claude Code 連接到閘道、為貴組織推出閘道，以及 Claude Code 傳送到閘道的內容。
 - [將 Claude Code 連接到 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway-connect.md): 將 Claude Code 指向您組織的 LLM 閘道。檢查您的管理員是否已配置它，或自行設定基礎 URL 和認證，然後驗證連接並修復閘道錯誤。
 - [為您的組織推出 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway-rollout.md): 為 Claude Code 部署閘道產品：配置它以轉發 Claude Code 發送的內容、發放開發者認證、透過受管設定分發配置，並驗證推出。
-- [Claude Code gateway 相容性指南](https://code.claude.com/docs/zh-TW/llm-gateway-protocol.md): 保持 LLM gateway 與 Claude Code 相容：它呼叫的端點、必須轉發的標頭和請求體欄位，以及移除它們時會破壞什麼。
+- [Claude Code 閘道相容性指南](https://code.claude.com/docs/zh-TW/llm-gateway-protocol.md): 保持 LLM 閘道與 Claude Code 相容：它呼叫的端點、必須轉發的標頭和本體欄位，以及移除它們時會中斷的功能。
 
-#### 使用量與成本
+#### 使用量和成本
 
 - [監控](https://code.claude.com/docs/zh-TW/monitoring-usage.md): 了解如何為 Claude Code 啟用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-TW/costs.md): 追蹤 token 使用情況、設定團隊支出限制，並透過上下文管理、模型選擇、延伸思考設定和預處理 hooks 來降低 Claude Code 成本。
@@ -257,7 +258,7 @@
 - [遷移至 Claude Agent SDK](https://code.claude.com/docs/zh-TW/agent-sdk/migration-guide.md): 將 Claude Code TypeScript 和 Python SDK 遷移至 Claude Agent SDK 的指南
 - [排除 Agent SDK 的故障](https://code.claude.com/docs/zh-TW/agent-sdk/troubleshooting.md): 根據您看到的確切錯誤訊息修復 Agent SDK 錯誤，包括 TypeScript 和 Python SDK 中每個錯誤的原因和修復方法。
 
-#### 建立代理程式
+#### 建立代理
 
 - [設定您的代理](https://code.claude.com/docs/zh-TW/agent-sdk/configuration.md): 設定 Agent SDK 工作階段：組合選項物件、設定模型、環境和限制，並找到每個功能選項的頁面。
 - [範例](https://code.claude.com/docs/zh-TW/agent-sdk/examples.md): 尋找完整、可執行的 Agent SDK 專案或 Claude Cookbook 中的引導式配方，以符合您想要建置的內容。
