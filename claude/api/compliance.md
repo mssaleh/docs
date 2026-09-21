@@ -19,7 +19,7 @@ compliance activities that can be filtered by various criteria.
 
 #### Query parameters
 
-- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 490 more`
+- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 503 more`
 
   Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
@@ -90,6 +90,14 @@ compliance activities that can be filtered by various criteria.
   - `"ccr_agent_deleted"`
 
     A Claude Code agent was deleted.
+
+  - `"ccr_agent_proxy_anthropic_oidc_token_exchanged"`
+
+    The Claude Code agent proxy exchanged a minted identity token for short-lived credentials in the organization's own cloud. Recorded for exchange targets only (such as "aws" and "gcp"; the "direct" target has no exchange step). One event is recorded per exchange call; a request served from the proxy's exchanged-credential cache does not exchange again and is not recorded here. Per-request detail for traffic the credentials were injected into is available in the agent proxy network events.
+
+  - `"ccr_agent_proxy_anthropic_oidc_token_minted"`
+
+    The Claude Code agent proxy minted a short-lived identity token for an anthropic_oidc credential. One event is recorded per fresh token issuance; a request served from the proxy's short-lived token cache does not mint a new token and is not recorded here. Per-request detail for traffic the credential was injected into is available in the agent proxy network events.
 
   - `"ccr_agent_proxy_credential_created"`
 
@@ -187,6 +195,14 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
 
+  - `"ccr_channel_manager_added"`
+
+    An org owner/admin assigned an organization member to manage the Claude-in-Slack configuration of one Slack channel.
+
+  - `"ccr_channel_manager_removed"`
+
+    An org owner/admin removed an organization member's assignment to manage the Claude-in-Slack configuration of one Slack channel.
+
   - `"ccr_role_channel_assignment_deleted"`
 
     CcrRoleChannelAssignmentDeleted is emitted when an org owner/admin removes an RBAC role's channel assignment row (the role reverts to granting zero channels).
@@ -230,6 +246,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_artifact_duplicated"`
 
     A user duplicated an artifact they could view into a new artifact that they own. The actor is the user who created the copy; the source artifact is not modified.
+
+  - `"claude_artifact_external_sharing_permission_updated"`
+
+    An organization admin allowed one artifact to be shared outside the organization by link while the organization-wide external sharing setting was off, or revoked that permission.
 
   - `"claude_artifact_published"`
 
@@ -374,6 +394,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_security_scan_schedule_updated"`
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
+
+  - `"claude_code_security_vulnerability_deleted"`
+
+    A Claude Code Security vulnerability finding was permanently deleted.
 
   - `"claude_code_security_vulnerability_fix_session_created"`
 
@@ -799,6 +823,14 @@ compliance activities that can be filtered by various criteria.
 
     Webhook signature validation failed.
 
+  - `"github_app_installation_linked"`
+
+    An installation of the Claude GitHub App (a GitHub organization or user account where the App is installed) was linked to the organization, letting the organization's Claude Code features act on that GitHub account's repositories.
+
+  - `"github_app_installation_unlinked"`
+
+    An installation of the Claude GitHub App was unlinked from the organization, so the organization's Claude Code features can no longer act on that GitHub account's repositories through it.
+
   - `"github_token_import"`
 
     A user attempted to import a personal GitHub access token for use with Claude Code. The `result` field indicates the outcome of the import (imported, rejected, or failed).
@@ -1038,6 +1070,14 @@ compliance activities that can be filtered by various criteria.
   - `"org_cowork_auto_mode_enabled"`
 
     The "Auto" permission mode in Cowork was enabled for the organization, allowing members to let Claude approve its own actions after a safety check.
+
+  - `"org_cowork_browser_pane_disabled"`
+
+    The in-app browser in Cowork was disabled for the organization, so Claude can no longer open or use websites in a browser pane during members' Cowork sessions.
+
+  - `"org_cowork_browser_pane_enabled"`
+
+    The in-app browser in Cowork was enabled for the organization, letting Claude open and use websites in a browser pane during members' Cowork sessions.
 
   - `"org_cowork_disabled"`
 
@@ -1515,6 +1555,10 @@ compliance activities that can be filtered by various criteria.
 
     An OIDC federation issuer was archived.
 
+  - `"platform_federation_issuer_created"`
+
+    An OIDC federation issuer was created, registering an external identity provider that federation rules can trust for workload authentication.
+
   - `"platform_federation_issuer_updated"`
 
     An OIDC federation issuer was updated.
@@ -1522,6 +1566,10 @@ compliance activities that can be filtered by various criteria.
   - `"platform_federation_rule_archived"`
 
     An OIDC federation rule was archived.
+
+  - `"platform_federation_rule_created"`
+
+    An OIDC federation rule was created, allowing tokens from a federation issuer to authenticate as a service account or user. Rules may additionally match on token claims or a condition expression, which are not included in this event.
 
   - `"platform_federation_rule_updated"`
 
@@ -1606,6 +1654,10 @@ compliance activities that can be filtered by various criteria.
   - `"platform_service_account_archived"`
 
     A service account was archived.
+
+  - `"platform_service_account_created"`
+
+    A service account was created.
 
   - `"platform_service_account_updated"`
 
@@ -2050,7 +2102,7 @@ compliance activities that can be filtered by various criteria.
 
     format: date-time
 
-- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 490 more`
+- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 503 more`
 
   Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
@@ -2121,6 +2173,14 @@ compliance activities that can be filtered by various criteria.
   - `"ccr_agent_deleted"`
 
     A Claude Code agent was deleted.
+
+  - `"ccr_agent_proxy_anthropic_oidc_token_exchanged"`
+
+    The Claude Code agent proxy exchanged a minted identity token for short-lived credentials in the organization's own cloud. Recorded for exchange targets only (such as "aws" and "gcp"; the "direct" target has no exchange step). One event is recorded per exchange call; a request served from the proxy's exchanged-credential cache does not exchange again and is not recorded here. Per-request detail for traffic the credentials were injected into is available in the agent proxy network events.
+
+  - `"ccr_agent_proxy_anthropic_oidc_token_minted"`
+
+    The Claude Code agent proxy minted a short-lived identity token for an anthropic_oidc credential. One event is recorded per fresh token issuance; a request served from the proxy's short-lived token cache does not mint a new token and is not recorded here. Per-request detail for traffic the credential was injected into is available in the agent proxy network events.
 
   - `"ccr_agent_proxy_credential_created"`
 
@@ -2218,6 +2278,14 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
 
+  - `"ccr_channel_manager_added"`
+
+    An org owner/admin assigned an organization member to manage the Claude-in-Slack configuration of one Slack channel.
+
+  - `"ccr_channel_manager_removed"`
+
+    An org owner/admin removed an organization member's assignment to manage the Claude-in-Slack configuration of one Slack channel.
+
   - `"ccr_role_channel_assignment_deleted"`
 
     CcrRoleChannelAssignmentDeleted is emitted when an org owner/admin removes an RBAC role's channel assignment row (the role reverts to granting zero channels).
@@ -2261,6 +2329,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_artifact_duplicated"`
 
     A user duplicated an artifact they could view into a new artifact that they own. The actor is the user who created the copy; the source artifact is not modified.
+
+  - `"claude_artifact_external_sharing_permission_updated"`
+
+    An organization admin allowed one artifact to be shared outside the organization by link while the organization-wide external sharing setting was off, or revoked that permission.
 
   - `"claude_artifact_published"`
 
@@ -2405,6 +2477,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_security_scan_schedule_updated"`
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
+
+  - `"claude_code_security_vulnerability_deleted"`
+
+    A Claude Code Security vulnerability finding was permanently deleted.
 
   - `"claude_code_security_vulnerability_fix_session_created"`
 
@@ -2830,6 +2906,14 @@ compliance activities that can be filtered by various criteria.
 
     Webhook signature validation failed.
 
+  - `"github_app_installation_linked"`
+
+    An installation of the Claude GitHub App (a GitHub organization or user account where the App is installed) was linked to the organization, letting the organization's Claude Code features act on that GitHub account's repositories.
+
+  - `"github_app_installation_unlinked"`
+
+    An installation of the Claude GitHub App was unlinked from the organization, so the organization's Claude Code features can no longer act on that GitHub account's repositories through it.
+
   - `"github_token_import"`
 
     A user attempted to import a personal GitHub access token for use with Claude Code. The `result` field indicates the outcome of the import (imported, rejected, or failed).
@@ -3069,6 +3153,14 @@ compliance activities that can be filtered by various criteria.
   - `"org_cowork_auto_mode_enabled"`
 
     The "Auto" permission mode in Cowork was enabled for the organization, allowing members to let Claude approve its own actions after a safety check.
+
+  - `"org_cowork_browser_pane_disabled"`
+
+    The in-app browser in Cowork was disabled for the organization, so Claude can no longer open or use websites in a browser pane during members' Cowork sessions.
+
+  - `"org_cowork_browser_pane_enabled"`
+
+    The in-app browser in Cowork was enabled for the organization, letting Claude open and use websites in a browser pane during members' Cowork sessions.
 
   - `"org_cowork_disabled"`
 
@@ -3546,6 +3638,10 @@ compliance activities that can be filtered by various criteria.
 
     An OIDC federation issuer was archived.
 
+  - `"platform_federation_issuer_created"`
+
+    An OIDC federation issuer was created, registering an external identity provider that federation rules can trust for workload authentication.
+
   - `"platform_federation_issuer_updated"`
 
     An OIDC federation issuer was updated.
@@ -3553,6 +3649,10 @@ compliance activities that can be filtered by various criteria.
   - `"platform_federation_rule_archived"`
 
     An OIDC federation rule was archived.
+
+  - `"platform_federation_rule_created"`
+
+    An OIDC federation rule was created, allowing tokens from a federation issuer to authenticate as a service account or user. Rules may additionally match on token claims or a condition expression, which are not included in this event.
 
   - `"platform_federation_rule_updated"`
 
@@ -3637,6 +3737,10 @@ compliance activities that can be filtered by various criteria.
   - `"platform_service_account_archived"`
 
     A service account was archived.
+
+  - `"platform_service_account_created"`
+
+    A service account was created.
 
   - `"platform_service_account_updated"`
 
@@ -4069,17 +4173,11 @@ compliance activities that can be filtered by various criteria.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
 
-- `data: optional array of object or object or object or 490 more`
+- `data: optional array of AbuseDecisionReceived or AccountDeleted or AdminAPIKeyCreated or 503 more`
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -4091,7 +4189,7 @@ compliance activities that can be filtered by various criteria.
 
       default: abuse_decision_received
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -4225,7 +4323,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -4335,7 +4433,7 @@ compliance activities that can be filtered by various criteria.
 
       default: account_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -4469,7 +4567,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -4567,7 +4665,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_api_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -4701,7 +4799,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -4807,7 +4905,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_api_key_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -4941,7 +5039,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -5043,7 +5141,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_api_key_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -5177,7 +5275,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -5301,7 +5399,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_connector_request_resolved
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -5435,7 +5533,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -5545,7 +5643,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_request_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -5679,7 +5777,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -5779,7 +5877,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_setup_checklist_step_delegated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -5913,7 +6011,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -6023,7 +6121,7 @@ compliance activities that can be filtered by various criteria.
 
       default: admin_setup_checklist_step_delegation_cancelled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -6157,7 +6255,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -6259,7 +6357,7 @@ compliance activities that can be filtered by various criteria.
 
       default: age_verified
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -6393,7 +6491,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -6491,7 +6589,7 @@ compliance activities that can be filtered by various criteria.
 
       default: anonymous_mobile_login_attempted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -6625,7 +6723,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -6723,7 +6821,7 @@ compliance activities that can be filtered by various criteria.
 
       default: api_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -6857,7 +6955,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -6967,7 +7065,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_access_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -7101,7 +7199,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -7211,7 +7309,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_commented
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -7345,7 +7443,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -7421,7 +7519,7 @@ compliance activities that can be filtered by various criteria.
 
       The artifact's identifier.
 
-    - `comment_action: "activate_thread" or "create_thread" or "deactivate_thread" or 9 more`
+    - `comment_action: "activate_thread" or "create_thread" or "deactivate_thread" or 10 more`
 
       The action recorded: for example a new comment thread, a reply to an existing thread, a thread resolved, reopened, or deleted, a thread's Claude activation granted or revoked, a comment's text rewritten by its author, an existing comment sent to Claude or withdrawn from Claude, or a thread resolved by a Claude session.
 
@@ -7434,6 +7532,8 @@ compliance activities that can be filtered by various criteria.
       - `"delete_thread"`
 
       - `"edit_comment"`
+
+      - `"move_thread"`
 
       - `"reopen"`
 
@@ -7487,7 +7587,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_comments_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -7621,7 +7721,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -7727,7 +7827,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -7861,7 +7961,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -7963,7 +8063,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_published_artifact_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -8097,7 +8197,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -8199,7 +8299,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_published
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -8333,7 +8433,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -8433,7 +8533,7 @@ compliance activities that can be filtered by various criteria.
 
     - `description: optional string or null`
 
-      Optional gallery-card description supplied at publish time. Same provenance as title (caller-authored, reader-visible).
+      No longer populated: the gallery-card description supplied at publish time is intentionally omitted from this feed.
 
     - `is_redeploy: optional boolean or null`
 
@@ -8455,7 +8555,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_sharing_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -8589,7 +8689,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -8661,11 +8761,11 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `audience: array of object or object or object`
+    - `audience: array of Organization or Users or AnyoneWithLink`
 
       The artifact's sharing audience after the change. If empty, the artifact is visible only to its owner.
 
-      - `ArtifactSharingAudienceOrganization object`
+      - `Organization object`
 
         Sharing audience: visible to the owning organization.
 
@@ -8673,7 +8773,7 @@ compliance activities that can be filtered by various criteria.
 
           default: organization
 
-      - `ArtifactSharingAudienceUsers object`
+      - `Users object`
 
         Sharing audience: visible to an explicit allowlist of users.
 
@@ -8681,10 +8781,9 @@ compliance activities that can be filtered by various criteria.
 
           default: users
 
-      - `ArtifactSharingAudienceAnyoneWithLink object`
+      - `AnyoneWithLink object`
 
-        Sharing audience: anyone with the link, including anonymous viewers
-        (an artifact shared to the open internet).
+        Sharing audience: anyone with the link, including anonymous viewers (an artifact shared to the open internet).
 
         - `type: optional "anyone_with_link"`
 
@@ -8756,7 +8855,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -8890,7 +8989,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -8996,7 +9095,7 @@ compliance activities that can be filtered by various criteria.
 
       default: audit_log_export_accessed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -9130,7 +9229,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -9228,7 +9327,7 @@ compliance activities that can be filtered by various criteria.
 
       default: audit_log_export_started
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -9362,7 +9461,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -9468,7 +9567,7 @@ compliance activities that can be filtered by various criteria.
 
       default: billing_emails_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -9602,7 +9701,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -9712,7 +9811,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -9846,7 +9945,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -9976,7 +10075,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -10110,7 +10209,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -10216,15 +10315,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
-  - `CcrAgentProxyCredentialCreated object`
+  - `CcrAgentProxyAnthropicOidcTokenExchanged object`
 
-    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+    The Claude Code agent proxy exchanged a minted identity token for short-lived credentials in the organization's own cloud. Recorded for exchange targets only (such as "aws" and "gcp"; the "direct" target has no exchange step). One event is recorded per exchange call; a request served from the proxy's exchanged-credential cache does not exchange again and is not recorded here. Per-request detail for traffic the credentials were injected into is available in the agent proxy network events.
 
-    - `type: optional "ccr_agent_proxy_credential_created"`
+    - `type: optional "ccr_agent_proxy_anthropic_oidc_token_exchanged"`
 
-      default: ccr_agent_proxy_credential_created
+      default: ccr_agent_proxy_anthropic_oidc_token_exchanged
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -10358,7 +10457,603 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `agent_id: string`
+
+      The Claude Code agent that owns the session, e.g. "cagt_01HX...". Empty when the session is not owned by an agent.
+
+    - `credential_id: string`
+
+      The credential row the exchange ran for, e.g. "apc_01HX...".
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `role_arn: string`
+
+      The IAM role the token was exchanged for ("aws" target), e.g. "arn:aws:iam::123456789012:role/example-role". Empty for other targets.
+
+    - `role_session_name: string`
+
+      The role session name the temporary credentials were issued under ("aws" target), matching the session name recorded in the organization's own AWS CloudTrail log. Empty for other targets.
+
+    - `service_account: string`
+
+      The Google Cloud service account the federated token was exchanged into ("gcp" target), e.g. "example@example-project.iam.gserviceaccount.com". Empty when the federated token was used directly, and for other targets.
+
+    - `session_id: string`
+
+      The Claude Code session whose request triggered the exchange, e.g. "cse_01HX..." or "session_01HX..." (the session's ID is carried in whichever tagged form the session's credential presented).
+
+    - `target: string`
+
+      The credential's configured target, e.g. "aws" or "gcp".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `credentials_expire_at: optional string or null`
+
+      When the exchanged cloud credentials expire. Unset when the cloud provider did not return a lifetime; such credentials were used for the single triggering request and not cached.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_threads: optional array of object`
+
+      The Slack threads in the session's provenance, when the session originated from Slack. At most 64 entries are included.
+
+      - `channel_id: string`
+
+        The Slack channel ID, e.g. "C0123ABCDE".
+
+      - `enterprise_id: string`
+
+        The Slack Enterprise Grid organization ID, e.g. "E0123ABCDE". Empty for workspaces that are not part of an Enterprise Grid.
+
+      - `team_id: string`
+
+        The Slack workspace (team) ID, e.g. "T0123ABCDE".
+
+      - `thread_ts: string`
+
+        The Slack thread timestamp within the channel, e.g. "1714000000.123456". Empty for a session bound to a whole channel rather than to one thread.
+
+  - `CcrAgentProxyAnthropicOidcTokenMinted object`
+
+    The Claude Code agent proxy minted a short-lived identity token for an anthropic_oidc credential. One event is recorded per fresh token issuance; a request served from the proxy's short-lived token cache does not mint a new token and is not recorded here. Per-request detail for traffic the credential was injected into is available in the agent proxy network events.
+
+    - `type: optional "ccr_agent_proxy_anthropic_oidc_token_minted"`
+
+      default: ccr_agent_proxy_anthropic_oidc_token_minted
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `agent_id: string`
+
+      The Claude Code agent that owns the session, e.g. "cagt_01HX...". Empty when the session is not owned by an agent.
+
+    - `audience: string`
+
+      The minted token's audience: the fixed token-exchange audience for the "aws" target, the credential row's Google workload identity pool provider URL for the "gcp" target, or the row's configured audience for the "direct" target.
+
+    - `credential_id: string`
+
+      The credential row the token was minted for, e.g. "apc_01HX...".
+
+    - `issuance_path: "broker_report" or "direct" or "proxy_record" or "unspecified"`
+
+      Which record of the issuance this event is. Unspecified on events published before this field existed.
+
+      - `"broker_report"`
+
+      - `"direct"`
+
+      - `"proxy_record"`
+
+      - `"unspecified"`
+
+    - `mint_jti: string`
+
+      The identifier of the mint attempt, a bare UUID. One mint through the Claude Tag mint broker produces two minted events that carry the same value, the broker's own report and the agent proxy's record. A reader counts issuances from the broker's reports by distinct report_id, and several distinct reports that share one mint_jti are the accepted mints of a replayed token. Empty on events for mints that did not travel through the broker.
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `report_id: string`
+
+      The identity of the mint broker's report itself, a bare UUID. The broker mints it once per report and delivery retries repeat it, so several events carrying one report_id are duplicates of one report and collapse to one issuance. Present on broker_report events only.
+
+    - `session_id: string`
+
+      The Claude Code session whose request triggered the mint, e.g. "cse_01HX..." or "session_01HX..." (the session's ID is carried in whichever tagged form the session's credential presented).
+
+    - `target: string`
+
+      The credential's configured target, e.g. "aws", "gcp", or "direct".
+
+    - `test_mint: string`
+
+      Set when the token was minted by the gateway verification test that runs while an admin registers a custom-gateway audience: "wrong_subject" for the probe token the gateway must reject, "right_subject" for the control token it must accept. Empty for tokens minted for live sessions.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_threads: optional array of object`
+
+      The Slack threads in the session's provenance, when the session originated from Slack. At most 64 entries are included.
+
+      - `channel_id: string`
+
+        The Slack channel ID, e.g. "C0123ABCDE".
+
+      - `enterprise_id: string`
+
+        The Slack Enterprise Grid organization ID, e.g. "E0123ABCDE". Empty for workspaces that are not part of an Enterprise Grid.
+
+      - `team_id: string`
+
+        The Slack workspace (team) ID, e.g. "T0123ABCDE".
+
+      - `thread_ts: string`
+
+        The Slack thread timestamp within the channel, e.g. "1714000000.123456". Empty for a session bound to a whole channel rather than to one thread.
+
+    - `token_expires_at: optional string or null`
+
+      When the minted token expires.
+
+      format: date-time
+
+  - `CcrAgentProxyCredentialCreated object`
+
+    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+
+    - `type: optional "ccr_agent_proxy_credential_created"`
+
+      default: ccr_agent_proxy_credential_created
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -10476,11 +11171,15 @@ compliance activities that can be filtered by various criteria.
 
       - `via_full_manage: boolean`
 
-        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized via the per-channel `claude_tag_channel:manage` permission for the Slack channel identified below.
+        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized for the Slack channel identified below, either via the per-channel `claude_tag_channel:manage` permission or, when `via_account_assignment` is true, via a direct channel-manager assignment.
 
       - `granting_role_ids: optional array of string`
 
-        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated).
+        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated) and when `via_account_assignment` is true (no role stands behind a direct assignment).
+
+      - `via_account_assignment: optional boolean or null`
+
+        True when the actor was authorized because an owner or admin assigned them directly as a manager of the Slack channel identified below (see ccr_channel_manager_added), rather than through a permission held via a role. When true, `via_full_manage` and `via_entitlement_leg` are false and `granting_role_ids` is empty. Absent on events recorded before direct channel-manager assignments existed; treat absence as false.
 
     - `created_at: optional string`
 
@@ -10508,7 +11207,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_credential_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -10642,7 +11341,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -10748,11 +11447,15 @@ compliance activities that can be filtered by various criteria.
 
       - `via_full_manage: boolean`
 
-        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized via the per-channel `claude_tag_channel:manage` permission for the Slack channel identified below.
+        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized for the Slack channel identified below, either via the per-channel `claude_tag_channel:manage` permission or, when `via_account_assignment` is true, via a direct channel-manager assignment.
 
       - `granting_role_ids: optional array of string`
 
-        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated).
+        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated) and when `via_account_assignment` is true (no role stands behind a direct assignment).
+
+      - `via_account_assignment: optional boolean or null`
+
+        True when the actor was authorized because an owner or admin assigned them directly as a manager of the Slack channel identified below (see ccr_channel_manager_added), rather than through a permission held via a role. When true, `via_full_manage` and `via_entitlement_leg` are false and `granting_role_ids` is empty. Absent on events recorded before direct channel-manager assignments existed; treat absence as false.
 
     - `created_at: optional string`
 
@@ -10776,7 +11479,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_credential_rotated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -10910,7 +11613,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -11036,11 +11739,15 @@ compliance activities that can be filtered by various criteria.
 
       - `via_full_manage: boolean`
 
-        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized via the per-channel `claude_tag_channel:manage` permission for the Slack channel identified below.
+        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized for the Slack channel identified below, either via the per-channel `claude_tag_channel:manage` permission or, when `via_account_assignment` is true, via a direct channel-manager assignment.
 
       - `granting_role_ids: optional array of string`
 
-        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated).
+        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated) and when `via_account_assignment` is true (no role stands behind a direct assignment).
+
+      - `via_account_assignment: optional boolean or null`
+
+        True when the actor was authorized because an owner or admin assigned them directly as a manager of the Slack channel identified below (see ccr_channel_manager_added), rather than through a permission held via a role. When true, `via_full_manage` and `via_entitlement_leg` are false and `granting_role_ids` is empty. Absent on events recorded before direct channel-manager assignments existed; treat absence as false.
 
     - `created_at: optional string`
 
@@ -11064,7 +11771,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_credential_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -11198,7 +11905,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -11312,11 +12019,15 @@ compliance activities that can be filtered by various criteria.
 
       - `via_full_manage: boolean`
 
-        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized via the per-channel `claude_tag_channel:manage` permission for the Slack channel identified below.
+        True when the actor held the organization-wide Claude Tag management permission. False when the actor was instead authorized for the Slack channel identified below, either via the per-channel `claude_tag_channel:manage` permission or, when `via_account_assignment` is true, via a direct channel-manager assignment.
 
       - `granting_role_ids: optional array of string`
 
-        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated).
+        The tagged IDs of the custom roles that granted the actor the per-channel `claude_tag_channel:manage` permission, e.g. "rbac_role_01HX...". Empty when `via_full_manage` is true (the actor was authorized by the organization-wide permission, so no per-channel role grant was evaluated) and when `via_account_assignment` is true (no role stands behind a direct assignment).
+
+      - `via_account_assignment: optional boolean or null`
+
+        True when the actor was authorized because an owner or admin assigned them directly as a manager of the Slack channel identified below (see ccr_channel_manager_added), rather than through a permission held via a role. When true, `via_full_manage` and `via_entitlement_leg` are false and `granting_role_ids` is empty. Absent on events recorded before direct channel-manager assignments existed; treat absence as false.
 
     - `created_at: optional string`
 
@@ -11348,7 +12059,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_destination_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -11482,7 +12193,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -11596,7 +12307,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_network_events_listed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -11730,7 +12441,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -11838,7 +12549,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_profile_bound
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -11972,7 +12683,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -12082,7 +12793,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_profile_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -12216,7 +12927,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -12358,7 +13069,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_profile_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -12492,7 +13203,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -12618,7 +13329,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_profile_unbound
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -12752,7 +13463,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -12862,7 +13573,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_profile_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -12996,7 +13707,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -13146,7 +13857,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_provisioning_credential_rejected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -13280,7 +13991,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -13398,7 +14109,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_provisioning_link_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -13532,7 +14243,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -13646,7 +14357,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_provisioning_link_generated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -13780,7 +14491,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -13886,7 +14597,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_provisioning_link_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -14020,7 +14731,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -14126,7 +14837,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_provisioning_link_submitted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -14260,7 +14971,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -14390,7 +15101,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -14524,7 +15235,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -14716,7 +15427,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_proxy_rule_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -14850,7 +15561,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -14976,7 +15687,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -15110,7 +15821,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -15306,7 +16017,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_slack_access_scope_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -15440,7 +16151,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -15554,7 +16265,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_slack_access_scope_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -15688,7 +16399,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -15798,7 +16509,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_slack_binding_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -15932,7 +16643,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -16042,7 +16753,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_slack_binding_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -16176,7 +16887,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -16286,7 +16997,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_agent_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -16420,7 +17131,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -16538,15 +17249,15 @@ compliance activities that can be filtered by various criteria.
 
       Names of the configuration fields included in the update, e.g. "display_name", "system_prompt_addendum", "guest_policy". Includes "is_virtual" when this update was the first administrator action on an auto-provisioned agent — a durable state change even when no other field was supplied.
 
-  - `CcrRoleChannelAssignmentDeleted object`
+  - `CcrChannelManagerAdded object`
 
-    CcrRoleChannelAssignmentDeleted is emitted when an org owner/admin removes an RBAC role's channel assignment row (the role reverts to granting zero channels).
+    An org owner/admin assigned an organization member to manage the Claude-in-Slack configuration of one Slack channel.
 
-    - `type: optional "ccr_role_channel_assignment_deleted"`
+    - `type: optional "ccr_channel_manager_added"`
 
-      default: ccr_role_channel_assignment_deleted
+      default: ccr_channel_manager_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -16680,7 +17391,503 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `agent_id: string`
+
+      The channel's Claude agent (cagt_...) the assignment is recorded against.
+
+    - `slack_channel_id: string`
+
+      The Slack channel the member may now manage, e.g. "C01ABC...".
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `user_id: string`
+
+      Tagged ID of the member who was assigned.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `CcrChannelManagerRemoved object`
+
+    An org owner/admin removed an organization member's assignment to manage the Claude-in-Slack configuration of one Slack channel.
+
+    - `type: optional "ccr_channel_manager_removed"`
+
+      default: ccr_channel_manager_removed
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `agent_id: string`
+
+      The channel's Claude agent (cagt_...) the assignment was recorded against.
+
+    - `slack_channel_id: string`
+
+      The Slack channel the member managed, e.g. "C01ABC...".
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `user_id: string`
+
+      Tagged ID of the member whose assignment was removed.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `CcrRoleChannelAssignmentDeleted object`
+
+    CcrRoleChannelAssignmentDeleted is emitted when an org owner/admin removes an RBAC role's channel assignment row (the role reverts to granting zero channels).
+
+    - `type: optional "ccr_role_channel_assignment_deleted"`
+
+      default: ccr_role_channel_assignment_deleted
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -16786,7 +17993,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_role_channel_assignment_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -16920,7 +18127,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -17034,7 +18241,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_session_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -17168,7 +18375,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -17274,7 +18481,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_session_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -17408,7 +18615,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -17510,7 +18717,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_session_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -17644,7 +18851,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -17750,7 +18957,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ccr_slack_channel_joined
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -17884,7 +19091,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -17990,7 +19197,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -18124,7 +19331,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -18230,7 +19437,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_snapshot_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -18364,7 +19571,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -18466,7 +19673,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_snapshot_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -18600,7 +19807,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -18702,7 +19909,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_snapshot_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -18836,7 +20043,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -18938,7 +20145,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_artifact_duplicated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -19072,7 +20279,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -19174,15 +20381,25 @@ compliance activities that can be filtered by various criteria.
 
       The version of the source artifact that was copied into the new artifact.
 
-  - `ClaudeChatAccessFailed object`
+  - `ClaudeArtifactExternalSharingPermissionUpdated object`
 
-    A user was denied access to a Claude.ai chat conversation.
+    An organization admin allowed one artifact to be shared outside the organization by link while the organization-wide external sharing setting was off, or revoked that permission.
 
-    - `type: optional "claude_chat_access_failed"`
+    - `type: optional "claude_artifact_external_sharing_permission_updated"`
 
-      default: claude_chat_access_failed
+      default: claude_artifact_external_sharing_permission_updated
 
-    - `actor: object or object or object or 8 more`
+    - `action: "allowed" or "revoked" or "unspecified"`
+
+      Whether the permission was allowed or revoked.
+
+      - `"allowed"`
+
+      - `"revoked"`
+
+      - `"unspecified"`
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -19316,7 +20533,243 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `claude_artifact_id: string`
+
+      Tagged ID of the artifact.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeChatAccessFailed object`
+
+    A user was denied access to a Claude.ai chat conversation.
+
+    - `type: optional "claude_chat_access_failed"`
+
+      default: claude_chat_access_failed
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -19418,7 +20871,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -19552,7 +21005,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -19658,7 +21111,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -19792,7 +21245,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -19898,7 +21351,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_deletion_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -20032,7 +21485,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -20134,7 +21587,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_sync_source_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -20268,7 +21721,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -20378,7 +21831,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_sync_source_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -20512,7 +21965,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -20618,7 +22071,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_sync_source_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -20752,7 +22205,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -20866,7 +22319,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -21000,7 +22453,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -21106,7 +22559,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_chat_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -21240,7 +22693,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -21346,7 +22799,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_credential_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -21480,7 +22933,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -21618,7 +23071,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_review_config_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -21752,7 +23205,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -21898,7 +23351,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_review_repository_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -22032,7 +23485,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -22146,7 +23599,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_review_repository_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -22280,7 +23733,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -22390,7 +23843,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_review_repository_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -22524,7 +23977,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -22642,7 +24095,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_runner_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -22776,7 +24229,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -22882,7 +24335,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_runner_pool_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -23016,7 +24469,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -23122,7 +24575,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_runner_pool_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -23256,7 +24709,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -23362,7 +24815,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_runner_pool_secret_minted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -23496,7 +24949,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -23624,7 +25077,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -23758,7 +25211,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -23868,7 +25321,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_runner_pool_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -24002,7 +25455,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -24112,7 +25565,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_center_config_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -24246,7 +25699,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -24352,7 +25805,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_scan_cancelled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -24486,7 +25939,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -24590,7 +26043,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_scan_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -24724,7 +26177,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -24842,7 +26295,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -24976,7 +26429,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -25116,7 +26569,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -25250,7 +26703,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -25376,7 +26829,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -25510,7 +26963,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -25646,7 +27099,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -25780,7 +27233,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -25882,7 +27335,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_scan_schedule_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -26016,7 +27469,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -26118,7 +27571,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_scan_schedule_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -26252,7 +27705,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -26348,15 +27801,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
-  - `ClaudeCodeSecurityVulnerabilityFixSessionCreated object`
+  - `ClaudeCodeSecurityVulnerabilityDeleted object`
 
-    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+    A Claude Code Security vulnerability finding was permanently deleted.
 
-    - `type: optional "claude_code_security_vulnerability_fix_session_created"`
+    - `type: optional "claude_code_security_vulnerability_deleted"`
 
-      default: claude_code_security_vulnerability_fix_session_created
+      default: claude_code_security_vulnerability_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -26490,7 +27943,247 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the finding belonged to
+
+    - `vulnerability_id: number`
+
+      Numeric ID of the deleted finding, as shown in the product
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeCodeSecurityVulnerabilityFixSessionCreated object`
+
+    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+
+    - `type: optional "claude_code_security_vulnerability_fix_session_created"`
+
+      default: claude_code_security_vulnerability_fix_session_created
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -26624,7 +28317,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -26758,7 +28451,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -26864,7 +28557,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_webhook_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -26998,7 +28691,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -27106,7 +28799,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_webhook_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -27240,7 +28933,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -27346,7 +29039,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_webhook_secret_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -27480,7 +29173,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -27586,7 +29279,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_security_webhook_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -27720,7 +29413,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -27836,7 +29529,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -27970,7 +29663,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -28080,7 +29773,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_team_memory_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -28214,7 +29907,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -28360,7 +30053,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"updated"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -28494,7 +30187,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -28612,7 +30305,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_user_marketplaces_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -28746,7 +30439,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -28872,7 +30565,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_user_memory_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -29006,7 +30699,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -29136,7 +30829,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_user_plugins_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -29270,7 +30963,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -29396,7 +31089,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_code_user_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -29530,7 +31223,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -29666,7 +31359,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -29800,7 +31493,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -29898,7 +31591,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_file_access_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -30032,7 +31725,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -30148,7 +31841,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_file_exported
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -30282,7 +31975,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -30400,7 +32093,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_file_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -30534,7 +32227,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -30650,7 +32343,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_sync_source_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -30784,7 +32477,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -30898,7 +32591,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_sync_source_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -31032,7 +32725,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -31142,7 +32835,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_sync_source_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -31276,7 +32969,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -31394,7 +33087,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_user_seat_tier_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -31528,7 +33221,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -31642,7 +33335,7 @@ compliance activities that can be filtered by various criteria.
 
       default: cli_plugin_exec_policy_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -31776,7 +33469,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -31902,7 +33595,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_command_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -32036,7 +33729,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -32138,7 +33831,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_command_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -32272,7 +33965,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -32374,7 +34067,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_command_replaced
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -32508,7 +34201,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -32610,7 +34303,7 @@ compliance activities that can be filtered by various criteria.
 
       default: compliance_api_accessed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -32744,7 +34437,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -32872,7 +34565,7 @@ compliance activities that can be filtered by various criteria.
 
       default: cowork_session_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -33006,7 +34699,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -33112,7 +34805,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_artifact_published
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -33246,7 +34939,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -33356,7 +35049,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -33490,7 +35183,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -33604,7 +35297,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -33738,7 +35431,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -33840,7 +35533,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_member_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -33974,7 +35667,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -34092,7 +35785,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_member_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -34226,7 +35919,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -34340,7 +36033,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_member_role_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -34474,7 +36167,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -34596,7 +36289,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_published
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -34730,7 +36423,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -34836,7 +36529,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_sharing_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -34970,7 +36663,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -35092,7 +36785,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_unpublished
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -35226,7 +36919,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -35332,7 +37025,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -35466,7 +37159,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -35576,7 +37269,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_version_restored
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -35710,7 +37403,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -35820,7 +37513,7 @@ compliance activities that can be filtered by various criteria.
 
       default: design_project_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -35954,7 +37647,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -36068,7 +37761,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_allowlisted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -36202,7 +37895,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -36304,7 +37997,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_blocklisted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -36438,7 +38131,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -36540,7 +38233,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -36674,7 +38367,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -36780,7 +38473,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_removed_from_allowlist
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -36914,7 +38607,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -37016,7 +38709,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_unblocked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -37150,7 +38843,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -37252,7 +38945,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -37386,7 +39079,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -37492,7 +39185,7 @@ compliance activities that can be filtered by various criteria.
 
       default: desktop_extension_version_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -37626,7 +39319,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -37732,7 +39425,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_config_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -37866,7 +39559,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -37964,7 +39657,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_config_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -38098,7 +39791,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -38244,7 +39937,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_signing_secret_generated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -38378,7 +40071,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -38480,7 +40173,7 @@ compliance activities that can be filtered by various criteria.
 
       default: domain_claim_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -38614,7 +40307,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -38712,7 +40405,7 @@ compliance activities that can be filtered by various criteria.
 
       default: end_user_invite_requested
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -38846,7 +40539,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -38946,7 +40639,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_billing_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -39080,7 +40773,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -39178,7 +40871,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_credit_granted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -39312,7 +41005,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -39410,7 +41103,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_spend_limit_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -39544,7 +41237,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -39664,7 +41357,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_spend_limit_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -39798,7 +41491,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -39906,7 +41599,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_spend_limit_increase_request_approved
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -40040,7 +41733,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -40154,7 +41847,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_spend_limit_increase_request_denied
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -40288,7 +41981,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -40394,7 +42087,7 @@ compliance activities that can be filtered by various criteria.
 
       default: extra_usage_spend_limit_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -40528,7 +42221,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -40648,7 +42341,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_file_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -40782,7 +42475,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -40888,7 +42581,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_file_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -41022,7 +42715,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -41136,7 +42829,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_configuration_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -41270,7 +42963,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -41384,7 +43077,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_configuration_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -41518,7 +43211,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -41632,7 +43325,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_configuration_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -41766,7 +43459,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -41932,7 +43625,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_user_connected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -42066,7 +43759,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -42168,7 +43861,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_user_disconnected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -42302,7 +43995,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -42404,7 +44097,7 @@ compliance activities that can be filtered by various criteria.
 
       default: ghe_webhook_signature_invalid
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -42538,7 +44231,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -42640,7 +44333,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_github_integration_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -42774,7 +44467,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -42892,7 +44585,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_github_integration_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -43026,7 +44719,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -43144,7 +44837,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_github_integration_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -43278,7 +44971,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -43380,15 +45073,15 @@ compliance activities that can be filtered by various criteria.
 
       Name of the GitHub repository the integration is connected to, when known.
 
-  - `GitHubTokenImport object`
+  - `GitHubAppInstallationLinked object`
 
-    A user attempted to import a personal GitHub access token for use with Claude Code. The `result` field indicates the outcome of the import (imported, rejected, or failed).
+    An installation of the Claude GitHub App (a GitHub organization or user account where the App is installed) was linked to the organization, letting the organization's Claude Code features act on that GitHub account's repositories.
 
-    - `type: optional "github_token_import"`
+    - `type: optional "github_app_installation_linked"`
 
-      default: github_token_import
+      default: github_app_installation_linked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -43522,7 +45215,495 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `github_installation_id: number`
+
+      Numeric GitHub ID of the installation that was linked
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `github_account_login: optional string or null`
+
+      Login of the GitHub organization or user account the App is installed on
+
+    - `github_account_type: optional string or null`
+
+      Whether that GitHub account is an organization or a user account, as reported by GitHub ("Organization" or "User")
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `GitHubAppInstallationUnlinked object`
+
+    An installation of the Claude GitHub App was unlinked from the organization, so the organization's Claude Code features can no longer act on that GitHub account's repositories through it.
+
+    - `type: optional "github_app_installation_unlinked"`
+
+      default: github_app_installation_unlinked
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `github_installation_id: number`
+
+      Numeric GitHub ID of the installation that was unlinked
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `github_account_login: optional string or null`
+
+      Login of the GitHub organization or user account the App is installed on
+
+    - `github_account_type: optional string or null`
+
+      Whether that GitHub account is an organization or a user account, as reported by GitHub ("Organization" or "User")
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `GitHubTokenImport object`
+
+    A user attempted to import a personal GitHub access token for use with Claude Code. The `result` field indicates the outcome of the import (imported, rejected, or failed).
+
+    - `type: optional "github_token_import"`
+
+      default: github_token_import
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -43656,7 +45837,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_gdrive_integration_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -43790,7 +45971,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -43896,7 +46077,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_gdrive_integration_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -44030,7 +46211,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -44136,7 +46317,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_gdrive_integration_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -44270,7 +46451,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -44376,7 +46557,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -44510,7 +46691,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -44616,7 +46797,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -44750,7 +46931,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -44852,7 +47033,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_list_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -44986,7 +47167,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -45084,7 +47265,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_member_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -45218,7 +47399,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -45324,7 +47505,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_member_addition_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -45458,7 +47639,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -45564,7 +47745,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_member_list_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -45698,7 +47879,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -45800,7 +47981,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_member_removal_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -45934,7 +48115,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -46040,7 +48221,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_member_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -46174,7 +48355,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -46280,7 +48461,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_project_shares_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -46414,7 +48595,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -46524,7 +48705,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_skill_shares_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -46658,7 +48839,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -46772,7 +48953,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -46906,7 +49087,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -47008,7 +49189,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -47142,7 +49323,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -47244,7 +49425,7 @@ compliance activities that can be filtered by various criteria.
 
       default: group_visibility_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -47378,7 +49559,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -47536,7 +49717,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_circuit_breaker_tripped
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -47670,7 +49851,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -47780,7 +49961,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_request_denied
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -47914,7 +50095,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -48028,7 +50209,7 @@ compliance activities that can be filtered by various criteria.
 
       default: inference_hooks_request_failed_open
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -48162,7 +50343,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -48268,6 +50449,10 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `request_id: optional string or null`
+
+      Anthropic's identifier for the request that proceeded uninspected. When a call to the Inference hooks endpoint was made for this request, it carried this value as `request_id`.
+
     - `surface: optional string or null`
 
       The product surface the request came from, e.g. "claude-ai" or "claude-code".
@@ -48280,7 +50465,7 @@ compliance activities that can be filtered by various criteria.
 
       default: integration_user_connected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -48414,7 +50599,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -48528,7 +50713,7 @@ compliance activities that can be filtered by various criteria.
 
       default: integration_user_disconnected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -48662,7 +50847,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -48772,7 +50957,7 @@ compliance activities that can be filtered by various criteria.
 
       default: invoice_collection_method_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -48906,7 +51091,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -49008,7 +51193,7 @@ compliance activities that can be filtered by various criteria.
 
       default: user_logged_out
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -49142,7 +51327,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -49240,7 +51425,7 @@ compliance activities that can be filtered by various criteria.
 
       default: lti_launch_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -49374,7 +51559,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -49472,7 +51657,7 @@ compliance activities that can be filtered by various criteria.
 
       default: lti_launch_success
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -49606,7 +51791,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -49704,7 +51889,7 @@ compliance activities that can be filtered by various criteria.
 
       default: lti_platform_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -49838,7 +52023,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -49944,7 +52129,7 @@ compliance activities that can be filtered by various criteria.
 
       default: lti_platform_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -50078,7 +52263,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -50184,7 +52369,7 @@ compliance activities that can be filtered by various criteria.
 
       default: magic_link_login_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -50318,7 +52503,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -50416,7 +52601,7 @@ compliance activities that can be filtered by various criteria.
 
       default: magic_link_login_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -50550,7 +52735,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -50648,7 +52833,7 @@ compliance activities that can be filtered by various criteria.
 
       default: magic_link_login_succeeded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -50782,7 +52967,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -50896,7 +53081,7 @@ compliance activities that can be filtered by various criteria.
 
       default: managed_organization_setup_completed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -51030,7 +53215,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -51128,7 +53313,7 @@ compliance activities that can be filtered by various criteria.
 
       default: marketplace_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -51262,7 +53447,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -51368,7 +53553,7 @@ compliance activities that can be filtered by various criteria.
 
       default: marketplace_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -51502,7 +53687,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -51604,7 +53789,7 @@ compliance activities that can be filtered by various criteria.
 
       default: marketplace_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -51738,7 +53923,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -51860,7 +54045,7 @@ compliance activities that can be filtered by various criteria.
 
       default: marketplace_webhook_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -51994,7 +54179,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -52096,7 +54281,7 @@ compliance activities that can be filtered by various criteria.
 
       default: marketplace_webhook_provisioned
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -52230,7 +54415,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -52336,7 +54521,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_directory_server_published
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -52470,7 +54655,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -52576,7 +54761,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_server_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -52710,7 +54895,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -52816,7 +55001,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_server_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -52950,7 +55135,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -53056,7 +55241,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_server_managed_auth_token_exchanged
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -53190,7 +55375,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -53324,7 +55509,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_server_managed_auth_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -53458,7 +55643,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -53570,7 +55755,7 @@ compliance activities that can be filtered by various criteria.
 
     - `mcp_server_url: optional string or null`
 
-      Base URL (scheme, host, port, and path only) of the MCP server at the time of the change; null when not available.
+      Origin (scheme, host and port, the default port omitted) of the MCP server at the time of the change; the path is never included. Null when not available.
 
     - `organization_id: optional string or null`
 
@@ -53604,7 +55789,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_server_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -53738,7 +55923,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -53844,7 +56029,7 @@ compliance activities that can be filtered by various criteria.
 
       default: mcp_tool_policy_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -53978,7 +56163,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -54092,7 +56277,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_analytics_api_capability_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -54226,7 +56411,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -54332,7 +56517,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_bulk_delete_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -54466,7 +56651,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -54564,7 +56749,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_capability_grant_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -54698,7 +56883,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -54814,7 +56999,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_capability_grant_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -54948,7 +57133,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -55064,7 +57249,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_claude_code_data_sharing_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -55198,7 +57383,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -55304,7 +57489,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_claude_code_data_sharing_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -55438,7 +57623,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -55544,7 +57729,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_claude_code_desktop_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -55678,7 +57863,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -55784,7 +57969,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_claude_code_desktop_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -55918,7 +58103,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -56024,7 +58209,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_claude_code_zero_data_retention_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -56158,7 +58343,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -56256,7 +58441,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_compliance_api_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -56390,7 +58575,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -56496,7 +58681,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_connector_domain_guard_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -56630,7 +58815,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -56730,7 +58915,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_act_without_asking_mode_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -56864,7 +59049,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -56962,7 +59147,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_act_without_asking_mode_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -57096,7 +59281,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -57194,7 +59379,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_agent_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -57328,7 +59513,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -57434,7 +59619,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_agent_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -57568,7 +59753,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -57674,7 +59859,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_auto_mode_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -57808,7 +59993,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -57906,7 +60091,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_auto_mode_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -58040,7 +60225,471 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `OrgCoworkBrowserPaneDisabled object`
+
+    The in-app browser in Cowork was disabled for the organization, so Claude can no longer open or use websites in a browser pane during members' Cowork sessions.
+
+    - `type: optional "org_cowork_browser_pane_disabled"`
+
+      default: org_cowork_browser_pane_disabled
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `OrgCoworkBrowserPaneEnabled object`
+
+    The in-app browser in Cowork was enabled for the organization, letting Claude open and use websites in a browser pane during members' Cowork sessions.
+
+    - `type: optional "org_cowork_browser_pane_enabled"`
+
+      default: org_cowork_browser_pane_enabled
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -58138,7 +60787,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -58272,7 +60921,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -58378,7 +61027,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -58512,7 +61161,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -58618,7 +61267,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_mcp_always_allow_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -58752,7 +61401,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -58850,7 +61499,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_mcp_always_allow_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -58984,7 +61633,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -59082,7 +61731,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_otlp_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -59216,7 +61865,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -59356,7 +62005,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_remote_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -59490,7 +62139,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -59588,7 +62237,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_cowork_remote_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -59722,7 +62371,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -59820,7 +62469,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_creation_blocked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -59954,7 +62603,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -60056,7 +62705,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_data_export_accessed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -60190,7 +62839,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -60298,7 +62947,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_data_export_completed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -60432,7 +63081,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -60540,7 +63189,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_data_export_started
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -60674,7 +63323,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -60792,7 +63441,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_data_residency_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -60926,7 +63575,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -61046,7 +63695,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_deleted_via_bulk
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -61180,7 +63829,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -61278,7 +63927,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_deletion_requested
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -61412,7 +64061,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -61510,7 +64159,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_resync_completed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -61644,7 +64293,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -61746,7 +64395,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_resync_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -61880,7 +64529,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -61982,7 +64631,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_resync_started
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -62116,7 +64765,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -62222,7 +64871,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_sync_activated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -62356,7 +65005,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -62454,7 +65103,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_sync_add_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -62588,7 +65237,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -62686,7 +65335,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_directory_sync_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -62820,7 +65469,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -62918,7 +65567,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_discoverability_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -63052,7 +65701,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -63150,7 +65799,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_discoverability_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -63284,7 +65933,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -63382,7 +66031,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_discoverability_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -63516,7 +66165,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -63614,7 +66263,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_domain_add_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -63748,7 +66397,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -63846,7 +66495,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_domain_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -63980,7 +66629,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -64082,7 +66731,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_domain_verified
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -64216,7 +66865,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -64318,7 +66967,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_external_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -64452,7 +67101,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -64566,7 +67215,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_external_key_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -64700,7 +67349,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -64802,7 +67451,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_external_key_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -64936,7 +67585,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -65062,7 +67711,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_external_key_validated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -65196,7 +67845,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -65308,7 +67957,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_hipaa_self_serve_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -65442,7 +68091,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -65552,7 +68201,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_ip_restriction_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -65686,7 +68335,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -65784,7 +68433,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_ip_restriction_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -65918,7 +68567,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -66016,7 +68665,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_ip_restriction_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -66150,7 +68799,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -66248,7 +68897,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_invite_link_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -66382,7 +69031,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -66480,7 +69129,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_invite_link_generated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -66614,7 +69263,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -66712,7 +69361,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_invite_link_regenerated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -66846,7 +69495,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -66944,7 +69593,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_invite_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -67078,7 +69727,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -67180,7 +69829,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_invites_listed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -67314,7 +69963,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -67412,7 +70061,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_proposal_decided
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -67546,7 +70195,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -67646,7 +70295,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_request_approved
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -67780,7 +70429,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -67878,7 +70527,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_request_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -68012,7 +70661,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -68110,7 +70759,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_request_dismissed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -68244,7 +70893,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -68342,7 +70991,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_request_instant_approved
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -68476,7 +71125,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -68574,7 +71223,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_join_requests_bulk_dismissed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -68708,7 +71357,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -68806,7 +71455,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_magic_link_second_factor_toggled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -68940,7 +71589,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -69042,7 +71691,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_member_invites_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -69176,7 +71825,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -69274,7 +71923,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_member_invites_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -69408,7 +72057,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -69506,7 +72155,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_members_exported
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -69640,7 +72289,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -69748,7 +72397,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -69882,7 +72531,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -70018,7 +72667,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_parent_join_proposal_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -70152,7 +72801,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -70250,7 +72899,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_parent_search_performed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -70384,7 +73033,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -70482,7 +73131,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_add_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -70616,7 +73265,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -70714,7 +73363,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_connection_activated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -70848,7 +73497,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -70954,7 +73603,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_connection_deactivated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -71088,7 +73737,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -71190,7 +73839,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_connection_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -71324,7 +73973,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -71426,7 +74075,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_group_role_mappings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -71560,7 +74209,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -71658,7 +74307,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_provisioning_mode_changed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -71792,7 +74441,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -71898,7 +74547,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_scim_welcome_email_toggled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -72032,7 +74681,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -72138,7 +74787,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_seat_tier_assignment_toggled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -72272,7 +74921,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -72378,7 +75027,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_seat_tier_mappings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -72512,7 +75161,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -72634,7 +75283,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sso_toggled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -72768,7 +75417,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -72870,7 +75519,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sync_deleting_synchronized_files_started
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -73004,7 +75653,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -73102,7 +75751,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_sync_synchronized_files_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -73236,7 +75885,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -73334,7 +75983,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_taint_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -73468,7 +76117,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -73574,7 +76223,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_taint_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -73708,7 +76357,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -73810,7 +76459,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -73944,7 +76593,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -74050,7 +76699,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_invite_accepted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -74184,7 +76833,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -74290,7 +76939,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_invite_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -74424,7 +77073,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -74526,7 +77175,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_invite_re_sent
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -74660,7 +77309,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -74770,7 +77419,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_invite_rejected
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -74904,7 +77553,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -75006,7 +77655,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_invite_sent
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -75140,7 +77789,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -75254,7 +77903,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_left
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -75388,7 +78037,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -75490,7 +78139,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_shares_retained
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -75624,7 +78273,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -75754,7 +78403,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_trusted_devices_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -75888,7 +78537,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -76002,7 +78651,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_user_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -76136,7 +78785,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -76238,7 +78887,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_users_listed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -76372,7 +79021,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -76470,7 +79119,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_work_across_apps_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -76604,7 +79253,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -76710,7 +79359,7 @@ compliance activities that can be filtered by various criteria.
 
       default: org_work_across_apps_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -76844,7 +79493,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -76950,7 +79599,7 @@ compliance activities that can be filtered by various criteria.
 
       default: organization_address_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -77084,7 +79733,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -77198,7 +79847,7 @@ compliance activities that can be filtered by various criteria.
 
       default: organization_icon_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -77332,7 +79981,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -77430,7 +80079,7 @@ compliance activities that can be filtered by various criteria.
 
       default: organization_icon_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -77564,7 +80213,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -77662,7 +80311,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_organization_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -77796,7 +80445,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -77868,7 +80517,7 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `updates: array of object or object or object or 92 more`
+    - `updates: array of Name or Capabilities or RedactContent or 94 more`
 
       - `Name object`
 
@@ -78176,7 +80825,7 @@ compliance activities that can be filtered by various criteria.
 
       - `ClaudeCodeWebEnabled object`
 
-        The Claude Code on the web setting was changed for the organization.
+        The Claude Code cloud sessions setting was changed for the organization.
 
         - `type: optional "claude_code_web_enabled"`
 
@@ -79595,6 +82244,38 @@ compliance activities that can be filtered by various criteria.
 
           Setting value immediately before this change
 
+      - `PasswordManagerIntegrationEnabled object`
+
+        The password manager integration setting was changed for the organization.
+
+        - `type: optional "password_manager_integration_enabled"`
+
+          default: password_manager_integration_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change
+
+      - `APIKeyCreationEnabled object`
+
+        The setting that allows members to create new API keys was changed for the organization.
+
+        - `type: optional "api_key_creation_enabled"`
+
+          default: api_key_creation_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change
+
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -79621,7 +82302,7 @@ compliance activities that can be filtered by various criteria.
 
       default: owned_projects_access_restored
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -79755,7 +82436,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -79857,7 +82538,7 @@ compliance activities that can be filtered by various criteria.
 
       default: payment_method_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -79991,7 +82672,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -80089,7 +82770,7 @@ compliance activities that can be filtered by various criteria.
 
       default: pending_share_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -80223,7 +82904,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -80337,7 +83018,7 @@ compliance activities that can be filtered by various criteria.
 
       default: pending_share_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -80471,7 +83152,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -80581,7 +83262,7 @@ compliance activities that can be filtered by various criteria.
 
       default: phone_code_sent
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -80715,7 +83396,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -80813,7 +83494,7 @@ compliance activities that can be filtered by various criteria.
 
       default: phone_code_verified
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -80947,7 +83628,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -81045,7 +83726,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -81179,7 +83860,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -81285,7 +83966,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -81419,7 +84100,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -81525,7 +84206,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -81659,7 +84340,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -81765,7 +84446,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -81899,7 +84580,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -82005,7 +84686,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -82139,7 +84820,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -82245,7 +84926,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -82379,7 +85060,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -82485,7 +85166,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_paused
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -82619,7 +85300,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -82725,7 +85406,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_run_triggered
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -82859,7 +85540,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -82965,7 +85646,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_unpaused
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -83099,7 +85780,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -83205,7 +85886,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_deployment_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -83339,7 +86020,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -83445,7 +86126,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -83579,7 +86260,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -83685,7 +86366,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -83819,7 +86500,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -83925,7 +86606,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -84059,7 +86740,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -84165,7 +86846,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_resource_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -84299,7 +86980,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -84409,7 +87090,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_resource_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -84543,7 +87224,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -84653,7 +87334,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_resource_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -84787,7 +87468,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -84897,7 +87578,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_thread_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -85031,7 +87712,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -85141,7 +87822,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_session_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -85275,7 +87956,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -85381,7 +88062,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_agent_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -85515,7 +88196,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -85621,7 +88302,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_api_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -85755,7 +88436,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -85863,7 +88544,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"user"`
 
-    - `scope: optional object or object or null`
+    - `scope: optional Organization or Workspace or null`
 
       Where the API key belongs: one workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the workspace's ID even when it is the organization's default workspace), or the whole organization (`{"type": "organization"}`) for an identity-linked API key that has no workspace. May be absent on activities recorded before this field was introduced.
 
@@ -85895,7 +88576,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_api_key_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -86029,7 +88710,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -86155,7 +88836,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_app_attest_authentication
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -86289,7 +88970,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -86419,7 +89100,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_billing_upgraded_to_prepaid
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -86553,7 +89234,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -86655,7 +89336,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_clearance_workspace_program_request_cleared
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -86789,7 +89470,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -86895,7 +89576,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_clearance_workspace_program_request_set
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -87029,7 +89710,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -87145,7 +89826,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_cost_report_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -87279,7 +89960,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -87377,7 +90058,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_dream_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -87511,7 +90192,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -87617,7 +90298,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_dream_cancelled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -87751,7 +90432,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -87857,7 +90538,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_dream_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -87991,7 +90672,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -88097,7 +90778,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_federated_authentication
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -88231,7 +90912,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -88389,7 +91070,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_federation_issuer_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -88523,7 +91204,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -88617,15 +91298,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
-  - `PlatformFederationIssuerUpdated object`
+  - `PlatformFederationIssuerCreated object`
 
-    An OIDC federation issuer was updated.
+    An OIDC federation issuer was created, registering an external identity provider that federation rules can trust for workload authentication.
 
-    - `type: optional "platform_federation_issuer_updated"`
+    - `type: optional "platform_federation_issuer_created"`
 
-      default: platform_federation_issuer_updated
+      default: platform_federation_issuer_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -88759,7 +91440,259 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `federation_issuer_id: string`
+
+      Tagged ID of the created issuer, e.g. "fdis_..."
+
+    - `issuer_url: string`
+
+      URL of the external OIDC identity provider that was registered
+
+    - `jwks_source: string`
+
+      How the issuer's token-signing keys are obtained — typically "discovery" (the issuer's OIDC discovery document), "explicit_url" (a fixed JWKS URL), or "inline" (keys supplied directly at registration). An unrecognized source is recorded verbatim.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `discovery_base: optional string or null`
+
+      Base URL for the OIDC discovery document, if a custom base was registered. Only present when jwks_source is "discovery".
+
+    - `jwks_url: optional string or null`
+
+      The fixed URL where the issuer publishes its token-signing keys. Only present when jwks_source is "explicit_url".
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `PlatformFederationIssuerUpdated object`
+
+    An OIDC federation issuer was updated.
+
+    - `type: optional "platform_federation_issuer_updated"`
+
+      default: platform_federation_issuer_updated
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -88899,7 +91832,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_federation_rule_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -89033,7 +91966,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -89127,15 +92060,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
-  - `PlatformFederationRuleUpdated object`
+  - `PlatformFederationRuleCreated object`
 
-    An OIDC federation rule was updated.
+    An OIDC federation rule was created, allowing tokens from a federation issuer to authenticate as a service account or user. Rules may additionally match on token claims or a condition expression, which are not included in this event.
 
-    - `type: optional "platform_federation_rule_updated"`
+    - `type: optional "platform_federation_rule_created"`
 
-      default: platform_federation_rule_updated
+      default: platform_federation_rule_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -89269,7 +92202,279 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `applies_to_all_workspaces: boolean`
+
+      Whether the rule applies to all workspaces in the organization.
+
+    - `federation_issuer_id: string`
+
+      Tagged ID of the federation issuer the rule trusts
+
+    - `federation_rule_id: string`
+
+      Tagged ID of the created rule, e.g. "fdrl_..."
+
+    - `oauth_scope: string`
+
+      Space-separated OAuth scopes that tokens minted through the rule carry, e.g. "workspace:inference" or "org:admin".
+
+    - `target_type: string`
+
+      What the rule authenticates as — typically "service_account" or "user". An unrecognized kind is recorded verbatim.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `match_audience: optional string or null`
+
+      Token audience the rule matches, if one was set.
+
+    - `match_subject_prefix: optional string or null`
+
+      Matcher for the token's `sub` claim, if one was set: exact match unless the value ends with `*`, which makes it a prefix match. An empty value matches any subject. Example: "repo:acme/*".
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `target_id: optional string or null`
+
+      Tagged ID of the service account the rule authenticates as, e.g. "svac_...". Absent when target_type is "user": user rules identify the target by token-claim lookup rather than a fixed ID.
+
+    - `target_lookup_attr: optional string or null`
+
+      Name of the rule attribute whose value resolves the target user. Only present when target_type is "user".
+
+    - `workspace_id: optional string or null`
+
+      Tagged ID of the workspace the rule references, if one was set. May be set alongside applies_to_all_workspaces, which takes precedence: the rule then covers every workspace in the organization.
+
+  - `PlatformFederationRuleUpdated object`
+
+    An OIDC federation rule was updated.
+
+    - `type: optional "platform_federation_rule_updated"`
+
+      default: platform_federation_rule_updated
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -89417,7 +92622,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_federation_rule_workspace_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -89551,7 +92756,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -89657,7 +92862,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_federation_rule_workspace_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -89791,7 +92996,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -89897,7 +93102,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_file_content_downloaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -90031,7 +93236,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -90133,7 +93338,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_file_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -90267,7 +93472,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -90369,7 +93574,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_file_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -90503,7 +93708,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -90609,7 +93814,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -90743,7 +93948,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -90857,7 +94062,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -90991,7 +94196,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -91105,7 +94310,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_store_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -91239,7 +94444,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -91345,7 +94550,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_store_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -91479,7 +94684,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -91585,7 +94790,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_store_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -91719,7 +94924,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -91825,7 +95030,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_store_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -91959,7 +95164,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -92065,7 +95270,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -92199,7 +95404,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -92313,7 +95518,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_memory_version_redacted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -92447,7 +95652,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -92561,7 +95766,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_oauth_app_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -92695,7 +95900,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -92801,7 +96006,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_oauth_app_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -92935,7 +96140,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -93037,7 +96242,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_oauth_app_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -93171,7 +96376,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -93299,7 +96504,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_plugin_directory_submission_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -93433,7 +96638,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -93539,7 +96744,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_plugin_directory_submission_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -93673,7 +96878,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -93775,7 +96980,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_plugin_directory_submission_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -93909,7 +97114,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -94015,7 +97220,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_service_account_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -94149,7 +97354,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -94243,15 +97448,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
-  - `PlatformServiceAccountUpdated object`
+  - `PlatformServiceAccountCreated object`
 
-    A service account was updated.
+    A service account was created.
 
-    - `type: optional "platform_service_account_updated"`
+    - `type: optional "platform_service_account_created"`
 
-      default: platform_service_account_updated
+      default: platform_service_account_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -94385,7 +97590,247 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+
+          - `FederatedActorAwsProvider object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `FederatedActorAzureProvider object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `FederatedActorGcpProvider object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `FederatedActorOidcProvider object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `organization_role: string`
+
+      Organization role the service account was created with — typically "admin" or "developer". A role this service does not recognize is recorded verbatim.
+
+    - `service_account_id: string`
+
+      Tagged ID of the created service account, e.g. "svac_..."
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `PlatformServiceAccountUpdated object`
+
+    A service account was updated.
+
+    - `type: optional "platform_service_account_updated"`
+
+      default: platform_service_account_updated
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -94509,7 +97954,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_service_account_workspace_member_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -94643,7 +98088,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -94753,7 +98198,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_service_account_workspace_member_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -94887,7 +98332,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -94993,7 +98438,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_service_account_workspace_member_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -95127,7 +98572,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -95253,7 +98698,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_signing_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -95387,7 +98832,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -95501,7 +98946,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_signing_key_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -95635,7 +99080,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -95749,7 +99194,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_signing_key_rotated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -95883,7 +99328,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -95997,7 +99442,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_skill_version_content_downloaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -96131,7 +99576,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -96237,7 +99682,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_skill_version_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -96371,7 +99816,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -96477,7 +99922,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_skill_version_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -96611,7 +100056,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -96717,7 +100162,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_spend_limit_alert_emails_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -96851,7 +100296,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -96957,7 +100402,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_spend_limit_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -97091,7 +100536,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -97197,7 +100642,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_spend_limit_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -97331,7 +100776,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -97433,7 +100878,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_spend_limit_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -97567,7 +101012,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -97673,7 +101118,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_usage_report_claude_code_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -97807,7 +101252,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -97905,7 +101350,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_usage_report_messages_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -98039,7 +101484,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -98137,7 +101582,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -98271,7 +101716,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -98373,7 +101818,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -98507,7 +101952,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -98609,7 +102054,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_inference_data_retention_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -98743,7 +102188,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -98849,7 +102294,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_inference_data_retention_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -98983,7 +102428,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -99089,7 +102534,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_member_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -99223,7 +102668,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -99329,7 +102774,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_member_removed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -99463,7 +102908,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -99569,7 +103014,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_member_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -99703,7 +103148,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -99829,7 +103274,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_member_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -99963,7 +103408,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -100069,7 +103514,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_members_listed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -100203,7 +103648,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -100305,7 +103750,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_rate_limit_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -100439,7 +103884,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -100549,7 +103994,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_rate_limit_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -100683,7 +104128,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -100797,7 +104242,7 @@ compliance activities that can be filtered by various criteria.
 
       default: platform_workspace_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -100931,7 +104376,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -101063,7 +104508,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -101197,7 +104642,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -101299,7 +104744,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -101433,7 +104878,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -101535,7 +104980,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -101669,7 +105114,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -101779,7 +105224,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -101913,7 +105358,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -102023,7 +105468,7 @@ compliance activities that can be filtered by various criteria.
 
       default: plugin_installation_preference_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -102157,7 +105602,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -102283,7 +105728,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_replaced
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -102417,7 +105862,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -102519,7 +105964,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_security_scan_completed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -102653,7 +106098,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -102781,7 +106226,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_plugin_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -102915,7 +106360,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -103017,7 +106462,7 @@ compliance activities that can be filtered by various criteria.
 
       default: prepaid_auto_recharge_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -103151,7 +106596,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -103249,7 +106694,7 @@ compliance activities that can be filtered by various criteria.
 
       default: prepaid_auto_recharge_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -103383,7 +106828,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -103489,7 +106934,7 @@ compliance activities that can be filtered by various criteria.
 
       default: prepaid_extra_usage_auto_reload_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -103623,7 +107068,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -103721,7 +107166,7 @@ compliance activities that can be filtered by various criteria.
 
       default: prepaid_extra_usage_auto_reload_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -103855,7 +107300,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -103953,7 +107398,7 @@ compliance activities that can be filtered by various criteria.
 
       default: prepaid_extra_usage_auto_reload_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -104087,7 +107532,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -104185,7 +107630,7 @@ compliance activities that can be filtered by various criteria.
 
       default: primary_owner_transferred
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -104319,7 +107764,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -104425,7 +107870,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -104559,7 +108004,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -104661,7 +108106,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -104795,7 +108240,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -104897,7 +108342,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -105031,7 +108476,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -105133,7 +108578,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_access_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -105267,7 +108712,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -105377,7 +108822,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_bulk_deletion_audit_truncated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -105511,7 +108956,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -105621,7 +109066,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -105755,7 +109200,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -105865,7 +109310,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_deletion_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -105999,7 +109444,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -106109,7 +109554,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -106243,7 +109688,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -106353,7 +109798,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -106487,7 +109932,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -106597,7 +110042,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_document_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -106731,7 +110176,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -106841,7 +110286,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_file_access_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -106975,7 +110420,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -107081,7 +110526,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_file_bulk_deletion_audit_truncated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -107215,7 +110660,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -107325,7 +110770,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_file_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -107459,7 +110904,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -107565,7 +111010,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_file_deletion_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -107699,7 +111144,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -107805,7 +111250,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_file_uploaded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -107939,7 +111384,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -108049,7 +111494,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_reported
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -108183,7 +111628,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -108285,7 +111730,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_sharing_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -108419,7 +111864,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -108491,7 +111936,7 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `audience: array of object or object`
+    - `audience: array of Public or Organization`
 
       Sharing audience for the project. If empty, it's only visible to the creating user.
 
@@ -108541,7 +111986,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_project_viewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -108675,7 +112120,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -108781,7 +112226,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_pubsec_identity_configured
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -108915,7 +112360,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -109019,7 +112464,7 @@ compliance activities that can be filtered by various criteria.
 
       default: rbac_role_assigned
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -109153,7 +112598,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -109263,7 +112708,7 @@ compliance activities that can be filtered by various criteria.
 
       default: rbac_role_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -109397,7 +112842,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -109503,7 +112948,7 @@ compliance activities that can be filtered by various criteria.
 
       default: rbac_role_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -109637,7 +113082,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -109752,7 +113197,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -109886,7 +113331,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -109999,7 +113444,7 @@ compliance activities that can be filtered by various criteria.
 
       Action permitted on the resource
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -110133,7 +113578,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -110251,7 +113696,7 @@ compliance activities that can be filtered by various criteria.
 
       Action that was permitted on the resource
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -110385,7 +113830,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -110495,7 +113940,7 @@ compliance activities that can be filtered by various criteria.
 
       default: rbac_role_unassigned
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -110629,7 +114074,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -110739,7 +114184,7 @@ compliance activities that can be filtered by various criteria.
 
       default: rbac_role_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -110873,7 +114318,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -110975,7 +114420,7 @@ compliance activities that can be filtered by various criteria.
 
       default: role_assignment_granted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -111109,7 +114554,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -111231,7 +114676,7 @@ compliance activities that can be filtered by various criteria.
 
       default: role_assignment_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -111365,7 +114810,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -111487,7 +114932,7 @@ compliance activities that can be filtered by various criteria.
 
       default: sso_login_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -111621,7 +115066,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -111719,7 +115164,7 @@ compliance activities that can be filtered by various criteria.
 
       default: sso_login_initiated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -111853,7 +115298,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -111951,7 +115396,7 @@ compliance activities that can be filtered by various criteria.
 
       default: sso_login_succeeded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -112085,7 +115530,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -112199,7 +115644,7 @@ compliance activities that can be filtered by various criteria.
 
       default: sso_second_factor_magic_link
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -112333,7 +115778,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -112431,7 +115876,7 @@ compliance activities that can be filtered by various criteria.
 
       default: scim_user_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -112565,7 +116010,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -112665,7 +116110,7 @@ compliance activities that can be filtered by various criteria.
 
       default: scim_user_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -112799,7 +116244,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -112899,7 +116344,7 @@ compliance activities that can be filtered by various criteria.
 
       default: scim_user_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -113033,7 +116478,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -113133,7 +116578,7 @@ compliance activities that can be filtered by various criteria.
 
       default: scoped_api_key_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -113267,7 +116712,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -113377,7 +116822,7 @@ compliance activities that can be filtered by various criteria.
 
       default: scoped_api_key_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -113511,7 +116956,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -113635,7 +117080,7 @@ compliance activities that can be filtered by various criteria.
 
       default: seat_tier_changes_cancelled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -113769,7 +117214,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -113867,7 +117312,7 @@ compliance activities that can be filtered by various criteria.
 
       default: seat_tiers_purchased
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -114001,7 +117446,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -114103,7 +117548,7 @@ compliance activities that can be filtered by various criteria.
 
       default: service_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -114237,7 +117682,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -114339,7 +117784,7 @@ compliance activities that can be filtered by various criteria.
 
       default: service_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -114473,7 +117918,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -114575,7 +118020,7 @@ compliance activities that can be filtered by various criteria.
 
       default: service_key_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -114709,7 +118154,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -114827,7 +118272,7 @@ compliance activities that can be filtered by various criteria.
 
       default: service_key_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -114961,7 +118406,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -115067,7 +118512,7 @@ compliance activities that can be filtered by various criteria.
 
       default: session_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -115201,7 +118646,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -115299,7 +118744,7 @@ compliance activities that can be filtered by various criteria.
 
       default: session_share_accessed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -115433,7 +118878,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -115533,7 +118978,7 @@ compliance activities that can be filtered by various criteria.
 
       default: session_share_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -115667,7 +119112,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -115771,7 +119216,7 @@ compliance activities that can be filtered by various criteria.
 
       default: session_share_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -115905,7 +119350,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -116009,7 +119454,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -116143,7 +119588,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -116263,7 +119708,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -116397,7 +119842,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -116523,7 +119968,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_disabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -116657,7 +120102,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -116759,7 +120204,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_enabled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -116893,7 +120338,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -116995,7 +120440,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_replaced
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -117129,7 +120574,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -117249,7 +120694,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_skill_security_scan_completed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -117383,7 +120828,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -117511,7 +120956,7 @@ compliance activities that can be filtered by various criteria.
 
       default: slack_workspace_claim_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -117645,7 +121090,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -117751,7 +121196,7 @@ compliance activities that can be filtered by various criteria.
 
       default: slack_workspace_claimed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -117885,7 +121330,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -117991,7 +121436,7 @@ compliance activities that can be filtered by various criteria.
 
       default: social_login_succeeded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -118125,7 +121570,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -118251,7 +121696,7 @@ compliance activities that can be filtered by various criteria.
 
       default: step_up_authentication_failed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -118385,7 +121830,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -118507,7 +121952,7 @@ compliance activities that can be filtered by various criteria.
 
       default: step_up_authentication_succeeded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -118641,7 +122086,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -118753,7 +122198,7 @@ compliance activities that can be filtered by various criteria.
 
       default: step_up_credential_enrolled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -118887,7 +122332,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -118989,7 +122434,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_cancellation_scheduled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -119123,7 +122568,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -119221,7 +122666,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_quantity_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -119355,7 +122800,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -119465,7 +122910,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_renewed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -119599,7 +123044,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -119705,7 +123150,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_resumed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -119839,7 +123284,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -119937,7 +123382,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_started
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -120071,7 +123516,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -120181,7 +123626,7 @@ compliance activities that can be filtered by various criteria.
 
       default: subscription_upgraded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -120315,7 +123760,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -120421,7 +123866,7 @@ compliance activities that can be filtered by various criteria.
 
       default: trusted_device_credential_rotated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -120555,7 +124000,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -120657,7 +124102,7 @@ compliance activities that can be filtered by various criteria.
 
       default: trusted_device_enrolled
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -120791,7 +124236,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -120921,7 +124366,7 @@ compliance activities that can be filtered by various criteria.
 
       default: trusted_device_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -121055,7 +124500,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -121173,7 +124618,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_archived
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -121307,7 +124752,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -121407,7 +124852,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_certificate_added
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -121541,7 +124986,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -121645,7 +125090,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_certificate_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -121779,7 +125224,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -121883,7 +125328,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -122017,7 +125462,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -122109,6 +125554,10 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `tunnel_token_id: optional string or null`
+
+      Id of the tunnel token issued with the tunnel and returned once in the create response; set only when creating the tunnel also issued its token, and absent for a tunnel whose token is revealed separately
+
   - `TunnelTokenMinted object`
 
     An OAuth bearer token for the tunnel management API was minted.
@@ -122117,7 +125566,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_token_minted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -122251,7 +125700,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -122353,7 +125802,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_token_revealed
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -122487,7 +125936,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -122589,7 +126038,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_token_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -122723,7 +126172,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -122830,7 +126279,7 @@ compliance activities that can be filtered by various criteria.
 
       default: tunnel_token_rotated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -122964,7 +126413,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -123068,7 +126517,7 @@ compliance activities that can be filtered by various criteria.
 
       default: user_consent_recorded
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -123202,7 +126651,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -123306,7 +126755,7 @@ compliance activities that can be filtered by various criteria.
 
       default: user_consent_revoked
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -123440,7 +126889,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -123546,7 +126995,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_user_role_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -123680,7 +127129,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -123794,7 +127243,7 @@ compliance activities that can be filtered by various criteria.
 
       default: claude_user_settings_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -123928,7 +127377,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -124000,7 +127449,7 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `updates: array of object or object or object or 19 more`
+    - `updates: array of FullName or DisplayName or ArtifactsEnabled or 19 more`
 
       - `FullName object`
 
@@ -124380,7 +127829,7 @@ compliance activities that can be filtered by various criteria.
 
       default: verification_evidence_submitted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -124514,7 +127963,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -124620,7 +128069,7 @@ compliance activities that can be filtered by various criteria.
 
       default: verification_program_application_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -124754,7 +128203,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -124856,7 +128305,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_member_spend_limit_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -124990,7 +128439,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -125104,7 +128553,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_member_spend_limit_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -125238,7 +128687,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -125348,7 +128797,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_member_spend_limit_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -125482,7 +128931,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -125596,7 +129045,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_spend_limit_alert_emails_updated
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -125730,7 +129179,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -125836,7 +129285,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_spend_limit_created
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -125970,7 +129419,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -126080,7 +129529,7 @@ compliance activities that can be filtered by various criteria.
 
       default: workspace_spend_limit_deleted
 
-    - `actor: object or object or object or 8 more`
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
 
       - `APIActor object`
 
@@ -126214,7 +129663,7 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: object or object or object or object`
+        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
 
           - `FederatedActorAwsProvider object`
 
@@ -126324,6 +129773,7 @@ compliance activities that can be filtered by various criteria.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/activities \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126380,12 +129830,6 @@ Returns organizations sorted by creation date in ascending order. Use
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -126418,6 +129862,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126465,12 +129910,6 @@ List current user members of an organization.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -126497,7 +129936,7 @@ List current user members of an organization.
 
     User's current full name
 
-  - `organization_role: "admin" or "billing" or "claude_code_user" or 6 more`
+  - `organization_role: "admin" or "billing" or "claude_code_user" or 8 more`
 
     User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
@@ -126515,6 +129954,10 @@ List current user members of an organization.
 
     - `"owner"`
 
+    - `"parent_org_admin"`
+
+    - `"parent_org_owner"`
+
     - `"primary_owner"`
 
     - `"user"`
@@ -126531,6 +129974,7 @@ List current user members of an organization.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126580,12 +130024,6 @@ List Compliance Roles
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -126630,6 +130068,7 @@ List Compliance Roles
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126669,12 +130108,6 @@ Get Compliance Role
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -126707,6 +130140,7 @@ Get Compliance Role
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126754,12 +130188,6 @@ List Compliance Role Permissions
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -126792,6 +130220,7 @@ List Compliance Role Permissions
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID/permissions \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -126824,6 +130253,13 @@ enforced state after all policies are applied, which may differ from what
 is configured in the admin console. Settings an organization's
 administrators cannot change (for example, ones controlled by Anthropic
 policy or not available to the organization) are omitted from the list.
+Settings that report a compliance arrangement with Anthropic are the
+exception: the HIPAA and Access Transparency settings are always included;
+the API zero data retention setting is reported for Claude Console
+organizations, and the Claude Code zero data retention and customer-managed
+encryption keys (CMEK) settings for Claude Enterprise organizations. Each
+reports whether the arrangement is in place at the organization level; a
+retention setting on an individual workspace is not reflected.
 
 The organization must belong to the API key's organization hierarchy;
 unknown organizations and organizations outside the hierarchy return 404.
@@ -126835,12 +130271,6 @@ unknown organizations and organizations outside the hierarchy return 404.
   The organization's UUID
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -126892,7 +130322,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 - `organization_id: string`
 
-- `settings: array of object or object or object or 3 more`
+- `settings: array of Boolean or Integer or String or 3 more`
 
   - `Boolean object`
 
@@ -126902,11 +130332,15 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: boolean
 
-    - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 53 more`
+    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 57 more`
+
+      - `"access_transparency_enabled"`
 
       - `"ai_powered_artifacts_enabled"`
 
       - `"api_workbench_feedback_collection_enabled"`
+
+      - `"api_zero_data_retention_enabled"`
 
       - `"artifact_connectors_enabled"`
 
@@ -126946,6 +130380,8 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       - `"claude_design_enabled"`
 
+      - `"claude_enterprise_claude_code_zero_data_retention_enabled"`
+
       - `"claude_in_slack_enabled"`
 
       - `"claude_science_custom_connectors_enabled"`
@@ -126963,6 +130399,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"claude_science_scientific_model_endpoints_enabled"`
 
       - `"claude_science_ssh_hosts_enabled"`
+
+      - `"cmek_enabled"`
 
       - `"code_execution_enabled"`
 
@@ -127111,7 +130549,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: data_retention
 
-    - `value: map[object or object]`
+    - `value: map[Fixed or Indefinite]`
 
       - `Fixed object`
 
@@ -127145,6 +130583,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/settings \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127169,7 +130608,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "ai_powered_artifacts_enabled",
+      "name": "access_transparency_enabled",
       "value": true,
       "type": "boolean"
     }
@@ -127205,12 +130644,6 @@ List Compliance Groups
   Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -127264,6 +130697,7 @@ List Compliance Groups
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/groups \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127303,12 +130737,6 @@ Get Compliance Group
   The group ID (tagged ID, e.g., rbac_group_abc123)
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -127350,6 +130778,7 @@ Get Compliance Group
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127398,12 +130827,6 @@ List Compliance Group Members
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -127444,6 +130867,7 @@ List Compliance Group Members
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127577,12 +131001,6 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -127681,6 +131099,7 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127726,12 +131145,6 @@ files. This is a destructive operation that cannot be undone.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -127751,6 +131164,7 @@ files. This is a destructive operation that cannot be undone.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -127869,12 +131283,6 @@ Retrieves message history and file metadata for a specific chat.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -127911,7 +131319,7 @@ Retrieves message history and file metadata for a specific chat.
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object or object or object`
+  - `content: array of Text or ToolUse or ToolResult`
 
     Content blocks within the message
 
@@ -128175,6 +131583,7 @@ Retrieves message history and file metadata for a specific chat.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128261,12 +131670,6 @@ download the bytes.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -128309,6 +131712,7 @@ download the bytes.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128346,12 +131750,6 @@ operation that cannot be undone.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -128371,6 +131769,7 @@ operation that cannot be undone.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128397,18 +131796,13 @@ Downloads the binary content of a file referenced in chat messages.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Example
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128429,12 +131823,6 @@ Use the sibling `/content` endpoint to download the bytes.
   The generated-file id (e.g., 'claude_gen_file_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude_chat_id}/messages.
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -128474,6 +131862,7 @@ Use the sibling `/content` endpoint to download the bytes.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128505,18 +131894,13 @@ Downloads the binary content of a file the assistant created via tool use.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Example
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128603,12 +131987,6 @@ are sorted chronologically (time ascending) by created_at.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -128685,6 +132063,7 @@ are sorted chronologically (time ascending) by created_at.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128725,12 +132104,6 @@ Get detailed information for a specific project.
   The project ID (tagged ID, e.g., claude_proj_abc123)
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -128812,6 +132185,7 @@ Get detailed information for a specific project.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128861,12 +132235,6 @@ Project must have no attached chats - returns 409 if chats exist.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -128886,6 +132254,7 @@ Project must have no attached chats - returns 409 if chats exist.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -128935,17 +132304,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
 
-- `data: array of object or object`
+- `data: array of ComplianceProjectFileReference or ComplianceProjectDocReference`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
@@ -129033,6 +132396,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129089,17 +132453,11 @@ role.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
 
-- `data: array of object or object or object or object`
+- `data: array of ComplianceProjectUserCollaborator or ComplianceProjectGroupCollaborator or ComplianceProjectOrganizationCollaborator or ComplianceProjectOrganizationRoleCollaborator`
 
   List of collaborators sorted chronologically by granted_at, tie break by the underlying role-assignment UUID
 
@@ -129243,6 +132601,7 @@ role.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collaborators \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129278,12 +132637,6 @@ Get detailed information for a specific project document.
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -129327,6 +132680,7 @@ Get detailed information for a specific project document.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129363,12 +132717,6 @@ consumer can dedupe or match hashes without downloading every document.
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -129426,6 +132774,7 @@ consumer can dedupe or match hashes without downloading every document.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129463,12 +132812,6 @@ Hard-deletes the project document permanently.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -129488,6 +132831,7 @@ Hard-deletes the project document permanently.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129520,12 +132864,6 @@ without downloading every artifact.
   The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -129569,6 +132907,7 @@ without downloading every artifact.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129603,18 +132942,13 @@ Returns the full text content of the artifact version.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Example
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129664,12 +132998,6 @@ forward-only via `next_page`; there is no reverse cursor.
     format: date-time
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -129737,6 +133065,7 @@ forward-only via `next_page`; there is no reverse cursor.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129778,12 +133107,6 @@ inference call has aged out returns 404.
 - `local_session_id: string`
 
 #### Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -129843,6 +133166,7 @@ inference call has aged out returns 404.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -129920,12 +133244,6 @@ explicit 400; restart the walk to read under the current boundary.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -129942,7 +133260,7 @@ explicit 400; restart the walk to read under the current boundary.
 
     Message identifier, prefixed `clsm_`. Stable for as long as the message's turn is retained: identifiers of retained turns do not change as older turns age out of the organization's retention period. The `retention_elapsed` placeholder's identifier is distinct from every retained turn's and changes only when further turns age out.
 
-  - `content: array of object or object or object`
+  - `content: array of Text or ToolUse or ToolResult`
 
     Content blocks within the message, discriminated on `type` (`text` / `tool_use` / `tool_result`: the same discriminator values as the claude.ai chat-messages endpoint; the tool variants omit `integration_name` and `mcp_server_url`, and `text` carries `truncated`). Extended-thinking content is never included. The request's `system` field is never included; a presence-only marker message is emitted when it was set. The request's `tools[]` definitions are never included as transcript messages. Project-level instructions (such as CLAUDE.md files) appear in the message stream as a user-role context block and are included. Empty when `provenance.type` is `content_unavailable`.
 
@@ -130038,7 +133356,7 @@ explicit 400; restart the walk to read under the current boundary.
 
     The model that served this assistant turn, as reported in the `model` field of the underlying Messages API response. Null on user messages and on any assistant message whose `provenance` is set: client-asserted history and synthetic markers were not produced by a model during this session, and for unavailable content the serving model is not known.
 
-  - `provenance: object or object or object or null`
+  - `provenance: ContentUnavailable or ClientAsserted or SyntheticMarker or null`
 
     Where this turn's content came from, discriminated on `type`. Null (the common case) means verified content: on an assistant message, content Claude produced during this session; on a user message, content the user sent. `content_unavailable`: the turn's content cannot be returned and `content` is empty; `reason` says why. `client_asserted`: assistant content the client supplied as conversation history; `content` shows what the model received but its authorship is not verified; never on user-role messages. `synthetic_marker`: a transcript marker the endpoint generated rather than content either party sent during the session. Both `client_asserted` and `synthetic_marker` can result from normal request or client processing, not only client modification. Callers should tolerate unrecognized `type` values.
 
@@ -130071,12 +133389,14 @@ explicit 400; restart the walk to read under the current boundary.
       A transcript marker generated by the endpoint rather than sent by
       either party during the session. Marker messages indicate that the
       prompt history diverged from what was captured, that the request's
-      `system` field was present but is not shown, or that
-      prompt-carried history was suppressed because the session spans the
-      child organization's retention boundary and those turns cannot be
-      placed against it (the marker's text names the cause). Markers that
-      report a mismatch with captured history can result from normal request
-      or client processing, not only client modification.
+      `system` field was present but is not shown, or that earlier turns
+      that a request re-sent as history were withheld because they cannot
+      be dated against the child organization's data-retention period
+      (only for organizations with a finite retention period; the request's
+      new user input after its last assistant turn is not affected). The
+      marker's text names the cause. Markers that report a mismatch with
+      captured history can result from normal request or client processing,
+      not only client modification.
 
       - `type: "synthetic_marker"`
 
@@ -130152,6 +133472,7 @@ explicit 400; restart the walk to read under the current boundary.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID/messages \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -130273,12 +133594,6 @@ retrieve the next page, and stop when `next_page` is null.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -130353,6 +133668,7 @@ retrieve the next page, and stop when `next_page` is null.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -130448,12 +133764,6 @@ malformed session identifier returns 400.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -130466,7 +133776,7 @@ malformed session identifier returns 400.
 
     Unique identifier for the message, e.g. `csev_abc123`
 
-  - `content: array of object or object or object`
+  - `content: array of Text or ToolUse or ToolResult`
 
     Content blocks within the message
 
@@ -130648,6 +133958,7 @@ malformed session identifier returns 400.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote/$CLAUDE_REMOTE_SESSION_ID/messages \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -130764,12 +134075,6 @@ returned.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -130859,6 +134164,7 @@ returned.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -130921,18 +134227,13 @@ only for identity-stored content; validate against it when present.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Example
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -130957,12 +134258,6 @@ Artifact.
 
 #### Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 #### Returns
@@ -130982,6 +134277,7 @@ Artifact.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

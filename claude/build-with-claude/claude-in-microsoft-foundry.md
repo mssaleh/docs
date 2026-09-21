@@ -77,7 +77,8 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-foundry:2.60.0")
+        implementation("com.anthropic:anthropic-java:2.63.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.63.0")
 
         // For Entra ID authentication, also add the Azure Identity library
         implementation("com.azure:azure-identity:1.18.3")
@@ -88,8 +89,13 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         ```xml
         <dependency>
             <groupId>com.anthropic</groupId>
+            <artifactId>anthropic-java</artifactId>
+            <version>2.63.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.60.0</version>
+            <version>2.63.0</version>
         </dependency>
         <!-- For Entra ID authentication, also add the Azure Identity library -->
         <dependency>
@@ -670,18 +676,18 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](https:
 The following Claude models are available through Foundry:
 
 | Model             | Default deployment name | Hosted on Azure | Hosted on Anthropic |
-| ----------------- | ----------------------- | --------------- | ------------------- |
-| Claude Fable 5.1  | claude-fable-5-1        |                 | ✓                   |
-| Claude Fable 5    | claude-fable-5          |                 | ✓                   |
-| Claude Opus 5     | claude-opus-5           | ✓               | ✓                   |
-| Claude Opus 4.8   | claude-opus-4-8         | ✓               | ✓                   |
-| Claude Opus 4.7   | claude-opus-4-7         |                 | ✓                   |
-| Claude Opus 4.6   | claude-opus-4-6         |                 | ✓                   |
-| Claude Opus 4.5   | claude-opus-4-5         |                 | ✓                   |
-| Claude Sonnet 5   | claude-sonnet-5         | ✓               | ✓                   |
-| Claude Sonnet 4.6 | claude-sonnet-4-6       |                 | ✓                   |
-| Claude Sonnet 4.5 | claude-sonnet-4-5       |                 | ✓                   |
-| Claude Haiku 4.5  | claude-haiku-4-5        | ✓               | ✓                   |
+| :---------------- | :---------------------- | :-------------: | :-----------------: |
+| Claude Fable 5.1  | `claude-fable-5-1`      |                 |          ✓          |
+| Claude Fable 5    | `claude-fable-5`        |                 |          ✓          |
+| Claude Opus 5     | `claude-opus-5`         |        ✓        |          ✓          |
+| Claude Opus 4.8   | `claude-opus-4-8`       |        ✓        |          ✓          |
+| Claude Opus 4.7   | `claude-opus-4-7`       |                 |          ✓          |
+| Claude Opus 4.6   | `claude-opus-4-6`       |                 |          ✓          |
+| Claude Opus 4.5   | `claude-opus-4-5`       |                 |          ✓          |
+| Claude Sonnet 5   | `claude-sonnet-5`       |        ✓        |          ✓          |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6`     |                 |          ✓          |
+| Claude Sonnet 4.5 | `claude-sonnet-4-5`     |                 |          ✓          |
+| Claude Haiku 4.5  | `claude-haiku-4-5`      |        ✓        |          ✓          |
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 

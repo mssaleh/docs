@@ -14,6 +14,13 @@ enforced state after all policies are applied, which may differ from what
 is configured in the admin console. Settings an organization's
 administrators cannot change (for example, ones controlled by Anthropic
 policy or not available to the organization) are omitted from the list.
+Settings that report a compliance arrangement with Anthropic are the
+exception: the HIPAA and Access Transparency settings are always included;
+the API zero data retention setting is reported for Claude Console
+organizations, and the Claude Code zero data retention and customer-managed
+encryption keys (CMEK) settings for Claude Enterprise organizations. Each
+reports whether the arrangement is in place at the organization level; a
+retention setting on an individual workspace is not reflected.
 
 The organization must belong to the API key's organization hierarchy;
 unknown organizations and organizations outside the hierarchy return 404.
@@ -25,12 +32,6 @@ unknown organizations and organizations outside the hierarchy return 404.
   The organization's UUID
 
 ## Headers
-
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -82,7 +83,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 - `organization_id: string`
 
-- `settings: array of object or object or object or 3 more`
+- `settings: array of Boolean or Integer or String or 3 more`
 
   - `Boolean object`
 
@@ -92,11 +93,15 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: boolean
 
-    - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 53 more`
+    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 57 more`
+
+      - `"access_transparency_enabled"`
 
       - `"ai_powered_artifacts_enabled"`
 
       - `"api_workbench_feedback_collection_enabled"`
+
+      - `"api_zero_data_retention_enabled"`
 
       - `"artifact_connectors_enabled"`
 
@@ -136,6 +141,8 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       - `"claude_design_enabled"`
 
+      - `"claude_enterprise_claude_code_zero_data_retention_enabled"`
+
       - `"claude_in_slack_enabled"`
 
       - `"claude_science_custom_connectors_enabled"`
@@ -153,6 +160,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"claude_science_scientific_model_endpoints_enabled"`
 
       - `"claude_science_ssh_hosts_enabled"`
+
+      - `"cmek_enabled"`
 
       - `"code_execution_enabled"`
 
@@ -301,7 +310,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: data_retention
 
-    - `value: map[object or object]`
+    - `value: map[Fixed or Indefinite]`
 
       - `Fixed object`
 
@@ -335,6 +344,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/settings \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -359,7 +369,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "ai_powered_artifacts_enabled",
+      "name": "access_transparency_enabled",
       "value": true,
       "type": "boolean"
     }
