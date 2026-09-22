@@ -23,13 +23,13 @@ export LLAMA_CLOUD_API_KEY="llx-..."
 
 ## Your first parse job in 60 seconds
 
-- [Python](#tab-panel-840)
-- [TypeScript](#tab-panel-841)
-- [Go](#tab-panel-842)
-- [Java](#tab-panel-843)
-- [CLI](#tab-panel-844)
-- [REST API](#tab-panel-845)
-- [Web UI](#tab-panel-846)
+- [Python](#tab-panel-890)
+- [TypeScript](#tab-panel-891)
+- [Go](#tab-panel-892)
+- [Java](#tab-panel-893)
+- [CLI](#tab-panel-894)
+- [REST API](#tab-panel-895)
+- [Web UI](#tab-panel-896)
 
 Install the SDK:
 
@@ -571,14 +571,14 @@ See [Retrieving Results](/llamaparse/parse/guides/retrieving-results/index.md) f
 
 If you’re non-technical or just want to sandbox Parse before writing any code, the Web UI is the fastest path.
 
-![Parse Web UI upload view: llama.pdf loaded in the file list on the left, tier picker on the right with Agentic selected, and Advanced options showing input controls like page ranges and cache control.](/_astro/web_ui_upload.DOzzn4mL_TpQQa.png?dpl=dpl_65MMk4yr6WX444XkCiEKP7iHsp6k)
+![Parse Web UI upload view: llama.pdf loaded in the file list on the left, tier picker on the right with Agentic selected, and Advanced options showing input controls like page ranges and cache control.](/_astro/web_ui_upload.DOzzn4mL_TpQQa.png?dpl=dpl_F3zQidLLHQkVcCyXdppwyoRLU9Su)
 
 1. Go to [**cloud.llamaindex.ai/parse**](https://cloud.llamaindex.ai/parse)
 2. Pick a **Tier** from **Recommended Settings**, or switch to **Advanced Settings** to customize
 3. Upload your document (or pick one of the sample use cases to try Parse without uploading anything)
 4. Click **Run Parse** and view the results directly in the browser
 
-![Parse Web UI result view: the raw LLaMA paper PDF on the left and Parse's clean markdown output on the right, with headings, author block, and the abstract rendered in proper structure.](/_astro/web_ui_result.xa7mL4CM_119HLa.png?dpl=dpl_65MMk4yr6WX444XkCiEKP7iHsp6k)
+![Parse Web UI result view: the raw LLaMA paper PDF on the left and Parse's clean markdown output on the right, with headings, author block, and the abstract rendered in proper structure.](/_astro/web_ui_result.xa7mL4CM_119HLa.png?dpl=dpl_F3zQidLLHQkVcCyXdppwyoRLU9Su)
 
 ### Choosing a tier
 
