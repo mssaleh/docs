@@ -3,7 +3,7 @@ title: skipProxyUrlNormalize
 description: "Let Proxy see the original request instead of Next.js's normalized version. Formerly skipMiddlewareUrlNormalize."
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/skipProxyUrlNormalize"
 docs_index: /docs/llms.txt
-version: 16.3.5
+version: 16.3.6
 lastUpdated: 2026-09-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

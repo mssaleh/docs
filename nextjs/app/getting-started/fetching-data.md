@@ -3,7 +3,7 @@ title: Fetching Data
 description: Learn how to fetch data and stream content that depends on data.
 url: "https://nextjs.org/docs/app/getting-started/fetching-data"
 docs_index: /docs/llms.txt
-version: 16.3.5
+version: 16.3.6
 lastUpdated: 2026-09-07
 prerequisites:
   - "Getting Started: /docs/app/getting-started"

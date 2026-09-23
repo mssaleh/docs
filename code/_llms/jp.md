@@ -12,7 +12,7 @@
 - [クイックスタート](https://code.claude.com/docs/ja/quickstart.md): Claude Code へようこそ！
 - [変更履歴](https://code.claude.com/docs/ja/changelog.md)
 
-#### コアコンセプト
+#### コア概念
 
 - [Claude Code の仕組み](https://code.claude.com/docs/ja/how-claude-code-works.md): agentic ループ、組み込みツール、Claude Code がプロジェクトとどのように相互作用するかを理解します。
 - [Claude Code を拡張する](https://code.claude.com/docs/ja/features-overview.md): CLAUDE.md、Skills、subagents、hooks、MCP、plugins をいつ使用するかを理解します。
@@ -48,7 +48,7 @@
 - [ルーティンで作業を自動化する](https://code.claude.com/docs/ja/routines.md): Claude Code を自動操縦に設定します。スケジュールで実行するルーティンを定義したり、API 呼び出しでトリガーしたり、Anthropic が管理するクラウドインフラストラクチャから GitHub イベントに反応させたりできます。
 - [ultrareview でバグを見つける](https://code.claude.com/docs/ja/ultrareview.md): /code-review ultra でクラウド上で深い複数エージェント型のコードレビューを実行し、マージ前にバグを見つけて検証します。
 
-##### Claude Code デスクトップ版
+##### Claude Code（デスクトップ版）
 
 - [デスクトップアプリを始める](https://code.claude.com/docs/ja/desktop-quickstart.md): Claude Code をデスクトップにインストールして、最初のコーディングセッションを開始します
 - [Desktop application](https://code.claude.com/docs/ja/desktop.md): Claude Code Desktop をさらに活用する：Git 分離による並列セッション、ドラッグアンドドロップペインレイアウト、統合ターミナルとファイルエディタ、サイドチャット、コンピュータ使用、電話から Dispatch セッションを送信、ビジュアル diff レビュー、アプリプレビュー、PR 監視、コネクタ、エンタープライズ設定。
@@ -86,7 +86,7 @@
 
 #### Skills
 
-- [スキルで Claude を拡張する](https://code.claude.com/docs/ja/skills.md): Claude Code でスキルを作成、管理、共有して Claude の機能を拡張します。カスタムコマンドとバンドルされたスキルが含まれます。
+- [Claude をスキルで拡張する](https://code.claude.com/docs/ja/skills.md): Claude Code でスキルを作成、管理、共有して Claude の機能を拡張します。カスタムコマンドとバンドルされたスキルが含まれます。
 
 #### プラグイン
 
@@ -130,7 +130,7 @@
 - [組織の MCP サーバーアクセスを制御する](https://code.claude.com/docs/ja/managed-mcp.md): 管理対象設定ファイル、管理対象設定、許可リスト、拒否リストを使用して、ユーザーが追加または接続できる MCP サーバーを制限するか、すべてのユーザーにサーバーを提供します。
 - [オートモードの設定](https://code.claude.com/docs/ja/auto-mode-config.md): オートモード分類器に、組織が信頼するリポジトリ、バケット、ドメインを指定します。環境コンテキストを設定し、デフォルトのブロックおよび許可ルールをオーバーライドし、オートモード CLI サブコマンドで有効な設定を検査します。
 
-#### デプロイ
+#### デプロイメント
 
 - [エンタープライズデプロイメント概要](https://code.claude.com/docs/ja/third-party-integrations.md): Claude Code が様々なサードパーティサービスとインフラストラクチャと統合して、エンタープライズデプロイメント要件を満たす方法について学びます。
 - [機能の利用可能性](https://code.claude.com/docs/ja/feature-availability.md): Anthropic のサブスクリプションプラン、Anthropic Console、Amazon Bedrock、Claude Platform on AWS、Google Cloud の Agent Platform、Microsoft Foundry 全体で利用可能な Claude Code 機能を比較します。
@@ -220,7 +220,7 @@
 - [モデル設定](https://code.claude.com/docs/ja/model-config.md): Claude Code のモデル設定について学習します。`opusplan` などのモデルエイリアスを含みます
 - [高速モードでレスポンスを高速化](https://code.claude.com/docs/ja/fast-mode.md): Claude Code で高速モードを切り替えて、Opus のレスポンスを高速化します。
 - [advisor ツールで難しい判断をエスカレートする](https://code.claude.com/docs/ja/advisor.md): メインモデルをより強力な advisor モデルと組み合わせて、タスク中の重要な瞬間に Claude が相談できるようにします。
-- [出力スタイル](https://code.claude.com/docs/ja/output-styles.md): ソフトウェアエンジニアリング以外の用途に合わせて Claude Code を適応させる
+- [出力スタイル](https://code.claude.com/docs/ja/output-styles.md): Concise や Explanatory などの組み込み出力スタイルを使用するか、カスタムスタイルを作成して、Claude Code のロール、トーン、応答形式を変更します。
 
 #### インターフェース
 

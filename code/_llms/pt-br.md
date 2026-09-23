@@ -220,7 +220,7 @@
 - [Configuração de modelo](https://code.claude.com/docs/pt/model-config.md): Configure qual modelo Claude Code usa, níveis de esforço, contexto estendido e a janela de auto-compactação
 - [Acelere respostas com modo rápido](https://code.claude.com/docs/pt/fast-mode.md): Obtenha respostas mais rápidas do Opus no Claude Code alternando o modo rápido.
 - [Escale decisões difíceis com a ferramenta advisor](https://code.claude.com/docs/pt/advisor.md): Combine seu modelo principal com um modelo advisor mais forte que Claude consulta em momentos-chave durante uma tarefa.
-- [Estilos de saída](https://code.claude.com/docs/pt/output-styles.md): Adapte Claude Code para usos além da engenharia de software
+- [Estilos de saída](https://code.claude.com/docs/pt/output-styles.md): Altere o papel, tom e formato de resposta do Claude Code com um estilo de saída integrado, como Conciso ou Explicativo, ou escreva um estilo personalizado.
 
 #### Interface
 
@@ -249,7 +249,7 @@
 
 - [Glossário](https://code.claude.com/docs/pt/glossary.md): Definições da terminologia do Claude Code. Aprenda o que significam agentic loop, compaction, CLAUDE.md, hooks, subagents, MCP e outros conceitos principais.
 
-### Agent SDK
+### SDK do Agent
 
 #### Agent SDK
 

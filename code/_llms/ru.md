@@ -220,7 +220,7 @@
 - [Конфигурация модели](https://code.claude.com/docs/ru/model-config.md): Настройте, какую модель использует Claude Code, уровни усилий, расширенный контекст и окно auto-compact
 - [Ускорьте ответы с помощью быстрого режима](https://code.claude.com/docs/ru/fast-mode.md): Получайте более быстрые ответы Opus в Claude Code, включив быстрый режим.
 - [Эскалация сложных решений с помощью инструмента advisor](https://code.claude.com/docs/ru/advisor.md): Объедините вашу основную модель с более мощной моделью-советником, которую Claude консультирует в ключевые моменты выполнения задачи.
-- [Output styles](https://code.claude.com/docs/ru/output-styles.md): Адаптируйте Claude Code для использования за пределами разработки программного обеспечения
+- [Output styles](https://code.claude.com/docs/ru/output-styles.md): Измените роль, тон и формат ответов Claude Code с помощью встроенного стиля вывода, такого как Concise или Explanatory, или напишите собственный стиль.
 
 #### Интерфейс
 

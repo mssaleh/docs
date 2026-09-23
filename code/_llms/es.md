@@ -220,7 +220,7 @@
 - [Configuración del modelo](https://code.claude.com/docs/es/model-config.md): Configure qué modelo utiliza Claude Code, niveles de esfuerzo, contexto extendido y la ventana de auto-compact
 - [Acelera las respuestas con el modo rápido](https://code.claude.com/docs/es/fast-mode.md): Obtén respuestas más rápidas de Opus en Claude Code al activar el modo rápido.
 - [Escalar decisiones difíciles con la herramienta advisor](https://code.claude.com/docs/es/advisor.md): Empareje su modelo principal con un modelo advisor más fuerte que Claude consulta en momentos clave durante una tarea.
-- [Estilos de salida](https://code.claude.com/docs/es/output-styles.md): Adapte Claude Code para usos más allá de la ingeniería de software
+- [Estilos de salida](https://code.claude.com/docs/es/output-styles.md): Cambie el rol, tono y formato de respuesta de Claude Code con un estilo de salida integrado como Conciso o Explicativo, o escriba un estilo personalizado.
 
 #### Interfaz
 

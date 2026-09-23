@@ -67,7 +67,7 @@
 - [Claude Code con GitHub Enterprise Server](https://code.claude.com/docs/it/github-enterprise-server.md): Connetti Claude Code alla tua istanza GitHub Enterprise Server auto-ospitata per sessioni cloud, revisione del codice e marketplace di plugin.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/it/gitlab-ci-cd.md): Scopri come integrare Claude Code nel tuo flusso di lavoro di sviluppo con GitLab CI/CD
 
-### Sviluppa con Claude Code
+### Crea con Claude Code
 
 #### Agenti e lavoro parallelo
 
@@ -116,7 +116,7 @@
 - [Risolvi i problemi di installazione e accesso](https://code.claude.com/docs/it/troubleshoot-install.md): Correggi gli errori di comando non trovato, PATH, permessi, rete e autenticazione durante l'installazione o l'accesso a Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/it/troubleshooting.md): Risolvi i problemi di utilizzo elevato di CPU o memoria, blocchi, thrashing auto-compact e problemi di ricerca in Claude Code, e trova la pagina giusta per altri problemi.
 - [Esegui il debug della tua configurazione](https://code.claude.com/docs/it/debug-your-config.md): Diagnostica perché CLAUDE.md, impostazioni, hooks, server MCP o skills non hanno effetto. Usa /context, /doctor, /hooks e /mcp per vedere cosa è stato effettivamente caricato.
-- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Cercate i messaggi di errore di runtime di Claude Code con il significato di ciascuno e come risolverlo.
+- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Consulta i messaggi di errore runtime di Claude Code con il significato di ciascuno e come risolverli.
 
 ### Amministrazione
 
@@ -220,7 +220,7 @@
 - [Configurazione del modello](https://code.claude.com/docs/it/model-config.md): Configurare quale modello Claude Code utilizza, livelli di impegno, contesto esteso e la finestra di auto-compattazione
 - [Accelera le risposte con la modalità veloce](https://code.claude.com/docs/it/fast-mode.md): Ottieni risposte più veloci di Opus in Claude Code attivando la modalità veloce.
 - [Escalate hard decisions with the advisor tool](https://code.claude.com/docs/it/advisor.md): Abbina il tuo modello principale con un modello advisor più potente che Claude consulta nei momenti chiave durante un'attività.
-- [Output styles](https://code.claude.com/docs/it/output-styles.md): Adattare Claude Code per usi oltre l'ingegneria del software
+- [Output styles](https://code.claude.com/docs/it/output-styles.md): Cambia il ruolo, il tono e il formato di risposta di Claude Code con uno stile di output integrato come Concise o Explanatory, oppure scrivi uno stile personalizzato.
 
 #### Interfaccia
 

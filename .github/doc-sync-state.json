@@ -5,13 +5,13 @@
     "reason": "new-release"
   },
   "nextjs": {
-    "version": "16.3.5",
-    "last_synced_at": "2026-09-12T07:58:49.506Z",
+    "version": "16.3.6",
+    "last_synced_at": "2026-09-23T08:40:02.944Z",
     "reason": "new-release"
   },
   "claude-code": {
-    "version": "2.1.278",
-    "last_synced_at": "2026-09-19T08:07:54.281Z",
+    "version": "2.1.280",
+    "last_synced_at": "2026-09-23T08:40:02.944Z",
     "reason": "new-release"
   },
   "claude-api": {

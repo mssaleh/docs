@@ -3,7 +3,7 @@ title: Handling connectivity drops
 description: How a Next.js app can recover when the network drops mid-fetch or mid-Server Action, and how to communicate that state to the user.
 url: "https://nextjs.org/docs/app/guides/offline-support"
 docs_index: /docs/llms.txt
-version: 16.3.5
+version: 16.3.6
 lastUpdated: 2026-08-25
 prerequisites:
   - "Guides: /docs/app/guides"

@@ -220,7 +220,7 @@
 - [Konfigurasi model](https://code.claude.com/docs/id/model-config.md): Konfigurasikan model mana yang digunakan Claude Code, tingkat upaya, konteks yang diperluas, dan jendela auto-compact
 - [Percepat respons dengan mode cepat](https://code.claude.com/docs/id/fast-mode.md): Dapatkan respons Opus yang lebih cepat di Claude Code dengan mengaktifkan mode cepat.
 - [Eskalasi keputusan sulit dengan alat advisor](https://code.claude.com/docs/id/advisor.md): Pasangkan model utama Anda dengan model advisor yang lebih kuat yang dikonsultasikan Claude pada momen-momen kunci selama tugas.
-- [Output styles](https://code.claude.com/docs/id/output-styles.md): Sesuaikan Claude Code untuk penggunaan di luar rekayasa perangkat lunak
+- [Output styles](https://code.claude.com/docs/id/output-styles.md): Ubah peran, nada, dan format respons Claude Code dengan gaya output bawaan seperti Concise atau Explanatory, atau tulis gaya kustom Anda sendiri.
 
 #### Antarmuka
 
@@ -299,7 +299,7 @@
 - [Observability dengan OpenTelemetry](https://code.claude.com/docs/id/agent-sdk/observability.md): Ekspor traces, metrics, dan events dari Agent SDK ke backend observability Anda menggunakan OpenTelemetry.
 - [Lacak todos](https://code.claude.com/docs/id/agent-sdk/todo-tracking.md): Lacak todos dalam sesi Agent SDK dan tampilkan kemajuan Claude dalam aplikasi Anda dari panggilan alat terstruktur
 
-#### Penyebaran
+#### Penerapan
 
 - [Hosting the Agent SDK](https://code.claude.com/docs/id/agent-sdk/hosting.md): Terapkan Agent SDK dalam produksi: arsitektur subprocess, persistensi sesi, penskalaan, observabilitas, dan isolasi multi-tenant untuk Docker, Kubernetes, dan penyedia sandbox.
 - [Mengamankan penyebaran agen AI](https://code.claude.com/docs/id/agent-sdk/secure-deployment.md): Panduan untuk mengamankan penyebaran Claude Code dan Agent SDK dengan isolasi, manajemen kredensial, dan kontrol jaringan

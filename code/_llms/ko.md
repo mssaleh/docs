@@ -220,7 +220,7 @@
 - [모델 구성](https://code.claude.com/docs/ko/model-config.md): Claude Code가 사용하는 모델, 노력 수준, 확장된 컨텍스트 및 자동 압축 윈도우를 구성합니다
 - [빠른 모드로 응답 속도 향상](https://code.claude.com/docs/ko/fast-mode.md): Claude Code에서 빠른 모드를 전환하여 더 빠른 Opus 응답을 받습니다.
 - [어려운 결정을 조언자 도구로 에스컬레이션하기](https://code.claude.com/docs/ko/advisor.md): 주 모델을 더 강력한 조언자 모델과 쌍으로 만들어 Claude가 작업 중 핵심 순간에 조언자를 참고하도록 합니다.
-- [출력 스타일](https://code.claude.com/docs/ko/output-styles.md): 소프트웨어 엔지니어링 이상의 용도로 Claude Code 적응시키기
+- [출력 스타일](https://code.claude.com/docs/ko/output-styles.md): 내장된 Concise 또는 Explanatory와 같은 출력 스타일이나 사용자 정의 스타일로 Claude Code의 역할, 톤, 응답 형식을 변경합니다.
 
 #### 인터페이스
 
