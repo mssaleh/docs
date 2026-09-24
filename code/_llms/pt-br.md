@@ -249,7 +249,7 @@
 
 - [Glossário](https://code.claude.com/docs/pt/glossary.md): Definições da terminologia do Claude Code. Aprenda o que significam agentic loop, compaction, CLAUDE.md, hooks, subagents, MCP e outros conceitos principais.
 
-### SDK do Agent
+### Agent SDK
 
 #### Agent SDK
 
