@@ -256,7 +256,7 @@
 - [Agent SDK 概览](https://code.claude.com/docs/zh-CN/agent-sdk/overview.md): 使用 Claude Code 作为库构建生产级 AI 代理
 - [快速开始](https://code.claude.com/docs/zh-CN/agent-sdk/quickstart.md): 使用 Python 或 TypeScript Agent SDK 开始构建能够自主工作的 AI 代理
 - [迁移到 Claude Agent SDK](https://code.claude.com/docs/zh-CN/agent-sdk/migration-guide.md): 将 Claude Code TypeScript 和 Python SDK 迁移到 Claude Agent SDK 的指南
-- [Agent SDK 故障排除](https://code.claude.com/docs/zh-CN/agent-sdk/troubleshooting.md): 通过您看到的确切错误消息修复 Agent SDK 错误，包括 TypeScript 和 Python SDK 中每个错误的原因和修复方法。
+- [Agent SDK 故障排除](https://code.claude.com/docs/zh-CN/agent-sdk/troubleshooting.md): 当 Claude Code CLI 无法启动、CLI 进程退出或成功结果到达但没有结构化输出时，修复 Agent SDK 错误。
 
 #### 构建代理
 

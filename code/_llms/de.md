@@ -256,7 +256,7 @@
 - [Agent SDK – Übersicht](https://code.claude.com/docs/de/agent-sdk/overview.md): Erstellen Sie produktive KI-Agenten mit Claude Code als Bibliothek
 - [Schnellstart](https://code.claude.com/docs/de/agent-sdk/quickstart.md): Erste Schritte mit dem Python- oder TypeScript-Agent-SDK zum Erstellen von KI-Agenten, die autonom funktionieren
 - [Migrieren zum Claude Agent SDK](https://code.claude.com/docs/de/agent-sdk/migration-guide.md): Leitfaden für die Migration der Claude Code TypeScript- und Python-SDKs zum Claude Agent SDK
-- [Fehlerbehebung im Agent SDK](https://code.claude.com/docs/de/agent-sdk/troubleshooting.md): Beheben Sie Agent SDK-Fehler anhand der genauen Meldung, die Sie sehen, mit der Ursache und Lösung für jeden Fehler in den TypeScript- und Python-SDKs.
+- [Fehlerbehebung im Agent SDK](https://code.claude.com/docs/de/agent-sdk/troubleshooting.md): Beheben Sie Agent SDK-Fehler, wenn die Claude Code CLI nicht startet, der CLI-Prozess beendet wird oder ein erfolgreiches Ergebnis ohne strukturierte Ausgabe ankommt.
 
 #### Agenten erstellen
 

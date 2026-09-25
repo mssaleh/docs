@@ -186,7 +186,7 @@
 - [커뮤니케이션 키트](https://code.claude.com/docs/ko/communications-kit.md): 엔지니어링 조직에 Claude Code를 배포할 때 사용할 수 있는 출시 공지, 드립 캠페인 메시지, FAQ 응답입니다.
 - [Champion kit](https://code.claude.com/docs/ko/champion-kit.md): Claude Code를 내부적으로 옹호하는 엔지니어를 위한 플레이북: 공유할 내용, 질문에 답하는 방법, 팀 내 도입 확대 방법.
 
-### 설정
+### 구성
 
 #### 설정
 
@@ -256,7 +256,7 @@
 - [Agent SDK 개요](https://code.claude.com/docs/ko/agent-sdk/overview.md): Claude Code를 라이브러리로 사용하여 프로덕션 AI 에이전트 구축하기
 - [빠른 시작](https://code.claude.com/docs/ko/agent-sdk/quickstart.md): Python 또는 TypeScript Agent SDK를 사용하여 자율적으로 작동하는 AI 에이전트를 구축하기 시작합니다
 - [Claude Agent SDK로 마이그레이션](https://code.claude.com/docs/ko/agent-sdk/migration-guide.md): Claude Code TypeScript 및 Python SDK를 Claude Agent SDK로 마이그레이션하기 위한 가이드
-- [Agent SDK 문제 해결](https://code.claude.com/docs/ko/agent-sdk/troubleshooting.md): 정확한 오류 메시지로 Agent SDK 오류를 수정합니다. TypeScript 및 Python SDK의 각 오류에 대한 원인과 해결 방법을 제공합니다.
+- [Agent SDK 문제 해결](https://code.claude.com/docs/ko/agent-sdk/troubleshooting.md): Claude Code CLI가 시작되지 않거나, CLI 프로세스가 종료되거나, 구조화된 출력 없이 성공적인 결과가 도착할 때 Agent SDK 오류를 수정합니다.
 
 #### 에이전트 구축하기
 

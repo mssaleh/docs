@@ -256,7 +256,7 @@
 - [Présentation du SDK Agent](https://code.claude.com/docs/fr/agent-sdk/overview.md): Créez des agents IA de production avec Claude Code en tant que bibliothèque
 - [Démarrage rapide](https://code.claude.com/docs/fr/agent-sdk/quickstart.md): Commencez avec le SDK Agent Python ou TypeScript pour créer des agents IA qui fonctionnent de manière autonome
 - [Migrer vers Claude Agent SDK](https://code.claude.com/docs/fr/agent-sdk/migration-guide.md): Guide pour migrer les SDK TypeScript et Python de Claude Code vers Claude Agent SDK
-- [Dépanner le SDK Agent](https://code.claude.com/docs/fr/agent-sdk/troubleshooting.md): Corrigez les erreurs du SDK Agent en fonction du message exact que vous voyez, avec la cause et la correction pour chaque erreur dans les SDK TypeScript et Python.
+- [Dépanner le SDK Agent](https://code.claude.com/docs/fr/agent-sdk/troubleshooting.md): Corrigez les erreurs du SDK Agent lorsque la CLI Claude Code ne démarre pas, le processus CLI se termine ou un résultat réussi arrive sans sortie structurée.
 
 #### Créer des agents
 

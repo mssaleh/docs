@@ -256,7 +256,7 @@
 - [Gambaran Umum Agent SDK](https://code.claude.com/docs/id/agent-sdk/overview.md): Bangun agen AI produksi dengan Claude Code sebagai perpustakaan
 - [Panduan Cepat](https://code.claude.com/docs/id/agent-sdk/quickstart.md): Mulai dengan Agent SDK Python atau TypeScript untuk membangun agen AI yang bekerja secara mandiri
 - [Migrasi ke Claude Agent SDK](https://code.claude.com/docs/id/agent-sdk/migration-guide.md): Panduan untuk migrasi Claude Code TypeScript dan Python SDKs ke Claude Agent SDK
-- [Troubleshoot the Agent SDK](https://code.claude.com/docs/id/agent-sdk/troubleshooting.md): Perbaiki kesalahan Agent SDK berdasarkan pesan yang tepat yang Anda lihat, dengan penyebab dan solusi untuk setiap kesalahan di SDK TypeScript dan Python.
+- [Troubleshoot the Agent SDK](https://code.claude.com/docs/id/agent-sdk/troubleshooting.md): Perbaiki kesalahan Agent SDK ketika Claude Code CLI gagal dimulai, proses CLI keluar, atau hasil yang berhasil tiba tanpa output terstruktur.
 
 #### Bangun agen
 

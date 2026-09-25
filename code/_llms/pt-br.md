@@ -67,7 +67,7 @@
 - [Claude Code com GitHub Enterprise Server](https://code.claude.com/docs/pt/github-enterprise-server.md): Conecte Claude Code à sua instância auto-hospedada do GitHub Enterprise Server para sessões na nuvem, revisão de código e marketplaces de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/pt/gitlab-ci-cd.md): Saiba como integrar Claude Code no seu fluxo de trabalho de desenvolvimento com GitLab CI/CD
 
-### Construir com Claude Code
+### Criar com Claude Code
 
 #### Agentes e trabalho paralelo
 
@@ -256,7 +256,7 @@
 - [Visão geral do Agent SDK](https://code.claude.com/docs/pt/agent-sdk/overview.md): Construa agentes de IA em produção com Claude Code como uma biblioteca
 - [Início Rápido](https://code.claude.com/docs/pt/agent-sdk/quickstart.md): Comece com o Agent SDK Python ou TypeScript para construir agentes de IA que funcionam autonomamente
 - [Migrar para Claude Agent SDK](https://code.claude.com/docs/pt/agent-sdk/migration-guide.md): Guia para migrar os SDKs TypeScript e Python do Claude Code para o Claude Agent SDK
-- [Solucionar problemas do Agent SDK](https://code.claude.com/docs/pt/agent-sdk/troubleshooting.md): Corrija erros do Agent SDK pela mensagem exata que você vê, com a causa e correção para cada erro nos SDKs TypeScript e Python.
+- [Solucionar problemas do Agent SDK](https://code.claude.com/docs/pt/agent-sdk/troubleshooting.md): Corrija erros do Agent SDK quando a CLI do Claude Code falha ao iniciar, o processo da CLI sai, ou um resultado bem-sucedido chega sem saída estruturada.
 
 #### Criar agentes
 
