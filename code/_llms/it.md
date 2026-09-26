@@ -88,12 +88,6 @@
 
 - [Estendi Claude con skills](https://code.claude.com/docs/it/skills.md): Crea, gestisci e condividi skills per estendere le capacità di Claude in Claude Code. Include comandi personalizzati e skills raggruppate.
 
-#### Plugin
-
-- [Scopri e installa plugin precostruiti tramite marketplace](https://code.claude.com/docs/it/discover-plugins.md): Trova e installa plugin dai marketplace per estendere Claude Code con nuove skills, agenti e funzionalità.
-- [Creare plugin](https://code.claude.com/docs/it/plugins.md): Crea plugin personalizzati per estendere Claude Code con skills, agents, hooks e MCP servers.
-- [Testare i plugin con evals](https://code.claude.com/docs/it/plugin-evals.md): Scrivi casi di eval per il tuo plugin Claude Code, eseguili con claude plugin eval, valuta i risultati, confrontali con una baseline senza plugin e gating CI sul punteggio.
-
 #### Artefatti
 
 - [Condividi l'output della sessione come artifact](https://code.claude.com/docs/it/artifacts.md): Gli artifact trasformano il lavoro di Claude Code in pagine live e interattive su claude.ai che puoi mantenere private, condividere con la tua organizzazione o pubblicare con un link pubblico.
@@ -117,6 +111,49 @@
 - [Troubleshooting](https://code.claude.com/docs/it/troubleshooting.md): Risolvi i problemi di utilizzo elevato di CPU o memoria, blocchi, thrashing auto-compact e problemi di ricerca in Claude Code, e trova la pagina giusta per altri problemi.
 - [Esegui il debug della tua configurazione](https://code.claude.com/docs/it/debug-your-config.md): Diagnostica perché CLAUDE.md, impostazioni, hooks, server MCP o skills non hanno effetto. Usa /context, /doctor, /hooks e /mcp per vedere cosa è stato effettivamente caricato.
 - [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Consulta i messaggi di errore runtime di Claude Code con il significato di ciascuno e come risolverli.
+
+### Plugin
+
+#### Plugin
+
+- [Panoramica dei plugin](https://code.claude.com/docs/it/plugins/overview.md): Comprendi cos'è un plugin Claude Code, quando ne hai bisogno invece di una skill autonoma o di un server MCP, e quale pagina leggere per installarne uno o crearne uno.
+
+#### Usa i plugin
+
+- [Installare e gestire i plugin](https://code.claude.com/docs/it/plugins/install.md): Installare i plugin di Claude Code da un marketplace su qualsiasi superficie che utilizzi, scegliere un ambito di installazione e aggiornarli o rimuoverli in seguito.
+- [Code intelligence plugins](https://code.claude.com/docs/it/plugins/code-intelligence.md): Installa un plugin di language server in modo che Claude veda gli errori di tipo dopo le modifiche e navighi il codice per simbolo, e rispondi alla finestra di dialogo di raccomandazione del plugin LSP.
+- [Sicurezza e affidabilità dei plugin](https://code.claude.com/docs/it/plugins/security.md): Decidi se fidarti di un plugin prima di installarlo, da ciò che un plugin può fare sulla tua macchina a come esaminarlo e rimuoverlo.
+
+#### Crea plugin
+
+- [Creare un plugin Claude Code](https://code.claude.com/docs/it/plugins/create.md): Crea il tuo primo plugin Claude Code da una directory vuota, testalo senza un marketplace e converti una configurazione .claude/ esistente.
+- [Aggiungi componenti a un plugin](https://code.claude.com/docs/it/plugins/components.md): Aggiungi skills, hooks, server MCP e ogni altro tipo di componente a un plugin Claude Code, con un esempio che convalida per ciascuno.
+- [Dipendenze dei plugin](https://code.claude.com/docs/it/plugins/dependencies.md): Dichiara i plugin da cui il tuo plugin dipende, con intervalli di versione come ^1.2, e scopri come Claude Code installa, risolve e elimina le dipendenze.
+- [Testare i plugin con evals](https://code.claude.com/docs/it/plugin-evals.md): Scrivi casi di eval per il tuo plugin Claude Code, eseguili con claude plugin eval, valuta i risultati, confrontali con una baseline senza plugin e blocca la CI in base al punteggio.
+- [Pubblica e distribuisci un plugin](https://code.claude.com/docs/it/plugins/publish.md): Pubblica un plugin Claude Code attraverso il tuo marketplace personale o il marketplace della comunità di Anthropic, con una checklist di pre-rilascio e come gli utenti ricevono gli aggiornamenti.
+- [Misurare il costo e l'utilizzo dei plugin](https://code.claude.com/docs/it/plugins/measure.md): Misurare il costo in token di un plugin Claude Code, scoprire se le persone lo usano ancora e scegliere gli eventi di telemetria per domande sui plugin a livello organizzativo.
+- [Consiglia il tuo plugin dalla tua CLI](https://code.claude.com/docs/it/plugins/cli-hints.md): Invita gli utenti di Claude Code a installare il tuo plugin del marketplace ufficiale emettendo un tag claude-code-hint dalla tua CLI o SDK.
+
+#### Eseguire un marketplace
+
+- [Creare un marketplace](https://code.claude.com/docs/it/plugins/create-marketplace.md): Crea un marketplace di plugin da un file marketplace.json e testalo localmente prima di ospitarlo.
+- [Ospitare e mantenere un marketplace](https://code.claude.com/docs/it/plugins/host-marketplace.md): Pubblica un marketplace di plugin dove gli utenti possono raggiungerlo, concedi accesso a uno privato e rilascia aggiornamenti e ridenominazioni senza interrompere le installazioni.
+- [Consigliare plugin per la tua organizzazione](https://code.claude.com/docs/it/plugins/relevance.md): Aggiungi un blocco di rilevanza alle voci dei plugin del marketplace in modo che Claude Code li suggerisca quando il lavoro di un utente corrisponde, e inserisci il marketplace nella whitelist nelle impostazioni gestite.
+
+#### Gestisci i plugin per la tua organizzazione
+
+- [Gestire i plugin Claude Code per la tua organizzazione](https://code.claude.com/docs/it/plugins/org.md): Controlla quali plugin Claude Code installa e consente su ogni macchina della tua organizzazione attraverso impostazioni gestite.
+
+#### Risoluzione dei problemi
+
+- [Risolvere i problemi dei plugin](https://code.claude.com/docs/it/plugins/troubleshooting.md): Correggi gli errori dei plugin in Claude Code. Trova il messaggio esatto che hai visto, raggruppato per fase da dove /plugin viene eseguito fino all'installazione e alla politica organizzativa.
+- [Riferimento al caricamento dei plugin](https://code.claude.com/docs/it/plugins/loading.md): Traccia da dove Claude Code carica ogni plugin, quale file di impostazioni decide se caricarlo e perché un aggiornamento non ha cambiato nulla.
+
+#### Riferimento
+
+- [Riferimento del manifest del plugin](https://code.claude.com/docs/it/plugins/manifest-reference.md): Riferimento completo per plugin.json: ogni campo con il suo tipo e valore predefinito, forme di percorso accettate, e gli schemi userConfig e variabili di ambiente.
+- [Marketplace reference](https://code.claude.com/docs/it/plugins/marketplace-reference.md): Riferimento completo per i campi marketplace.json, le voci dei plugin e gli oggetti sorgente del plugin e del marketplace, con indicazione di dove ciascuno è valido.
+- [Riferimento comandi plugin](https://code.claude.com/docs/it/plugins/cli-reference.md): Riferimento completo per i comandi shell del plugin claude, /plugin e /reload-plugins in una sessione, e i flag che caricano un plugin per una sola sessione.
 
 ### Amministrazione
 
@@ -167,13 +204,6 @@
 - [Monitoraggio](https://code.claude.com/docs/it/monitoring-usage.md): Scopri come abilitare e configurare OpenTelemetry per Claude Code.
 - [Gestisci i costi in modo efficace](https://code.claude.com/docs/it/costs.md): Traccia l'utilizzo dei token, imposta i limiti di spesa del team e riduci i costi di Claude Code con la gestione del contesto, la selezione del modello, le impostazioni del pensiero esteso e gli hook di pre-elaborazione.
 - [Traccia l'utilizzo del team con l'analittica](https://code.claude.com/docs/it/analytics.md): Visualizza le metriche di utilizzo di Claude Code, traccia l'adozione e misura la velocità di ingegneria nel dashboard di analittica.
-
-#### Distribuzione dei plugin
-
-- [Creare e distribuire un marketplace di plugin](https://code.claude.com/docs/it/plugin-marketplaces.md): Crea e ospita marketplace di plugin per distribuire estensioni Claude Code tra team e comunità.
-- [Vincola le versioni delle dipendenze dei plugin](https://code.claude.com/docs/it/plugin-dependencies.md): Dichiara vincoli di versione sulle dipendenze dei plugin e raggruppa un set di plugin curato dietro un'unica installazione.
-- [Consiglia il tuo plugin dalla tua CLI](https://code.claude.com/docs/it/plugin-hints.md): Emetti un marcatore su una riga dalla tua CLI in modo che Claude Code chieda agli utenti di installare il tuo plugin ufficiale.
-- [Consigliare plugin per la vostra organizzazione](https://code.claude.com/docs/it/plugin-relevance.md): Aggiungere un blocco di rilevanza alle voci dei plugin del marketplace in modo che Claude Code li suggerisca quando il lavoro di un utente corrisponde.
 
 #### Sicurezza e dati
 
@@ -242,7 +272,6 @@
 - [Modalità interattiva](https://code.claude.com/docs/it/interactive-mode.md): Riferimento completo per le scorciatoie da tastiera, le modalità di input e le funzioni interattive nelle sessioni di Claude Code.
 - [Checkpointing](https://code.claude.com/docs/it/checkpointing.md): Traccia, riavvolgi e riassumi le modifiche e la conversazione di Claude per gestire lo stato della sessione.
 - [Riferimento dei hooks](https://code.claude.com/docs/it/hooks.md): Riferimento per gli eventi dei hook di Claude Code, schema di configurazione, formati JSON di input/output, codici di uscita, hook asincroni, hook HTTP, hook di prompt e hook degli strumenti MCP.
-- [Plugins reference](https://code.claude.com/docs/it/plugins-reference.md): Riferimento tecnico completo per il sistema di plugin di Claude Code, inclusi schemi, comandi CLI e specifiche dei componenti.
 - [Riferimento dei canali](https://code.claude.com/docs/it/channels-reference.md): Crea un server MCP che invia webhook, avvisi e messaggi di chat in una sessione di Claude Code. Riferimento per il contratto del canale: dichiarazione di capacità, eventi di notifica, strumenti di risposta, gating del mittente e inoltro delle autorizzazioni.
 
 #### Glossario

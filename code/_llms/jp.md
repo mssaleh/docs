@@ -88,12 +88,6 @@
 
 - [Claude をスキルで拡張する](https://code.claude.com/docs/ja/skills.md): Claude Code でスキルを作成、管理、共有して Claude の機能を拡張します。カスタムコマンドとバンドルされたスキルが含まれます。
 
-#### プラグイン
-
-- [マーケットプレイスから事前構築されたプラグインを発見してインストールする](https://code.claude.com/docs/ja/discover-plugins.md): マーケットプレイスからプラグインを検索してインストールし、Claude Code を新しいスキル、エージェント、機能で拡張します。
-- [プラグインを作成する](https://code.claude.com/docs/ja/plugins.md): スキル、エージェント、フック、MCP サーバーで Claude Code を拡張するカスタムプラグインを作成します。
-- [evals でプラグインをテストする](https://code.claude.com/docs/ja/plugin-evals.md): Claude Code プラグイン用の eval ケースを作成し、claude plugin eval で実行し、結果をグレード化し、プラグインなしのベースラインと比較し、CI でスコアをゲートする。
-
 #### Artifacts
 
 - [セッション出力をアーティファクトとして共有する](https://code.claude.com/docs/ja/artifacts.md): Artifacts は Claude Code の成果物を claude.ai 上のライブでインタラクティブなページに変え、プライベートに保つ、組織と共有する、または公開リンクで公開することができます。
@@ -117,6 +111,50 @@
 - [トラブルシューティング](https://code.claude.com/docs/ja/troubleshooting.md): Claude Code の高い CPU またはメモリ使用量、ハング、auto-compact スラッシング、検索の問題を修正し、その他の問題に対応する適切なページを見つけます。
 - [設定をデバッグする](https://code.claude.com/docs/ja/debug-your-config.md): CLAUDE.md、設定、hooks、MCP サーバー、またはスキルが機能していない理由を診断します。/context、/doctor、/hooks、/mcp を使用して、実際に読み込まれた内容を確認します。
 - [エラーリファレンス](https://code.claude.com/docs/ja/errors.md): Claude Code のランタイムエラーメッセージを検索し、各エラーの意味と修正方法を確認できます。
+
+### プラグイン
+
+#### プラグイン
+
+- [プラグインの概要](https://code.claude.com/docs/ja/plugins/overview.md): Claude Code プラグインとは何か、スタンドアロンスキルまたは MCP サーバーの代わりにプラグインが必要な場合、およびプラグインをインストールまたは作成するために読むべきページについて理解します。
+
+#### プラグインを使用する
+
+- [プラグインのインストールと管理](https://code.claude.com/docs/ja/plugins/install.md): 任意のサーフェスから Claude Code プラグインをマーケットプレイスからインストールし、インストール範囲を選択して、後で更新または削除します。
+- [Anthropic のマーケットプレイス](https://code.claude.com/docs/ja/plugins/anthropic-marketplaces.md): Claude Code 向けの Anthropic 公式、コミュニティ、デモプラグインマーケットプレイス：それぞれの名前、リポジトリ、追加方法、プラグインの閲覧場所。
+- [コード インテリジェンス プラグイン](https://code.claude.com/docs/ja/plugins/code-intelligence.md): 言語サーバー プラグインをインストールして、Claude が編集後の型エラーを検出し、シンボルでコードをナビゲートできるようにし、LSP プラグイン推奨ダイアログに応答します。
+- [プラグインのセキュリティと信頼](https://code.claude.com/docs/ja/plugins/security.md): プラグインをインストールする前に信頼できるかどうかを判断します。マシン上でプラグインが何ができるか、プラグインをレビューする方法、削除する方法について説明します。
+
+#### プラグインを作成
+
+- [Claude Code プラグインを作成する](https://code.claude.com/docs/ja/plugins/create.md): 空のディレクトリから最初の Claude Code プラグインを構築し、マーケットプレイスなしでテストし、既存の .claude/ セットアップを変換します。
+- [プラグインにコンポーネントを追加する](https://code.claude.com/docs/ja/plugins/components.md): スキル、フック、MCP サーバー、その他すべてのコンポーネントタイプを Claude Code プラグインに追加し、各コンポーネントの検証例を含めます。
+- [プラグイン依存関係](https://code.claude.com/docs/ja/plugins/dependencies.md): プラグインが依存するプラグインを宣言し、^1.2 などのバージョン範囲を指定して、Claude Code がどのようにインストール、解決、削除するかを確認します。
+- [evals でプラグインをテストする](https://code.claude.com/docs/ja/plugin-evals.md): Claude Code プラグイン用の eval ケースを作成し、claude plugin eval で実行し、結果をグレード化し、プラグインなしのベースラインと比較し、CI でスコアをゲートする。
+- [プラグインを公開・配布する](https://code.claude.com/docs/ja/plugins/publish.md): Claude Code プラグインを独自のマーケットプレイスまたは Anthropic のコミュニティマーケットプレイスを通じて公開し、リリース前チェックリストとユーザーが更新を受け取る方法について説明します。
+- [プラグインのコストと使用状況を測定する](https://code.claude.com/docs/ja/plugins/measure.md): Claude Code プラグインのトークンコスト、人々がまだそれを使用しているかどうかを確認し、組織全体のプラグイン質問のテレメトリイベントを選択します。
+- [CLI から プラグインを推奨する](https://code.claude.com/docs/ja/plugins/cli-hints.md): Claude Code ユーザーに対して、CLI または SDK から claude-code-hint タグを出力することで、公式マーケットプレイスのプラグインをインストールするよう促します。
+
+#### マーケットプレイスを実行する
+
+- [マーケットプレイスを作成する](https://code.claude.com/docs/ja/plugins/create-marketplace.md): marketplace.json ファイルからプラグインマーケットプレイスを構築し、ホストする前にローカルでテストします。
+- [マーケットプレイスをホストして維持する](https://code.claude.com/docs/ja/plugins/host-marketplace.md): ユーザーが到達できる場所にプラグインマーケットプレイスを公開し、プライベートマーケットプレイスへのアクセスを許可し、インストールを破損させずに更新と名前変更をリリースします。
+- [組織向けプラグインを推奨する](https://code.claude.com/docs/ja/plugins/relevance.md): マーケットプレイスプラグインエントリに関連性ブロックを追加して、ユーザーの作業が一致するときに Claude Code が推奨するようにし、マネージド設定でマーケットプレイスをホワイトリストに登録します。
+
+#### 組織向けプラグインを管理する
+
+- [組織向けの Claude Code プラグインを管理する](https://code.claude.com/docs/ja/plugins/org.md): マネージド設定を通じて、組織内のすべてのマシンに Claude Code がインストールして許可するプラグインを制御します。
+
+#### トラブルシューティング
+
+- [プラグインのトラブルシューティング](https://code.claude.com/docs/ja/plugins/troubleshooting.md): Claude Code でプラグインエラーを修正します。/plugin の実行からインストール、組織ポリシーまで、段階ごとにグループ化された正確なメッセージを見つけます。
+- [プラグイン読み込みリファレンス](https://code.claude.com/docs/ja/plugins/loading.md): Claude Code がどのプラグインをどこから読み込むか、どの設定ファイルが読み込みを決定するか、なぜアップデートが反映されなかったのかを追跡します。
+
+#### リファレンス
+
+- [プラグインマニフェストリファレンス](https://code.claude.com/docs/ja/plugins/manifest-reference.md): plugin.json の完全なリファレンス：すべてのフィールドとその型、デフォルト値、受け入れられるパス形式、userConfig と環境変数スキーマ。
+- [マーケットプレイスリファレンス](https://code.claude.com/docs/ja/plugins/marketplace-reference.md): marketplace.json フィールド、プラグインエントリ、プラグインおよびマーケットプレイスソースオブジェクトの完全なリファレンス。各フィールドの有効な場所を含みます。
+- [プラグインコマンドリファレンス](https://code.claude.com/docs/ja/plugins/cli-reference.md): claude プラグインシェルコマンド、セッション内の /plugin と /reload-plugins、および 1 つのセッションのためにプラグインをロードするフラグの完全なリファレンス。
 
 ### 管理
 
@@ -167,13 +205,6 @@
 - [監視](https://code.claude.com/docs/ja/monitoring-usage.md): Claude Code の OpenTelemetry を有効にして設定する方法を学びます。
 - [コストを効果的に管理する](https://code.claude.com/docs/ja/costs.md): トークン使用量を追跡し、チームの支出制限を設定し、コンテキスト管理、モデル選択、拡張思考設定、前処理フックを使用して Claude Code のコストを削減します。
 - [チームの使用状況を分析で追跡する](https://code.claude.com/docs/ja/analytics.md): Claude Code の使用メトリクスを表示し、採用状況を追跡し、分析ダッシュボードでエンジニアリング速度を測定します。
-
-#### Plugin 配布
-
-- [プラグインマーケットプレイスの作成と配布](https://code.claude.com/docs/ja/plugin-marketplaces.md): Claude Code 拡張機能を配布するためのプラグインマーケットプレイスを構築およびホストします。
-- [プラグイン依存関係のバージョンを制約する](https://code.claude.com/docs/ja/plugin-dependencies.md): プラグイン依存関係のバージョン制約を宣言して、キュレーションされたプラグインセットを 1 つのインストールの背後にバンドルします。
-- [CLI からプラグインを推奨する](https://code.claude.com/docs/ja/plugin-hints.md): CLI から 1 行のマーカーを出力して、Claude Code ユーザーに公式プラグインのインストールを促します。
-- [組織向けプラグインを推奨する](https://code.claude.com/docs/ja/plugin-relevance.md): マーケットプレイスプラグインエントリに関連性ブロックを追加して、ユーザーの作業が一致したときに Claude Code がそれらを提案するようにします。
 
 #### セキュリティとデータ
 
@@ -242,7 +273,6 @@
 - [インタラクティブモード](https://code.claude.com/docs/ja/interactive-mode.md): Claude Code セッションのキーボードショートカット、入力モード、インタラクティブ機能の完全なリファレンス。
 - [チェックポイント](https://code.claude.com/docs/ja/checkpointing.md): Claude のエディット内容と会話を追跡、巻き戻し、要約してセッション状態を管理します。
 - [Hooks リファレンス](https://code.claude.com/docs/ja/hooks.md): Claude Code のフック イベント、設定スキーマ、JSON 入出力形式、終了コード、非同期フック、HTTP フック、プロンプト フック、MCP ツール フックのリファレンス。
-- [プラグインリファレンス](https://code.claude.com/docs/ja/plugins-reference.md): Claude Code プラグインシステムの完全な技術リファレンス。スキーマ、CLI コマンド、コンポーネント仕様を含みます。
 - [チャネルリファレンス](https://code.claude.com/docs/ja/channels-reference.md): webhook、アラート、チャットメッセージを Claude Code セッションにプッシュする MCP サーバーを構築します。チャネルコントラクトのリファレンス：機能宣言、通知イベント、返信ツール、送信者ゲーティング、権限リレー。
 
 #### 用語集

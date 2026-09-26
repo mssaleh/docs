@@ -88,12 +88,6 @@
 
 - [Расширение Claude с помощью skills](https://code.claude.com/docs/ru/skills.md): Создавайте, управляйте и делитесь skills для расширения возможностей Claude в Claude Code. Включает пользовательские команды и встроенные skills.
 
-#### Плагины
-
-- [Откройте и установите готовые плагины через маркетплейсы](https://code.claude.com/docs/ru/discover-plugins.md): Найдите и установите плагины из маркетплейсов, чтобы расширить Claude Code новыми skills, agents и возможностями.
-- [Создание plugins](https://code.claude.com/docs/ru/plugins.md): Создавайте пользовательские plugins для расширения Claude Code с помощью skills, agents, hooks и MCP servers.
-- [Тестирование plugins с помощью evals](https://code.claude.com/docs/ru/plugin-evals.md): Напишите eval-кейсы для вашего Claude Code plugin, запустите их с помощью claude plugin eval, оцените результаты, сравните с базовым вариантом без plugin и установите ограничение CI на основе оценки.
-
 #### Артефакты
 
 - [Поделитесь выходом сеанса как артефактами](https://code.claude.com/docs/ru/artifacts.md): Артефакты превращают работу Claude Code в живые интерактивные страницы на claude.ai, которые вы можете хранить в приватном режиме, делиться с вашей организацией или публиковать по общедоступной ссылке.
@@ -117,6 +111,49 @@
 - [Troubleshooting](https://code.claude.com/docs/ru/troubleshooting.md): Исправьте высокое использование CPU или памяти, зависания, auto-compact thrashing и проблемы поиска в Claude Code, и найдите нужную страницу для других проблем.
 - [Отладка конфигурации](https://code.claude.com/docs/ru/debug-your-config.md): Диагностируйте, почему CLAUDE.md, параметры, hooks, MCP серверы или skills не вступают в силу. Используйте /context, /doctor, /hooks и /mcp, чтобы увидеть, что действительно загрузилось.
 - [Справочник по ошибкам](https://code.claude.com/docs/ru/errors.md): Найдите сообщения об ошибках Claude Code с объяснением их значения и способов исправления.
+
+### Плагины
+
+#### Плагины
+
+- [Обзор plugins](https://code.claude.com/docs/ru/plugins/overview.md): Узнайте, что такое Claude Code plugin, когда вам нужен plugin вместо отдельного skill или MCP server, и какую страницу прочитать для установки или создания plugin.
+
+#### Использовать plugins
+
+- [Установка и управление плагинами](https://code.claude.com/docs/ru/plugins/install.md): Установите плагины Claude Code из маркетплейса на любой поверхности, которую вы используете, выберите область установки и обновляйте или удаляйте их позже.
+- [Code intelligence plugins](https://code.claude.com/docs/ru/plugins/code-intelligence.md): Установите плагин языкового сервера, чтобы Claude видел ошибки типов после редактирования и навигировал по коду по символам, и ответьте на диалог рекомендации плагина LSP.
+- [Безопасность и доверие к плагинам](https://code.claude.com/docs/ru/plugins/security.md): Решите, доверять ли плагину перед его установкой: от того, что плагин может делать на вашем компьютере, до того, как его проверить и удалить.
+
+#### Создание плагинов
+
+- [Создание плагина Claude Code](https://code.claude.com/docs/ru/plugins/create.md): Создайте свой первый плагин Claude Code с нуля, протестируйте его без marketplace и преобразуйте существующую конфигурацию .claude/.
+- [Добавление компонентов в плагин](https://code.claude.com/docs/ru/plugins/components.md): Добавляйте skills, hooks, MCP серверы и все остальные типы компонентов в плагин Claude Code с примерами, которые проходят валидацию для каждого.
+- [Зависимости плагинов](https://code.claude.com/docs/ru/plugins/dependencies.md): Объявляйте плагины, от которых зависит ваш плагин, с диапазонами версий, такими как ^1.2, и узнайте, как Claude Code устанавливает, разрешает и удаляет их.
+- [Тестирование plugins с помощью evals](https://code.claude.com/docs/ru/plugin-evals.md): Напишите eval-кейсы для вашего Claude Code plugin, запустите их с помощью claude plugin eval, оцените результаты, сравните с базовым вариантом без plugin и установите ограничение CI на основе оценки.
+- [Публикация и распространение плагина](https://code.claude.com/docs/ru/plugins/publish.md): Опубликуйте плагин Claude Code через собственный маркетплейс или маркетплейс сообщества Anthropic с предварительным контрольным списком и информацией о том, как пользователи получают обновления.
+- [Измерение стоимости и использования плагина](https://code.claude.com/docs/ru/plugins/measure.md): Измерьте стоимость токенов плагина Claude Code, узнайте, используют ли его люди, и выберите события телеметрии для вопросов плагинов на уровне организации.
+- [Рекомендуйте ваш plugin из вашего CLI](https://code.claude.com/docs/ru/plugins/cli-hints.md): Предложите пользователям Claude Code установить ваш plugin из официального marketplace, отправив тег claude-code-hint из вашего CLI или SDK.
+
+#### Запустить marketplace
+
+- [Создание marketplace](https://code.claude.com/docs/ru/plugins/create-marketplace.md): Создайте plugin marketplace из файла marketplace.json и протестируйте его локально перед размещением.
+- [Размещение и поддержка маркетплейса](https://code.claude.com/docs/ru/plugins/host-marketplace.md): Опубликуйте маркетплейс плагинов, где пользователи смогут его найти, предоставьте доступ к приватному маркетплейсу и выпускайте обновления и переименования без нарушения установок.
+- [Рекомендуйте plugins для вашей организации](https://code.claude.com/docs/ru/plugins/relevance.md): Добавьте блок relevance к записям marketplace plugins, чтобы Claude Code предлагал их, когда работа пользователя совпадает, и разрешите marketplace в управляемых параметрах.
+
+#### Управление плагинами вашей организации
+
+- [Управление плагинами Claude Code для вашей организации](https://code.claude.com/docs/ru/plugins/org.md): Контролируйте, какие плагины Claude Code устанавливает и разрешает на каждой машине в вашей организации через управляемые параметры.
+
+#### Устранение неполадок
+
+- [Устранение неполадок плагинов](https://code.claude.com/docs/ru/plugins/troubleshooting.md): Исправьте ошибки плагинов в Claude Code. Найдите точное сообщение об ошибке, сгруппированное по этапам от запуска /plugin до установки и политики организации.
+- [Справочник по загрузке плагинов](https://code.claude.com/docs/ru/plugins/loading.md): Отследите, откуда Claude Code загружает каждый плагин, какой файл параметров решает, загружается ли он, и почему обновление ничего не изменило.
+
+#### Справочник
+
+- [Справочник манифеста плагина](https://code.claude.com/docs/ru/plugins/manifest-reference.md): Полный справочник по plugin.json: каждое поле с его типом и значением по умолчанию, принятые формы путей и схемы userConfig и переменных окружения.
+- [Справочник Marketplace](https://code.claude.com/docs/ru/plugins/marketplace-reference.md): Полный справочник по полям marketplace.json, записям плагинов и объектам источников плагинов и marketplace, с указанием того, где каждый из них действителен.
+- [Справочник команд плагинов](https://code.claude.com/docs/ru/plugins/cli-reference.md): Полный справочник по командам оболочки claude plugin, /plugin и /reload-plugins в сеансе, а также флагам, которые загружают плагин на один сеанс.
 
 ### Администрирование
 
@@ -167,13 +204,6 @@
 - [Мониторинг](https://code.claude.com/docs/ru/monitoring-usage.md): Узнайте, как включить и настроить OpenTelemetry для Claude Code.
 - [Эффективное управление затратами](https://code.claude.com/docs/ru/costs.md): Отслеживайте использование токенов, устанавливайте лимиты расходов команды и снижайте затраты Claude Code с помощью управления контекстом, выбора модели, настроек расширенного мышления и предварительной обработки hooks.
 - [Отслеживание использования команды с помощью аналитики](https://code.claude.com/docs/ru/analytics.md): Просмотрите метрики использования Claude Code, отслеживайте внедрение и измеряйте скорость разработки на панели аналитики.
-
-#### Распространение плагинов
-
-- [Создание и распространение marketplace плагинов](https://code.claude.com/docs/ru/plugin-marketplaces.md): Создавайте и размещайте marketplace плагинов для распространения расширений Claude Code по командам и сообществам.
-- [Ограничение версий зависимостей плагина](https://code.claude.com/docs/ru/plugin-dependencies.md): Объявляйте ограничения версий для зависимостей плагина и объедините подобранный набор плагинов в одну установку.
-- [Рекомендуйте ваш плагин из вашего CLI](https://code.claude.com/docs/ru/plugin-hints.md): Выведите однострочный маркер из вашего CLI, чтобы Claude Code предложил пользователям установить ваш официальный плагин.
-- [Рекомендуйте plugins для вашей организации](https://code.claude.com/docs/ru/plugin-relevance.md): Добавьте блок relevance к записям plugins на marketplace, чтобы Claude Code предлагал их, когда работа пользователя совпадает.
 
 #### Безопасность и данные
 
@@ -242,7 +272,6 @@
 - [Интерактивный режим](https://code.claude.com/docs/ru/interactive-mode.md): Полный справочник по сочетаниям клавиш, режимам ввода и интерактивным функциям в сеансах Claude Code.
 - [Checkpointing](https://code.claude.com/docs/ru/checkpointing.md): Отслеживайте, перематывайте и суммируйте правки и беседу Claude для управления состоянием сеанса.
 - [Справочник по hooks](https://code.claude.com/docs/ru/hooks.md): Справочник по событиям hook Claude Code, схеме конфигурации, форматам JSON входа/выхода, кодам выхода, асинхронным hooks, HTTP hooks, prompt hooks и MCP tool hooks.
-- [Справочник по plugins](https://code.claude.com/docs/ru/plugins-reference.md): Полный технический справочник по системе plugins Claude Code, включая схемы, команды CLI и спецификации компонентов.
 - [Справочник по каналам](https://code.claude.com/docs/ru/channels-reference.md): Создайте MCP-сервер, который отправляет вебхуки, оповещения и сообщения чата в сеанс Claude Code. Справочник по контракту канала: объявление возможностей, события уведомлений, инструменты ответа, проверка отправителя и трансляция разрешений.
 
 #### Глоссарий

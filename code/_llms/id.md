@@ -88,12 +88,6 @@
 
 - [Perluas Claude dengan skills](https://code.claude.com/docs/id/skills.md): Buat, kelola, dan bagikan skills untuk memperluas kemampuan Claude di Claude Code. Mencakup perintah kustom dan skills bundel.
 
-#### Plugin
-
-- [Temukan dan instal plugin yang sudah dibuat melalui marketplace](https://code.claude.com/docs/id/discover-plugins.md): Temukan dan instal plugin dari marketplace untuk memperluas Claude Code dengan skills, agen, dan kemampuan baru.
-- [Buat plugins](https://code.claude.com/docs/id/plugins.md): Buat plugins kustom untuk memperluas Claude Code dengan skills, agents, hooks, dan MCP servers.
-- [Uji plugin dengan evals](https://code.claude.com/docs/id/plugin-evals.md): Tulis kasus eval untuk plugin Claude Code Anda, jalankan dengan claude plugin eval, nilai hasilnya, bandingkan dengan baseline tanpa plugin, dan gating CI pada skor.
-
 #### Artefak
 
 - [Bagikan output sesi sebagai artifacts](https://code.claude.com/docs/id/artifacts.md): Artifacts mengubah pekerjaan Claude Code menjadi halaman interaktif langsung di claude.ai yang dapat Anda simpan pribadi, bagikan dengan organisasi Anda, atau publikasikan ke tautan publik.
@@ -118,6 +112,49 @@
 - [Debug konfigurasi Anda](https://code.claude.com/docs/id/debug-your-config.md): Diagnosis mengapa CLAUDE.md, settings, hooks, server MCP, atau skills tidak berlaku. Gunakan /context, /doctor, /hooks, dan /mcp untuk melihat apa yang benar-benar dimuat.
 - [Referensi kesalahan](https://code.claude.com/docs/id/errors.md): Cari pesan kesalahan runtime Claude Code dengan arti masing-masing dan cara memperbaikinya.
 
+### Plugin
+
+#### Plugin
+
+- [Ikhtisar plugin](https://code.claude.com/docs/id/plugins/overview.md): Pahami apa itu plugin Claude Code, kapan Anda membutuhkannya daripada skill mandiri atau server MCP, dan halaman mana yang harus dibaca untuk memasang atau membuat satu.
+
+#### Gunakan plugin
+
+- [Instal dan kelola plugin](https://code.claude.com/docs/id/plugins/install.md): Instal plugin Claude Code dari marketplace di permukaan apa pun yang Anda gunakan, pilih cakupan instalasi, dan perbarui atau hapus nanti.
+- [Code intelligence plugins](https://code.claude.com/docs/id/plugins/code-intelligence.md): Instal plugin language server sehingga Claude melihat kesalahan tipe setelah pengeditan dan menavigasi kode berdasarkan simbol, serta menjawab dialog rekomendasi plugin LSP.
+- [Keamanan dan kepercayaan plugin](https://code.claude.com/docs/id/plugins/security.md): Tentukan apakah Anda mempercayai plugin sebelum menginstalnya, dari apa yang dapat dilakukan plugin di mesin Anda hingga cara meninjau dan menghapusnya.
+
+#### Buat plugin
+
+- [Buat plugin Claude Code](https://code.claude.com/docs/id/plugins/create.md): Bangun plugin Claude Code pertama Anda dari direktori kosong, uji tanpa marketplace, dan konversi setup .claude/ yang sudah ada.
+- [Tambahkan komponen ke plugin](https://code.claude.com/docs/id/plugins/components.md): Tambahkan skills, hooks, server MCP, dan setiap jenis komponen lainnya ke plugin Claude Code, dengan contoh yang memvalidasi untuk masing-masing.
+- [Dependensi plugin](https://code.claude.com/docs/id/plugins/dependencies.md): Deklarasikan plugin yang plugin Anda bergantung padanya, dengan rentang versi seperti ^1.2, dan lihat bagaimana Claude Code menginstal, menyelesaikan, dan memangkas dependensi tersebut.
+- [Uji plugin dengan evals](https://code.claude.com/docs/id/plugin-evals.md): Tulis kasus eval untuk plugin Claude Code Anda, jalankan dengan claude plugin eval, nilai hasilnya, bandingkan dengan baseline tanpa plugin, dan gating CI pada skor.
+- [Publikasikan dan distribusikan plugin](https://code.claude.com/docs/id/plugins/publish.md): Publikasikan plugin Claude Code melalui marketplace Anda sendiri atau marketplace komunitas Anthropic, dengan daftar periksa pra-rilis dan cara pengguna mendapatkan pembaruan.
+- [Ukur biaya dan penggunaan plugin](https://code.claude.com/docs/id/plugins/measure.md): Ukur biaya token plugin Claude Code, cari tahu apakah orang masih menggunakannya, dan pilih peristiwa telemetri untuk pertanyaan plugin di seluruh organisasi.
+- [Rekomendasikan plugin Anda dari CLI Anda](https://code.claude.com/docs/id/plugins/cli-hints.md): Minta pengguna Claude Code untuk memasang plugin marketplace resmi Anda dengan mengeluarkan tag claude-code-hint dari CLI atau SDK Anda.
+
+#### Jalankan marketplace
+
+- [Buat marketplace](https://code.claude.com/docs/id/plugins/create-marketplace.md): Bangun marketplace plugin dari file marketplace.json dan uji secara lokal sebelum Anda menghosting-nya.
+- [Host dan kelola marketplace](https://code.claude.com/docs/id/plugins/host-marketplace.md): Publikasikan marketplace plugin tempat pengguna dapat mengaksesnya, berikan akses ke marketplace pribadi, dan rilis pembaruan serta perubahan nama tanpa merusak instalasi.
+- [Rekomendasikan plugins untuk organisasi Anda](https://code.claude.com/docs/id/plugins/relevance.md): Tambahkan blok relevansi ke entri plugin marketplace sehingga Claude Code menyarankannya ketika pekerjaan pengguna cocok, dan daftarkan whitelist marketplace dalam pengaturan terkelola.
+
+#### Kelola plugin untuk organisasi Anda
+
+- [Kelola plugin Claude Code untuk organisasi Anda](https://code.claude.com/docs/id/plugins/org.md): Kontrol plugin mana yang Claude Code instal dan izinkan di seluruh organisasi Anda melalui pengaturan terkelola.
+
+#### Pemecahan Masalah
+
+- [Troubleshoot plugins](https://code.claude.com/docs/id/plugins/troubleshooting.md): Perbaiki kesalahan plugin di Claude Code. Temukan pesan yang tepat yang Anda lihat, dikelompokkan berdasarkan tahap dari mana /plugin berjalan melalui instalasi dan kebijakan organisasi.
+- [Referensi pemuatan plugin](https://code.claude.com/docs/id/plugins/loading.md): Lacak dari mana Claude Code memuat setiap plugin, file pengaturan mana yang menentukan apakah plugin dimuat, dan mengapa pembaruan tidak mengubah apa pun.
+
+#### Referensi
+
+- [Referensi manifest plugin](https://code.claude.com/docs/id/plugins/manifest-reference.md): Referensi lengkap untuk plugin.json: setiap field dengan tipenya dan default, bentuk path yang diterima, dan skema userConfig serta variabel lingkungan.
+- [Referensi Marketplace](https://code.claude.com/docs/id/plugins/marketplace-reference.md): Referensi lengkap untuk field marketplace.json, entri plugin, dan objek sumber plugin dan marketplace, dengan tempat masing-masing valid.
+- [Referensi perintah plugin](https://code.claude.com/docs/id/plugins/cli-reference.md): Referensi lengkap untuk perintah shell plugin claude, /plugin dan /reload-plugins dalam sesi, dan flag yang memuat plugin untuk satu sesi.
+
 ### Administrasi
 
 #### Pengaturan dan akses
@@ -130,7 +167,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penyebaran
+#### Penerapan
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.
@@ -167,13 +204,6 @@
 - [Pemantauan](https://code.claude.com/docs/id/monitoring-usage.md): Pelajari cara mengaktifkan dan mengonfigurasi OpenTelemetry untuk Claude Code.
 - [Kelola biaya secara efektif](https://code.claude.com/docs/id/costs.md): Lacak penggunaan token, tetapkan batas pengeluaran tim, dan kurangi biaya Claude Code dengan manajemen konteks, pemilihan model, pengaturan pemikiran yang diperluas, dan hook prapemrosesan.
 - [Lacak penggunaan tim dengan analitik](https://code.claude.com/docs/id/analytics.md): Lihat metrik penggunaan Claude Code, lacak adopsi, dan ukur kecepatan teknik dalam dasbor analitik.
-
-#### Distribusi Plugin
-
-- [Buat dan distribusikan marketplace plugin](https://code.claude.com/docs/id/plugin-marketplaces.md): Bangun dan host marketplace plugin untuk mendistribusikan ekstensi Claude Code di seluruh tim dan komunitas.
-- [Batasi versi dependensi plugin](https://code.claude.com/docs/id/plugin-dependencies.md): Deklarasikan batasan versi pada dependensi plugin, dan bundel satu set plugin yang dikurasi di balik satu instalasi.
-- [Rekomendasikan plugin Anda dari CLI Anda](https://code.claude.com/docs/id/plugin-hints.md): Keluarkan penanda satu baris dari CLI Anda sehingga Claude Code meminta pengguna untuk memasang plugin resmi Anda.
-- [Rekomendasikan plugins untuk organisasi Anda](https://code.claude.com/docs/id/plugin-relevance.md): Tambahkan blok relevance ke entri plugin marketplace sehingga Claude Code menyarankannya ketika pekerjaan pengguna cocok.
 
 #### Keamanan dan data
 
@@ -242,7 +272,6 @@
 - [Mode interaktif](https://code.claude.com/docs/id/interactive-mode.md): Referensi lengkap untuk pintasan keyboard, mode input, dan fitur interaktif dalam sesi Claude Code.
 - [Checkpointing](https://code.claude.com/docs/id/checkpointing.md): Lacak, putar ulang, dan ringkas edit dan percakapan Claude untuk mengelola status sesi.
 - [Referensi hooks](https://code.claude.com/docs/id/hooks.md): Referensi untuk event hook Claude Code, skema konfigurasi, format JSON input/output, kode keluar, hooks asinkron, hooks HTTP, prompt hooks, dan MCP tool hooks.
-- [Referensi Plugins](https://code.claude.com/docs/id/plugins-reference.md): Referensi teknis lengkap untuk sistem plugin Claude Code, termasuk skema, perintah CLI, dan spesifikasi komponen.
 - [Referensi Channels](https://code.claude.com/docs/id/channels-reference.md): Bangun server MCP yang mendorong webhooks, alerts, dan pesan chat ke dalam sesi Claude Code. Referensi untuk kontrak channel: deklarasi kemampuan, event notifikasi, tools balasan, gating pengirim, dan relay izin.
 
 #### Glosarium
@@ -299,7 +328,7 @@
 - [Observability dengan OpenTelemetry](https://code.claude.com/docs/id/agent-sdk/observability.md): Ekspor traces, metrics, dan events dari Agent SDK ke backend observability Anda menggunakan OpenTelemetry.
 - [Lacak todos](https://code.claude.com/docs/id/agent-sdk/todo-tracking.md): Lacak todos dalam sesi Agent SDK dan tampilkan kemajuan Claude dalam aplikasi Anda dari panggilan alat terstruktur
 
-#### Penerapan
+#### Penyebaran
 
 - [Hosting the Agent SDK](https://code.claude.com/docs/id/agent-sdk/hosting.md): Terapkan Agent SDK dalam produksi: arsitektur subprocess, persistensi sesi, penskalaan, observabilitas, dan isolasi multi-tenant untuk Docker, Kubernetes, dan penyedia sandbox.
 - [Mengamankan penyebaran agen AI](https://code.claude.com/docs/id/agent-sdk/secure-deployment.md): Panduan untuk mengamankan penyebaran Claude Code dan Agent SDK dengan isolasi, manajemen kredensial, dan kontrol jaringan

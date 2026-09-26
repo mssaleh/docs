@@ -1,8 +1,8 @@
-# Claude Code Docs: Chinese
+# Claude Code Docs: Simplified Chinese
 
 > Official documentation for Claude Code, Anthropic's agentic coding tool available in the terminal, IDE, desktop app, and browser. Covers installation, configuration, skills, subagents, hooks, MCP, the Agent SDK, and reference material.
 
-## Chinese
+## Simplified Chinese
 
 ### 快速开始
 
@@ -88,12 +88,6 @@
 
 - [使用 skills 扩展 Claude](https://code.claude.com/docs/zh-CN/skills.md): 创建、管理和共享 skills 以在 Claude Code 中扩展 Claude 的功能。包括自定义命令和捆绑的 skills。
 
-#### 插件
-
-- [通过市场发现和安装预构建插件](https://code.claude.com/docs/zh-CN/discover-plugins.md): 从市场发现和安装插件，以使用新 skills、agents 和功能扩展 Claude Code。
-- [创建插件](https://code.claude.com/docs/zh-CN/plugins.md): 创建自定义插件以使用 skills、agents、hooks 和 MCP servers 扩展 Claude Code。
-- [使用 evals 测试插件](https://code.claude.com/docs/zh-CN/plugin-evals.md): 为您的 Claude Code 插件编写 eval 用例，使用 claude plugin eval 运行它们，对结果进行评分，与无插件基线进行比较，并在 CI 中基于分数进行门控。
-
 #### 制品库
 
 - [将会话输出作为 artifacts 共享](https://code.claude.com/docs/zh-CN/artifacts.md): Artifacts 将 Claude Code 的工作转化为 claude.ai 上的实时交互式页面，您可以将其保持私密、与您的组织共享或发布到公开链接。
@@ -117,6 +111,50 @@
 - [故障排除](https://code.claude.com/docs/zh-CN/troubleshooting.md): 修复 Claude Code 中的高 CPU 或内存使用、挂起、自动压缩抖动和搜索问题，并找到其他问题的正确页面。
 - [调试你的配置](https://code.claude.com/docs/zh-CN/debug-your-config.md): 诊断为什么 CLAUDE.md、settings、hooks、MCP 服务器或 skills 没有生效。使用 /context、/doctor、/hooks 和 /mcp 来查看实际加载了什么。
 - [错误参考](https://code.claude.com/docs/zh-CN/errors.md): 查找 Claude Code 运行时错误消息，了解每个错误的含义以及如何修复。
+
+### 插件
+
+#### 插件
+
+- [插件概览](https://code.claude.com/docs/zh-CN/plugins/overview.md): 了解什么是 Claude Code 插件，何时需要使用插件而不是独立的 skill 或 MCP 服务器，以及应该阅读哪个页面来安装或创建插件。
+
+#### 使用插件
+
+- [安装和管理插件](https://code.claude.com/docs/zh-CN/plugins/install.md): 从任何使用的界面上的市场安装 Claude Code 插件，选择安装范围，以及稍后更新或删除它们。
+- [Anthropic 的插件市场](https://code.claude.com/docs/zh-CN/plugins/anthropic-marketplaces.md): Anthropic 官方、社区和演示插件市场的 Claude Code：它们的名称、存储库、如何添加每个市场，以及在哪里浏览它们的插件。
+- [代码智能插件](https://code.claude.com/docs/zh-CN/plugins/code-intelligence.md): 安装语言服务器插件，使 Claude 在编辑后能看到类型错误并通过符号导航代码，并回答 LSP 插件推荐对话框。
+- [插件安全和信任](https://code.claude.com/docs/zh-CN/plugins/security.md): 在安装插件之前决定是否信任它，从插件在您的机器上可以做什么，到如何审查和删除它。
+
+#### 创建插件
+
+- [创建 Claude Code 插件](https://code.claude.com/docs/zh-CN/plugins/create.md): 从空目录构建您的第一个 Claude Code 插件，在没有市场的情况下测试它，并转换现有的 .claude/ 设置。
+- [向插件添加组件](https://code.claude.com/docs/zh-CN/plugins/components.md): 向 Claude Code 插件添加 skills、hooks、MCP 服务器和其他所有组件类型，并提供针对每种类型的验证示例。
+- [插件依赖](https://code.claude.com/docs/zh-CN/plugins/dependencies.md): 声明你的插件所依赖的其他插件，使用版本范围如 ^1.2，并了解 Claude Code 如何安装、解析和修剪它们。
+- [使用 evals 测试插件](https://code.claude.com/docs/zh-CN/plugin-evals.md): 为您的 Claude Code 插件编写 eval 用例，使用 claude plugin eval 运行它们，对结果进行评分，与无插件基线进行比较，并在 CI 中基于分数进行门控。
+- [发布和分发插件](https://code.claude.com/docs/zh-CN/plugins/publish.md): 通过您自己的市场或 Anthropic 的社区市场发布 Claude Code 插件，包括发布前检查清单以及用户如何获取更新。
+- [测量插件成本和使用情况](https://code.claude.com/docs/zh-CN/plugins/measure.md): 测量 Claude Code 插件的令牌成本，了解人们是否仍在使用它，并为组织范围的插件问题选择遥测事件。
+- [从您的 CLI 推荐您的插件](https://code.claude.com/docs/zh-CN/plugins/cli-hints.md): 通过从您的 CLI 或 SDK 发出 claude-code-hint 标签，提示 Claude Code 用户安装您的官方市场插件。
+
+#### 运行 marketplace
+
+- [创建一个 marketplace](https://code.claude.com/docs/zh-CN/plugins/create-marketplace.md): 从 marketplace.json 文件构建一个 plugin marketplace，并在托管之前在本地测试它。
+- [托管和维护一个 marketplace](https://code.claude.com/docs/zh-CN/plugins/host-marketplace.md): 发布一个插件 marketplace，让用户可以通过它来访问，授予对私有 marketplace 的访问权限，并在推送更新和重命名后不会破坏安装。
+- [为您的组织推荐插件](https://code.claude.com/docs/zh-CN/plugins/relevance.md): 向 marketplace 插件条目添加相关性块，以便当用户的工作匹配时 Claude Code 会建议安装这些插件，并在托管设置中将 marketplace 列入允许列表。
+
+#### 管理组织的插件
+
+- [为您的组织管理 Claude Code plugins](https://code.claude.com/docs/zh-CN/plugins/org.md): 通过托管设置控制 Claude Code 在组织中每台机器上安装和允许的 plugins。
+
+#### 故障排除
+
+- [排查插件问题](https://code.claude.com/docs/zh-CN/plugins/troubleshooting.md): 修复 Claude Code 中的插件错误。找到您看到的确切消息，按照 /plugin 运行、安装和组织策略的阶段分组。
+- [插件加载参考](https://code.claude.com/docs/zh-CN/plugins/loading.md): 追踪 Claude Code 从何处加载每个插件，哪个设置文件决定是否加载，以及为什么更新没有产生任何变化。
+
+#### 参考
+
+- [Plugin manifest 参考](https://code.claude.com/docs/zh-CN/plugins/manifest-reference.md): plugin.json 的完整参考：每个字段的类型和默认值、接受的路径形式，以及 userConfig 和环境变量模式。
+- [Marketplace 参考](https://code.claude.com/docs/zh-CN/plugins/marketplace-reference.md): marketplace.json 字段、插件条目和插件及 marketplace 源对象的完整参考，包括每个字段的有效位置。
+- [Plugin 命令参考](https://code.claude.com/docs/zh-CN/plugins/cli-reference.md): claude plugin shell 命令、会话中的 /plugin 和 /reload-plugins 的完整参考，以及在一个会话中加载 plugin 的标志。
 
 ### 管理
 
@@ -167,13 +205,6 @@
 - [监控](https://code.claude.com/docs/zh-CN/monitoring-usage.md): 了解如何为 Claude Code 启用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-CN/costs.md): 跟踪令牌使用情况，设置团队支出限制，并通过上下文管理、模型选择、扩展思考设置和预处理 hooks 来降低 Claude Code 成本。
 - [使用分析跟踪团队使用情况](https://code.claude.com/docs/zh-CN/analytics.md): 在分析仪表板中查看 Claude Code 使用指标、跟踪采用情况并衡量工程速度。
-
-#### 插件分发
-
-- [创建和分发 plugin marketplace](https://code.claude.com/docs/zh-CN/plugin-marketplaces.md): 构建和托管 plugin marketplace，以在团队和社区中分发 Claude Code 扩展。
-- [约束插件依赖版本](https://code.claude.com/docs/zh-CN/plugin-dependencies.md): 在插件依赖上声明版本约束，并将精选插件集合捆绑在一个安装后面。
-- [从您的 CLI 推荐您的插件](https://code.claude.com/docs/zh-CN/plugin-hints.md): 从您的 CLI 发出一行标记，以便 Claude Code 提示用户安装您的官方插件。
-- [为您的组织推荐插件](https://code.claude.com/docs/zh-CN/plugin-relevance.md): 向marketplace插件条目添加relevance块，以便当用户的工作与之匹配时，Claude Code会建议他们安装。
 
 #### 安全和数据
 
@@ -242,7 +273,6 @@
 - [交互模式](https://code.claude.com/docs/zh-CN/interactive-mode.md): Claude Code 会话中键盘快捷键、输入模式和交互功能的完整参考。
 - [Checkpointing](https://code.claude.com/docs/zh-CN/checkpointing.md): 跟踪、回溯和总结 Claude 的编辑和对话以管理会话状态。
 - [Hooks 参考](https://code.claude.com/docs/zh-CN/hooks.md): Claude Code hook 事件、配置架构、JSON 输入/输出格式、退出代码、异步 hooks、HTTP hooks、提示 hooks 和 MCP 工具 hooks 的参考。
-- [Plugins 参考](https://code.claude.com/docs/zh-CN/plugins-reference.md): Claude Code 插件系统的完整技术参考，包括模式、CLI 命令和组件规范。
 - [Channels 参考](https://code.claude.com/docs/zh-CN/channels-reference.md): 构建一个 MCP 服务器，将 webhooks、警报和聊天消息推送到 Claude Code 会话中。频道合约的参考：能力声明、通知事件、回复工具、发送者门控和权限中继。
 
 #### 术语表

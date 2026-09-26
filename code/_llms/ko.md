@@ -88,12 +88,6 @@
 
 - [Claude를 skills로 확장하기](https://code.claude.com/docs/ko/skills.md): Claude Code에서 skills를 생성, 관리 및 공유하여 Claude의 기능을 확장합니다. 사용자 정의 명령어 및 번들 skills를 포함합니다.
 
-#### 플러그인
-
-- [마켓플레이스를 통해 미리 빌드된 플러그인 발견 및 설치](https://code.claude.com/docs/ko/discover-plugins.md): 마켓플레이스에서 플러그인을 찾아 설치하여 Claude Code를 새로운 skills, agents 및 기능으로 확장합니다.
-- [플러그인 만들기](https://code.claude.com/docs/ko/plugins.md): skills, agents, hooks, MCP servers를 사용하여 Claude Code를 확장하는 사용자 정의 플러그인을 만듭니다.
-- [evals로 플러그인 테스트하기](https://code.claude.com/docs/ko/plugin-evals.md): Claude Code 플러그인에 대한 eval 케이스를 작성하고, claude plugin eval로 실행하며, 결과를 채점하고, 플러그인 없는 기준선과 비교하고, CI에서 점수를 기준으로 게이트합니다.
-
 #### 아티팩트
 
 - [세션 출력을 아티팩트로 공유하기](https://code.claude.com/docs/ko/artifacts.md): 아티팩트는 Claude Code의 작업을 claude.ai의 라이브 인터랙티브 페이지로 변환하여 비공개로 유지하거나, 조직과 공유하거나, 공개 링크로 게시할 수 있습니다.
@@ -117,6 +111,49 @@
 - [문제 해결](https://code.claude.com/docs/ko/troubleshooting.md): Claude Code에서 높은 CPU 또는 메모리 사용량, 중단, 자동 압축 스래싱 및 검색 문제를 해결하고 다른 문제에 대한 올바른 페이지를 찾습니다.
 - [구성 디버깅하기](https://code.claude.com/docs/ko/debug-your-config.md): CLAUDE.md, 설정, 훅, MCP 서버 또는 스킬이 적용되지 않는 이유를 진단합니다. /context, /doctor, /hooks, /mcp를 사용하여 실제로 로드된 항목을 확인합니다.
 - [오류 참조](https://code.claude.com/docs/ko/errors.md): Claude Code 런타임 오류 메시지를 조회하고 각 오류의 의미와 해결 방법을 확인합니다.
+
+### 플러그인
+
+#### 플러그인
+
+- [플러그인 개요](https://code.claude.com/docs/ko/plugins/overview.md): Claude Code 플러그인이 무엇인지, 독립형 스킬이나 MCP 서버 대신 플러그인이 필요한 경우, 플러그인을 설치하거나 만드는 방법을 알아봅니다.
+
+#### 플러그인 사용
+
+- [플러그인 설치 및 관리](https://code.claude.com/docs/ko/plugins/install.md): 마켓플레이스에서 Claude Code 플러그인을 설치하고, 설치 범위를 선택하며, 나중에 업데이트하거나 제거합니다.
+- [Anthropic의 마켓플레이스](https://code.claude.com/docs/ko/plugins/anthropic-marketplaces.md): Claude Code를 위한 Anthropic의 공식, 커뮤니티, 데모 플러그인 마켓플레이스: 이름, 저장소, 각각을 추가하는 방법, 플러그인을 찾아보는 위치.
+- [코드 인텔리전스 플러그인](https://code.claude.com/docs/ko/plugins/code-intelligence.md): 언어 서버 플러그인을 설치하여 Claude가 편집 후 타입 오류를 확인하고 기호로 코드를 탐색하며, LSP 플러그인 권장 대화상자에 응답합니다.
+- [플러그인 보안 및 신뢰](https://code.claude.com/docs/ko/plugins/security.md): 플러그인을 설치하기 전에 신뢰할 수 있는지 결정하세요. 플러그인이 머신에서 할 수 있는 작업부터 플러그인을 검토하고 제거하는 방법까지 알아봅니다.
+
+#### 플러그인 만들기
+
+- [Claude Code 플러그인 만들기](https://code.claude.com/docs/ko/plugins/create.md): 빈 디렉토리에서 첫 번째 Claude Code 플러그인을 만들고, 마켓플레이스 없이 테스트하며, 기존 .claude/ 설정을 변환합니다.
+- [플러그인에 컴포넌트 추가하기](https://code.claude.com/docs/ko/plugins/components.md): Claude Code 플러그인에 skills, hooks, MCP 서버 및 다른 모든 컴포넌트 유형을 추가하고, 각각에 대해 검증하는 예제를 포함합니다.
+- [플러그인 의존성](https://code.claude.com/docs/ko/plugins/dependencies.md): 플러그인이 의존하는 플러그인을 선언하고, ^1.2와 같은 버전 범위를 사용하며, Claude Code가 이를 설치, 해결 및 정리하는 방법을 알아봅니다.
+- [evals로 플러그인 테스트하기](https://code.claude.com/docs/ko/plugin-evals.md): Claude Code 플러그인에 대한 eval 케이스를 작성하고, claude plugin eval로 실행하며, 결과를 채점하고, 플러그인 없는 기준선과 비교하고, CI에서 점수를 기준으로 게이트합니다.
+- [플러그인 게시 및 배포](https://code.claude.com/docs/ko/plugins/publish.md): Claude Code 플러그인을 자신의 마켓플레이스 또는 Anthropic의 커뮤니티 마켓플레이스를 통해 게시하고, 사전 릴리스 체크리스트 및 사용자가 업데이트를 받는 방법을 알아봅니다.
+- [플러그인 비용 및 사용량 측정](https://code.claude.com/docs/ko/plugins/measure.md): Claude Code 플러그인의 토큰 비용을 측정하고, 사람들이 여전히 사용하는지 확인하며, 조직 전체 플러그인 질문을 위한 텔레메트리 이벤트를 선택합니다.
+- [CLI에서 플러그인 추천하기](https://code.claude.com/docs/ko/plugins/cli-hints.md): CLI 또는 SDK에서 claude-code-hint 태그를 내보내 Claude Code 사용자에게 공식 마켓플레이스 플러그인 설치를 유도합니다.
+
+#### 마켓플레이스 실행
+
+- [마켓플레이스 만들기](https://code.claude.com/docs/ko/plugins/create-marketplace.md): marketplace.json 파일에서 플러그인 마켓플레이스를 구축하고 호스팅하기 전에 로컬에서 테스트합니다.
+- [마켓플레이스 호스팅 및 유지 관리](https://code.claude.com/docs/ko/plugins/host-marketplace.md): 사용자가 접근할 수 있는 플러그인 마켓플레이스를 게시하고, 비공개 마켓플레이스에 대한 액세스를 부여하며, 설치를 중단하지 않고 업데이트 및 이름 변경을 릴리스합니다.
+- [조직을 위한 플러그인 추천](https://code.claude.com/docs/ko/plugins/relevance.md): 마켓플레이스 플러그인 항목에 관련성 블록을 추가하여 사용자의 작업이 일치할 때 Claude Code가 플러그인을 제안하도록 하고, 관리 설정에서 마켓플레이스를 허용 목록에 추가합니다.
+
+#### 조직의 플러그인 관리
+
+- [조직을 위한 Claude Code 플러그인 관리](https://code.claude.com/docs/ko/plugins/org.md): 관리되는 설정을 통해 조직의 모든 머신에 Claude Code가 설치하고 허용하는 플러그인을 제어합니다.
+
+#### 문제 해결
+
+- [플러그인 로딩 참조](https://code.claude.com/docs/ko/plugins/loading.md): Claude Code가 각 플러그인을 어디에서 로드하는지, 어떤 설정 파일이 로드 여부를 결정하는지, 그리고 업데이트가 아무것도 변경하지 않은 이유를 추적합니다.
+
+#### 참고
+
+- [플러그인 매니페스트 참조](https://code.claude.com/docs/ko/plugins/manifest-reference.md): plugin.json의 완전한 참조: 모든 필드의 타입과 기본값, 허용되는 경로 형식, userConfig 및 환경 변수 스키마.
+- [마켓플레이스 참조](https://code.claude.com/docs/ko/plugins/marketplace-reference.md): marketplace.json 필드, 플러그인 항목, 플러그인 및 마켓플레이스 소스 객체의 완전한 참조와 각각이 유효한 위치입니다.
+- [플러그인 명령어 참조](https://code.claude.com/docs/ko/plugins/cli-reference.md): claude 플러그인 셸 명령어, 세션 내 /plugin 및 /reload-plugins, 그리고 한 세션 동안 플러그인을 로드하는 플래그에 대한 완전한 참조입니다.
 
 ### 관리
 
@@ -167,13 +204,6 @@
 - [모니터링](https://code.claude.com/docs/ko/monitoring-usage.md): Claude Code에 대한 OpenTelemetry를 활성화하고 구성하는 방법을 알아봅니다.
 - [비용을 효과적으로 관리하기](https://code.claude.com/docs/ko/costs.md): 토큰 사용량을 추적하고, 팀 지출 한도를 설정하며, 컨텍스트 관리, 모델 선택, 확장 사고 설정 및 전처리 hooks를 통해 Claude Code 비용을 절감합니다.
 - [팀 사용량을 분석으로 추적하기](https://code.claude.com/docs/ko/analytics.md): Claude Code 사용량 지표를 확인하고, 채택 현황을 추적하며, 분석 대시보드에서 엔지니어링 속도를 측정합니다.
-
-#### 플러그인 배포
-
-- [플러그인 마켓플레이스 생성 및 배포](https://code.claude.com/docs/ko/plugin-marketplaces.md): Claude Code 확장 프로그램을 팀과 커뮤니티에 배포하기 위한 플러그인 마켓플레이스를 구축하고 호스팅합니다.
-- [플러그인 종속성 버전 제약](https://code.claude.com/docs/ko/plugin-dependencies.md): 플러그인 종속성에 대한 버전 제약을 선언하고 선별된 플러그인 세트를 하나의 설치 뒤에 번들로 제공합니다.
-- [CLI에서 플러그인 추천하기](https://code.claude.com/docs/ko/plugin-hints.md): CLI에서 한 줄 마커를 내보내어 Claude Code가 사용자에게 공식 플러그인 설치를 권유하도록 합니다.
-- [조직을 위한 플러그인 추천](https://code.claude.com/docs/ko/plugin-relevance.md): 마켓플레이스 플러그인 항목에 관련성 블록을 추가하여 사용자의 작업이 일치할 때 Claude Code가 플러그인을 제안하도록 합니다.
 
 #### 보안 및 데이터
 
@@ -242,7 +272,6 @@
 - [대화형 모드](https://code.claude.com/docs/ko/interactive-mode.md): Claude Code 세션의 키보드 단축키, 입력 모드 및 대화형 기능에 대한 완전한 참조입니다.
 - [Checkpointing](https://code.claude.com/docs/ko/checkpointing.md): Claude의 편집 및 대화를 추적, 되돌리기 및 요약하여 세션 상태를 관리합니다.
 - [Hooks 참조](https://code.claude.com/docs/ko/hooks.md): Claude Code hook 이벤트, 구성 스키마, JSON 입출력 형식, 종료 코드, 비동기 hook, HTTP hook, 프롬프트 hook, MCP 도구 hook에 대한 참조입니다.
-- [플러그인 참조](https://code.claude.com/docs/ko/plugins-reference.md): 스키마, CLI 명령어, 컴포넌트 사양을 포함한 Claude Code 플러그인 시스템의 완전한 기술 참조입니다.
 - [채널 참조](https://code.claude.com/docs/ko/channels-reference.md): 웹훅, 알림, 채팅 메시지를 Claude Code 세션으로 푸시하는 MCP 서버를 구축합니다. 채널 계약 참조: 기능 선언, 알림 이벤트, 회신 도구, 발신자 게이팅, 권한 릴레이.
 
 #### 용어집

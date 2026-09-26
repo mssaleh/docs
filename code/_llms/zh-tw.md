@@ -88,12 +88,6 @@
 
 - [使用 skills 擴展 Claude](https://code.claude.com/docs/zh-TW/skills.md): 在 Claude Code 中建立、管理和分享 skills 以擴展 Claude 的功能。包括自訂命令和捆綁的 skills。
 
-#### 外掛程式
-
-- [透過市場探索和安裝預建外掛程式](https://code.claude.com/docs/zh-TW/discover-plugins.md): 從市場探索和安裝外掛程式，以使用新技能、代理和功能擴展 Claude Code。
-- [建立 plugins](https://code.claude.com/docs/zh-TW/plugins.md): 建立自訂 plugins 以使用 skills、agents、hooks 和 MCP servers 擴展 Claude Code。
-- [使用 evals 測試 plugins](https://code.claude.com/docs/zh-TW/plugin-evals.md): 為您的 Claude Code plugin 編寫 eval 案例，使用 claude plugin eval 執行它們，評分結果，與無 plugin 基準線進行比較，並在 CI 中根據分數進行把關。
-
 #### 成品
 
 - [將工作階段輸出分享為成品](https://code.claude.com/docs/zh-TW/artifacts.md): 成品將 Claude Code 的工作轉化為 claude.ai 上的即時互動頁面，您可以保持私密、與您的組織分享，或發佈到公開連結。
@@ -117,6 +111,49 @@
 - [故障排除](https://code.claude.com/docs/zh-TW/troubleshooting.md): 修復 Claude Code 中的高 CPU 或記憶體使用、掛起、auto-compact 抖動和搜尋問題，並找到其他問題的正確頁面。
 - [偵錯您的設定](https://code.claude.com/docs/zh-TW/debug-your-config.md): 診斷為什麼 CLAUDE.md、settings、hooks、MCP servers 或 skills 沒有生效。使用 /context、/doctor、/hooks 和 /mcp 查看實際載入的內容。
 - [錯誤參考](https://code.claude.com/docs/zh-TW/errors.md): 查詢 Claude Code 執行時錯誤訊息，了解每個錯誤的含義及修復方法。
+
+### 外掛程式
+
+#### 外掛程式
+
+- [Plugins 概述](https://code.claude.com/docs/zh-TW/plugins/overview.md): 了解什麼是 Claude Code plugin，何時需要使用 plugin 而不是獨立的 skill 或 MCP 伺服器，以及應該閱讀哪個頁面來安裝或建立 plugin。
+
+#### 使用外掛程式
+
+- [安裝和管理外掛程式](https://code.claude.com/docs/zh-TW/plugins/install.md): 從任何使用介面上的市集安裝 Claude Code 外掛程式，選擇安裝範圍，並在稍後更新或移除它們。
+- [Anthropic 的 marketplace](https://code.claude.com/docs/zh-TW/plugins/anthropic-marketplaces.md): Anthropic 官方、社群和示範 plugin marketplace for Claude Code：它們的名稱、儲存庫、如何新增每個，以及在哪裡瀏覽它們的 plugin。
+- [Code intelligence plugins](https://code.claude.com/docs/zh-TW/plugins/code-intelligence.md): 安裝語言伺服器外掛程式，讓 Claude 在編輯後看到型別錯誤並按符號導覽程式碼，並回應 LSP 外掛程式建議對話框。
+- [Plugin 安全性和信任](https://code.claude.com/docs/zh-TW/plugins/security.md): 在安裝 plugin 之前決定是否信任它，從 plugin 在您的機器上可以執行的操作，到如何檢查它和移除它。
+
+#### 建立外掛程式
+
+- [建立 Claude Code 外掛程式](https://code.claude.com/docs/zh-TW/plugins/create.md): 從空目錄建立您的第一個 Claude Code 外掛程式，在沒有市集的情況下測試它，並轉換現有的 .claude/ 設定。
+- [新增元件至外掛程式](https://code.claude.com/docs/zh-TW/plugins/components.md): 新增技能、hooks、MCP 伺服器及其他所有元件類型至 Claude Code 外掛程式，並提供每種元件的驗證範例。
+- [外掛程式相依性](https://code.claude.com/docs/zh-TW/plugins/dependencies.md): 宣告您的外掛程式所依賴的外掛程式，使用版本範圍如 ^1.2，並查看 Claude Code 如何安裝、解析和修剪它們。
+- [使用 evals 測試 plugins](https://code.claude.com/docs/zh-TW/plugin-evals.md): 為您的 Claude Code plugin 編寫 eval 案例，使用 claude plugin eval 執行它們，評分結果，與無 plugin 基準線進行比較，並在 CI 中根據分數進行把關。
+- [發佈和分發外掛程式](https://code.claude.com/docs/zh-TW/plugins/publish.md): 透過您自己的市集或 Anthropic 的社群市集發佈 Claude Code 外掛程式，包括發行前檢查清單以及使用者如何取得更新。
+- [測量外掛程式成本和使用情況](https://code.claude.com/docs/zh-TW/plugins/measure.md): 測量 Claude Code 外掛程式的權杖成本，了解人們是否仍在使用它，並為組織範圍的外掛程式問題選擇遙測事件。
+- [從您的 CLI 推薦您的外掛程式](https://code.claude.com/docs/zh-TW/plugins/cli-hints.md): 透過從您的 CLI 或 SDK 發出 claude-code-hint 標籤，提示 Claude Code 使用者安裝您的官方市場外掛程式。
+
+#### 執行 marketplace
+
+- [建立 marketplace](https://code.claude.com/docs/zh-TW/plugins/create-marketplace.md): 從 marketplace.json 檔案建立 plugin marketplace，並在託管前在本機測試。
+- [託管和維護市集](https://code.claude.com/docs/zh-TW/plugins/host-marketplace.md): 發佈一個外掛程式市集，讓使用者可以透過 /plugin marketplace add 新增它、安裝其外掛程式，並在您推送變更後持續接收更新。
+- [為您的組織推薦 plugins](https://code.claude.com/docs/zh-TW/plugins/relevance.md): 在 marketplace plugin 項目中新增相關性區塊，以便當使用者的工作符合時 Claude Code 會建議安裝，並在受管設定中將 marketplace 加入允許清單。
+
+#### 管理您組織的外掛程式
+
+- [為您的組織管理 Claude Code 外掛程式](https://code.claude.com/docs/zh-TW/plugins/org.md): 透過受管設定控制 Claude Code 在組織中每台機器上安裝和允許的外掛程式。
+
+#### 疑難排解
+
+- [排除外掛程式故障](https://code.claude.com/docs/zh-TW/plugins/troubleshooting.md): 修復 Claude Code 中的外掛程式錯誤。找到您看到的確切訊息，按照 /plugin 執行、安裝和組織政策的階段分組。
+- [Plugin 載入參考](https://code.claude.com/docs/zh-TW/plugins/loading.md): 追蹤 Claude Code 從何處載入每個 plugin，哪個設定檔決定是否載入，以及為什麼更新沒有改變任何內容。
+
+#### 參考資料
+
+- [Plugin manifest 參考](https://code.claude.com/docs/zh-TW/plugins/manifest-reference.md): plugin.json 的完整參考：每個欄位的類型和預設值、接受的路徑形式，以及 userConfig 和環境變數架構。
+- [Plugin 命令參考](https://code.claude.com/docs/zh-TW/plugins/cli-reference.md): claude plugin shell 命令的完整參考，包括在工作階段中的 /plugin 和 /reload-plugins，以及在單一工作階段中載入 plugin 的旗標。
 
 ### 管理
 
@@ -167,13 +204,6 @@
 - [監控](https://code.claude.com/docs/zh-TW/monitoring-usage.md): 了解如何為 Claude Code 啟用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-TW/costs.md): 追蹤 token 使用情況、設定團隊支出限制，並透過上下文管理、模型選擇、延伸思考設定和預處理 hooks 來降低 Claude Code 成本。
 - [使用分析追蹤團隊使用情況](https://code.claude.com/docs/zh-TW/analytics.md): 在分析儀表板中檢視 Claude Code 使用指標、追蹤採用情況，並衡量 Claude Code 對工程速度的影響。
-
-#### 外掛程式發佈
-
-- [建立並分發 plugin marketplace](https://code.claude.com/docs/zh-TW/plugin-marketplaces.md): 建立並託管 plugin marketplace，以在團隊和社群中分發 Claude Code 擴充功能。
-- [限制 plugin 依賴版本](https://code.claude.com/docs/zh-TW/plugin-dependencies.md): 在 plugin 依賴上聲明版本約束，並將精選 plugin 集合捆綁在一個安裝後面。
-- [從您的 CLI 推薦您的外掛程式](https://code.claude.com/docs/zh-TW/plugin-hints.md): 從您的 CLI 發出單行標記，以便 Claude Code 提示使用者安裝您的官方外掛程式。
-- [為您的組織推薦外掛程式](https://code.claude.com/docs/zh-TW/plugin-relevance.md): 在 marketplace.json 中的外掛程式項目中新增相關性區塊，以便在使用者的工作相符時，Claude Code 會建議這些外掛程式。
 
 #### 安全性和資料
 
@@ -242,7 +272,6 @@
 - [互動模式](https://code.claude.com/docs/zh-TW/interactive-mode.md): Claude Code 會話中鍵盤快捷鍵、輸入模式和互動功能的完整參考。
 - [Checkpointing](https://code.claude.com/docs/zh-TW/checkpointing.md): 追蹤、回溯和總結 Claude 的編輯和對話以管理會話狀態。
 - [Hooks 參考](https://code.claude.com/docs/zh-TW/hooks.md): Claude Code hook 事件、配置架構、JSON 輸入/輸出格式、退出代碼、非同步 hooks、HTTP hooks、提示 hooks 和 MCP 工具 hooks 的參考。
-- [Plugins 參考](https://code.claude.com/docs/zh-TW/plugins-reference.md): Claude Code plugin 系統的完整技術參考，包括 schemas、CLI 命令和元件規格。
 - [Channels 參考](https://code.claude.com/docs/zh-TW/channels-reference.md): 建立一個 MCP 伺服器，將 webhooks、警報和聊天訊息推送到 Claude Code 工作階段。頻道合約的參考：功能聲明、通知事件、回覆工具、寄件者閘道和權限中繼。
 
 #### 詞彙表
