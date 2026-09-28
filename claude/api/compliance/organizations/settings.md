@@ -95,7 +95,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: boolean
 
-    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 57 more`
+    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 59 more`
 
       - `"access_transparency_enabled"`
 
@@ -110,6 +110,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"ask_your_org_enabled"`
 
       - `"chat_enabled"`
+
+      - `"claude_academy_inference_enabled"`
 
       - `"claude_ai_chat_sharing_enabled"`
 
@@ -196,6 +198,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"memory_enabled"`
 
       - `"org_wide_skill_sharing_enabled"`
+
+      - `"project_sharing_enabled"`
 
       - `"public_projects_enabled"`
 
@@ -456,7 +460,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
 
         default: boolean
 
-      - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 57 more`
+      - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 59 more`
 
         - `"access_transparency_enabled"`
 
@@ -471,6 +475,8 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
         - `"ask_your_org_enabled"`
 
         - `"chat_enabled"`
+
+        - `"claude_academy_inference_enabled"`
 
         - `"claude_ai_chat_sharing_enabled"`
 
@@ -557,6 +563,8 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
         - `"memory_enabled"`
 
         - `"org_wide_skill_sharing_enabled"`
+
+        - `"project_sharing_enabled"`
 
         - `"public_projects_enabled"`
 
