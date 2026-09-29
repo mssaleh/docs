@@ -50,7 +50,7 @@
 
 ##### Claude Code auf dem Desktop
 
-- [Erste Schritte mit der Desktop-App](https://code.claude.com/docs/de/desktop-quickstart.md): Installieren Sie Claude Code auf dem Desktop und starten Sie Ihre erste Coding-Sitzung
+- [Erste Schritte mit der Desktop-App](https://code.claude.com/docs/de/desktop-quickstart.md): Installieren Sie die Claude-Desktop-App, öffnen Sie die Registerkarte Code und starten Sie Ihre erste Claude-Code-Sitzung in einem Projektordner auf Ihrem Computer.
 - [Desktop-Anwendung](https://code.claude.com/docs/de/desktop.md): Nutzen Sie Claude Code Desktop optimal: parallele Sitzungen mit Git-Isolation, Drag-and-Drop-Pane-Layout, integriertes Terminal und Datei-Editor, Seitenchats, Computernutzung, Dispatch-Sitzungen von Ihrem Telefon, visuelle Diff-Überprüfung, App-Vorschau, PR-Überwachung, Konnektoren und Unternehmensk…
 - [Claude Desktop unter Linux (Beta)](https://code.claude.com/docs/de/desktop-linux.md): Installieren und aktualisieren Sie die Claude-Desktop-App unter Ubuntu und Debian
 - [Claude Code Desktop in WSL](https://code.claude.com/docs/de/desktop-wsl.md): Führen Sie Code-Sitzungen in einer WSL 2-Distribution unter Windows aus
@@ -64,7 +64,7 @@
 - [Code Review](https://code.claude.com/docs/de/code-review.md): Richten Sie automatisierte PR-Reviews ein, die Logikfehler, Sicherheitslücken und Regressionen durch Multi-Agent-Analyse Ihrer vollständigen Codebasis erkennen
 - [Claude Code GitHub Actions](https://code.claude.com/docs/de/github-actions.md): Führen Sie Claude Code in GitHub Actions-Workflows aus, um auf @claude-Erwähnungen zu reagieren, Aufgaben zu automatisieren und Issues in Pull Requests umzuwandeln
 - [Claude Code GitHub Actions mit Cloud-Anbietern verwenden](https://code.claude.com/docs/de/github-actions-cloud-providers.md): Führen Sie Claude Code GitHub Actions über Amazon Bedrock, Google Cloud's Agent Platform oder Microsoft Foundry statt über die Claude API aus
-- [Claude Code mit GitHub Enterprise Server](https://code.claude.com/docs/de/github-enterprise-server.md): Verbinden Sie Claude Code mit Ihrer selbstgehosteten GitHub Enterprise Server-Instanz für Web-Sitzungen, Code-Review und Plugin-Marktplätze.
+- [Claude Code mit GitHub Enterprise Server](https://code.claude.com/docs/de/github-enterprise-server.md): Verbinden Sie Claude Code mit Ihrer selbstgehosteten GitHub Enterprise Server-Instanz für Cloud-Sitzungen, Code-Review und Plugin-Marktplätze.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/de/gitlab-ci-cd.md): Erfahren Sie, wie Sie Claude Code in Ihren Entwicklungs-Workflow mit GitLab CI/CD integrieren
 
 ### Mit Claude Code erstellen
@@ -121,6 +121,7 @@
 #### Plugins verwenden
 
 - [Plugins installieren und verwalten](https://code.claude.com/docs/de/plugins/install.md): Installieren Sie Claude Code-Plugins aus einem Marketplace auf jeder Oberfläche, die Sie verwenden, wählen Sie einen Installationsbereich aus, und aktualisieren oder entfernen Sie sie später.
+- [Anthropics Marktplätze](https://code.claude.com/docs/de/plugins/anthropic-marketplaces.md): Anthropics offizielle, Community- und Demo-Plugin-Marktplätze für Claude Code: ihre Namen, Repositories, wie Sie jeden hinzufügen, und wo Sie ihre Plugins durchsuchen können.
 - [Code-Intelligence-Plugins](https://code.claude.com/docs/de/plugins/code-intelligence.md): Installieren Sie ein Language-Server-Plugin, damit Claude nach Änderungen Typfehler sieht und Code nach Symbol navigiert, und beantworten Sie den LSP-Plugin-Empfehlungsdialog.
 - [Plugin-Sicherheit und Vertrauen](https://code.claude.com/docs/de/plugins/security.md): Entscheiden Sie, ob Sie einem Plugin vertrauen, bevor Sie es installieren – von dem, was ein Plugin auf Ihrem Computer tun kann, bis hin zu dessen Überprüfung und Deinstallation.
 
@@ -130,7 +131,7 @@
 - [Komponenten zu einem Plugin hinzufügen](https://code.claude.com/docs/de/plugins/components.md): Fügen Sie Skills, Hooks, MCP-Server und alle anderen Komponententypen zu einem Claude Code-Plugin hinzu, mit einem Beispiel, das für jeden validiert.
 - [Plugin-Abhängigkeiten](https://code.claude.com/docs/de/plugins/dependencies.md): Deklarieren Sie die Plugins, von denen Ihr Plugin abhängt, mit Versionsbereichen wie ^1.2, und erfahren Sie, wie Claude Code diese installiert, auflöst und bereinigt.
 - [Plugins mit Evals testen](https://code.claude.com/docs/de/plugin-evals.md): Schreiben Sie Eval-Fälle für Ihr Claude Code Plugin, führen Sie sie mit claude plugin eval aus, bewerten Sie die Ergebnisse, vergleichen Sie sie mit einer Baseline ohne Plugin und gaten Sie CI basierend auf dem Score.
-- [Ein Plugin veröffentlichen und verteilen](https://code.claude.com/docs/de/plugins/publish.md): Veröffentlichen Sie ein Claude Code Plugin über Ihren eigenen Marketplace oder Anthropics Community Marketplace, mit einer Pre-Release-Checkliste und wie Benutzer Updates erhalten.
+- [Ein Plugin veröffentlichen und verteilen](https://code.claude.com/docs/de/plugins/publish.md): Veröffentlichen Sie ein Claude Code Plugin über Ihren eigenen Marketplace oder Anthropics Verzeichnis, mit einer Pre-Release-Checkliste und wie Benutzer Updates erhalten.
 - [Kosten und Nutzung von Plugins messen](https://code.claude.com/docs/de/plugins/measure.md): Messen Sie die Token-Kosten eines Claude Code-Plugins, finden Sie heraus, ob es noch verwendet wird, und wählen Sie die Telemetrie-Events für organisationsweite Plugin-Fragen aus.
 - [Empfehlen Sie Ihr Plugin über Ihre CLI](https://code.claude.com/docs/de/plugins/cli-hints.md): Fordern Sie Claude Code-Benutzer auf, Ihr offizielles Marketplace-Plugin zu installieren, indem Sie ein claude-code-hint-Tag von Ihrer CLI oder SDK ausgeben.
 
@@ -147,11 +148,13 @@
 #### Fehlerbehebung
 
 - [Plugins fehlerbeheben](https://code.claude.com/docs/de/plugins/troubleshooting.md): Beheben Sie Plugin-Fehler in Claude Code. Finden Sie die genaue Meldung, die Sie gesehen haben, gruppiert nach Phase von der Ausführung von /plugin über die Installation bis zur Organisationsrichtlinie.
+- [Plugin-Ladeverweis](https://code.claude.com/docs/de/plugins/loading.md): Verfolgen Sie, von wo Claude Code jedes Plugin lädt, welche Einstellungsdatei entscheidet, ob es geladen wird, und warum ein Update nichts geändert hat.
 
 #### Referenz
 
 - [Plugin-Manifest-Referenz](https://code.claude.com/docs/de/plugins/manifest-reference.md): Vollständige Referenz für plugin.json: jedes Feld mit seinem Typ und Standard, akzeptierte Pfadformen und die userConfig- und Umgebungsvariablenschemas.
 - [Marketplace-Referenz](https://code.claude.com/docs/de/plugins/marketplace-reference.md): Vollständige Referenz für marketplace.json-Felder, Plugin-Einträge und die Plugin- und Marketplace-Quellobjekte mit Angabe ihrer Gültigkeitsbereiche.
+- [Referenz für Plugin-Befehle](https://code.claude.com/docs/de/plugins/cli-reference.md): Vollständige Referenz für die Claude-Plugin-Shell-Befehle, /plugin und /reload-plugins in einer Sitzung, und die Flags, die ein Plugin für eine Sitzung laden.
 
 ### Verwaltung
 

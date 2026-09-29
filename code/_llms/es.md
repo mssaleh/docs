@@ -50,7 +50,7 @@
 
 ##### Claude Code en el escritorio
 
-- [Comenzar con la aplicación de escritorio](https://code.claude.com/docs/es/desktop-quickstart.md): Instale Claude Code en el escritorio e inicie su primera sesión de codificación
+- [Comenzar con la aplicación de escritorio](https://code.claude.com/docs/es/desktop-quickstart.md): Instale la aplicación de escritorio de Claude, abra la pestaña Code e inicie su primera sesión de Claude Code en una carpeta de proyecto en su computadora.
 - [Aplicación de escritorio](https://code.claude.com/docs/es/desktop.md): Aproveche al máximo Claude Code Desktop: sesiones paralelas con aislamiento de Git, diseño de panel de arrastrar y soltar, terminal integrada y editor de archivos, chats laterales, uso de computadora, envíe sesiones desde su teléfono, revisión visual de diferencias, vistas previas de aplicaciones, m…
 - [Claude Desktop en Linux (beta)](https://code.claude.com/docs/es/desktop-linux.md): Instala y actualiza la aplicación de escritorio Claude en Ubuntu y Debian
 - [Claude Code Desktop en WSL](https://code.claude.com/docs/es/desktop-wsl.md): Ejecutar sesiones de Code dentro de una distribución WSL 2 en Windows
@@ -130,7 +130,7 @@
 - [Agregar componentes a un plugin](https://code.claude.com/docs/es/plugins/components.md): Agrega skills, hooks, servidores MCP y todos los demás tipos de componentes a un plugin de Claude Code, con un ejemplo que valida cada uno.
 - [Dependencias de plugins](https://code.claude.com/docs/es/plugins/dependencies.md): Declare los plugins de los que depende su plugin, con rangos de versión como ^1.2, y vea cómo Claude Code instala, resuelve y elimina las dependencias.
 - [Prueba plugins con evals](https://code.claude.com/docs/es/plugin-evals.md): Escriba casos de eval para su plugin de Claude Code, ejecútelos con claude plugin eval, califique los resultados, compare con una línea base sin plugin y controle CI en la puntuación.
-- [Publicar y distribuir un plugin](https://code.claude.com/docs/es/plugins/publish.md): Publique un plugin de Claude Code a través de su propio marketplace o del marketplace comunitario de Anthropic, con una lista de verificación previa al lanzamiento y cómo los usuarios reciben actualizaciones.
+- [Publicar y distribuir un plugin](https://code.claude.com/docs/es/plugins/publish.md): Publique un plugin de Claude Code a través de su propio marketplace o del directorio de Anthropic, con una lista de verificación previa al lanzamiento y cómo los usuarios reciben actualizaciones.
 - [Medir el costo y el uso del plugin](https://code.claude.com/docs/es/plugins/measure.md): Mida el costo de tokens de un plugin de Claude Code, descubra si la gente aún lo usa y seleccione los eventos de telemetría para preguntas de plugins en toda la organización.
 - [Recomienda tu plugin desde tu CLI](https://code.claude.com/docs/es/plugins/cli-hints.md): Solicita a los usuarios de Claude Code que instalen tu plugin del marketplace oficial emitiendo una etiqueta claude-code-hint desde tu CLI o SDK.
 

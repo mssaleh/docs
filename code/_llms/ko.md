@@ -50,7 +50,7 @@
 
 ##### Claude Code 데스크톱
 
-- [데스크톱 앱 시작하기](https://code.claude.com/docs/ko/desktop-quickstart.md): 데스크톱에 Claude Code를 설치하고 첫 번째 코딩 세션을 시작합니다
+- [데스크톱 앱 시작하기](https://code.claude.com/docs/ko/desktop-quickstart.md): Claude 데스크톱 앱을 설치하고, 코드 탭을 열고, 컴퓨터의 프로젝트 폴더에서 첫 번째 Claude Code 세션을 시작합니다.
 - [Desktop 애플리케이션](https://code.claude.com/docs/ko/desktop.md): Claude Code Desktop을 더 활용하기: Git 격리를 통한 병렬 세션, 드래그 앤 드롭 패널 레이아웃, 통합 터미널 및 파일 편집기, 사이드 채팅, 컴퓨터 사용, 휴대폰에서 Dispatch 세션 전송, 시각적 diff 검토, 앱 미리보기, PR 모니터링, 커넥터, 엔터프라이즈 구성.
 - [Linux의 Claude Desktop (베타)](https://code.claude.com/docs/ko/desktop-linux.md): Ubuntu 및 Debian에서 Claude 데스크톱 앱 설치 및 업데이트
 - [WSL의 Claude Code Desktop](https://code.claude.com/docs/ko/desktop-wsl.md): WSL 2 배포판 내에서 Code 세션 실행
@@ -131,7 +131,7 @@
 - [플러그인에 컴포넌트 추가하기](https://code.claude.com/docs/ko/plugins/components.md): Claude Code 플러그인에 skills, hooks, MCP 서버 및 다른 모든 컴포넌트 유형을 추가하고, 각각에 대해 검증하는 예제를 포함합니다.
 - [플러그인 의존성](https://code.claude.com/docs/ko/plugins/dependencies.md): 플러그인이 의존하는 플러그인을 선언하고, ^1.2와 같은 버전 범위를 사용하며, Claude Code가 이를 설치, 해결 및 정리하는 방법을 알아봅니다.
 - [evals로 플러그인 테스트하기](https://code.claude.com/docs/ko/plugin-evals.md): Claude Code 플러그인에 대한 eval 케이스를 작성하고, claude plugin eval로 실행하며, 결과를 채점하고, 플러그인 없는 기준선과 비교하고, CI에서 점수를 기준으로 게이트합니다.
-- [플러그인 게시 및 배포](https://code.claude.com/docs/ko/plugins/publish.md): Claude Code 플러그인을 자신의 마켓플레이스 또는 Anthropic의 커뮤니티 마켓플레이스를 통해 게시하고, 사전 릴리스 체크리스트 및 사용자가 업데이트를 받는 방법을 알아봅니다.
+- [플러그인 게시 및 배포](https://code.claude.com/docs/ko/plugins/publish.md): Claude Code 플러그인을 자신의 마켓플레이스 또는 Anthropic의 디렉터리를 통해 게시하고, 사전 릴리스 체크리스트 및 사용자가 업데이트를 받는 방법을 알아봅니다.
 - [플러그인 비용 및 사용량 측정](https://code.claude.com/docs/ko/plugins/measure.md): Claude Code 플러그인의 토큰 비용을 측정하고, 사람들이 여전히 사용하는지 확인하며, 조직 전체 플러그인 질문을 위한 텔레메트리 이벤트를 선택합니다.
 - [CLI에서 플러그인 추천하기](https://code.claude.com/docs/ko/plugins/cli-hints.md): CLI 또는 SDK에서 claude-code-hint 태그를 내보내 Claude Code 사용자에게 공식 마켓플레이스 플러그인 설치를 유도합니다.
 
@@ -147,6 +147,7 @@
 
 #### 문제 해결
 
+- [플러그인 문제 해결](https://code.claude.com/docs/ko/plugins/troubleshooting.md): Claude Code에서 플러그인 오류를 수정합니다. /plugin이 실행되는 단계부터 설치 및 조직 정책까지 단계별로 그룹화된 정확한 메시지를 찾습니다.
 - [플러그인 로딩 참조](https://code.claude.com/docs/ko/plugins/loading.md): Claude Code가 각 플러그인을 어디에서 로드하는지, 어떤 설정 파일이 로드 여부를 결정하는지, 그리고 업데이트가 아무것도 변경하지 않은 이유를 추적합니다.
 
 #### 참고

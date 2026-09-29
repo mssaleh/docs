@@ -50,7 +50,7 @@
 
 ##### Claude Code no desktop
 
-- [Comece com o aplicativo de desktop](https://code.claude.com/docs/pt/desktop-quickstart.md): Instale Claude Code no desktop e inicie sua primeira sessão de codificação
+- [Comece com o aplicativo de desktop](https://code.claude.com/docs/pt/desktop-quickstart.md): Instale o aplicativo Claude de desktop, abra a aba Code e inicie sua primeira sessão de Claude Code em uma pasta de projeto no seu computador.
 - [Aplicativo Desktop](https://code.claude.com/docs/pt/desktop.md): Aproveite ao máximo o Claude Code Desktop: sessões paralelas com isolamento Git, layout de painel com arrastar e soltar, terminal integrado e editor de arquivo, chats laterais, computer use, Dispatch sessions do seu telefone, revisão visual de diff, visualizações de aplicativos, monitoramento de PR,…
 - [Claude Desktop no Linux (beta)](https://code.claude.com/docs/pt/desktop-linux.md): Instale e atualize o aplicativo desktop Claude no Ubuntu e Debian
 - [Claude Code Desktop em WSL](https://code.claude.com/docs/pt/desktop-wsl.md): Execute sessões de Code dentro de uma distribuição WSL 2 no Windows
@@ -67,7 +67,7 @@
 - [Claude Code com GitHub Enterprise Server](https://code.claude.com/docs/pt/github-enterprise-server.md): Conecte Claude Code à sua instância auto-hospedada do GitHub Enterprise Server para sessões na nuvem, revisão de código e marketplaces de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/pt/gitlab-ci-cd.md): Saiba como integrar Claude Code no seu fluxo de trabalho de desenvolvimento com GitLab CI/CD
 
-### Construir com Claude Code
+### Criar com Claude Code
 
 #### Agentes e trabalho paralelo
 
@@ -130,7 +130,7 @@
 - [Adicionar componentes a um plugin](https://code.claude.com/docs/pt/plugins/components.md): Adicione skills, hooks, servidores MCP e todos os outros tipos de componentes a um plugin Claude Code, com um exemplo que valida cada um.
 - [Dependências de plugin](https://code.claude.com/docs/pt/plugins/dependencies.md): Declare os plugins dos quais seu plugin depende, com intervalos de versão como ^1.2, e veja como Claude Code instala, resolve e remove as dependências.
 - [Testar plugins com evals](https://code.claude.com/docs/pt/plugin-evals.md): Escreva casos de eval para seu plugin Claude Code, execute-os com claude plugin eval, classifique os resultados, compare com uma linha de base sem plugin e gate CI na pontuação.
-- [Publicar e distribuir um plugin](https://code.claude.com/docs/pt/plugins/publish.md): Publique um plugin Claude Code através do seu próprio marketplace ou do marketplace da comunidade da Anthropic, com uma lista de verificação de pré-lançamento e como os usuários recebem atualizações.
+- [Publicar e distribuir um plugin](https://code.claude.com/docs/pt/plugins/publish.md): Publique um plugin Claude Code através do seu próprio marketplace ou do diretório da Anthropic, com uma lista de verificação de pré-lançamento e como os usuários recebem atualizações.
 - [Medir custo e uso do plugin](https://code.claude.com/docs/pt/plugins/measure.md): Meça o custo de token de um plugin Claude Code, descubra se as pessoas ainda o usam e escolha os eventos de telemetria para perguntas sobre plugins em toda a organização.
 - [Recomende seu plugin a partir de sua CLI](https://code.claude.com/docs/pt/plugins/cli-hints.md): Solicite aos usuários do Claude Code que instalem seu plugin do marketplace oficial emitindo uma tag claude-code-hint a partir de sua CLI ou SDK.
 

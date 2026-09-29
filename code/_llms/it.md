@@ -110,7 +110,7 @@
 - [Risolvi i problemi di installazione e accesso](https://code.claude.com/docs/it/troubleshoot-install.md): Correggi gli errori di comando non trovato, PATH, permessi, rete e autenticazione durante l'installazione o l'accesso a Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/it/troubleshooting.md): Risolvi i problemi di utilizzo elevato di CPU o memoria, blocchi, thrashing auto-compact e problemi di ricerca in Claude Code, e trova la pagina giusta per altri problemi.
 - [Esegui il debug della tua configurazione](https://code.claude.com/docs/it/debug-your-config.md): Diagnostica perché CLAUDE.md, impostazioni, hooks, server MCP o skills non hanno effetto. Usa /context, /doctor, /hooks e /mcp per vedere cosa è stato effettivamente caricato.
-- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Consulta i messaggi di errore runtime di Claude Code con il significato di ciascuno e come risolverli.
+- [Riferimento degli errori](https://code.claude.com/docs/it/errors.md): Consulta i messaggi di errore di runtime di Claude Code con il significato di ciascuno e come risolverli.
 
 ### Plugin
 
@@ -130,7 +130,7 @@
 - [Aggiungi componenti a un plugin](https://code.claude.com/docs/it/plugins/components.md): Aggiungi skills, hooks, server MCP e ogni altro tipo di componente a un plugin Claude Code, con un esempio che convalida per ciascuno.
 - [Dipendenze dei plugin](https://code.claude.com/docs/it/plugins/dependencies.md): Dichiara i plugin da cui il tuo plugin dipende, con intervalli di versione come ^1.2, e scopri come Claude Code installa, risolve e elimina le dipendenze.
 - [Testare i plugin con evals](https://code.claude.com/docs/it/plugin-evals.md): Scrivi casi di eval per il tuo plugin Claude Code, eseguili con claude plugin eval, valuta i risultati, confrontali con una baseline senza plugin e blocca la CI in base al punteggio.
-- [Pubblica e distribuisci un plugin](https://code.claude.com/docs/it/plugins/publish.md): Pubblica un plugin Claude Code attraverso il tuo marketplace personale o il marketplace della comunità di Anthropic, con una checklist di pre-rilascio e come gli utenti ricevono gli aggiornamenti.
+- [Pubblica e distribuisci un plugin](https://code.claude.com/docs/it/plugins/publish.md): Pubblica un plugin Claude Code attraverso il tuo marketplace personale o la directory di Anthropic, con una checklist di pre-rilascio e come gli utenti ricevono gli aggiornamenti.
 - [Misurare il costo e l'utilizzo dei plugin](https://code.claude.com/docs/it/plugins/measure.md): Misurare il costo in token di un plugin Claude Code, scoprire se le persone lo usano ancora e scegliere gli eventi di telemetria per domande sui plugin a livello organizzativo.
 - [Consiglia il tuo plugin dalla tua CLI](https://code.claude.com/docs/it/plugins/cli-hints.md): Invita gli utenti di Claude Code a installare il tuo plugin del marketplace ufficiale emettendo un tag claude-code-hint dalla tua CLI o SDK.
 
@@ -227,7 +227,7 @@
 #### Autorizzazioni e sandboxing
 
 - [Configurare le autorizzazioni](https://code.claude.com/docs/it/permissions.md): Controlla cosa Claude Code può accedere e fare con regole di autorizzazione granulari, modalità e criteri gestiti.
-- [Scegli una modalità di autorizzazione](https://code.claude.com/docs/it/permission-modes.md): Controlla se Claude chiede prima di agire. Cambia le modalità di autorizzazione con Shift+Tab nella CLI, l'indicatore di modalità in VS Code, o il selettore di modalità in Desktop.
+- [Scegli una modalità di autorizzazione](https://code.claude.com/docs/it/permission-modes.md): Controlla se Claude chiede prima di agire. Cambia le modalità di autorizzazione con Shift+Tab nella CLI, l'indicatore di modalità in VS Code o il selettore di modalità in Desktop.
 - [Configura lo strumento Bash in sandbox](https://code.claude.com/docs/it/sandboxing.md): Scopri come lo strumento Bash in sandbox di Claude Code fornisce isolamento del filesystem e della rete per un'esecuzione dell'agente più sicura e autonoma.
 - [Scegliere un ambiente sandbox](https://code.claude.com/docs/it/sandbox-environments.md): Confronta le opzioni di sandbox di Claude Code: lo strumento Bash sandboxed integrato, il runtime sandbox, i dev container, Docker e le VM. Scegli l'isolamento giusto per il tuo modello di minaccia.
 

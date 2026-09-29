@@ -50,7 +50,7 @@
 
 ##### Claude Code デスクトップ版
 
-- [デスクトップアプリを始める](https://code.claude.com/docs/ja/desktop-quickstart.md): Claude Code をデスクトップにインストールして、最初のコーディングセッションを開始します
+- [デスクトップアプリを始める](https://code.claude.com/docs/ja/desktop-quickstart.md): Claude デスクトップアプリをインストールして、Code タブを開き、コンピューター上のプロジェクトフォルダーで最初の Claude Code セッションを開始します。
 - [Desktop application](https://code.claude.com/docs/ja/desktop.md): Claude Code Desktop をさらに活用する：Git 分離による並列セッション、ドラッグアンドドロップペインレイアウト、統合ターミナルとファイルエディタ、サイドチャット、コンピュータ使用、電話から Dispatch セッションを送信、ビジュアル diff レビュー、アプリプレビュー、PR 監視、コネクタ、エンタープライズ設定。
 - [Claude Desktop on Linux (beta)](https://code.claude.com/docs/ja/desktop-linux.md): Ubuntu と Debian に Claude デスクトップアプリをインストールおよび更新する
 - [Claude Code Desktop in WSL](https://code.claude.com/docs/ja/desktop-wsl.md): WSL 2 ディストリビューション内で Code セッションを実行する
@@ -131,7 +131,7 @@
 - [プラグインにコンポーネントを追加する](https://code.claude.com/docs/ja/plugins/components.md): スキル、フック、MCP サーバー、その他すべてのコンポーネントタイプを Claude Code プラグインに追加し、各コンポーネントの検証例を含めます。
 - [プラグイン依存関係](https://code.claude.com/docs/ja/plugins/dependencies.md): プラグインが依存するプラグインを宣言し、^1.2 などのバージョン範囲を指定して、Claude Code がどのようにインストール、解決、削除するかを確認します。
 - [evals でプラグインをテストする](https://code.claude.com/docs/ja/plugin-evals.md): Claude Code プラグイン用の eval ケースを作成し、claude plugin eval で実行し、結果をグレード化し、プラグインなしのベースラインと比較し、CI でスコアをゲートする。
-- [プラグインを公開・配布する](https://code.claude.com/docs/ja/plugins/publish.md): Claude Code プラグインを独自のマーケットプレイスまたは Anthropic のコミュニティマーケットプレイスを通じて公開し、リリース前チェックリストとユーザーが更新を受け取る方法について説明します。
+- [プラグインを公開・配布する](https://code.claude.com/docs/ja/plugins/publish.md): Claude Code プラグインを独自のマーケットプレイスまたは Anthropic のディレクトリを通じて公開し、リリース前チェックリストとユーザーが更新を受け取る方法について説明します。
 - [プラグインのコストと使用状況を測定する](https://code.claude.com/docs/ja/plugins/measure.md): Claude Code プラグインのトークンコスト、人々がまだそれを使用しているかどうかを確認し、組織全体のプラグイン質問のテレメトリイベントを選択します。
 - [CLI から プラグインを推奨する](https://code.claude.com/docs/ja/plugins/cli-hints.md): Claude Code ユーザーに対して、CLI または SDK から claude-code-hint タグを出力することで、公式マーケットプレイスのプラグインをインストールするよう促します。
 
@@ -228,7 +228,7 @@
 #### 権限とサンドボックス
 
 - [権限を設定する](https://code.claude.com/docs/ja/permissions.md): きめ細かい権限ルール、モード、管理ポリシーを使用して、Claude Code がアクセスして実行できる内容を制御します。
-- [権限モードを選択する](https://code.claude.com/docs/ja/permission-modes.md): Claude がアクションを実行する前に確認するかどうかを制御します。CLI で Shift+Tab でモードを切り替えるか、VS Code のモード指示器、Desktop のモードセレクター、または Web のモードドロップダウンを使用します。
+- [権限モードを選択する](https://code.claude.com/docs/ja/permission-modes.md): Claude が行動する前に確認するかどうかを制御します。CLI では Shift+Tab で、VS Code ではモード表示で、Desktop ではモードセレクターで権限モードを切り替えます。
 - [サンドボックス化された Bash ツールを設定する](https://code.claude.com/docs/ja/sandboxing.md): Claude Code のサンドボックス化された Bash ツールがファイルシステムとネットワークの分離を提供し、より安全で自律的なエージェント実行を実現する方法について学びます。
 - [サンドボックス環境を選択する](https://code.claude.com/docs/ja/sandbox-environments.md): Claude Code のサンドボックスオプションを比較します。組み込みのサンドボックス化された Bash ツール、サンドボックスランタイム、dev コンテナ、Docker、VM があります。脅威モデルに適した分離を選択してください。
 

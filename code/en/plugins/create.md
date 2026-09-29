@@ -146,14 +146,14 @@ Each kind of [component](/docs/en/plugins/components), such as skills, agents, h
 
 The table lists the directories most plugins start with, and the [full layout](/docs/en/plugins/manifest-reference#standard-layout) lists the rest.
 
-| Location                     | Contents                                                                                                                          |
-| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Location | Contents |
+| :- | :- |
 | `.claude-plugin/plugin.json` | The manifest. When you load a plugin with `--plugin-dir` and it has no manifest, Claude Code names the plugin after its directory |
-| `skills/`                    | One `<name>/SKILL.md` directory per skill                                                                                         |
-| `commands/`                  | Flat Markdown files, the older form of skills. Use `skills/` for new plugins                                                      |
-| `agents/`                    | One Markdown file per subagent                                                                                                    |
-| `hooks/hooks.json`           | Hook configuration: a top-level `"hooks"` key whose value has the same shape as `hooks` in a settings file                        |
-| `.mcp.json`                  | MCP server definitions                                                                                                            |
+| `skills/` | One `<name>/SKILL.md` directory per skill |
+| `commands/` | Flat Markdown files, the older form of skills. Use `skills/` for new plugins |
+| `agents/` | One Markdown file per subagent |
+| `hooks/hooks.json` | Hook configuration: a top-level `"hooks"` key whose value has the same shape as `hooks` in a settings file |
+| `.mcp.json` | MCP server definitions |
 
 <Warning>
   Only `plugin.json` goes inside `.claude-plugin/`. Components saved there don't load.
@@ -192,6 +192,8 @@ claude --plugin-dir ./my-first-plugin --plugin-dir ./other-plugin.zip
 To load several plugins from one place, pass a folder that holds them, such as `--plugin-dir ./plugins`. Loading a folder of plugins requires Claude Code v2.1.265 or later.
 
 If the folder has no `.claude-plugin/` directory and no plugin components at its top level, Claude Code treats it as a folder of plugins. Each immediate subfolder that has a `.claude-plugin/plugin.json` manifest then loads as a separate plugin. Everything else in the folder is skipped without an error, including a subfolder that has no manifest. If a plugin in the folder doesn't load, check that its subfolder has a `.claude-plugin/plugin.json`.
+
+You can also pass a folder that keeps a `.claude-plugin/marketplace.json` beside its plugin folders. As long as that `.claude-plugin/` directory holds no `plugin.json`, the plugin folders still load. Nothing is installed or enabled from the marketplace file, because Claude Code doesn't read it. Loading plugins from such a folder requires Claude Code v2.1.281 or later.
 
 In an interactive session, you can also add and remove plugins in the folder after startup:
 

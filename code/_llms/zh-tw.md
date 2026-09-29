@@ -50,7 +50,7 @@
 
 ##### Claude Code 桌面版
 
-- [開始使用桌面應用程式](https://code.claude.com/docs/zh-TW/desktop-quickstart.md): 在桌面上安裝 Claude Code 並開始您的第一個編碼會話
+- [開始使用桌面應用程式](https://code.claude.com/docs/zh-TW/desktop-quickstart.md): 安裝 Claude 桌面應用程式、開啟 Code 標籤，並在您電腦上的專案資料夾開始您的第一個 Claude Code 會話。
 - [Desktop 應用程式](https://code.claude.com/docs/zh-TW/desktop.md): 充分利用 Claude Code Desktop：具有 Git 隔離的並行會話、拖放窗格佈局、整合終端機和檔案編輯器、側邊聊天、電腦使用、從您的手機 Dispatch 會話、視覺化差異檢查、應用程式預覽、PR 監控、連接器和企業配置。
 - [Linux 上的 Claude Desktop（測試版）](https://code.claude.com/docs/zh-TW/desktop-linux.md): 在 Ubuntu 和 Debian 上安裝和更新 Claude 桌面應用程式
 - [Claude Code Desktop in WSL](https://code.claude.com/docs/zh-TW/desktop-wsl.md): 在 Windows 上的 WSL 2 發行版內執行 Code 工作階段
@@ -153,6 +153,7 @@
 #### 參考資料
 
 - [Plugin manifest 參考](https://code.claude.com/docs/zh-TW/plugins/manifest-reference.md): plugin.json 的完整參考：每個欄位的類型和預設值、接受的路徑形式，以及 userConfig 和環境變數架構。
+- [Marketplace 參考](https://code.claude.com/docs/zh-TW/plugins/marketplace-reference.md): marketplace.json 欄位、外掛程式項目和外掛程式與 marketplace 來源物件的完整參考，包括每個欄位的有效位置。
 - [Plugin 命令參考](https://code.claude.com/docs/zh-TW/plugins/cli-reference.md): claude plugin shell 命令的完整參考，包括在工作階段中的 /plugin 和 /reload-plugins，以及在單一工作階段中載入 plugin 的旗標。
 
 ### 管理
@@ -199,7 +200,7 @@
 - [為您的組織推出 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway-rollout.md): 為 Claude Code 部署閘道產品：配置它以轉發 Claude Code 發送的內容、發放開發者認證、透過受管設定分發配置，並驗證推出。
 - [Claude Code 閘道相容性指南](https://code.claude.com/docs/zh-TW/llm-gateway-protocol.md): 保持 LLM 閘道與 Claude Code 相容：它呼叫的端點、必須轉發的標頭和本體欄位，以及移除它們時會中斷的功能。
 
-#### 使用量與成本
+#### 使用量和成本
 
 - [監控](https://code.claude.com/docs/zh-TW/monitoring-usage.md): 了解如何為 Claude Code 啟用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-TW/costs.md): 追蹤 token 使用情況、設定團隊支出限制，並透過上下文管理、模型選擇、延伸思考設定和預處理 hooks 來降低 Claude Code 成本。

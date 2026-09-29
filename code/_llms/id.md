@@ -50,7 +50,7 @@
 
 ##### Claude Code di desktop
 
-- [Memulai dengan aplikasi desktop](https://code.claude.com/docs/id/desktop-quickstart.md): Instal Claude Code di desktop dan mulai sesi coding pertama Anda
+- [Memulai dengan aplikasi desktop](https://code.claude.com/docs/id/desktop-quickstart.md): Instal aplikasi desktop Claude, buka tab Code, dan mulai sesi Claude Code pertama Anda di folder proyek di komputer Anda.
 - [Aplikasi desktop](https://code.claude.com/docs/id/desktop.md): Dapatkan lebih banyak dari Claude Code Desktop: sesi paralel dengan isolasi Git, tata letak pane drag-and-drop, terminal terintegrasi dan editor file, side chats, computer use, Dispatch sessions dari ponsel Anda, tinjauan diff visual, pratinjau aplikasi, pemantauan PR, konektor, dan konfigurasi ente…
 - [Claude Desktop di Linux (beta)](https://code.claude.com/docs/id/desktop-linux.md): Instal dan perbarui aplikasi desktop Claude di Ubuntu dan Debian
 - [Claude Code Desktop di WSL](https://code.claude.com/docs/id/desktop-wsl.md): Jalankan sesi Code di dalam distribusi WSL 2 di Windows
@@ -72,7 +72,7 @@
 #### Agen dan pekerjaan paralel
 
 - [Jalankan agen secara paralel](https://code.claude.com/docs/id/agents.md): Bandingkan cara Claude Code dapat menangani beberapa tugas sekaligus: subagents, agent view, agent teams, dynamic workflows, dan projects.
-- [Buat subagent khusus](https://code.claude.com/docs/id/sub-agents.md): Buat dan gunakan subagent AI khusus di Claude Code untuk alur kerja khusus tugas dan manajemen konteks yang lebih baik.
+- [Buat subagen kustom](https://code.claude.com/docs/id/sub-agents.md): Buat dan gunakan subagen AI khusus di Claude Code untuk alur kerja spesifik tugas dan manajemen konteks yang lebih baik.
 - [Kelola banyak agen dengan tampilan agen](https://code.claude.com/docs/id/agent-view.md): Kirim dan kelola banyak sesi Claude Code dari satu layar. Tampilan agen menunjukkan apa yang dilakukan setiap sesi dan mana yang membutuhkan masukan Anda.
 - [Koordinasikan tim Claude Code sessions](https://code.claude.com/docs/id/agent-teams.md): Koordinasikan beberapa instance Claude Code yang bekerja bersama sebagai tim, dengan tugas bersama, pesan antar-agent, dan manajemen terpusat.
 - [Pesan sesi Claude Code Anda yang lain](https://code.claude.com/docs/id/cross-session-messaging.md): Biarkan Claude mencantumkan dan mengirim pesan ke sesi Claude Code Anda yang lain di mesin ini, dan jangkau sesi Anda di mesin lain atau di web.
@@ -130,7 +130,7 @@
 - [Tambahkan komponen ke plugin](https://code.claude.com/docs/id/plugins/components.md): Tambahkan skills, hooks, server MCP, dan setiap jenis komponen lainnya ke plugin Claude Code, dengan contoh yang memvalidasi untuk masing-masing.
 - [Dependensi plugin](https://code.claude.com/docs/id/plugins/dependencies.md): Deklarasikan plugin yang plugin Anda bergantung padanya, dengan rentang versi seperti ^1.2, dan lihat bagaimana Claude Code menginstal, menyelesaikan, dan memangkas dependensi tersebut.
 - [Uji plugin dengan evals](https://code.claude.com/docs/id/plugin-evals.md): Tulis kasus eval untuk plugin Claude Code Anda, jalankan dengan claude plugin eval, nilai hasilnya, bandingkan dengan baseline tanpa plugin, dan gating CI pada skor.
-- [Publikasikan dan distribusikan plugin](https://code.claude.com/docs/id/plugins/publish.md): Publikasikan plugin Claude Code melalui marketplace Anda sendiri atau marketplace komunitas Anthropic, dengan daftar periksa pra-rilis dan cara pengguna mendapatkan pembaruan.
+- [Publikasikan dan distribusikan plugin](https://code.claude.com/docs/id/plugins/publish.md): Publikasikan plugin Claude Code melalui marketplace Anda sendiri atau direktori Anthropic, dengan daftar periksa pra-rilis dan cara pengguna mendapatkan pembaruan.
 - [Ukur biaya dan penggunaan plugin](https://code.claude.com/docs/id/plugins/measure.md): Ukur biaya token plugin Claude Code, cari tahu apakah orang masih menggunakannya, dan pilih peristiwa telemetri untuk pertanyaan plugin di seluruh organisasi.
 - [Rekomendasikan plugin Anda dari CLI Anda](https://code.claude.com/docs/id/plugins/cli-hints.md): Minta pengguna Claude Code untuk memasang plugin marketplace resmi Anda dengan mengeluarkan tag claude-code-hint dari CLI atau SDK Anda.
 
@@ -167,7 +167,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penerapan
+#### Penyebaran
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.

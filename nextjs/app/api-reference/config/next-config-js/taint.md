@@ -3,7 +3,7 @@ title: taint
 description: Enable tainting Objects and Values.
 url: "https://nextjs.org/docs/app/api-reference/config/next-config-js/taint"
 docs_index: /docs/llms.txt
-version: 16.3.5
+version: 16.3.6
 lastUpdated: 2026-09-07
 prerequisites:
   - "Configuration: /docs/app/api-reference/config"

@@ -50,7 +50,7 @@
 
 ##### Claude Code на рабочем столе
 
-- [Начало работы с настольным приложением](https://code.claude.com/docs/ru/desktop-quickstart.md): Установите Claude Code на рабочий стол и начните свой первый сеанс кодирования
+- [Начало работы с настольным приложением](https://code.claude.com/docs/ru/desktop-quickstart.md): Установите настольное приложение Claude, откройте вкладку Code и начните свой первый сеанс Claude Code в папке проекта на вашем компьютере.
 - [Настольное приложение](https://code.claude.com/docs/ru/desktop.md): Получите больше возможностей от Claude Code Desktop: параллельные сеансы с изоляцией Git, макет панелей с перетаскиванием, интегрированный терминал и редактор файлов, боковые чаты, использование компьютера, отправка сеансов со своего телефона, визуальный просмотр различий, предпросмотр приложений, м…
 - [Claude Desktop на Linux (бета)](https://code.claude.com/docs/ru/desktop-linux.md): Установка и обновление приложения Claude Desktop на Ubuntu и Debian
 - [Claude Code Desktop в WSL](https://code.claude.com/docs/ru/desktop-wsl.md): Запуск сеансов Code внутри дистрибутива WSL 2 на Windows
@@ -130,7 +130,7 @@
 - [Добавление компонентов в плагин](https://code.claude.com/docs/ru/plugins/components.md): Добавляйте skills, hooks, MCP серверы и все остальные типы компонентов в плагин Claude Code с примерами, которые проходят валидацию для каждого.
 - [Зависимости плагинов](https://code.claude.com/docs/ru/plugins/dependencies.md): Объявляйте плагины, от которых зависит ваш плагин, с диапазонами версий, такими как ^1.2, и узнайте, как Claude Code устанавливает, разрешает и удаляет их.
 - [Тестирование plugins с помощью evals](https://code.claude.com/docs/ru/plugin-evals.md): Напишите eval-кейсы для вашего Claude Code plugin, запустите их с помощью claude plugin eval, оцените результаты, сравните с базовым вариантом без plugin и установите ограничение CI на основе оценки.
-- [Публикация и распространение плагина](https://code.claude.com/docs/ru/plugins/publish.md): Опубликуйте плагин Claude Code через собственный маркетплейс или маркетплейс сообщества Anthropic с предварительным контрольным списком и информацией о том, как пользователи получают обновления.
+- [Публикация и распространение плагина](https://code.claude.com/docs/ru/plugins/publish.md): Опубликуйте плагин Claude Code через собственный маркетплейс или маркетплейс Anthropic, с предварительным контрольным списком и информацией о том, как пользователи получают обновления.
 - [Измерение стоимости и использования плагина](https://code.claude.com/docs/ru/plugins/measure.md): Измерьте стоимость токенов плагина Claude Code, узнайте, используют ли его люди, и выберите события телеметрии для вопросов плагинов на уровне организации.
 - [Рекомендуйте ваш plugin из вашего CLI](https://code.claude.com/docs/ru/plugins/cli-hints.md): Предложите пользователям Claude Code установить ваш plugin из официального marketplace, отправив тег claude-code-hint из вашего CLI или SDK.
 

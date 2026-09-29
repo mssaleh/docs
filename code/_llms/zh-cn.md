@@ -50,7 +50,7 @@
 
 ##### Claude Code 桌面版
 
-- [开始使用桌面应用](https://code.claude.com/docs/zh-CN/desktop-quickstart.md): 在桌面上安装 Claude Code 并开始您的第一个编码会话
+- [开始使用桌面应用](https://code.claude.com/docs/zh-CN/desktop-quickstart.md): 安装 Claude 桌面应用，打开 Code 选项卡，并在您计算机上的项目文件夹中开始您的第一个 Claude Code 会话。
 - [Desktop application](https://code.claude.com/docs/zh-CN/desktop.md): 充分利用 Claude Code Desktop：使用 Git 隔离的并行会话、拖放窗格布局、集成终端和文件编辑器、侧边聊天、计算机使用、从手机 Dispatch 会话、可视化 diff 审查、应用预览、PR 监控、连接器和企业配置。
 - [Linux 上的 Claude Desktop（测试版）](https://code.claude.com/docs/zh-CN/desktop-linux.md): 在 Ubuntu 和 Debian 上安装和更新 Claude 桌面应用
 - [Claude Code Desktop 在 WSL 中](https://code.claude.com/docs/zh-CN/desktop-wsl.md): 在 Windows 上的 WSL 2 发行版内运行 Code 会话
@@ -131,7 +131,7 @@
 - [向插件添加组件](https://code.claude.com/docs/zh-CN/plugins/components.md): 向 Claude Code 插件添加 skills、hooks、MCP 服务器和其他所有组件类型，并提供针对每种类型的验证示例。
 - [插件依赖](https://code.claude.com/docs/zh-CN/plugins/dependencies.md): 声明你的插件所依赖的其他插件，使用版本范围如 ^1.2，并了解 Claude Code 如何安装、解析和修剪它们。
 - [使用 evals 测试插件](https://code.claude.com/docs/zh-CN/plugin-evals.md): 为您的 Claude Code 插件编写 eval 用例，使用 claude plugin eval 运行它们，对结果进行评分，与无插件基线进行比较，并在 CI 中基于分数进行门控。
-- [发布和分发插件](https://code.claude.com/docs/zh-CN/plugins/publish.md): 通过您自己的市场或 Anthropic 的社区市场发布 Claude Code 插件，包括发布前检查清单以及用户如何获取更新。
+- [发布和分发插件](https://code.claude.com/docs/zh-CN/plugins/publish.md): 通过您自己的市场或 Anthropic 的目录发布 Claude Code 插件，包括发布前检查清单以及用户如何获取更新。
 - [测量插件成本和使用情况](https://code.claude.com/docs/zh-CN/plugins/measure.md): 测量 Claude Code 插件的令牌成本，了解人们是否仍在使用它，并为组织范围的插件问题选择遥测事件。
 - [从您的 CLI 推荐您的插件](https://code.claude.com/docs/zh-CN/plugins/cli-hints.md): 通过从您的 CLI 或 SDK 发出 claude-code-hint 标签，提示 Claude Code 用户安装您的官方市场插件。
 
