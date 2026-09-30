@@ -32,7 +32,7 @@
 
 - [Platform dan integrasi](https://code.claude.com/docs/id/platforms.md): Pilih di mana menjalankan Claude Code dan apa yang akan dihubungkan. Bandingkan CLI, Desktop, VS Code, JetBrains, web, mobile, dan integrasi seperti Chrome, Slack, dan CI/CD.
 - [Lanjutkan sesi lokal dari perangkat apa pun dengan Remote Control](https://code.claude.com/docs/id/remote-control.md): Lanjutkan sesi Claude Code lokal dari ponsel, tablet, atau browser apa pun menggunakan Remote Control. Bekerja dengan claude.ai/code dan aplikasi Claude mobile.
-- [Biarkan Claude mengoordinasikan pekerjaan berkelanjutan dengan Projects](https://code.claude.com/docs/id/claude-projects.md): Berikan Claude sekumpulan pekerjaan terkait dalam satu percakapan dan biarkan ia mengoordinasikan sesi cloud paralel yang berbagi repositori, instruksi, dan memori.
+- [Biarkan Claude mengoordinasikan pekerjaan berkelanjutan dengan Projects](https://code.claude.com/docs/id/claude-projects.md): Berikan Claude sekumpulan pekerjaan terkait dalam satu percakapan dan biarkan ia menjalankannya sebagai sesi cloud paralel yang berbagi repositori, instruksi, dan memori.
 - [Claude Code di mobile](https://code.claude.com/docs/id/mobile.md): Mulai, pantau, dan arahkan tugas Claude Code dari ponsel Anda dengan aplikasi Claude untuk iOS dan Android.
 - [Gunakan Claude Code dengan Chrome](https://code.claude.com/docs/id/chrome.md): Hubungkan Claude Code ke browser Chrome Anda untuk menguji aplikasi web, debug dengan console logs, otomatisasi pengisian formulir, dan ekstrak data dari halaman web.
 - [Biarkan Claude menggunakan komputer Anda dari CLI](https://code.claude.com/docs/id/computer-use.md): Aktifkan computer use di Claude Code CLI sehingga Claude dapat membuka aplikasi, mengklik, mengetik, dan melihat layar Anda di macOS. Uji aplikasi native, debug masalah visual, dan otomatisasi alat GUI-only tanpa meninggalkan terminal Anda.
@@ -44,7 +44,7 @@
 ##### Claude Code di cloud
 
 - [Mulai dengan Claude Code di cloud](https://code.claude.com/docs/id/web-quickstart.md): Jalankan Claude Code di cloud dari browser atau ponsel Anda. Hubungkan repositori GitHub, kirimkan tugas, dan tinjau PR tanpa setup lokal.
-- [Gunakan Claude Code di cloud](https://code.claude.com/docs/id/claude-code-on-the-web.md): Jalankan sesi Claude Code di cloud dari browser, ponsel, aplikasi desktop, atau terminal Anda, pindahkan dengan --cloud dan --teleport, dan auto-fix pull request.
+- [Gunakan Claude Code di cloud](https://code.claude.com/docs/id/claude-code-on-the-web.md): Jalankan sesi Claude Code di cloud dari browser, ponsel, aplikasi desktop, atau terminal Anda, pindahkan dengan `--cloud` dan `--teleport`, dan auto-fix pull request.
 - [Otomatisasi pekerjaan dengan rutinitas](https://code.claude.com/docs/id/routines.md): Letakkan Claude Code pada autopilot. Tentukan rutinitas yang berjalan sesuai jadwal, dipicu oleh panggilan API, atau bereaksi terhadap peristiwa GitHub dari infrastruktur cloud.
 - [Temukan bug dengan ultrareview](https://code.claude.com/docs/id/ultrareview.md): Jalankan tinjauan kode multi-agen yang mendalam di cloud dengan /code-review ultra untuk menemukan dan memverifikasi bug sebelum Anda merge.
 
@@ -167,7 +167,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penyebaran
+#### Penerapan
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.

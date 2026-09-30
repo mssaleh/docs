@@ -44,7 +44,7 @@
 ##### Claude Code in der Cloud
 
 - [Erste Schritte mit Claude Code in der Cloud](https://code.claude.com/docs/de/web-quickstart.md): Führen Sie Claude Code in der Cloud aus Ihrem Browser oder Telefon aus. Verbinden Sie ein GitHub-Repository, übermitteln Sie eine Aufgabe und überprüfen Sie den PR ohne lokales Setup.
-- [Claude Code in der Cloud verwenden](https://code.claude.com/docs/de/claude-code-on-the-web.md): Führen Sie Claude Code-Sitzungen in der Cloud aus Ihrem Browser, Telefon, Desktop-App oder Terminal aus, verschieben Sie sie mit --cloud und --teleport, und beheben Sie Pull Requests automatisch.
+- [Claude Code in der Cloud verwenden](https://code.claude.com/docs/de/claude-code-on-the-web.md): Führen Sie Claude Code-Sitzungen in der Cloud aus Ihrem Browser, Telefon, Desktop-App oder Terminal aus, verschieben Sie sie mit `--cloud` und `--teleport`, und beheben Sie Pull Requests automatisch.
 - [Automatisieren Sie Arbeitsabläufe mit Routinen](https://code.claude.com/docs/de/routines.md): Setzen Sie Claude Code auf Autopilot. Definieren Sie Routinen, die nach einem Zeitplan ausgeführt werden, durch API-Aufrufe ausgelöst werden oder auf GitHub-Ereignisse von der Cloud-Infrastruktur reagieren.
 - [Bugs mit Ultrareview finden](https://code.claude.com/docs/de/ultrareview.md): Führen Sie eine tiefe, Multi-Agent-Code-Review in der Cloud mit /code-review ultra durch, um Bugs vor dem Merge zu finden und zu verifizieren.
 

@@ -362,7 +362,7 @@
 - [Week 22 · May 25–29, 2026](https://code.claude.com/docs/ko/whats-new/2026-w22.md): Claude Opus 4.8에서 Claude Code를 실행하고, 동적 워크플로우로 대규모 작업을 조율하며, security-guidance 플러그인으로 보안 문제를 포착하고, Opus 4.8의 빠른 모드를 더 낮은 가격으로 사용합니다.
 - [21주차 · 2026년 5월 18–22일](https://code.claude.com/docs/ko/whats-new/2026-w21.md): Pro 플랜에서 자동 모드를 사용하고 Sonnet 4.6을 지원하며, /usage에서 플랜 한도를 주도하는 스킬, 서브에이전트, MCP 서버를 확인하고, 새로운 /code-review 명령으로 diff를 검토합니다.
 - [20주차 · 2026년 5월 11–15일](https://code.claude.com/docs/ko/whats-new/2026-w20.md): 에이전트 뷰로 모든 Claude Code 세션을 한 화면에서 관리하고, Claude가 조건을 만족할 때까지 목표를 향해 작동하도록 유지하며, Opus 4.7에서 기본적으로 빠른 모드를 실행합니다.
-- [19주차 · 2026년 5월 4–8일](https://code.claude.com/docs/ko/whats-new/2026-w19.md): .zip 아카이브 및 URL에서 플러그인을 로드하고, Ctrl+R로 모든 프로젝트의 명령 기록을 검색하고, 로컬 HEAD 또는 원격 기본값에서 새 worktree를 분기하고, 자동 모드 하드 거부 규칙으로 작업을 무조건 차단합니다.
+- [19주차 · 2026년 5월 4–8일](https://code.claude.com/docs/ko/whats-new/2026-w19.md): .zip 아카이브 및 URL에서 플러그인을 로드하고, Ctrl+R로 모든 프로젝트에서 명령 기록을 검색하고, 로컬 HEAD 또는 원격 기본값에서 새 worktree를 분기하고, 자동 모드 hard deny 규칙으로 작업을 무조건 차단합니다.
 - [18주차 · 4월 27일 – 5월 1일, 2026년](https://code.claude.com/docs/ko/whats-new/2026-w18.md): Claude Code가 Windows에서 Git Bash 없이 실행되며, claude auth login은 브라우저 콜백이 localhost에 도달할 수 없을 때 붙여넣은 OAuth 코드를 허용하고, claude project purge는 프로젝트별 로컬 상태를 정리하며, PR URL을 /resume에 붙여넣으면 이를 생성한 세션을 찾습니다.
 - [17주차 · 2026년 4월 20–24일](https://code.claude.com/docs/ko/whats-new/2026-w17.md): /ultrareview가 연구 미리보기로 공개되며, 터미널로 돌아올 때 자동 세션 요약, 플러그인으로 빌드하고 배포할 수 있는 커스텀 색상 테마, 그리고 재설계된 웹용 Claude Code가 제공됩니다.
 - [16주차 · 2026년 4월 13–17일](https://code.claude.com/docs/ko/whats-new/2026-w16.md): 새로운 xhigh 노력 수준이 포함된 Claude Opus 4.7, Claude Code 웹의 루틴, Claude가 필요할 때 휴대폰에 알림을 보내는 모바일 푸시 알림, 사용 한도를 주도하는 요소를 보여주는 /usage 분석, 그리고 번들된 JavaScript를 대체하는 네이티브 바이너리.

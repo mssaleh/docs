@@ -32,7 +32,7 @@
 
 - [プラットフォームと統合](https://code.claude.com/docs/ja/platforms.md): Claude Code を実行する場所を選択し、何に接続するかを決定します。CLI、Desktop、VS Code、JetBrains、Web、モバイル、および Chrome、Slack、CI/CD などの統合を比較します。
 - [任意のデバイスからローカルセッションを続行する Remote Control](https://code.claude.com/docs/ja/remote-control.md): Remote Control を使用して、電話、タブレット、または任意のブラウザから Claude Code のローカルセッションを続行します。claude.ai/code と Claude モバイルアプリで動作します。
-- [Claude がプロジェクトで進行中の作業を調整する](https://code.claude.com/docs/ja/claude-projects.md): 関連する作業の本体を 1 つの会話で Claude に提供し、リポジトリ、指示、メモリを共有する並列クラウドセッションを調整させます。
+- [Claude がプロジェクトで進行中の作業を調整する](https://code.claude.com/docs/ja/claude-projects.md): 関連する作業のストリームを 1 つの会話で Claude に提供し、リポジトリ、指示、メモリを共有する並列クラウドセッションを調整させます。
 - [モバイルの Claude Code](https://code.claude.com/docs/ja/mobile.md): Claude アプリ for iOS と Android を使用して、携帯電話から Claude Code タスクを開始、監視、操作します。
 - [Chrome で Claude Code を使用する](https://code.claude.com/docs/ja/chrome.md): Claude Code を Chrome ブラウザに接続して、Web アプリをテストし、コンソールログでデバッグし、フォーム入力を自動化し、Web ページからデータを抽出します。
 - [Claude に CLI からコンピュータを使用させる](https://code.claude.com/docs/ja/computer-use.md): Claude Code CLI でコンピュータ使用を有効にして、Claude がアプリを開いたり、クリックしたり、入力したり、macOS でスクリーンを表示したりできるようにします。ネイティブアプリをテストし、ビジュアルの問題をデバッグし、ターミナルを離れることなく GUI のみのツールを自動化します。
@@ -168,7 +168,7 @@
 - [組織の MCP サーバーアクセスを制御する](https://code.claude.com/docs/ja/managed-mcp.md): 管理対象設定ファイル、管理対象設定、許可リスト、拒否リストを使用して、ユーザーが追加または接続できる MCP サーバーを制限するか、すべてのユーザーにサーバーを提供します。
 - [オートモードの設定](https://code.claude.com/docs/ja/auto-mode-config.md): オートモード分類器に、組織が信頼するリポジトリ、バケット、ドメインを指定します。環境コンテキストを設定し、デフォルトのブロックおよび許可ルールをオーバーライドし、オートモード CLI サブコマンドで有効な設定を検査します。
 
-#### デプロイメント
+#### デプロイ
 
 - [エンタープライズデプロイメント概要](https://code.claude.com/docs/ja/third-party-integrations.md): Claude Code が様々なサードパーティサービスとインフラストラクチャと統合して、エンタープライズデプロイメント要件を満たす方法について学びます。
 - [機能の利用可能性](https://code.claude.com/docs/ja/feature-availability.md): Anthropic のサブスクリプションプラン、Anthropic Console、Amazon Bedrock、Claude Platform on AWS、Google Cloud の Agent Platform、Microsoft Foundry 全体で利用可能な Claude Code 機能を比較します。

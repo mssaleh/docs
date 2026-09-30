@@ -32,7 +32,7 @@
 
 - [Plataformas e integrações](https://code.claude.com/docs/pt/platforms.md): Escolha onde executar Claude Code e o que conectar a ele. Compare a CLI, Desktop, VS Code, JetBrains, web, mobile e integrações como Chrome, Slack e CI/CD.
 - [Continue sessões locais de qualquer dispositivo com Remote Control](https://code.claude.com/docs/pt/remote-control.md): Continue uma sessão local do Claude Code do seu telefone, tablet ou qualquer navegador usando Remote Control. Funciona com claude.ai/code e o aplicativo Claude para dispositivos móveis.
-- [Deixe Claude coordenar trabalho contínuo com Projects](https://code.claude.com/docs/pt/claude-projects.md): Dê a Claude um corpo de trabalho relacionado em uma conversa e deixe-o coordenar sessões em nuvem paralelas que compartilham repositórios, instruções e memória.
+- [Deixe Claude coordenar trabalho contínuo com Projects](https://code.claude.com/docs/pt/claude-projects.md): Dê a Claude um fluxo de trabalho relacionado em uma conversa e deixe-o executar como sessões em nuvem paralelas que compartilham repositórios, instruções e memória.
 - [Claude Code no celular](https://code.claude.com/docs/pt/mobile.md): Inicie, monitore e dirija tarefas do Claude Code do seu telefone com o aplicativo Claude para iOS e Android.
 - [Use Claude Code with Chrome](https://code.claude.com/docs/pt/chrome.md): Conecte Claude Code ao seu navegador Chrome para testar aplicativos web, depurar com logs de console, automatizar preenchimento de formulários e extrair dados de páginas web.
 - [Deixe Claude usar seu computador a partir da CLI](https://code.claude.com/docs/pt/computer-use.md): Ative o computer use na Claude Code CLI para que Claude possa abrir aplicativos, clicar, digitar e ver sua tela no macOS. Teste aplicativos nativos, depure problemas visuais e automatize ferramentas apenas com GUI sem sair do seu terminal.
@@ -44,7 +44,7 @@
 ##### Claude Code na nuvem
 
 - [Comece com Claude Code na nuvem](https://code.claude.com/docs/pt/web-quickstart.md): Execute Claude Code na nuvem a partir do seu navegador ou telefone. Conecte um repositório GitHub, envie uma tarefa e revise o PR sem configuração local.
-- [Use Claude Code na nuvem](https://code.claude.com/docs/pt/claude-code-on-the-web.md): Execute sessões Claude Code na nuvem a partir do seu navegador, telefone, aplicativo desktop ou terminal, mova-as com --cloud e --teleport, e corrija automaticamente pull requests.
+- [Use Claude Code na nuvem](https://code.claude.com/docs/pt/claude-code-on-the-web.md): Execute sessões Claude Code na nuvem a partir do seu navegador, telefone, aplicativo desktop ou terminal, mova-as com `--cloud` e `--teleport`, e corrija automaticamente pull requests.
 - [Automatizar trabalho com rotinas](https://code.claude.com/docs/pt/routines.md): Coloque Claude Code no piloto automático. Defina rotinas que são executadas em um cronograma, acionadas em chamadas de API ou reagem a eventos do GitHub a partir da infraestrutura em nuvem.
 - [Encontre bugs com ultrareview](https://code.claude.com/docs/pt/ultrareview.md): Execute uma revisão de código profunda e multi-agente na nuvem com /code-review ultra para encontrar e verificar bugs antes de fazer merge.
 
@@ -60,14 +60,14 @@
 ##### Revisão de código e CI/CD
 
 - [Detectar problemas de segurança enquanto Claude escreve código](https://code.claude.com/docs/pt/security-guidance.md): Instale o plugin security-guidance para que Claude revise suas próprias alterações de código em busca de vulnerabilidades e as corrija na mesma sessão.
-- [Digitalize seu código em busca de vulnerabilidades](https://code.claude.com/docs/pt/claude-security.md): Instale o plugin Claude Security para digitalizar seu código em busca de vulnerabilidades em uma sessão Claude Code e transforme as descobertas em patches que você revisa e aplica.
+- [Digitalize seu código em busca de vulnerabilidades](https://code.claude.com/docs/pt/claude-security.md): Instale o plugin de Segurança Claude para digitalizar seu código em busca de vulnerabilidades em uma sessão Claude Code e transforme as descobertas em patches que você revisa e aplica.
 - [Code Review](https://code.claude.com/docs/pt/code-review.md): Configure análises automatizadas de PR que detectam erros de lógica, vulnerabilidades de segurança e regressões usando análise multi-agente de sua base de código completa
 - [Claude Code GitHub Actions](https://code.claude.com/docs/pt/github-actions.md): Execute Claude Code em fluxos de trabalho do GitHub Actions para responder a menções @claude, automatizar tarefas e transformar issues em pull requests
 - [Use Claude Code GitHub Actions com provedores de nuvem](https://code.claude.com/docs/pt/github-actions-cloud-providers.md): Execute Claude Code GitHub Actions através do Amazon Bedrock, Google Cloud's Agent Platform ou Microsoft Foundry em vez da Claude API
 - [Claude Code com GitHub Enterprise Server](https://code.claude.com/docs/pt/github-enterprise-server.md): Conecte Claude Code à sua instância auto-hospedada do GitHub Enterprise Server para sessões na nuvem, revisão de código e marketplaces de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/pt/gitlab-ci-cd.md): Saiba como integrar Claude Code no seu fluxo de trabalho de desenvolvimento com GitLab CI/CD
 
-### Criar com Claude Code
+### Construir com Claude Code
 
 #### Agentes e trabalho paralelo
 

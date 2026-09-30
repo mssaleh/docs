@@ -44,7 +44,7 @@
 ##### 雲端 Claude Code
 
 - [在雲端開始使用 Claude Code](https://code.claude.com/docs/zh-TW/web-quickstart.md): 在雲端從瀏覽器或手機執行 Claude Code。連接 GitHub 儲存庫、提交任務，並在無需本地設定的情況下檢查 PR。
-- [在雲端使用 Claude Code](https://code.claude.com/docs/zh-TW/claude-code-on-the-web.md): 從您的瀏覽器、手機、桌面應用程式或終端在雲端執行 Claude Code 工作階段，使用 --cloud 和 --teleport 移動工作階段，以及自動修復拉取請求。
+- [在雲端使用 Claude Code](https://code.claude.com/docs/zh-TW/claude-code-on-the-web.md): 從您的瀏覽器、手機、桌面應用程式或終端在雲端執行 Claude Code 工作階段，使用 `--cloud` 和 `--teleport` 移動工作階段，以及自動修復拉取請求。
 - [使用例行程序自動化工作](https://code.claude.com/docs/zh-TW/routines.md): 讓 Claude Code 自動運行。定義在排程上運行、在 API 呼叫時觸發或對來自雲端基礎設施的 GitHub 事件做出反應的例行程序。
 - [使用 Ultrareview 尋找錯誤](https://code.claude.com/docs/zh-TW/ultrareview.md): 使用 /code-review ultra 在雲端執行深度多代理程式碼審查，在合併前尋找並驗證錯誤。
 
@@ -60,7 +60,7 @@
 ##### 程式碼審查與 CI/CD
 
 - [在 Claude 編寫程式碼時捕捉安全問題](https://code.claude.com/docs/zh-TW/security-guidance.md): 安裝 security-guidance 外掛程式，讓 Claude 檢查自己的程式碼變更是否存在漏洞，並在同一個工作階段中修復它們。
-- [掃描程式碼庫以尋找漏洞](https://code.claude.com/docs/zh-TW/claude-security.md): 安裝 Claude Security plugin 以在 Claude Code 工作階段中掃描程式碼庫以尋找漏洞，並將發現的問題轉換為您可以檢查和應用的修補程式。
+- [掃描程式碼庫以尋找漏洞](https://code.claude.com/docs/zh-TW/claude-security.md): 安裝 Claude Security plugin 以在 Claude Code 工作階段中掃描程式碼庫以尋找漏洞，並將發現的問題轉換為您可以檢視和應用的修補程式。
 - [Code Review](https://code.claude.com/docs/zh-TW/code-review.md): 設定自動化 PR 審查，使用多代理分析您的完整程式碼庫來捕捉邏輯錯誤、安全漏洞和迴歸
 - [Claude Code GitHub Actions](https://code.claude.com/docs/zh-TW/github-actions.md): 在 GitHub Actions 工作流程中執行 Claude Code，以回應 @claude 提及、自動化任務，並將議題轉換為 pull request
 - [使用 Claude Code GitHub Actions 搭配雲端提供者](https://code.claude.com/docs/zh-TW/github-actions-cloud-providers.md): 透過 Amazon Bedrock、Google Cloud 的 Agent Platform 或 Microsoft Foundry 執行 Claude Code GitHub Actions，而不是使用 Claude API

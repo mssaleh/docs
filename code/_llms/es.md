@@ -44,7 +44,7 @@
 ##### Claude Code en la nube
 
 - [Comienza con Claude Code en la nube](https://code.claude.com/docs/es/web-quickstart.md): Ejecuta Claude Code en la nube desde tu navegador o teléfono. Conecta un repositorio de GitHub, envía una tarea y revisa el PR sin configuración local.
-- [Usar Claude Code en la nube](https://code.claude.com/docs/es/claude-code-on-the-web.md): Ejecute sesiones de Claude Code en la nube desde su navegador, teléfono, aplicación de escritorio o terminal, muévalas con --cloud y --teleport, y corrija automáticamente solicitudes de extracción.
+- [Usar Claude Code en la nube](https://code.claude.com/docs/es/claude-code-on-the-web.md): Ejecute sesiones de Claude Code en la nube desde su navegador, teléfono, aplicación de escritorio o terminal, muévalas con `--cloud` y `--teleport`, y corrija automáticamente solicitudes de extracción.
 - [Automatizar el trabajo con rutinas](https://code.claude.com/docs/es/routines.md): Ponga Claude Code en piloto automático. Defina rutinas que se ejecuten en un horario, se activen en llamadas API o reaccionen a eventos de GitHub desde la infraestructura en la nube.
 - [Encuentra errores con ultrareview](https://code.claude.com/docs/es/ultrareview.md): Ejecuta una revisión de código profunda y multiagente en la nube con /code-review ultra para encontrar y verificar errores antes de fusionar.
 
@@ -60,7 +60,7 @@
 ##### Revisión de código e CI/CD
 
 - [Detectar problemas de seguridad mientras Claude escribe código](https://code.claude.com/docs/es/security-guidance.md): Instale el plugin security-guidance para que Claude revise sus propios cambios de código en busca de vulnerabilidades y las corrija en la misma sesión.
-- [Escanea tu base de código en busca de vulnerabilidades](https://code.claude.com/docs/es/claude-security.md): Instala el plugin de seguridad de Claude para escanear tu base de código en busca de vulnerabilidades en una sesión de Claude Code y convierte los hallazgos en parches que revisas y aplicas.
+- [Escanee su base de código en busca de vulnerabilidades](https://code.claude.com/docs/es/claude-security.md): Instale el plugin de seguridad de Claude para escanear su base de código en busca de vulnerabilidades en una sesión de Claude Code y convierta los hallazgos en parches que usted revisa y aplica.
 - [Code Review](https://code.claude.com/docs/es/code-review.md): Configure revisiones automatizadas de PR que detecten errores lógicos, vulnerabilidades de seguridad y regresiones mediante análisis multiagente de su base de código completa
 - [Claude Code GitHub Actions](https://code.claude.com/docs/es/github-actions.md): Ejecute Claude Code en flujos de trabajo de GitHub Actions para responder a menciones @claude, automatizar tareas y convertir problemas en solicitudes de extracción
 - [Usar Claude Code GitHub Actions con proveedores en la nube](https://code.claude.com/docs/es/github-actions-cloud-providers.md): Ejecute Claude Code GitHub Actions a través de Amazon Bedrock, Google Cloud's Agent Platform o Microsoft Foundry en lugar de la API de Claude
