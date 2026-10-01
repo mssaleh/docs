@@ -48,7 +48,7 @@
 - [ルーティンで作業を自動化する](https://code.claude.com/docs/ja/routines.md): Claude Code を自動操縦に設定します。スケジュールで実行するルーティンを定義したり、API 呼び出しでトリガーしたり、Anthropic が管理するクラウドインフラストラクチャから GitHub イベントに反応させたりできます。
 - [ultrareview でバグを見つける](https://code.claude.com/docs/ja/ultrareview.md): /code-review ultra でクラウド上で深い複数エージェント型のコードレビューを実行し、マージ前にバグを見つけて検証します。
 
-##### Claude Code デスクトップ版
+##### Claude Code（デスクトップ版）
 
 - [デスクトップアプリを始める](https://code.claude.com/docs/ja/desktop-quickstart.md): Claude デスクトップアプリをインストールして、Code タブを開き、コンピューター上のプロジェクトフォルダーで最初の Claude Code セッションを開始します。
 - [Desktop application](https://code.claude.com/docs/ja/desktop.md): Claude Code Desktop をさらに活用する：Git 分離による並列セッション、ドラッグアンドドロップペインレイアウト、統合ターミナルとファイルエディタ、サイドチャット、コンピュータ使用、電話から Dispatch セッションを送信、ビジュアル diff レビュー、アプリプレビュー、PR 監視、コネクタ、エンタープライズ設定。
@@ -168,7 +168,7 @@
 - [組織の MCP サーバーアクセスを制御する](https://code.claude.com/docs/ja/managed-mcp.md): 管理対象設定ファイル、管理対象設定、許可リスト、拒否リストを使用して、ユーザーが追加または接続できる MCP サーバーを制限するか、すべてのユーザーにサーバーを提供します。
 - [オートモードの設定](https://code.claude.com/docs/ja/auto-mode-config.md): オートモード分類器に、組織が信頼するリポジトリ、バケット、ドメインを指定します。環境コンテキストを設定し、デフォルトのブロックおよび許可ルールをオーバーライドし、オートモード CLI サブコマンドで有効な設定を検査します。
 
-#### デプロイ
+#### デプロイメント
 
 - [エンタープライズデプロイメント概要](https://code.claude.com/docs/ja/third-party-integrations.md): Claude Code が様々なサードパーティサービスとインフラストラクチャと統合して、エンタープライズデプロイメント要件を満たす方法について学びます。
 - [機能の利用可能性](https://code.claude.com/docs/ja/feature-availability.md): Anthropic のサブスクリプションプラン、Anthropic Console、Amazon Bedrock、Claude Platform on AWS、Google Cloud の Agent Platform、Microsoft Foundry 全体で利用可能な Claude Code 機能を比較します。

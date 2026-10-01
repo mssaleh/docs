@@ -96,7 +96,7 @@
 
 - [hooks를 사용하여 작업 자동화](https://code.claude.com/docs/ko/hooks-guide.md): Claude Code가 파일을 편집하거나 작업을 완료하거나 입력이 필요할 때 자동으로 셸 명령을 실행합니다. 코드 형식 지정, 알림 전송, 명령 검증 및 프로젝트 규칙 적용합니다.
 - [채널을 사용하여 실행 중인 세션으로 이벤트 푸시하기](https://code.claude.com/docs/ko/channels.md): 채널을 사용하여 MCP 서버에서 실행 중인 Claude Code 세션으로 메시지, 알림 및 웹훅을 푸시합니다. CI 결과, 채팅 메시지 및 모니터링 이벤트를 전달하여 Claude가 자리를 비웠을 때 반응할 수 있도록 합니다.
-- [일정에 따라 프롬프트 실행하기](https://code.claude.com/docs/ko/scheduled-tasks.md): /loop와 cron 스케줄링 도구를 사용하여 Claude Code 세션 내에서 프롬프트를 반복 실행하거나, 상태를 폴링하거나, 일회성 알림을 설정합니다.
+- [일정에 따라 프롬프트 실행](https://code.claude.com/docs/ko/scheduled-tasks.md): /loop와 cron 스케줄링 도구를 사용하여 Claude Code 세션 내에서 프롬프트를 반복 실행하거나, 상태를 폴링하거나, 일회성 알림을 설정합니다.
 - [Claude를 목표를 향해 계속 작동하게 하기](https://code.claude.com/docs/ko/goal.md): /goal로 완료 조건을 설정하면 Claude가 조건이 충족될 때까지 계속 작동하며, 모델이 불가능하다고 판단하거나 수정해야 할 오류가 발생하면 목표가 지워집니다.
 - [Claude Code를 프로그래밍 방식으로 실행하기](https://code.claude.com/docs/ko/headless.md): Agent SDK를 사용하여 CLI, Python 또는 TypeScript에서 Claude Code를 프로그래밍 방식으로 실행합니다.
 - [링크에서 세션 시작하기](https://code.claude.com/docs/ko/deep-links.md): URL에서 Claude Code 터미널 세션을 엽니다. 런북, 알림 및 대시보드에 `claude-cli://` 링크를 포함하여 클릭하면 Claude Code가 올바른 저장소에서 올바른 프롬프트와 함께 열립니다.

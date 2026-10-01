@@ -67,7 +67,7 @@
 - [Claude Code com GitHub Enterprise Server](https://code.claude.com/docs/pt/github-enterprise-server.md): Conecte Claude Code à sua instância auto-hospedada do GitHub Enterprise Server para sessões na nuvem, revisão de código e marketplaces de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/pt/gitlab-ci-cd.md): Saiba como integrar Claude Code no seu fluxo de trabalho de desenvolvimento com GitLab CI/CD
 
-### Construir com Claude Code
+### Criar com Claude Code
 
 #### Agentes e trabalho paralelo
 
