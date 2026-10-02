@@ -12,7 +12,7 @@
 - [Panduan Cepat](https://code.claude.com/docs/id/quickstart.md): Selamat datang di Claude Code!
 - [Changelog](https://code.claude.com/docs/id/changelog.md)
 
-#### Konsep Inti
+#### Konsep inti
 
 - [Cara Kerja Claude Code](https://code.claude.com/docs/id/how-claude-code-works.md): Pahami loop agentic, tools bawaan, dan bagaimana Claude Code berinteraksi dengan proyek Anda.
 - [Perluas Claude Code](https://code.claude.com/docs/id/features-overview.md): Pahami kapan menggunakan CLAUDE.md, Skills, subagents, hooks, MCP, dan plugins.
@@ -57,7 +57,7 @@
 - [Jadwalkan tugas berulang di Claude Code Desktop](https://code.claude.com/docs/id/desktop-scheduled-tasks.md): Atur tugas terjadwal di Claude Code Desktop untuk menjalankan Claude secara otomatis pada basis berulang untuk tinjauan kode harian, audit dependensi, atau briefing pagi.
 - [Uji aplikasi iOS di simulator](https://code.claude.com/docs/id/desktop-ios-simulator.md): Claude Code Desktop membuka aplikasi Anda di pane iOS Simulator ketika Claude membangun, menjalankan, atau memeriksanya, dengan simulator terpisah untuk setiap sesi.
 
-##### Tinjauan kode & CI/CD
+##### Code review & CI/CD
 
 - [Tangkap masalah keamanan saat Claude menulis kode](https://code.claude.com/docs/id/security-guidance.md): Instal plugin security-guidance untuk membuat Claude meninjau perubahan kodenya sendiri untuk kerentanan dan memperbaikinya dalam sesi yang sama.
 - [Pindai basis kode Anda untuk menemukan kerentanan](https://code.claude.com/docs/id/claude-security.md): Instal plugin Claude Security untuk memindai basis kode Anda mencari kerentanan dalam sesi Claude Code dan ubah temuan menjadi patch yang Anda tinjau dan terapkan.
@@ -67,9 +67,9 @@
 - [Claude Code dengan GitHub Enterprise Server](https://code.claude.com/docs/id/github-enterprise-server.md): Hubungkan Claude Code ke instans GitHub Enterprise Server yang di-host sendiri untuk sesi cloud, tinjauan kode, dan pasar plugin.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/id/gitlab-ci-cd.md): Pelajari tentang mengintegrasikan Claude Code ke dalam alur kerja pengembangan Anda dengan GitLab CI/CD
 
-### Bangun dengan Claude Code
+### Membangun dengan Claude Code
 
-#### Agen dan pekerjaan paralel
+#### Agent dan pekerjaan paralel
 
 - [Jalankan agen secara paralel](https://code.claude.com/docs/id/agents.md): Bandingkan cara Claude Code dapat menangani beberapa tugas sekaligus: subagents, agent view, agent teams, dynamic workflows, dan projects.
 - [Buat subagen kustom](https://code.claude.com/docs/id/sub-agents.md): Buat dan gunakan subagen AI khusus di Claude Code untuk alur kerja spesifik tugas dan manajemen konteks yang lebih baik.
@@ -88,11 +88,11 @@
 
 - [Perluas Claude dengan skills](https://code.claude.com/docs/id/skills.md): Buat, kelola, dan bagikan skills untuk memperluas kemampuan Claude di Claude Code. Mencakup perintah kustom dan skills bundel.
 
-#### Artefak
+#### Artifact
 
 - [Bagikan output sesi sebagai artifacts](https://code.claude.com/docs/id/artifacts.md): Artifacts mengubah pekerjaan Claude Code menjadi halaman interaktif langsung di claude.ai yang dapat Anda simpan pribadi, bagikan dengan organisasi Anda, atau publikasikan ke tautan publik.
 
-#### Otomasi
+#### Otomatisasi
 
 - [Otomatisasi tindakan dengan hooks](https://code.claude.com/docs/id/hooks-guide.md): Jalankan perintah shell secara otomatis ketika Claude Code mengedit file, menyelesaikan tugas, atau memerlukan input. Format kode, kirim notifikasi, validasi perintah, dan terapkan aturan proyek.
 - [Dorong acara ke dalam sesi yang sedang berjalan dengan channels](https://code.claude.com/docs/id/channels.md): Gunakan channels untuk mendorong pesan, peringatan, dan webhooks ke dalam sesi Claude Code Anda dari server MCP. Teruskan hasil CI, pesan obrolan, dan acara pemantauan sehingga Claude dapat bereaksi saat Anda tidak ada.
@@ -105,7 +105,7 @@
 
 - [Siapkan Claude Code di monorepo atau codebase besar](https://code.claude.com/docs/id/large-codebases.md): Konfigurasikan Claude Code untuk monorepos dan codebase pohon tunggal besar dengan file CLAUDE.md bersarang, worktrees sparse, code intelligence, dan skills per-paket sehingga Claude tetap fokus pada kode yang sedang Anda kerjakan.
 
-#### Pemecahan Masalah
+#### Pemecahan masalah
 
 - [Troubleshoot installation and login](https://code.claude.com/docs/id/troubleshoot-install.md): Perbaiki command not found, PATH, permission, network, dan authentication errors saat menginstal atau masuk ke Claude Code.
 - [Troubleshooting](https://code.claude.com/docs/id/troubleshooting.md): Perbaiki penggunaan CPU atau memori yang tinggi, hang, thrashing auto-compact, dan masalah pencarian di Claude Code, dan temukan halaman yang tepat untuk masalah lainnya.
@@ -121,6 +121,7 @@
 #### Gunakan plugin
 
 - [Instal dan kelola plugin](https://code.claude.com/docs/id/plugins/install.md): Instal plugin Claude Code dari marketplace di permukaan apa pun yang Anda gunakan, pilih cakupan instalasi, dan perbarui atau hapus nanti.
+- [Marketplace Anthropic](https://code.claude.com/docs/id/plugins/anthropic-marketplaces.md): Marketplace plugin resmi, komunitas, dan demo dari Anthropic untuk Claude Code: nama, repositori, cara menambahkan masing-masing, dan tempat menelusuri plugin-pluginnya.
 - [Code intelligence plugins](https://code.claude.com/docs/id/plugins/code-intelligence.md): Instal plugin language server sehingga Claude melihat kesalahan tipe setelah pengeditan dan menavigasi kode berdasarkan simbol, serta menjawab dialog rekomendasi plugin LSP.
 - [Keamanan dan kepercayaan plugin](https://code.claude.com/docs/id/plugins/security.md): Tentukan apakah Anda mempercayai plugin sebelum menginstalnya, dari apa yang dapat dilakukan plugin di mesin Anda hingga cara meninjau dan menghapusnya.
 
@@ -134,7 +135,25 @@
 - [Ukur biaya dan penggunaan plugin](https://code.claude.com/docs/id/plugins/measure.md): Ukur biaya token plugin Claude Code, cari tahu apakah orang masih menggunakannya, dan pilih peristiwa telemetri untuk pertanyaan plugin di seluruh organisasi.
 - [Rekomendasikan plugin Anda dari CLI Anda](https://code.claude.com/docs/id/plugins/cli-hints.md): Minta pengguna Claude Code untuk memasang plugin marketplace resmi Anda dengan mengeluarkan tag claude-code-hint dari CLI atau SDK Anda.
 
-#### Jalankan marketplace
+#### Mod
+
+- [Ikhtisar Mods](https://code.claude.com/docs/id/plugins/mods/overview.md): Tambahkan pane, perintah, dan aturan pemanggilan alat ke Claude Code dengan mod. Lihat apa yang dapat dilakukan mod, cara membuat atau memasang mod, dan tempat mod berjalan.
+- [Buat sebuah mod](https://code.claude.com/docs/id/plugins/mods/create.md): Biarkan Claude menulis mod Claude Code dari deskripsi, atau tulis sendiri yang menghitung panggilan alat dan menambahkan perintah. Pelajari loop reload dan validate.
+- [Referensi mod](https://code.claude.com/docs/id/plugins/mods/reference.md): Referensi lengkap untuk mod Claude Code: tata letak modul hook, event, metode API mod, titik render, elemen per surface, batas, dan pengaturan.
+
+##### Build
+
+- [Menggambar di antarmuka dengan mod](https://code.claude.com/docs/id/plugins/mods/interface.md): Menggambar panel, pita di atas prompt, tombol, dan bidang teks dari mod Claude Code, menangani penekanan dan input, serta menjaga status antara redraw dan sesi.
+- [Galeri antarmuka untuk mod](https://code.claude.com/docs/id/plugins/mods/gallery.md): Lihat elemen antarmuka yang dapat digambar oleh mod Claude Code, seperti teks, tombol, kolom, Markdown, kode, dan diff, beserta contoh kode dan tangkapan layar terminal.
+- [Bereaksi terhadap peristiwa dengan mod](https://code.claude.com/docs/id/plugins/mods/events.md): Tangani peristiwa Claude Code dari mod: amati, tulis ulang, atau jawab panggilan alat, prompt, dan giliran, saring peristiwa mana yang ditangani hook, dan rencanakan untuk mod lain.
+- [Gunakan mods API](https://code.claude.com/docs/id/plugins/mods/api.md): Panggil mods API dari mod Claude Code untuk menambahkan perintah dan alat, memanggil model, menjalankan pekerjaan pada timer, mengirim pesan ke sesi lain, dan mengakses file serta jaringan.
+
+##### Uji dan pecahkan masalah
+
+- [Uji coba mod](https://code.claude.com/docs/id/plugins/mods/test.md): Tulis tes otomatis untuk mod Claude Code yang menaikkan peristiwa, stub jawaban Claude Code, dan tekan tombol, tanpa sesi, masuk, atau jaringan.
+- [Troubleshoot a mod](https://code.claude.com/docs/id/plugins/mods/troubleshoot.md): Cari tahu mengapa Claude Code mod tidak melakukan apa pun: cocokkan gejala atau pesan dengan penyebabnya, cari pesan penolakan, dan baca log debug.
+
+#### Kelola marketplace
 
 - [Buat marketplace](https://code.claude.com/docs/id/plugins/create-marketplace.md): Bangun marketplace plugin dari file marketplace.json dan uji secara lokal sebelum Anda menghosting-nya.
 - [Host dan kelola marketplace](https://code.claude.com/docs/id/plugins/host-marketplace.md): Publikasikan marketplace plugin tempat pengguna dapat mengaksesnya, berikan akses ke marketplace pribadi, dan rilis pembaruan serta perubahan nama tanpa merusak instalasi.
@@ -143,8 +162,9 @@
 #### Kelola plugin untuk organisasi Anda
 
 - [Kelola plugin Claude Code untuk organisasi Anda](https://code.claude.com/docs/id/plugins/org.md): Kontrol plugin mana yang Claude Code instal dan izinkan di seluruh organisasi Anda melalui pengaturan terkelola.
+- [Kelola mod untuk organisasi Anda](https://code.claude.com/docs/id/plugins/mods/admin.md): Kontrol mod Claude Code dengan pengaturan terkelola: hentikan mod yang dipasang pengguna, izinkan hanya milik Anda sendiri, tinjau apa yang dapat dilakukan mod, dan terapkan kebijakan dengan mod Anda sendiri.
 
-#### Pemecahan Masalah
+#### Pemecahan masalah
 
 - [Troubleshoot plugins](https://code.claude.com/docs/id/plugins/troubleshooting.md): Perbaiki kesalahan plugin di Claude Code. Temukan pesan yang tepat yang Anda lihat, dikelompokkan berdasarkan tahap dari mana /plugin berjalan melalui instalasi dan kebijakan organisasi.
 - [Referensi pemuatan plugin](https://code.claude.com/docs/id/plugins/loading.md): Lacak dari mana Claude Code memuat setiap plugin, file pengaturan mana yang menentukan apakah plugin dimuat, dan mengapa pembaruan tidak mengubah apa pun.
@@ -157,7 +177,7 @@
 
 ### Administrasi
 
-#### Pengaturan dan akses
+#### Penyiapan dan akses
 
 - [Siapkan Claude Code untuk organisasi Anda](https://code.claude.com/docs/id/admin-setup.md): Peta keputusan untuk administrator yang menerapkan Claude Code, mencakup penyedia API, pengaturan terkelola, penegakan kebijakan, pemantauan penggunaan, dan penanganan data.
 - [Pengaturan lanjutan](https://code.claude.com/docs/id/setup.md): Persyaratan sistem, instalasi khusus platform, manajemen versi, dan penghapusan instalasi untuk Claude Code.
@@ -167,7 +187,7 @@
 - [Kontrol akses server MCP untuk organisasi Anda](https://code.claude.com/docs/id/managed-mcp.md): Batasi server MCP mana yang dapat ditambahkan atau dihubungkan pengguna, atau sediakan server untuk setiap pengguna, dengan file konfigurasi yang dikelola, pengaturan yang dikelola, daftar izin, dan daftar penolakan.
 - [Konfigurasi mode otomatis](https://code.claude.com/docs/id/auto-mode-config.md): Beri tahu pengklasifikasi mode otomatis repositori, bucket, dan domain mana yang dipercaya organisasi Anda. Atur konteks lingkungan, ganti aturan blokir dan izin default, dan periksa konfigurasi efektif Anda dengan subperintah CLI mode otomatis.
 
-#### Penyebaran
+#### Deployment
 
 - [Ikhtisar penyebaran enterprise](https://code.claude.com/docs/id/third-party-integrations.md): Pelajari bagaimana Claude Code dapat terintegrasi dengan berbagai layanan pihak ketiga dan infrastruktur untuk memenuhi persyaratan penyebaran enterprise.
 - [Ketersediaan fitur](https://code.claude.com/docs/id/feature-availability.md): Bandingkan fitur Claude Code mana yang tersedia di seluruh paket langganan Anthropic, Anthropic Console, Amazon Bedrock, Claude Platform di AWS, Platform Agent Google Cloud, dan Microsoft Foundry.
@@ -183,14 +203,14 @@
 
 - [Jalankan Claude Code melalui gateway](https://code.claude.com/docs/id/gateways.md): Arahkan Claude Code melalui gateway yang di-host sendiri untuk kredensial terpusat, pelacakan penggunaan, dan kontrol biaya. Mencakup arsitektur, gateway aplikasi Claude Anthropic, dan menggunakan produk gateway lainnya.
 
-##### Claude apps gateway
+##### Gateway aplikasi Claude
 
 - [Claude apps gateway untuk Amazon Bedrock, Claude Platform di AWS, Google Cloud, dan Microsoft Foundry](https://code.claude.com/docs/id/claude-apps-gateway.md): Jalankan Claude Code melalui Amazon Bedrock, Claude Platform di AWS, Google Cloud, atau Microsoft Foundry di balik gateway yang di-host sendiri dengan SSO sign-in, akses model per-grup, dan telemetri OTLP.
 - [Konfigurasi gateway aplikasi Claude](https://code.claude.com/docs/id/claude-apps-gateway-config.md): Referensi untuk setiap opsi gateway.yaml: listener dan TLS, OIDC, session, Postgres store, Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, dan Microsoft Foundry upstreams, model routing, managed policies, dan telemetry.
 - [Batas pengeluaran gateway aplikasi Claude](https://code.claude.com/docs/id/claude-apps-gateway-spend-limits.md): Batasi pengeluaran setiap pengembang melalui gateway aplikasi Claude berdasarkan hari, minggu, atau bulan. Tetapkan batas dengan Admin API dan gateway memberlakukannya secara langsung pada setiap permintaan.
 - [Penyebaran dan operasi gateway aplikasi Claude](https://code.claude.com/docs/id/claude-apps-gateway-deploy.md): Daftarkan gateway dengan IdP Anda, bangun kontainer, sebarkan di Kubernetes atau Cloud Run, dan operasikan: pemeriksaan kesehatan, rotasi rahasia, peningkatan, dan keamanan.
 - [Terapkan gateway aplikasi Claude di AWS](https://code.claude.com/docs/id/claude-apps-gateway-on-aws.md): Contoh praktis menjalankan gateway aplikasi Claude di AWS: ECS Fargate atau EKS, Amazon RDS untuk PostgreSQL, AWS Secrets Manager, dan autentikasi berbasis peran IAM ke Amazon Bedrock.
-- [Terapkan gateway aplikasi Claude di Google Cloud](https://code.claude.com/docs/id/claude-apps-gateway-on-gcp.md): Contoh praktis menjalankan gateway aplikasi Claude di Google Cloud: Cloud Run atau GKE, Cloud SQL untuk PostgreSQL, Secret Manager, dan autentikasi service-account ke Agent Platform Google Cloud.
+- [Deploy gateway aplikasi Claude di Google Cloud](https://code.claude.com/docs/id/claude-apps-gateway-on-gcp.md): Contoh praktis menjalankan gateway aplikasi Claude di Google Cloud: Cloud Run atau GKE, Cloud SQL untuk PostgreSQL, Secret Manager, dan autentikasi service-account ke Agent Platform Google Cloud.
 
 ##### Gateway lainnya
 
@@ -228,14 +248,14 @@
 
 - [Konfigurasi izin](https://code.claude.com/docs/id/permissions.md): Kontrol apa yang dapat diakses Claude Code dan lakukan dengan aturan izin terperinci, mode, dan kebijakan terkelola.
 - [Pilih mode izin](https://code.claude.com/docs/id/permission-modes.md): Kontrol apakah Claude meminta izin sebelum bertindak. Alihkan mode izin dengan Shift+Tab di CLI, indikator mode di VS Code, atau pemilih mode di Desktop.
-- [Konfigurasi alat Bash sandboxed](https://code.claude.com/docs/id/sandboxing.md): Pelajari bagaimana alat Bash sandboxed Claude Code menyediakan isolasi filesystem dan jaringan untuk eksekusi agen yang lebih aman dan mandiri.
+- [Konfigurasikan tool Bash dengan sandbox](https://code.claude.com/docs/id/sandboxing.md): Batasi file dan host jaringan yang dapat dijangkau oleh perintah shell Claude Code dengan sandbox bawaan. Aktifkan, tetapkan batasnya, dan perbaiki hal-hal yang terganggu olehnya.
 - [Pilih lingkungan sandbox](https://code.claude.com/docs/id/sandbox-environments.md): Bandingkan opsi sandbox Claude Code: alat Bash bersandbox bawaan, runtime sandbox, dev container, Docker, dan VM. Pilih isolasi yang tepat untuk model ancaman Anda.
 
 #### Lingkungan
 
 - [Konfigurasi lingkungan cloud](https://code.claude.com/docs/id/cloud-environments.md): Konfigurasi lingkungan cloud untuk sesi Claude Code cloud: tingkat akses jaringan, variabel lingkungan, skrip setup, dan caching lingkungan.
 
-##### Lingkungan yang di-host sendiri
+##### Lingkungan self-hosted
 
 - [Lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments.md): Jalankan sesi cloud Claude Code pada infrastruktur yang Anda kontrol: siapkan lingkungan yang di-host sendiri, deploy runner, dan arahkan sesi ke komputasi Anda sendiri.
 - [Panduan cepat lingkungan yang di-host sendiri](https://code.claude.com/docs/id/self-hosted-environments-quickstart.md): Siapkan lingkungan yang di-host sendiri pertama Anda: instal Claude Code, buat lingkungan, mulai runner, dan arahkan sesi ke sana.
@@ -287,12 +307,12 @@
 - [Migrasi ke Claude Agent SDK](https://code.claude.com/docs/id/agent-sdk/migration-guide.md): Panduan untuk migrasi Claude Code TypeScript dan Python SDKs ke Claude Agent SDK
 - [Troubleshoot the Agent SDK](https://code.claude.com/docs/id/agent-sdk/troubleshooting.md): Perbaiki kesalahan Agent SDK ketika Claude Code CLI gagal dimulai, proses CLI keluar, atau hasil yang berhasil tiba tanpa output terstruktur.
 
-#### Bangun agen
+#### Membangun agent
 
 - [Konfigurasi agen Anda](https://code.claude.com/docs/id/agent-sdk/configuration.md): Konfigurasi sesi Agent SDK: susun objek opsi, atur model, lingkungan, dan batas, serta temukan halaman opsi setiap fitur.
 - [Contoh](https://code.claude.com/docs/id/agent-sdk/examples.md): Temukan proyek Agent SDK yang lengkap dan dapat dijalankan atau resep terpandu di Claude Cookbook yang sesuai dengan apa yang ingin Anda bangun.
 
-#### Konsep Inti
+#### Konsep inti
 
 - [Cara kerja agent loop](https://code.claude.com/docs/id/agent-sdk/agent-loop.md): Pahami lifecycle pesan, eksekusi tool, context window, dan arsitektur yang menggerakkan agent SDK Anda.
 - [Gunakan fitur Claude Code di SDK](https://code.claude.com/docs/id/agent-sdk/claude-code-features.md): Muat instruksi proyek, skills, hooks, dan fitur Claude Code lainnya ke dalam agen SDK Anda.
@@ -306,7 +326,7 @@
 - [Stream responses in real-time](https://code.claude.com/docs/id/agent-sdk/streaming-output.md): Dapatkan respons real-time dari Agent SDK saat teks dan tool calls streaming masuk
 - [Dapatkan output terstruktur dari agen](https://code.claude.com/docs/id/agent-sdk/structured-outputs.md): Kembalikan JSON yang divalidasi dari alur kerja agen menggunakan JSON Schema, Zod, atau Pydantic. Dapatkan data terstruktur yang aman tipe setelah penggunaan alat multi-putaran.
 
-#### Perluas dengan tools
+#### Perluas dengan tool
 
 - [Berikan Claude alat kustom](https://code.claude.com/docs/id/agent-sdk/custom-tools.md): Tentukan alat kustom dengan server MCP dalam proses SDK Agent sehingga Claude dapat memanggil fungsi Anda, mengakses API Anda, dan melakukan operasi khusus domain.
 - [Hubungkan ke alat eksternal dengan MCP](https://code.claude.com/docs/id/agent-sdk/mcp.md): Konfigurasi server MCP untuk memperluas agen Anda dengan alat eksternal. Mencakup jenis transport, pencarian alat untuk set alat besar, autentikasi, dan penanganan kesalahan.
@@ -328,7 +348,7 @@
 - [Observability dengan OpenTelemetry](https://code.claude.com/docs/id/agent-sdk/observability.md): Ekspor traces, metrics, dan events dari Agent SDK ke backend observability Anda menggunakan OpenTelemetry.
 - [Lacak todos](https://code.claude.com/docs/id/agent-sdk/todo-tracking.md): Lacak todos dalam sesi Agent SDK dan tampilkan kemajuan Claude dalam aplikasi Anda dari panggilan alat terstruktur
 
-#### Penerapan
+#### Deployment
 
 - [Hosting the Agent SDK](https://code.claude.com/docs/id/agent-sdk/hosting.md): Terapkan Agent SDK dalam produksi: arsitektur subprocess, persistensi sesi, penskalaan, observabilitas, dan isolasi multi-tenant untuk Docker, Kubernetes, dan penyedia sandbox.
 - [Mengamankan penyebaran agen AI](https://code.claude.com/docs/id/agent-sdk/secure-deployment.md): Panduan untuk mengamankan penyebaran Claude Code dan Agent SDK dengan isolasi, manajemen kredensial, dan kontrol jaringan
@@ -339,9 +359,9 @@
 - [TypeScript SDK V2 session API (dihapus)](https://code.claude.com/docs/id/agent-sdk/typescript-v2-preview.md): Referensi untuk API sesi SDK Agent TypeScript V2 yang dihapus, dengan pola send/stream berbasis sesi untuk percakapan multi-turn.
 - [Referensi Agent SDK - Python](https://code.claude.com/docs/id/agent-sdk/python.md): Referensi API lengkap untuk Python Agent SDK, termasuk semua fungsi, tipe, dan kelas.
 
-### Apa yang Baru
+### Yang Baru
 
-#### Apa yang Baru
+#### Yang Baru
 
 - [Apa yang baru](https://code.claude.com/docs/id/whats-new/index.md): Ringkasan mingguan fitur Claude Code yang penting, dengan cuplikan kode, demo, dan konteks tentang mengapa hal-hal ini penting.
 - [Minggu 37 · 7–11 September 2026](https://code.claude.com/docs/id/whats-new/2026-w37.md): Uji plugin Anda dengan claude plugin eval dan keluarkan panel Claude Code Desktop ke jendela terpisah mereka sendiri.

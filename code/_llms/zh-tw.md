@@ -4,7 +4,7 @@
 
 ## Traditional Chinese
 
-### 開始使用
+### 快速入門
 
 #### 開始使用
 
@@ -41,14 +41,14 @@
 - [Slack 中的 Claude Code](https://code.claude.com/docs/zh-TW/slack.md): 直接從您的 Slack 工作區委派編碼任務。Anthropic 正在為 Team 和 Enterprise 工作區停用此較早版本，改用 Claude Tag；它仍然是 Pro 和 Max 方案上的設定路徑。
 - [Claude Tag](https://code.claude.com/docs/zh-TW/claude-tag.md): 透過 Claude Tag 將 Claude 帶入您的團隊 Slack 頻道，並在 claude.com 上找到其設定和使用文件。
 
-##### 雲端 Claude Code
+##### 雲端上的 Claude Code
 
 - [在雲端開始使用 Claude Code](https://code.claude.com/docs/zh-TW/web-quickstart.md): 在雲端從瀏覽器或手機執行 Claude Code。連接 GitHub 儲存庫、提交任務，並在無需本地設定的情況下檢查 PR。
 - [在雲端使用 Claude Code](https://code.claude.com/docs/zh-TW/claude-code-on-the-web.md): 從您的瀏覽器、手機、桌面應用程式或終端在雲端執行 Claude Code 工作階段，使用 `--cloud` 和 `--teleport` 移動工作階段，以及自動修復拉取請求。
 - [使用例行程序自動化工作](https://code.claude.com/docs/zh-TW/routines.md): 讓 Claude Code 自動運行。定義在排程上運行、在 API 呼叫時觸發或對來自雲端基礎設施的 GitHub 事件做出反應的例行程序。
 - [使用 Ultrareview 尋找錯誤](https://code.claude.com/docs/zh-TW/ultrareview.md): 使用 /code-review ultra 在雲端執行深度多代理程式碼審查，在合併前尋找並驗證錯誤。
 
-##### Claude Code 桌面版
+##### 桌面版 Claude Code
 
 - [開始使用桌面應用程式](https://code.claude.com/docs/zh-TW/desktop-quickstart.md): 安裝 Claude 桌面應用程式、開啟 Code 標籤，並在您電腦上的專案資料夾開始您的第一個 Claude Code 會話。
 - [Desktop 應用程式](https://code.claude.com/docs/zh-TW/desktop.md): 充分利用 Claude Code Desktop：具有 Git 隔離的並行會話、拖放窗格佈局、整合終端機和檔案編輯器、側邊聊天、電腦使用、從您的手機 Dispatch 會話、視覺化差異檢查、應用程式預覽、PR 監控、連接器和企業配置。
@@ -67,9 +67,9 @@
 - [Claude Code 與 GitHub Enterprise Server](https://code.claude.com/docs/zh-TW/github-enterprise-server.md): 將 Claude Code 連接到您自託管的 GitHub Enterprise Server 實例，以進行雲端會話、代碼審查和插件市場。
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/zh-TW/gitlab-ci-cd.md): 了解如何將 Claude Code 整合到您的開發工作流程中，使用 GitLab CI/CD
 
-### 使用 Claude Code 建構
+### 使用 Claude Code 打造
 
-#### 代理程式與平行工作
+#### Agents 與平行工作
 
 - [平行執行代理](https://code.claude.com/docs/zh-TW/agents.md): 比較 Claude Code 同時執行多項任務的方式：子代理、代理檢視、代理團隊、動態工作流程和專案。
 - [建立自訂 subagents](https://code.claude.com/docs/zh-TW/sub-agents.md): 在 Claude Code 中建立和使用專門的 AI subagents，用於特定任務的工作流程和改進的上下文管理。
@@ -84,11 +84,11 @@
 - [連接到 MCP 伺服器](https://code.claude.com/docs/zh-TW/mcp-quickstart.md): 將 MCP 伺服器新增至 Claude Code、驗證連接，並在磁碟上找到設定。
 - [透過 MCP 將 Claude Code 連接到工具](https://code.claude.com/docs/zh-TW/mcp.md): 了解如何使用 Model Context Protocol 將 Claude Code 連接到您的工具。
 
-#### 技能
+#### Skills
 
 - [使用 skills 擴展 Claude](https://code.claude.com/docs/zh-TW/skills.md): 在 Claude Code 中建立、管理和分享 skills 以擴展 Claude 的功能。包括自訂命令和捆綁的 skills。
 
-#### 成品
+#### Artifacts
 
 - [將工作階段輸出分享為成品](https://code.claude.com/docs/zh-TW/artifacts.md): 成品將 Claude Code 的工作轉化為 claude.ai 上的即時互動頁面，您可以保持私密、與您的組織分享，或發佈到公開連結。
 
@@ -112,20 +112,20 @@
 - [偵錯您的設定](https://code.claude.com/docs/zh-TW/debug-your-config.md): 診斷為什麼 CLAUDE.md、settings、hooks、MCP servers 或 skills 沒有生效。使用 /context、/doctor、/hooks 和 /mcp 查看實際載入的內容。
 - [錯誤參考](https://code.claude.com/docs/zh-TW/errors.md): 查詢 Claude Code 執行時錯誤訊息，了解每個錯誤的含義及修復方法。
 
-### 外掛程式
+### 外掛
 
-#### 外掛程式
+#### 外掛
 
 - [Plugins 概述](https://code.claude.com/docs/zh-TW/plugins/overview.md): 了解什麼是 Claude Code plugin，何時需要使用 plugin 而不是獨立的 skill 或 MCP 伺服器，以及應該閱讀哪個頁面來安裝或建立 plugin。
 
-#### 使用外掛程式
+#### 使用外掛
 
 - [安裝和管理外掛程式](https://code.claude.com/docs/zh-TW/plugins/install.md): 從任何使用介面上的市集安裝 Claude Code 外掛程式，選擇安裝範圍，並在稍後更新或移除它們。
 - [Anthropic 的 marketplace](https://code.claude.com/docs/zh-TW/plugins/anthropic-marketplaces.md): Anthropic 官方、社群和示範 plugin marketplace for Claude Code：它們的名稱、儲存庫、如何新增每個，以及在哪裡瀏覽它們的 plugin。
 - [Code intelligence plugins](https://code.claude.com/docs/zh-TW/plugins/code-intelligence.md): 安裝語言伺服器外掛程式，讓 Claude 在編輯後看到型別錯誤並按符號導覽程式碼，並回應 LSP 外掛程式建議對話框。
 - [Plugin 安全性和信任](https://code.claude.com/docs/zh-TW/plugins/security.md): 在安裝 plugin 之前決定是否信任它，從 plugin 在您的機器上可以執行的操作，到如何檢查它和移除它。
 
-#### 建立外掛程式
+#### 建立外掛
 
 - [建立 Claude Code 外掛程式](https://code.claude.com/docs/zh-TW/plugins/create.md): 從空目錄建立您的第一個 Claude Code 外掛程式，在沒有市集的情況下測試它，並轉換現有的 .claude/ 設定。
 - [新增元件至外掛程式](https://code.claude.com/docs/zh-TW/plugins/components.md): 新增技能、hooks、MCP 伺服器及其他所有元件類型至 Claude Code 外掛程式，並提供每種元件的驗證範例。
@@ -135,22 +135,41 @@
 - [測量外掛程式成本和使用情況](https://code.claude.com/docs/zh-TW/plugins/measure.md): 測量 Claude Code 外掛程式的權杖成本，了解人們是否仍在使用它，並為組織範圍的外掛程式問題選擇遙測事件。
 - [從您的 CLI 推薦您的外掛程式](https://code.claude.com/docs/zh-TW/plugins/cli-hints.md): 透過從您的 CLI 或 SDK 發出 claude-code-hint 標籤，提示 Claude Code 使用者安裝您的官方市場外掛程式。
 
-#### 執行 marketplace
+#### mod
+
+- [Mods 概述](https://code.claude.com/docs/zh-TW/plugins/mods/overview.md): 使用 mod 為 Claude Code 新增窗格、命令和工具呼叫規則。了解 mod 的功能、如何建立或安裝 mod，以及 mod 的執行位置。
+- [建立 mod](https://code.claude.com/docs/zh-TW/plugins/mods/create.md): 讓 Claude 從描述中寫出 Claude Code mod，或自己寫一個來計算工具呼叫並新增命令。學習重新載入和驗證迴圈。
+- [Mods 參考資料](https://code.claude.com/docs/zh-TW/plugins/mods/reference.md): Claude Code mod 的完整參考資料：hook 模組配置、事件、mods API 方法、轉譯位置、各使用介面的元素、限制與設定。
+
+##### 建置
+
+- [使用 mod 在介面中繪製](https://code.claude.com/docs/zh-TW/plugins/mods/interface.md): 從 Claude Code mod 繪製窗格、提示上方的帶狀區域、按鈕和文字欄位，處理按下和輸入，並在重新繪製和工作階段之間保持狀態。
+- [Mod 介面圖庫](https://code.claude.com/docs/zh-TW/plugins/mods/gallery.md): 查看 Claude Code mod 可以繪製的介面元素，例如文字、按鈕、欄位、Markdown、程式碼和差異，並附有範例程式碼和終端機螢幕截圖。
+- [使用 mod 回應事件](https://code.claude.com/docs/zh-TW/plugins/mods/events.md): 從 mod 處理 Claude Code 事件：觀察、重寫或回答工具呼叫、提示和回合，篩選 hook 處理哪些事件，並為其他 mod 進行規劃。
+- [使用 mods API](https://code.claude.com/docs/zh-TW/plugins/mods/api.md): 從 Claude Code mod 呼叫 mods API 以新增命令和工具、呼叫模型、在計時器上執行工作、向其他工作階段傳送訊息，以及存取檔案和網路。
+
+##### 測試與疑難排解
+
+- [測試 mod](https://code.claude.com/docs/zh-TW/plugins/mods/test.md): 為 Claude Code mod 編寫自動化測試，該測試會觸發事件、存根 Claude Code 的答案並按下按鈕，無需工作階段、登入或網路。
+- [排除 mod 的故障](https://code.claude.com/docs/zh-TW/plugins/mods/troubleshoot.md): 找出 Claude Code mod 為什麼沒有作用：將症狀或訊息與其原因相符，查詢拒絕訊息，並閱讀偵錯日誌。
+
+#### 營運市集
 
 - [建立 marketplace](https://code.claude.com/docs/zh-TW/plugins/create-marketplace.md): 從 marketplace.json 檔案建立 plugin marketplace，並在託管前在本機測試。
 - [託管和維護市集](https://code.claude.com/docs/zh-TW/plugins/host-marketplace.md): 發佈一個外掛程式市集，讓使用者可以透過 /plugin marketplace add 新增它、安裝其外掛程式，並在您推送變更後持續接收更新。
 - [為您的組織推薦 plugins](https://code.claude.com/docs/zh-TW/plugins/relevance.md): 在 marketplace plugin 項目中新增相關性區塊，以便當使用者的工作符合時 Claude Code 會建議安裝，並在受管設定中將 marketplace 加入允許清單。
 
-#### 管理您組織的外掛程式
+#### 管理組織的外掛
 
 - [為您的組織管理 Claude Code 外掛程式](https://code.claude.com/docs/zh-TW/plugins/org.md): 透過受管設定控制 Claude Code 在組織中每台機器上安裝和允許的外掛程式。
+- [為您的組織管理 mods](https://code.claude.com/docs/zh-TW/plugins/mods/admin.md): 使用受管設定控制 Claude Code mods：停止使用者安裝的 mods、僅允許您自己的 mods、檢查 mod 可以執行的操作，以及使用您自己的 mod 強制執行政策。
 
 #### 疑難排解
 
 - [排除外掛程式故障](https://code.claude.com/docs/zh-TW/plugins/troubleshooting.md): 修復 Claude Code 中的外掛程式錯誤。找到您看到的確切訊息，按照 /plugin 執行、安裝和組織政策的階段分組。
 - [Plugin 載入參考](https://code.claude.com/docs/zh-TW/plugins/loading.md): 追蹤 Claude Code 從何處載入每個 plugin，哪個設定檔決定是否載入，以及為什麼更新沒有改變任何內容。
 
-#### 參考資料
+#### 參考
 
 - [Plugin manifest 參考](https://code.claude.com/docs/zh-TW/plugins/manifest-reference.md): plugin.json 的完整參考：每個欄位的類型和預設值、接受的路徑形式，以及 userConfig 和環境變數架構。
 - [Marketplace 參考](https://code.claude.com/docs/zh-TW/plugins/marketplace-reference.md): marketplace.json 欄位、外掛程式項目和外掛程式與 marketplace 來源物件的完整參考，包括每個欄位的有效位置。
@@ -200,13 +219,13 @@
 - [為您的組織推出 LLM 閘道](https://code.claude.com/docs/zh-TW/llm-gateway-rollout.md): 為 Claude Code 部署閘道產品：配置它以轉發 Claude Code 發送的內容、發放開發者認證、透過受管設定分發配置，並驗證推出。
 - [Claude Code 閘道相容性指南](https://code.claude.com/docs/zh-TW/llm-gateway-protocol.md): 保持 LLM 閘道與 Claude Code 相容：它呼叫的端點、必須轉發的標頭和本體欄位，以及移除它們時會中斷的功能。
 
-#### 使用量和成本
+#### 使用量與費用
 
 - [監控](https://code.claude.com/docs/zh-TW/monitoring-usage.md): 了解如何為 Claude Code 啟用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-TW/costs.md): 追蹤 token 使用情況、設定團隊支出限制，並透過上下文管理、模型選擇、延伸思考設定和預處理 hooks 來降低 Claude Code 成本。
 - [使用分析追蹤團隊使用情況](https://code.claude.com/docs/zh-TW/analytics.md): 在分析儀表板中檢視 Claude Code 使用指標、追蹤採用情況，並衡量 Claude Code 對工程速度的影響。
 
-#### 安全性和資料
+#### 安全性與資料
 
 - [安全性](https://code.claude.com/docs/zh-TW/security.md): 了解 Claude Code 的安全防護措施和安全使用的最佳實踐。
 - [資料使用](https://code.claude.com/docs/zh-TW/data-usage.md): 了解 Anthropic 對 Claude 資料使用政策
@@ -225,11 +244,11 @@
 - [所有設定](https://code.claude.com/docs/zh-TW/settings-reference.md): Claude Code settings.json 的完整參考：每個鍵的位置、類型和預設值，以及隨時可貼上的範例，包含每個鍵的索引。
 - [設定檔範例](https://code.claude.com/docs/zh-TW/settings-example.md): 開發者、團隊和組織的實際 settings.json 檔案：複製其中一個，保留您想要的鍵，並變更數值。
 
-#### 權限與 sandboxing
+#### 權限與沙箱機制
 
 - [設定權限](https://code.claude.com/docs/zh-TW/permissions.md): 使用細粒度權限規則、模式和受管理原則來控制 Claude Code 可以存取和執行的操作。
 - [選擇權限模式](https://code.claude.com/docs/zh-TW/permission-modes.md): 控制 Claude 在採取動作前是否詢問。在 CLI 中使用 Shift+Tab、在 VS Code 中使用模式指示器，或在 Desktop 中使用模式選擇器來切換權限模式。
-- [設定沙箱化 Bash 工具](https://code.claude.com/docs/zh-TW/sandboxing.md): 了解 Claude Code 的沙箱化 Bash 工具如何提供檔案系統和網路隔離，以實現更安全、更自主的代理執行。
+- [設定沙箱化的 Bash 工具](https://code.claude.com/docs/zh-TW/sandboxing.md): 使用內建沙箱限制 Claude Code 的 shell 命令可存取的檔案與網路主機。啟用沙箱、設定邊界，並修正它所造成的問題。
 - [選擇沙箱環境](https://code.claude.com/docs/zh-TW/sandbox-environments.md): 比較 Claude Code 沙箱選項：內建的沙箱化 Bash 工具、sandbox runtime、dev containers、Docker 和虛擬機。為您的威脅模型選擇適當的隔離。
 
 #### 環境
@@ -241,14 +260,14 @@
 - [自託管環境](https://code.claude.com/docs/zh-TW/self-hosted-environments.md): 在您控制的基礎設施上執行 Claude Code 雲端工作階段：設定自託管環境、部署執行器，並將工作階段路由到您自己的運算資源。
 - [自託管環境快速入門](https://code.claude.com/docs/zh-TW/self-hosted-environments-quickstart.md): 設定您的第一個自託管環境：安裝 Claude Code、建立環境、啟動執行器，並將工作階段路由到該環境。
 - [將自託管環境部署到生產環境](https://code.claude.com/docs/zh-TW/self-hosted-environments-deploy.md): 在生產環境中執行自託管執行器：安全強化、網路出站流量控制、Git 認證、Kubernetes 和 Compose 配方，以及故障排除。
-- [在自託管環境中自訂會話](https://code.claude.com/docs/zh-TW/self-hosted-environments-configuration.md): 使用包裝指令碼在自託管環境會話中自訂每個會話的認證、生命週期掛鉤和按需執行器生成。
+- [在自託管環境中自訂工作階段](https://code.claude.com/docs/zh-TW/self-hosted-environments-configuration.md): 使用包裝指令碼在自託管環境工作階段中自訂每個工作階段的憑證、生命週期 hook 和按需執行器生成。
 - [端對端測試自託管環境](https://code.claude.com/docs/zh-TW/self-hosted-environments-testing.md): 從 CI 驗證自託管執行器映像：使用 CLI 分派工作階段、透過 Stop hook 讀取 Claude 的回覆，並編寫完整迴圈的指令碼。
 - [自託管環境參考](https://code.claude.com/docs/zh-TW/self-hosted-environments-reference.md): 自託管執行器和協調器的完整參考：CLI 旗標、環境變數和 Prometheus 指標。
 - [在自託管環境中驗證工作階段身分](https://code.claude.com/docs/zh-TW/self-hosted-environments-identity.md): 驗證 CLAUDE_CODE_SESSION_ACCESS_TOKEN JWT，以便您網路上的服務可以信任來自自託管環境中工作階段的請求。
 
 #### 模型與回應
 
-- [模型配置](https://code.claude.com/docs/zh-TW/model-config.md): 了解 Claude Code 模型配置，包括模型別名如 `opusplan`
+- [模型設定](https://code.claude.com/docs/zh-TW/model-config.md): 設定 Claude Code 使用的模型、effort 等級、延伸上下文以及自動壓縮視窗
 - [使用快速模式加快回應速度](https://code.claude.com/docs/zh-TW/fast-mode.md): 在 Claude Code 中切換快速模式，以獲得更快的 Opus 回應。
 - [使用顧問工具升級困難決策](https://code.claude.com/docs/zh-TW/advisor.md): 將您的主要模型與更強大的顧問模型配對，Claude 在任務期間的關鍵時刻會諮詢該模型。
 - [輸出樣式](https://code.claude.com/docs/zh-TW/output-styles.md): 使用內建輸出樣式（例如簡潔或詳細說明）改變 Claude Code 的角色、語氣和回應格式，或撰寫自訂樣式。
@@ -264,7 +283,7 @@
 
 ### 參考資料
 
-#### 參考資料
+#### 參考
 
 - [CLI 參考](https://code.claude.com/docs/zh-TW/cli-reference.md): Claude Code 命令列介面的完整參考，包括命令和旗標。
 - [Commands](https://code.claude.com/docs/zh-TW/commands.md): Claude Code 中可用命令的完整參考，包括內建命令和捆綁的 skills。
@@ -288,7 +307,7 @@
 - [遷移至 Claude Agent SDK](https://code.claude.com/docs/zh-TW/agent-sdk/migration-guide.md): 將 Claude Code TypeScript 和 Python SDK 遷移至 Claude Agent SDK 的指南
 - [排除 Agent SDK 的故障](https://code.claude.com/docs/zh-TW/agent-sdk/troubleshooting.md): 當 Claude Code CLI 無法啟動、CLI 程序退出或成功結果到達但沒有結構化輸出時，修復 Agent SDK 錯誤。
 
-#### 建立代理
+#### 建立 agent
 
 - [設定您的代理](https://code.claude.com/docs/zh-TW/agent-sdk/configuration.md): 設定 Agent SDK 工作階段：組合選項物件、設定模型、環境和限制，並找到每個功能選項的頁面。
 - [範例](https://code.claude.com/docs/zh-TW/agent-sdk/examples.md): 尋找完整、可執行的 Agent SDK 專案或 Claude Cookbook 中的引導式配方，以符合您想要建置的內容。
@@ -300,14 +319,14 @@
 - [使用 sessions](https://code.claude.com/docs/zh-TW/agent-sdk/sessions.md): Sessions 如何保持代理對話歷史，以及何時使用 continue、resume 和 fork 返回到先前的運行。
 - [將工作階段持久化到外部儲存](https://code.claude.com/docs/zh-TW/agent-sdk/session-storage.md): 將 Agent SDK 工作階段文字記錄鏡像到您自己的物件儲存、鍵值儲存或資料庫，以便其他主機可以繼續您的工作階段。
 
-#### 輸入和輸出
+#### 輸入與輸出
 
 - [串流輸入](https://code.claude.com/docs/zh-TW/agent-sdk/streaming-vs-single-mode.md): 了解 Claude Agent SDK 的兩種輸入模式及何時使用各種模式
 - [處理批准和使用者輸入](https://code.claude.com/docs/zh-TW/agent-sdk/user-input.md): 將 Claude 的批准請求和澄清問題呈現給使用者，然後將他們的決定返回給 SDK。
 - [即時串流回應](https://code.claude.com/docs/zh-TW/agent-sdk/streaming-output.md): 當文字和工具呼叫串流進來時，從 Agent SDK 取得即時回應
 - [從代理獲取結構化輸出](https://code.claude.com/docs/zh-TW/agent-sdk/structured-outputs.md): 使用 JSON Schema、Zod 或 Pydantic 從代理工作流程返回驗證的 JSON。在多輪工具使用後獲得類型安全的結構化資料。
 
-#### 使用工具擴充
+#### 使用工具擴充功能
 
 - [為 Claude 提供自訂工具](https://code.claude.com/docs/zh-TW/agent-sdk/custom-tools.md): 使用 Claude Agent SDK 的同程序 MCP 伺服器定義自訂工具，讓 Claude 可以呼叫您的函數、存取您的 API，並執行特定領域的操作。
 - [使用 MCP 連接外部工具](https://code.claude.com/docs/zh-TW/agent-sdk/mcp.md): 配置 MCP 伺服器以擴展您的代理程式的外部工具。涵蓋傳輸類型、大型工具集的工具搜尋、身份驗證和錯誤處理。

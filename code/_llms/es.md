@@ -12,7 +12,7 @@
 - [Inicio rápido](https://code.claude.com/docs/es/quickstart.md): ¡Bienvenido a Claude Code!
 - [Registro de cambios](https://code.claude.com/docs/es/changelog.md)
 
-#### Conceptos fundamentales
+#### Conceptos básicos
 
 - [Cómo funciona Claude Code](https://code.claude.com/docs/es/how-claude-code-works.md): Comprenda el bucle agentico, las herramientas integradas y cómo Claude Code interactúa con su proyecto.
 - [Extender Claude Code](https://code.claude.com/docs/es/features-overview.md): Comprenda cuándo usar CLAUDE.md, Skills, subagents, hooks, MCP y plugins.
@@ -57,7 +57,7 @@
 - [Programar tareas recurrentes en Claude Code Desktop](https://code.claude.com/docs/es/desktop-scheduled-tasks.md): Configure tareas programadas en Claude Code Desktop para ejecutar Claude automáticamente de forma recurrente para revisiones de código diarias, auditorías de dependencias o resúmenes matutinos.
 - [Prueba aplicaciones iOS en el simulador](https://code.claude.com/docs/es/desktop-ios-simulator.md): Claude Code Desktop abre tu aplicación en el panel del Simulador de iOS cuando Claude la compila, ejecuta o verifica, con un simulador separado para cada sesión.
 
-##### Revisión de código e CI/CD
+##### Revisión de código y CI/CD
 
 - [Detectar problemas de seguridad mientras Claude escribe código](https://code.claude.com/docs/es/security-guidance.md): Instale el plugin security-guidance para que Claude revise sus propios cambios de código en busca de vulnerabilidades y las corrija en la misma sesión.
 - [Escanee su base de código en busca de vulnerabilidades](https://code.claude.com/docs/es/claude-security.md): Instale el plugin de seguridad de Claude para escanear su base de código en busca de vulnerabilidades en una sesión de Claude Code y convierta los hallazgos en parches que usted revisa y aplica.
@@ -67,7 +67,7 @@
 - [Claude Code con GitHub Enterprise Server](https://code.claude.com/docs/es/github-enterprise-server.md): Conecte Claude Code a su instancia de GitHub Enterprise Server autohospedada para sesiones en la nube, revisión de código y mercados de plugins.
 - [Claude Code GitLab CI/CD](https://code.claude.com/docs/es/gitlab-ci-cd.md): Aprenda a integrar Claude Code en su flujo de trabajo de desarrollo con GitLab CI/CD
 
-### Crear con Claude Code
+### Crea con Claude Code
 
 #### Agentes y trabajo en paralelo
 
@@ -110,7 +110,7 @@
 - [Solucionar problemas de instalación e inicio de sesión](https://code.claude.com/docs/es/troubleshoot-install.md): Corrija errores de comando no encontrado, PATH, permisos, red y autenticación al instalar o iniciar sesión en Claude Code.
 - [Solución de problemas](https://code.claude.com/docs/es/troubleshooting.md): Corrige el alto uso de CPU o memoria, cuelgues, thrashing de auto-compact, y problemas de búsqueda en Claude Code, y encuentra la página correcta para otros problemas.
 - [Depura tu configuración](https://code.claude.com/docs/es/debug-your-config.md): Diagnostica por qué CLAUDE.md, configuración, hooks, servidores MCP o skills no están surtiendo efecto. Usa /context, /doctor, /hooks y /mcp para ver qué se cargó realmente.
-- [Referencia de errores](https://code.claude.com/docs/es/errors.md): Busque mensajes de error en tiempo de ejecución de Claude Code con lo que cada uno significa y cómo solucionarlo.
+- [Referencia de errores](https://code.claude.com/docs/es/errors.md): Busca mensajes de error en tiempo de ejecución de Claude Code con lo que cada uno significa y cómo solucionarlo.
 
 ### Plugins
 
@@ -118,9 +118,10 @@
 
 - [Descripción general de plugins](https://code.claude.com/docs/es/plugins/overview.md): Comprenda qué es un plugin de Claude Code, cuándo necesita uno en lugar de una skill independiente o un servidor MCP, y qué página leer para instalar o crear uno.
 
-#### Usar plugins
+#### Usa plugins
 
 - [Instalar y administrar plugins](https://code.claude.com/docs/es/plugins/install.md): Instale plugins de Claude Code desde un marketplace en cualquier superficie que utilice, elija un alcance de instalación y actualícelos o elimínelos más tarde.
+- [Los marketplaces de Anthropic](https://code.claude.com/docs/es/plugins/anthropic-marketplaces.md): Los marketplaces de plugins oficiales, comunitarios y de demostración de Anthropic para Claude Code: sus nombres, repositorios, cómo agregar cada uno y dónde explorar sus plugins.
 - [Plugins de inteligencia de código](https://code.claude.com/docs/es/plugins/code-intelligence.md): Instale un plugin de servidor de lenguaje para que Claude vea errores de tipo después de ediciones y navegue el código por símbolo, y responda al diálogo de recomendación del plugin LSP.
 - [Seguridad y confianza de plugins](https://code.claude.com/docs/es/plugins/security.md): Decide si confiar en un plugin antes de instalarlo, desde lo que un plugin puede hacer en tu máquina hasta cómo revisar uno y eliminarlo.
 
@@ -134,15 +135,34 @@
 - [Medir el costo y el uso del plugin](https://code.claude.com/docs/es/plugins/measure.md): Mida el costo de tokens de un plugin de Claude Code, descubra si la gente aún lo usa y seleccione los eventos de telemetría para preguntas de plugins en toda la organización.
 - [Recomienda tu plugin desde tu CLI](https://code.claude.com/docs/es/plugins/cli-hints.md): Solicita a los usuarios de Claude Code que instalen tu plugin del marketplace oficial emitiendo una etiqueta claude-code-hint desde tu CLI o SDK.
 
-#### Ejecutar un marketplace
+#### Mods
+
+- [Descripción general de mods](https://code.claude.com/docs/es/plugins/mods/overview.md): Agregue paneles, comandos y reglas de llamadas de herramientas a Claude Code con un mod. Vea qué puede hacer un mod, cómo crear o instalar uno, y dónde se ejecutan los mods.
+- [Crear un mod](https://code.claude.com/docs/es/plugins/mods/create.md): Haga que Claude escriba un mod de Claude Code a partir de una descripción, o escriba uno usted mismo que cuente llamadas de herramientas y agregue un comando. Aprenda el ciclo de recarga y validación.
+- [Referencia de mods](https://code.claude.com/docs/es/plugins/mods/reference.md): Referencia completa de los mods de Claude Code: estructura del módulo de hooks, eventos, métodos de la API de mods, puntos de renderizado, elementos por superficie, límites y configuración.
+
+##### Crear
+
+- [Dibujar en la interfaz con un mod](https://code.claude.com/docs/es/plugins/mods/interface.md): Dibuja paneles, una banda sobre el prompt, botones y campos de texto desde un mod de Claude Code, maneja pulsaciones y entradas, y mantén el estado entre redibujos y sesiones.
+- [Galería de interfaz para mods](https://code.claude.com/docs/es/plugins/mods/gallery.md): Consulta los elementos de interfaz que puede dibujar un mod de Claude Code, como texto, botones, campos, Markdown, código y diffs, con código de ejemplo y capturas de pantalla de la terminal.
+- [Reaccionar a eventos con un mod](https://code.claude.com/docs/es/plugins/mods/events.md): Maneja eventos de Claude Code desde un mod: observa, reescribe o responde llamadas de herramientas, indicaciones y turnos, filtra qué eventos maneja un hook y planifica para otros mods.
+- [Usar la API de mods](https://code.claude.com/docs/es/plugins/mods/api.md): Llamar a la API de mods desde un mod de Claude Code para agregar comandos y herramientas, llamar a un modelo, ejecutar trabajo en un temporizador, enviar mensajes a otras sesiones y acceder a archivos y la red.
+
+##### Prueba y solución de problemas
+
+- [Prueba un mod](https://code.claude.com/docs/es/plugins/mods/test.md): Escribe pruebas automatizadas para un mod de Claude Code que generen eventos, simulen las respuestas de Claude Code y presionen botones, sin sesión, inicio de sesión ni red.
+- [Solucionar problemas de un mod](https://code.claude.com/docs/es/plugins/mods/troubleshoot.md): Descubre por qué un mod de Claude Code no hace nada: haz coincidir el síntoma o mensaje con su causa, busca mensajes de rechazo y lee el registro de depuración.
+
+#### Administra un marketplace
 
 - [Crear un marketplace](https://code.claude.com/docs/es/plugins/create-marketplace.md): Cree un marketplace de plugins a partir de un archivo marketplace.json y pruébelo localmente antes de alojarlo.
 - [Alojar y mantener un marketplace](https://code.claude.com/docs/es/plugins/host-marketplace.md): Publique un marketplace de plugins donde los usuarios puedan acceder a él, otorgue acceso a uno privado y lance actualizaciones y cambios de nombre sin romper las instalaciones.
 - [Recomendar plugins para su organización](https://code.claude.com/docs/es/plugins/relevance.md): Agregue un bloque de relevancia a las entradas de plugins del marketplace para que Claude Code los sugiera cuando el trabajo de un usuario coincida, y permita el marketplace en la configuración administrada.
 
-#### Administrar plugins para su organización
+#### Administra los plugins de tu organización
 
 - [Administrar plugins de Claude Code para su organización](https://code.claude.com/docs/es/plugins/org.md): Controle qué plugins instala Claude Code y permite en todas las máquinas de su organización mediante configuración administrada.
+- [Administrar mods para su organización](https://code.claude.com/docs/es/plugins/mods/admin.md): Controle los mods de Claude Code con configuración administrada: detenga los mods instalados por usuarios, permita solo los suyos, revise qué puede hacer un mod e implemente políticas con su propio mod.
 
 #### Solución de problemas
 
@@ -167,7 +187,7 @@
 - [Controlar el acceso a servidores MCP para su organización](https://code.claude.com/docs/es/managed-mcp.md): Restrinja qué servidores MCP pueden agregar o conectar los usuarios, o proporcione servidores a todos los usuarios, con archivos de configuración administrados, configuración administrada, listas de permitidos y listas de denegados.
 - [Configurar el modo automático](https://code.claude.com/docs/es/auto-mode-config.md): Indique al clasificador del modo automático qué repositorios, buckets y dominios confía su organización. Establezca el contexto del entorno, anule las reglas de bloqueo y permiso predeterminadas e inspeccione su configuración efectiva con los subcomandos de la CLI del modo automático.
 
-#### Implementación
+#### Despliegue
 
 - [Descripción general de implementación empresarial](https://code.claude.com/docs/es/third-party-integrations.md): Aprenda cómo Claude Code puede integrarse con varios servicios de terceros e infraestructura para cumplir con los requisitos de implementación empresarial.
 - [Disponibilidad de características](https://code.claude.com/docs/es/feature-availability.md): Compare qué características de Claude Code están disponibles en los planes de suscripción de Anthropic, la Consola de Anthropic, Amazon Bedrock, Claude Platform en AWS, Google Cloud's Agent Platform y Microsoft Foundry.
@@ -179,20 +199,20 @@
 - [Ejecutar Claude Code detrás de un lanzador corporativo](https://code.claude.com/docs/es/corporate-launcher.md): Enrute los procesos que Claude Code inicia desde su propio binario, incluido el servicio de fondo y cada sesión de vista de agente, a través de un lanzador requerido con CLAUDE_CODE_PROCESS_WRAPPER o la configuración processWrapper.
 - [Contenedores de desarrollo](https://code.claude.com/docs/es/devcontainer.md): Ejecuta Claude Code dentro de un contenedor de desarrollo para entornos consistentes e aislados en todo tu equipo.
 
-#### Puertas de enlace
+#### Gateways
 
 - [Ejecutar Claude Code a través de una puerta de enlace](https://code.claude.com/docs/es/gateways.md): Enrute Claude Code a través de una puerta de enlace autohospedada para credenciales centralizadas, seguimiento de uso y controles de costos. Cubre la arquitectura, la puerta de enlace de aplicaciones Claude de Anthropic y el uso de otros productos de puerta de enlace.
 
-##### Puerta de enlace de aplicaciones Claude
+##### Gateway de apps de Claude
 
 - [Puerta de enlace de aplicaciones Claude para Amazon Bedrock, Claude Platform en AWS, Google Cloud y Microsoft Foundry](https://code.claude.com/docs/es/claude-apps-gateway.md): Ejecute Claude Code a través de Amazon Bedrock, Claude Platform en AWS, Google Cloud o Microsoft Foundry detrás de una puerta de enlace autohospedada con inicio de sesión SSO, acceso a modelos por grupo y telemetría OTLP.
 - [Configuración de la puerta de enlace de aplicaciones Claude](https://code.claude.com/docs/es/claude-apps-gateway-config.md): Referencia para cada opción de gateway.yaml: listener y TLS, OIDC, sesión, almacén Postgres, upstream de Bedrock, Claude Platform en AWS, Agent Platform de Google Cloud y Microsoft Foundry, enrutamiento de modelos, políticas administradas y telemetría.
 - [Límites de gasto de la puerta de enlace de aplicaciones Claude](https://code.claude.com/docs/es/claude-apps-gateway-spend-limits.md): Limite el gasto de cada desarrollador a través de la puerta de enlace de aplicaciones Claude por día, semana o mes. Establezca límites con una API de administrador y la puerta de enlace los aplica en vivo en cada solicitud.
 - [Implementación y operaciones de la puerta de enlace de aplicaciones Claude](https://code.claude.com/docs/es/claude-apps-gateway-deploy.md): Registre la puerta de enlace con su IdP, construya el contenedor, implemente en Kubernetes o Cloud Run, y opérelo: verificaciones de salud, rotación de secretos, actualizaciones y seguridad.
 - [Implementar Claude apps gateway en AWS](https://code.claude.com/docs/es/claude-apps-gateway-on-aws.md): Un ejemplo práctico de ejecutar Claude apps gateway en AWS: ECS Fargate o EKS, Amazon RDS para PostgreSQL, AWS Secrets Manager, y autenticación basada en roles de IAM a Amazon Bedrock.
-- [Implementar Claude apps gateway en Google Cloud](https://code.claude.com/docs/es/claude-apps-gateway-on-gcp.md): Un ejemplo práctico de ejecutar Claude apps gateway en Google Cloud: Cloud Run o GKE, Cloud SQL para PostgreSQL, Secret Manager y autenticación de cuenta de servicio en Agent Platform de Google Cloud.
+- [Desplegar Claude apps gateway en Google Cloud](https://code.claude.com/docs/es/claude-apps-gateway-on-gcp.md): Un ejemplo práctico de ejecutar Claude apps gateway en Google Cloud: Cloud Run o GKE, Cloud SQL para PostgreSQL, Secret Manager y autenticación de cuenta de servicio en Agent Platform de Google Cloud.
 
-##### Otras puertas de enlace
+##### Otros gateways
 
 - [Otras puertas de enlace LLM](https://code.claude.com/docs/es/llm-gateway.md): Enrute Claude Code a través de una puerta de enlace LLM que su organización ya ejecuta. Cubre la conexión de Claude Code a una puerta de enlace, el despliegue de una para su organización, y qué envía Claude Code a una puerta de enlace.
 - [Conectar Claude Code a una puerta de enlace LLM](https://code.claude.com/docs/es/llm-gateway-connect.md): Apunte Claude Code a la puerta de enlace LLM de su organización. Compruebe si su administrador ya la configuró, o establezca la URL base y las credenciales usted mismo, luego verifique la conexión y corrija los errores de la puerta de enlace.
@@ -226,16 +246,16 @@
 
 #### Permisos y sandboxing
 
-- [Configurar permisos](https://code.claude.com/docs/es/permissions.md): Controle lo que Claude Code puede acceder y hacer con reglas de permisos granulares, modos y políticas administradas.
+- [Configurar permisos](https://code.claude.com/docs/es/permissions.md): Controla a qué puede acceder Claude Code y qué puede hacer con reglas de permisos granulares, modos y políticas administradas.
 - [Elegir un modo de permisos](https://code.claude.com/docs/es/permission-modes.md): Controle si Claude solicita aprobación antes de actuar. Cambie de modo de permisos con Mayús+Tab en la CLI, el indicador de modo en VS Code, o el selector de modo en Desktop.
-- [Configurar la herramienta Bash aislada](https://code.claude.com/docs/es/sandboxing.md): Aprenda cómo la herramienta Bash aislada de Claude Code proporciona aislamiento del sistema de archivos y la red para una ejecución de agentes más segura y autónoma.
+- [Configura la herramienta Bash en el sandbox](https://code.claude.com/docs/es/sandboxing.md): Restringe los archivos y hosts de red a los que pueden acceder los comandos de shell de Claude Code con el sandbox integrado. Actívalo, define el límite y corrige lo que deje de funcionar.
 - [Elegir un entorno sandbox](https://code.claude.com/docs/es/sandbox-environments.md): Compare las opciones de sandbox de Claude Code: la herramienta Bash aislada integrada, el tiempo de ejecución sandbox, contenedores de desarrollo, Docker y máquinas virtuales. Elija el aislamiento adecuado para su modelo de amenaza.
 
 #### Entornos
 
 - [Configurar entornos en la nube](https://code.claude.com/docs/es/cloud-environments.md): Configure entornos en la nube para sesiones en la nube de Claude Code: niveles de acceso a la red, variables de entorno, scripts de configuración y almacenamiento en caché de entornos.
 
-##### Entornos autohospedados
+##### Entornos autoalojados
 
 - [Entornos autohospedados](https://code.claude.com/docs/es/self-hosted-environments.md): Ejecute sesiones en la nube de Claude Code en la infraestructura que controla: configure un entorno autohospedado, implemente ejecutores y enrute sesiones a su propio cómputo.
 - [Guía de inicio rápido de entornos autohospedados](https://code.claude.com/docs/es/self-hosted-environments-quickstart.md): Configure su primer entorno autohospedado: instale Claude Code, cree el entorno, inicie un runner y enrute una sesión hacia él.
@@ -278,9 +298,9 @@
 
 - [Glosario](https://code.claude.com/docs/es/glossary.md): Definiciones de terminología de Claude Code. Aprenda qué significan agentic loop, compaction, CLAUDE.md, hooks, subagents, MCP y otros conceptos centrales.
 
-### SDK de Agente
+### Agent SDK
 
-#### SDK de Agente
+#### Agent SDK
 
 - [Descripción general del Agent SDK](https://code.claude.com/docs/es/agent-sdk/overview.md): Construya agentes de IA en producción con Claude Code como una biblioteca
 - [Inicio rápido](https://code.claude.com/docs/es/agent-sdk/quickstart.md): Comience con el SDK de Agent de Python o TypeScript para crear agentes de IA que funcionen de forma autónoma
@@ -292,7 +312,7 @@
 - [Configura tu agente](https://code.claude.com/docs/es/agent-sdk/configuration.md): Configura sesiones del Agent SDK: compone el objeto de opciones, establece el modelo, el entorno y los límites, y encuentra la página de cada opción de característica.
 - [Ejemplos](https://code.claude.com/docs/es/agent-sdk/examples.md): Encuentra un proyecto completo y ejecutable del Agent SDK o una receta guiada en el Claude Cookbook que coincida con lo que deseas construir.
 
-#### Conceptos fundamentales
+#### Conceptos básicos
 
 - [Cómo funciona el bucle del agente](https://code.claude.com/docs/es/agent-sdk/agent-loop.md): Comprenda el ciclo de vida de los mensajes, la ejecución de herramientas, la ventana de contexto y la arquitectura que potencia sus agentes SDK.
 - [Usar características de Claude Code en el SDK](https://code.claude.com/docs/es/agent-sdk/claude-code-features.md): Cargue instrucciones de proyecto, skills, hooks y otras características de Claude Code en sus agentes SDK.
@@ -306,7 +326,7 @@
 - [Transmitir respuestas en tiempo real](https://code.claude.com/docs/es/agent-sdk/streaming-output.md): Obtener respuestas en tiempo real del Agent SDK mientras el texto y las llamadas de herramientas se transmiten
 - [Obtener salida estructurada de agentes](https://code.claude.com/docs/es/agent-sdk/structured-outputs.md): Devuelve JSON validado desde flujos de trabajo de agentes usando JSON Schema, Zod o Pydantic. Obtén datos estructurados seguros en tipos después del uso de herramientas de múltiples turnos.
 
-#### Extender con herramientas
+#### Amplía con herramientas
 
 - [Dale a Claude herramientas personalizadas](https://code.claude.com/docs/es/agent-sdk/custom-tools.md): Define herramientas personalizadas con el servidor MCP en proceso del SDK del Agente Claude para que Claude pueda llamar a sus funciones, acceder a sus APIs y realizar operaciones específicas del dominio.
 - [Conectar con herramientas externas usando MCP](https://code.claude.com/docs/es/agent-sdk/mcp.md): Configure servidores MCP para extender su agente con herramientas externas. Cubre tipos de transporte, búsqueda de herramientas para conjuntos grandes de herramientas, autenticación y manejo de errores.
@@ -328,12 +348,12 @@
 - [Observabilidad con OpenTelemetry](https://code.claude.com/docs/es/agent-sdk/observability.md): Exporte trazas, métricas y eventos del Agent SDK a su backend de observabilidad usando OpenTelemetry.
 - [Rastrear tareas](https://code.claude.com/docs/es/agent-sdk/todo-tracking.md): Rastrear tareas en sesiones del SDK del Agente y renderizar el progreso de Claude en su aplicación desde llamadas de herramientas estructuradas
 
-#### Implementación
+#### Despliegue
 
 - [Alojamiento del Agent SDK](https://code.claude.com/docs/es/agent-sdk/hosting.md): Implemente el Agent SDK en producción: arquitectura de subprocesos, persistencia de sesiones, escalado, observabilidad e aislamiento multiinquilino para Docker, Kubernetes y proveedores de sandbox.
 - [Despliegue seguro de agentes de IA](https://code.claude.com/docs/es/agent-sdk/secure-deployment.md): Una guía para asegurar despliegues de Claude Code y Agent SDK con aislamiento, gestión de credenciales y controles de red
 
-#### Referencias de SDK
+#### Referencias del SDK
 
 - [Referencia del SDK de Agent - TypeScript](https://code.claude.com/docs/es/agent-sdk/typescript.md): Referencia completa de la API del SDK de Agent de TypeScript, incluyendo todas las funciones, tipos e interfaces.
 - [API de sesión de TypeScript SDK V2 (eliminada)](https://code.claude.com/docs/es/agent-sdk/typescript-v2-preview.md): Referencia para la API de sesión eliminada V2 del SDK del Agente TypeScript, con patrones de envío/transmisión basados en sesiones para conversaciones de múltiples turnos.
