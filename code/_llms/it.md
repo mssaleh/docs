@@ -125,7 +125,7 @@
 - [Code intelligence plugins](https://code.claude.com/docs/it/plugins/code-intelligence.md): Installa un plugin di language server in modo che Claude veda gli errori di tipo dopo le modifiche e navighi il codice per simbolo, e rispondi alla finestra di dialogo di raccomandazione del plugin LSP.
 - [Sicurezza e affidabilità dei plugin](https://code.claude.com/docs/it/plugins/security.md): Decidi se fidarti di un plugin prima di installarlo, da ciò che un plugin può fare sulla tua macchina a come esaminarlo e rimuoverlo.
 
-#### Crea plugin
+#### Creare plugin
 
 - [Creare un plugin Claude Code](https://code.claude.com/docs/it/plugins/create.md): Crea il tuo primo plugin Claude Code da una directory vuota, testalo senza un marketplace e converti una configurazione .claude/ esistente.
 - [Aggiungi componenti a un plugin](https://code.claude.com/docs/it/plugins/components.md): Aggiungi skills, hooks, server MCP e ogni altro tipo di componente a un plugin Claude Code, con un esempio che convalida per ciascuno.
@@ -137,21 +137,21 @@
 
 #### Mod
 
-- [Panoramica dei mod](https://code.claude.com/docs/it/plugins/mods/overview.md): Aggiungi riquadri, comandi e regole di chiamata di strumenti a Claude Code con un mod. Scopri cosa può fare un mod, come crearne o installarne uno e dove vengono eseguiti i mod.
-- [Creare un mod](https://code.claude.com/docs/it/plugins/mods/create.md): Fai scrivere a Claude un mod di Claude Code da una descrizione, oppure scrivi tu stesso uno che conta le chiamate ai tool e aggiunge un comando. Impara il ciclo di ricaricamento e convalida.
+- [Panoramica dei mod](https://code.claude.com/docs/it/plugins/mods/overview.md): Aggiungi pannelli, comandi e regole per le chiamate agli strumenti a Claude Code con un mod. Scopri cosa può fare un mod, come crearne o installarne uno e dove vengono eseguiti i mod.
+- [Creare un mod](https://code.claude.com/docs/it/plugins/mods/create.md): Chiedi a Claude di scrivere un mod di Claude Code a partire da una descrizione, oppure scrivine uno tu che conta le chiamate agli strumenti e aggiunge un comando. Impara il ciclo di ricaricamento e convalida.
 - [Riferimento dei mod](https://code.claude.com/docs/it/plugins/mods/reference.md): Riferimento completo per i mod di Claude Code: struttura del modulo degli hook, eventi, metodi dell'API dei mod, punti di rendering, elementi per superficie, limiti e impostazioni.
 
 ##### Sviluppa
 
-- [Disegnare nell'interfaccia con un mod](https://code.claude.com/docs/it/plugins/mods/interface.md): Disegnare riquadri, una banda sopra il prompt, pulsanti e campi di testo da un mod di Claude Code, gestire pressioni e input, e mantenere lo stato tra i ridisegni e le sessioni.
-- [Galleria dell'interfaccia per le mod](https://code.claude.com/docs/it/plugins/mods/gallery.md): Scopri gli elementi dell'interfaccia che una mod di Claude Code può disegnare, come testo, pulsanti, campi, Markdown, codice e diff, con codice di esempio e screenshot del terminale.
-- [Reagire agli eventi con un mod](https://code.claude.com/docs/it/plugins/mods/events.md): Gestire gli eventi di Claude Code da un mod: osservare, riscrivere o rispondere alle chiamate di strumenti, ai prompt e ai turni, filtrare quali eventi un hook gestisce e pianificare per altri mod.
-- [Usa l'API mods](https://code.claude.com/docs/it/plugins/mods/api.md): Chiama l'API mods da un mod Claude Code per aggiungere comandi e strumenti, chiamare un modello, eseguire lavoro su un timer, inviare messaggi ad altre sessioni e accedere a file e rete.
+- [Disegna nell'interfaccia con un mod](https://code.claude.com/docs/it/plugins/mods/interface.md): Disegna riquadri, una fascia sopra il prompt, pulsanti e campi di testo da un mod di Claude Code, gestisci pressioni e input e mantieni lo stato tra i ridisegni e le sessioni.
+- [Galleria dell'interfaccia per i mod](https://code.claude.com/docs/it/plugins/mods/gallery.md): Scopri gli elementi dell'interfaccia che un mod di Claude Code può disegnare, come testo, pulsanti, campi, Markdown, codice e diff, con codice di esempio e screenshot del terminale.
+- [Reagire agli eventi con un mod](https://code.claude.com/docs/it/plugins/mods/events.md): Gestisci gli eventi di Claude Code da un mod: osserva, riscrivi o rispondi a chiamate agli strumenti, prompt e turni, filtra quali eventi gestisce un hook e pianifica in vista di altri mod.
+- [Usa l'API dei mod](https://code.claude.com/docs/it/plugins/mods/api.md): Chiama l'API dei mod da un mod di Claude Code per aggiungere comandi e strumenti, chiamare un modello, eseguire lavoro a intervalli di tempo, inviare messaggi ad altre sessioni e accedere ai file e alla rete.
 
 ##### Test e risoluzione dei problemi
 
-- [Testare un mod](https://code.claude.com/docs/it/plugins/mods/test.md): Scrivi test automatizzati per un mod Claude Code che generano eventi, simulano le risposte di Claude Code e premono pulsanti, senza sessione, accesso o rete.
-- [Risolvere i problemi di un mod](https://code.claude.com/docs/it/plugins/mods/troubleshoot.md): Scopri perché un mod Claude Code non fa nulla: abbina il sintomo o il messaggio alla sua causa, cerca i messaggi di rifiuto e leggi il debug log.
+- [Testare un mod](https://code.claude.com/docs/it/plugins/mods/test.md): Scrivi test automatizzati per un mod di Claude Code che attivano eventi, simulano le risposte di Claude Code e premono pulsanti, senza sessione, accesso o rete.
+- [Risolvere i problemi di un mod](https://code.claude.com/docs/it/plugins/mods/troubleshoot.md): Scopri perché un mod di Claude Code non fa nulla: associa il sintomo o il messaggio alla sua causa, cerca i messaggi di rifiuto e leggi il log di debug.
 
 #### Gestisci un marketplace
 
@@ -162,7 +162,7 @@
 #### Gestisci i plugin per la tua organizzazione
 
 - [Gestire i plugin Claude Code per la tua organizzazione](https://code.claude.com/docs/it/plugins/org.md): Controlla quali plugin Claude Code installa e consente su ogni macchina della tua organizzazione attraverso impostazioni gestite.
-- [Gestire i mod per la vostra organizzazione](https://code.claude.com/docs/it/plugins/mods/admin.md): Controllare i mod di Claude Code con impostazioni gestite: bloccare i mod installati dagli utenti, consentire solo i vostri, esaminare cosa può fare un mod e applicare la politica con il vostro mod.
+- [Gestire i mod per la tua organizzazione](https://code.claude.com/docs/it/plugins/mods/admin.md): Controlla i mod di Claude Code con le impostazioni gestite: blocca i mod installati dagli utenti, consenti solo i tuoi, verifica cosa può fare un mod e applica le policy con un tuo mod.
 
 #### Risoluzione dei problemi
 
@@ -203,7 +203,7 @@
 
 - [Eseguire Claude Code attraverso un gateway](https://code.claude.com/docs/it/gateways.md): Instrada Claude Code attraverso un gateway auto-ospitato per credenziali centralizzate, tracciamento dell'utilizzo e controlli dei costi. Copre l'architettura, il gateway delle app Claude di Anthropic e l'utilizzo di altri prodotti gateway.
 
-##### Gateway delle app di Claude
+##### Gateway delle app Claude
 
 - [Gateway di app Claude per Amazon Bedrock, Claude Platform su AWS, Google Cloud e Microsoft Foundry](https://code.claude.com/docs/it/claude-apps-gateway.md): Esegui Claude Code attraverso Amazon Bedrock, Claude Platform su AWS, Google Cloud o Microsoft Foundry dietro un gateway auto-ospitato con accesso SSO, accesso ai modelli per gruppo e telemetria OTLP.
 - [Configurazione del gateway delle app Claude](https://code.claude.com/docs/it/claude-apps-gateway-config.md): Riferimento per ogni opzione di gateway.yaml: listener e TLS, OIDC, sessione, archivio Postgres, upstream Amazon Bedrock, Claude Platform su AWS, Agent Platform di Google Cloud e Microsoft Foundry, routing dei modelli, criteri gestiti e telemetria.
@@ -286,7 +286,7 @@
 #### Riferimento
 
 - [Riferimento CLI](https://code.claude.com/docs/it/cli-reference.md): Riferimento completo per l'interfaccia da riga di comando di Claude Code, inclusi comandi e flag.
-- [Commands](https://code.claude.com/docs/it/commands.md): Riferimento completo per i comandi disponibili in Claude Code, inclusi i comandi integrati e le skills in bundle.
+- [Comandi](https://code.claude.com/docs/it/commands.md): Riferimento completo per i comandi disponibili in Claude Code, inclusi i comandi integrati e le skill incluse.
 - [Variabili d'ambiente](https://code.claude.com/docs/it/env-vars.md): Riferimento per le variabili d'ambiente che controllano il comportamento di Claude Code.
 - [Riferimento degli strumenti](https://code.claude.com/docs/it/tools-reference.md): Riferimento completo per gli strumenti che Claude Code può utilizzare, inclusi i requisiti di autorizzazione e il comportamento per strumento.
 - [Modalità interattiva](https://code.claude.com/docs/it/interactive-mode.md): Riferimento completo per le scorciatoie da tastiera, le modalità di input e le funzioni interattive nelle sessioni di Claude Code.
@@ -326,7 +326,7 @@
 - [Trasmettere risposte in tempo reale](https://code.claude.com/docs/it/agent-sdk/streaming-output.md): Ricevere risposte in tempo reale dall'Agent SDK mentre il testo e le chiamate di strumenti vengono trasmessi
 - [Ottenere output strutturati dagli agenti](https://code.claude.com/docs/it/agent-sdk/structured-outputs.md): Restituire JSON convalidato dai flussi di lavoro degli agenti utilizzando JSON Schema, Zod o Pydantic. Ottenere dati strutturati e type-safe dopo l'uso di strumenti multi-turno.
 
-#### Estendi con gli strumenti
+#### Estendi con strumenti
 
 - [Fornisci a Claude strumenti personalizzati](https://code.claude.com/docs/it/agent-sdk/custom-tools.md): Definisci strumenti personalizzati con il server MCP in-process dell'Agent SDK di Claude in modo che Claude possa chiamare le tue funzioni, accedere alle tue API ed eseguire operazioni specifiche del dominio.
 - [Connettiti a strumenti esterni con MCP](https://code.claude.com/docs/it/agent-sdk/mcp.md): Configura i server MCP per estendere il tuo agente con strumenti esterni. Copre i tipi di trasporto, la ricerca di strumenti per set di strumenti di grandi dimensioni, l'autenticazione e la gestione degli errori.
@@ -348,7 +348,7 @@
 - [Osservabilità con OpenTelemetry](https://code.claude.com/docs/it/agent-sdk/observability.md): Esporta tracce, metriche ed eventi dall'Agent SDK al tuo backend di osservabilità utilizzando OpenTelemetry.
 - [Traccia todo](https://code.claude.com/docs/it/agent-sdk/todo-tracking.md): Traccia i todo nelle sessioni di Agent SDK e visualizza i progressi di Claude nella tua applicazione da chiamate di strumenti strutturate
 
-#### Deploy
+#### Distribuzione
 
 - [Hosting dell'Agent SDK](https://code.claude.com/docs/it/agent-sdk/hosting.md): Distribuisci l'Agent SDK in produzione: architettura subprocess, persistenza della sessione, scalabilità, osservabilità e isolamento multi-tenant per Docker, Kubernetes e provider sandbox.
 - [Distribuzione sicura di agenti AI](https://code.claude.com/docs/it/agent-sdk/secure-deployment.md): Una guida per proteggere le distribuzioni di Claude Code e Agent SDK con isolamento, gestione delle credenziali e controlli di rete

@@ -141,7 +141,7 @@
 - [Criar um mod](https://code.claude.com/docs/pt/plugins/mods/create.md): Peça ao Claude para escrever um mod do Claude Code a partir de uma descrição, ou escreva um você mesmo que conte chamadas de ferramentas e adicione um comando. Aprenda o loop de recarga e validação.
 - [Referência de mods](https://code.claude.com/docs/pt/plugins/mods/reference.md): Referência completa para mods do Claude Code: estrutura do módulo de hooks, eventos, métodos da API de mods, pontos de renderização, elementos por superfície, limites e configurações.
 
-##### Desenvolver
+##### Build
 
 - [Desenhar na interface com um mod](https://code.claude.com/docs/pt/plugins/mods/interface.md): Desenhe painéis, uma faixa acima do prompt, botões e campos de texto a partir de um mod Claude Code, manipule pressionamentos e entrada, e mantenha o estado entre redesenhos e sessões.
 - [Galeria de interface para mods](https://code.claude.com/docs/pt/plugins/mods/gallery.md): Veja os elementos de interface que um mod do Claude Code pode desenhar, como texto, botões, campos, Markdown, código e diffs, com código de exemplo e capturas de tela do terminal.
@@ -159,7 +159,7 @@
 - [Hospedar e manter um marketplace](https://code.claude.com/docs/pt/plugins/host-marketplace.md): Publique um marketplace de plugins onde os usuários possam acessá-lo, conceda acesso a um privado e lance atualizações e renomeações sem quebrar as instalações.
 - [Recomendar plugins para sua organização](https://code.claude.com/docs/pt/plugins/relevance.md): Adicione um bloco de relevância às entradas de plugins do marketplace para que o Claude Code os sugira quando o trabalho de um usuário corresponder, e adicione o marketplace à allowlist nas configurações gerenciadas.
 
-#### Gerenciar plugins da sua organização
+#### Gerencie plugins para sua organização
 
 - [Gerenciar plugins do Claude Code para sua organização](https://code.claude.com/docs/pt/plugins/org.md): Controle quais plugins o Claude Code instala e permite em toda a sua organização através de configurações gerenciadas.
 - [Gerenciar mods para sua organização](https://code.claude.com/docs/pt/plugins/mods/admin.md): Controle mods do Claude Code com configurações gerenciadas: interrompa mods instalados pelo usuário, permita apenas os seus, revise o que um mod pode fazer e aplique política com seu próprio mod.

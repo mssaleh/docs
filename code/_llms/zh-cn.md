@@ -4,7 +4,7 @@
 
 ## Simplified Chinese
 
-### 快速入门
+### 入门
 
 #### 快速入门
 
@@ -219,7 +219,7 @@
 - [为您的组织推出 LLM 网关](https://code.claude.com/docs/zh-CN/llm-gateway-rollout.md): 为 Claude Code 部署网关产品：配置它以转发 Claude Code 发送的内容，颁发开发者凭证，通过托管设置分发配置，并验证推出。
 - [Claude Code 网关兼容性指南](https://code.claude.com/docs/zh-CN/llm-gateway-protocol.md): 保持 LLM 网关与 Claude Code 兼容：它调用的端点、必须转发的标头和正文字段，以及删除它们时会破坏的功能。
 
-#### 用量和费用
+#### 用量与费用
 
 - [监控](https://code.claude.com/docs/zh-CN/monitoring-usage.md): 了解如何为 Claude Code 启用和配置 OpenTelemetry。
 - [有效管理成本](https://code.claude.com/docs/zh-CN/costs.md): 跟踪令牌使用情况，设置团队支出限制，并通过上下文管理、模型选择、扩展思考设置和预处理 hooks 来降低 Claude Code 成本。
@@ -359,7 +359,7 @@
 - [TypeScript SDK V2 session API（已移除）](https://code.claude.com/docs/zh-CN/agent-sdk/typescript-v2-preview.md): 已移除的 V2 TypeScript Agent SDK session API 参考，具有用于多轮对话的基于会话的 send/stream 模式。
 - [Agent SDK 参考 - Python](https://code.claude.com/docs/zh-CN/agent-sdk/python.md): Python Agent SDK 的完整 API 参考，包括所有函数、类型和类。
 
-### 最新动态
+### 新功能
 
 #### 最新动态
 

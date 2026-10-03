@@ -20,7 +20,7 @@
 - [Explorar la ventana de contexto](https://code.claude.com/docs/es/context-window.md): Una simulación interactiva de cómo se llena la ventana de contexto de Claude Code durante una sesión. Vea qué se carga automáticamente, cuánto cuesta cada lectura de archivo y cuándo se activan las reglas y hooks.
 - [Cómo Claude Code utiliza el almacenamiento en caché de prompts](https://code.claude.com/docs/es/prompt-caching.md): Claude Code gestiona automáticamente el almacenamiento en caché de prompts. Vea por qué un cambio de modelo desencadena un turno lento sin caché, qué cuesta `/compact`, por qué las ediciones de CLAUDE.md no se aplican a mitad de sesión, y cómo verificar su tasa de aciertos de caché.
 
-#### Usar Claude Code
+#### Usa Claude Code
 
 - [Cómo Claude recuerda su proyecto](https://code.claude.com/docs/es/memory.md): Proporcione a Claude instrucciones persistentes con archivos CLAUDE.md o AGENTS.md, y permita que Claude acumule aprendizajes automáticamente con auto memory.
 - [Gestionar sesiones](https://code.claude.com/docs/es/sessions.md): Nombre, reanude, ramifique y cambie entre conversaciones de Claude Code. Cubre `--continue`, `--resume`, `--from-pr`, el selector `/resume`, nombres de sesión, exportación de transcripciones y dónde se almacenan las transcripciones.
@@ -137,23 +137,23 @@
 
 #### Mods
 
-- [Descripción general de mods](https://code.claude.com/docs/es/plugins/mods/overview.md): Agregue paneles, comandos y reglas de llamadas de herramientas a Claude Code con un mod. Vea qué puede hacer un mod, cómo crear o instalar uno, y dónde se ejecutan los mods.
-- [Crear un mod](https://code.claude.com/docs/es/plugins/mods/create.md): Haga que Claude escriba un mod de Claude Code a partir de una descripción, o escriba uno usted mismo que cuente llamadas de herramientas y agregue un comando. Aprenda el ciclo de recarga y validación.
+- [Descripción general de los mods](https://code.claude.com/docs/es/plugins/mods/overview.md): Agrega paneles, comandos y reglas para llamadas a herramientas a Claude Code con un mod. Descubre lo que puede hacer un mod, cómo crear o instalar uno y dónde se ejecutan los mods.
+- [Crear un mod](https://code.claude.com/docs/es/plugins/mods/create.md): Pídele a Claude que escriba un mod de Claude Code a partir de una descripción, o escribe tú mismo uno que cuente las llamadas a herramientas y agregue un comando. Aprende el ciclo de recarga y validación.
 - [Referencia de mods](https://code.claude.com/docs/es/plugins/mods/reference.md): Referencia completa de los mods de Claude Code: estructura del módulo de hooks, eventos, métodos de la API de mods, puntos de renderizado, elementos por superficie, límites y configuración.
 
 ##### Crear
 
-- [Dibujar en la interfaz con un mod](https://code.claude.com/docs/es/plugins/mods/interface.md): Dibuja paneles, una banda sobre el prompt, botones y campos de texto desde un mod de Claude Code, maneja pulsaciones y entradas, y mantén el estado entre redibujos y sesiones.
+- [Dibuja en la interfaz con un mod](https://code.claude.com/docs/es/plugins/mods/interface.md): Dibuja paneles, una franja sobre el prompt, botones y campos de texto desde un mod de Claude Code, gestiona pulsaciones y entradas, y conserva el estado entre redibujados y sesiones.
 - [Galería de interfaz para mods](https://code.claude.com/docs/es/plugins/mods/gallery.md): Consulta los elementos de interfaz que puede dibujar un mod de Claude Code, como texto, botones, campos, Markdown, código y diffs, con código de ejemplo y capturas de pantalla de la terminal.
-- [Reaccionar a eventos con un mod](https://code.claude.com/docs/es/plugins/mods/events.md): Maneja eventos de Claude Code desde un mod: observa, reescribe o responde llamadas de herramientas, indicaciones y turnos, filtra qué eventos maneja un hook y planifica para otros mods.
-- [Usar la API de mods](https://code.claude.com/docs/es/plugins/mods/api.md): Llamar a la API de mods desde un mod de Claude Code para agregar comandos y herramientas, llamar a un modelo, ejecutar trabajo en un temporizador, enviar mensajes a otras sesiones y acceder a archivos y la red.
+- [Reaccionar a eventos con un mod](https://code.claude.com/docs/es/plugins/mods/events.md): Maneja eventos de Claude Code desde un mod: observa, reescribe o responde llamadas a herramientas, prompts y turnos, filtra qué eventos maneja un hook y planifica para otros mods.
+- [Usa la API de mods](https://code.claude.com/docs/es/plugins/mods/api.md): Llama a la API de mods desde un mod de Claude Code para agregar comandos y herramientas, llamar a un modelo, ejecutar trabajo con un temporizador, enviar mensajes a otras sesiones y acceder a archivos y a la red.
 
-##### Prueba y solución de problemas
+##### Prueba y soluciona problemas
 
-- [Prueba un mod](https://code.claude.com/docs/es/plugins/mods/test.md): Escribe pruebas automatizadas para un mod de Claude Code que generen eventos, simulen las respuestas de Claude Code y presionen botones, sin sesión, inicio de sesión ni red.
-- [Solucionar problemas de un mod](https://code.claude.com/docs/es/plugins/mods/troubleshoot.md): Descubre por qué un mod de Claude Code no hace nada: haz coincidir el síntoma o mensaje con su causa, busca mensajes de rechazo y lee el registro de depuración.
+- [Probar un mod](https://code.claude.com/docs/es/plugins/mods/test.md): Escribe pruebas automatizadas para un mod de Claude Code que disparan eventos, simulan las respuestas de Claude Code y presionan botones, sin sesión, inicio de sesión ni red.
+- [Solucionar problemas de un mod](https://code.claude.com/docs/es/plugins/mods/troubleshoot.md): Descubre por qué un mod de Claude Code no hace nada: relaciona el síntoma o mensaje con su causa, consulta los mensajes de rechazo y lee el registro de depuración.
 
-#### Administra un marketplace
+#### Gestiona un marketplace
 
 - [Crear un marketplace](https://code.claude.com/docs/es/plugins/create-marketplace.md): Cree un marketplace de plugins a partir de un archivo marketplace.json y pruébelo localmente antes de alojarlo.
 - [Alojar y mantener un marketplace](https://code.claude.com/docs/es/plugins/host-marketplace.md): Publique un marketplace de plugins donde los usuarios puedan acceder a él, otorgue acceso a uno privado y lance actualizaciones y cambios de nombre sin romper las instalaciones.
@@ -162,7 +162,7 @@
 #### Administra los plugins de tu organización
 
 - [Administrar plugins de Claude Code para su organización](https://code.claude.com/docs/es/plugins/org.md): Controle qué plugins instala Claude Code y permite en todas las máquinas de su organización mediante configuración administrada.
-- [Administrar mods para su organización](https://code.claude.com/docs/es/plugins/mods/admin.md): Controle los mods de Claude Code con configuración administrada: detenga los mods instalados por usuarios, permita solo los suyos, revise qué puede hacer un mod e implemente políticas con su propio mod.
+- [Administra los mods de tu organización](https://code.claude.com/docs/es/plugins/mods/admin.md): Controla los mods de Claude Code con la configuración administrada: detén los mods instalados por los usuarios, permite solo los tuyos, revisa lo que puede hacer un mod y aplica políticas con tu propio mod.
 
 #### Solución de problemas
 
@@ -286,7 +286,7 @@
 #### Referencia
 
 - [Referencia de CLI](https://code.claude.com/docs/es/cli-reference.md): Referencia completa de la interfaz de línea de comandos de Claude Code, incluyendo comandos y banderas.
-- [Comandos](https://code.claude.com/docs/es/commands.md): Referencia completa de comandos disponibles en Claude Code, incluidos comandos integrados y skills incluidas.
+- [Comandos](https://code.claude.com/docs/es/commands.md): Referencia completa de los comandos disponibles en Claude Code, incluidos los comandos integrados y los skills incluidos.
 - [Variables de entorno](https://code.claude.com/docs/es/env-vars.md): Referencia para variables de entorno que controlan el comportamiento de Claude Code.
 - [Referencia de herramientas](https://code.claude.com/docs/es/tools-reference.md): Referencia completa de las herramientas que Claude Code puede usar, incluidos los requisitos de permisos y el comportamiento por herramienta.
 - [Modo interactivo](https://code.claude.com/docs/es/interactive-mode.md): Referencia completa de atajos de teclado, modos de entrada y características interactivas en sesiones de Claude Code.

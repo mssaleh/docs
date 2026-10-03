@@ -28,7 +28,7 @@
 - [プロンプトライブラリ](https://code.claude.com/docs/ja/prompt-library.md): Claude Code 用のコピー＆ペーストプロンプト。タスクと役割でタグ付けされています。
 - [Claude Code のベストプラクティス](https://code.claude.com/docs/ja/best-practices.md): 環境設定から並列セッションでのスケーリングまで、Claude Code を最大限に活用するためのヒントとパターン。
 
-#### プラットフォームと連携
+#### プラットフォームと統合
 
 - [プラットフォームと統合](https://code.claude.com/docs/ja/platforms.md): Claude Code を実行する場所を選択し、何に接続するかを決定します。CLI、Desktop、VS Code、JetBrains、Web、モバイル、および Chrome、Slack、CI/CD などの統合を比較します。
 - [任意のデバイスからローカルセッションを続行する Remote Control](https://code.claude.com/docs/ja/remote-control.md): Remote Control を使用して、電話、タブレット、または任意のブラウザから Claude Code のローカルセッションを続行します。claude.ai/code と Claude モバイルアプリで動作します。
@@ -141,7 +141,7 @@
 - [mod を作成する](https://code.claude.com/docs/ja/plugins/mods/create.md): Claude に説明から Claude Code mod を書かせるか、ツール呼び出しをカウントしてコマンドを追加する mod を自分で書きます。リロードと検証ループについて学びます。
 - [mod リファレンス](https://code.claude.com/docs/ja/plugins/mods/reference.md): Claude Code の mod の完全なリファレンス：フックモジュールの構成、イベント、mods API メソッド、描画箇所、サーフェス別の要素、制限、設定。
 
-##### ビルド
+##### 構築
 
 - [mod でインターフェースに描画する](https://code.claude.com/docs/ja/plugins/mods/interface.md): Claude Code の mod からペイン、プロンプト上部の帯、ボタン、テキストフィールドを描画し、押下や入力を処理して、再描画やセッションをまたいで状態を保持します。
 - [mod のインターフェースギャラリー](https://code.claude.com/docs/ja/plugins/mods/gallery.md): Claude Code の mod が描画できるインターフェース要素（テキスト、ボタン、フィールド、Markdown、コード、差分など）を、サンプルコードとターミナルのスクリーンショットで確認できます。
@@ -251,7 +251,7 @@
 - [サンドボックス化された Bash ツールを設定する](https://code.claude.com/docs/ja/sandboxing.md): 組み込みのサンドボックスを使用して、Claude Code のシェルコマンドがアクセスできるファイルとネットワークホストを制限します。サンドボックスをオンにし、境界を設定し、それによって生じる問題を解決します。
 - [サンドボックス環境を選択する](https://code.claude.com/docs/ja/sandbox-environments.md): Claude Code のサンドボックスオプションを比較します。組み込みのサンドボックス化された Bash ツール、サンドボックスランタイム、dev コンテナ、Docker、VM があります。脅威モデルに適した分離を選択してください。
 
-#### 環境
+#### environments
 
 - [クラウド環境を設定する](https://code.claude.com/docs/ja/cloud-environments.md): Claude Code クラウドセッション用のクラウド環境を設定します。ネットワークアクセスレベル、環境変数、セットアップスクリプト、環境キャッシュを構成できます。
 
@@ -359,7 +359,7 @@
 - [TypeScript SDK V2 セッション API（削除済み）](https://code.claude.com/docs/ja/agent-sdk/typescript-v2-preview.md): マルチターン会話向けのセッションベースの send/stream パターンを備えた、削除済みの V2 TypeScript Agent SDK セッション API のリファレンス。
 - [Agent SDK リファレンス - Python](https://code.claude.com/docs/ja/agent-sdk/python.md): Python Agent SDK の完全な API リファレンス。すべての関数、型、クラスを含みます。
 
-### 新機能
+### 新着情報
 
 #### 新機能
 

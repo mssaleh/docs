@@ -141,7 +141,7 @@
 - [Buat sebuah mod](https://code.claude.com/docs/id/plugins/mods/create.md): Biarkan Claude menulis mod Claude Code dari deskripsi, atau tulis sendiri yang menghitung panggilan alat dan menambahkan perintah. Pelajari loop reload dan validate.
 - [Referensi mod](https://code.claude.com/docs/id/plugins/mods/reference.md): Referensi lengkap untuk mod Claude Code: tata letak modul hook, event, metode API mod, titik render, elemen per surface, batas, dan pengaturan.
 
-##### Build
+##### Membangun
 
 - [Menggambar di antarmuka dengan mod](https://code.claude.com/docs/id/plugins/mods/interface.md): Menggambar panel, pita di atas prompt, tombol, dan bidang teks dari mod Claude Code, menangani penekanan dan input, serta menjaga status antara redraw dan sesi.
 - [Galeri antarmuka untuk mod](https://code.claude.com/docs/id/plugins/mods/gallery.md): Lihat elemen antarmuka yang dapat digambar oleh mod Claude Code, seperti teks, tombol, kolom, Markdown, kode, dan diff, beserta contoh kode dan tangkapan layar terminal.
@@ -153,7 +153,7 @@
 - [Uji coba mod](https://code.claude.com/docs/id/plugins/mods/test.md): Tulis tes otomatis untuk mod Claude Code yang menaikkan peristiwa, stub jawaban Claude Code, dan tekan tombol, tanpa sesi, masuk, atau jaringan.
 - [Troubleshoot a mod](https://code.claude.com/docs/id/plugins/mods/troubleshoot.md): Cari tahu mengapa Claude Code mod tidak melakukan apa pun: cocokkan gejala atau pesan dengan penyebabnya, cari pesan penolakan, dan baca log debug.
 
-#### Kelola marketplace
+#### Menjalankan marketplace
 
 - [Buat marketplace](https://code.claude.com/docs/id/plugins/create-marketplace.md): Bangun marketplace plugin dari file marketplace.json dan uji secara lokal sebelum Anda menghosting-nya.
 - [Host dan kelola marketplace](https://code.claude.com/docs/id/plugins/host-marketplace.md): Publikasikan marketplace plugin tempat pengguna dapat mengaksesnya, berikan akses ke marketplace pribadi, dan rilis pembaruan serta perubahan nama tanpa merusak instalasi.

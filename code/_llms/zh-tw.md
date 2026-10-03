@@ -6,7 +6,7 @@
 
 ### 快速入門
 
-#### 開始使用
+#### 快速入門
 
 - [概述](https://code.claude.com/docs/zh-TW/overview.md): Claude Code 是一個代理編碼工具，可以讀取您的程式碼庫、編輯檔案、執行命令，並與您的開發工具整合。可在您的終端機、IDE、桌面應用程式和瀏覽器中使用。
 - [快速入門](https://code.claude.com/docs/zh-TW/quickstart.md): 歡迎使用 Claude Code！
@@ -69,7 +69,7 @@
 
 ### 使用 Claude Code 打造
 
-#### Agents 與平行工作
+#### Agent 與平行工作
 
 - [平行執行代理](https://code.claude.com/docs/zh-TW/agents.md): 比較 Claude Code 同時執行多項任務的方式：子代理、代理檢視、代理團隊、動態工作流程和專案。
 - [建立自訂 subagents](https://code.claude.com/docs/zh-TW/sub-agents.md): 在 Claude Code 中建立和使用專門的 AI subagents，用於特定任務的工作流程和改進的上下文管理。
@@ -255,7 +255,7 @@
 
 - [設定雲端環境](https://code.claude.com/docs/zh-TW/cloud-environments.md): 為 Claude Code 雲端工作階段設定雲端環境：網路存取層級、環境變數、設定指令碼和環境快取。
 
-##### 自行託管環境
+##### 自架環境
 
 - [自託管環境](https://code.claude.com/docs/zh-TW/self-hosted-environments.md): 在您控制的基礎設施上執行 Claude Code 雲端工作階段：設定自託管環境、部署執行器，並將工作階段路由到您自己的運算資源。
 - [自託管環境快速入門](https://code.claude.com/docs/zh-TW/self-hosted-environments-quickstart.md): 設定您的第一個自託管環境：安裝 Claude Code、建立環境、啟動執行器，並將工作階段路由到該環境。
@@ -281,9 +281,9 @@
 - [自訂您的狀態列](https://code.claude.com/docs/zh-TW/statusline.md): 設定自訂狀態列以監控 Claude Code 中的 context window 使用情況、成本和 git 狀態
 - [自訂鍵盤快捷鍵](https://code.claude.com/docs/zh-TW/keybindings.md): 使用快捷鍵配置檔案在 Claude Code 中自訂鍵盤快捷鍵。
 
-### 參考資料
+### 參考
 
-#### 參考
+#### 參考資料
 
 - [CLI 參考](https://code.claude.com/docs/zh-TW/cli-reference.md): Claude Code 命令列介面的完整參考，包括命令和旗標。
 - [Commands](https://code.claude.com/docs/zh-TW/commands.md): Claude Code 中可用命令的完整參考，包括內建命令和捆綁的 skills。
@@ -326,7 +326,7 @@
 - [即時串流回應](https://code.claude.com/docs/zh-TW/agent-sdk/streaming-output.md): 當文字和工具呼叫串流進來時，從 Agent SDK 取得即時回應
 - [從代理獲取結構化輸出](https://code.claude.com/docs/zh-TW/agent-sdk/structured-outputs.md): 使用 JSON Schema、Zod 或 Pydantic 從代理工作流程返回驗證的 JSON。在多輪工具使用後獲得類型安全的結構化資料。
 
-#### 使用工具擴充功能
+#### 使用工具擴充
 
 - [為 Claude 提供自訂工具](https://code.claude.com/docs/zh-TW/agent-sdk/custom-tools.md): 使用 Claude Agent SDK 的同程序 MCP 伺服器定義自訂工具，讓 Claude 可以呼叫您的函數、存取您的 API，並執行特定領域的操作。
 - [使用 MCP 連接外部工具](https://code.claude.com/docs/zh-TW/agent-sdk/mcp.md): 配置 MCP 伺服器以擴展您的代理程式的外部工具。涵蓋傳輸類型、大型工具集的工具搜尋、身份驗證和錯誤處理。
